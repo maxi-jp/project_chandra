@@ -20,8 +20,8 @@ namespace IS_XNA_Shooter
         /*                          CONSTRUCTOR                          */
         /* ------------------------------------------------------------- */
         public GameA(int num, Texture2D textureAim, Texture2D textureBg,
-            float playerVelocity)
-            : base(playerVelocity)
+            float playerVelocity, int playerLife)
+            : base(playerVelocity, playerLife)
         {
             hub = new IngameHubA(GRMng.hubLeft, GRMng.hubCenter, GRMng.hubRight);
             level = new LevelA(camera, num, enemies);
@@ -40,7 +40,7 @@ namespace IS_XNA_Shooter
             points[7] = new Vector2(15, 45);
             player = new PlayerA(camera, level, Vector2.Zero, 0, points, GRMng.frameWidthPA2, GRMng.frameHeightPA2,
                 GRMng.numAnimsPA2, GRMng.frameCountPA2, GRMng.loopingPA2, SuperGame.frameTime24, GRMng.texturePA2,
-                playerVelocity, shots);
+                playerVelocity, playerLife, shots);
 
             level.setPlayer(player);
 

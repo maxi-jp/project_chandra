@@ -13,7 +13,8 @@ namespace IS_XNA_Shooter
         //-------------------------
         //----    Atributos    ----
         //-------------------------
-        private List<Rectangle> crashList;  //objetos de colisión en el parallax donde se juega
+       // private List<List<Rectangle>> crashList;  //objetos de colisión en el parallax donde se juega
+        private List<Collider> colliderList; //lista de colliders para crashlist
         private BackgroundGameB backGround; //Fondo con los parallax
 
 
@@ -21,21 +22,21 @@ namespace IS_XNA_Shooter
         //---------------------------
         //----    Constructor    ----
         //---------------------------
-        public GameB(int numLevel, Texture textureAim, float playerVelocity)
-            : base(playerVelocity)
+        public GameB(int numLevel, Texture textureAim, float playerVelocity, int playerLife)
+            : base(playerVelocity, playerLife)
         {
             camera = new Camera();
             shots = new List<Shot>();
-
+            colliderList = new List<Collider>();
             level = new LevelB(camera, numLevel);
             enemies = ((LevelB)level).getEnemies();
             camera.setLevel(level);
-            crashList = ((LevelB)level).getRectangles();
+           // crashList = ((LevelB)level).getRectangles();
             backGround = new BackgroundGameB(level);
 
-            player = new PlayerB(camera, ((LevelB)level), Vector2.Zero, 0, puntosColliderPlayer(), GRMng.frameWidthPA2, 
-                GRMng.frameHeightPA2, GRMng.numAnimsPA2, GRMng.frameCountPA2, GRMng.loopingPA2, SuperGame.frameTime24, 
-                GRMng.texturePA2, playerVelocity+200, shots);
+                player = new PlayerB(camera, ((LevelB)level), Vector2.Zero, 0, puntosColliderPlayer(), GRMng.frameWidthPA2,
+                    GRMng.frameHeightPA2, GRMng.numAnimsPA2, GRMng.frameCountPA2, GRMng.loopingPA2, SuperGame.frameTime24,
+                    GRMng.texturePA2, playerVelocity + 200, playerLife, shots);
             level.setPlayer(player);
             camera.setPlayer(player);            
         }
@@ -60,7 +61,6 @@ namespace IS_XNA_Shooter
             backGround.Draw(spriteBatch);
             //dibuja player, enemigos y balas
             base.Draw(spriteBatch);
-
             if (SuperGame.debug)
             {
                 spriteBatch.DrawString(SuperGame.fontDebug, "Camera=" + camera.position + ".",

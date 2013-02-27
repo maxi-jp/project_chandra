@@ -108,14 +108,9 @@ namespace IS_XNA_Shooter
                 String enemyType;
                 float positionX;
                 float positionY;
-                //int positionX1;
-                //int positionY1;
-                //int positionX2;
-                //int positionY2;
                 float time;
                 XmlDocument lvl = XMLLvlMng.lvl1;
-                //var lasNoticias = lvl.getElementsByTagName("enemyList");
-                //XElement enemyList = lvl.Root.Element("enemyList");
+              
                 XmlNodeList level = lvl.GetElementsByTagName("level");
 
                 XmlNodeList lista =
@@ -144,25 +139,6 @@ namespace IS_XNA_Shooter
                     enemies.Add(enemy);
                     
                 }
-
-                /*XmlNodeList listaRectangles =
-                        ((XmlElement)level[0]).GetElementsByTagName("rectangle");
-                foreach (XmlElement nodo in listaRectangles)
-                {
-
-                    XmlAttributeCollection RectangleN = nodo.Attributes;
-
-
-                    positionX1 = (int)Convert.ToDouble(RectangleN[0].Value);
-                    positionY1 = (int)Convert.ToDouble(RectangleN[1].Value);
-                    positionX2 = (int)Convert.ToDouble(RectangleN[2].Value);
-                    positionY2 = (int)Convert.ToDouble(RectangleN[3].Value);
-
-                    Rectangle rectangulo = new Rectangle(positionX1, positionY1, positionX2, positionY2);
-                    //rectangles.Add(rectangulo);
-
-
-                }*/
 
             }
             catch (Exception e)

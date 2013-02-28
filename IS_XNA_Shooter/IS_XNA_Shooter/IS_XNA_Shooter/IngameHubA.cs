@@ -9,17 +9,18 @@ namespace IS_XNA_Shooter
 {
     class IngameHubA : IngameHub
     {
-        /* ------------------- ATRIBUTOS ------------------- */
+        /* ------------------- ATTRIBUTES ------------------- */
         private Texture2D textureLeft, textureCenter, textureRight;
         private Vector2 positionLeft, positionRight;
         private Rectangle rectangleCenter;
         private int size;
+        private int lifes; // number of lifes of the Ship
 
-        /* ------------------- CONSTRUCTORES ------------------- */
+        /* ------------------- CONSTRUCTORS ------------------- */
         public IngameHubA(Texture2D textureLeft, Texture2D textureCenter, Texture2D textureRight)
             : base()
         {
-            size = 140;
+            size = textureCenter.Width;
             this.textureLeft = textureLeft;
             this.textureCenter = textureCenter;
             this.textureRight = textureRight;
@@ -29,7 +30,7 @@ namespace IS_XNA_Shooter
             rectangleCenter = new Rectangle(SuperGame.screenWidth / 2 - size / 2, 0, size, textureCenter.Height);
         }
 
-        /* ------------------- MÉTODOS ------------------- */
+        /* ------------------- METHODS ------------------- */
         public override void Update(float deltaTime)
         {
         }

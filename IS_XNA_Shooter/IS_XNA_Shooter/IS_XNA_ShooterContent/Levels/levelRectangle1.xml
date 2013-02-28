@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<level>
+    <!-- nivelBackground -->
+    <listaBackgrounds> <!--  numLayers=" "-->
+        <!--numLayers -->
+        <BGLayer nivel=" " velocidad=" " numPNG=" ">
+            <PNGList>
+                <!-- png1 -->
+                <!-- png2 -->
+				<!-- png3 -->
+            </PNGList>
+        </BGLayer>
+        <BGLayer nivel=" " velocidad=" " numPNG=" ">
+            <PNGList>
+                <!-- png1 -->
+                <!-- png2 -->
+				<!-- png3 -->
+            </PNGList>
+        </BGLayer>
+		<BGLayer nivel=" " velocidad=" " numPNG=" ">
+            <PNGList>
+                <!-- png1 -->
+                <!-- png2 -->
+				<!-- png3 -->
+            </PNGList>
+        </BGLayer>
+    </listaBackgrounds>
+    <listaRectangles numRectangulos="6">
+		<!-- layer1 -->
+        <rectangle x="0" y="0" width="400" height="50" />
+		<rectangle x="400" y="0" width="400" height="100" />
+		<rectangle x="800" y="0" width="400" height="50" />
+		<rectangle x="0" y="750" width="400" height="50" />
+		<rectangle x="600" y="700" width="300" height="100" />
+		<rectangle x="900" y="750" width="300" height="50" />
+	</listaRectangles>
+	<listaRectangles numRectangulos="8">
+		<!-- layer2 -->
+        <rectangle x="0" y="0" width="300" height="50" />
+		<rectangle x="300" y="0" width="400" height="300" />
+		<rectangle x="700" y="0" width="500" height="50" />
+		<rectangle x="0" y="750" width="400" height="50" />
+		<rectangle x="400" y="600" width="100" height="200" />
+		<rectangle x="500" y="750" width="450" height="50" />
+		<rectangle x="950" y="400" width="50" height="400" />
+		<rectangle x="1000" y="750" width="200" height="50" />
+	</listaRectangles>
+	<listaRectangles numRectangulos="9">
+		<!-- layer3 -->
+        <rectangle x="0" y="0" width="200" height="50" />
+		<rectangle x="200" y="0" width="300" height="100" />
+		<rectangle x="500" y="0" width="200" height="50" />
+		<rectangle x="700" y="0" width="300" height="100" />
+		<rectangle x="1000" y="0" width="200" height="50" />
+		<rectangle x="0" y="750" width="250" height="50" />
+		<rectangle x="250" y="650" width="250" height="150" />
+		<rectangle x="700" y="650" width="250" height="150" />
+		<rectangle x="950" y="750" width="250" height="50" />
+	</listaRectangles>
+    
+</level>

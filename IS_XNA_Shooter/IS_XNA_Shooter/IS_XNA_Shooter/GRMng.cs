@@ -45,7 +45,7 @@ namespace IS_XNA_Shooter
         public static short[] frameCountEW2 = { 1, 4 };
         public static bool[] loopingEW2 = { true, true };
 
-        /* ------------------- PLAYERA1 ------------------- */
+        /* ------------------- ShipA1 ------------------- */
         public static Texture2D texturePA1;
         public static short frameWidthPA1 = 40;
         public static short frameHeightPA1 = 40;
@@ -53,7 +53,7 @@ namespace IS_XNA_Shooter
         public static short[] frameCountPA1 = { 1, 5 };
         public static bool[] loopingPA1 = { true, false };
 
-        /* ------------------- PLAYERA2 ------------------- */
+        /* ------------------- ShipA2 ------------------- */
         public static Texture2D texturePA2;
         public static short frameWidthPA2 = 80;
         public static short frameHeightPA2 = 80;

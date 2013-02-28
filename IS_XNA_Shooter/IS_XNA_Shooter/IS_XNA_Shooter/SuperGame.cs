@@ -278,7 +278,7 @@ namespace IS_XNA_Shooter
             LvlMng.LoadContent(1);
 
             game = new GameB(1, GRMng.textureAim,
-                /*playerVelocity*/200f, /*playerLife*/100);
+                /*ShipVelocity*/200f, /*ShipLife*/100);
            
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
 
@@ -293,7 +293,7 @@ namespace IS_XNA_Shooter
             LvlMng.LoadContent(0); // cargamos los XML
 
             game = new GameA(1, GRMng.textureAim, GRMng.textureCell,
-                /*playerVelocity*/200f, /*playerLife*/100);
+                /*ShipVelocity*/200f, /*ShipLife*/100);
 
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
 
@@ -308,7 +308,7 @@ namespace IS_XNA_Shooter
             LvlMng.LoadContent(0); // cargamos los XML
 
             game = new GameA(1, GRMng.textureAim, GRMng.textureCell,
-                /*playerVelocity*/200f, /*playerLife*/100);
+                /*ShipVelocity*/200f, /*ShipLife*/100);
 
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
 
@@ -323,7 +323,7 @@ namespace IS_XNA_Shooter
             LvlMng.LoadContent(0);
 
             game = new GameA(1, GRMng.textureAim, GRMng.textureCell,
-                /*playerVelocity*/200f, /*playerLife*/100);
+                /*ShipVelocity*/200f, /*ShipLife*/100);
 
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
 
@@ -338,7 +338,7 @@ namespace IS_XNA_Shooter
             LvlMng.LoadContent(1);
 
             game = new GameB(1, GRMng.textureAim,
-                /*playerVelocity*/200f, /*playerLife*/100);
+                /*ShipVelocity*/200f, /*ShipLife*/100);
 
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
 

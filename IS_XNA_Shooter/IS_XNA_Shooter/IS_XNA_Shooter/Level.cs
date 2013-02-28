@@ -11,8 +11,8 @@ namespace IS_XNA_Shooter
     class Level
     {
         protected Camera camera;
-        protected Player player;
-        protected Vector2 playerInitPosition;
+        protected Ship Ship;
+        protected Vector2 ShipInitPosition;
         public int width;
         public int height;
         protected List<Enemy> enemies;
@@ -153,12 +153,12 @@ namespace IS_XNA_Shooter
             }
         }   //  end LeerArchivoXML()
 
-        public virtual void setPlayer(Player player)
+        public virtual void setShip(Ship Ship)
         {
-            this.player = player;
+            this.Ship = Ship;
             foreach (Enemy e in enemies)// enemigos
-                e.setPlayer(player);
-            player.SetPosition(playerInitPosition);
+                e.setShip(Ship);
+            Ship.SetPosition(ShipInitPosition);
         }
 
 

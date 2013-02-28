@@ -23,7 +23,7 @@ namespace IS_XNA_Shooter
                 case 1:
                     width = 1200;
                     height = 800;
-                    playerInitPosition = new Vector2(width / 2, height / 2);
+                    ShipInitPosition = new Vector2(width / 2, height / 2);
                     this.enemies = enemies;
                     timeLeftEnemy = new List<float>();
 
@@ -125,8 +125,8 @@ namespace IS_XNA_Shooter
                 null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
         }
 
-        public override void setPlayer(Player player) {
-            base.setPlayer(player);
+        public override void setShip(Ship Ship) {
+            base.setShip(Ship);
         }
     }
 }

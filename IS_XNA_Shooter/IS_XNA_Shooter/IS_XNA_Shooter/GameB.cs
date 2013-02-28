@@ -13,17 +13,16 @@ namespace IS_XNA_Shooter
         //-------------------------
         //----    Atributos    ----
         //-------------------------
-       // private List<List<Rectangle>> crashList;  //objetos de colisión en el parallax donde se juega
+
+        // private List<List<Rectangle>> crashList;  //objetos de colisión en el parallax donde se juega
         private List<Collider> colliderList; //lista de colliders para crashlist
         private BackgroundGameB backGround; //Fondo con los parallax
-
-
 
         //---------------------------
         //----    Constructor    ----
         //---------------------------
-        public GameB(int numLevel, Texture textureAim, float playerVelocity, int playerLife)
-            : base(playerVelocity, playerLife)
+        public GameB(int numLevel, Texture textureAim, float ShipVelocity, int ShipLife)
+            : base(ShipVelocity, ShipLife)
         {
             camera = new Camera();
             shots = new List<Shot>();
@@ -34,13 +33,13 @@ namespace IS_XNA_Shooter
            // crashList = ((LevelB)level).getRectangles();
             backGround = new BackgroundGameB(level);
 
-                player = new PlayerB(camera, ((LevelB)level), Vector2.Zero, 0, puntosColliderPlayer(), GRMng.frameWidthPA2,
-                    GRMng.frameHeightPA2, GRMng.numAnimsPA2, GRMng.frameCountPA2, GRMng.loopingPA2, SuperGame.frameTime24,
-                    GRMng.texturePA2, playerVelocity + 200, playerLife, shots);
-            level.setPlayer(player);
-            camera.setPlayer(player);            
-        }
+            Ship = new ShipB(camera, ((LevelB)level), Vector2.Zero, 0, puntosColliderShip(), GRMng.frameWidthPA2,
+                GRMng.frameHeightPA2, GRMng.numAnimsPA2, GRMng.frameCountPA2, GRMng.loopingPA2, SuperGame.frameTime24,
+                GRMng.texturePA2, ShipVelocity + 200, ShipLife, shots);
 
+            level.setShip(Ship);
+            camera.setShip(Ship);            
+        }
 
 
         //--------------------------------
@@ -59,25 +58,23 @@ namespace IS_XNA_Shooter
         {
             //dibuja background
             backGround.Draw(spriteBatch);
-            //dibuja player, enemigos y balas
+            //dibuja Ship, enemigos y balas
             base.Draw(spriteBatch);
             if (SuperGame.debug)
             {
                 spriteBatch.DrawString(SuperGame.fontDebug, "Camera=" + camera.position + ".",
                     new Vector2(5, 3), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-                spriteBatch.DrawString(SuperGame.fontDebug, "Player=" + player.position + ".",
+                spriteBatch.DrawString(SuperGame.fontDebug, "Ship=" + Ship.position + ".",
                     new Vector2(5, 15), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             }
          }
-
-
 
         //--------------------------------
         //----    Métodos privados    ----
         //--------------------------------
 
         //Método privado que calcula los puntos de colisión de la nave
-        private Vector2[] puntosColliderPlayer()
+        private Vector2[] puntosColliderShip()
         {
             Vector2[] points = new Vector2[8];
             points[0] = new Vector2(15, 35);
@@ -92,6 +89,5 @@ namespace IS_XNA_Shooter
             return points;
         }
 
-  
     }//GameB
 }

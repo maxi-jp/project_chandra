@@ -15,8 +15,8 @@ namespace IS_XNA_Shooter
         /* ------------------------------------------------------------- */
         protected Level level;
         protected IngameHub hub;
-        protected Player player;
-        protected float playerVelocity = 200f;
+        protected Ship Ship;
+        protected float ShipVelocity = 200f;
         protected List<Enemy> enemies;
         protected List<Shot> shots;
         protected List<Explosion> explosions;
@@ -25,7 +25,7 @@ namespace IS_XNA_Shooter
         /* ------------------------------------------------------------- */
         /*                          CONSTRUCTOR                          */
         /* ------------------------------------------------------------- */
-        public Game (float playerVelocity, int playerLife)
+        public Game (float ShipVelocity, int ShipLife)
         {
             camera = new Camera();
             enemies = new List<Enemy>();
@@ -43,7 +43,7 @@ namespace IS_XNA_Shooter
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             level.Update(deltaTime);    // nivel
-            player.Update(deltaTime);   // player
+            Ship.Update(deltaTime);   // Ship
             foreach (Enemy e in enemies)// enemigos
                 if (e.isActive())
                     e.Update(deltaTime);
@@ -94,11 +94,11 @@ namespace IS_XNA_Shooter
                     e.Draw(spriteBatch);
             foreach (Shot shot in shots)
                 shot.Draw(spriteBatch);
-            player.Draw(spriteBatch);
+            Ship.Draw(spriteBatch);
             foreach (Explosion e in explosions)
                 if (e.isActive())
                     e.Draw(spriteBatch);
-           // hub.Draw(spriteBatch);
+            hub.Draw(spriteBatch);
         }
 
     } // class Game

@@ -15,13 +15,14 @@ namespace IS_XNA_Shooter
 
         protected int life;         // vida
         protected float velocity;   // velocidad
-        protected Ship Ship;    // jugador
-        private bool active;        // si no esta activo no se muestra
+        protected Ship Ship;        // jugador
+        protected bool active;      // si no esta activo no se muestra
+        protected int value;        // puntos que da al matarlo
 
         /* ------------------- CONSTRUCTORES ------------------- */
         public Enemy(Camera camera, Level level, Vector2 position, float rotation,
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
-            float frametime, Texture2D texture, float velocity, int life, Ship Ship)
+            float frametime, Texture2D texture, float velocity, int life, int value, Ship Ship)
             : base(camera, level, true, position, rotation, texture, frameWidth, frameHeight, numAnim,
                 frameCount, looping, frametime)
         {

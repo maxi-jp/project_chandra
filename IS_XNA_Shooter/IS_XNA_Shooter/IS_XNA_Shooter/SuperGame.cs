@@ -40,7 +40,7 @@ namespace IS_XNA_Shooter
 
         private GRMng grManager;        // gestor de recursos gráficos
         public ControlMng controlMng;   // gestor de controles
-        private XMLLvlMng LvlMng; // gestor de XML
+        private XMLLvlMng LvlMng;       // gestor de XML
         private Audio audio;            // gestor del Audio del juego
 
         public Vector2 pointer; // posicion del raton
@@ -48,12 +48,12 @@ namespace IS_XNA_Shooter
         protected float totalTime; // contador del tiempo total
 
         // contadores de frames:
-        private int drawFramesCounter;
-        private int drawFramesCounterAux;
-        private int updateFramesCounter;
-        private int updateFramesCounterAux;
-        private float timeCounterSecond;
-        private float timeCounterSecondAux;
+        private int     drawFramesCounter;
+        private int     drawFramesCounterAux;
+        private int     updateFramesCounter;
+        private int     updateFramesCounterAux;
+        private float   timeCounterSecond;
+        private float   timeCounterSecondAux;
 
         // tiempo de duración de un frame en una animación:
         public static float frameTime24 = ((float)1 / 24);
@@ -63,9 +63,11 @@ namespace IS_XNA_Shooter
         public static float timeToResume = 2f; // t que tarda en volver después de pause
 
         // objetos del juego:
-        private Menu menu;
-        private MenuIngame menuIngame;
-        private Game game;
+        private Menu        menu;
+        private MenuIngame  menuIngame;
+        private Game        game;
+        public Player       player;
+        private int         playerLifes = 4;
 
         public enum shootType
         {
@@ -126,7 +128,7 @@ namespace IS_XNA_Shooter
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // dimensiones de la pantalla:
+            // Screen dimensions
             screenWidth = GraphicsDevice.Viewport.Width;
             screenHeight = GraphicsDevice.Viewport.Height;
 
@@ -138,9 +140,12 @@ namespace IS_XNA_Shooter
 
             fontDebug = Content.Load<SpriteFont>("FontDebug");
 
-            // creamos el menu
+            // Create the Menu
             menu = new Menu(this);
             menuIngame = new MenuIngame(this);
+
+            // Create the player
+            player = new Player(playerLifes);
         }
 
         /// <summary>
@@ -277,7 +282,7 @@ namespace IS_XNA_Shooter
             audio.LoadContent(1);
             LvlMng.LoadContent(1);
 
-            game = new GameB(1, GRMng.textureAim,
+            game = new GameB(this, 1, GRMng.textureAim,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
            
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
@@ -292,7 +297,7 @@ namespace IS_XNA_Shooter
             audio.LoadContent(1);
             LvlMng.LoadContent(0); // cargamos los XML
 
-            game = new GameA(1, GRMng.textureAim, GRMng.textureCell,
+            game = new GameA(this, 1, GRMng.textureAim, GRMng.textureCell,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
 
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
@@ -307,7 +312,7 @@ namespace IS_XNA_Shooter
             audio.LoadContent(1);
             LvlMng.LoadContent(0); // cargamos los XML
 
-            game = new GameA(1, GRMng.textureAim, GRMng.textureCell,
+            game = new GameA(this, 1, GRMng.textureAim, GRMng.textureCell,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
 
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
@@ -322,7 +327,7 @@ namespace IS_XNA_Shooter
             audio.LoadContent(1);
             LvlMng.LoadContent(0);
 
-            game = new GameA(1, GRMng.textureAim, GRMng.textureCell,
+            game = new GameA(this, 1, GRMng.textureAim, GRMng.textureCell,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
 
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
@@ -337,7 +342,7 @@ namespace IS_XNA_Shooter
             audio.LoadContent(1);
             LvlMng.LoadContent(1);
 
-            game = new GameB(1, GRMng.textureAim,
+            game = new GameB(this, 1, GRMng.textureAim,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
 
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego

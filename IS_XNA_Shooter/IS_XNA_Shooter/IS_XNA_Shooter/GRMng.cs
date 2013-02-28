@@ -41,9 +41,9 @@ namespace IS_XNA_Shooter
         public static Texture2D textureEW2;
         public static short frameWidthEW2 = 80;
         public static short frameHeightEW2 = 80;
-        public static short numAnimsEW2 = 2;
-        public static short[] frameCountEW2 = { 1, 4 };
-        public static bool[] loopingEW2 = { true, true };
+        public static short numAnimsEW2 = 3;
+        public static short[] frameCountEW2 = { 1, 4, 6 };
+        public static bool[] loopingEW2 = { true, true, false };
 
         /* ------------------- ShipA1 ------------------- */
         public static Texture2D texturePA1;

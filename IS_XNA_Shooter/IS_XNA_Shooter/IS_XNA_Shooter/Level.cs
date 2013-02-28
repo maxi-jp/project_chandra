@@ -131,11 +131,11 @@ namespace IS_XNA_Shooter
                     if (enemyType.Equals("enemyWeak"))
                         enemy = new EnemyWeak(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEW2, GRMng.frameHeightEW2, GRMng.numAnimsEW2, GRMng.frameCountEW2,
-                            GRMng.loopingEW2, SuperGame.frameTime12, GRMng.textureEW2, 100, 100, null);
-                    else
+                            GRMng.loopingEW2, SuperGame.frameTime12, GRMng.textureEW2, 100, 100, 1, null);
+                    else if (enemyType.Equals("enemyBeam"))
                         enemy = new EnemyBeamA(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEW2, GRMng.frameHeightEW2, GRMng.numAnimsEW2, GRMng.frameCountEW2,
-                            GRMng.loopingEW2, SuperGame.frameTime12, GRMng.textureEW2, 1000, 100, null);
+                            GRMng.loopingEW2, SuperGame.frameTime12, GRMng.textureEW2, 1000, 100, 4, null);
                     enemies.Add(enemy);
                     
                 }

@@ -21,8 +21,8 @@ namespace IS_XNA_Shooter
         //---------------------------
         //----    Constructor    ----
         //---------------------------
-        public GameB(int numLevel, Texture textureAim, float ShipVelocity, int ShipLife)
-            : base(ShipVelocity, ShipLife)
+        public GameB(SuperGame mainGame, int numLevel, Texture textureAim, float ShipVelocity, int ShipLife)
+            : base(mainGame, ShipVelocity, ShipLife)
         {
             camera = new Camera();
             shots = new List<Shot>();

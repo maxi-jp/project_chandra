@@ -11,7 +11,7 @@ namespace IS_XNA_Shooter
     class GameA : Game
     {
         /* ------------------------------------------------------------- */
-        /*                           ATRIBUTOS                           */
+        /*                           ATTRIBUTES                          */
         /* ------------------------------------------------------------- */
         private Sprite aimPointSprite;
         private BackgroundGameA backGround;
@@ -19,11 +19,11 @@ namespace IS_XNA_Shooter
         /* ------------------------------------------------------------- */
         /*                          CONSTRUCTOR                          */
         /* ------------------------------------------------------------- */
-        public GameA(int num, Texture2D textureAim, Texture2D textureBg,
+        public GameA(SuperGame mainGame, int num, Texture2D textureAim, Texture2D textureBg,
             float ShipVelocity, int ShipLife)
-            : base(ShipVelocity, ShipLife)
+            : base(mainGame, ShipVelocity, ShipLife)
         {
-            hub = new IngameHubA(GRMng.hubLeft, GRMng.hubCenter, GRMng.hubRight);
+            hub = new IngameHubA(GRMng.hubLeft, GRMng.hubCenter, GRMng.hubRight, mainGame.player.GetLife());
             level = new LevelA(camera, num, enemies);
             backGround = new BackgroundGameA(camera, level);
             
@@ -50,7 +50,7 @@ namespace IS_XNA_Shooter
         }
 
         /* ------------------------------------------------------------- */
-        /*                            MÉTODOS                            */
+        /*                            METHODS                            */
         /* ------------------------------------------------------------- */
         public override void Update(GameTime gameTime)
         {
@@ -62,7 +62,7 @@ namespace IS_XNA_Shooter
             aimPointSprite.position.X = Mouse.GetState().X;
             aimPointSprite.position.Y = Mouse.GetState().Y;
 
-//            camera.Update(deltaTime);   // cámara
+            //camera.Update(deltaTime);   // cámara
         }
 
         public override void Draw(SpriteBatch spriteBatch)

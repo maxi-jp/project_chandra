@@ -13,6 +13,7 @@ namespace IS_XNA_Shooter
         /* ------------------------------------------------------------- */
         /*                           ATRIBUTOS                           */
         /* ------------------------------------------------------------- */
+        protected SuperGame mainGame;
         protected Level level;
         protected IngameHub hub;
         protected Ship Ship;
@@ -25,8 +26,9 @@ namespace IS_XNA_Shooter
         /* ------------------------------------------------------------- */
         /*                          CONSTRUCTOR                          */
         /* ------------------------------------------------------------- */
-        public Game (float ShipVelocity, int ShipLife)
+        public Game (SuperGame mainGame, float ShipVelocity, int ShipLife)
         {
+            this.mainGame = mainGame;
             camera = new Camera();
             enemies = new List<Enemy>();
             shots = new List<Shot>();
@@ -43,7 +45,7 @@ namespace IS_XNA_Shooter
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             level.Update(deltaTime);    // nivel
-            Ship.Update(deltaTime);   // Ship
+            Ship.Update(deltaTime);     // Ship
             foreach (Enemy e in enemies)// enemigos
                 if (e.isActive())
                     e.Update(deltaTime);

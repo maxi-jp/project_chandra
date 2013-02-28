@@ -17,8 +17,9 @@ namespace IS_XNA_Shooter
         private int lifes; // number of lifes of the Ship
 
         /* ------------------- CONSTRUCTORS ------------------- */
-        public IngameHubA(Texture2D textureLeft, Texture2D textureCenter, Texture2D textureRight)
-            : base()
+        public IngameHubA(Texture2D textureLeft, Texture2D textureCenter, Texture2D textureRight,
+            int playerLifes)
+            : base(playerLifes)
         {
             size = textureCenter.Width;
             this.textureLeft = textureLeft;

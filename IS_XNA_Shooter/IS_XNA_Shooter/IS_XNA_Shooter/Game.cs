@@ -25,7 +25,7 @@ namespace IS_XNA_Shooter
         /* ------------------------------------------------------------- */
         /*                          CONSTRUCTOR                          */
         /* ------------------------------------------------------------- */
-        public Game (float playerVelocity, int playerLife)
+        public Game (float playerVelocity)
         {
             camera = new Camera();
             enemies = new List<Enemy>();

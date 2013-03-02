@@ -57,5 +57,6 @@ namespace IS_XNA_Shooter
             }
         }
        
+
     } // class XMLLvlMng
 }

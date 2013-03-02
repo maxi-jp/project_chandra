@@ -125,6 +125,28 @@ namespace IS_XNA_Shooter
                 null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
         }
 
+        public override void Update(float deltaTime)
+        {
+            base.Update(deltaTime);
+            int i = 0; // iterator for the list of enemies
+            bool stillAlive = false; // is true if there is any enemie alive
+            //the next loop searches an enemy alive for controlling the end of level 
+            if (!levelFinished)
+            {
+                while (i < enemies.Count && !stillAlive)
+                {
+                    if (enemies[i] != null && !enemies[i].isDead())
+                    {
+                        stillAlive = true;
+                    }
+                    i++;
+                }
+                if (!stillAlive)
+                    levelFinished = true;
+            }	
+
+        }
+
         public override void setPlayer(Player player) {
             base.setPlayer(player);
         }

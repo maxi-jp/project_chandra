@@ -54,6 +54,15 @@ namespace IS_XNA_Shooter
             base.Update(deltaTime);
 
             collider.Update(position, rotation);
+            if (outOfScreen())
+                kill();
+            
+        }
+
+        private bool outOfScreen()
+        {   //if the enemy is out the screen it is killed
+            return (position.X > level.width || position.X < 0 || position.Y > level.height || position.Y < 0);
+               
         }
 
         public override void Draw(SpriteBatch spriteBatch)

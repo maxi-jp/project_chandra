@@ -127,21 +127,9 @@ namespace IS_XNA_Shooter
                     textureEW1 =        content.Load<Texture2D>("Graphics/Ships/EnemyWeakAnim");
                     textureEW2 =        content.Load<Texture2D>("Graphics/Ships/sprites_enemy01_80x80");
                     textureCell =       content.Load<Texture2D>("Graphics/celdasuelo");
-                    textureBg00 =       content.Load<Texture2D>("Graphics/Backgrounds/bg00");
-                    textureBg01 =       content.Load<Texture2D>("Graphics/Backgrounds/bg01");
-                    textureBg02 =       content.Load<Texture2D>("Graphics/Backgrounds/bg02");
-                    textureBg03 =       content.Load<Texture2D>("Graphics/Backgrounds/bg03");
-                    break;
-
-                case 3: // GameB nivel 1
-                    LoadIngameMenu();
-
-                    texturePA2 =        content.Load<Texture2D>("Graphics/Ships/sprites80x80");
-                    textureL1 =         content.Load<Texture2D>("Graphics/laserShotAnim");
-                    textureExplosion1 = content.Load<Texture2D>("Graphics/Explosions/sprites_explosion100x100");
-                    textureEW2 =        content.Load<Texture2D>("Graphics/Ships/sprites_enemy01_80x80");
                     textureRed =        content.Load<Texture2D>("Graphics/Rojazo");
                     textureBgGame1A =   content.Load<Texture2D>("Graphics/Backgrounds/backgroundTile1");
+                    textureBgSpace =    content.Load<Texture2D>("Graphics/Backgrounds/backgroundSpace");
                     textureBg00 =       content.Load<Texture2D>("Graphics/Backgrounds/bg00");
                     textureBg01 =       content.Load<Texture2D>("Graphics/Backgrounds/bg01");
                     textureBg02 =       content.Load<Texture2D>("Graphics/Backgrounds/bg02");
@@ -201,6 +189,10 @@ namespace IS_XNA_Shooter
                     textureCell = null;
                     //textureRed.Dispose();
                     textureRed = null;
+                    //textureBgGame1A.Dispose();
+                    textureBgGame1A = null;
+                    //textureBgSpace.Dispose();
+                    textureBgSpace = null;
                     //textureBg00.Dispose();
                     textureBg00 = null;
                     //textureBg01.Dispose();
@@ -211,26 +203,6 @@ namespace IS_XNA_Shooter
                     textureBg03 = null;
                     //textureCol
                     textureBgCol1 = textureBgCol2 = textureBgCol3 = null;
-                    break;
-
-                case 3: // GameB nivel 1
-                    hubCenter = null;
-                    hubLeft = null;
-                    hubRight = null;
-
-                    texturePA2 = null;
-                    textureL1 = null;
-                    textureExplosion1 = null;
-                    textureEW2 = null;
-                    textureRed = null;
-                    textureBgGame1A = null;
-                    textureBg00 = null;
-                    textureBg01 = null;
-                    textureBg02 = null;
-                    textureBg03 = null;
-                    textureBgCol1 = null;
-                    textureBgCol2 = null;
-                    textureBgCol3 = null;
                     break;
             }
         } // UnloadContent
@@ -266,12 +238,6 @@ namespace IS_XNA_Shooter
             //menuIngame.Dispose();
             menuIngame = null;
             getready321 = null;
-        }
-
-        public void UnloadContentGame()
-        {
-            UnloadContent(2);
-            UnloadContent(3);
         }
 
     } // class GRMng

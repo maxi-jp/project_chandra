@@ -127,6 +127,26 @@ namespace IS_XNA_Shooter
 
         public override void setShip(Ship Ship) {
             base.setShip(Ship);
+            base.Update(deltaTime);
+            int i = 0; // iterator for the list of enemies
+            bool stillAlive = false; // is true if there is any enemie alive
+            //the next loop searches an enemy alive for controlling the end of level 
+            if (!levelFinished)
+            {
+                while (i < enemies.Count && !stillAlive)
+                {
+                    if (enemies[i] != null && !enemies[i].isDead())
+                    {
+                        stillAlive = true;
+                    }
+                    i++;
+                }
+                if (!stillAlive)
+                    levelFinished = true;
+            }	
+
+        }
+
         }
     }
 }

@@ -17,6 +17,7 @@ namespace IS_XNA_Shooter
         public int height;
         protected List<Enemy> enemies;
         protected List<float> timeLeftEnemy;
+        protected bool levelFinished = false;
 
         /* ------------------- CONSTRUCTORES ------------------- */
         public Level() 
@@ -161,6 +162,11 @@ namespace IS_XNA_Shooter
             Ship.SetPosition(ShipInitPosition);
         }
 
+        // This method returns true when the level is finished.
+        public bool getFinish()
+        {
+            return levelFinished;
+        }
 
         public XMLLvlMng LvlMng { get; set; }
     } // class Level

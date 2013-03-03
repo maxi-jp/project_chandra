@@ -27,8 +27,6 @@ obj/
 [Rr]elease*/
 _ReSharper*/
 [Tt]est[Rr]esult*
-*.sln
 *.ico
-Properties/
-*.csproj
 *.cachefile
+bin/

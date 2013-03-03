@@ -39,5 +39,10 @@ namespace IS_XNA_Shooter
             //bgLayer3.Draw(spriteBatch);
             bgLayerC.Draw(spriteBatch);
         }
+
+        internal void Dispose()
+        {
+            //TO DO
+        }
     }
 }

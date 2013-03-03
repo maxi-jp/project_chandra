@@ -22,13 +22,16 @@
 				<enemy type="enemyBeam" positionX="100" positionY="350" time="10"></enemy>
 				<enemy type="enemyBeam" positionX="100" positionY="500" time="10"></enemy>
 				<!-- OLEADA 4 --> 
+				<!--
 				<enemy type="enemyWeak" positionX="350" positionY="700" time="20"></enemy>
 				<enemy type="enemyWeak" positionX="500" positionY="700" time="20"></enemy>
 				<enemy type="enemyWeak" positionX="650" positionY="700" time="20"></enemy>
 				<enemy type="enemyWeak" positionX="350" positionY="770" time="20"></enemy>
 				<enemy type="enemyWeak" positionX="500" positionY="770" time="20"></enemy>
 				<enemy type="enemyWeak" positionX="650" positionY="770" time="20"></enemy>
+				-->
 				<!-- OLEADA 5 --> 
+				<!--
 				<enemy type="enemyWeak" positionX="1100" positionY="50" time="30"></enemy>
 				<enemy type="enemyWeak" positionX="1100" positionY="50" time="31"></enemy>
 				<enemy type="enemyWeak" positionX="1100" positionY="750" time="30"></enemy>
@@ -37,7 +40,9 @@
 				<enemy type="enemyWeak" positionX="100" positionY="50" time="32"></enemy>
 				<enemy type="enemyWeak" positionX="100" positionY="750" time="31"></enemy>
 				<enemy type="enemyWeak" positionX="100" positionY="750" time="32"></enemy>
+				-->
 				<!-- OLEADA 6 --> 
+				<!--
 				<enemy type="enemyWeak" positionX="1000" positionY="50" time="40"></enemy>
 				<enemy type="enemyWeak" positionX="973" positionY="699" time="41"></enemy>
 				<enemy type="enemyWeak" positionX="134" positionY="733" time="42"></enemy>
@@ -57,8 +62,9 @@
 				<enemy type="enemyWeak" positionX="1100" positionY="750" time="52"></enemy>
 				<enemy type="enemyWeak" positionX="100" positionY="50" time="52"></enemy>
 				<enemy type="enemyWeak" positionX="100" positionY="750" time="52"></enemy>
-				
+				-->
 				<!-- OLEADA 7 -->
+				<!--
 				<enemy type="enemyWeak" positionX="1100" positionY="50" time="60"></enemy>
 				<enemy type="enemyWeak" positionX="1100" positionY="750" time="60"></enemy>
 				<enemy type="enemyWeak" positionX="100" positionY="50" time="60"></enemy>
@@ -78,8 +84,9 @@
 				<enemy type="enemyWeak" positionX="1100" positionY="750" time="66"></enemy>
 				<enemy type="enemyWeak" positionX="100" positionY="50" time="66"></enemy>
 				<enemy type="enemyWeak" positionX="100" positionY="750" time="66"></enemy>
-				
+				-->
 				<!-- OLEADA FINAL -->
+				<!--
 				<enemy type="enemyWeak" positionX="100" positionY="50" time="73"></enemy>
 				<enemy type="enemyWeak" positionX="450" positionY="50" time="72"></enemy>
 				<enemy type="enemyWeak" positionX="750" positionY="50" time="72"></enemy>
@@ -105,6 +112,6 @@
 				<enemy type="enemyWeak" positionX="100" positionY="500" time="79"></enemy>
 				<enemy type="enemyWeak" positionX="1100" positionY="300" time="79"></enemy>
 				<enemy type="enemyWeak" positionX="1100" positionY="500" time="79"></enemy>
-				
+				-->
 	</enemiesList>
 </level>

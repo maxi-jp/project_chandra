@@ -319,7 +319,7 @@ namespace IS_XNA_Shooter
             audio.LoadContent(1);
             LvlMng.LoadContent(1); // cargamos los rectangulos
 
-            game = new GameB(this, 1, GRMng.textureAim,
+            game = new GameScroll(this, 1, GRMng.textureAim,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
 
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego

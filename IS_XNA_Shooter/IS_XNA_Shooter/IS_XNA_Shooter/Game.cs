@@ -22,6 +22,7 @@ namespace IS_XNA_Shooter
         protected List<Shot> shots;
         protected List<Explosion> explosions;
         protected Camera camera;
+        protected int ShipLife;
 
         /* ------------------------------------------------------------- */
         /*                          CONSTRUCTOR                          */
@@ -29,6 +30,7 @@ namespace IS_XNA_Shooter
         public Game (SuperGame mainGame, float ShipVelocity, int ShipLife)
         {
             this.mainGame = mainGame;
+            this.ShipLife = ShipLife;
             camera = new Camera();
             enemies = new List<Enemy>();
             shots = new List<Shot>();

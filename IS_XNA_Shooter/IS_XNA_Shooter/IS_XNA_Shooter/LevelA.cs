@@ -127,6 +127,10 @@ namespace IS_XNA_Shooter
 
         public override void setShip(Ship Ship) {
             base.setShip(Ship);
+        }
+
+        public override void Update(float deltaTime)
+        {
             base.Update(deltaTime);
             int i = 0; // iterator for the list of enemies
             bool stillAlive = false; // is true if there is any enemie alive
@@ -144,9 +148,7 @@ namespace IS_XNA_Shooter
                 if (!stillAlive)
                     levelFinished = true;
             }	
-
         }
 
         }
     }
-}

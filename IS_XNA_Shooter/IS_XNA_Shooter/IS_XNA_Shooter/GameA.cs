@@ -11,7 +11,7 @@ namespace IS_XNA_Shooter
     class GameA : Game
     {
         /* ------------------------------------------------------------- */
-        /*                           ATTRIBUTES                          */
+        /*                           ATRIBUTOS                           */
         /* ------------------------------------------------------------- */
         private Sprite aimPointSprite;
         private BackgroundGameA backGround;
@@ -19,11 +19,11 @@ namespace IS_XNA_Shooter
         /* ------------------------------------------------------------- */
         /*                          CONSTRUCTOR                          */
         /* ------------------------------------------------------------- */
-        public GameA(SuperGame mainGame, int num, Texture2D textureAim, Texture2D textureBg,
-            float ShipVelocity, int ShipLife)
-            : base(mainGame, ShipVelocity, ShipLife)
+        public GameA(int num, Texture2D textureAim, Texture2D textureBg,
+            float playerVelocity)
+            : base(playerVelocity)
         {
-            hub = new IngameHubA(GRMng.hubLeft, GRMng.hubCenter, GRMng.hubRight, mainGame.player.GetLife());
+            hub = new IngameHubA(GRMng.hubLeft, GRMng.hubCenter, GRMng.hubRight);
             level = new LevelA(camera, num, enemies);
             backGround = new BackgroundGameA(camera, level);
             
@@ -38,19 +38,19 @@ namespace IS_XNA_Shooter
             points[5] = new Vector2(34, 66);
             points[6] = new Vector2(26, 47);
             points[7] = new Vector2(15, 45);
-            Ship = new ShipA(camera, level, Vector2.Zero, 0, points, GRMng.frameWidthPA2, GRMng.frameHeightPA2,
+            player = new ShipA(camera, level, Vector2.Zero, 0, points, GRMng.frameWidthPA2, GRMng.frameHeightPA2,
                 GRMng.numAnimsPA2, GRMng.frameCountPA2, GRMng.loopingPA2, SuperGame.frameTime24, GRMng.texturePA2,
-                ShipVelocity, ShipLife, shots);
+                playerVelocity, shots);
 
-            level.setShip(Ship);
+            level.setPlayer(player);
 
             aimPointSprite = new Sprite(true, Vector2.Zero, 0, textureAim);
 
-            camera.setShip(Ship);
+            camera.setPlayer(player);
         }
 
         /* ------------------------------------------------------------- */
-        /*                            METHODS                            */
+        /*                            MÉTODOS                            */
         /* ------------------------------------------------------------- */
         public override void Update(GameTime gameTime)
         {
@@ -62,24 +62,30 @@ namespace IS_XNA_Shooter
             aimPointSprite.position.X = Mouse.GetState().X;
             aimPointSprite.position.Y = Mouse.GetState().Y;
 
-            //camera.Update(deltaTime);   // cámara
+//            camera.Update(deltaTime);   // cámara
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             backGround.Draw(spriteBatch);
 
-            base.Draw(spriteBatch); // Ship, enemigos, balas
+            base.Draw(spriteBatch); // player, enemigos, balas
             
             aimPointSprite.Draw(spriteBatch); // punto de mira
 
             if (SuperGame.debug)
             {
+                spriteBatch.DrawString(SuperGame.fontDebug, "player rot=" + player.rotation + ".",
+                    new Vector2(5, 3), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                spriteBatch.DrawString(SuperGame.fontDebug, "enemigo=" + enemies[0].rotation + ".",
+                   new Vector2(5, 15), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                
+                /* 
                 spriteBatch.DrawString(SuperGame.fontDebug, "Camera=" + camera.position + ".",
                     new Vector2(5, 3), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-                spriteBatch.DrawString(SuperGame.fontDebug, "Ship=" + Ship.position + ".",
+                spriteBatch.DrawString(SuperGame.fontDebug, "Player=" + player.position + ".",
                     new Vector2(5, 15), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-
+                */
                 /*if (enemies.Count > 0)
                 {
                     spriteBatch.DrawString(Game1.fontDebug, "Enemy = " + enemies[0].position.ToString() + ".",

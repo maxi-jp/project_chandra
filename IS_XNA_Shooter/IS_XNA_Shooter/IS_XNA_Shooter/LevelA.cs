@@ -125,7 +125,8 @@ namespace IS_XNA_Shooter
                 null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
         }
 
-        public override void setShip(Ship Ship) {
+        public override void setShip(Ship Ship)
+        {
             base.setShip(Ship);
         }
 
@@ -148,7 +149,8 @@ namespace IS_XNA_Shooter
                 if (!stillAlive)
                     levelFinished = true;
             }	
-        }
 
-        }
-    }
+        } // Update
+
+    } // class LevelA
+}

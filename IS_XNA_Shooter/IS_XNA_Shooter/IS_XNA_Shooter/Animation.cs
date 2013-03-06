@@ -31,6 +31,9 @@ namespace IS_XNA_Shooter
         // Animación anterior
         protected short prevAnim;
 
+        // next animation to be played
+        protected short nextAnim;
+
         // Área de la tira imagen que vamos a mostrar
         Rectangle sourceRect = new Rectangle();
 
@@ -50,7 +53,7 @@ namespace IS_XNA_Shooter
         protected int numAnim;
 
         // estado de la Animation
-        public bool active;
+        public bool animActive;
 
         // Determina si la animación continúa o se desctiva después de ejecutarse
         protected bool[] looping;
@@ -77,14 +80,14 @@ namespace IS_XNA_Shooter
             currentFrame = 0;
 
             // Set the Animation to active by default
-            active = true;
+            animActive = true;
         }
 
         /* ------------------- MÉTODOS ------------------- */
         public virtual void Update (float deltaTime)
         {
             // Do not update the game if we are not active
-            if (!active)
+            if (!animActive)
                 return;
 
             // Update the elapsed time
@@ -103,10 +106,12 @@ namespace IS_XNA_Shooter
                     currentFrame = 0;
                     // If we are not looping deactivate the animation
                     if (!looping[currentAnim])
-                        if (currentAnim != prevAnim)
-                            currentAnim = prevAnim;
+                    {
+                        if (nextAnim == -1)
+                            animActive = false;
                         else
-                            active = false;
+                            currentAnim = prevAnim;
+                    }
                 }
 
                 // Reset the elapsed time to zero
@@ -128,7 +133,7 @@ namespace IS_XNA_Shooter
         public override void Draw (SpriteBatch spriteBatch)
         {
             // Only draw the animation when we are active
-            if (active)
+            if (animActive)
                 spriteBatch.Draw(texture, destinationRect, sourceRect, Color.White, rotation,
                     middlePoint, SpriteEffects.None, 1);
         }
@@ -141,6 +146,12 @@ namespace IS_XNA_Shooter
 
             currentFrame = 0;
             elapsedTime = 0;
+        }
+
+        protected void setAnim(short i, short j)
+        {
+            nextAnim = j;
+            setAnim(i);
         }
 
     } // class Animation

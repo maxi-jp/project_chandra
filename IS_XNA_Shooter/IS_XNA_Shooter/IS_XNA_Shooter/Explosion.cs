@@ -23,9 +23,7 @@ namespace IS_XNA_Shooter
             base.looping[0] = false;
 
             setAnim(0);
-            active = true;
-
-            Audio.PlayEffect("brokenBone01");
+            animActive = true;
         }
 
         /* ------------------- MÉTODOS ------------------- */
@@ -41,7 +39,7 @@ namespace IS_XNA_Shooter
 
         public bool isActive()
         {
-            return active;
+            return animActive;
         }
 
     } // class Explosion

@@ -17,7 +17,7 @@ namespace IS_XNA_Shooter
         /* ------------------- CONSTRUCTORES ------------------- */
         public EnemyMineShot(Camera camera, Level level, Vector2 position, float rotation,
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
-            float frametime, Texture2D texture, float velocity, int life, Player player,
+            float frametime, Texture2D texture, float velocity, int life, Ship player,
             int shotPower, float shotVelocity, float timeToShot)
             : base(camera, level, position, rotation, frameWidth, frameHeight, numAnim, frameCount,
                 looping, frametime, texture, velocity, life, player, shotPower, shotVelocity, timeToShot)

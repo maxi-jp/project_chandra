@@ -15,7 +15,7 @@ namespace IS_XNA_Shooter
         /* ------------------------------------------------------------- */
         protected Level level;
         protected IngameHub hub;
-        protected Player player;
+        protected Ship player;
         protected float playerVelocity = 200f;
         protected List<Enemy> enemies;
         protected List<Shot> shots;

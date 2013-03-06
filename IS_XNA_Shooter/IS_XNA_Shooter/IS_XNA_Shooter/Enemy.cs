@@ -15,7 +15,7 @@ namespace IS_XNA_Shooter
 
         protected int life;         // vida
         protected float velocity;   // velocidad
-        protected Player player;    // jugador
+        protected Ship player;    // jugador
         private bool active;        // si no esta activo no se muestra
         
         //Shots
@@ -29,7 +29,7 @@ namespace IS_XNA_Shooter
         /* ------------------- CONSTRUCTORES ------------------- */
         public Enemy(Camera camera, Level level, Vector2 position, float rotation,
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
-            float frametime, Texture2D texture, float velocity, int life, Player player, 
+            float frametime, Texture2D texture, float velocity, int life, Ship player, 
             int shotPower, float shotVelocity, float timeToShot)
             : base(camera, level, true, position, rotation, texture, frameWidth, frameHeight, numAnim,
                 frameCount, looping, frametime)
@@ -92,7 +92,7 @@ namespace IS_XNA_Shooter
             active = false;
         }
 
-        public void SetPlayer(Player player)
+        public void SetPlayer(Ship player)
         {
             this.player = player;
         }

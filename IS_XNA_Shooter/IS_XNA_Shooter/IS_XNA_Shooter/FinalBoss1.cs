@@ -107,8 +107,10 @@ namespace IS_XNA_Shooter
 
         private void phase1(float deltaTime)
         {
-            if (down) position.Y += deltaTime * velocity;
-            else position.Y -= deltaTime * velocity;
+            if (down) 
+                position.Y += deltaTime * velocity;
+            else 
+                position.Y -= deltaTime * velocity;
             changeDirection();
 
             //Front shot

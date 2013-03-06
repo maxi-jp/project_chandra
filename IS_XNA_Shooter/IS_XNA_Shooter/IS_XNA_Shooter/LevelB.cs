@@ -44,8 +44,8 @@ namespace IS_XNA_Shooter
 
             Vector2 position = new Vector2(SuperGame.screenWidth - GRMng.frameWidthFB1 / 2, 
                                            SuperGame.screenHeight / 2 - GRMng.frameHeightFB1 / 2);
-            Enemy e = new FinalBoss1(camera, this, position, 0, GRMng.frameWidthFB1, GRMng.frameHeightFB1, 
-                GRMng.numAnimsFB1, GRMng.frameCountFB1, GRMng.loopingFB1, SuperGame.frameTime12, GRMng.textureFB1, -50, 100, 1, null);
+            Enemy e = new FinalBoss1(camera, this, position, (float)Math.PI, GRMng.frameWidthFB1, GRMng.frameHeightFB1, 
+                GRMng.numAnimsFB1, GRMng.frameCountFB1, GRMng.loopingFB1, SuperGame.frameTime12, GRMng.textureFB1, 40, 100, 1, null, shots);
             e.setActive();
             enemies = new List<Enemy>();
             enemies.Add(e);

@@ -71,7 +71,7 @@ namespace IS_XNA_Shooter
                 if (collisionable)
                     for (int j = 0; j < tileY; j++)
                     {
-                        if (position.X + texture.Width <= SuperGame.screenWidth / 2)// si la posicion del layer llega al fin
+                        if (position.X + texture.Width <= SuperGame.screenWidth / 2)// si la posicion del primer layer llega al fin
                         {
                             position.X = SuperGame.screenWidth / 2;
                             numtex1 = numtex2;

@@ -15,12 +15,25 @@ namespace IS_XNA_Shooter
         //-------------------------
 
         // private List<List<Rectangle>> crashList;  //objetos de colisión en el parallax donde se juega
+        private playState currentState;
         private List<Collider> colliderList; //lista de colliders para crashlist
         private BackgroundGameB backGroundB; //Fondo con los parallax
         private BackgroundGameA backGroundA;
         private Texture2D textureAim;
         private List<int> levelList;
         private int currentLevel=0;
+        public Sprite spriteGetReady;
+        public Sprite spriteNum;
+        private float timeToResumeAux=5f;
+
+        public enum playState
+        {
+            beginLevel,
+            playing,
+            shipDestroyed,
+            levelComplete
+        };
+
         //---------------------------
         //----    Constructor    ----
         //---------------------------
@@ -36,11 +49,16 @@ namespace IS_XNA_Shooter
             levelList = new List<int>();
             levelList.Add(0); levelList.Add(1);
             levelList.Add(0); levelList.Add(1);
+            spriteGetReady = new Sprite(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight / 2 - 90), 0,
+               GRMng.getready321, new Rectangle(0, 0, 512, 80));
+            spriteNum = new Sprite(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight / 2 + 80), 0,
+                GRMng.getready321, new Rectangle(0, 80, 170, 150));
             initLevelB(1);
         }
 
         private void initLevelB(int numLevel)
         {
+            currentState = playState.beginLevel;
             colliderList = new List<Collider>();
             level = new LevelB(camera, numLevel);
             enemies = ((LevelB)level).getEnemies();
@@ -49,10 +67,10 @@ namespace IS_XNA_Shooter
             backGroundB = new BackgroundGameB(level);
             //backGroundA.Dispose();
             backGroundA = null;
-            Ship = new ShipB(camera, ((LevelB)level), Vector2.Zero, 0, puntosColliderShip(), GRMng.frameWidthPA2,
+            Ship = new ShipB(camera, ((LevelB)level), new Vector2(150f,380f), 0, puntosColliderShip(), GRMng.frameWidthPA2,
                 GRMng.frameHeightPA2, GRMng.numAnimsPA2, GRMng.frameCountPA2, GRMng.loopingPA2, SuperGame.frameTime24,
                 GRMng.texturePA2, ShipVelocity + 200, ShipLife, shots);
-            level.setShip(Ship);
+            //level.setShip(Ship);
             camera.setShip(Ship);
         }
 
@@ -93,18 +111,43 @@ namespace IS_XNA_Shooter
         //--------------------------------
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (level.getFinish())
+            switch (currentState)
             {
-                currentLevel++;
-                if (currentLevel< levelList.Count)
-                    initNextLevel(levelList[currentLevel]);
+                case playState.beginLevel:
+                    timeToResumeAux -= deltaTime;
+                    if (timeToResumeAux <= 0)
+                    {
+                        currentState = playState.playing;
+                        timeToResumeAux = 5f;
+                    }
+                    else if (timeToResumeAux >= 5f * 2 / 3)
+                        spriteNum.SetRectangle(new Rectangle(341, 80, 170, 150));
+                    else if (timeToResumeAux >= 5f / 3)
+                        spriteNum.SetRectangle(new Rectangle(171, 80, 170, 150));
+                
+                    else
+                        spriteNum.SetRectangle(new Rectangle(0, 80, 170, 150));
+                    if (backGroundB != null)
+                        backGroundB.Update(deltaTime);
+                    break;
+                case playState.playing:
+                    base.Update(gameTime);
+                    if (level.getFinish())
+                    {
+                        currentLevel++;
+                        if (currentLevel< levelList.Count)
+                            initNextLevel(levelList[currentLevel]);
+                        currentState = playState.beginLevel;
+                    }
+                    if (backGroundB!=null)
+                        backGroundB.Update(deltaTime);
+                    break;
+                case playState.shipDestroyed:
+                    break;
+                case playState.levelComplete:
+                    break;
             }
-
-            //actualiza background
-            if (backGroundB!=null)
-                backGroundB.Update(deltaTime);
         }
 
         private void initNextLevel(int level)
@@ -130,12 +173,22 @@ namespace IS_XNA_Shooter
             if (backGroundA != null)
                 backGroundA.Draw(spriteBatch);
             base.Draw(spriteBatch);
-            if (SuperGame.debug)
+
+            switch (currentState)
             {
-                spriteBatch.DrawString(SuperGame.fontDebug, "Camera=" + camera.position + ".",
-                    new Vector2(5, 3), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-                spriteBatch.DrawString(SuperGame.fontDebug, "Ship=" + Ship.position + ".",
-                    new Vector2(5, 15), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                case playState.beginLevel:
+                    spriteGetReady.DrawRectangle(spriteBatch);
+                    spriteNum.DrawRectangle(spriteBatch);
+                    break;
+                case playState.playing:
+                    if (SuperGame.debug)
+                    {
+                        spriteBatch.DrawString(SuperGame.fontDebug, "Camera=" + camera.position + ".",
+                            new Vector2(5, 3), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                        spriteBatch.DrawString(SuperGame.fontDebug, "Ship=" + Ship.position + ".",
+                            new Vector2(5, 15), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                    }
+                    break;
             }
          }
 
@@ -158,6 +211,7 @@ namespace IS_XNA_Shooter
 
             return points;
         }
+
 
     }//GameB
 }

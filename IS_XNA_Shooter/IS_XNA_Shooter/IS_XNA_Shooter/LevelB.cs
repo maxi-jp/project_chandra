@@ -8,20 +8,35 @@ using System.Xml;
 
 namespace IS_XNA_Shooter
 {
+    /// <summary>
+    /// This class represents a scroll level
+    /// </summary>
     class LevelB : Level
     {
         //-------------------------
-        //----    Atributos    ----
+        //----    Atributes    ----
         //-------------------------
-        private int numLevel;   //número de nivel
-        //private Camera camera;  //cámara
+
+        /// <summary>
+        /// Number of level
+        /// </summary>
+        private int numLevel;
+        /// <summary>
+        /// A list of collider rectangles from the level
+        /// </summary>
         private List<List<Rectangle>> listRectCollider;
 
 
 
-        //---------------------------
-        //----    Constructor    ----
-        //---------------------------
+        //-----------------------
+        //----    Builder    ----
+        //-----------------------
+
+        /// <summary>
+        /// The builder of the level
+        /// </summary>
+        /// <param name="camera"></param>
+        /// <param name="numLevel"></param>
         public LevelB(Camera camera, int numLevel)
             : base()
         {
@@ -32,27 +47,26 @@ namespace IS_XNA_Shooter
             height = SuperGame.screenHeight;
             timeLeftEnemy = new List<float>();
             listRectCollider = new List<List<Rectangle>>();
-            readRectangles();
 
-            //Enemigo
-            Enemy e1 = new EnemyWeakB(camera, this, new Vector2(SuperGame.screenWidth + 100, 
-                50)/*new Random().Next(SuperGame.screenHeight))*/, (float)Math.PI, GRMng.frameWidthEW2, 
-                GRMng.frameHeightEW2, GRMng.numAnimsEW2, GRMng.frameCountEW2, GRMng.loopingEW2, SuperGame.frameTime12, 
-                GRMng.textureEW2, -200, 100, 1, null);
-            e1.setActive();
+            //readRectangles();
+
+            Enemy e = new FinalBoss1(camera, this, new Vector2(SuperGame.screenWidth + 100, 50), (float)Math.PI, GRMng.frameWidthEW2, GRMng.frameHeightEW2, 
+                GRMng.numAnimsEW2, GRMng.frameCountEW2, GRMng.loopingEW2, SuperGame.frameTime12, GRMng.textureEW2, -200, 100, 1, null);
+            e.setActive();
+
             enemies = new List<Enemy>();
-            enemies.Add(e1);
+            enemies.Add(e);
         }
 
 
 
         //--------------------------------
-        //----    Métodos públicos    ----
+        //----    Public functions    ----
         //--------------------------------
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
-            int i=0; // iterator for the list of enemies
+            /*int i=0; // iterator for the list of enemies
             bool stillAlive = false; // is true if there is any enemie alive
             //the next loop searches an enemy alive for controlling the end of level 
             if (!levelFinished)
@@ -67,7 +81,7 @@ namespace IS_XNA_Shooter
                 }
                 if (!stillAlive)
                     levelFinished = true;
-            }
+            }*/
         }
 
         public override void Draw(SpriteBatch spriteBatch)

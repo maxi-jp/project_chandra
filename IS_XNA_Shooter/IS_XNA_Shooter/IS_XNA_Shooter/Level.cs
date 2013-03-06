@@ -8,59 +8,65 @@ using System.Xml;
 
 namespace IS_XNA_Shooter
 {
+    /// <summary>
+    /// This class represents a level with the ship of the player, the enemies...
+    /// </summary>
     class Level
     {
+        /// <summary>
+        /// This is game's camera
+        /// </summary>
         protected Camera camera;
+        /// <summary>
+        /// This is our ship
+        /// </summary>
         protected Ship Ship;
+        /// <summary>
+        /// This is the initial position of our ship
+        /// </summary>
         protected Vector2 ShipInitPosition;
-        public int width;
-        public int height;
+        /// <summary>
+        /// Theese are the width and the height of the level
+        /// </summary>
+        public int width, height;
+        /// <summary>
+        /// This is a list with the enemies of the level
+        /// </summary>
         protected List<Enemy> enemies;
+        /// <summary>
+        /// This is a list with the time in which the enemies are created
+        /// </summary>
         protected List<float> timeLeftEnemy;
+        /// <summary>
+        /// This tell us if the level has finished or not
+        /// </summary>
         protected bool levelFinished = false;
 
-        /* ------------------- CONSTRUCTORES ------------------- */
+        /* ------------------- BUILDERS ------------------- */
+
+        /// <summary>
+        /// An empty builder
+        /// </summary>
         public Level() 
-        { 
-         //Lo ponemos para que compile LevelB ya que no tiene camara y demas atributos.
+        {
         }
 
+        /// <summary>
+        /// A builder with a camera and a list of enemies
+        /// </summary>
+        /// <param name="camera"></param>
+        /// <param name="num"> This is the number of the level (1, 2, 3 ...) </param>
+        /// <param name="enemies"></param>
         public Level(Camera camera, int num, List<Enemy> enemies)
         {
-            //this.camera = camera;
-/*
-            switch (num)
-            {
-                case 1:
-                    width = 1200;
-                    height = 800;
-                    this.enemies = enemies;
-                    timeLeftEnemy = new List<float>();
-
-                    /*Enemy enemy1 = new EnemyWeak(camera, this, new Vector2(100, 100), 0,
-                        GRMng.frameWidthEW, GRMng.frameHeightEW, GRMng.numAnimsEW, GRMng.frameCountEW,
-                        GRMng.loopingEW, SuperGame.frameTime12, GRMng.textureEW, 80, 100, null);
-                    enemies.Add(enemy1);
-                    timeLeftEnemy.Add(2);*/
-            /*
-                    Enemy enemy;
-                    for (int i = 0; i < 40; i++)
-                    {
-                        enemy = new EnemyWeak(camera, this, new Vector2(100, 100), 0,
-                            GRMng.frameWidthEW, GRMng.frameHeightEW, GRMng.numAnimsEW, GRMng.frameCountEW,
-                            GRMng.loopingEW, SuperGame.frameTime12, GRMng.textureEW, 80+i, 100, null);
-                        enemies.Add(enemy);
-                        timeLeftEnemy.Add(1+i);
-                    }
-                    
-                    break;
-            }
-            */
-           // whitePixel = GRMng.whitepixel;
-           // textureBg = GRMng.textureCell;
         }
 
-        /* ------------------- MÉTODOS ------------------- */
+        /* ------------------- FUNCTIONS ------------------- */
+
+        /// <summary>
+        /// This function updates the state of the level
+        /// </summary>
+        /// <param name="deltaTime"> This is the time between the before and the current update </param>
         public virtual void Update(float deltaTime)
         {
             for (int i = 0; i < timeLeftEnemy.Count(); i++)
@@ -71,35 +77,20 @@ namespace IS_XNA_Shooter
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            /*
-            // grid del suelo
-            for (int i = 0; i < width; i += textureBg.Width)
-                for (int j = 0; j < height; j += textureBg.Height)
-                    spriteBatch.Draw(textureBg, new Vector2(i + camera.displacement.X, j + camera.displacement.Y), Color.White);
-
-
-            // linea de arriba:
-            //spriteBatch.Draw(whitePixel, new Rectangle(0, 0, width, 1), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
-            spriteBatch.Draw(whitePixel, new Rectangle((int)camera.displacement.X, (int)camera.displacement.Y, width, 1),
-                null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
-            // linea de la derecha:
-            //spriteBatch.Draw(whitePixel, new Rectangle(width, 0, 1, height), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
-            spriteBatch.Draw(whitePixel, new Rectangle((int)camera.displacement.X, (int)camera.displacement.Y, 1, height),
-                null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
-            // linea de abajo:
-            //spriteBatch.Draw(whitePixel, new Rectangle(0, height, width, 1), null, Color.White, w0, Vector2.Zero, SpriteEffects.None, 0);
-            spriteBatch.Draw(whitePixel, new Rectangle((int)camera.displacement.X + width, (int)camera.displacement.Y, 1, height),
-                null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
-            // linea de la izquierda:
-            //spriteBatch.Draw(whitePixel, new Rectangle(0, 0, 1, height), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
-            spriteBatch.Draw(whitePixel, new Rectangle((int)camera.displacement.X, (int)camera.displacement.Y + height, width, 1),
-                null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
-        */
         }
 
- 	protected void LeerArchivoXML(int modoDeJuego, int levelModo)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="modoDeJuego"></param>
+        /// <param name="levelModo"></param>
+ 	    protected void LeerArchivoXML(int modoDeJuego, int levelModo)
         {
             // Utilizar nombres de fichero y nodos XML idénticos a los que se guardaron
 
@@ -154,6 +145,10 @@ namespace IS_XNA_Shooter
             }
         }   //  end LeerArchivoXML()
 
+        /// <summary>
+        /// This function gives a value to the atribute ship.
+        /// </summary>
+        /// <param name="Ship"></param>
         public virtual void setShip(Ship Ship)
         {
             this.Ship = Ship;
@@ -162,12 +157,18 @@ namespace IS_XNA_Shooter
             Ship.SetPosition(ShipInitPosition);
         }
 
-        // This method returns true when the level is finished.
+        /// <summary>
+        /// This method returns true when the level is finished.
+        /// </summary>
+        /// <returns> True if the level has finished, and false in another case </returns>
         public bool getFinish()
         {
             return levelFinished;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public XMLLvlMng LvlMng { get; set; }
     } // class Level
 }

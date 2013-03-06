@@ -17,10 +17,10 @@ namespace IS_XNA_Shooter
         /* ------------------- CONSTRUCTORES ------------------- */
         public EnemyMineShot(Camera camera, Level level, Vector2 position, float rotation,
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
-            float frametime, Texture2D texture, float velocity, Player player,
-            int shotPower, float shotVelocity, float timeToShot,int life, int value, Ship Ship)
+            float frametime, Texture2D texture, float velocity, int life, Player player,
+            int shotPower, float shotVelocity, float timeToShot)
             : base(camera, level, position, rotation, frameWidth, frameHeight, numAnim, frameCount,
-                looping, frametime, texture, velocity, life, value, Ship)
+                looping, frametime, texture, velocity, life, player, shotPower, shotVelocity, timeToShot)
         {
             setAnim(1);
 
@@ -65,10 +65,67 @@ namespace IS_XNA_Shooter
                 position.X += (float)(velocity * despX * deltaTime);
                 position.Y += (float)(velocity * despY * deltaTime);
             }
-
+            
+            //Dispara si toca
+            timeToShot -= deltaTime;
+            if (timeToShot <= 0)
+            {
+                SixShots();
+                timeToShot = 4.0f;
+            }
             // comprobamos que el player no se salga del nivel
             position.X = MathHelper.Clamp(position.X, 0 + collider.Width / 2, level.width - collider.Width / 2);
             position.Y = MathHelper.Clamp(position.Y, 0 + collider.Height / 2, level.height - collider.Height / 2);
+        }
+
+        //Dispara 6 tiros desde el centro de la nave al exterior en 6 direcciones diferentes
+        private void SixShots()
+        {
+
+            Vector2 pos = new Vector2(position.X+30,position.Y+30);
+            float rot = 0.75f;
+
+            Shot s1 = new Shot(camera, level, pos, rot, GRMng.frameWidthL1, GRMng.frameHeightL1,
+               GRMng.numAnimsL1, GRMng.frameCountL1, GRMng.loopingL1, SuperGame.frameTime8,
+               GRMng.textureL1, SuperGame.shootType.normal, shotVelocity, shotPower);
+
+            pos.Y = position.Y;
+            rot = 0.0f;
+            Shot s2 = new Shot(camera, level, pos, rot, GRMng.frameWidthL1, GRMng.frameHeightL1,
+               GRMng.numAnimsL1, GRMng.frameCountL1, GRMng.loopingL1, SuperGame.frameTime8,
+               GRMng.textureL1, SuperGame.shootType.normal, shotVelocity, shotPower);
+
+            pos.Y = position.Y - 30;
+            rot = -0.75f;
+            Shot s3 = new Shot(camera, level, pos, rot, GRMng.frameWidthL1, GRMng.frameHeightL1,
+               GRMng.numAnimsL1, GRMng.frameCountL1, GRMng.loopingL1, SuperGame.frameTime8,
+               GRMng.textureL1, SuperGame.shootType.normal, shotVelocity, shotPower);
+
+            pos.X = position.X - 30;
+            pos.Y = position.Y + 30;
+            rot = 2.33f;
+            Shot s4 = new Shot(camera, level, pos, rot, GRMng.frameWidthL1, GRMng.frameHeightL1,
+               GRMng.numAnimsL1, GRMng.frameCountL1, GRMng.loopingL1, SuperGame.frameTime8,
+               GRMng.textureL1, SuperGame.shootType.normal, shotVelocity, shotPower);
+
+            pos.Y = position.Y ;
+            rot = 3.12f;
+            Shot s5 = new Shot(camera, level, pos, rot, GRMng.frameWidthL1, GRMng.frameHeightL1,
+               GRMng.numAnimsL1, GRMng.frameCountL1, GRMng.loopingL1, SuperGame.frameTime8,
+               GRMng.textureL1, SuperGame.shootType.normal, shotVelocity, shotPower);
+
+            pos.Y = position.Y - 30;
+            rot = 3.92f;
+            Shot s6 = new Shot(camera, level, pos, rot, GRMng.frameWidthL1, GRMng.frameHeightL1,
+               GRMng.numAnimsL1, GRMng.frameCountL1, GRMng.loopingL1, SuperGame.frameTime8,
+               GRMng.textureL1, SuperGame.shootType.normal, shotVelocity, shotPower);
+
+            shots.Add(s1);
+            shots.Add(s2);
+            shots.Add(s3);
+            shots.Add(s4);
+            shots.Add(s5);
+            shots.Add(s6);
         }
 
     }//Class EnemyMineShot

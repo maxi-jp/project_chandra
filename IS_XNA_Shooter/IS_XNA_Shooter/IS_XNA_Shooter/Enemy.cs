@@ -15,37 +15,36 @@ namespace IS_XNA_Shooter
 
         protected int life;         // vida
         protected float velocity;   // velocidad
-        protected Ship Ship;        // jugador
-        protected bool active;      // si no esta activo no se muestra
-        protected int value;        // puntos que da al matarlo
+        protected Player player;    // jugador
+        private bool active;        // si no esta activo no se muestra
+        
+        //Shots
+        protected List<Shot> shots;
+        protected float shotVelocity = 500f;
+        protected int shotPower = 200;
+
+        protected float timeToShot = 1.7f; // tiempo minimo entre disparos en segundos
+        
 
         /* ------------------- CONSTRUCTORES ------------------- */
         public Enemy(Camera camera, Level level, Vector2 position, float rotation,
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
-            float frametime, Texture2D texture, float velocity, int life, int value, Ship Ship)
+            float frametime, Texture2D texture, float velocity, int life, Player player, 
+            int shotPower, float shotVelocity, float timeToShot)
             : base(camera, level, true, position, rotation, texture, frameWidth, frameHeight, numAnim,
                 frameCount, looping, frametime)
         {
             this.velocity = velocity;
             this.life = life;
-            this.Ship = Ship;
+            this.player = player;
             active = false;
 
-            Vector2[] points = new Vector2[8];
-            points[0] = new Vector2(21, 21);
-            points[1] = new Vector2(32, 22);
-            points[2] = new Vector2(49, 28);
-            points[3] = new Vector2(57, 37);
-            points[4] = new Vector2(57, 42);
-            points[5] = new Vector2(49, 51);
-            points[6] = new Vector2(32, 57);
-            points[7] = new Vector2(21, 57);
-            /*Vector2[] points = new Vector2[4];
-            points[0] = new Vector2(20, 20);
-            points[1] = new Vector2(60, 35);
-            points[2] = new Vector2(60, 45);
-            points[3] = new Vector2(20, 60);*/
-            collider = new Collider(camera, true, position, rotation, points, frameWidth, frameHeight);
+            this.shotPower = shotPower;
+            this.shotVelocity = shotVelocity;
+            this.timeToShot = timeToShot;
+            this.shots = new List<Shot>();
+
+           
         }
 
         /* ------------------- MÉTODOS ------------------- */
@@ -54,15 +53,6 @@ namespace IS_XNA_Shooter
             base.Update(deltaTime);
 
             collider.Update(position, rotation);
-            if (outOfScreen())
-                kill();
-            
-        }
-
-        private bool outOfScreen()
-        {   //if the enemy is out the screen it is killed
-            return (position.X > level.width || position.X < 0 || position.Y > level.height || position.Y < 0);
-               
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -72,27 +62,27 @@ namespace IS_XNA_Shooter
                 collider.Draw(spriteBatch);
         }
 
-        public bool isDead()
+        public bool IsDead()
         {
             return (life <= 0);
         }
 
-        public void damage(int i)
+        public void Damage(int i)
         {
             life -= i;
         }
 
-        public bool isActive()
+        public bool IsActive()
         {
             return active;
         }
 
-        public void setActive(bool aux)
+        public void SetActive(bool aux)
         {
             active = aux;
         }
 
-        public void setActive()
+        public void SetActive()
         {
             active = true;
         }
@@ -102,14 +92,34 @@ namespace IS_XNA_Shooter
             active = false;
         }
 
-        public void setShip(Ship Ship)
+        public void SetPlayer(Player player)
         {
-            this.Ship = Ship;
+            this.player = player;
         }
 
-        public void kill()
+        public void Kill()
         {
             life = -1;
+        }
+
+        public List<Shot> getShots()
+        {
+            return shots;
+        }
+        protected void EnemyShot(Vector2 position)
+        {
+            /*if (ControlMng.isControllerActive())
+            {
+                GamePad.SetVibration(PlayerIndex.One, 0.1f, 0.2f);
+                timeVibShotAux = timeVibShot;
+            }*/
+
+            Shot nuevo = new Shot(camera, level, position, rotation, GRMng.frameWidthESBullet, GRMng.frameHeightESBullet,
+                        GRMng.numAnimsESBullet, GRMng.frameCountESBullet, GRMng.loopingESBullet, SuperGame.frameTime8,
+                        GRMng.textureESBullet, SuperGame.shootType.normal, shotVelocity, shotPower);
+
+            shots.Add(nuevo);
+            
         }
 
     } // class Enemy

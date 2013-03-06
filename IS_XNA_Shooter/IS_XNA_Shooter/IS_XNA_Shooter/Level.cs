@@ -11,13 +11,12 @@ namespace IS_XNA_Shooter
     class Level
     {
         protected Camera camera;
-        protected Ship Ship;
-        protected Vector2 ShipInitPosition;
+        protected Ship player;
+        protected Vector2 playerInitPosition;
         public int width;
         public int height;
         protected List<Enemy> enemies;
         protected List<float> timeLeftEnemy;
-        protected bool levelFinished = false;
 
         /* ------------------- CONSTRUCTORES ------------------- */
         public Level() 
@@ -66,8 +65,8 @@ namespace IS_XNA_Shooter
             for (int i = 0; i < timeLeftEnemy.Count(); i++)
             {
                 timeLeftEnemy[i] -= deltaTime;
-                if (!enemies[i].isActive() && timeLeftEnemy[i] <= 0 && !enemies[i].isDead())
-                    enemies[i].setActive();
+                if (!enemies[i].IsActive() && timeLeftEnemy[i] <= 0 && !enemies[i].IsDead())
+                    enemies[i].SetActive();
             }
         }
         
@@ -132,11 +131,11 @@ namespace IS_XNA_Shooter
                     if (enemyType.Equals("enemyWeak"))
                         enemy = new EnemyWeak(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEW2, GRMng.frameHeightEW2, GRMng.numAnimsEW2, GRMng.frameCountEW2,
-                            GRMng.loopingEW2, SuperGame.frameTime12, GRMng.textureEW2, 100, 100, 1, null);
-                    else if (enemyType.Equals("enemyBeam"))
+                            GRMng.loopingEW2, SuperGame.frameTime12, GRMng.textureEW2, 100, 100, null, 0, 0, 0);
+                    else
                         enemy = new EnemyBeamA(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEW2, GRMng.frameHeightEW2, GRMng.numAnimsEW2, GRMng.frameCountEW2,
-                            GRMng.loopingEW2, SuperGame.frameTime12, GRMng.textureEW2, 1000, 100, 4, null);
+                            GRMng.loopingEW2, SuperGame.frameTime12, GRMng.textureEW2, 1000, 100, null, 0, 0, 0);
                     enemies.Add(enemy);
                     
                 }
@@ -154,19 +153,14 @@ namespace IS_XNA_Shooter
             }
         }   //  end LeerArchivoXML()
 
-        public virtual void setShip(Ship Ship)
+        public virtual void setPlayer(Ship player)
         {
-            this.Ship = Ship;
+            this.player = player;
             foreach (Enemy e in enemies)// enemigos
-                e.setShip(Ship);
-            Ship.SetPosition(ShipInitPosition);
+                e.SetPlayer(player);
+            player.SetPosition(playerInitPosition);
         }
 
-        // This method returns true when the level is finished.
-        public bool getFinish()
-        {
-            return levelFinished;
-        }
 
         public XMLLvlMng LvlMng { get; set; }
     } // class Level

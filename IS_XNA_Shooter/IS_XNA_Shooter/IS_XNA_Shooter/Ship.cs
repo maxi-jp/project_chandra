@@ -19,7 +19,6 @@ namespace IS_XNA_Shooter
         protected List<Shot> shots;
         protected float shotVelocity = 500f;
         protected int shotPower = 200;
-        protected int life;
 
         protected float timeToShot = 0.2f; // tiempo minimo entre disparos en segundos
         protected float timeToShotAux;
@@ -30,13 +29,12 @@ namespace IS_XNA_Shooter
         /* ------------------- CONSTRUCTORES ------------------- */
         public Ship(Camera camera, Level level, Vector2 position, float rotation, Vector2[] colliderPoints,
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping, float frametime,
-            Texture2D texture, float velocity, int life, List<Shot> shots)
+            Texture2D texture, float velocity, List<Shot> shots)
             : base(camera, level, true, position, rotation, texture, frameWidth, frameHeight, numAnim, frameCount, looping,
                 frametime)
         {
             movement = new Vector2(1, 0);
             this.velocity = velocity;
-            this.life = life;
             this.shots = shots;
 
             collider = new Collider(camera, true, position, rotation, colliderPoints, frameWidth, frameHeight);
@@ -57,13 +55,13 @@ namespace IS_XNA_Shooter
             if (ControlMng.isControllerActive()) // GamePad
             {
                 if (timeVibShotAux <= 0)
-                    GamePad.SetVibration(ShipIndex.One, 0, 0);
+                    GamePad.SetVibration(PlayerIndex.One, 0, 0);
 
-                movement = GamePad.GetState(ShipIndex.One).ThumbSticks.Left;
+                movement = GamePad.GetState(PlayerIndex.One).ThumbSticks.Left;
                 movement.Y = -movement.Y;
 
-                disp = GamePad.GetState(ShipIndex.One).Triggers.Right;
-                if (GamePad.GetState(ShipIndex.One).IsButtonDown(Buttons.RightTrigger))
+                disp = GamePad.GetState(PlayerIndex.One).Triggers.Right;
+                if (GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.RightTrigger))
                     disp = 1;
 
                 timeVibShotAux -= deltaTime;
@@ -108,7 +106,7 @@ namespace IS_XNA_Shooter
 
             // disparos:
             if ((disp > 0) && (timeToShotAux <= 0))
-                ShipShot(disp);
+                PlayerShot(disp);
 
             timeToShotAux -= deltaTime;
 
@@ -159,7 +157,7 @@ namespace IS_XNA_Shooter
 
             // disparos:
             if ((disp > 0) && (timeToShotAux <= 0))
-                ShipShot(disp);
+                PlayerShot(disp);
 
             timeToShotAux -= deltaTime;
 
@@ -173,11 +171,11 @@ namespace IS_XNA_Shooter
                 collider.Draw(spriteBatch);     
         }
 
-        private void ShipShot(float disp)
+        private void PlayerShot(float disp)
         {
             /*if (ControlMng.isControllerActive())
             {
-                GamePad.SetVibration(ShipIndex.One, 0.1f, 0.2f);
+                GamePad.SetVibration(PlayerIndex.One, 0.1f, 0.2f);
                 timeVibShotAux = timeVibShot;
             }*/
 
@@ -198,5 +196,5 @@ namespace IS_XNA_Shooter
             this.position = position;
         }
 
-    } // class Ship
+    } // class player
 }

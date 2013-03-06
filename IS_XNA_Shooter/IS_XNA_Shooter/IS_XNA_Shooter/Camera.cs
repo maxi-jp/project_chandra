@@ -10,8 +10,8 @@ namespace IS_XNA_Shooter
     class Camera
     {
         /* ------------------- ATRIBUTOS ------------------- */
-        private bool followShip;  //si la camara sigue al jugador.
-        private Ship Ship;  //jugador
+        private bool followPlayer;  //si la camara sigue al jugador.
+        private Ship player;  //jugador
         private Level level;    //nivel
         private Vector2 screenCenter;   // punto central de la pantalla
         public Vector2 displacement;    // posicion en pantalla de las coordenadas 0,0 del mundo
@@ -26,16 +26,16 @@ namespace IS_XNA_Shooter
             screenCenter = new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight / 2);
             displacement = new Vector2();
 
-            followShip = true;
+            followPlayer = true;
         }
 
-        public Camera(Ship Ship, int X, int Y)
+        public Camera(Ship player, int X, int Y)
         {
-            this.Ship = Ship;
+            this.player = player;
             position.X = X;
             position.Y = Y;
 
-            followShip = true;
+            followPlayer = true;
         }
 
 
@@ -52,12 +52,12 @@ namespace IS_XNA_Shooter
             }
         }
 
-        public void setShip(Ship Ship)
+        public void setPlayer(Ship player)
         {
-            this.Ship = Ship;
+            this.player = player;
             if (level != null && level is LevelA)
             {
-                position = Ship.position;
+                position = player.position;
             }
         }
 
@@ -83,7 +83,7 @@ namespace IS_XNA_Shooter
         //La nave siempre está en el centro de la cámara
         private void movement1(float deltaTime)
         {
-            //position = Ship.position;
+            //position = player.position;
             //position.X += 100 * deltaTime ;
         }
 
@@ -91,19 +91,19 @@ namespace IS_XNA_Shooter
         //La cámara varía en función de la nave, cuando quedan 400 pixels para llegar a alguna de las paredes, va el doble de lento que el jugador
         private void movement2()
         {
-            if (Ship.position.X < level.width/2)
-                position.X = (Ship.position.X + level.width / 2) / 2;
-            else if (Ship.position.X > level.width - level.width / 2)
-                position.X = level.width - (level.width - Ship.position.X + level.width / 2) / 2;
+            if (player.position.X < level.width/2)
+                position.X = (player.position.X + level.width / 2) / 2;
+            else if (player.position.X > level.width - level.width / 2)
+                position.X = level.width - (level.width - player.position.X + level.width / 2) / 2;
             else
-                position.X = Ship.position.X;
+                position.X = player.position.X;
 
-            if (Ship.position.Y < level.height/2)
-                position.Y = (Ship.position.Y + level.height / 2) / 2;
-            else if (Ship.position.Y > level.height - level.height / 2)
-                position.Y = level.height - (level.height - Ship.position.Y + level.height / 2) / 2;
+            if (player.position.Y < level.height/2)
+                position.Y = (player.position.Y + level.height / 2) / 2;
+            else if (player.position.Y > level.height - level.height / 2)
+                position.Y = level.height - (level.height - player.position.Y + level.height / 2) / 2;
             else
-                position.Y = Ship.position.Y;
+                position.Y = player.position.Y;
         }
     } // Camera
 }

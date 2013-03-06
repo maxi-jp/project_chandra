@@ -23,7 +23,7 @@ namespace IS_XNA_Shooter
                 case 1:
                     width = 1200;
                     height = 800;
-                    ShipInitPosition = new Vector2(width / 2, height / 2);
+                    playerInitPosition = new Vector2(width / 2, height / 2);
                     this.enemies = enemies;
                     timeLeftEnemy = new List<float>();
 
@@ -88,8 +88,17 @@ namespace IS_XNA_Shooter
                         timeLeftEnemy.Add(1 + i);
                     }*/
 
-                    LeerArchivoXML(0,0);
-                    
+                    //LeerArchivoXML(0,0);
+                    Enemy enemy;
+                    for (int i = 0; i < 1; i++)
+                    {
+                        enemy = new EnemyScared(camera, this, new Vector2(1000, 700), 0,
+                            GRMng.frameWidthES, GRMng.frameHeightES, GRMng.numAnimsES, GRMng.frameCountES,
+                            GRMng.loopingES, SuperGame.frameTime12, GRMng.textureES, 100, 100, null, 1, 1000f,1.0f);
+                        enemies.Add(enemy);
+                        timeLeftEnemy.Add(1 + i);
+                    }
+
                     break;
             }
 
@@ -125,30 +134,8 @@ namespace IS_XNA_Shooter
                 null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
         }
 
-        public override void setShip(Ship Ship) {
-            base.setShip(Ship);
-        }
-
-        public override void Update(float deltaTime)
-        {
-            base.Update(deltaTime);
-            int i = 0; // iterator for the list of enemies
-            bool stillAlive = false; // is true if there is any enemie alive
-            //the next loop searches an enemy alive for controlling the end of level 
-            if (!levelFinished)
-            {
-                while (i < enemies.Count && !stillAlive)
-                {
-                    if (enemies[i] != null && !enemies[i].isDead())
-                    {
-                        stillAlive = true;
-                    }
-                    i++;
-                }
-                if (!stillAlive)
-                    levelFinished = true;
-            }	
-        }
-
+        public override void setPlayer(Ship player) {
+            base.setPlayer(player);
         }
     }
+}

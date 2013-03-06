@@ -11,7 +11,7 @@ namespace IS_XNA_Shooter
         /* ------------------- ATRIBUTOS ------------------- */
 
         /* ------------------- CONSTRUCTORES ------------------- */
-        public IngameHub(int playerLifes)
+        public IngameHub()
         {
         }
 

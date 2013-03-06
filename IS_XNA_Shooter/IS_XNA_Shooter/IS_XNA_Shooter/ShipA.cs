@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace IS_XNA_Shooter
 {
-    // clase ShipA para nave con mapas con vista cenital
+    // clase PlayerA para nave con mapas con vista cenital
     class ShipA : Ship
     {
         /* ------------------- ATRIBUTOS ------------------- */
@@ -18,9 +18,9 @@ namespace IS_XNA_Shooter
         /* ------------------- CONSTRUCTORES ------------------- */
         public ShipA(Camera camera, Level level, Vector2 position, float rotation, Vector2[] colliderPoints,
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
-            float frametime, Texture2D texture, float velocity, int life, List<Shot> shots)
+            float frametime, Texture2D texture, float velocity, List<Shot> shots)
             : base(camera, level, position, rotation, colliderPoints, frameWidth, frameHeight, numAnim, frameCount,
-                looping, frametime, texture, velocity, life, shots)
+                looping, frametime, texture, velocity, shots)
         {
             pointer = new Vector2();
             prevRotation = 0;
@@ -65,10 +65,10 @@ namespace IS_XNA_Shooter
                     rotation = (float)Math.PI - gyre;
             }
 
-            // comprobamos que el Ship no se salga del nivel
+            // comprobamos que el player no se salga del nivel
             position.X = MathHelper.Clamp(position.X, 0 + collider.Width/2, level.width - collider.Width/2);
             position.Y = MathHelper.Clamp(position.Y, 0 + collider.Height / 2, level.height - collider.Height / 2);
         }
 
-    } // class ShipA
+    } // class PlayerA
 }

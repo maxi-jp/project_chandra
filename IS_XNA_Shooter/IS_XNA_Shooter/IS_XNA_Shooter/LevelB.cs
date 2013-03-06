@@ -13,10 +13,6 @@ namespace IS_XNA_Shooter
     /// </summary>
     class LevelB : Level
     {
-        //-------------------------
-        //----    Atributes    ----
-        //-------------------------
-
         /// <summary>
         /// Number of level
         /// </summary>
@@ -26,17 +22,13 @@ namespace IS_XNA_Shooter
         /// </summary>
         private List<List<Rectangle>> listRectCollider;
 
-
-
-        //-----------------------
-        //----    Builder    ----
-        //-----------------------
+        //-----------------------------------------------------------------------------------------------------------------
 
         /// <summary>
-        /// The builder of the level
+        /// Builds the level B
         /// </summary>
-        /// <param name="camera"></param>
-        /// <param name="numLevel"></param>
+        /// <param name="camera"> Camera </param>
+        /// <param name="numLevel"> Number of level </param>
         public LevelB(Camera camera, int numLevel, List<Shot> shots)
             : base()
         {
@@ -50,19 +42,21 @@ namespace IS_XNA_Shooter
 
             //readRectangles();
 
-            Enemy e = new FinalBoss1(camera, this, new Vector2(SuperGame.screenWidth - 40, SuperGame.screenHeight/2), (float)Math.PI, GRMng.frameWidthEW2, GRMng.frameHeightEW2, 
-                GRMng.numAnimsEW2, GRMng.frameCountEW2, GRMng.loopingEW2, SuperGame.frameTime12, GRMng.textureEW2, 40, 100, 1, null, shots);
+            Vector2 position = new Vector2(SuperGame.screenWidth - GRMng.frameWidthFB1 / 2, 
+                                           SuperGame.screenHeight / 2 - GRMng.frameHeightFB1 / 2);
+            Enemy e = new FinalBoss1(camera, this, position, 0, GRMng.frameWidthFB1, GRMng.frameHeightFB1, 
+                GRMng.numAnimsFB1, GRMng.frameCountFB1, GRMng.loopingFB1, SuperGame.frameTime12, GRMng.textureFB1, -50, 100, 1, null);
             e.setActive();
-
             enemies = new List<Enemy>();
             enemies.Add(e);
         }
 
+        //-----------------------------------------------------------------------------------------------------------------
 
-
-        //--------------------------------
-        //----    Public functions    ----
-        //--------------------------------
+        /// <summary>
+        /// Update the enemies in the level B
+        /// </summary>
+        /// <param name="deltaTime"> Time between last time and this </param>
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
@@ -84,11 +78,18 @@ namespace IS_XNA_Shooter
             }*/
         }
 
+        /// <summary>
+        /// Draw the enemies in the level B
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
         }
 
+        /// <summary>
+        /// Read the list of rectangles in the file .xml
+        /// </summary>
         public void readRectangles()
         {
             int positionX1;
@@ -123,13 +124,19 @@ namespace IS_XNA_Shooter
                 }
         }
 
-        //devuelve la lista de rectangulos de colisión del parallax donde se juega
+        /// <summary>
+        /// Get a list of rectangles to collision in the game B
+        /// </summary>
+        /// <returns></returns>
         public List<List<Rectangle>> getRectangles()
         {
             return listRectCollider;
         }
 
-        //devuelve la lista de enemigos del nivel
+        /// <summary>
+        /// Get a list of enemies
+        /// </summary>
+        /// <returns></returns>
         public List<Enemy> getEnemies()
         {
             return enemies;

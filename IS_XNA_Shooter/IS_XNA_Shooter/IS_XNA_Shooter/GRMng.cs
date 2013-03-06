@@ -90,6 +90,15 @@ namespace IS_XNA_Shooter
         public static Texture2D menuIngame;
         public static Texture2D getready321;    // textura cuenta atrás menú
 
+        /* ------------------- FINAL BOSS 1 ------------------- */
+        public static Texture2D textureFB1;
+        public static short frameWidthFB1 = 80;
+        public static short frameHeightFB1 = 80;
+        public static short numAnimsFB1 = 1;        //number of rows in the animation
+        public static short[] frameCountFB1 = { 4 };  //number of columns in each row
+        public static bool[] loopingFB1 = { true };   //put a loop in the animation for each row
+
+
         public GRMng (ContentManager content)
         {
             this.content = content;
@@ -101,6 +110,7 @@ namespace IS_XNA_Shooter
             // 0=Menú principal
             // 1=Menú ingame
             // 2=GameA nivel 1
+            // 3=GameB
 
             switch (i)
             {
@@ -138,6 +148,30 @@ namespace IS_XNA_Shooter
                     textureBgCol2 =     content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable2");
                     textureBgCol3 =     content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable3");
                     break;
+
+                case 3: // GameB
+                    LoadIngameMenu();
+
+                    hubCenter =         content.Load<Texture2D>("Graphics/Hub/center_720");
+                    hubLeft =           content.Load<Texture2D>("Graphics/Hub/left_720");
+                    hubRight =          content.Load<Texture2D>("Graphics/Hub/right_720");
+
+                    texturePA1 =        content.Load<Texture2D>("Graphics/Ships/playerShotAnim");
+                    texturePA2 =        content.Load<Texture2D>("Graphics/Ships/sprites80x80");
+                    textureFB1 =        content.Load<Texture2D>("Graphics/Ships/finalBoss1");
+                    textureAim =        content.Load<Texture2D>("Graphics/aimpoint");
+                    textureL1 =         content.Load<Texture2D>("Graphics/laserShotAnim");
+                    textureExplosion1 = content.Load<Texture2D>("Graphics/Explosions/sprites_explosion100x100");
+                    textureBgSpace =    content.Load<Texture2D>("Graphics/Backgrounds/backgroundSpace");
+                    textureBg00 =       content.Load<Texture2D>("Graphics/Backgrounds/bg00");
+                    textureBg01 =       content.Load<Texture2D>("Graphics/Backgrounds/bg01");
+                    textureBg02 =       content.Load<Texture2D>("Graphics/Backgrounds/bg02");
+                    textureBg03 =       content.Load<Texture2D>("Graphics/Backgrounds/bg03");
+                    textureBgCol1 =     content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable1");
+                    textureBgCol2 =     content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable2");
+                    textureBgCol3 =     content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable3");
+
+                    break;
             }
 
             whitepixel =        content.Load<Texture2D>("Graphics/whitepixel");
@@ -152,6 +186,7 @@ namespace IS_XNA_Shooter
             // 0=Menú principal
             // 1=Menú ingame
             // 2=GameA nivel 1
+            // 3=GameB
 
             switch (i)
             {
@@ -203,6 +238,27 @@ namespace IS_XNA_Shooter
                     textureBg03 = null;
                     //textureCol
                     textureBgCol1 = textureBgCol2 = textureBgCol3 = null;
+                    break;
+
+                case 3:
+                    hubCenter = null;
+                    hubLeft = null;
+                    hubRight = null;
+
+                    texturePA1 = null;
+                    texturePA2 = null;
+                    textureFB1 = null;
+                    textureAim = null;
+                    textureL1 = null;
+                    textureExplosion1 = null;
+                    textureBgSpace = null;
+                    textureBg00 = null;
+                    textureBg01 = null;
+                    textureBg02 = null;
+                    textureBg03 = null;
+                    textureBgCol1 = null;
+                    textureBgCol2 = null;
+                    textureBgCol3 = null;
                     break;
             }
         } // UnloadContent

@@ -254,13 +254,12 @@ namespace IS_XNA_Shooter
         /* ------------------------------------------------------------- */
         public void newHistory()
         {
-            grManager.LoadContent(2); // cargamos los recursos del nivel 1 de GameA
-            audio.LoadContent(1);
-            LvlMng.LoadContent(1); // cargamos los rectangulos
-            LvlMng.LoadContent(0); // cargamos enemigos del levelA
+            grManager.LoadContent(3); // load the resources for the GameB
+            audio.LoadContent(1);   // load the audio
+            LvlMng.LoadContent(1); // load the rectangles
+            LvlMng.LoadContent(0); // load the enemies in the GameB
 
-            game = new GameB(this, 1, GRMng.textureAim,
-                /*ShipVelocity*/200f, /*ShipLife*/100);
+            game = new GameB(this, 1, GRMng.textureAim, 200f, 100);
            
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
 

@@ -15,17 +15,16 @@ namespace IS_XNA_Shooter
         protected bool isFleeing = false;
         protected float rotationPosition;
         private Matrix rotationMatrix; // matriz de rotación
-        protected float timeToShot;
         /* ------------------- CONSTRUCTORES ------------------- */
         public EnemyScared(Camera camera, Level level, Vector2 position, float rotation,
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
-            float frametime, Texture2D texture, float velocity, int shotPower, float shotVelocity,
-             float timeToShot, int life, int value, Ship Ship)
+            float frametime, Texture2D texture, float velocity, int life, Player player, 
+            int shotPower, float shotVelocity, float timeToShot)
             : base (camera, level, position, rotation, frameWidth, frameHeight, numAnim, frameCount,
-                looping, frametime, texture, velocity, life, value, Ship)
+                looping, frametime, texture, velocity, life, player, shotPower, shotVelocity, timeToShot)
         {
             setAnim(3);
-            this.timeToShot = timeToShot;
+
             Vector2[] points = new Vector2[5];
             points[0] = new Vector2(20, 0);
             points[1] = new Vector2(70, 40);
@@ -46,8 +45,8 @@ namespace IS_XNA_Shooter
         {
             base.Update(deltaTime);
 
-            float dY = -Ship.position.Y + position.Y;
-            float dX = -Ship.position.X + position.X;
+            float dY = -player.position.Y + position.Y;
+            float dX = -player.position.X + position.X;
 
             float gyre = (float)Math.Atan(dY / dX);
 
@@ -78,7 +77,7 @@ namespace IS_XNA_Shooter
                 float r = ((float)Math.PI) / 8;
                 float h = (float)Math.Sqrt(dY * dY + dX * dX);
                 float ang = 0;
-                float rot = Ship.rotation;
+                float rot = player.rotation;
 
                 //Si estamos huyendo
                 if (isFleeing)
@@ -161,7 +160,7 @@ namespace IS_XNA_Shooter
                         ang = (float)Math.Abs(Math.Asin(dY / h));
                         ang += (float)Math.PI;
 
-                        if (Ship.rotation < 0)
+                        if (player.rotation < 0)
                             rot += 2 * (float)Math.PI;
 
                         //Si la nave del jugador no nos mira, empezamos a girar para perseguirle
@@ -207,9 +206,9 @@ namespace IS_XNA_Shooter
                         ang += (float)Math.PI / 2;
 
                         //Si la nave del jugador nos mira, empezamos a girar para huir
-                        if (ang < Ship.rotation + r && ang > Ship.rotation - r)
+                        if (ang < player.rotation + r && ang > player.rotation - r)
                         {
-                            rotationPosition = Ship.rotation;
+                            rotationPosition = player.rotation;
                             if (rotationPosition < 0)
                                 rotationPosition += 2 * (float)Math.PI;
                             isRotating = true;
@@ -224,10 +223,10 @@ namespace IS_XNA_Shooter
                         ang = (float)Math.Abs(Math.Asin(dY / h));
 
                         //Si la nave del jugador nos mira, empezamos a girar para huir
-                        if (ang < Ship.rotation + r && ang > Ship.rotation - r)
+                        if (ang < player.rotation + r && ang > player.rotation - r)
                         {
 
-                            rotationPosition = Ship.rotation;
+                            rotationPosition = player.rotation;
                             if (rotationPosition < 0)
                                 rotationPosition += 2 * (float)Math.PI;
                             isRotating = true;
@@ -243,9 +242,9 @@ namespace IS_XNA_Shooter
                         ang = -ang;
 
                         //Si la nave del jugador nos mira, empezamos a girar para huir
-                        if (ang < Ship.rotation + r && ang > Ship.rotation - r)
+                        if (ang < player.rotation + r && ang > player.rotation - r)
                         {
-                            rotationPosition = Ship.rotation;
+                            rotationPosition = player.rotation;
                             if (rotationPosition < 0)
                                 rotationPosition += 2 * (float)Math.PI;
                             isRotating = true;
@@ -261,9 +260,9 @@ namespace IS_XNA_Shooter
                         ang += (float)Math.PI;
 
                         //Si la nave del jugador nos mira, empezamos a girar para huir
-                        if (ang < Ship.rotation + r && ang > Ship.rotation - r)
+                        if (ang < player.rotation + r && ang > player.rotation - r)
                         {
-                            rotationPosition = Ship.rotation;
+                            rotationPosition = player.rotation;
                             if (rotationPosition < 0)
                                 rotationPosition += 2 * (float)Math.PI;
                             isRotating = true;
@@ -273,7 +272,7 @@ namespace IS_XNA_Shooter
                         }
                     }
 
-                    if (!(ang < Ship.rotation + r && ang > Ship.rotation - r))
+                    if (!(ang < player.rotation + r && ang > player.rotation - r))
                     {
                         Chase(dX, gyre, deltaTime);
                     }
@@ -299,8 +298,8 @@ namespace IS_XNA_Shooter
             p2 = Vector2.Transform(p2Orig, rotationMatrix);
             p2 += position;
 
-            //base.EnemyShot(p1);
-            //base.EnemyShot(p2);
+            base.EnemyShot(p1);
+            base.EnemyShot(p2);
             
         }
 

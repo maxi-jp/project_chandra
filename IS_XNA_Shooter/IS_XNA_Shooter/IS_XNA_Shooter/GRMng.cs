@@ -41,11 +41,19 @@ namespace IS_XNA_Shooter
         public static Texture2D textureEW2;
         public static short frameWidthEW2 = 80;
         public static short frameHeightEW2 = 80;
-        public static short numAnimsEW2 = 3;
-        public static short[] frameCountEW2 = { 1, 4, 6 };
-        public static bool[] loopingEW2 = { true, true, false };
+        public static short numAnimsEW2 = 2;
+        public static short[] frameCountEW2 = { 1, 4 };
+        public static bool[] loopingEW2 = { true, true };
 
-        /* ------------------- ShipA1 ------------------- */
+        /* ------------------- ENEMYSCARED ------------------- */
+        public static Texture2D textureES;
+        public static short frameWidthES = 80;
+        public static short frameHeightES = 80;
+        public static short numAnimsES = 5;
+        public static short[] frameCountES = { 1, 1 , 2 , 3 , 3 };
+        public static bool[] loopingES = { true , true, true, true, true};
+
+        /* ------------------- PLAYERA1 ------------------- */
         public static Texture2D texturePA1;
         public static short frameWidthPA1 = 40;
         public static short frameHeightPA1 = 40;
@@ -53,7 +61,7 @@ namespace IS_XNA_Shooter
         public static short[] frameCountPA1 = { 1, 5 };
         public static bool[] loopingPA1 = { true, false };
 
-        /* ------------------- ShipA2 ------------------- */
+        /* ------------------- PLAYERA2 ------------------- */
         public static Texture2D texturePA2;
         public static short frameWidthPA2 = 80;
         public static short frameHeightPA2 = 80;
@@ -68,6 +76,16 @@ namespace IS_XNA_Shooter
         public static short numAnimsL1 = 1;
         public static short[] frameCountL1 = { 3 };
         public static bool[] loopingL1 = { true };
+
+        /* ------------------- BULLET -------------------- */
+
+        public static Texture2D textureESBullet;
+        public static short frameWidthESBullet = 10;
+        public static short frameHeightESBullet = 3;
+        public static short numAnimsESBullet = 1;
+        public static short[] frameCountESBullet = { 1 };
+        public static bool[] loopingESBullet = { true };
+
 
         /* ------------------- EXPLOSION VERDE ------------------- */
         public static Texture2D textureExplosion1;
@@ -123,13 +141,29 @@ namespace IS_XNA_Shooter
                     texturePA2 =        content.Load<Texture2D>("Graphics/Ships/sprites80x80");
                     textureAim =        content.Load<Texture2D>("Graphics/aimpoint");
                     textureL1 =         content.Load<Texture2D>("Graphics/laserShotAnim");
+                    textureESBullet = content.Load<Texture2D>("Graphics/scaredBullet");
+
                     textureExplosion1 = content.Load<Texture2D>("Graphics/Explosions/sprites_explosion100x100");
                     textureEW1 =        content.Load<Texture2D>("Graphics/Ships/EnemyWeakAnim");
                     textureEW2 =        content.Load<Texture2D>("Graphics/Ships/sprites_enemy01_80x80");
+                    textureES =         content.Load<Texture2D>("Graphics/Ships/EnemyScared");
                     textureCell =       content.Load<Texture2D>("Graphics/celdasuelo");
+                    textureBg00 =       content.Load<Texture2D>("Graphics/Backgrounds/bg00");
+                    textureBg01 =       content.Load<Texture2D>("Graphics/Backgrounds/bg01");
+                    textureBg02 =       content.Load<Texture2D>("Graphics/Backgrounds/bg02");
+                    textureBg03 =       content.Load<Texture2D>("Graphics/Backgrounds/bg03");
+                    break;
+
+                case 3: // GameB nivel 1
+                    LoadIngameMenu();
+
+                    texturePA2 =        content.Load<Texture2D>("Graphics/Ships/sprites80x80");
+                    textureL1 =         content.Load<Texture2D>("Graphics/laserShotAnim");
+                    textureExplosion1 = content.Load<Texture2D>("Graphics/Explosions/sprites_explosion100x100");
+                    textureEW2 =        content.Load<Texture2D>("Graphics/Ships/sprites_enemy01_80x80");
+                    textureES =         content.Load<Texture2D>("Graphics/Ships/EnemyScared");
                     textureRed =        content.Load<Texture2D>("Graphics/Rojazo");
                     textureBgGame1A =   content.Load<Texture2D>("Graphics/Backgrounds/backgroundTile1");
-                    textureBgSpace =    content.Load<Texture2D>("Graphics/Backgrounds/backgroundSpace");
                     textureBg00 =       content.Load<Texture2D>("Graphics/Backgrounds/bg00");
                     textureBg01 =       content.Load<Texture2D>("Graphics/Backgrounds/bg01");
                     textureBg02 =       content.Load<Texture2D>("Graphics/Backgrounds/bg02");
@@ -185,14 +219,12 @@ namespace IS_XNA_Shooter
                     textureEW1 = null;
                     //textureEW2.Dispose();
                     textureEW2 = null;
+                    //textureES.Dispose();
+                    textureES = null;
                     //textureCell.Dispose();
                     textureCell = null;
                     //textureRed.Dispose();
                     textureRed = null;
-                    //textureBgGame1A.Dispose();
-                    textureBgGame1A = null;
-                    //textureBgSpace.Dispose();
-                    textureBgSpace = null;
                     //textureBg00.Dispose();
                     textureBg00 = null;
                     //textureBg01.Dispose();
@@ -203,6 +235,27 @@ namespace IS_XNA_Shooter
                     textureBg03 = null;
                     //textureCol
                     textureBgCol1 = textureBgCol2 = textureBgCol3 = null;
+                    break;
+
+                case 3: // GameB nivel 1
+                    hubCenter = null;
+                    hubLeft = null;
+                    hubRight = null;
+
+                    texturePA2 = null;
+                    textureL1 = null;
+                    textureExplosion1 = null;
+                    textureEW2 = null;
+                    textureES = null;
+                    textureRed = null;
+                    textureBgGame1A = null;
+                    textureBg00 = null;
+                    textureBg01 = null;
+                    textureBg02 = null;
+                    textureBg03 = null;
+                    textureBgCol1 = null;
+                    textureBgCol2 = null;
+                    textureBgCol3 = null;
                     break;
             }
         } // UnloadContent
@@ -238,6 +291,12 @@ namespace IS_XNA_Shooter
             //menuIngame.Dispose();
             menuIngame = null;
             getready321 = null;
+        }
+
+        public void UnloadContentGame()
+        {
+            UnloadContent(2);
+            UnloadContent(3);
         }
 
     } // class GRMng

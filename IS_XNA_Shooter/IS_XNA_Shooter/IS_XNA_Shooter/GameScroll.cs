@@ -33,7 +33,7 @@ namespace IS_XNA_Shooter
         {
             hub = new IngameHubA(GRMng.hubLeft, GRMng.hubCenter, GRMng.hubRight, mainGame.player.GetLife());
             colliderList = new List<Collider>();
-            level = new LevelB(camera, numLevel);
+            level = new LevelB(camera, numLevel, shots);
             enemies = ((LevelB)level).getEnemies();
             camera.setLevel(level);
             // crashList = ((LevelB)level).getRectangles();

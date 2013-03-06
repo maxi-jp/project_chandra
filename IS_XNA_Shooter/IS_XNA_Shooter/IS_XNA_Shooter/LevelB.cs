@@ -37,7 +37,7 @@ namespace IS_XNA_Shooter
         /// </summary>
         /// <param name="camera"></param>
         /// <param name="numLevel"></param>
-        public LevelB(Camera camera, int numLevel)
+        public LevelB(Camera camera, int numLevel, List<Shot> shots)
             : base()
         {
             this.numLevel = numLevel;
@@ -50,8 +50,8 @@ namespace IS_XNA_Shooter
 
             //readRectangles();
 
-            Enemy e = new FinalBoss1(camera, this, new Vector2(SuperGame.screenWidth + 100, 50), (float)Math.PI, GRMng.frameWidthEW2, GRMng.frameHeightEW2, 
-                GRMng.numAnimsEW2, GRMng.frameCountEW2, GRMng.loopingEW2, SuperGame.frameTime12, GRMng.textureEW2, -200, 100, 1, null);
+            Enemy e = new FinalBoss1(camera, this, new Vector2(SuperGame.screenWidth - 40, SuperGame.screenHeight/2), (float)Math.PI, GRMng.frameWidthEW2, GRMng.frameHeightEW2, 
+                GRMng.numAnimsEW2, GRMng.frameCountEW2, GRMng.loopingEW2, SuperGame.frameTime12, GRMng.textureEW2, 40, 100, 1, null, shots);
             e.setActive();
 
             enemies = new List<Enemy>();

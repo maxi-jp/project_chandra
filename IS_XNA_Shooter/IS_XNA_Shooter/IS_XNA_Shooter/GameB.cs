@@ -42,7 +42,7 @@ namespace IS_XNA_Shooter
         private void initLevelB(int numLevel)
         {
             colliderList = new List<Collider>();
-            level = new LevelB(camera, numLevel);
+            level = new LevelB(camera, numLevel, shots);
             enemies = ((LevelB)level).getEnemies();
             camera.setLevel(level);
             // crashList = ((LevelB)level).getRectangles();
@@ -136,6 +136,12 @@ namespace IS_XNA_Shooter
                     new Vector2(5, 3), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
                 spriteBatch.DrawString(SuperGame.fontDebug, "Ship=" + Ship.position + ".",
                     new Vector2(5, 15), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+
+                spriteBatch.DrawString(SuperGame.fontDebug, "FinalBoss=" + enemies[0].position + ".",
+                    new Vector2(5, 28), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+
+                spriteBatch.DrawString(SuperGame.fontDebug, "ScreenHeight=" + SuperGame.screenHeight + ".",
+                    new Vector2(5, 41), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             }
          }
 

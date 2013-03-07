@@ -92,10 +92,10 @@ namespace IS_XNA_Shooter
 
         /* ------------------- FINAL BOSS 1 ------------------- */
         public static Texture2D textureFB1;
-        public static short frameWidthFB1 = 80;
-        public static short frameHeightFB1 = 80;
+        public static short frameWidthFB1 = 240;
+        public static short frameHeightFB1 = 240;
         public static short numAnimsFB1 = 1;        //number of rows in the animation
-        public static short[] frameCountFB1 = { 4 };  //number of columns in each row
+        public static short[] frameCountFB1 = { 3 };  //number of columns in each row
         public static bool[] loopingFB1 = { true };   //put a loop in the animation for each row
 
 

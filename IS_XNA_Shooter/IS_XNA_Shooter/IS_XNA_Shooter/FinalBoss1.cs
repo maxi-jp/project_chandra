@@ -138,8 +138,8 @@ namespace IS_XNA_Shooter
         private void ShotFront()
         {
             Audio.PlayEffect("laserShot01");
-
-            Shot nuevo = new Shot(camera, level, new Vector2(position.X - 20, position.Y), rotation, GRMng.frameWidthL1, GRMng.frameHeightL1,
+            //x - 20 
+            Shot nuevo = new Shot(camera, level, new Vector2(position.X -120 , position.Y), rotation, GRMng.frameWidthL1, GRMng.frameHeightL1,
                 GRMng.numAnimsL1, GRMng.frameCountL1, GRMng.loopingL1, SuperGame.frameTime8,
                 GRMng.textureL1, SuperGame.shootType.normal, shotFrontVelocity, shotFrontPower);
 
@@ -166,12 +166,13 @@ namespace IS_XNA_Shooter
             }
 
                 Audio.PlayEffect("laserShot01");
-
-            Shot nuevo = new Shot(camera, level, new Vector2(position.X - 10, position.Y + collider.Height / 2), angle, GRMng.frameWidthL1, GRMng.frameHeightL1,
+            //position.X - 10, position.Y + collider.Height / 2
+            Shot nuevo = new Shot(camera, level, new Vector2(position.X , position.Y  + collider.Height / 2), angle, GRMng.frameWidthL1, GRMng.frameHeightL1,
                 GRMng.numAnimsL1, GRMng.frameCountL1, GRMng.loopingL1, SuperGame.frameTime8, GRMng.textureL1, SuperGame.shootType.normal, shotWingsVelocity, shotWingsPower);
             shots.Add(nuevo);
 
-            nuevo = new Shot(camera, level, new Vector2(position.X - 10, position.Y - collider.Height / 2), angle, GRMng.frameWidthL1, GRMng.frameHeightL1,
+            //position.X - 10, position.Y - collider.Height / 2
+            nuevo = new Shot(camera, level, new Vector2(position.X , position.Y - collider.Height / 2), angle, GRMng.frameWidthL1, GRMng.frameHeightL1,
                 GRMng.numAnimsL1, GRMng.frameCountL1, GRMng.loopingL1, SuperGame.frameTime8, GRMng.textureL1, SuperGame.shootType.normal, shotWingsVelocity, shotWingsPower);
             shots.Add(nuevo);
 

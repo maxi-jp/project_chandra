@@ -114,6 +114,7 @@
     <Compile Include="BackgroundLayer.cs" />
     <Compile Include="BackgroundLayerB.cs" />
     <Compile Include="Camera.cs" />
+    <Compile Include="EnemyLaserA.cs" />
     <Compile Include="EnemyMineShot.cs" />
     <Compile Include="EnemyScared.cs" />
     <Compile Include="Collider.cs" />

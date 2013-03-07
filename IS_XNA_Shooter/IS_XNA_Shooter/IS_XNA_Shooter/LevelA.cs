@@ -92,7 +92,7 @@ namespace IS_XNA_Shooter
                     Enemy enemy;
                     for (int i = 0; i < 1; i++)
                     {
-                        enemy = new EnemyScared(camera, this, new Vector2(1000, 700), 0,
+                        enemy = new EnemyLaserA(camera, this, new Vector2(1000, 700), 0,
                             GRMng.frameWidthES, GRMng.frameHeightES, GRMng.numAnimsES, GRMng.frameCountES,
                             GRMng.loopingES, SuperGame.frameTime12, GRMng.textureES, 100, 100, null, 1, 1000f,1.0f);
                         enemies.Add(enemy);

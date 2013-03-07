@@ -17,6 +17,8 @@ namespace IS_XNA_Shooter
 
         public Collider collider;
 
+        private int width, height;
+
         /* ------------------- CONSTRUCTORES ------------------- */
         public Shot(Camera camera, Level level, Vector2 position, float rotation,
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
@@ -31,6 +33,9 @@ namespace IS_XNA_Shooter
 
 
             collider = new Collider(camera, true, position, rotation, frameWidth, frameHeight);
+
+            width = frameWidth;
+            height = frameHeight;
         }
 
         /* ------------------- MÉTODOS ------------------- */
@@ -41,8 +46,8 @@ namespace IS_XNA_Shooter
             position.X += (float)Math.Cos(rotation) * velocity * deltaTime;
             position.Y += (float)Math.Sin(rotation) * velocity * deltaTime;
 
-            if (position.X < -200 || position.X > level.width + 200 ||
-                position.Y < -200 || position.Y > level.height + 200)
+            if (position.X < -200 - width || position.X > level.width + 200 + width ||
+                position.Y < -200 - width || position.Y > level.height + 200 + width)
                 active = false;
 
             collider.Update(position, rotation);

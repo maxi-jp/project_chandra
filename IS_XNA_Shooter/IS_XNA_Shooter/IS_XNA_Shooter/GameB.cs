@@ -35,12 +35,16 @@ namespace IS_XNA_Shooter
             backGround = new BackgroundGameB(level);
 
                 player = new ShipB(camera, ((LevelB)level), Vector2.Zero, 0, puntosColliderPlayer(), GRMng.frameWidthPA2,
+            ship = new ShipB(camera, ((LevelB)level), Vector2.Zero, 0, puntosColliderShip(), GRMng.frameWidthPA2,
                     GRMng.frameHeightPA2, GRMng.numAnimsPA2, GRMng.frameCountPA2, GRMng.loopingPA2, SuperGame.frameTime24,
                     GRMng.texturePA2, playerVelocity + 200, shots);
-            level.setPlayer(player);
-            camera.setPlayer(player);            
+            level.setShip(ship);
+            camera.setShip(ship);
         }
 
+            ship = new ShipA(camera, level, Vector2.Zero, 0, points, GRMng.frameWidthPA2, GRMng.frameHeightPA2,
+            level.setShip(ship);
+            camera.setShip(ship);            
 
 
         //--------------------------------
@@ -65,7 +69,7 @@ namespace IS_XNA_Shooter
             {
                 spriteBatch.DrawString(SuperGame.fontDebug, "Camera=" + camera.position + ".",
                     new Vector2(5, 3), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-                spriteBatch.DrawString(SuperGame.fontDebug, "Player=" + player.position + ".",
+                spriteBatch.DrawString(SuperGame.fontDebug, "Ship=" + ship.position + ".",
                     new Vector2(5, 15), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             }
          }

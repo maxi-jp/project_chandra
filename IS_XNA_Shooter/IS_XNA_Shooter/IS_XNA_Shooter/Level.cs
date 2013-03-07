@@ -11,7 +11,7 @@ namespace IS_XNA_Shooter
     class Level
     {
         protected Camera camera;
-        protected Ship player;
+        protected Ship ship;
         protected Vector2 playerInitPosition;
         public int width;
         public int height;
@@ -21,7 +21,7 @@ namespace IS_XNA_Shooter
         /* ------------------- CONSTRUCTORES ------------------- */
         public Level() 
         { 
-         //Lo ponemos para que compile LevelB ya que no tiene camara y demas atributos.
+            //Lo ponemos para que compile LevelB ya que no tiene camara y demas atributos.
         }
 
         public Level(Camera camera, int num, List<Enemy> enemies)
@@ -62,12 +62,12 @@ namespace IS_XNA_Shooter
         /* ------------------- MÉTODOS ------------------- */
         public virtual void Update(float deltaTime)
         {
-            for (int i = 0; i < timeLeftEnemy.Count(); i++)
+            /*for (int i = 0; i < timeLeftEnemy.Count(); i++)
             {
                 timeLeftEnemy[i] -= deltaTime;
-                if (!enemies[i].IsActive() && timeLeftEnemy[i] <= 0 && !enemies[i].IsDead())
+                if (!enemies[i].IsActive() && timeLeftEnemy[i] <= 0 && !enemies[i].isDead())
                     enemies[i].SetActive();
-            }
+            }*/
         }
         
         public virtual void Draw(SpriteBatch spriteBatch)
@@ -98,7 +98,7 @@ namespace IS_XNA_Shooter
         */
         }
 
- 	protected void LeerArchivoXML(int modoDeJuego, int levelModo)
+ 	    protected void LeerArchivoXML(int modoDeJuego, int levelModo)
         {
             // Utilizar nombres de fichero y nodos XML idénticos a los que se guardaron
 
@@ -124,18 +124,20 @@ namespace IS_XNA_Shooter
                     positionX = (float)Convert.ToDouble(enemyN[1].Value);
                     positionY = (float)Convert.ToDouble(enemyN[2].Value);
                     time = (float)Convert.ToDouble(enemyN[3].Value); //aqui casca
-                    timeLeftEnemy.Add(time);
+                    //timeLeftEnemy.Add(time);
 
                     Enemy enemy = null;
 
                     if (enemyType.Equals("enemyWeak"))
                         enemy = new EnemyWeak(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEW2, GRMng.frameHeightEW2, GRMng.numAnimsEW2, GRMng.frameCountEW2,
-                            GRMng.loopingEW2, SuperGame.frameTime12, GRMng.textureEW2, 100, 100, null, 0, 0, 0);
-                    else
+                            GRMng.loopingEW2, SuperGame.frameTime12, GRMng.textureEW2, time, 100, 100,
+                            1, null);
                         enemy = new EnemyBeamA(camera, this, new Vector2(positionX, positionY), 0,
-                            GRMng.frameWidthEW2, GRMng.frameHeightEW2, GRMng.numAnimsEW2, GRMng.frameCountEW2,
-                            GRMng.loopingEW2, SuperGame.frameTime12, GRMng.textureEW2, 1000, 100, null, 0, 0, 0);
+                            GRMng.frameWidthEB1, GRMng.frameHeightEB1, GRMng.numAnimsEB1, GRMng.frameCountEB1,
+                            GRMng.loopingEB1, SuperGame.frameTime12, GRMng.textureEB1, time, 1000, 100,
+                            4, null);
+
                     enemies.Add(enemy);
                     
                 }
@@ -153,12 +155,12 @@ namespace IS_XNA_Shooter
             }
         }   //  end LeerArchivoXML()
 
-        public virtual void setPlayer(Ship player)
+        public virtual void setShip(Ship ship)
         {
-            this.player = player;
+            this.ship = ship;
             foreach (Enemy e in enemies)// enemigos
-                e.SetPlayer(player);
-            player.SetPosition(playerInitPosition);
+                e.SetShip(ship);
+            ship.SetPosition(ShipInitPosition);
         }
 
 

@@ -60,12 +60,12 @@ namespace IS_XNA_Shooter
             collider.Draw(spriteBatch);
         }
 
-        public int getPower()
+        public int GetPower()
         {
             return power;
         }
 
-        public bool isActive()
+        public bool IsActive()
         {
             return active;
         }

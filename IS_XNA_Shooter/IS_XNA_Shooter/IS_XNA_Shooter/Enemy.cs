@@ -10,13 +10,15 @@ namespace IS_XNA_Shooter
     // clase padre enemigo de la que heredan todos los enemigos.
     abstract class Enemy : Animation
     {
-        /* ------------------- ATRIBUTOS ------------------- */
+        /* ------------------- ATTRIBUTES ------------------- */
         public Collider collider;
+        protected Ship ship;        // player ship
 
+        protected float timeToSpawn;    // indicates the time when the Enemy has to turn active
+
+        // Enemy stats:
         protected int life;         // vida
         protected float velocity;   // velocidad
-        protected Ship player;    // jugador
-        private bool active;        // si no esta activo no se muestra
         
         //Shots
         protected List<Shot> shots;
@@ -26,50 +28,82 @@ namespace IS_XNA_Shooter
         protected float timeToShot = 1.7f; // tiempo minimo entre disparos en segundos
         
 
-        /* ------------------- CONSTRUCTORES ------------------- */
+        // control variables:
+        protected bool active;      // si no esta activo no se muestra
+        protected bool colisionable;// indicates if the Enemy is colisionable or not
+        protected bool erasable;    // indicates if the Enemy is no longer necesary in the Game
+        
+        /* ------------------- CONSTRUCTORS ------------------- */
         public Enemy(Camera camera, Level level, Vector2 position, float rotation,
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
-            float frametime, Texture2D texture, float velocity, int life, Ship player, 
-            int shotPower, float shotVelocity, float timeToShot)
+            float frametime, Texture2D texture, float timeToSpawn, float velocity, int life,
+            int value, int shotPower, float shotVelocity, float timeToShot, Ship ship)
             : base(camera, level, true, position, rotation, texture, frameWidth, frameHeight, numAnim,
                 frameCount, looping, frametime)
         {
             this.velocity = velocity;
+            this.timeToSpawn = timeToSpawn;
             this.life = life;
-            this.player = player;
-            active = false;
-
+            this.value = value;
+            this.ship = ship;
             this.shotPower = shotPower;
             this.shotVelocity = shotVelocity;
             this.timeToShot = timeToShot;
+            
             this.shots = new List<Shot>();
-
+            
+            active = false;
+            colisionable = false;
+            erasable = false;
            
         }
 
-        /* ------------------- MÉTODOS ------------------- */
+        /* ------------------- METHODS ------------------- */
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
 
-            collider.Update(position, rotation);
+            if (!animActive)
+                erasable = true;
+
+            if (colisionable)
+                collider.Update(position, rotation);
+
+            if (outOfScreen())
+                Kill();
+        } // Update
+
+        public void UpdateTimeToSpawn(float deltaTime)
+        {
+            timeToSpawn -= deltaTime;
+            if (timeToSpawn <= 0)
+                SetActive();
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
-            if (SuperGame.debug)
+
+            if (SuperGame.debug && colisionable)
                 collider.Draw(spriteBatch);
         }
 
-        public bool IsDead()
+        private bool outOfScreen()
+        {   //if the enemy is out the screen it is killed
+            return (position.X > level.width || position.X < 0 || position.Y > level.height || position.Y < 0);
+               
+        }
+
         {
             return (life <= 0);
         }
 
-        public void Damage(int i)
+        public virtual void Damage(int i)
         {
             life -= i;
+
+            if (life <= 0)
+                colisionable = false;
         }
 
         public bool IsActive()
@@ -80,32 +114,48 @@ namespace IS_XNA_Shooter
         public void SetActive(bool aux)
         {
             active = aux;
+            colisionable = aux;
         }
 
         public void SetActive()
         {
             active = true;
+            colisionable = true;
         }
 
-        public void unsetActive()
+        public void UnsetActive()
         {
             active = false;
         }
 
-        public void SetPlayer(Ship player)
+        public bool IsColisionable()
         {
-            this.player = player;
+            return colisionable;
+        }
+
+        public bool IsErasable()
+        {
+            return erasable;
+        }
+
+        public void SetShip(Ship ship)
+        {
+            this.ship = ship;
         }
 
         public void Kill()
         {
             life = -1;
+            active = false;
+            colisionable = false;
+            erasable = true;
         }
-
+        
         public List<Shot> getShots()
         {
             return shots;
         }
+
         protected void EnemyShot(Vector2 position)
         {
             /*if (ControlMng.isControllerActive())

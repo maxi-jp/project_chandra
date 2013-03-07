@@ -113,7 +113,7 @@ namespace IS_XNA_Shooter
             collider.Update(position, rotation);
         }*/
 
-        public virtual void Update(float deltaTime)
+        public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
             // movimiento del jugado

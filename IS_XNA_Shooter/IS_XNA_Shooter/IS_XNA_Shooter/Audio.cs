@@ -94,8 +94,12 @@ namespace IS_XNA_Shooter
                 case "brokenBone01":
                     brokenBone01.Play(effectsVolume, pitch, pan);
                     break;
+
+                case "brokenBone02":
+                    brokenBone02.Play(effectsVolume, pitch, pan);
+                    break;
             }
-        }
+        } // PlayEffect
 
         public static void PlayMusic(int i)
         {
@@ -106,7 +110,7 @@ namespace IS_XNA_Shooter
                     MediaPlayer.IsRepeating = true;
                     break;
             }
-        }
+        } // PlayMusic
 
         public static void SetMusicVolumen(float volume)
         {

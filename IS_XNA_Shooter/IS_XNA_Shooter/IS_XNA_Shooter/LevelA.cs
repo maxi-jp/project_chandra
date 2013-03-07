@@ -134,8 +134,9 @@ namespace IS_XNA_Shooter
                 null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
         }
 
-        public override void setPlayer(Ship player) {
-            base.setPlayer(player);
-        }
-    }
+        public override void setShip(Ship Ship)
+        {
+        } // Update
+
+    } // class LevelA
 }

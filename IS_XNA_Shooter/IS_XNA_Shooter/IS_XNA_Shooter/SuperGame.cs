@@ -38,7 +38,7 @@ namespace IS_XNA_Shooter
         public static int screenWidth;  // ancho de la pantalla
         public static int screenHeight; // alto de la pantalla
 
-        private GRMng grManager;        // gestor de recursos gráficos
+        private GRMng grManager;        // gestor de recursos gr‡ficos
         public ControlMng controlMng;   // gestor de controles
         private XMLLvlMng LvlMng; // gestor de XML
         private Audio audio;            // gestor del Audio del juego
@@ -55,12 +55,12 @@ namespace IS_XNA_Shooter
         private float timeCounterSecond;
         private float timeCounterSecondAux;
 
-        // tiempo de duración de un frame en una animación:
-        public static float frameTime24 = ((float)1 / 24);
-        public static float frameTime12 = ((float)1 / 12);
-        public static float frameTime8 = ((float)1 / 8);
+        // tiempo de duraci—n de un frame en una animaci—n:
+        public static float frameTime24 =   ((float)1 / 24);
+        public static float frameTime12 =   ((float)1 / 12);
+        public static float frameTime8 =    ((float)1 / 8);
 
-        public static float timeToResume = 2f; // t que tarda en volver después de pause
+        public static float timeToResume = 2f; // t que tarda en volver despuŽs de pause
 
         // objetos del juego:
         private Menu menu;
@@ -104,7 +104,6 @@ namespace IS_XNA_Shooter
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             IsMouseVisible = true;
 
             drawFramesCounter = drawFramesCounterAux = 0;
@@ -182,7 +181,7 @@ namespace IS_XNA_Shooter
             if (Keyboard.GetState().IsKeyDown(Keys.F))
                 debug = !debug;
 
-            // posición actual del ratón:
+            // posici—n actual del rat—n:
             pointer.X = Mouse.GetState().X;
             pointer.Y = Mouse.GetState().Y;
 
@@ -265,11 +264,12 @@ namespace IS_XNA_Shooter
             }
 
             spriteBatch.End();
+
             base.Draw(gameTime);
         }
 
         /* ------------------------------------------------------------- */
-        /*                            MÉTODOS                            */
+        /*                            MƒTODOS                            */
         /* ------------------------------------------------------------- */
         public void newHistory()
         {
@@ -281,7 +281,7 @@ namespace IS_XNA_Shooter
            
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
 
-            grManager.UnloadContent(0); // descargamos los recursos del menú
+            grManager.UnloadContent(0); // descargamos los recursos del menœ
             LvlMng.UnloadContent(1); // descargamos los XML
         }
 
@@ -295,7 +295,7 @@ namespace IS_XNA_Shooter
 
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
 
-            grManager.UnloadContent(0); // descargamos los recursos del menú
+            grManager.UnloadContent(0); // descargamos los recursos del menœ
             LvlMng.UnloadContent(0); // descargamos los XML
         }
 
@@ -309,7 +309,7 @@ namespace IS_XNA_Shooter
 
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
 
-            grManager.UnloadContent(0); // descargamos los recursos del menú
+            grManager.UnloadContent(0); // descargamos los recursos del menœ
             LvlMng.UnloadContent(0);// descargamos los XML
         }
 
@@ -323,7 +323,7 @@ namespace IS_XNA_Shooter
 
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
 
-            grManager.UnloadContent(0); // descargamos los recursos del menú
+            grManager.UnloadContent(0); // descargamos los recursos del menœ
             LvlMng.UnloadContent(0); // descargamos los XML
         }
 
@@ -333,12 +333,12 @@ namespace IS_XNA_Shooter
             audio.LoadContent(1);
             LvlMng.LoadContent(1);
 
-            game = new GameB(1, GRMng.textureAim, 200f);
+            game = new GameB(this, 1, GRMng.textureAim,
 
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
 
             LvlMng.UnloadContent(1); // descargamos los XML
-            grManager.UnloadContent(0); // descargamos los recursos del menú
+            grManager.UnloadContent(0); // descargamos los recursos del menœ
         }
 
         public void Resume()

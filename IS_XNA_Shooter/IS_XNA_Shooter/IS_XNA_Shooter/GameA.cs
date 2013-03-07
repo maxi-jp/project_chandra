@@ -38,15 +38,15 @@ namespace IS_XNA_Shooter
             points[5] = new Vector2(34, 66);
             points[6] = new Vector2(26, 47);
             points[7] = new Vector2(15, 45);
-            player = new ShipA(camera, level, Vector2.Zero, 0, points, GRMng.frameWidthPA2, GRMng.frameHeightPA2,
+            ship = new ShipA(camera, level, Vector2.Zero, 0, points, GRMng.frameWidthPA2, GRMng.frameHeightPA2,
                 GRMng.numAnimsPA2, GRMng.frameCountPA2, GRMng.loopingPA2, SuperGame.frameTime24, GRMng.texturePA2,
                 playerVelocity, shots);
 
-            level.setPlayer(player);
+            level.setShip(ship);
 
             aimPointSprite = new Sprite(true, Vector2.Zero, 0, textureAim);
 
-            camera.setPlayer(player);
+            camera.setShip(ship);
         }
 
         /* ------------------------------------------------------------- */
@@ -77,7 +77,7 @@ namespace IS_XNA_Shooter
             {
                 spriteBatch.DrawString(SuperGame.fontDebug, "player rot=" + player.rotation + ".",
                     new Vector2(5, 3), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-                spriteBatch.DrawString(SuperGame.fontDebug, "enemigo=" + enemies[0].rotation + ".",
+                spriteBatch.DrawString(SuperGame.fontDebug, "Ship=" + ship.position + ".",
                    new Vector2(5, 15), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
                 
                 /* 

@@ -13,20 +13,25 @@ namespace IS_XNA_Shooter
         /* ------------------------------------------------------------- */
         /*                           ATRIBUTOS                           */
         /* ------------------------------------------------------------- */
+        protected SuperGame mainGame;
         protected Level level;
         protected IngameHub hub;
         protected Ship ship;
-        protected float playerVelocity = 200f;
+        protected float shipVelocity = 200f;
+        protected int shipLife;
         protected List<Enemy> enemies;
         protected List<Shot> shots;
         protected List<Explosion> explosions;
         protected Camera camera;
-
+        
         /* ------------------------------------------------------------- */
         /*                          CONSTRUCTOR                          */
         /* ------------------------------------------------------------- */
-        public Game (float playerVelocity)
+        public Game (SuperGame mainGame, float shipVelocity, int shipLife)
         {
+            this.mainGame = mainGame;
+            this.shipLife = shipLife;
+            this.shipVelocity = shipVelocity;
 
             camera = new Camera();
             enemies = new List<Enemy>();
@@ -61,7 +66,7 @@ namespace IS_XNA_Shooter
                         for (int i = 0; i < enemyShotsAux.Count(); i++)// disparos
                         {
                             enemyShotsAux[i].Update(deltaTime);
-                            if (!enemyShotsAux[i].isActive())
+                            if (!enemyShotsAux[i].IsActive())
                                 enemyShotsAux.RemoveAt(i);
                         }
                     }
@@ -71,7 +76,6 @@ namespace IS_XNA_Shooter
             }
 
             for (int i = 0; i < shots.Count(); i++)     // shots
-                }
             {
                 shots[i].Update(deltaTime);
                 if (!shots[i].IsActive())

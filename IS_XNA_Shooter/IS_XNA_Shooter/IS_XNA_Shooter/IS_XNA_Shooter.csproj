@@ -130,6 +130,7 @@
     <Compile Include="LevelA.cs" />
     <Compile Include="LevelB.cs" />
     <Compile Include="MenuIngame.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="ShipA.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="GameA.cs" />

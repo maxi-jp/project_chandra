@@ -24,10 +24,10 @@ namespace IS_XNA_Shooter
         /* ------------------- CONSTRUCTORS ------------------- */
         public EnemyLaserA(Camera camera, Level level, Vector2 position, float rotation,
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
-            float frametime, Texture2D texture, float velocity, int life, Ship player,
-            int shotPower, float shotVelocity, float timeToShot)
+            float frametime, Texture2D texture, float timeToSpawn, float velocity, int life,
+            int value, int shotPower, float shotVelocity, float timeToShot, Ship ship)
             : base(camera, level, position, rotation, frameWidth, frameHeight, numAnim, frameCount,
-                looping, frametime, texture, 50, 100, player, 1, 80f, 3.0f)
+                looping, frametime, texture, timeToSpawn, 50, 100, value, 1, 80f, 3.0f,ship)
         {
             setAnim(3);
 

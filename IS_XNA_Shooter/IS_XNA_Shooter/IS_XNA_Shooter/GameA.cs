@@ -19,12 +19,12 @@ namespace IS_XNA_Shooter
         /* ------------------------------------------------------------- */
         /*                          CONSTRUCTOR                          */
         /* ------------------------------------------------------------- */
-        public GameA(int num, Texture2D textureAim, Texture2D textureBg,
-            float playerVelocity)
-            : base(playerVelocity)
+        public GameA(SuperGame mainGame, int numLevel, Texture2D textureAim, Texture2D textureBg, 
+            float shipVelocity, int shipLife)
+            :base(mainGame, shipVelocity, shipLife)
         {
             hub = new IngameHubA(GRMng.hubLeft, GRMng.hubCenter, GRMng.hubRight);
-            level = new LevelA(camera, num, enemies);
+            level = new LevelA(camera, numLevel, enemies);
             backGround = new BackgroundGameA(camera, level);
             
             camera.setLevel(level);

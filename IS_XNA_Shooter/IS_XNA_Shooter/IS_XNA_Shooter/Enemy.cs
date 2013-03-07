@@ -94,6 +94,7 @@ namespace IS_XNA_Shooter
                
         }
 
+        public bool isDead()
         {
             return (life <= 0);
         }

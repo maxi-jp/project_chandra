@@ -38,34 +38,35 @@ namespace IS_XNA_Shooter
         public static int screenWidth;  // ancho de la pantalla
         public static int screenHeight; // alto de la pantalla
 
-        private GRMng grManager;        // gestor de recursos gr‡ficos
+        private GRMng grManager;        // gestor de recursos gráficos
         public ControlMng controlMng;   // gestor de controles
-        private XMLLvlMng LvlMng; // gestor de XML
+        private XMLLvlMng LvlMng;       // gestor de XML
         private Audio audio;            // gestor del Audio del juego
 
         public Vector2 pointer; // posicion del raton
 
         protected float totalTime; // contador del tiempo total
 
-        // contadores de frames:
-        private int drawFramesCounter;
-        private int drawFramesCounterAux;
-        private int updateFramesCounter;
-        private int updateFramesCounterAux;
-        private float timeCounterSecond;
-        private float timeCounterSecondAux;
+        private int     drawFramesCounter;
+        private int     drawFramesCounterAux;
+        private int     updateFramesCounter;
+        private int     updateFramesCounterAux;
+        private float   timeCounterSecond;
+        private float   timeCounterSecondAux;
 
-        // tiempo de duraci—n de un frame en una animaci—n:
+        // tiempo de duración de un frame en una animación:
         public static float frameTime24 =   ((float)1 / 24);
         public static float frameTime12 =   ((float)1 / 12);
         public static float frameTime8 =    ((float)1 / 8);
 
-        public static float timeToResume = 2f; // t que tarda en volver despuŽs de pause
+        public static float timeToResume = 2f; // t que tarda en volver después de pause
 
         // objetos del juego:
-        private Menu menu;
-        private MenuIngame menuIngame;
-        private Game game;
+        private Menu        menu;
+        private MenuIngame  menuIngame;
+        private Game        game;
+        public Player       player;
+        private int         playerLifes = 4;
 
         public enum shootType
         {
@@ -125,7 +126,7 @@ namespace IS_XNA_Shooter
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // dimensiones de la pantalla:
+            // Screen dimensions
             screenWidth = GraphicsDevice.Viewport.Width;
             screenHeight = GraphicsDevice.Viewport.Height;
 
@@ -137,9 +138,12 @@ namespace IS_XNA_Shooter
 
             fontDebug = Content.Load<SpriteFont>("FontDebug");
 
-            // creamos el menu
+            // Create the Menu
             menu = new Menu(this);
             menuIngame = new MenuIngame(this);
+
+            // Create the player
+            player = new Player(playerLifes);
         }
 
         /// <summary>
@@ -181,7 +185,7 @@ namespace IS_XNA_Shooter
             if (Keyboard.GetState().IsKeyDown(Keys.F))
                 debug = !debug;
 
-            // posici—n actual del rat—n:
+            // posición actual del ratón:
             pointer.X = Mouse.GetState().X;
             pointer.Y = Mouse.GetState().Y;
 
@@ -269,20 +273,21 @@ namespace IS_XNA_Shooter
         }
 
         /* ------------------------------------------------------------- */
-        /*                            MƒTODOS                            */
+        /*                            MÉTODOS                            */
         /* ------------------------------------------------------------- */
         public void newHistory()
         {
-            grManager.LoadContent(3); // cargamos los recursos del nivel 1 de GameB
+            grManager.LoadContent(2); // cargamos los recursos del nivel 1 de GameA
             audio.LoadContent(1);
-            LvlMng.LoadContent(1);
+            LvlMng.LoadContent(1); // cargamos los rectangulos
+            LvlMng.LoadContent(0); // cargamos enemigos del levelA
 
-            game = new GameB(1, GRMng.textureAim, 200f);
+            game = new GameB(this, 1, GRMng.textureAim,
+                /*ShipVelocity*/200f, /*ShipLife*/100);
            
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
 
-            grManager.UnloadContent(0); // descargamos los recursos del menœ
-            LvlMng.UnloadContent(1); // descargamos los XML
+            grManager.UnloadContent(0); // descargamos los recursos del menú
         }
 
         public void newSurvival()
@@ -291,12 +296,13 @@ namespace IS_XNA_Shooter
             audio.LoadContent(1);
             LvlMng.LoadContent(0); // cargamos los XML
 
-            game = new GameA(1, GRMng.textureAim, GRMng.textureCell, 200f);
+            game = new GameA(this, 1, GRMng.textureAim, GRMng.textureCell,
+                /*ShipVelocity*/200f, /*ShipLife*/100);
 
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
 
-            grManager.UnloadContent(0); // descargamos los recursos del menœ
-            LvlMng.UnloadContent(0); // descargamos los XML
+            LvlMng.UnloadContent(0);
+            grManager.UnloadContent(0); // descargamos los recursos del menú
         }
 
         public void newKiller()
@@ -305,12 +311,14 @@ namespace IS_XNA_Shooter
             audio.LoadContent(1);
             LvlMng.LoadContent(0); // cargamos los XML
 
-            game = new GameA(1, GRMng.textureAim, GRMng.textureCell, 200f);
+            game = new GameA(this, 1, GRMng.textureAim, GRMng.textureCell,
+                /*ShipVelocity*/200f, /*ShipLife*/100);
 
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
 
-            grManager.UnloadContent(0); // descargamos los recursos del menœ
-            LvlMng.UnloadContent(0);// descargamos los XML
+            LvlMng.UnloadContent(0);
+            grManager.UnloadContent(0); // descargamos los recursos del menú
+
         }
 
         public void newDefense()
@@ -319,26 +327,28 @@ namespace IS_XNA_Shooter
             audio.LoadContent(1);
             LvlMng.LoadContent(0);
 
-            game = new GameA(1, GRMng.textureAim, GRMng.textureCell, 200f);
+            game = new GameA(this, 1, GRMng.textureAim, GRMng.textureCell,
+                /*ShipVelocity*/200f, /*ShipLife*/100);
 
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
 
-            grManager.UnloadContent(0); // descargamos los recursos del menœ
-            LvlMng.UnloadContent(0); // descargamos los XML
+            LvlMng.UnloadContent(0);
+            grManager.UnloadContent(0); // descargamos los recursos del menú
         }
 
         public void newScroll()
         {
-            grManager.LoadContent(3); // cargamos los recursos del nivel 1 de GameB
+            grManager.LoadContent(2); // cargamos los recursos del nivel 1 de GameA
             audio.LoadContent(1);
-            LvlMng.LoadContent(1);
+            LvlMng.LoadContent(1); // cargamos los rectangulos
 
             game = new GameB(this, 1, GRMng.textureAim,
+                /*ShipVelocity*/200f, /*ShipLife*/100);
 
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
 
-            LvlMng.UnloadContent(1); // descargamos los XML
-            grManager.UnloadContent(0); // descargamos los recursos del menœ
+            LvlMng.UnloadContent(1);
+            grManager.UnloadContent(0); // descargamos los recursos del menú
         }
 
         public void Resume()
@@ -351,8 +361,7 @@ namespace IS_XNA_Shooter
             grManager.LoadContent(0);
             currentState = gameState.mainMenu;
             menu.menuState = Menu.MenuState.main;
-
-            grManager.UnloadContentGame(); // all resources are released for any game
+            grManager.UnloadContent(2);
             audio.UnloadContent(1);
         }
 

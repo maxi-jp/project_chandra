@@ -359,11 +359,5 @@ namespace IS_XNA_Shooter
             UnloadContent(3);
         }
 
-        public void UnloadContentGame()
-        {
-            UnloadContent(2);
-            UnloadContent(3);
-        }
-
     } // class GRMng
 }

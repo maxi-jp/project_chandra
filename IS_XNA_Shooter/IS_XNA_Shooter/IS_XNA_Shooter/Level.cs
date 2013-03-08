@@ -16,7 +16,6 @@ namespace IS_XNA_Shooter
         public int width;
         public int height;
         protected List<Enemy> enemies;
-        protected List<float> timeLeftEnemy;
         protected bool levelFinished = false;
 
         /* ------------------- CONSTRUCTORES ------------------- */
@@ -27,76 +26,18 @@ namespace IS_XNA_Shooter
 
         public Level(Camera camera, int num, List<Enemy> enemies)
         {
-            //this.camera = camera;
-/*
-            switch (num)
-            {
-                case 1:
-                    width = 1200;
-                    height = 800;
-                    this.enemies = enemies;
-                    timeLeftEnemy = new List<float>();
-
-                    /*Enemy enemy1 = new EnemyWeak(camera, this, new Vector2(100, 100), 0,
-                        GRMng.frameWidthEW, GRMng.frameHeightEW, GRMng.numAnimsEW, GRMng.frameCountEW,
-                        GRMng.loopingEW, SuperGame.frameTime12, GRMng.textureEW, 80, 100, null);
-                    enemies.Add(enemy1);
-                    timeLeftEnemy.Add(2);*/
-            /*
-                    Enemy enemy;
-                    for (int i = 0; i < 40; i++)
-                    {
-                        enemy = new EnemyWeak(camera, this, new Vector2(100, 100), 0,
-                            GRMng.frameWidthEW, GRMng.frameHeightEW, GRMng.numAnimsEW, GRMng.frameCountEW,
-                            GRMng.loopingEW, SuperGame.frameTime12, GRMng.textureEW, 80+i, 100, null);
-                        enemies.Add(enemy);
-                        timeLeftEnemy.Add(1+i);
-                    }
-                    
-                    break;
-            }
-            */
-           // whitePixel = GRMng.whitepixel;
-           // textureBg = GRMng.textureCell;
+            
         }
 
         /* ------------------- MÉTODOS ------------------- */
         public virtual void Update(float deltaTime)
         {
-            /*for (int i = 0; i < timeLeftEnemy.Count(); i++)
-            {
-                timeLeftEnemy[i] -= deltaTime;
-                if (!enemies[i].IsActive() && timeLeftEnemy[i] <= 0 && !enemies[i].isDead())
-                    enemies[i].SetActive();
-            }*/
+            
         }
         
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            /*
-            // grid del suelo
-            for (int i = 0; i < width; i += textureBg.Width)
-                for (int j = 0; j < height; j += textureBg.Height)
-                    spriteBatch.Draw(textureBg, new Vector2(i + camera.displacement.X, j + camera.displacement.Y), Color.White);
-
-
-            // linea de arriba:
-            //spriteBatch.Draw(whitePixel, new Rectangle(0, 0, width, 1), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
-            spriteBatch.Draw(whitePixel, new Rectangle((int)camera.displacement.X, (int)camera.displacement.Y, width, 1),
-                null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
-            // linea de la derecha:
-            //spriteBatch.Draw(whitePixel, new Rectangle(width, 0, 1, height), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
-            spriteBatch.Draw(whitePixel, new Rectangle((int)camera.displacement.X, (int)camera.displacement.Y, 1, height),
-                null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
-            // linea de abajo:
-            //spriteBatch.Draw(whitePixel, new Rectangle(0, height, width, 1), null, Color.White, w0, Vector2.Zero, SpriteEffects.None, 0);
-            spriteBatch.Draw(whitePixel, new Rectangle((int)camera.displacement.X + width, (int)camera.displacement.Y, 1, height),
-                null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
-            // linea de la izquierda:
-            //spriteBatch.Draw(whitePixel, new Rectangle(0, 0, 1, height), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
-            spriteBatch.Draw(whitePixel, new Rectangle((int)camera.displacement.X, (int)camera.displacement.Y + height, width, 1),
-                null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
-        */
+            
         }
 
  	    protected void LeerArchivoXML(int modoDeJuego, int levelModo)
@@ -131,8 +72,8 @@ namespace IS_XNA_Shooter
 
                     if (enemyType.Equals("enemyWeak"))
                         enemy = new EnemyWeak(camera, this, new Vector2(positionX, positionY), 0,
-                            GRMng.frameWidthEW2, GRMng.frameHeightEW2, GRMng.numAnimsEW2, GRMng.frameCountEW2,
-                            GRMng.loopingEW2, SuperGame.frameTime12, GRMng.textureEW2, time, 100, 100,
+                            GRMng.frameWidthEW1, GRMng.frameHeightEW1, GRMng.numAnimsEW1, GRMng.frameCountEW1,
+                            GRMng.loopingEW1, SuperGame.frameTime12, GRMng.textureEW1, time, 100, 100,
                             1, null);
                     else if (enemyType.Equals("enemyBeam"))
                         enemy = new EnemyBeamA(camera, this, new Vector2(positionX, positionY), 0,

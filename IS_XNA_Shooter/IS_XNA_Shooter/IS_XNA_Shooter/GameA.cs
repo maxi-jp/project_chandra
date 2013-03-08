@@ -38,8 +38,8 @@ namespace IS_XNA_Shooter
             points[5] = new Vector2(34, 66);
             points[6] = new Vector2(26, 47);
             points[7] = new Vector2(15, 45);
-            ship = new ShipA(camera, level, Vector2.Zero, 0, points, GRMng.frameWidthPA2, GRMng.frameHeightPA2,
-                GRMng.numAnimsPA2, GRMng.frameCountPA2, GRMng.loopingPA2, SuperGame.frameTime24, GRMng.texturePA2,
+            ship = new ShipA(camera, level, Vector2.Zero, 0, points, GRMng.frameWidthPA1, GRMng.frameHeightPA1,
+                GRMng.numAnimsPA1, GRMng.frameCountPA1, GRMng.loopingPA1, SuperGame.frameTime24, GRMng.texturePA1,
                 ShipVelocity, ShipLife, shots);
 
             level.setShip(ship);
@@ -63,15 +63,16 @@ namespace IS_XNA_Shooter
             aimPointSprite.position.Y = Mouse.GetState().Y;
 
             //camera.Update(deltaTime);   // cámara
-        }
+
+        } // Update
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             backGround.Draw(spriteBatch);
 
-            base.Draw(spriteBatch); // Ship, enemigos, balas
+            base.Draw(spriteBatch); // Ship, enemies, shots
             
-            aimPointSprite.Draw(spriteBatch); // punto de mira
+            aimPointSprite.Draw(spriteBatch); // aim point
 
             if (SuperGame.debug)
             {
@@ -79,6 +80,10 @@ namespace IS_XNA_Shooter
                     new Vector2(5, 3), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
                 spriteBatch.DrawString(SuperGame.fontDebug, "Ship=" + ship.position + ".",
                     new Vector2(5, 15), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+
+                // number of enemies:
+                spriteBatch.DrawString(SuperGame.fontDebug, "Enemies in game = " + enemies.Count() + ".",
+                    new Vector2(5, 27), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
 
                 /*if (enemies.Count > 0)
                 {
@@ -92,7 +97,8 @@ namespace IS_XNA_Shooter
                         new Vector2(5, 51), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
                 }*/
             }
-        }
+
+        } // Draw
 
     } // class GameA
 }

@@ -52,7 +52,8 @@ namespace IS_XNA_Shooter
         {
             base.Draw(spriteBatch);
 
-            collider.Draw(spriteBatch);
+            if (SuperGame.debug)
+                collider.Draw(spriteBatch);
         }
 
         public int GetPower()

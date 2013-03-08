@@ -193,28 +193,39 @@ namespace IS_XNA_Shooter
             switch (currentState)
             {
                 case gameState.mainMenu:
+
+                    if (debug && Keyboard.GetState().IsKeyDown(Keys.T))
+                        NewGameATest();
+
                     menu.Update(Mouse.GetState().X, Mouse.GetState().Y);
+
                     if (Mouse.GetState().LeftButton == ButtonState.Pressed)
                         menu.Click(Mouse.GetState().X, Mouse.GetState().Y);
                     else if (Mouse.GetState().LeftButton == ButtonState.Released)
                         menu.Unclick(Mouse.GetState().X, Mouse.GetState().Y);
+
                     break;
 
                 case gameState.playing:
+
                     game.Update(gameTime);
                     totalTime += deltaTime;
 
                     if (Keyboard.GetState().IsKeyDown(Keys.P) ||
                         GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed)
                         currentState = gameState.pause;
+
                     break;
 
                 case gameState.pause:
+
                     menuIngame.Update(deltaTime, Mouse.GetState().X, Mouse.GetState().Y);
+
                     if (Mouse.GetState().LeftButton == ButtonState.Pressed)
                         menuIngame.Click(Mouse.GetState().X, Mouse.GetState().Y);
                     else if (Mouse.GetState().LeftButton == ButtonState.Released)
                         menuIngame.Unclick(Mouse.GetState().X, Mouse.GetState().Y);
+
                     break;
 
                 case gameState.gameOver:
@@ -275,6 +286,16 @@ namespace IS_XNA_Shooter
         /* ------------------------------------------------------------- */
         /*                            MÉTODOS                            */
         /* ------------------------------------------------------------- */
+        private void NewGameATest()
+        {
+            grManager.LoadContent(2); // cargamos los recursos del nivel 1 de GameA
+            audio.LoadContent(1);
+            game = new GameA(this, 0, GRMng.textureAim, GRMng.textureCell,
+                /*ShipVelocity*/200f, /*ShipLife*/100);
+            currentState = gameState.playing; // cambiamos el estado del juego a modo juego
+            grManager.UnloadContent(0); // descargamos los recursos del menú
+        }
+
         public void newHistory()
         {
             grManager.LoadContent(2); // cargamos los recursos del nivel 1 de GameA

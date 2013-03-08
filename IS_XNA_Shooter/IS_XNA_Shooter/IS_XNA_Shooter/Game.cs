@@ -11,26 +11,30 @@ namespace IS_XNA_Shooter
     abstract class Game
     {
         /* ------------------------------------------------------------- */
-        /*                           ATRIBUTOS                           */
+        /*                           ATTRIBUTES                          */
         /* ------------------------------------------------------------- */
         protected SuperGame mainGame;
-        protected Level level;
         protected IngameHub hub;
+
+        protected Camera camera;
+        protected Level level;
+
         protected Ship ship;
-        protected float ShipVelocity = 200f;
+        protected float shipVelocity;
+        protected int shipLife;
+
         protected List<Enemy> enemies;
         protected List<Shot> shots;
         protected List<Explosion> explosions;
-        protected Camera camera;
-        protected int ShipLife;
 
         /* ------------------------------------------------------------- */
         /*                          CONSTRUCTOR                          */
         /* ------------------------------------------------------------- */
-        public Game (SuperGame mainGame, float ShipVelocity, int ShipLife)
+        public Game (SuperGame mainGame, float shipVelocity, int shipLife)
         {
             this.mainGame = mainGame;
-            this.ShipLife = ShipLife;
+            this.shipLife = shipLife;
+            this.shipVelocity = shipVelocity;
 
             camera = new Camera();
             enemies = new List<Enemy>();
@@ -41,7 +45,7 @@ namespace IS_XNA_Shooter
         }
 
         /* ------------------------------------------------------------- */
-        /*                            MÉTODOS                            */
+        /*                            METHODS                            */
         /* ------------------------------------------------------------- */
         public virtual void Update(GameTime gameTime)
         {
@@ -107,7 +111,7 @@ namespace IS_XNA_Shooter
                 if (e.IsActive())
                     e.Draw(spriteBatch);
 
-            foreach (Shot shot in shots)
+            foreach (Shot shot in shots)    // player shots
                 shot.Draw(spriteBatch);
 
             ship.Draw(spriteBatch);

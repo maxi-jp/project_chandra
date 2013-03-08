@@ -39,6 +39,7 @@ namespace IS_XNA_Shooter
             this.life = life;
             this.value = value;
             this.ship = ship;
+
             active = false;
             colisionable = false;
             erasable = false;
@@ -49,7 +50,7 @@ namespace IS_XNA_Shooter
         {
             base.Update(deltaTime);
 
-            if (!animActive)
+            if (DeadCondition())
                 erasable = true;
 
             if (colisionable)
@@ -137,6 +138,11 @@ namespace IS_XNA_Shooter
             active = false;
             colisionable = false;
             erasable = true;
+        }
+
+        public virtual bool DeadCondition()
+        {
+            return (!animActive);
         }
 
     } // class Enemy

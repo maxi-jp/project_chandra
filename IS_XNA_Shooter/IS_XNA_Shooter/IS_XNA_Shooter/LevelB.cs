@@ -30,16 +30,15 @@ namespace IS_XNA_Shooter
             this.camera = camera;
             width = SuperGame.screenWidth*2;
             height = SuperGame.screenHeight;
-            timeLeftEnemy = new List<float>();
             listRectCollider = new List<List<Rectangle>>();
             readRectangles();
 
             //Enemigo
             Enemy e1 = new EnemyWeakB(camera, this, new Vector2(SuperGame.screenWidth + 100, 
-                50)/*new Random().Next(SuperGame.screenHeight))*/, (float)Math.PI, GRMng.frameWidthEW2, 
-                GRMng.frameHeightEW2, GRMng.numAnimsEW2, GRMng.frameCountEW2, GRMng.loopingEW2, SuperGame.frameTime12, 
-                GRMng.textureEW2, -100, 100, 1, null);
-            e1.setActive();
+                50)/*new Random().Next(SuperGame.screenHeight))*/, (float)Math.PI, GRMng.frameWidthEW1, 
+                GRMng.frameHeightEW1, GRMng.numAnimsEW1, GRMng.frameCountEW1, GRMng.loopingEW1, SuperGame.frameTime12, 
+                GRMng.textureEW1, 1, -200, 100, 1, null);
+            e1.SetActive();
             enemies = new List<Enemy>();
             enemies.Add(e1);
         }

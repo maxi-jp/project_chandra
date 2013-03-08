@@ -37,15 +37,15 @@ namespace IS_XNA_Shooter
         //---------------------------
         //----    Constructor    ----
         //---------------------------
-        public GameB(SuperGame mainGame, int numLevel, Texture2D textureAim, float ShipVelocity, int ShipLife)
-            : base(mainGame, ShipVelocity, ShipLife)
+        public GameB(SuperGame mainGame, int numLevel, Texture2D textureAim, float shipVelocity, int shipLife)
+            : base(mainGame, shipVelocity, shipLife)
         {
             hub = new IngameHubA(GRMng.hubLeft, GRMng.hubCenter, GRMng.hubRight, mainGame.player.GetLife());
             camera = new Camera();
             shots = new List<Shot>();
             this.textureAim = textureAim;
-            this.ShipVelocity = ShipVelocity;
-            this.ShipLife=ShipLife;
+            this.shipVelocity = shipVelocity;
+            this.shipLife = shipLife;
             levelList = new List<int>();
             levelList.Add(0); levelList.Add(1);
             levelList.Add(0); levelList.Add(1);
@@ -68,10 +68,10 @@ namespace IS_XNA_Shooter
             //backGroundA.Dispose();
             backGroundA = null;
             Ship = new ShipB(camera, ((LevelB)level), new Vector2(150f,380f), 0, puntosColliderShip(), GRMng.frameWidthPA2,
-                GRMng.frameHeightPA2, GRMng.numAnimsPA2, GRMng.frameCountPA2, GRMng.loopingPA2, SuperGame.frameTime24,
-                GRMng.texturePA2, ShipVelocity + 200, ShipLife, shots);
+                GRMng.frameHeightPA1, GRMng.numAnimsPA1, GRMng.frameCountPA1, GRMng.loopingPA1, SuperGame.frameTime24,
+                GRMng.texturePA1, shipVelocity + 200, shipLife, shots);
             //level.setShip(Ship);
-            camera.setShip(Ship);
+            camera.setShip(ship);
         }
 
         private void initLevelA(int numLevel, Texture2D textureAim)
@@ -93,16 +93,16 @@ namespace IS_XNA_Shooter
             points[5] = new Vector2(34, 66);
             points[6] = new Vector2(26, 47);
             points[7] = new Vector2(15, 45);
-            Ship = new ShipA(camera, level, Vector2.Zero, 0, points, GRMng.frameWidthPA2, GRMng.frameHeightPA2,
-                GRMng.numAnimsPA2, GRMng.frameCountPA2, GRMng.loopingPA2, SuperGame.frameTime24, 
-                GRMng.texturePA2, ShipVelocity + 200, ShipLife, shots);
+            ship = new ShipA(camera, level, Vector2.Zero, 0, points, GRMng.frameWidthPA1, GRMng.frameHeightPA1,
+                GRMng.numAnimsPA1, GRMng.frameCountPA1, GRMng.loopingPA1, SuperGame.frameTime24, 
+                GRMng.texturePA1, shipVelocity + 200, shipLife, shots);
 
 
             //aimPointSprite = new Sprite(true, Vector2.Zero, 0, textureAim);
 
 
-            level.setShip(Ship);
-            camera.setShip(Ship);            
+            level.setShip(ship);
+            camera.setShip(ship);            
         }
 
 

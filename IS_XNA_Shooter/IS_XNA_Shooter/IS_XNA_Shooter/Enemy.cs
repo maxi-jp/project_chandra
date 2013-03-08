@@ -10,53 +10,70 @@ namespace IS_XNA_Shooter
     // clase padre enemigo de la que heredan todos los enemigos.
     abstract class Enemy : Animation
     {
-        /* ------------------- ATRIBUTOS ------------------- */
+        /* ------------------- ATTRIBUTES ------------------- */
         public Collider collider;
+        protected Ship ship;        // player ship
 
+        protected float timeToSpawn;    // indicates the time when the Enemy has to turn active
+
+        // Enemy stats:
         protected int life;         // vida
         protected float velocity;   // velocidad
-        protected Ship Ship;        // jugador
-        protected bool active;      // si no esta activo no se muestra
         protected int value;        // puntos que da al matarlo
 
-        /* ------------------- CONSTRUCTORES ------------------- */
+        // control variables:
+        protected bool active;      // si no esta activo no se muestra
+        protected bool colisionable;// indicates if the Enemy is colisionable or not
+        protected bool erasable;    // indicates if the Enemy is no longer necesary in the Game
+        
+        /* ------------------- CONSTRUCTORS ------------------- */
         public Enemy(Camera camera, Level level, Vector2 position, float rotation,
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
-            float frametime, Texture2D texture, float velocity, int life, int value, Ship Ship)
+            float frametime, Texture2D texture, float timeToSpawn, float velocity, int life,
+            int value, Ship ship)
             : base(camera, level, true, position, rotation, texture, frameWidth, frameHeight, numAnim,
                 frameCount, looping, frametime)
         {
             this.velocity = velocity;
+            this.timeToSpawn = timeToSpawn;
             this.life = life;
-            this.Ship = Ship;
-            active = false;
+            this.value = value;
+            this.ship = ship;
 
-            Vector2[] points = new Vector2[8];
-            points[0] = new Vector2(21, 21);
-            points[1] = new Vector2(32, 22);
-            points[2] = new Vector2(49, 28);
-            points[3] = new Vector2(57, 37);
-            points[4] = new Vector2(57, 42);
-            points[5] = new Vector2(49, 51);
-            points[6] = new Vector2(32, 57);
-            points[7] = new Vector2(21, 57);
-            /*Vector2[] points = new Vector2[4];
-            points[0] = new Vector2(20, 20);
-            points[1] = new Vector2(60, 35);
-            points[2] = new Vector2(60, 45);
-            points[3] = new Vector2(20, 60);*/
-            collider = new Collider(camera, true, position, rotation, points, frameWidth, frameHeight);
+            active = false;
+            colisionable = false;
+            erasable = false;
         }
 
-        /* ------------------- MÉTODOS ------------------- */
+        /* ------------------- METHODS ------------------- */
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
 
-            collider.Update(position, rotation);
+            if (DeadCondition())
+                erasable = true;
+
+            if (colisionable)
+                collider.Update(position, rotation);
+
             if (outOfScreen())
-                kill();
-            
+                Kill();
+
+        } // Update
+
+        public void UpdateTimeToSpawn(float deltaTime)
+        {
+            timeToSpawn -= deltaTime;
+            if (timeToSpawn <= 0)
+                SetActive();
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            base.Draw(spriteBatch);
+
+            if (SuperGame.debug && colisionable)
+                collider.Draw(spriteBatch);
         }
 
         private bool outOfScreen()
@@ -65,51 +82,67 @@ namespace IS_XNA_Shooter
                
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            base.Draw(spriteBatch);
-            if (SuperGame.debug)
-                collider.Draw(spriteBatch);
-        }
-
         public bool isDead()
         {
             return (life <= 0);
         }
 
-        public void damage(int i)
+        public virtual void Damage(int i)
         {
             life -= i;
+
+            if (life <= 0)
+                colisionable = false;
         }
 
-        public bool isActive()
+        public bool IsActive()
         {
             return active;
         }
 
-        public void setActive(bool aux)
+        public void SetActive(bool aux)
         {
             active = aux;
+            colisionable = aux;
         }
 
-        public void setActive()
+        public void SetActive()
         {
             active = true;
+            colisionable = true;
         }
 
-        public void unsetActive()
+        public void UnsetActive()
         {
             active = false;
         }
 
-        public void setShip(Ship Ship)
+        public bool IsColisionable()
         {
-            this.Ship = Ship;
+            return colisionable;
         }
 
-        public void kill()
+        public bool IsErasable()
+        {
+            return erasable;
+        }
+
+        public void SetShip(Ship ship)
+        {
+            this.ship = ship;
+        }
+
+        public void Kill()
         {
             life = -1;
+            active = false;
+            colisionable = false;
+            erasable = true;
+        }
+
+        public virtual bool DeadCondition()
+        {
+            return (!animActive);
         }
 
     } // class Enemy

@@ -53,10 +53,11 @@ namespace IS_XNA_Shooter
         private int     updateFramesCounterAux;
         private float   timeCounterSecond;
         private float   timeCounterSecondAux;
+
         // tiempo de duración de un frame en una animación:
-        public static float frameTime24 = ((float)1 / 24);
-        public static float frameTime12 = ((float)1 / 12);
-        public static float frameTime8 = ((float)1 / 8);
+        public static float frameTime24 =   ((float)1 / 24);
+        public static float frameTime12 =   ((float)1 / 12);
+        public static float frameTime8 =    ((float)1 / 8);
 
         public static float timeToResume = 2f; // t que tarda en volver después de pause
 
@@ -86,9 +87,9 @@ namespace IS_XNA_Shooter
             controlMng = new ControlMng();
             audio = new Audio(Content);
 
-            //int resX = 1280, resY = 720;
+            int resX = 1280, resY = 720;
             //int resX = 1366, resY = 768;
-            int resX = 1024, resY = 768;
+            //int resX = 1024, resY = 768;
             graphics.PreferredBackBufferWidth = resX;
             graphics.PreferredBackBufferHeight = resY;
             graphics.IsFullScreen = false;
@@ -104,8 +105,11 @@ namespace IS_XNA_Shooter
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             IsMouseVisible = true;
+
+            drawFramesCounter = drawFramesCounterAux = 0;
+            updateFramesCounter = updateFramesCounterAux = 0;
+            timeCounterSecond = timeCounterSecondAux = 1;
 
             currentState = gameState.mainMenu; // ponemos el estado de juego a modo menu
             pointer = new Vector2();
@@ -163,10 +167,20 @@ namespace IS_XNA_Shooter
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
-            // TODO: Add your update logic here
-
             // tiempo que ha pasado desde la ultima vez que ejecutamos el metodo
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            // contadores de frames:
+            timeCounterSecondAux -= deltaTime;
+            if (timeCounterSecondAux <= 0)
+            {
+                drawFramesCounter = drawFramesCounterAux;
+                drawFramesCounterAux = 0;
+                updateFramesCounter = updateFramesCounterAux;
+                updateFramesCounterAux = 0;
+                timeCounterSecondAux = timeCounterSecond;
+            }
+            updateFramesCounterAux++;
 
             if (Keyboard.GetState().IsKeyDown(Keys.F))
                 debug = !debug;
@@ -179,28 +193,39 @@ namespace IS_XNA_Shooter
             switch (currentState)
             {
                 case gameState.mainMenu:
+
+                    if (debug && Keyboard.GetState().IsKeyDown(Keys.T))
+                        NewGameATest();
+
                     menu.Update(Mouse.GetState().X, Mouse.GetState().Y);
+
                     if (Mouse.GetState().LeftButton == ButtonState.Pressed)
                         menu.Click(Mouse.GetState().X, Mouse.GetState().Y);
                     else if (Mouse.GetState().LeftButton == ButtonState.Released)
                         menu.Unclick(Mouse.GetState().X, Mouse.GetState().Y);
+
                     break;
 
                 case gameState.playing:
+
                     game.Update(gameTime);
                     totalTime += deltaTime;
 
                     if (Keyboard.GetState().IsKeyDown(Keys.P) ||
                         GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed)
                         currentState = gameState.pause;
+
                     break;
 
                 case gameState.pause:
+
                     menuIngame.Update(deltaTime, Mouse.GetState().X, Mouse.GetState().Y);
+
                     if (Mouse.GetState().LeftButton == ButtonState.Pressed)
                         menuIngame.Click(Mouse.GetState().X, Mouse.GetState().Y);
                     else if (Mouse.GetState().LeftButton == ButtonState.Released)
                         menuIngame.Unclick(Mouse.GetState().X, Mouse.GetState().Y);
+
                     break;
 
                 case gameState.gameOver:
@@ -219,7 +244,8 @@ namespace IS_XNA_Shooter
             GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
 
-            // TODO: Add your drawing code here
+            drawFramesCounterAux++;
+
             switch (currentState)
             {
                 case gameState.mainMenu:
@@ -240,18 +266,36 @@ namespace IS_XNA_Shooter
             }
 
             // fps:
+            /*if (debug)
+                 spriteBatch.DrawString(SuperGame.fontDebug,
+                     "FPS=" + (float)1 / gameTime.ElapsedGameTime.Milliseconds * 1000 + ".",
+                     new Vector2(screenWidth-100, 3), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);*/
             if (debug)
-                spriteBatch.DrawString(SuperGame.fontDebug,
-                    "FPS=" + (float)1 / gameTime.ElapsedGameTime.Milliseconds * 1000 + ".",
-                    new Vector2(screenWidth-100, 3), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            {
+                spriteBatch.DrawString(SuperGame.fontDebug, "Draw FPS=" + drawFramesCounter + ".",
+                    new Vector2(screenWidth - 150, 3), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                spriteBatch.DrawString(SuperGame.fontDebug, "Update FPS=" + updateFramesCounter + ".",
+                    new Vector2(screenWidth - 150, 15), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            }
 
             spriteBatch.End();
+
             base.Draw(gameTime);
         }
 
         /* ------------------------------------------------------------- */
         /*                            MÉTODOS                            */
         /* ------------------------------------------------------------- */
+        private void NewGameATest()
+        {
+            grManager.LoadContent(2); // cargamos los recursos del nivel 1 de GameA
+            audio.LoadContent(1);
+            game = new GameA(this, 0, GRMng.textureAim, GRMng.textureCell,
+                /*ShipVelocity*/200f, /*ShipLife*/100);
+            currentState = gameState.playing; // cambiamos el estado del juego a modo juego
+            grManager.UnloadContent(0); // descargamos los recursos del menú
+        }
+
         public void newHistory()
         {
             grManager.LoadContent(2); // cargamos los recursos del nivel 1 de GameA
@@ -319,7 +363,7 @@ namespace IS_XNA_Shooter
             audio.LoadContent(1);
             LvlMng.LoadContent(1); // cargamos los rectangulos
 
-            game = new GameScroll(this, 1, GRMng.textureAim,
+            game = new GameB(this, 1, GRMng.textureAim,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
 
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego

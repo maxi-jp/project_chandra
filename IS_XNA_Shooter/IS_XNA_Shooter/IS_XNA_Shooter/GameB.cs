@@ -100,7 +100,7 @@ namespace IS_XNA_Shooter
         private void initLevelA(int numLevel, Texture2D textureAim)
         {
             hub = new IngameHubA(GRMng.hubLeft, GRMng.hubCenter, GRMng.hubRight, mainGame.player.GetLife());
-            level = new LevelA(camera, numLevel, enemies);
+            level = new LevelA(camera, numLevel, enemies, shots);
             backGroundA = new BackgroundGameA(camera, level);
             backGroundB = null;
             camera.setLevel(level);

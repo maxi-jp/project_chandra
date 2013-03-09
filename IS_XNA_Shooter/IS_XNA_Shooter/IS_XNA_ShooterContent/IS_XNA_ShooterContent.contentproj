@@ -312,8 +312,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Graphics\Ships\finalBoss1.png">
+    <Compile Include="Graphics\Ships\Final Boss 1\finalBoss1.png">
       <Name>finalBoss1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Graphics\Ships\Final Boss 1\finalBossHeroe1.png">
+      <Name>finalBossHeroe1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

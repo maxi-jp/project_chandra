@@ -24,7 +24,8 @@ namespace IS_XNA_Shooter
             : base(mainGame, ShipVelocity, ShipLife)
         {
             hub = new IngameHubA(GRMng.hubLeft, GRMng.hubCenter, GRMng.hubRight, mainGame.player.GetLife());
-            level = new LevelA(camera, num, enemies);
+            shots = new List<Shot>();
+            level = new LevelA(camera, num, enemies, shots);
             backGround = new BackgroundGameA(camera, level);
             
             camera.setLevel(level);

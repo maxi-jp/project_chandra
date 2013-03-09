@@ -98,6 +98,14 @@ namespace IS_XNA_Shooter
         public static short[] frameCountFB1 = { 3 };  //number of columns in each row
         public static bool[] loopingFB1 = { true };   //put a loop in the animation for each row
 
+        /* ------------------- FINAL BOSS HEROE 1 ------------------- */
+        public static Texture2D textureFBH1;
+        public static short frameWidthFBH1 = 80;
+        public static short frameHeightFBH1 = 60;
+        public static short numAnimsFBH1 = 1;        //number of rows in the animation
+        public static short[] frameCountFBH1 = { 1 };  //number of columns in each row
+        public static bool[] loopingFBH1 = { true };   //put a loop in the animation for each row
+
 
         public GRMng (ContentManager content)
         {
@@ -147,6 +155,7 @@ namespace IS_XNA_Shooter
                     textureBgCol1 =     content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable1");
                     textureBgCol2 =     content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable2");
                     textureBgCol3 =     content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable3");
+                    textureFBH1 =       content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBossHeroe1");
                     break;
 
                 case 3: // GameB
@@ -158,7 +167,7 @@ namespace IS_XNA_Shooter
 
                     texturePA1 =        content.Load<Texture2D>("Graphics/Ships/playerShotAnim");
                     texturePA2 =        content.Load<Texture2D>("Graphics/Ships/sprites80x80");
-                    textureFB1 =        content.Load<Texture2D>("Graphics/Ships/finalBoss1");
+                    textureFB1 =        content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBoss1");
                     textureAim =        content.Load<Texture2D>("Graphics/aimpoint");
                     textureL1 =         content.Load<Texture2D>("Graphics/laserShotAnim");
                     textureExplosion1 = content.Load<Texture2D>("Graphics/Explosions/sprites_explosion100x100");
@@ -238,6 +247,7 @@ namespace IS_XNA_Shooter
                     textureBg03 = null;
                     //textureCol
                     textureBgCol1 = textureBgCol2 = textureBgCol3 = null;
+                    textureFBH1 = null;
                     break;
 
                 case 3:

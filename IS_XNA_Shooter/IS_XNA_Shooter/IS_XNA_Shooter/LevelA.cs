@@ -13,7 +13,7 @@ namespace IS_XNA_Shooter
         private Texture2D whitePixel;
         private Texture2D textureBg;
 
-        public LevelA(Camera camera, int num, List<Enemy> enemies)
+        public LevelA(Camera camera, int num, List<Enemy> enemies, List<Shot> shots)
             : base()
         {
             this.camera = camera;
@@ -88,7 +88,15 @@ namespace IS_XNA_Shooter
                         timeLeftEnemy.Add(1 + i);
                     }*/
 
-                    LeerArchivoXML(0,0);
+                    //LeerArchivoXML(0,0);
+
+                    Vector2 position = new Vector2(100, 100);
+                    Enemy enemy = new FinalBossHeroe1(camera, this, position, (float)Math.PI, GRMng.frameWidthFBH1, GRMng.frameHeightFBH1, 
+                                                  GRMng.numAnimsFBH1, GRMng.frameCountFBH1, GRMng.loopingFBH1, SuperGame.frameTime12, 
+                                                  GRMng.textureFBH1, 0, 100, 1, null, shots);
+                    enemies.Add(enemy);
+                    timeLeftEnemy.Add(0);
+                    
                     
                     break;
             }

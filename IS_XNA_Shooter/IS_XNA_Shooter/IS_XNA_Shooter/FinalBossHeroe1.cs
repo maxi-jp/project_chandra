@@ -175,8 +175,8 @@ namespace IS_XNA_Shooter
                 shotLastTime = 0;
 
                 Vector2 shotPos = new Vector2(pX, pY);
-                Shot shot = new Shot(camera, level, shotPos, rotation, GRMng.frameWidthL1, GRMng.frameHeightL1, 
-                    GRMng.numAnimsL1, GRMng.frameCountL1, GRMng.loopingL1, SuperGame.frameTime8, GRMng.textureL1, 
+                Shot shot = new Shot(camera, level, shotPos, rotation, GRMng.frame_width_shot_fbh1, GRMng.frame_height_shot_fbh1, 
+                    GRMng.num_anims_shot_fbh1, GRMng.frame_count_shot_fbh1, GRMng.looping_shot_fbh1, SuperGame.frameTime8, GRMng.texture_shot_fbh1, 
                     SuperGame.shootType.normal, 500, 100);
                 shots.Add(shot);
             }

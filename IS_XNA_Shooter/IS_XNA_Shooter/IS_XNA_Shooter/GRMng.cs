@@ -106,6 +106,13 @@ namespace IS_XNA_Shooter
         public static short[] frameCountFBH1 = { 1 };  //number of columns in each row
         public static bool[] loopingFBH1 = { true };   //put a loop in the animation for each row
 
+        /* ------------------- SHOT FINAL BOSS HEROE 1 ------------------- */
+        public static Texture2D texture_shot_fbh1;
+        public static short frame_width_shot_fbh1 = 20;
+        public static short frame_height_shot_fbh1 = 20;
+        public static short num_anims_shot_fbh1 = 1;        //number of rows in the animation
+        public static short[] frame_count_shot_fbh1 = { 4 };  //number of columns in each row
+        public static bool[] looping_shot_fbh1 = { true };   //put a loop in the animation for each row
 
         public GRMng (ContentManager content)
         {
@@ -156,6 +163,7 @@ namespace IS_XNA_Shooter
                     textureBgCol2 =     content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable2");
                     textureBgCol3 =     content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable3");
                     textureFBH1 =       content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBossHeroe1");
+                    texture_shot_fbh1 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/shotHeroe1");
                     break;
 
                 case 3: // GameB
@@ -247,7 +255,11 @@ namespace IS_XNA_Shooter
                     textureBg03 = null;
                     //textureCol
                     textureBgCol1 = textureBgCol2 = textureBgCol3 = null;
+                    //texture final boss heroe 1
                     textureFBH1 = null;
+                    //texture shot final boss heroe 1
+                    texture_shot_fbh1 = null;
+
                     break;
 
                 case 3:

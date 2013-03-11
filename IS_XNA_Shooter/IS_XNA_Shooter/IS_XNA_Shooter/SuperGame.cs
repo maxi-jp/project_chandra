@@ -298,6 +298,7 @@ namespace IS_XNA_Shooter
 
         public void newHistory()
         {
+            grManager.LoadContent(3); // cargamos los recursos del nivel 1 de GameA
             grManager.LoadContent(2); // cargamos los recursos del nivel 1 de GameA
             audio.LoadContent(1);
             LvlMng.LoadContent(1); // cargamos los rectangulos

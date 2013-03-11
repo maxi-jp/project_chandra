@@ -39,10 +39,37 @@ namespace IS_XNA_Shooter
                 GRMng.frameHeightEW1, GRMng.numAnimsEW1, GRMng.frameCountEW1, GRMng.loopingEW1, SuperGame.frameTime12, 
                 GRMng.textureEW1, 1, -200, 100, 1, null);
             e1.SetActive();
+
             enemies = new List<Enemy>();
             enemies.Add(e1);
+
         }
 
+        public LevelB(Camera camera, int numLevel, List<Shot> shots, List<Enemy> enemiesBot)
+            : base()
+        {
+            this.numLevel = numLevel;
+            this.enemies = new List<Enemy>();
+            this.camera = camera;
+            width = SuperGame.screenWidth*2;
+            height = SuperGame.screenHeight;
+            listRectCollider = new List<List<Rectangle>>();
+            readRectangles();
+
+            //Enemigo
+            //Enemy e1 = new EnemyWeakB(camera, this, new Vector2(SuperGame.screenWidth + 100, 
+                //50)/*new Random().Next(SuperGame.screenHeight))*/, (float)Math.PI, GRMng.frameWidthEW1, 
+                //GRMng.frameHeightEW1, GRMng.numAnimsEW1, GRMng.frameCountEW1, GRMng.loopingEW1, SuperGame.frameTime12, 
+                //GRMng.textureEW1, 1, -200, 100, 1, null);
+            //e1.SetActive();
+            Vector2 positionFinalBoss = new Vector2(SuperGame.screenWidth - GRMng.frameWidthFinalBoss1/2,
+                                                    SuperGame.screenHeight / 2);
+            Enemy finalBoss = new FinalBoss1(camera, this, positionFinalBoss, shots, enemiesBot);
+            finalBoss.SetActive();
+            enemies = new List<Enemy>();
+            enemies.Add(finalBoss);
+
+        }
 
 
         //--------------------------------

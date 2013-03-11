@@ -23,7 +23,7 @@ namespace IS_XNA_Shooter
         protected float shipVelocity;
         protected int shipLife;
 
-        protected List<Enemy> enemies;
+        protected List<Enemy> enemies, enemiesBot;
         protected List<Shot> shots;
         protected List<Explosion> explosions;
 
@@ -38,6 +38,7 @@ namespace IS_XNA_Shooter
 
             camera = new Camera();
             enemies = new List<Enemy>();
+            enemiesBot = new List<Enemy>();
             shots = new List<Shot>();
             explosions = new List<Explosion>();
 
@@ -66,6 +67,17 @@ namespace IS_XNA_Shooter
                     enemies[i].UpdateTimeToSpawn(deltaTime);
             }
 
+            for (int i = 0; i < enemiesBot.Count(); i++)   // enemies
+            {
+
+                if (enemiesBot[i].IsErasable())
+                    enemiesBot.RemoveAt(i);
+                else if (enemiesBot[i].IsActive())
+                    enemiesBot[i].Update(deltaTime);
+                else
+                    enemiesBot[i].UpdateTimeToSpawn(deltaTime);
+            }
+
             for (int i = 0; i < shots.Count(); i++)     // shots
             {
                 shots[i].Update(deltaTime);
@@ -85,7 +97,7 @@ namespace IS_XNA_Shooter
             {
                 for (int j = 0; j < shots.Count(); j++)
                 {
-                    if (enemies[i].IsColisionable() && shots[j].IsActive() && enemies[i].collider.collision(shots[j].position))
+                    if (enemies[i].collider != null && enemies[i].IsColisionable() && shots[j].IsActive() && enemies[i].collider.collision(shots[j].position))
                     //if (enemies[i].isActive() && shots[j].isActive() && enemies[i].collider.collision(shots[j].collider))
                     {                       
                         // nueva explosión:
@@ -108,6 +120,10 @@ namespace IS_XNA_Shooter
             level.Draw(spriteBatch);
 
             foreach (Enemy e in enemies)
+                if (e.IsActive())
+                    e.Draw(spriteBatch);
+
+            foreach (Enemy e in enemiesBot)
                 if (e.IsActive())
                     e.Draw(spriteBatch);
 

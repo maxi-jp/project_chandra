@@ -87,6 +87,23 @@ namespace IS_XNA_Shooter
         public static short numAnimsELBullet = 1;
         public static short[] frameCountELBullet = { 1 };
         public static bool[] loopingELBullet = { true };
+
+        /* ------------------- FINAL BOSS 1-------------------- */
+        public static Texture2D textureFinalBoss1;
+        public static short frameWidthFinalBoss1 = 240;
+        public static short frameHeightFinalBoss1 = 240;
+        public static short numAnimsFinalBoss1 = 1;
+        public static short[] frameCountFinalBoss1 = { 3 };
+        public static bool[] loopingFinalBoss1 = { true };
+
+        /* ------------------- FINAL BOSS 1-------------------- */
+        public static Texture2D textureBFB;
+        public static short frameWidthBFB = 40;
+        public static short frameHeightBFB = 25;
+        public static short numAnimsBFB = 2;
+        public static short[] frameCountBFB = { 2, 3 };
+        public static bool[] loopingBFB = { true };
+
         #endregion
 
         #region PLAYER
@@ -205,6 +222,9 @@ namespace IS_XNA_Shooter
                     textureBgCol1 = content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable1");
                     textureBgCol2 = content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable2");
                     textureBgCol3 = content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable3");
+
+                    textureFinalBoss1 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBoss1");
+                    textureBFB = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBossPhase2");
 
                     break;
             }

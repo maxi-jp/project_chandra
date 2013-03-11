@@ -18,6 +18,7 @@ namespace IS_XNA_Shooter
         public static Texture2D redpixel;       // textura pixel rojo
         public static Texture2D blackpixeltrans;// textura pixel negro transparente
 
+        #region BACKGROUNDS
         /* ------------------- FONDOS ------------------- */
         public static Texture2D textureBgGame1A; // tile fondo para el juego A
         public static Texture2D textureBgSpace; // dibujo espacial
@@ -28,38 +29,107 @@ namespace IS_XNA_Shooter
         public static Texture2D textureBgCol1;
         public static Texture2D textureBgCol2;
         public static Texture2D textureBgCol3;
+        #endregion
 
-        /* ------------------- ENEMYWEAK NARANJA ------------------- */
-        public static Texture2D textureEW1;
-        public static short frameWidthEW1 = 20;
-        public static short frameHeightEW1 = 20;
-        public static short numAnimsEW1 = 1;
-        public static short[] frameCountEW1 = { 4 };
-        public static bool[] loopingEW1 = { true };
-
+        #region ENEMIES
         /* ------------------- ENEMYWEAK VERDE ------------------- */
-        public static Texture2D textureEW2;
-        public static short frameWidthEW2 = 80;
-        public static short frameHeightEW2 = 80;
-        public static short numAnimsEW2 = 3;
-        public static short[] frameCountEW2 = { 1, 4, 6 };
-        public static bool[] loopingEW2 = { true, true, false };
+        public static Texture2D textureEW1;
+        public static short frameWidthEW1 = 80;
+        public static short frameHeightEW1 = 80;
+        public static short numAnimsEW1 = 3;
+        public static short[] frameCountEW1 = { 1, 4, 6 };
+        public static bool[] loopingEW1 = { true, true, false };
 
-        /* ------------------- ShipA1 ------------------- */
+        /* ------------------- ENEMYBEAM MORADO ------------------- */
+        public static Texture2D textureEB1;
+        public static short frameWidthEB1 = 80;
+        public static short frameHeightEB1 = 80;
+        public static short numAnimsEB1 = 3;
+        public static short[] frameCountEB1 = { 1, 4, 6 };
+        public static bool[] loopingEB1 = { true, true, false };
+
+        /* ------------------- ENEMYSCARED ------------------- */
+        public static Texture2D textureES;
+        public static short frameWidthES = 80;
+        public static short frameHeightES = 80;
+        public static short numAnimsES = 6;
+        public static short[] frameCountES = { 1, 1, 2, 3, 3, 5 };
+        public static bool[] loopingES = { true, true, true, true, true, false };
+        /* ------------------- BULLET SCARED -------------------- */
+        public static Texture2D textureESBullet;
+        public static short frameWidthESBullet = 10;
+        public static short frameHeightESBullet = 3;
+        public static short numAnimsESBullet = 1;
+        public static short[] frameCountESBullet = { 1 };
+        public static bool[] loopingESBullet = { true };
+
+        /* ------------------- ENEMYMINESHOT ------------------- */
+        public static Texture2D textureEMS;
+        public static short frameWidthEMS = 80;
+        public static short frameHeightEMS = 80;
+        public static short numAnimsEMS = 3;
+        public static short[] frameCountEMS = { 1, 4, 5 };
+        public static bool[] loopingEMS = { true, false, false };
+        /* ------------------- BULLET MINESHOT-------------------- */
+        public static Texture2D textureEMSBullet;
+        public static short frameWidthEMSBullet = 4;
+        public static short frameHeightEMSBullet = 4;
+        public static short numAnimsEMSBullet = 1;
+        public static short[] frameCountEMSBullet = { 1 };
+        public static bool[] loopingEMSBullet = { true };
+
+
+        /* ------------------- ENEMY LASER-------------------- */
+        /* ------------------- BULLET LASER-------------------- */
+        public static Texture2D textureELBullet;
+        public static short frameWidthELBullet = 600;
+        public static short frameHeightELBullet = 2;
+        public static short numAnimsELBullet = 1;
+        public static short[] frameCountELBullet = { 1 };
+        public static bool[] loopingELBullet = { true };
+
+        /* ------------------- FINAL BOSS 1-------------------- */
+        public static Texture2D textureFinalBoss1;
+        public static short frameWidthFinalBoss1 = 240;
+        public static short frameHeightFinalBoss1 = 240;
+        public static short numAnimsFinalBoss1 = 1;
+        public static short[] frameCountFinalBoss1 = { 3 };
+        public static bool[] loopingFinalBoss1 = { true };
+
+        /* ------------------- FINAL BOSS 1-------------------- */
+        public static Texture2D textureBFB;
+        public static short frameWidthBFB = 40;
+        public static short frameHeightBFB = 25;
+        public static short numAnimsBFB = 2;
+        public static short[] frameCountBFB = { 2, 3 };
+        public static bool[] loopingBFB = { true };
+
+        /* ------------------- FINAL BOSS HEROE-------------------- */
+        public static Texture2D textureFinalBossHeroe;
+        public static short frameWidthFinalBossHeroe = 80;
+        public static short frameHeightFinalBossHeroe = 60;
+        public static short numAnimsFinalBossHeroe = 1;
+        public static short[] frameCountFinalBossHeroe = { 1 };
+        public static bool[] loopingFinalBossHeroe = {true};
+
+        /* ------------------- BULLET LASER-------------------- */
+        public static Texture2D textureLaserHeroe;
+        public static short frameWidthLaserHeroe = 1024;
+        public static short frameHeightLaserHeroe = 32;
+        public static short numAnimsLaserHeroe = 1;
+        public static short[] frameCountLaserHeroe = { 4 };
+        public static bool[] loopingLaserHeroe = { true };
+
+        #endregion
+
+        #region PLAYER
+        /* ------------------- PLAYERA1 ------------------- */
         public static Texture2D texturePA1;
-        public static short frameWidthPA1 = 40;
-        public static short frameHeightPA1 = 40;
-        public static short numAnimsPA1 = 2;
-        public static short[] frameCountPA1 = { 1, 5 };
-        public static bool[] loopingPA1 = { true, false };
-
-        /* ------------------- ShipA2 ------------------- */
-        public static Texture2D texturePA2;
-        public static short frameWidthPA2 = 80;
-        public static short frameHeightPA2 = 80;
-        public static short numAnimsPA2 = 3;
-        public static short[] frameCountPA2 = { 1, 4, 5 };
-        public static bool[] loopingPA2 = { true, true, false };
+        public static short frameWidthPA1 = 80;
+        public static short frameHeightPA1 = 80;
+        public static short numAnimsPA1 = 3;
+        public static short[] frameCountPA1 = { 1, 4, 5 };
+        public static bool[] loopingPA1 = { true, true, false };
 
         /* ------------------- LASER 1 ------------------- */
         public static Texture2D textureL1;
@@ -68,18 +138,24 @@ namespace IS_XNA_Shooter
         public static short numAnimsL1 = 1;
         public static short[] frameCountL1 = { 3 };
         public static bool[] loopingL1 = { true };
+        #endregion
 
+        #region OTHERS
         /* ------------------- EXPLOSION VERDE ------------------- */
         public static Texture2D textureExplosion1;
         public static short frameWidthEx1 = 100;
         public static short frameHeightEx1 = 100;
         public static short frameCountEx1 = 8;
+        #endregion
 
+        #region HUBS
         /* ------------------- HUB A ------------------- */
         public static Texture2D hubLeft;
         public static Texture2D hubCenter;
         public static Texture2D hubRight;
+        #endregion
 
+        #region MENUS
         /* ------------------- MENÚ ------------------- */
         public static Texture2D menuMain;
         public static Texture2D menuHistory;
@@ -89,43 +165,20 @@ namespace IS_XNA_Shooter
         /* ------------------- MENÚ INGAME ------------------- */
         public static Texture2D menuIngame;
         public static Texture2D getready321;    // textura cuenta atrás menú
+        #endregion
 
-        /* ------------------- FINAL BOSS 1 ------------------- */
-        public static Texture2D textureFB1;
-        public static short frameWidthFB1 = 240;
-        public static short frameHeightFB1 = 240;
-        public static short numAnimsFB1 = 1;        //number of rows in the animation
-        public static short[] frameCountFB1 = { 3 };  //number of columns in each row
-        public static bool[] loopingFB1 = { true };   //put a loop in the animation for each row
-
-        /* ------------------- FINAL BOSS HEROE 1 ------------------- */
-        public static Texture2D textureFBH1;
-        public static short frameWidthFBH1 = 80;
-        public static short frameHeightFBH1 = 60;
-        public static short numAnimsFBH1 = 1;        //number of rows in the animation
-        public static short[] frameCountFBH1 = { 1 };  //number of columns in each row
-        public static bool[] loopingFBH1 = { true };   //put a loop in the animation for each row
-
-        /* ------------------- SHOT FINAL BOSS HEROE 1 ------------------- */
-        public static Texture2D texture_shot_fbh1;
-        public static short frame_width_shot_fbh1 = 20;
-        public static short frame_height_shot_fbh1 = 20;
-        public static short num_anims_shot_fbh1 = 1;        //number of rows in the animation
-        public static short[] frame_count_shot_fbh1 = { 4 };  //number of columns in each row
-        public static bool[] looping_shot_fbh1 = { true };   //put a loop in the animation for each row
-
-        public GRMng (ContentManager content)
+        public GRMng(ContentManager content)
         {
             this.content = content;
         }
 
-        public void LoadContent (int i)
+        public void LoadContent(int i)
         {
             // i:
             // 0=Menú principal
             // 1=Menú ingame
             // 2=GameA nivel 1
-            // 3=GameB
+            // 3=GameB nivel 1
 
             switch (i)
             {
@@ -140,60 +193,69 @@ namespace IS_XNA_Shooter
                 case 2: // GameA nivel 1
                     LoadIngameMenu();
 
-                    hubCenter =         content.Load<Texture2D>("Graphics/Hub/center_720");
-                    hubLeft =           content.Load<Texture2D>("Graphics/Hub/left_720");
-                    hubRight =          content.Load<Texture2D>("Graphics/Hub/right_720");
+                    hubCenter = content.Load<Texture2D>("Graphics/Hub/center_720");
+                    hubLeft = content.Load<Texture2D>("Graphics/Hub/left_720");
+                    hubRight = content.Load<Texture2D>("Graphics/Hub/right_720");
 
-                    texturePA1 =        content.Load<Texture2D>("Graphics/Ships/playerShotAnim");
-                    texturePA2 =        content.Load<Texture2D>("Graphics/Ships/sprites80x80");
-                    textureAim =        content.Load<Texture2D>("Graphics/aimpoint");
-                    textureL1 =         content.Load<Texture2D>("Graphics/laserShotAnim");
+                    texturePA1 = content.Load<Texture2D>("Graphics/Ships/sprites80x80");
+                    textureAim = content.Load<Texture2D>("Graphics/aimpoint");
+                    textureL1 = content.Load<Texture2D>("Graphics/laserShotAnim");
+                    
                     textureExplosion1 = content.Load<Texture2D>("Graphics/Explosions/sprites_explosion100x100");
-                    textureEW1 =        content.Load<Texture2D>("Graphics/Ships/EnemyWeakAnim");
-                    textureEW2 =        content.Load<Texture2D>("Graphics/Ships/sprites_enemy01_80x80");
-                    textureCell =       content.Load<Texture2D>("Graphics/celdasuelo");
-                    textureRed =        content.Load<Texture2D>("Graphics/Rojazo");
-                    textureBgGame1A =   content.Load<Texture2D>("Graphics/Backgrounds/backgroundTile1");
-                    textureBgSpace =    content.Load<Texture2D>("Graphics/Backgrounds/backgroundSpace");
-                    textureBg00 =       content.Load<Texture2D>("Graphics/Backgrounds/bg00");
-                    textureBg01 =       content.Load<Texture2D>("Graphics/Backgrounds/bg01");
-                    textureBg02 =       content.Load<Texture2D>("Graphics/Backgrounds/bg02");
-                    textureBg03 =       content.Load<Texture2D>("Graphics/Backgrounds/bg03");
-                    textureBgCol1 =     content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable1");
-                    textureBgCol2 =     content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable2");
-                    textureBgCol3 =     content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable3");
-                    textureFBH1 =       content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBossHeroe1");
-                    texture_shot_fbh1 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/shotHeroe1");
+                    
+                    textureEW1 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy01_80x80");
+                    textureEB1 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy02_80x80");
+                    textureES = content.Load<Texture2D>("Graphics/Ships/EnemyScared");
+                    textureESBullet = content.Load<Texture2D>("Graphics/scaredBullet");
+                    textureEMS =  content.Load<Texture2D>("Graphics/Ships/mineAnimation");
+                    textureEMSBullet = content.Load<Texture2D>("Graphics/mineShot");
+                    textureELBullet = content.Load<Texture2D>("Graphics/yellowpixel");
+                    
+                    textureCell = content.Load<Texture2D>("Graphics/celdasuelo");
+                    textureBg00 = content.Load<Texture2D>("Graphics/Backgrounds/bg00");
+                    textureBg01 = content.Load<Texture2D>("Graphics/Backgrounds/bg01");
+                    textureBg02 = content.Load<Texture2D>("Graphics/Backgrounds/bg02");
+                    textureBg03 = content.Load<Texture2D>("Graphics/Backgrounds/bg03");
+
                     break;
 
-                case 3: // GameB
+                case 3: // GameB nivel 1
                     LoadIngameMenu();
 
-                    hubCenter =         content.Load<Texture2D>("Graphics/Hub/center_720");
-                    hubLeft =           content.Load<Texture2D>("Graphics/Hub/left_720");
-                    hubRight =          content.Load<Texture2D>("Graphics/Hub/right_720");
-
-                    texturePA1 =        content.Load<Texture2D>("Graphics/Ships/playerShotAnim");
-                    texturePA2 =        content.Load<Texture2D>("Graphics/Ships/sprites80x80");
-                    textureFB1 =        content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBoss1");
-                    textureAim =        content.Load<Texture2D>("Graphics/aimpoint");
-                    textureL1 =         content.Load<Texture2D>("Graphics/laserShotAnim");
+                    texturePA1 = content.Load<Texture2D>("Graphics/Ships/sprites80x80");
+                    textureL1 = content.Load<Texture2D>("Graphics/laserShotAnim");
                     textureExplosion1 = content.Load<Texture2D>("Graphics/Explosions/sprites_explosion100x100");
-                    textureBgSpace =    content.Load<Texture2D>("Graphics/Backgrounds/backgroundSpace");
-                    textureBg00 =       content.Load<Texture2D>("Graphics/Backgrounds/bg00");
-                    textureBg01 =       content.Load<Texture2D>("Graphics/Backgrounds/bg01");
-                    textureBg02 =       content.Load<Texture2D>("Graphics/Backgrounds/bg02");
-                    textureBg03 =       content.Load<Texture2D>("Graphics/Backgrounds/bg03");
-                    textureBgCol1 =     content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable1");
-                    textureBgCol2 =     content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable2");
-                    textureBgCol3 =     content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable3");
+                    
+                    textureEW1 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy01_80x80");
+                    
+                    textureRed = content.Load<Texture2D>("Graphics/Rojazo");
+                    
+                    textureBgGame1A = content.Load<Texture2D>("Graphics/Backgrounds/backgroundTile1");
+                    textureBg00 = content.Load<Texture2D>("Graphics/Backgrounds/bg00");
+                    textureBg01 = content.Load<Texture2D>("Graphics/Backgrounds/bg01");
+                    textureBg02 = content.Load<Texture2D>("Graphics/Backgrounds/bg02");
+                    textureBg03 = content.Load<Texture2D>("Graphics/Backgrounds/bg03");
+                    textureBgCol1 = content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable1");
+                    textureBgCol2 = content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable2");
+                    textureBgCol3 = content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable3");
+
+
+                    textureLaserHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBossLaser");
+                    textureFinalBoss1 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBoss1");
+                    textureBFB = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBossPhase2");
+                    textureFinalBossHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBossHeroe1");
+                 
+                    
+
+                                      
+                   
 
                     break;
             }
 
-            whitepixel =        content.Load<Texture2D>("Graphics/whitepixel");
-            redpixel =          content.Load<Texture2D>("Graphics/redpixel");
-            blackpixeltrans =   content.Load<Texture2D>("Graphics/blackpixeltransparent");
+            whitepixel = content.Load<Texture2D>("Graphics/whitepixel");
+            redpixel = content.Load<Texture2D>("Graphics/redpixel");
+            blackpixeltrans = content.Load<Texture2D>("Graphics/blackpixeltransparent");
 
         } // LoadContent
 
@@ -203,7 +265,7 @@ namespace IS_XNA_Shooter
             // 0=Menú principal
             // 1=Menú ingame
             // 2=GameA nivel 1
-            // 3=GameB
+            // 3=GameB nivel 1
 
             switch (i)
             {
@@ -216,64 +278,49 @@ namespace IS_XNA_Shooter
                     break;
 
                 case 2: // GameA nivel 1
-                    //hubCenter.Dispose();
+
                     hubCenter = null;
-                    //hubLeft.Dispose();
                     hubLeft = null;
-                    //hubRight.Dispose();
                     hubRight = null;
 
-                    //texturePA1.Dispose();
                     texturePA1 = null;
-                    //texturePA2.Dispose();
-                    texturePA2 = null;
-                    //textureAim.Dispose();
                     textureAim = null;
-                    //textureL1.Dispose();
                     textureL1 = null;
-                    //textureExplosion1.Dispose();
                     textureExplosion1 = null;
-                    //textureEW1.Dispose();
+
                     textureEW1 = null;
-                    //textureEW2.Dispose();
-                    textureEW2 = null;
-                    //textureCell.Dispose();
+                    textureEB1 = null;
+                    textureES = null;
+                    textureESBullet = null;
+                    textureEMS = null;
+                    textureEMSBullet = null;
+                    textureELBullet = null;
+
                     textureCell = null;
-                    //textureRed.Dispose();
                     textureRed = null;
-                    //textureBgGame1A.Dispose();
-                    textureBgGame1A = null;
-                    //textureBgSpace.Dispose();
-                    textureBgSpace = null;
-                    //textureBg00.Dispose();
+
                     textureBg00 = null;
-                    //textureBg01.Dispose();
                     textureBg01 = null;
-                    //textureBg02.Dispose();
                     textureBg02 = null;
-                    //textureBg03.Dispose();
                     textureBg03 = null;
-                    //textureCol
-                    textureBgCol1 = textureBgCol2 = textureBgCol3 = null;
-                    //texture final boss heroe 1
-                    textureFBH1 = null;
-                    //texture shot final boss heroe 1
-                    texture_shot_fbh1 = null;
 
                     break;
 
-                case 3:
+                case 3: // GameB nivel 1
+
                     hubCenter = null;
                     hubLeft = null;
                     hubRight = null;
 
                     texturePA1 = null;
-                    texturePA2 = null;
-                    textureFB1 = null;
-                    textureAim = null;
                     textureL1 = null;
+
                     textureExplosion1 = null;
-                    textureBgSpace = null;
+
+                    textureEW1 = null;
+
+                    textureRed = null;
+                    textureBgGame1A = null;
                     textureBg00 = null;
                     textureBg01 = null;
                     textureBg02 = null;
@@ -281,34 +328,31 @@ namespace IS_XNA_Shooter
                     textureBgCol1 = null;
                     textureBgCol2 = null;
                     textureBgCol3 = null;
+
                     break;
             }
         } // UnloadContent
 
         private void LoadMenu()
         {
-            menuMain =      content.Load<Texture2D>("Graphics/Menu/main");
-            menuHistory =   content.Load<Texture2D>("Graphics/Menu/history");
-            menuArcade =    content.Load<Texture2D>("Graphics/Menu/arcade");
-            menuConfig =    content.Load<Texture2D>("Graphics/Menu/configuration");
+            menuMain = content.Load<Texture2D>("Graphics/Menu/main");
+            menuHistory = content.Load<Texture2D>("Graphics/Menu/history");
+            menuArcade = content.Load<Texture2D>("Graphics/Menu/arcade");
+            menuConfig = content.Load<Texture2D>("Graphics/Menu/configuration");
         }
 
         private void UnloadMenu()
         {
-            //menuMain.Dispose();
             menuMain = null;
-            //menuHistory.Dispose();
             menuHistory = null;
-            //menuArcade.Dispose();
             menuArcade = null;
-            //menuConfig.Dispose();
             menuConfig = null;
         }
 
         private void LoadIngameMenu()
         {
-            menuIngame =    content.Load<Texture2D>("Graphics/Menu/ingame");
-            getready321 =   content.Load<Texture2D>("Graphics/Menu/getready321");
+            menuIngame = content.Load<Texture2D>("Graphics/Menu/ingame");
+            getready321 = content.Load<Texture2D>("Graphics/Menu/getready321");
         }
 
         private void UnloadIngameMenu()
@@ -316,6 +360,12 @@ namespace IS_XNA_Shooter
             //menuIngame.Dispose();
             menuIngame = null;
             getready321 = null;
+        }
+
+        public void UnloadContentGame()
+        {
+            UnloadContent(2);
+            UnloadContent(3);
         }
 
     } // class GRMng

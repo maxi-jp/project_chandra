@@ -24,6 +24,7 @@ namespace IS_XNA_Shooter
         /// Tell us if the enemy have to go down or up.
         /// </summary>
         private Boolean down;
+        private Boolean singletonEnemyHeroe;
         /// <summary>
         /// Time between shots
         /// </summary>
@@ -44,6 +45,12 @@ namespace IS_XNA_Shooter
         /// 
         /// </summary>
         private List<Shot> shots;
+        private List<Enemy> enemies;
+        private float seconds;
+        private bool movingToCenter;
+        private bool movingToBack;
+
+        Shot shot;
 
         // ---------------------------
         // -----     BUILDER     -----
@@ -66,16 +73,19 @@ namespace IS_XNA_Shooter
         /// <param name="velocity"></param>
         /// <param name="life"></param>
         /// <param name="value"></param>
-        /// <param name="Ship"></param>
-        public FinalBoss1(Camera camera, Level level, Vector2 position, float rotation,
-            short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
-            float frametime, Texture2D texture, float velocity, int life, int value, Ship Ship, List<Shot> shots)
-            : base (camera, level, position, rotation, frameWidth, frameHeight, numAnim, frameCount,
-                looping, frametime, texture, velocity, life, value, Ship)
+        /// <param name="ship"></param>
+        public FinalBoss1(Camera camera, Level level,Vector2 position, List<Shot> shots, List <Enemy> enemies)
+            : base (camera, level, position, (float)Math.PI, GRMng.frameWidthFinalBoss1, GRMng.frameHeightFinalBoss1, 
+                GRMng.numAnimsFinalBoss1, GRMng.frameCountFinalBoss1, GRMng.loopingFinalBoss1, SuperGame.frameTime12,
+                GRMng.textureFinalBoss1, 0, 40, 100000, 1, null)
         {
-            phase = 1;
+            phase = 3;
             down = true;
-
+            movingToCenter = true;
+            movingToBack = true;
+            singletonEnemyHeroe = true;
+            seconds = 10f;
+            
             //Front shot
             timeToShotFront = 0.5f;
             shotFrontPower = 200;
@@ -88,6 +98,16 @@ namespace IS_XNA_Shooter
 
             //Shots' list
             this.shots = shots;
+
+            this.enemies = enemies;
+
+
+
+            //LASER Phase 3
+            shot = new Shot(camera, level, position, rotation, GRMng.frameWidthLaserHeroe, GRMng.frameHeightLaserHeroe,
+    GRMng.numAnimsELBullet, GRMng.frameCountELBullet, GRMng.loopingELBullet, SuperGame.frameTime8,
+    GRMng.textureLaserHeroe, SuperGame.shootType.normal, 1, 1);
+            
         }
 
         // ------------------------------------
@@ -99,6 +119,8 @@ namespace IS_XNA_Shooter
             base.Update(deltaTime);
 
             if (phase == 1) phase1(deltaTime);
+            if (phase == 2) phase2(deltaTime);
+            if (phase == 3) phase3(deltaTime);
         }
 
         // -------------------------------------
@@ -124,14 +146,169 @@ namespace IS_XNA_Shooter
             timeToShotWingsAux -= deltaTime;
         }
 
+        private void phase2(float deltaTime)
+        {
+            if (movingToCenter){
+
+                if (position.Y < SuperGame.screenHeight / 2) { position.Y += deltaTime * velocity *3; }
+                else if (position.Y > SuperGame.screenHeight / 2) { position.Y -= deltaTime * velocity * 3; }
+
+                if (position.X < (SuperGame.screenWidth * 4 / 6)) { position.X += deltaTime * velocity * 3; }
+                else if (position.X > (SuperGame.screenWidth * 4 / 6)) { position.X -= deltaTime * velocity * 3; }
+
+               if (position.X == this.frameWidth / 2 && position.Y == this.frameHeight / 2) { movingToCenter = false; }
+            }
+
+            //Front shot
+            if (timeToShotFrontAux <= 0)
+            {
+                ShotFront();
+                timeToShotFrontAux = 0.35f;
+            }
+            timeToShotFrontAux -= deltaTime;
+
+            //Wings shot
+            if (timeToShotWingsAux <= 0)
+            {
+                ShotWings();
+                timeToShotWingsAux = 0.35f;
+            }
+            timeToShotWingsAux -= deltaTime;
+
+            seconds +=  deltaTime;
+            if (seconds > 5)
+            {
+                Vector2 positionEnemy = new Vector2(position.X , position.Y  + this.frameHeight / 2); ///(470, 100);
+                Enemy e = new BotFinalBoss(camera, level, positionEnemy, (float)Math.PI, GRMng.frameWidthBFB, GRMng.frameHeightBFB,
+                    GRMng.numAnimsBFB, GRMng.frameCountBFB, GRMng.loopingBFB, SuperGame.frameTime12, GRMng.textureBFB, 150, 100, 1, ship, shots,true);
+                e.SetActive();
+                enemies.Add(e);
+
+                Vector2 positionEnemy1 = new Vector2(position.X, position.Y + this.frameHeight / 2); //(470, 300);
+                Enemy e1 = new BotFinalBoss(camera, level, positionEnemy1, (float)Math.PI, GRMng.frameWidthBFB, GRMng.frameHeightBFB,
+                    GRMng.numAnimsBFB, GRMng.frameCountBFB, GRMng.loopingBFB, SuperGame.frameTime12, GRMng.textureBFB, 150, 100, 1, ship, shots,false);
+                e1.SetActive();
+                enemies.Add(e1);
+
+                Vector2 positionEnemy2 = new Vector2(position.X , position.Y  - this.frameHeight / 2);//(470, 500);
+                Enemy e2 = new BotFinalBoss(camera, level, positionEnemy2, (float)Math.PI, GRMng.frameWidthBFB, GRMng.frameHeightBFB,
+                    GRMng.numAnimsBFB, GRMng.frameCountBFB, GRMng.loopingBFB, SuperGame.frameTime12, GRMng.textureBFB, 150, 100, 1, ship, shots,true);
+                e2.SetActive();
+                enemies.Add(e2);
+
+                Vector2 positionEnemy3 = new Vector2(position.X , position.Y  - this.frameHeight / 2);
+                Enemy e3 = new BotFinalBoss(camera, level, positionEnemy3, (float)Math.PI, GRMng.frameWidthBFB, GRMng.frameHeightBFB,
+                    GRMng.numAnimsBFB, GRMng.frameCountBFB, GRMng.loopingBFB, SuperGame.frameTime12, GRMng.textureBFB, 150, 100, 1, ship, shots,false);
+                e3.SetActive();
+                enemies.Add(e3);
+
+                seconds = 0;
+            }
+        }
+
+
+        private void phase3(float deltaTime)
+        {
+
+            
+            if (movingToBack)
+            {
+
+               
+
+                if (position.X + this.frameWidth/2 < SuperGame.screenWidth) { position.X += deltaTime * velocity * 3; }
+                else if (position.X + this.frameWidth/2 > SuperGame.screenWidth) { position.X -= deltaTime * velocity * 3; }
+
+                if ((position.X + this.frameWidth/2 == SuperGame.screenWidth)) { movingToBack = false; }
+            }
+
+            if (position.Y < ship.position.Y) { position.Y += deltaTime * velocity; }
+            else if (position.Y > ship.position.Y) { position.Y -= deltaTime * velocity; }
+
+            //Front shot
+            if (timeToShotFrontAux <= 0)
+            {
+                ShotFront();
+                timeToShotFrontAux = 0.35f;
+            }
+            timeToShotFrontAux -= deltaTime;
+
+            //Wings shot
+            if (timeToShotWingsAux <= 0)
+            {
+                ShotWings();
+                timeToShotWingsAux = 0.35f;
+            }
+            timeToShotWingsAux -= deltaTime;
+
+            seconds += deltaTime;
+            if (seconds > 5)
+            {
+                Vector2 positionEnemy = new Vector2(position.X, position.Y + this.frameHeight / 2); ///(470, 100);
+                Enemy e = new BotFinalBoss(camera, level, positionEnemy, (float)Math.PI, GRMng.frameWidthBFB, GRMng.frameHeightBFB,
+                    GRMng.numAnimsBFB, GRMng.frameCountBFB, GRMng.loopingBFB, SuperGame.frameTime12, GRMng.textureBFB, 150, 100, 1, ship, shots, true);
+                e.SetActive();
+                enemies.Add(e);
+
+                Vector2 positionEnemy1 = new Vector2(position.X, position.Y + this.frameHeight / 2); //(470, 300);
+                Enemy e1 = new BotFinalBoss(camera, level, positionEnemy1, (float)Math.PI, GRMng.frameWidthBFB, GRMng.frameHeightBFB,
+                    GRMng.numAnimsBFB, GRMng.frameCountBFB, GRMng.loopingBFB, SuperGame.frameTime12, GRMng.textureBFB, 150, 100, 1, ship, shots, false);
+                e1.SetActive();
+                enemies.Add(e1);
+
+                Vector2 positionEnemy2 = new Vector2(position.X, position.Y - this.frameHeight / 2);//(470, 500);
+                Enemy e2 = new BotFinalBoss(camera, level, positionEnemy2, (float)Math.PI, GRMng.frameWidthBFB, GRMng.frameHeightBFB,
+                    GRMng.numAnimsBFB, GRMng.frameCountBFB, GRMng.loopingBFB, SuperGame.frameTime12, GRMng.textureBFB, 150, 100, 1, ship, shots, true);
+                e2.SetActive();
+                enemies.Add(e2);
+
+                Vector2 positionEnemy3 = new Vector2(position.X, position.Y - this.frameHeight / 2);
+                Enemy e3 = new BotFinalBoss(camera, level, positionEnemy3, (float)Math.PI, GRMng.frameWidthBFB, GRMng.frameHeightBFB,
+                    GRMng.numAnimsBFB, GRMng.frameCountBFB, GRMng.loopingBFB, SuperGame.frameTime12, GRMng.textureBFB, 150, 100, 1, ship, shots, false);
+                e3.SetActive();
+                enemies.Add(e3);
+
+                seconds = 0;
+            }
+
+            if (singletonEnemyHeroe)
+            {
+                Vector2 positionEnemy4 = new Vector2(position.X, position.Y + this.frameHeight / 2);
+                Enemy e4 = new EnemyFinalHeroe2(camera, level, positionEnemy4, (float)Math.PI, GRMng.frameWidthFinalBossHeroe, GRMng.frameHeightFinalBossHeroe,
+                    GRMng.numAnimsFinalBossHeroe, GRMng.frameCountFinalBossHeroe, GRMng.loopingFinalBossHeroe, SuperGame.frameTime12, GRMng.textureFinalBossHeroe, 0, 150, 100, 1, ship, true);
+                e4.SetActive();
+                enemies.Add(e4);
+
+                Vector2 positionEnemy5 = new Vector2(position.X, position.Y + this.frameHeight / 2);
+                Enemy e5 = new EnemyFinalHeroe2(camera, level, positionEnemy5, (float)Math.PI, GRMng.frameWidthFinalBossHeroe, GRMng.frameHeightFinalBossHeroe,
+                    GRMng.numAnimsFinalBossHeroe, GRMng.frameCountFinalBossHeroe, GRMng.loopingFinalBossHeroe, SuperGame.frameTime12, GRMng.textureFinalBossHeroe, 0, 150, 100, 1, ship, false);
+                e5.SetActive();
+                enemies.Add(e5);
+
+                Vector2 positionEnemy6 = new Vector2(position.X, position.Y - this.frameHeight / 2);
+                Enemy e6 = new EnemyFinalHeroe2(camera, level, positionEnemy6, (float)Math.PI, GRMng.frameWidthFinalBossHeroe, GRMng.frameHeightFinalBossHeroe,
+                    GRMng.numAnimsFinalBossHeroe, GRMng.frameCountFinalBossHeroe, GRMng.loopingFinalBossHeroe, SuperGame.frameTime12, GRMng.textureFinalBossHeroe, 0, 150, 100, 1, ship, false);
+                e6.SetActive();
+                enemies.Add(e6);
+
+                Vector2 positionEnemy7 = new Vector2(position.X, position.Y - this.frameHeight / 2);
+                Enemy e7 = new EnemyFinalHeroe2(camera, level, positionEnemy7, (float)Math.PI, GRMng.frameWidthFinalBossHeroe, GRMng.frameHeightFinalBossHeroe,
+                    GRMng.numAnimsFinalBossHeroe, GRMng.frameCountFinalBossHeroe, GRMng.loopingFinalBossHeroe, SuperGame.frameTime12, GRMng.textureFinalBossHeroe, 0, 150, 100, 1, ship, true);
+                e7.SetActive();
+                enemies.Add(e7);
+
+                singletonEnemyHeroe = false;
+
+            }
+        }
         /// <summary>
         /// change the direction of the enemy when it achieve the limit of the screen
         /// </summary>
         private void changeDirection()
         {
-            if (position.Y + collider.Height / 2 >= SuperGame.screenHeight)
+            if (position.Y + this.frameHeight / 2 >= SuperGame.screenHeight)
                 down = false;
-            else if (position.Y - collider.Height / 2 <= 0)
+            else if (position.Y - this.frameHeight / 2 <= 0)
                 down = true;
         }
 
@@ -150,31 +327,53 @@ namespace IS_XNA_Shooter
         private void ShotWings()
         {
             float angle;
-            if (Ship.position.X != position.X)
+            float angleUp;
+            float angleDown;
+            if (ship.position.X != position.X)
             {
-                double dist = (position.Y - Ship.position.Y) / (Ship.position.X - position.X);
-                angle = rotation - (float)Math.Atan(dist);
+                double dist = (position.Y - ship.position.Y) / (ship.position.X - position.X);
+               angle = rotation - (float)Math.Atan(dist);
+               if (ship.position.X - position.X > 0) { angle += (float)Math.PI; angle = angle % (float)(Math.PI * 2); }
             }
             else
             {
-                if (Ship.position.Y > position.Y)
+                if (ship.position.Y > position.Y)
+                    
                     angle = (float)Math.PI / 2;
-                else if (Ship.position.Y < position.Y)
+                    
+                else if (ship.position.Y < position.Y)
                     angle = (float)-Math.PI / 2;
                 else 
                     angle = 0f;
             }
 
+            angleUp = angle;
+            angleDown = angle;
+            // up
+            if(angle > Math.PI+Math.PI/5)
+            {
+                angleDown =(float)(Math.PI + Math.PI / 5 );
+                angleUp = angle;
+                    }
+             else if (angle < Math.PI - Math.PI / 5)
+                {
+                    angleUp = (float) (Math.PI - Math.PI /5);
+                    angleDown = angle; 
+                }
+           
+
                 Audio.PlayEffect("laserShot01");
             //position.X - 10, position.Y + collider.Height / 2
-            Shot nuevo = new Shot(camera, level, new Vector2(position.X , position.Y  + collider.Height / 2), angle, GRMng.frameWidthL1, GRMng.frameHeightL1,
+            Shot nuevo = new Shot(camera, level, new Vector2(position.X , position.Y  + this.frameHeight / 2), angleDown, GRMng.frameWidthL1, GRMng.frameHeightL1,
                 GRMng.numAnimsL1, GRMng.frameCountL1, GRMng.loopingL1, SuperGame.frameTime8, GRMng.textureL1, SuperGame.shootType.normal, shotWingsVelocity, shotWingsPower);
             shots.Add(nuevo);
-
+           
+           
             //position.X - 10, position.Y - collider.Height / 2
-            nuevo = new Shot(camera, level, new Vector2(position.X , position.Y - collider.Height / 2), angle, GRMng.frameWidthL1, GRMng.frameHeightL1,
+            nuevo = new Shot(camera, level, new Vector2(position.X , position.Y - this.frameHeight / 2), angleUp, GRMng.frameWidthL1, GRMng.frameHeightL1,
                 GRMng.numAnimsL1, GRMng.frameCountL1, GRMng.loopingL1, SuperGame.frameTime8, GRMng.textureL1, SuperGame.shootType.normal, shotWingsVelocity, shotWingsPower);
             shots.Add(nuevo);
+            
 
             timeToShotWingsAux = timeToShotWings;
         }

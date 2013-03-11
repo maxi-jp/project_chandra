@@ -8,28 +8,21 @@ using System.Xml;
 
 namespace IS_XNA_Shooter
 {
-    /// <summary>
-    /// This class represents a scroll level
-    /// </summary>
     class LevelB : Level
     {
-        /// <summary>
-        /// Number of level
-        /// </summary>
-        private int numLevel;
-        /// <summary>
-        /// A list of collider rectangles from the level
-        /// </summary>
+        //-------------------------
+        //----    Atributos    ----
+        //-------------------------
+        private int numLevel;   //número de nivel
+        //private Camera camera;  //cámara
         private List<List<Rectangle>> listRectCollider;
 
-        //-----------------------------------------------------------------------------------------------------------------
 
-        /// <summary>
-        /// Builds the level B
-        /// </summary>
-        /// <param name="camera"> Camera </param>
-        /// <param name="numLevel"> Number of level </param>
-        public LevelB(Camera camera, int numLevel, List<Shot> shots)
+
+        //---------------------------
+        //----    Constructor    ----
+        //---------------------------
+        public LevelB(Camera camera, int numLevel)
             : base()
         {
             this.numLevel = numLevel;
@@ -37,30 +30,55 @@ namespace IS_XNA_Shooter
             this.camera = camera;
             width = SuperGame.screenWidth*2;
             height = SuperGame.screenHeight;
-            timeLeftEnemy = new List<float>();
             listRectCollider = new List<List<Rectangle>>();
+            readRectangles();
 
-            //readRectangles();
+            //Enemigo
+            Enemy e1 = new EnemyWeakB(camera, this, new Vector2(SuperGame.screenWidth + 100, 
+                50)/*new Random().Next(SuperGame.screenHeight))*/, (float)Math.PI, GRMng.frameWidthEW1, 
+                GRMng.frameHeightEW1, GRMng.numAnimsEW1, GRMng.frameCountEW1, GRMng.loopingEW1, SuperGame.frameTime12, 
+                GRMng.textureEW1, 1, -200, 100, 1, null);
+            e1.SetActive();
 
-            Vector2 position = new Vector2(SuperGame.screenWidth - GRMng.frameWidthFB1 / 2, 
-                                           SuperGame.screenHeight / 2 - GRMng.frameHeightFB1 / 2);
-            Enemy e = new FinalBoss1(camera, this, position, (float)Math.PI, GRMng.frameWidthFB1, GRMng.frameHeightFB1, 
-                GRMng.numAnimsFB1, GRMng.frameCountFB1, GRMng.loopingFB1, SuperGame.frameTime12, GRMng.textureFB1, 40, 100, 1, null, shots);
-            e.setActive();
             enemies = new List<Enemy>();
-            enemies.Add(e);
+            enemies.Add(e1);
+
         }
 
-        //-----------------------------------------------------------------------------------------------------------------
+        public LevelB(Camera camera, int numLevel, List<Shot> shots, List<Enemy> enemiesBot)
+            : base()
+        {
+            this.numLevel = numLevel;
+            this.enemies = new List<Enemy>();
+            this.camera = camera;
+            width = SuperGame.screenWidth*2;
+            height = SuperGame.screenHeight;
+            listRectCollider = new List<List<Rectangle>>();
+            readRectangles();
 
-        /// <summary>
-        /// Update the enemies in the level B
-        /// </summary>
-        /// <param name="deltaTime"> Time between last time and this </param>
+            //Enemigo
+            //Enemy e1 = new EnemyWeakB(camera, this, new Vector2(SuperGame.screenWidth + 100, 
+                //50)/*new Random().Next(SuperGame.screenHeight))*/, (float)Math.PI, GRMng.frameWidthEW1, 
+                //GRMng.frameHeightEW1, GRMng.numAnimsEW1, GRMng.frameCountEW1, GRMng.loopingEW1, SuperGame.frameTime12, 
+                //GRMng.textureEW1, 1, -200, 100, 1, null);
+            //e1.SetActive();
+            Vector2 positionFinalBoss = new Vector2(SuperGame.screenWidth - GRMng.frameWidthFinalBoss1/2,
+                                                    SuperGame.screenHeight / 2);
+            Enemy finalBoss = new FinalBoss1(camera, this, positionFinalBoss, shots, enemiesBot);
+            finalBoss.SetActive();
+            enemies = new List<Enemy>();
+            enemies.Add(finalBoss);
+
+        }
+
+
+        //--------------------------------
+        //----    Métodos públicos    ----
+        //--------------------------------
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
-            /*int i=0; // iterator for the list of enemies
+            int i=0; // iterator for the list of enemies
             bool stillAlive = false; // is true if there is any enemie alive
             //the next loop searches an enemy alive for controlling the end of level 
             if (!levelFinished)
@@ -75,21 +93,14 @@ namespace IS_XNA_Shooter
                 }
                 if (!stillAlive)
                     levelFinished = true;
-            }*/
+            }
         }
 
-        /// <summary>
-        /// Draw the enemies in the level B
-        /// </summary>
-        /// <param name="spriteBatch"></param>
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
         }
 
-        /// <summary>
-        /// Read the list of rectangles in the file .xml
-        /// </summary>
         public void readRectangles()
         {
             int positionX1;
@@ -124,19 +135,13 @@ namespace IS_XNA_Shooter
                 }
         }
 
-        /// <summary>
-        /// Get a list of rectangles to collision in the game B
-        /// </summary>
-        /// <returns></returns>
+        //devuelve la lista de rectangulos de colisión del parallax donde se juega
         public List<List<Rectangle>> getRectangles()
         {
             return listRectCollider;
         }
 
-        /// <summary>
-        /// Get a list of enemies
-        /// </summary>
-        /// <returns></returns>
+        //devuelve la lista de enemigos del nivel
         public List<Enemy> getEnemies()
         {
             return enemies;

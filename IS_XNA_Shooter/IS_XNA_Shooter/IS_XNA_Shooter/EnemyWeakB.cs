@@ -12,9 +12,10 @@ namespace IS_XNA_Shooter
 
         public EnemyWeakB(Camera camera, Level level, Vector2 position, float rotation,
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
-            float frametime, Texture2D texture, float velocity, int life, int value, Ship Ship)
+            float frametime, Texture2D texture, float timeToSpawn, float velocity, int life,
+            int value, Ship Ship)
             : base(camera, level, position, rotation, frameWidth, frameHeight, numAnim, frameCount,
-                looping, frametime, texture, velocity, life, value, Ship)
+                looping, frametime, texture, timeToSpawn, velocity, life, value, Ship)
         {
             setAnim(1);
         }

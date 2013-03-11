@@ -7,85 +7,24 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace IS_XNA_Shooter
 {
-    /// <summary>
-    /// Class that manage the parallax layer in the game B
-    /// </summary>
+    // Es la clase que gestiona los parallax del juego B.
     class BackgroundLayerB : Sprite
     {
-        /// <summary>
-        /// Movement speed of the layer
-        /// </summary>
-        private float speed;
+        private float speed; // velocidad a la que se desplaza la capa
 
-        /// <summary>
-        /// If we repeat the layer
-        /// </summary>
         private bool tileable;
 
-        /// <summary>
-        /// Screen width
-        /// </summary>
         private int screenWidth;
-
-        /// <summary>
-        /// Screen height
-        /// </summary>
         private int screenHeight;
-
-        /// <summary>
-        /// Scale of the layer
-        /// </summary>
         private float scale;
-
-        /// <summary>
-        /// List for collisions
-        /// </summary>
         private List<List<Rectangle>> listForCollision;
-
-        /// <summary>
-        /// List of tectures
-        /// </summary>
         private List<Texture2D> textureList;
-
-        /// <summary>
-        /// If this layer is collisionable
-        /// </summary>
         private bool collisionable;
 
-        /// <summary>
-        /// Number of tiles in the axis x
-        /// </summary>
-        private int tileX;
-
-        /// <summary>
-        /// Number of tiles in the axis y
-        /// </summary>
-        private int tileY;
-
-        /// <summary>
-        /// Select a initial texture
-        /// </summary>
+        private int tileX, tileY;
         private int numtex1 = 0;
-
-        /// <summary>
-        /// Select a initial texture collisionable
-        /// </summary>
         private int numtex2;
 
-        //-----------------------------------------------------------------------------------------------------------------
-
-        /// <summary>
-        /// Builds the BackgroundLayerB
-        /// </summary>
-        /// <param name="middlePosition"> Set the reference in the center </param>
-        /// <param name="position"> Position </param>
-        /// <param name="rotation"> Rotation </param>
-        /// <param name="texture"> Texture </param>
-        /// <param name="speed"> Speed </param>
-        /// <param name="tileable"> Set loop </param>
-        /// <param name="scale"> Scale </param>
-        /// <param name="collisionable"> Set collisionable </param>
-        /// <param name="listForCollision"> List of rectangles </param>
         public BackgroundLayerB (bool middlePosition, Vector2 position,
             float rotation, Texture2D texture, float speed, bool tileable, float scale, bool collisionable, List<List<Rectangle>> listForCollision)
             : base(middlePosition, position, rotation, texture)
@@ -94,8 +33,7 @@ namespace IS_XNA_Shooter
             this.tileable = tileable;
             this.scale = scale;
             this.collisionable = collisionable;
-            
-            //we add the texture of collisionable rectangles
+            // añadimos los terrenos colisionables
             textureList = new List<Texture2D>();
             textureList.Add(GRMng.textureBgCol1);
             textureList.Add(GRMng.textureBgCol2);
@@ -113,29 +51,21 @@ namespace IS_XNA_Shooter
 
             if (tileable)
             {
+                //tileX = screenWidth / texture.Width + 2;
                 tileY = screenHeight / texture.Height + 1;
                 tileX = 1;
             }
             else tileX = tileY = 1;
         }
 
-        //-----------------------------------------------------------------------------------------------------------------
-
-        /// <summary>
-        /// Update the background layer B
-        /// </summary>
-        /// <param name="deltaTime"> Time between the last time and this</param>
         public void Update(float deltaTime)
         {
             position.X += speed * deltaTime;
         }
 
-        /// <summary>
-        /// Draw the background layer B
-        /// </summary>
-        /// <param name="spriteBatch"></param>
         public override void Draw(SpriteBatch spriteBatch)
         {
+
             //base.Draw(spriteBatch);
             if (tileable)
                 if (collisionable)
@@ -172,6 +102,5 @@ namespace IS_XNA_Shooter
                 spriteBatch.Draw(texture, position,
                        null, Color.White, rotation, base.drawPoint, (float)(Program.scale * scale), SpriteEffects.None, 0);
         }
-
-    } //Class BackgroundLayerB
+    }
 }

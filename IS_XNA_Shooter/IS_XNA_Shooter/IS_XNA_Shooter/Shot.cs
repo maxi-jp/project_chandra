@@ -52,15 +52,16 @@ namespace IS_XNA_Shooter
         {
             base.Draw(spriteBatch);
 
-            collider.Draw(spriteBatch);
+            if (SuperGame.debug)
+                collider.Draw(spriteBatch);
         }
 
-        public int getPower()
+        public int GetPower()
         {
             return power;
         }
 
-        public bool isActive()
+        public bool IsActive()
         {
             return active;
         }

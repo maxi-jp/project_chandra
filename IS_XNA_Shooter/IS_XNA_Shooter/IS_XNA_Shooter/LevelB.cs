@@ -68,6 +68,7 @@ namespace IS_XNA_Shooter
                                                     SuperGame.screenHeight / 2);
             Enemy finalBoss = new FinalBoss1(camera, this, positionFinalBoss, shots, enemies);
             finalBoss.SetActive();
+
             enemies.Add(finalBoss);
 
         }

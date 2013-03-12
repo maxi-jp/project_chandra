@@ -79,6 +79,9 @@ namespace IS_XNA_Shooter
                 GRMng.numAnimsFinalBoss1, GRMng.frameCountFinalBoss1, GRMng.loopingFinalBoss1, SuperGame.frameTime12,
                 GRMng.textureFinalBoss1, 0, 40, 100000, 1, null)
         {
+            //collider points
+            colliderPoints();
+            
             phase = 3;
             down = true;
             movingToCenter = true;
@@ -376,6 +379,18 @@ namespace IS_XNA_Shooter
             
 
             timeToShotWingsAux = timeToShotWings;
+        }
+
+        private void colliderPoints()
+        {
+            Vector2[] points = new Vector2[3];            
+            points[0] = new Vector2(24, 240);
+            points[1] = new Vector2(24, 0);
+            points[2] = new Vector2(240, 111);
+            points[3] = new Vector2(240, 128);
+
+
+            collider = new Collider(camera, true, position, rotation, points, frameWidth, frameHeight);
         }
     }
 }

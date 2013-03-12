@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace IS_XNA_Shooter
 {
@@ -240,7 +241,7 @@ namespace IS_XNA_Shooter
                     textureBgCol3 = content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable3");
 
 
-                    textureLaserHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBossLaser");
+                    textureLaserHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBoss1Laser");
                     textureFinalBoss1 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBoss1");
                     textureBFB = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBossPhase2");
                     textureFinalBossHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBossHeroe1");

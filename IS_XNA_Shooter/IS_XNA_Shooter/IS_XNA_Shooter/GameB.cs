@@ -44,7 +44,8 @@ namespace IS_XNA_Shooter
         private void initLevelB(int numLevel)
         {
             colliderList = new List<Collider>();
-            level = new LevelB(camera, numLevel);
+            //level = new LevelB(camera, numLevel);
+            level = new LevelB(camera, numLevel, shots, enemiesBot);
             enemies = ((LevelB)level).getEnemies();
             camera.setLevel(level);
             // crashList = ((LevelB)level).getRectangles();

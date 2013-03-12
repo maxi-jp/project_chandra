@@ -64,6 +64,7 @@ namespace IS_XNA_Shooter
         // objetos del juego:
         private Menu        menu;
         private MenuIngame  menuIngame;
+        private MenuGameOver menuGameOver;
         private Game        game;
         public Player       player;
         private int         playerLifes = 4;
@@ -138,9 +139,10 @@ namespace IS_XNA_Shooter
 
             fontDebug = Content.Load<SpriteFont>("FontDebug");
 
-            // Create the Menu
+            // Create the Menus
             menu = new Menu(this);
             menuIngame = new MenuIngame(this);
+            menuGameOver = new MenuGameOver(this);
 
             // Create the player
             player = new Player(playerLifes);
@@ -229,6 +231,13 @@ namespace IS_XNA_Shooter
                     break;
 
                 case gameState.gameOver:
+
+                    menuGameOver.Update(Mouse.GetState().X, Mouse.GetState().Y);
+                    if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                        menuGameOver.Click(Mouse.GetState().X, Mouse.GetState().Y);
+                    else if (Mouse.GetState().LeftButton == ButtonState.Released)
+                        menuGameOver.Unclick(Mouse.GetState().X, Mouse.GetState().Y);
+
                     break;
             }
 
@@ -262,6 +271,7 @@ namespace IS_XNA_Shooter
                     break;
 
                 case gameState.gameOver:
+                    menuGameOver.Draw(spriteBatch);
                     break;
             }
 
@@ -290,7 +300,7 @@ namespace IS_XNA_Shooter
         {
             grManager.LoadContent(2); // cargamos los recursos del nivel 1 de GameA
             audio.LoadContent(1);
-            game = new GameA(this, 0, GRMng.textureAim, GRMng.textureCell,
+            game = new GameA(this, player, 0, GRMng.textureAim, GRMng.textureCell,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
             grManager.UnloadContent(0); // descargamos los recursos del menú
@@ -303,7 +313,7 @@ namespace IS_XNA_Shooter
             LvlMng.LoadContent(1); // cargamos los rectangulos
             LvlMng.LoadContent(0); // cargamos enemigos del levelA
 
-            game = new GameB(this, 1, GRMng.textureAim,
+            game = new GameB(this, player, 1, GRMng.textureAim,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
            
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
@@ -317,7 +327,7 @@ namespace IS_XNA_Shooter
             audio.LoadContent(1);
             LvlMng.LoadContent(0); // cargamos los XML
 
-            game = new GameA(this, 1, GRMng.textureAim, GRMng.textureCell,
+            game = new GameA(this, player, 1, GRMng.textureAim, GRMng.textureCell,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
 
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
@@ -332,7 +342,7 @@ namespace IS_XNA_Shooter
             audio.LoadContent(1);
             LvlMng.LoadContent(0); // cargamos los XML
 
-            game = new GameA(this, 1, GRMng.textureAim, GRMng.textureCell,
+            game = new GameA(this, player, 1, GRMng.textureAim, GRMng.textureCell,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
 
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
@@ -348,7 +358,7 @@ namespace IS_XNA_Shooter
             audio.LoadContent(1);
             LvlMng.LoadContent(0);
 
-            game = new GameA(this, 1, GRMng.textureAim, GRMng.textureCell,
+            game = new GameA(this, player, 1, GRMng.textureAim, GRMng.textureCell,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
 
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
@@ -363,7 +373,7 @@ namespace IS_XNA_Shooter
             audio.LoadContent(1);
             LvlMng.LoadContent(1); // cargamos los rectangulos
 
-            game = new GameB(this, 1, GRMng.textureAim,
+            game = new GameB(this, player, 1, GRMng.textureAim,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
 
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
@@ -382,8 +392,13 @@ namespace IS_XNA_Shooter
             grManager.LoadContent(0);
             currentState = gameState.mainMenu;
             menu.menuState = Menu.MenuState.main;
-            grManager.UnloadContent(2);
+            grManager.UnloadContentGame();
             audio.UnloadContent(1);
+        }
+
+        public void GameOver()
+        {
+            currentState = gameState.gameOver;
         }
 
     } // class SuperGame

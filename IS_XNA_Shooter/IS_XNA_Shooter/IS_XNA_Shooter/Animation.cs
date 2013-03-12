@@ -74,7 +74,6 @@ namespace IS_XNA_Shooter
 
             currentAnim = prevAnim = 0;
 
-
             // Set the time to zero
             elapsedTime = 0;
             currentFrame = 0;
@@ -134,7 +133,7 @@ namespace IS_XNA_Shooter
         {
             // Only draw the animation when we are active
             if (animActive)
-                spriteBatch.Draw(texture, destinationRect, sourceRect, Color.White, rotation,
+                spriteBatch.Draw(texture, destinationRect, sourceRect, color, rotation,
                     middlePoint, SpriteEffects.None, 1);
         }
 

@@ -12,12 +12,15 @@ namespace IS_XNA_Shooter
         //---------------------------
         //----    Constructor    ----
         //---------------------------
-        public ShipB(Camera camera, LevelB level, Vector2 position, float rotation, Vector2[] colliderPoints,
+        public ShipB(Game game, Camera camera, LevelB level, Vector2 position, float rotation,
+            Vector2[] colliderPoints,
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
-            float frametime, Texture2D texture, float velocity, int life, List<Shot> shots)
-            : base(camera, level, position, rotation, colliderPoints, frameWidth, frameHeight, numAnim, frameCount,
-                looping, frametime, texture, velocity, life, shots)
-        {            
+            float frametime, Texture2D texture,
+            float velocity, int life, List<Shot> shots)
+            : base(game, camera, level, position, rotation, colliderPoints, frameWidth, frameHeight,
+                numAnim, frameCount, looping, frametime, texture, velocity, life, shots)
+        {
+
         }
 
 

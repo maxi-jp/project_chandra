@@ -10,25 +10,35 @@ namespace IS_XNA_Shooter
     class IngameHubA : IngameHub
     {
         /* ------------------- ATTRIBUTES ------------------- */
-        private Texture2D textureLeft, textureCenter, textureRight;
-        private Vector2 positionLeft, positionRight;
-        private Rectangle rectangleCenter;
-        private int size;
-        private int lifes; // number of lifes of the Ship
+        private Texture2D textureBase;
+        private Rectangle sorceRecLeft, sorceRecCenter1, sorceRecCenter2, sorceRecRight;
+        private Sprite left, right;
+        private List<Sprite> center;
 
         /* ------------------- CONSTRUCTORS ------------------- */
-        public IngameHubA(Texture2D textureLeft, Texture2D textureCenter, Texture2D textureRight,
-            int playerLifes)
+        public IngameHubA(Texture2D textureBase, int playerLifes)
             : base(playerLifes)
         {
-            size = textureCenter.Width;
-            this.textureLeft = textureLeft;
-            this.textureCenter = textureCenter;
-            this.textureRight = textureRight;
+            this.textureBase = textureBase;
 
-            positionLeft = new Vector2(SuperGame.screenWidth / 2 - size / 2 - textureLeft.Width, 0);
-            positionRight = new Vector2(SuperGame.screenWidth / 2 + size / 2, 0);
-            rectangleCenter = new Rectangle(SuperGame.screenWidth / 2 - size / 2, 0, size, textureCenter.Height);
+            sorceRecLeft = new Rectangle(0, 100, 27, 67);
+            sorceRecCenter1 = new Rectangle(27, 100, 57, 67);
+            sorceRecCenter2 = new Rectangle(84, 100, 57, 67);
+            sorceRecRight = new Rectangle(141, 100, 28, 67);
+
+            left = new Sprite(false, new Vector2((SuperGame.screenWidth / 2) - 27 - 57 * playerLifes/2, 0),
+                0, textureBase, sorceRecLeft);
+            right = new Sprite(false, new Vector2((SuperGame.screenWidth / 2) + 57 * playerLifes/2, 0),
+                0, textureBase, sorceRecRight);
+
+            center = new List<Sprite>();
+            Sprite sprite;
+            for (int i = 0; i < playerLifes; i++)
+            {
+                sprite = new Sprite(false, new Vector2((SuperGame.screenWidth / 2) - 57 * playerLifes / 2 + 57 * i, 0),
+                    0, textureBase, sorceRecCenter1);
+                center.Add(sprite);
+            }
         }
 
         /* ------------------- METHODS ------------------- */
@@ -38,9 +48,22 @@ namespace IS_XNA_Shooter
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(textureLeft, positionLeft, Color.White);
-            spriteBatch.Draw(textureCenter, rectangleCenter, Color.White);
-            spriteBatch.Draw(textureRight, positionRight, Color.White);
+            left.DrawRectangle(spriteBatch);
+
+            foreach (Sprite s in center)
+                s.DrawRectangle(spriteBatch);
+
+            right.DrawRectangle(spriteBatch);
+        }
+
+        public override void PlayerLosesLive()
+        {
+            base.PlayerLosesLive();
+
+            for (int i = lifesActual; i < center.Count(); i++)
+            {
+                center[i].SetRectangle(sorceRecCenter2);
+            }
         }
 
     } // class IngameHubA

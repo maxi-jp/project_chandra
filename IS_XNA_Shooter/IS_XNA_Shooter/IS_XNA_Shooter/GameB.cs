@@ -25,10 +25,11 @@ namespace IS_XNA_Shooter
         //---------------------------
         //----    Constructor    ----
         //---------------------------
-        public GameB(SuperGame mainGame, int numLevel, Texture2D textureAim, float shipVelocity, int shipLife)
-            : base(mainGame, shipVelocity, shipLife)
+        public GameB(SuperGame mainGame, Player player, int numLevel, Texture2D textureAim,
+            float shipVelocity, int shipLife)
+            : base(mainGame, player, shipVelocity, shipLife)
         {
-            hub = new IngameHubA(GRMng.hubLeft, GRMng.hubCenter, GRMng.hubRight, mainGame.player.GetLife());
+            hub = new IngameHubA(GRMng.hubBase, mainGame.player.GetLife());
             camera = new Camera();
             shots = new List<Shot>();
             this.textureAim = textureAim;
@@ -50,7 +51,8 @@ namespace IS_XNA_Shooter
             backGroundB = new BackgroundGameB(level);
             //backGroundA.Dispose();
             backGroundA = null;
-            ship = new ShipB(camera, ((LevelB)level), Vector2.Zero, 0, puntosColliderShip(), GRMng.frameWidthPA1,
+            ship = new ShipB(this, camera, ((LevelB)level), Vector2.Zero, 0, puntosColliderShip(),
+                GRMng.frameWidthPA1,
                 GRMng.frameHeightPA1, GRMng.numAnimsPA1, GRMng.frameCountPA1, GRMng.loopingPA1, SuperGame.frameTime24,
                 GRMng.texturePA1, shipVelocity + 200, shipLife, shots);
             level.setShip(ship);
@@ -59,7 +61,7 @@ namespace IS_XNA_Shooter
 
         private void initLevelA(int numLevel, Texture2D textureAim)
         {
-            hub = new IngameHubA(GRMng.hubLeft, GRMng.hubCenter, GRMng.hubRight, 3); // three lifes because yes
+            hub = new IngameHubA(GRMng.hubBase, 3); // three lifes because yes
             level = new LevelA(camera, numLevel, enemies);
             backGroundA = new BackgroundGameA(camera, level);
             //backGroundB.Dispose();
@@ -76,7 +78,8 @@ namespace IS_XNA_Shooter
             points[5] = new Vector2(34, 66);
             points[6] = new Vector2(26, 47);
             points[7] = new Vector2(15, 45);
-            ship = new ShipA(camera, level, Vector2.Zero, 0, points, GRMng.frameWidthPA1, GRMng.frameHeightPA1,
+            ship = new ShipA(this, camera, level, Vector2.Zero, 0, points,
+                GRMng.frameWidthPA1, GRMng.frameHeightPA1,
                 GRMng.numAnimsPA1, GRMng.frameCountPA1, GRMng.loopingPA1, SuperGame.frameTime24, 
                 GRMng.texturePA1, shipVelocity + 200, shipLife, shots);
 

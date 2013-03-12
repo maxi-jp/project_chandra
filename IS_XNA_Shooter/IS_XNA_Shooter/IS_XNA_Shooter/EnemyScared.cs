@@ -20,7 +20,7 @@ namespace IS_XNA_Shooter
         private List<Shot> shots;
         private float timeToShot = 4.0f;
         private float shotVelocity = 300f;
-        private int shotPower = 10;
+        private int shotPower = 200;
 
         /* ------------------- CONSTRUCTORS ------------------- */
         public EnemyScared(Camera camera, Level level, Vector2 position, float rotation,
@@ -296,16 +296,25 @@ namespace IS_XNA_Shooter
                 shots[i].Update(deltaTime);
                 if (!shots[i].IsActive())
                     shots.RemoveAt(i);
+                else  // shots-player colisions
+                {
+                    if (ship.collider.collision(shots[i].position))
+                    {
+                        // the player is hitted:
+                        ship.Damage(shots[i].GetPower());
+                        shots.RemoveAt(i);
+                    }
+                }
             }
                        
         } // Update
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            base.Draw(spriteBatch);
-
             foreach (Shot shot in shots)
                 shot.Draw(spriteBatch);
+
+            base.Draw(spriteBatch);
         }
 
         private void TwoShots() 
@@ -386,6 +395,13 @@ namespace IS_XNA_Shooter
                 setAnim(5, -1);
                 Audio.PlayEffect("brokenBone02");
             }
+        }
+
+        public override void Kill()
+        {
+            base.Kill();
+
+            shots.Clear();
         }
 
         public override bool DeadCondition()

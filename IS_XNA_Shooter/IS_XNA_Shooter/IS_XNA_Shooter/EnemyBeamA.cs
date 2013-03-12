@@ -27,8 +27,9 @@ namespace IS_XNA_Shooter
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
             float frametime, Texture2D texture, float timeToSpawn, float velocity, int life,
             int value, Ship ship)
-            : base (camera, level, position, rotation, frameWidth, frameHeight, numAnim, frameCount,
-                looping, frametime, texture, timeToSpawn, velocity, life, value, ship)
+            : base (camera, level, position, rotation,
+                frameWidth, frameHeight, numAnim, frameCount, looping, frametime, texture,
+                timeToSpawn, velocity, life, value, ship)
         {
             Vector2[] points = new Vector2[8];
             points[0] = new Vector2(21, 21);
@@ -39,14 +40,9 @@ namespace IS_XNA_Shooter
             points[5] = new Vector2(49, 51);
             points[6] = new Vector2(32, 57);
             points[7] = new Vector2(21, 57);
-            /*Vector2[] points = new Vector2[4];
-            points[0] = new Vector2(20, 20);
-            points[1] = new Vector2(60, 35);
-            points[2] = new Vector2(60, 45);
-            points[3] = new Vector2(20, 60);*/
             collider = new Collider(camera, true, position, rotation, points, frameWidth, frameHeight);
 
-            setAnim(1);
+            setAnim(0);
             gyre = dX = dY = 0;
             timeToBeamAux = timeToBeam;
 
@@ -67,6 +63,7 @@ namespace IS_XNA_Shooter
                         timeToBeamAux -= deltaTime;
                         if (timeToBeamAux <= 0) // change the state
                         {
+                            setAnim(1);
                             timeToBeamAux = timeToBeam;
                             currentState = enemyState.ONBEAM;
                         }
@@ -89,52 +86,33 @@ namespace IS_XNA_Shooter
                         {
                             position.X += (float)(velocity * Math.Cos(gyre) * deltaTime);
                             position.Y += (float)(velocity * Math.Sin(gyre) * deltaTime);
-                            
+
                             if ((position.X > level.width - collider.radius) ||
                                 (position.Y > level.height - collider.radius) ||
                                 (position.Y < collider.radius))
-                                    currentState = enemyState.ONWAIT;
+                            {
+                                currentState = enemyState.ONWAIT;
+                                setAnim(0);
+                            }
                         }
                         else // its on the right of the player
                         {
                             position.X -= (float)(velocity * Math.Cos(gyre) * deltaTime);
                             position.Y -= (float)(velocity * Math.Sin(gyre) * deltaTime);
-                                
+
                             if ((position.X < collider.radius) ||
                                 (position.Y > level.height - collider.radius) ||
                                 (position.Y < collider.radius))
-                                    currentState = enemyState.ONWAIT;
+                            {
+                                currentState = enemyState.ONWAIT;
+                                setAnim(0);
+                            }
                         }
 
                         break;
 
                 } // switch (currentState)
             }
-            /*
-            if(timeToBeam < 5)
-            {
-                float dY = -ship.position.Y + position.Y;
-                dX = -ship.position.X + position.X;
-                gyre = (float)Math.Atan(dY / dX);
-                if (dX < 0)
-                    rotation = gyre;
-                else
-                    rotation = (float)Math.PI + gyre;
-            }
-            else
-            {
-                if (dX < 0)
-                {
-                    position.X += (float)(velocity * Math.Cos(gyre) * deltaTime);
-                    position.Y += (float)(velocity * Math.Sin(gyre) * deltaTime);
-                }
-                else
-                {
-                    position.X -= (float)(velocity * Math.Cos(gyre) * deltaTime);
-                    position.Y -= (float)(velocity * Math.Sin(gyre) * deltaTime);
-                }
-            }*/
-
         } // Update
 
         public override void Damage(int i)

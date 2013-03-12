@@ -19,11 +19,11 @@ namespace IS_XNA_Shooter
         /* ------------------------------------------------------------- */
         /*                          CONSTRUCTOR                          */
         /* ------------------------------------------------------------- */
-        public GameA(SuperGame mainGame, int num, Texture2D textureAim, Texture2D textureBg,
-            float ShipVelocity, int ShipLife)
-            : base(mainGame, ShipVelocity, ShipLife)
+        public GameA(SuperGame mainGame, Player player, int num, Texture2D textureAim,
+            Texture2D textureBg, float shipVelocity, int shipLife)
+            : base(mainGame, player, shipVelocity, shipLife)
         {
-            hub = new IngameHubA(GRMng.hubLeft, GRMng.hubCenter, GRMng.hubRight, mainGame.player.GetLife());
+            hub = new IngameHubA(GRMng.hubBase, mainGame.player.GetLife());
             level = new LevelA(camera, num, enemies);
             backGround = new BackgroundGameA(camera, level);
             
@@ -38,9 +38,10 @@ namespace IS_XNA_Shooter
             points[5] = new Vector2(34, 66);
             points[6] = new Vector2(26, 47);
             points[7] = new Vector2(15, 45);
-            ship = new ShipA(camera, level, Vector2.Zero, 0, points, GRMng.frameWidthPA1, GRMng.frameHeightPA1,
+            ship = new ShipA(this, camera, level, Vector2.Zero, 0, points,
+                GRMng.frameWidthPA1, GRMng.frameHeightPA1,
                 GRMng.numAnimsPA1, GRMng.frameCountPA1, GRMng.loopingPA1, SuperGame.frameTime24, GRMng.texturePA1,
-                ShipVelocity, ShipLife, shots);
+                shipVelocity, shipLife, shots);
 
             level.setShip(ship);
 

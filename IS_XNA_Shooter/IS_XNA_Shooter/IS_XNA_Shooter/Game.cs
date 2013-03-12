@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace IS_XNA_Shooter
 {
@@ -14,6 +15,7 @@ namespace IS_XNA_Shooter
         /*                           ATTRIBUTES                          */
         /* ------------------------------------------------------------- */
         protected SuperGame mainGame;
+        protected Player player;
         protected IngameHub hub;
 
         protected Camera camera;
@@ -30,9 +32,10 @@ namespace IS_XNA_Shooter
         /* ------------------------------------------------------------- */
         /*                          CONSTRUCTOR                          */
         /* ------------------------------------------------------------- */
-        public Game (SuperGame mainGame, float shipVelocity, int shipLife)
+        public Game (SuperGame mainGame, Player player, float shipVelocity, int shipLife)
         {
             this.mainGame = mainGame;
+            this.player = player;
             this.shipLife = shipLife;
             this.shipVelocity = shipVelocity;
 
@@ -101,6 +104,10 @@ namespace IS_XNA_Shooter
             }
 
             camera.Update(deltaTime);   // cámara
+
+            if (SuperGame.debug)
+                if (Keyboard.GetState().IsKeyDown(Keys.K))
+                    PlayerDead();
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
@@ -121,6 +128,23 @@ namespace IS_XNA_Shooter
                     e.Draw(spriteBatch);*/
 
             hub.Draw(spriteBatch);
+        }
+
+        // This methods is called when the ship of the player has been
+        // hitted by an enemy shot and its life is < 0
+        public virtual void PlayerDead()
+        {
+            //mainGame.TargetElapsedTime = TimeSpan.FromTicks(2000000);
+            player.LoseLife();
+            hub.PlayerLosesLive();
+
+            // All the enemies and the shots must be erased:
+            for (int i = 0; i < enemies.Count(); i++)
+                enemies[i].Kill();
+            shots.Clear();
+
+            if (player.GetLife() == 0)
+                mainGame.GameOver();
         }
 
     } // class Game

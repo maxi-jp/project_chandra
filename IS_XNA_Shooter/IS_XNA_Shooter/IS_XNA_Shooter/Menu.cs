@@ -31,6 +31,8 @@ namespace IS_XNA_Shooter
         private int horizontalSep; // separación horizontal de las opciones
         private Vector2 backButtonPosition; // posicion de la opcion "back"
 
+        private Texture2D splash;
+
         private Sprite spriteHistTitle, spriteArcadeTitle, spriteConfigTitle;
         private MenuItem itemBack;
         private MenuItem itemMainHistory, itemMainArcade, itemMainScores;
@@ -48,6 +50,8 @@ namespace IS_XNA_Shooter
 
             horizontalSep = 48;
             backButtonPosition = new Vector2(5, SuperGame.screenHeight - 45);
+
+            splash = GRMng.menuSplash;
 
             itemBack = new MenuItem(false, backButtonPosition, GRMng.menuMain,
                 new Rectangle(120, 360, 100, 40), new Rectangle(220, 360, 100, 40), new Rectangle(320, 360, 100, 40));
@@ -139,6 +143,8 @@ namespace IS_XNA_Shooter
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.Draw(splash, Vector2.Zero, Color.White);
+
             switch (menuState)
             {
                 case MenuState.main:

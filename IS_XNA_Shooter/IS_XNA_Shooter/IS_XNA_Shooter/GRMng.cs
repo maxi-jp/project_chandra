@@ -112,13 +112,13 @@ namespace IS_XNA_Shooter
         public static short[] frameCountFinalBossHeroe = { 1 };
         public static bool[] loopingFinalBossHeroe = {true};
 
-        /* ------------------- BULLET LASER-------------------- */
-        public static Texture2D textureLaserHeroe;
-        public static short frameWidthLaserHeroe = 512;
-        public static short frameHeightLaserHeroe = 32;
-        public static short numAnimsLaserHeroe = 1;
-        public static short[] frameCountLaserHeroe = { 2 };
-        public static bool[] loopingLaserHeroe = { true };
+        /* ------------------- BULLET LASER BOSS-------------------- */
+        public static Texture2D textureLaserBoss;
+        public static short frameWidthLaserBoss = 512;
+        public static short frameHeightLaserBoss = 16;
+        public static short numAnimsLaserBoss = 2;
+        public static short[] frameCountLaserBoss = { 1, 2 };
+        public static bool[] loopingLaserBoss = { true };
 
         /* ------------------- BULLET LASER Heroe-------------------- */
         public static Texture2D textureELBulletHeroe;
@@ -249,7 +249,7 @@ namespace IS_XNA_Shooter
                     textureBgCol3 = content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable3");
 
 
-                    textureLaserHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBossLaser");
+                    textureLaserBoss = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBoss1Laser");
                     textureFinalBoss1 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBoss1");
                     textureBFB = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBossPhase2");
                     textureFinalBossHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBossHeroe1");

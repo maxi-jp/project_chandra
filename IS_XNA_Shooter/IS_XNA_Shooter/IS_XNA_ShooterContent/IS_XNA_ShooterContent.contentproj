@@ -383,8 +383,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Graphics\Ships\Final Boss 1\finalBossLaser.png">
-      <Name>finalBossLaser</Name>
+    <Compile Include="Graphics\Ships\Final Boss 1\finalBoss1Laser.png">
+      <Name>finalBoss1Laser</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

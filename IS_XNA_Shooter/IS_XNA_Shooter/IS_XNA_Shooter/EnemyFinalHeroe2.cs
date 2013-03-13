@@ -33,26 +33,26 @@ namespace IS_XNA_Shooter
             : base(camera, level, position, rotation, frameWidth, frameHeight, numAnim, frameCount,
                 looping, frametime, texture, timeToSpawn, 50, 100, value, ship)
         {
-           // setAnim(3);
+            // setAnim(3);
 
-          /*  Vector2[] points = new Vector2[6];
-            points[0] = new Vector2(20, 20);
-            points[1] = new Vector2(40, 13);
-            points[2] = new Vector2(60, 20);
-            points[3] = new Vector2(60, 60);
-            points[4] = new Vector2(40, 65);
-            points[5] = new Vector2(20, 60);
-            collider = new Collider(camera, true, position, rotation, points, frameWidth, frameHeight);*/
+            /*  Vector2[] points = new Vector2[6];
+              points[0] = new Vector2(20, 20);
+              points[1] = new Vector2(40, 13);
+              points[2] = new Vector2(60, 20);
+              points[3] = new Vector2(60, 60);
+              points[4] = new Vector2(40, 65);
+              points[5] = new Vector2(20, 60);
+              collider = new Collider(camera, true, position, rotation, points, frameWidth, frameHeight);*/
             this.down = down;
             //For the Laser
             //Rectangle rect = new Rectangle(0, 0, 2000, 2);
-       /*     p1 = new Vector2();
-            p2 = new Vector2();
-            p1Orig = new Vector2(0, 0);
-            p2Orig = new Vector2(320, 0);*/
+            /*     p1 = new Vector2();
+                 p2 = new Vector2();
+                 p1Orig = new Vector2(0, 0);
+                 p2Orig = new Vector2(320, 0);*/
 
-           
-            
+
+
         }
 
         /* ------------------- METHODS ------------------- */
@@ -62,7 +62,7 @@ namespace IS_XNA_Shooter
 
             if (life > 0)
             {
-              timeToShot -= deltaTime;
+                timeToShot -= deltaTime;
                 if (timeToShot <= 0)
                 {
 
@@ -72,16 +72,17 @@ namespace IS_XNA_Shooter
                         LaserShot();
                         shot.Update(deltaTime);
                         timeShoting -= deltaTime;
-                        
+
                     }
-                    else {
+                    else
+                    {
                         shooting = false;
                         timeShoting = 0.5f;
                         timeToShot = 3.0f;
-                        
+
                     }
-                    
-               
+
+
                     /*if (shooting)
                         shots.Add(shot);
                     else shots.Remove(shot);*/
@@ -93,8 +94,8 @@ namespace IS_XNA_Shooter
                     position.Y -= deltaTime * velocity;
                 changeDirection();
 
-                if (position.X < SuperGame.screenWidth*3 / 4) { position.X += deltaTime * velocity*3; }
-                else if (position.X > SuperGame.screenWidth*3 /4) { position.X -= deltaTime * velocity*3; }
+                if (position.X < SuperGame.screenWidth * 3 / 4) { position.X += deltaTime * velocity * 3; }
+                else if (position.X > SuperGame.screenWidth * 3 / 4) { position.X -= deltaTime * velocity * 3; }
             }
 
         } // Update
@@ -108,30 +109,30 @@ namespace IS_XNA_Shooter
         }
 
         //The enemy Shoot a Laser, we calculate previously the rectangle of it
-        private void LaserShot() 
-        { 
+        private void LaserShot()
+        {
             //The calculation of the rectangle
-           // rotationMatrix = Matrix.CreateRotationZ(rotation);
-          //  int width = level.width + 800;
+            // rotationMatrix = Matrix.CreateRotationZ(rotation);
+            //  int width = level.width + 800;
 
             //p1 = Vector2.Transform(p1Orig, rotationMatrix);
-          /*  p1 = p1Orig;
-            p1 += position;
+            /*  p1 = p1Orig;
+              p1 += position;
 
-           //p2 = Vector2.Transform(p2Orig, rotationMatrix);
-            p2 = p2Orig;
-            p2 += position;
+             //p2 = Vector2.Transform(p2Orig, rotationMatrix);
+              p2 = p2Orig;
+              p2 += position;
 
-            rect.X = (int)position.X;
-            rect.Y = (int)position.Y;*/
+              rect.X = (int)position.X;
+              rect.Y = (int)position.Y;*/
 
-           // shot.position = position;
+            // shot.position = position;
 
             Vector2 positionShot = new Vector2(position.X - 1040, position.Y);
-            shot = new Shot(camera, level, positionShot,0, GRMng.frameWidthELBulletHeroe, GRMng.frameHeightELBulletHeroe,
+            shot = new Shot(camera, level, positionShot, 0, GRMng.frameWidthELBulletHeroe, GRMng.frameHeightELBulletHeroe,
                 GRMng.numAnimsELBulletHeroe, GRMng.frameCountELBulletHeroe, GRMng.loopingELBulletHeroe, SuperGame.frameTime8,
                 GRMng.textureELBulletHeroe, SuperGame.shootType.normal, shotVelocity, shotPower);
-         //   shot.rotation = rotation;
+            //   shot.rotation = rotation;
 
         }
 

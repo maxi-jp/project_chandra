@@ -17,7 +17,8 @@ namespace IS_XNA_Shooter
             float frametime, Texture2D texture, float velocity, int life, List<Shot> shots)
             : base(camera, level, position, rotation, colliderPoints, frameWidth, frameHeight, numAnim, frameCount,
                 looping, frametime, texture, velocity, life, shots)
-        {            
+        {
+            //this.collider = new Collider(camera, true, position, rotation, GRMng.pointsP1, frameWidth, frameHeight);
         }
 
 

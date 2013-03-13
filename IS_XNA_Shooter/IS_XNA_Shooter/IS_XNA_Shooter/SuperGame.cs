@@ -32,6 +32,8 @@ namespace IS_XNA_Shooter
         /*                           ATRIBUTOS                           */
         /* ------------------------------------------------------------- */
         public gameState currentState; // estado actual del juego
+        private bool testGameA = false;
+        private bool testGameB = false;
 
         public static bool debug = true;
 
@@ -185,6 +187,11 @@ namespace IS_XNA_Shooter
             if (Keyboard.GetState().IsKeyDown(Keys.F))
                 debug = !debug;
 
+            if (!testGameA && Keyboard.GetState().IsKeyDown(Keys.F1))
+                NewGameATest();
+            if (!testGameB && Keyboard.GetState().IsKeyDown(Keys.F2))
+                NewGameBTest();
+
             // posición actual del ratón:
             pointer.X = Mouse.GetState().X;
             pointer.Y = Mouse.GetState().Y;
@@ -288,12 +295,26 @@ namespace IS_XNA_Shooter
         /* ------------------------------------------------------------- */
         private void NewGameATest()
         {
+            testGameA = true;
+            testGameB = false;
             grManager.LoadContent(2); // cargamos los recursos del nivel 1 de GameA
             audio.LoadContent(1);
             game = new GameA(this, 0, GRMng.textureAim, GRMng.textureCell,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
             grManager.UnloadContent(0); // descargamos los recursos del menú
+        }
+
+        private void NewGameBTest()
+        {
+            testGameA = false;
+            testGameB = true;
+            grManager.LoadContent(2);   // loads the resources of GameA
+            grManager.LoadContent(3);   // loads the resources of GameB
+            audio.LoadContent(1);
+            game = new GameB(this, 0, GRMng.textureAim, 200, 100);
+            currentState = gameState.playing;
+            grManager.UnloadContent(0); //unloads the resources of Menu
         }
 
         public void newHistory()

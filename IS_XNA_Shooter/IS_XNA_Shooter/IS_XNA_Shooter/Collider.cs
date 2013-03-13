@@ -10,7 +10,7 @@ namespace IS_XNA_Shooter
     class Collider
     {
         /* ------------------- ATRIBUTOS ------------------- */
-        private Vector2 position;
+        public Vector2 position, prevPosition;
         private float rotation;
         private Rectangle rectangle;
         public int Width, Height;
@@ -24,16 +24,19 @@ namespace IS_XNA_Shooter
 
         /* ------------------- CONSTRUCTORES ------------------- */
         public Collider(Camera camera, bool middlePos, Vector2 position, float rotation, Vector2[] points,
-            int frameWidth, int frameHeight)
+            float radius, int frameWidth, int frameHeight)
         {
             this.camera = camera;
             this.middlePos = middlePos;
             this.position = position;
             this.rotation = rotation;
+            this.radius = radius;
             Width = frameWidth;
             Height = frameHeight;
 
-            radius = (float)Math.Sqrt(((frameWidth / 2) * (frameWidth / 2)) + ((frameHeight / 2) * (frameHeight / 2)));
+            prevPosition = new Vector2();
+
+            //radius = (float)Math.Sqrt(((frameWidth / 2) * (frameWidth / 2)) + ((frameHeight / 2) * (frameHeight / 2)));
             if (middlePos)
                 pivotPoint = new Vector2(frameWidth / 2, frameHeight / 2);
             else
@@ -81,6 +84,7 @@ namespace IS_XNA_Shooter
         /* ------------------- MÉTODOS ------------------- */
         public void Update(Vector2 newPosition, float newRotation)
         {
+            prevPosition = position;
             position = newPosition;
             rotation = newRotation;
 
@@ -104,42 +108,89 @@ namespace IS_XNA_Shooter
         }
 
         // comprueba si this esta colisionando con el Collider other
-        public bool collision(Collider other)
+        public bool Collision(Collider other)
         {
             float AX = MathHelper.Distance(other.position.X, position.X);
             float AY = MathHelper.Distance(other.position.Y, position.Y);
 
-            // primero miramos si la distancia de separación entre los colliders
+            bool collision = false;
+            int cont, it = 0;
+
+            // PRIMERA COMPROBACIÓN (distancia de Manhattan):
+            // miramos si la distancia de separación entre los colliders
             // es menor que la suma de los radios.
-            // después por cada uno de los puntos que componen other se mira si esta
-            // dentro de this.
             if ((AX + AY) < (other.radius + radius))
             {
-                // aquí se actualizaran las posiciones de los puntos con UpdatePoints();
-                for (int i = 0; i < other.points.Length; i++)
+                // SEGUNDA COMPROBACIÓN (teorema de Pitágoras):
+                // se mira si la distancia real entre los position de ambos collider
+                // es menor que la suma de sus radios.
+                if (((position.X - other.position.X) * (position.X - other.position.X) +
+                    (position.Y - other.position.Y) * (position.Y - other.position.Y)) <
+                    (radius + other.radius) * (radius + other.radius))
                 {
-                    // calcular ecuaciones de cada una de las 4 rectas y - y1 = ((y2 - y1) / (x2 - x1)) * (x - x1)
-                    // calcular la distancia del punto other.points[i] con cada
-                    // una de esas 4 rectas
-                    // si todas son positivas el punto esta dentro, si no, no.
-                    for (int j = 0; j < points.Length; j++)
+                    // TERCERA COMPROBACIÓN (distancias de cada punto a las rectas del collider this):
+                    // por cada uno de los puntos que componen other se mira si esta
+                    // dentro de this.
+                    while (!collision && it < other.points.Length)
                     {
-                        if (DistancePointToSegment(points[j], points[(j + 1) % points.Length], other.points[i]) < 0)
+                        // calcular ecuaciones de cada una de las 4 rectas y - y1 = ((y2 - y1) / (x2 - x1)) * (x - x1)
+                        // calcular la distancia del punto other.points[i] con cada
+                        // una de esas 4 rectas
+                        // si todas son positivas el punto esta dentro, si no, no.
+                        cont = points.Length;
+                        for (int j = 0; j < points.Length; j++)
+                        {
+                            if (DistancePointToSegment(points[j], points[(j + 1) % points.Length], other.points[it]) < 0)
+                                cont--;
+                        }
+                        if (cont == 0)
                             return true;
+                        it++;
                     }
+                    return false;
                 }
-                return false;
+                else return false;
                 //return rectangle.Intersects(other.getRectangle());
             }
             else return false;
         }
 
-        /*
-            SEGUNDA COMPROBACION PITÁGORAS
-            ((position.X - other.position.X) * (position.X - other.position.X) + 
-             (position.Y - other.position.Y) * (position.Y - other.position.Y)) <
-              (radius + other.radius) * (radius + other.radius) ; colisionan
-        */
+        // Check colision between two colliders, but only checking if the position of the
+        // collider other is inside the collider this
+        public bool CollisionPoint(Collider other)
+        {
+            float AX = MathHelper.Distance(other.position.X, position.X);
+            float AY = MathHelper.Distance(other.position.Y, position.Y);
+
+            float d = 0;
+            int cont = points.Length;
+
+            // 1st: Manhattan distance
+            if ((AX < radius) || (AY < radius))
+            {
+                // 2nd: distance point to segments
+                for (int i = 0; i < points.Length; i++)
+                {
+                    d = DistancePointToSegment(points[i], points[(i + 1) % points.Length], other.position);
+                    if (d < 0)
+                        cont--;
+                }
+                if (cont == 0)
+                    return true;
+                else // 3rd: all segments intersections
+                {
+                    // http://pier.guillen.com.mx/algorithms/07-geometricos/07.4-interseccion_segmentos.htm
+                    for (int i = 0; i < points.Length; i++)
+                    {
+                        if (TwoSegmentIntersects(points[i], points[(i + 1) % points.Length],
+                            other.prevPosition, other.position))
+                            return true;
+                    }
+                    return false;
+                }
+            }
+            else return false;
+        }
 
         // comprueba si el punto other esta dentro de this
         public bool collision(Vector2 other)
@@ -148,8 +199,9 @@ namespace IS_XNA_Shooter
             float AY = MathHelper.Distance(other.Y, position.Y);
 
             float d = 0;
+
             int cont = points.Length;
-            if ((AX + AY) < radius)
+            if ((AX < radius) || (AY < radius))
             {
                 //return rectangle.Contains((int)other.X, (int)other.Y);
                 for (int i = 0; i < points.Length; i++)
@@ -227,6 +279,37 @@ namespace IS_XNA_Shooter
             // http://mathworld.wolfram.com/Point-LineDistance2-Dimensional.html
             return (((B.X - A.X)*(A.Y - p.Y) - (A.X - p.X)*(B.Y - A.Y)) /
                 (float)(Math.Sqrt((B.X - A.X)*(B.X - A.X) + (B.Y - A.Y)*(B.Y - A.Y))));
+        }
+
+        private bool TwoSegmentIntersects(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4)
+        {
+            float dx, dy, dx1, dy1, dx2, dy2, side1, side2;
+
+            // side is > 0 if two points are in the same side of a line
+            // < 0 if the points are in each side of the line
+
+            dx = p2.X - p1.X;
+            dy = p2.Y - p1.Y;
+            dx1 = p3.X - p1.X;
+            dy1 = p3.Y - p1.Y;
+            dx2 = p4.X - p2.X;
+            dy2 = p4.Y - p2.Y;
+            side1 = (dx * dy1 - dy * dx1) * (dx * dy2 - dy * dx2);
+
+            dx = p4.X - p3.X;
+            dy = p4.Y - p3.Y;
+            dx1 = p1.X - p3.X;
+            dy1 = p1.Y - p3.Y;
+            dx2 = p2.X - p4.X;
+            dy2 = p2.Y - p4.Y;
+            side2 = (dx * dy1 - dy * dx1) * (dx * dy2 - dy * dx2);
+
+            return ((side1 < 0) && (side2 < 0));
+        }
+
+        private bool Inside()
+        {
+            return false;
         }
 
     } // class Collider

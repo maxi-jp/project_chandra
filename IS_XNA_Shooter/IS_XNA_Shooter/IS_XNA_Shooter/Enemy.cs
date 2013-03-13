@@ -89,7 +89,10 @@ namespace IS_XNA_Shooter
 
         public virtual void Damage(int i)
         {
-            life -= i;
+            if (i == -1)
+                life = 0;
+            else
+                life -= i;
 
             if (life <= 0)
                 colisionable = false;

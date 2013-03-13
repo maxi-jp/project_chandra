@@ -26,7 +26,7 @@ namespace IS_XNA_Shooter
         private SuperGame mainGame;
         private int horizontalSep; // separación horizontal de las opciones
 
-        private Sprite spritePause, spriteGetReady, spriteNum, sprite3, sprite2, sprite1;
+        private Sprite spritePause, spriteGetReady, spriteNum;
         private MenuItem itemResume, itemConfig, itemExit, itemExitYes, itemExitNo;
 
         private Texture2D blackpixel;

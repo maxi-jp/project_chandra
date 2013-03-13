@@ -90,7 +90,8 @@ namespace IS_XNA_Shooter
         /* ------------------- ENEMY LASER-------------------- */
         /* ------------------- BULLET LASER-------------------- */
         public static Texture2D textureELBullet;
-        public static short frameWidthELBullet = 600;
+        public static short frameWidthELBulletA = 600;
+        public static short frameWidthELBulletB = 1300;
         public static short frameHeightELBullet = 2;
         public static short numAnimsELBullet = 1;
         public static short[] frameCountELBullet = { 1 };

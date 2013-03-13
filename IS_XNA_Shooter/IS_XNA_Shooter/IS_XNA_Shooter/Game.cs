@@ -100,20 +100,25 @@ namespace IS_XNA_Shooter
             {
                 for (int j = 0; j < shots.Count(); j++)
                 {
-                    if (enemies[i].collider != null && enemies[i].IsColisionable() && shots[j].IsActive() && enemies[i].collider.collision(shots[j].position))
+                    if (enemies[i].IsColisionable() && shots[j].IsActive() &&
+                        enemies[i].collider.CollisionPoint(shots[j].collider))
                     //if (enemies[i].isActive() && shots[j].isActive() && enemies[i].collider.collision(shots[j].collider))
                     {                       
-                        // nueva explosión:
-                        /*Explosion newExp = new Explosion(camera, level, eAux.position, eAux.rotation, GRMng.frameWidthEx1,
-                            GRMng.frameHeightEx1, GRMng.frameCountEx1, SuperGame.frameTime24, GRMng.textureExplosion1);
-                        explosions.Add(newExp);*/
-
                         enemies[i].Damage(shots[j].GetPower());
-
                         shots.RemoveAt(j);
                     }
                 }
             }
+
+            // enemies-player collision:
+            /*for (int i = 0; i < enemies.Count(); i++)
+            {
+                if (enemies[i].IsColisionable() && ship.collider.collision(enemies[i].collider))
+                {
+                    // the player has been hit by an enemy
+                    bool tocado = true;
+                }
+            }*/
 
             camera.Update(deltaTime);   // cámara
 

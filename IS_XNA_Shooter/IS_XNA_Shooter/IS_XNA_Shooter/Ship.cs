@@ -58,7 +58,7 @@ namespace IS_XNA_Shooter
             this.life = life;
             this.shots = shots;
 
-            collider = new Collider(camera, true, position, rotation, colliderPoints, frameWidth, frameHeight);
+            collider = new Collider(camera, true, position, rotation, colliderPoints, 35, frameWidth, frameHeight);
 
             currentState = shipState.ONNORMAL;
 

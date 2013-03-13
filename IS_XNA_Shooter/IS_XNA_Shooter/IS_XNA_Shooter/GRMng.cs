@@ -128,6 +128,30 @@ namespace IS_XNA_Shooter
         public static short[] frameCountELBulletHeroe = { 1 };
         public static bool[] loopingELBulletHeroe = { true };
 
+        /* ------------------- FINAL BOSS 1 TURRET 1 -------------------- */
+        public static Texture2D textureFinalBoss1Turret1;
+        public static short frameWidthFinalBoss1Turret1 = 20;
+        public static short frameHeightFinalBoss1Turret1 = 20;
+        public static short numAnimsFinalBoss1Turret1 = 2;
+        public static short[] frameCountFinalBoss1Turret1 = { 1, 3 };
+        public static bool[] loopingFinalBoss1Turret1 = { true };
+
+        /* ------------------- FINAL BOSS 1 TURRET 1 SHOT -------------------- */
+        public static Texture2D textureFinalBoss1Turret1Shot;
+        public static short frameWidthFinalBoss1Turret1Shot = 5;
+        public static short frameHeightFinalBoss1Turret1Shot = 5;
+        public static short numAnimsFinalBoss1Turret1Shot = 1;
+        public static short[] frameCountFinalBoss1Turret1Shot = { 1 };
+        public static bool[] loopingFinalBoss1Turret1Shot = { true };
+
+        /* ------------------- FINAL BOSS 1 TURRET 2 -------------------- */
+        public static Texture2D textureFinalBoss1Turret2;
+        public static short frameWidthFinalBoss1Turret2 = 90;
+        public static short frameHeightFinalBoss1Turret2 = 30;
+        public static short numAnimsFinalBoss1Turret2 = 1;
+        public static short[] frameCountFinalBoss1Turret2 = { 1 };
+        public static bool[] loopingFinalBoss1Turret2 = { true };
+
         #endregion
 
         #region PLAYER
@@ -228,6 +252,11 @@ namespace IS_XNA_Shooter
 
                     textureFinalBossHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBossHeroe1");
 
+                    textureFinalBoss1Turret1 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/turret1");
+                    textureFinalBoss1Turret2 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/turret2");
+
+                    textureFinalBoss1Turret1Shot = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/shotTurret1");
+
                     break;
 
                 case 3: // GameB nivel 1
@@ -314,6 +343,13 @@ namespace IS_XNA_Shooter
                     textureBg01 = null;
                     textureBg02 = null;
                     textureBg03 = null;
+
+                    textureFinalBossHeroe = null;
+
+                    textureFinalBoss1Turret1 = null;
+                    textureFinalBoss1Turret2 = null;
+
+                    textureFinalBoss1Turret1Shot = null;
 
                     break;
 

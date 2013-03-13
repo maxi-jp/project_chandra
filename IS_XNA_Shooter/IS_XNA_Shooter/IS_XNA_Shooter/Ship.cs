@@ -198,5 +198,10 @@ namespace IS_XNA_Shooter
             this.position = position;
         }
 
+        public void EraseShots()
+        {
+            shots.Clear();
+        }
+
     } // class Ship
 }

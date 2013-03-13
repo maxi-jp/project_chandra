@@ -113,5 +113,6 @@ namespace IS_XNA_Shooter
         }
 
         public XMLLvlMng LvlMng { get; set; }
+
     } // class Level
 }

@@ -9,6 +9,7 @@ namespace IS_XNA_Shooter
 {
     class ShipB : Ship
     {
+
         //---------------------------
         //----    Constructor    ----
         //---------------------------
@@ -17,7 +18,8 @@ namespace IS_XNA_Shooter
             float frametime, Texture2D texture, float velocity, int life, List<Shot> shots)
             : base(camera, level, position, rotation, colliderPoints, frameWidth, frameHeight, numAnim, frameCount,
                 looping, frametime, texture, velocity, life, shots)
-        {            
+        {
+
         }
 
 

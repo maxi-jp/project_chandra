@@ -298,17 +298,19 @@ namespace IS_XNA_Shooter
 
         public void newHistory()
         {
-            grManager.LoadContent(2); // cargamos los recursos del nivel 1 de GameA
+            grManager.LoadContent(3); // cargamos los recursos del nivel 1 de GameB
+            grManager.LoadContent(2); // cargamos los recursos del nivel 1 de GameA Pa que funcione
             audio.LoadContent(1);
             LvlMng.LoadContent(1); // cargamos los rectangulos
             LvlMng.LoadContent(0); // cargamos enemigos del levelA
 
-            game = new GameB(this, 1, GRMng.textureAim,
+            game = new GameStory(this, 1, GRMng.textureAim,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
            
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
 
-            grManager.UnloadContent(0); // descargamos los recursos del menú
+            //grManager.UnloadContent(2); 
+            //grManager.UnloadContent(3); // descargamos los recursos del menú
         }
 
         public void newSurvival()
@@ -317,7 +319,7 @@ namespace IS_XNA_Shooter
             audio.LoadContent(1);
             LvlMng.LoadContent(0); // cargamos los XML
 
-            game = new GameA(this, 1, GRMng.textureAim, GRMng.textureCell,
+            game = new GameA(this, 0, GRMng.textureAim, GRMng.textureCell,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
 
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
@@ -359,7 +361,8 @@ namespace IS_XNA_Shooter
 
         public void newScroll()
         {
-            grManager.LoadContent(2); // cargamos los recursos del nivel 1 de GameA
+            grManager.LoadContent(3); // cargamos los recursos del nivel 1 de GameB
+            grManager.LoadContent(2); // cargamos los recursos del nivel 1 de GameA Pa que funcione
             audio.LoadContent(1);
             LvlMng.LoadContent(1); // cargamos los rectangulos
 
@@ -369,7 +372,8 @@ namespace IS_XNA_Shooter
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego
 
             LvlMng.UnloadContent(1);
-            grManager.UnloadContent(0); // descargamos los recursos del menú
+            //grManager.UnloadContent(2);
+            //grManager.UnloadContent(3); // descargamos los recursos del menú
         }
 
         public void Resume()

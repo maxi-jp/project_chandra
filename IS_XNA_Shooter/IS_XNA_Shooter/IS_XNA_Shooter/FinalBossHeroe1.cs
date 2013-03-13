@@ -66,17 +66,12 @@ namespace IS_XNA_Shooter
         /// <param name="life"></param>
         /// <param name="value"></param>
         /// <param name="Ship"></param>
-        public FinalBossHeroe1(Camera camera, Level level, Vector2 position, float rotation,
-            short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
-            float frametime, Texture2D texture, float velocity, int life, int value, Ship Ship, List<Shot> shots)
-            : base(camera, level, position, rotation, frameWidth, frameHeight, numAnim, frameCount,
-                looping, frametime, texture, velocity, life, value, Ship)
+        public FinalBossHeroe1(Camera camera, Level level, Vector2 position, Ship Ship, List<Shot> shots)
+            : base(camera, level, position, 0, GRMng.frameWidthFinalBossHeroe, GRMng.frameHeightFinalBossHeroe,
+            GRMng.numAnimsFinalBossHeroe, GRMng.frameCountFinalBossHeroe, GRMng.loopingFinalBossHeroe, SuperGame.frameTime12, 
+            GRMng.textureFinalBossHeroe, 0, 500, 100, 1, Ship)
         {
-            this.position = new Vector2(level.width/2 - GRMng.frameWidthFBH1 / 2 + 400, 
-                level.height / 2 - GRMng.frameHeightFBH1 / 2 + 400);            
-            this.rotation = 0;
-            this.velocity = 500;
-            this.life = 1;
+            this.position = position;         
             destiny = position;
             currentState = State.attack;
             totalTime = 0;
@@ -103,8 +98,8 @@ namespace IS_XNA_Shooter
                     {
                         currentState = State.move;
                         Random random = new Random();
-                        destiny.X = random.Next(GRMng.frameWidthFBH1, level.width - GRMng.frameWidthFBH1);
-                        destiny.Y = random.Next(GRMng.frameHeightFBH1, level.height - GRMng.frameHeightFBH1);
+                        destiny.X = random.Next(frameWidth, level.width - frameHeight);
+                        destiny.Y = random.Next(frameHeight, level.height - frameHeight);
                     }
                     break;
 
@@ -134,10 +129,10 @@ namespace IS_XNA_Shooter
 
             float pX = position.X;
             float pY = position.Y;
-            float distance = GRMng.frameWidthFBH1 / 2 + 10;
+            float distance = frameWidth / 2 + 10;
 
-            float dY = -Ship.position.Y + position.Y;
-            float dX = -Ship.position.X + position.X;
+            float dY = -ship.position.Y + position.Y;
+            float dX = -ship.position.X + position.X;
 
             float gyre = Math.Abs((float)Math.Atan(dY / dX));
 
@@ -175,10 +170,10 @@ namespace IS_XNA_Shooter
                 shotLastTime = 0;
 
                 Vector2 shotPos = new Vector2(pX, pY);
-                Shot shot = new Shot(camera, level, shotPos, rotation, GRMng.frame_width_shot_fbh1, GRMng.frame_height_shot_fbh1, 
+                /*Shot shot = new Shot(camera, level, shotPos, rotation, GRMng.frame_width_shot_fbh1, GRMng.frame_height_shot_fbh1, 
                     GRMng.num_anims_shot_fbh1, GRMng.frame_count_shot_fbh1, GRMng.looping_shot_fbh1, SuperGame.frameTime8, GRMng.texture_shot_fbh1, 
                     SuperGame.shootType.normal, 500, 100);
-                shots.Add(shot);
+                shots.Add(shot);*/
             }
         }
 

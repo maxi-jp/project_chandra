@@ -226,6 +226,8 @@ namespace IS_XNA_Shooter
                     textureBg02 = content.Load<Texture2D>("Graphics/Backgrounds/bg02");
                     textureBg03 = content.Load<Texture2D>("Graphics/Backgrounds/bg03");
 
+                    textureFinalBossHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBossHeroe1");
+
                     break;
 
                 case 3: // GameB nivel 1

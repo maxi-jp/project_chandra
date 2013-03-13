@@ -93,6 +93,7 @@
     <Compile Include="Explosion.cs" />
     <Compile Include="FinalBoss1.cs" />
     <Compile Include="FinalBoss1Turret.cs" />
+    <Compile Include="FinalBossHeroe1.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameA.cs" />
     <Compile Include="GameB.cs" />

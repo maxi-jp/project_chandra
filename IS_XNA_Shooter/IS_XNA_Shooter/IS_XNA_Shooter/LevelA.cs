@@ -115,7 +115,7 @@ namespace IS_XNA_Shooter
             Enemy enemy;
 
             // EnemyWeak:
-            if (Keyboard.GetState().IsKeyDown(Keys.F1))
+            if (Keyboard.GetState().IsKeyDown(Keys.NumPad0))
             {
                 enemy = new EnemyWeak(camera, this, new Vector2(20, 20), 0, GRMng.frameWidthEW1,
                     GRMng.frameHeightEW1, GRMng.numAnimsEW1, GRMng.frameCountEW1, GRMng.loopingEW1,
@@ -125,7 +125,7 @@ namespace IS_XNA_Shooter
             }
 
             // EnemyBeamA:
-            if (Keyboard.GetState().IsKeyDown(Keys.F2))
+            if (Keyboard.GetState().IsKeyDown(Keys.NumPad1))
             {
                 enemy = new EnemyBeamA(camera, this, new Vector2(60, 60), 0, GRMng.frameWidthEB1,
                     GRMng.frameHeightEB1, GRMng.numAnimsEB1, GRMng.frameCountEB1, GRMng.loopingEB1,
@@ -135,7 +135,7 @@ namespace IS_XNA_Shooter
             }
 
             // EnemyMineShot
-            if (Keyboard.GetState().IsKeyDown(Keys.F3))
+            if (Keyboard.GetState().IsKeyDown(Keys.NumPad2))
             {
                 enemy = new EnemyMineShot(camera, this, new Vector2(60, 60), 0, GRMng.frameWidthEMS,
                     GRMng.frameHeightEMS, GRMng.numAnimsEMS, GRMng.frameCountEMS, GRMng.loopingEMS,
@@ -145,7 +145,7 @@ namespace IS_XNA_Shooter
             }
 
             // EnemyLaser
-            if (Keyboard.GetState().IsKeyDown(Keys.F4))
+            if (Keyboard.GetState().IsKeyDown(Keys.NumPad3))
             {
                 enemy = new EnemyLaserA(camera, this, new Vector2(60, 60), 0, GRMng.frameWidthES,
                     GRMng.frameHeightES, GRMng.numAnimsES, GRMng.frameCountES, GRMng.loopingES,
@@ -155,11 +155,20 @@ namespace IS_XNA_Shooter
             }
 
             // EnemyScared
-            if (Keyboard.GetState().IsKeyDown(Keys.F5))
+            if (Keyboard.GetState().IsKeyDown(Keys.NumPad4))
             {
                 enemy = new EnemyScared(camera, this, new Vector2(60, 60), 0, GRMng.frameWidthES,
                     GRMng.frameHeightES, GRMng.numAnimsES, GRMng.frameCountES, GRMng.loopingES,
                     SuperGame.frameTime12, GRMng.textureES, 0, 200, 100, 1, ship);
+                enemies.Add(enemy);
+                timeToSpawnEnemy = 0.5f;
+            }
+
+            // FinalBoss
+            if (Keyboard.GetState().IsKeyDown(Keys.NumPad5))
+            {
+                Vector2 positionBoss = new Vector2(GRMng.frameWidthFinalBossHeroe, GRMng.frameHeightFinalBossHeroe);
+                enemy = new FinalBossHeroe1(camera, this, positionBoss, ship, shotEnemies);
                 enemies.Add(enemy);
                 timeToSpawnEnemy = 0.5f;
             }

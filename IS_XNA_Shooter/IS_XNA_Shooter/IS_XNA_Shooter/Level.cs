@@ -16,6 +16,7 @@ namespace IS_XNA_Shooter
         public int width;
         public int height;
         protected List<Enemy> enemies;
+        protected List<Shot> shotEnemies;
         protected bool levelFinished = false;
 
         /* ------------------- CONSTRUCTORES ------------------- */
@@ -104,6 +105,11 @@ namespace IS_XNA_Shooter
             foreach (Enemy e in enemies)// enemigos
                 e.SetShip(ship);
             ship.SetPosition(ShipInitPosition);
+        }
+
+        public virtual void setShotEnemies(List<Shot> shotEnemies)
+        {
+            this.shotEnemies = shotEnemies;
         }
 
         // This method returns true when the level is finished.

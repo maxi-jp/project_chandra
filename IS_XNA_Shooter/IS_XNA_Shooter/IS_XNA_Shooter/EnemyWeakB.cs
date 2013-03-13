@@ -17,6 +17,16 @@ namespace IS_XNA_Shooter
             : base(camera, level, position, rotation, frameWidth, frameHeight, numAnim, frameCount,
                 looping, frametime, texture, timeToSpawn, velocity, life, value, Ship)
         {
+            Vector2[] points = new Vector2[7];
+            points[0] = new Vector2(21, 21);
+            points[1] = new Vector2(32, 22);
+            points[2] = new Vector2(49, 28);
+            points[3] = new Vector2(57, 40);
+            points[4] = new Vector2(49, 51);
+            points[5] = new Vector2(32, 57);
+            points[6] = new Vector2(21, 57);
+            collider = new Collider(camera, true, position, rotation, points, 40, frameWidth, frameHeight);
+
             setAnim(1);
         }
 
@@ -27,5 +37,20 @@ namespace IS_XNA_Shooter
 
             position.X += deltaTime * velocity;
         }
+
+        public override void Damage(int i)
+        {
+            base.Damage(i);
+
+            // if the enemy is dead, play the new animation and the death sound
+            if (life <= 0)
+            {
+                setAnim(2, -1);
+                Audio.PlayEffect("brokenBone01");
+            }
+        }
+        
+
+        
     }
 }

@@ -31,16 +31,15 @@ namespace IS_XNA_Shooter
                 frameWidth, frameHeight, numAnim, frameCount, looping, frametime, texture,
                 timeToSpawn, velocity, life, value, ship)
         {
-            Vector2[] points = new Vector2[8];
-            points[0] = new Vector2(21, 21);
-            points[1] = new Vector2(32, 22);
-            points[2] = new Vector2(49, 28);
-            points[3] = new Vector2(57, 37);
-            points[4] = new Vector2(57, 42);
-            points[5] = new Vector2(49, 51);
-            points[6] = new Vector2(32, 57);
-            points[7] = new Vector2(21, 57);
-            collider = new Collider(camera, true, position, rotation, points, frameWidth, frameHeight);
+            Vector2[] points = new Vector2[7];
+            points[0] = new Vector2(9, 30);
+            points[1] = new Vector2(23, 24);
+            points[2] = new Vector2(41, 28);
+            points[3] = new Vector2(72, 40);
+            points[4] = new Vector2(41, 52);
+            points[5] = new Vector2(23, 56);
+            points[6] = new Vector2(9, 50);
+            collider = new Collider(camera, true, position, rotation, points, 40, frameWidth, frameHeight);
 
             setAnim(0);
             gyre = dX = dY = 0;
@@ -54,7 +53,7 @@ namespace IS_XNA_Shooter
         {
             base.Update(deltaTime);
 
-            if (life > 0)
+            /*if (life > 0)
             {
                 switch (currentState)
                 {
@@ -112,7 +111,7 @@ namespace IS_XNA_Shooter
                         break;
 
                 } // switch (currentState)
-            }
+            }*/
         } // Update
 
         public override void Damage(int i)

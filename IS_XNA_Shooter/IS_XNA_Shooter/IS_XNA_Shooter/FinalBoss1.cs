@@ -24,6 +24,7 @@ namespace IS_XNA_Shooter
         /// Tell us if the enemy have to go down or up.
         /// </summary>
         private Boolean down;
+        private Boolean singletonLaserVelocityBoss;
         private Boolean singletonEnemyHeroe;
         /// <summary>
         /// Time between shots
@@ -50,6 +51,12 @@ namespace IS_XNA_Shooter
         private bool movingToCenter;
         private bool movingToBack;
 
+        //Laser
+        private float shotVelocity = 80f;
+        private float timeToShot = 3.0f;
+        private float timeShoting = 0.5f;
+        private int shotPower = 1;
+        private bool shooting;
         Shot shot;
 
         // ---------------------------
@@ -79,14 +86,12 @@ namespace IS_XNA_Shooter
                 GRMng.numAnimsFinalBoss1, GRMng.frameCountFinalBoss1, GRMng.loopingFinalBoss1, SuperGame.frameTime12,
                 GRMng.textureFinalBoss1, 0, 40, 100000, 1, null)
         {
-            //collider points
-            colliderPoints();
-            
             phase = 3;
             down = true;
             movingToCenter = true;
             movingToBack = true;
             singletonEnemyHeroe = true;
+            singletonLaserVelocityBoss = true;
             seconds = 10f;
             
             //Front shot
@@ -212,7 +217,7 @@ namespace IS_XNA_Shooter
 
         private void phase3(float deltaTime)
         {
-
+           
             
             if (movingToBack)
             {
@@ -301,7 +306,32 @@ namespace IS_XNA_Shooter
                 enemies.Add(e7);
 
                 singletonEnemyHeroe = false;
+             }
 
+
+            timeToShot -= deltaTime;
+            if (timeToShot <= 0)
+            {
+
+                if (timeShoting > 0)
+                {
+                    shooting = true;
+                    LaserShot();
+                    shot.Update(deltaTime);
+                    timeShoting -= deltaTime;
+                    //More speed if it's shooting
+                    if (singletonLaserVelocityBoss) {velocity = velocity * 3f; singletonLaserVelocityBoss = !singletonLaserVelocityBoss;}
+
+                }
+                else
+                {
+                    shooting = false;
+                    timeShoting = 0.5f;
+                    timeToShot = 3.0f;
+                    velocity = velocity / 1.05f;
+                    //When the laser do not shoot , the velocity get the before value
+                    if (!singletonLaserVelocityBoss) { velocity = velocity / 3f; singletonLaserVelocityBoss = !singletonLaserVelocityBoss; }
+                }
             }
         }
         /// <summary>
@@ -381,16 +411,42 @@ namespace IS_XNA_Shooter
             timeToShotWingsAux = timeToShotWings;
         }
 
-        private void colliderPoints()
+        private void LaserShot()
         {
-            Vector2[] points = new Vector2[3];            
-            points[0] = new Vector2(24, 240);
-            points[1] = new Vector2(24, 0);
-            points[2] = new Vector2(240, 111);
-            points[3] = new Vector2(240, 128);
+            //The calculation of the rectangle
+            // rotationMatrix = Matrix.CreateRotationZ(rotation);
+            //  int width = level.width + 800;
 
+            //p1 = Vector2.Transform(p1Orig, rotationMatrix);
+            /*  p1 = p1Orig;
+              p1 += position;
 
-            collider = new Collider(camera, true, position, rotation, points, frameWidth, frameHeight);
+             //p2 = Vector2.Transform(p2Orig, rotationMatrix);
+              p2 = p2Orig;
+              p2 += position;
+
+              rect.X = (int)position.X;
+              rect.Y = (int)position.Y;*/
+
+            // shot.position = position;
+
+            Vector2 positionShot = new Vector2(position.X - 1040, position.Y);
+            shot = new Shot(camera, level, positionShot, 0, GRMng.frameWidthELBulletHeroe, GRMng.frameHeightELBulletHeroe,
+                GRMng.numAnimsELBulletHeroe, GRMng.frameCountELBulletHeroe, GRMng.loopingELBulletHeroe, SuperGame.frameTime8,
+                GRMng.textureELBulletHeroe, SuperGame.shootType.normal, shotVelocity, shotPower);
+            
+            //   shot.rotation = rotation;
+
         }
+
+        
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            if (shooting)
+                shot.Draw(spriteBatch);
+
+            base.Draw(spriteBatch);
+        }
+
     }
 }

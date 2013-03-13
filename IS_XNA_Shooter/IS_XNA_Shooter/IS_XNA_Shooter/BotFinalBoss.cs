@@ -66,12 +66,12 @@ namespace IS_XNA_Shooter
             this.down = down;
                       
             //Front shot
-            timeToShotFront = 0.5f;
+            timeToShotFront = 5f;
             shotFrontPower = 200;
             shotFrontVelocity = 500f;
 
             //Wing shots
-            timeToShotWings = 0.5f;
+            timeToShotWings = 5f;
             shotWingsPower = 200;
             shotWingsVelocity = 500f;
 

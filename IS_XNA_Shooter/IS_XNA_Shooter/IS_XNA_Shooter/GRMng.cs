@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
 
 namespace IS_XNA_Shooter
 {
@@ -115,11 +114,19 @@ namespace IS_XNA_Shooter
 
         /* ------------------- BULLET LASER-------------------- */
         public static Texture2D textureLaserHeroe;
-        public static short frameWidthLaserHeroe = 1024;
+        public static short frameWidthLaserHeroe = 512;
         public static short frameHeightLaserHeroe = 32;
         public static short numAnimsLaserHeroe = 1;
-        public static short[] frameCountLaserHeroe = { 4 };
+        public static short[] frameCountLaserHeroe = { 2 };
         public static bool[] loopingLaserHeroe = { true };
+
+        /* ------------------- BULLET LASER Heroe-------------------- */
+        public static Texture2D textureELBulletHeroe;
+        public static short frameWidthELBulletHeroe = 2080;
+        public static short frameHeightELBulletHeroe = 2;
+        public static short numAnimsELBulletHeroe = 1;
+        public static short[] frameCountELBulletHeroe = { 1 };
+        public static bool[] loopingELBulletHeroe = { true };
 
         #endregion
 
@@ -211,6 +218,7 @@ namespace IS_XNA_Shooter
                     textureEMS =  content.Load<Texture2D>("Graphics/Ships/mineAnimation");
                     textureEMSBullet = content.Load<Texture2D>("Graphics/mineShot");
                     textureELBullet = content.Load<Texture2D>("Graphics/yellowpixel");
+                    textureELBulletHeroe = content.Load<Texture2D>("Graphics/yellowpixel");
                     
                     textureCell = content.Load<Texture2D>("Graphics/celdasuelo");
                     textureBg00 = content.Load<Texture2D>("Graphics/Backgrounds/bg00");
@@ -241,7 +249,7 @@ namespace IS_XNA_Shooter
                     textureBgCol3 = content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable3");
 
 
-                    textureLaserHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBoss1Laser");
+                    textureLaserHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBossLaser");
                     textureFinalBoss1 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBoss1");
                     textureBFB = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBossPhase2");
                     textureFinalBossHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBossHeroe1");

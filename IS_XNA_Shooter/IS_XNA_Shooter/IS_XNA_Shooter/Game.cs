@@ -23,7 +23,7 @@ namespace IS_XNA_Shooter
         protected float shipVelocity;
         protected int shipLife;
 
-        protected List<Enemy> enemies;
+        protected List<Enemy> enemies, enemiesBot;
         protected List<Shot> shots;
         protected List<Explosion> explosions;
 
@@ -38,6 +38,7 @@ namespace IS_XNA_Shooter
 
             camera = new Camera();
             enemies = new List<Enemy>();
+            enemiesBot = new List<Enemy>();
             shots = new List<Shot>();
             explosions = new List<Explosion>();
 
@@ -64,6 +65,17 @@ namespace IS_XNA_Shooter
                     enemies[i].Update(deltaTime);
                 else
                     enemies[i].UpdateTimeToSpawn(deltaTime);
+            }
+
+            for (int i = 0; i < enemiesBot.Count(); i++)   // enemies
+            {
+
+                if (enemiesBot[i].IsErasable())
+                    enemiesBot.RemoveAt(i);
+                else if (enemiesBot[i].IsActive())
+                    enemiesBot[i].Update(deltaTime);
+                else
+                    enemiesBot[i].UpdateTimeToSpawn(deltaTime);
             }
 
             for (int i = 0; i < shots.Count(); i++)     // shots
@@ -108,6 +120,10 @@ namespace IS_XNA_Shooter
             level.Draw(spriteBatch);
 
             foreach (Enemy e in enemies)
+                if (e.IsActive())
+                    e.Draw(spriteBatch);
+
+            foreach (Enemy e in enemiesBot)
                 if (e.IsActive())
                     e.Draw(spriteBatch);
 

@@ -45,14 +45,13 @@ namespace IS_XNA_Shooter
             collider = new Collider(camera, true, position, rotation, points, frameWidth, frameHeight);*/
             this.down = down;
             //For the Laser
-            Rectangle rect = new Rectangle(0, 0, 2000, 2);
-            p1 = new Vector2();
+            //Rectangle rect = new Rectangle(0, 0, 2000, 2);
+       /*     p1 = new Vector2();
             p2 = new Vector2();
             p1Orig = new Vector2(0, 0);
-            p2Orig = new Vector2(320, 0);
-            shot = new Shot(camera, level, p1, rotation, GRMng.frameWidthELBullet, GRMng.frameHeightELBullet,
-                GRMng.numAnimsELBullet, GRMng.frameCountELBullet, GRMng.loopingELBullet, SuperGame.frameTime8,
-                GRMng.textureELBullet, SuperGame.shootType.normal, shotVelocity, shotPower);
+            p2Orig = new Vector2(320, 0);*/
+
+           
             
         }
 
@@ -112,20 +111,27 @@ namespace IS_XNA_Shooter
         private void LaserShot() 
         { 
             //The calculation of the rectangle
-            rotationMatrix = Matrix.CreateRotationZ(rotation);
-            int width = level.width + 200;
+           // rotationMatrix = Matrix.CreateRotationZ(rotation);
+          //  int width = level.width + 800;
 
-            p1 = Vector2.Transform(p1Orig, rotationMatrix);
+            //p1 = Vector2.Transform(p1Orig, rotationMatrix);
+          /*  p1 = p1Orig;
             p1 += position;
 
-            p2 = Vector2.Transform(p2Orig, rotationMatrix);
+           //p2 = Vector2.Transform(p2Orig, rotationMatrix);
+            p2 = p2Orig;
             p2 += position;
 
             rect.X = (int)position.X;
-            rect.Y = (int)position.Y;
+            rect.Y = (int)position.Y;*/
 
-            shot.position = p2;
-            shot.rotation = rotation;
+           // shot.position = position;
+
+            Vector2 positionShot = new Vector2(position.X - 1040, position.Y);
+            shot = new Shot(camera, level, positionShot,0, GRMng.frameWidthELBulletHeroe, GRMng.frameHeightELBulletHeroe,
+                GRMng.numAnimsELBulletHeroe, GRMng.frameCountELBulletHeroe, GRMng.loopingELBulletHeroe, SuperGame.frameTime8,
+                GRMng.textureELBulletHeroe, SuperGame.shootType.normal, shotVelocity, shotPower);
+         //   shot.rotation = rotation;
 
         }
 

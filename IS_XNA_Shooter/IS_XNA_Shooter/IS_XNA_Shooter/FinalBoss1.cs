@@ -84,12 +84,12 @@ namespace IS_XNA_Shooter
         public FinalBoss1(Camera camera, Level level,Vector2 position, List<Shot> shots, List <Enemy> enemies)
             : base (camera, level, position, (float)Math.PI, GRMng.frameWidthFinalBoss1, GRMng.frameHeightFinalBoss1, 
                 GRMng.numAnimsFinalBoss1, GRMng.frameCountFinalBoss1, GRMng.loopingFinalBoss1, SuperGame.frameTime12,
-                GRMng.textureFinalBoss1, 0, 40, 100000, 1, null)
+                GRMng.textureFinalBoss1, 0, 40, 5000, 1, null)
         {
             //collider points
             colliderPoints();
             
-            phase = 3;
+            phase = 1;
             down = true;
             movingToCenter = true;
             movingToBack = true;
@@ -155,6 +155,9 @@ namespace IS_XNA_Shooter
             if (timeToShotWingsAux <= 0)
                 ShotWings();
             timeToShotWingsAux -= deltaTime;
+
+            if (life < 4900) 
+                phase = 2;
         }
 
         private void phase2(float deltaTime)
@@ -215,6 +218,8 @@ namespace IS_XNA_Shooter
 
                 seconds = 0;
             }
+
+            if (life < 1000) phase = 3;
         }
 
 
@@ -227,8 +232,8 @@ namespace IS_XNA_Shooter
 
                
 
-                if (position.X + this.frameWidth/2 < SuperGame.screenWidth) { position.X += deltaTime * velocity * 3; }
-                else if (position.X + this.frameWidth/2 > SuperGame.screenWidth) { position.X -= deltaTime * velocity * 3; }
+                if (position.X + this.frameWidth/2 < SuperGame.screenWidth) { position.X += deltaTime * velocity*3; }
+                else if (position.X + this.frameWidth/2 > SuperGame.screenWidth) { position.X -= deltaTime * velocity*3; }
 
                 if ((position.X + this.frameWidth/2 == SuperGame.screenWidth)) { movingToBack = false; }
             }

@@ -94,8 +94,8 @@ namespace IS_XNA_Shooter
                     position.Y -= deltaTime * velocity;
                 changeDirection();
 
-                if (position.X < SuperGame.screenWidth * 3 / 4) { position.X += deltaTime * velocity * 3; }
-                else if (position.X > SuperGame.screenWidth * 3 / 4) { position.X -= deltaTime * velocity * 3; }
+                if (position.X < SuperGame.screenWidth * 3 / 4) { position.X += deltaTime * velocity; }
+                else if (position.X > SuperGame.screenWidth * 3 / 4) { position.X -= deltaTime * velocity; }
             }
 
         } // Update

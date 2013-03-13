@@ -18,7 +18,7 @@ namespace IS_XNA_Shooter
         protected Vector2 movement;
         protected List<Shot> shots;
         protected float shotVelocity = 500f;
-        protected int shotPower = 200;
+        protected int shotPower = 10;
         protected int life;
 
         protected float timeToShot = 0.2f; // tiempo minimo entre disparos en segundos

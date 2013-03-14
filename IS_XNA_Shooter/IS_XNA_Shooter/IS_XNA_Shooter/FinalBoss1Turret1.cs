@@ -107,11 +107,14 @@ namespace IS_XNA_Shooter
                 pY -= distance * (float)Math.Sin(gyre);
             }
 
-            if (lastTimeShot >= 1f)
+            if (lastTimeShot >= 1f && !isDead())
             {
                 lastTimeShot = 0;
                 buildShot(pX, pY);
             }
+
+            if (lastTimeShot >= 0.8f && !isDead())
+                setAnim(1);
         }
 
         //-----------------------------------------------------------------------------------------------------------------
@@ -129,59 +132,29 @@ namespace IS_XNA_Shooter
 
             collider = new Collider(camera, true, position, rotation, points, frameWidth, frameHeight);
 
-        }
-
-        private void updatePursuit(float deltaTime)
-        {
-            if (rotationVelocity < 30)
-                rotationVelocity += 5 * deltaTime;
-            else if (velocity <= 0)
-                velocity = 200;
-
-            rotation += rotationVelocity * deltaTime;
-
-            float dY = position.Y - ship.position.Y;
-            float dX = position.X - ship.position.X;
-
-            float gyre = Math.Abs((float)Math.Atan(dY / dX));
-
-            //look to first clock
-            if (dX <= 0 && dY <= 0)
-            {
-                position.X += velocity * deltaTime * (float)Math.Cos(gyre);
-                position.Y += velocity * deltaTime * (float)Math.Sin(gyre);
-            }
-            //look to second clock
-            else if (dX >= 0 && dY <= 0)
-            {
-                position.X -= velocity * deltaTime * (float)Math.Cos(gyre);
-                position.Y += velocity * deltaTime * (float)Math.Sin(gyre);
-            }
-            //look to third clock
-            else if (dX >= 0 && dY >= 0)
-            {
-                position.X -= velocity * deltaTime * (float)Math.Cos(gyre);
-                position.Y -= velocity * deltaTime * (float)Math.Sin(gyre);
-            }
-            //look to fourth clock
-            else
-            {
-                position.X += velocity * deltaTime * (float)Math.Cos(gyre);
-                position.Y -= velocity * deltaTime * (float)Math.Sin(gyre);
-            }    
-        }
+        } 
         
         /// <summary>
         /// Builds a shot
         /// </summary>
         private void buildShot(float x, float y)
         {
+            setAnim(0);
+
             Vector2 shotPos = new Vector2(x, y);
             Shot shot = new Shot(camera, level, shotPos, rotation, GRMng.frameWidthFinalBoss1Turret1Shot, 
                 GRMng.frameHeightFinalBoss1Turret1Shot, GRMng.numAnimsFinalBoss1Turret1Shot, 
                 GRMng.frameCountFinalBoss1Turret1Shot, GRMng.loopingFinalBoss1Turret1Shot, SuperGame.frameTime8, 
                 GRMng.textureFinalBoss1Turret1Shot, SuperGame.shootType.normal, 200, 10);
             shots.Add(shot);
+        }
+
+        public override void Damage(int i)
+        {
+            base.Damage(i);
+
+            if (life <= 0)
+                setAnim(2, -1);
         }
     }
 }

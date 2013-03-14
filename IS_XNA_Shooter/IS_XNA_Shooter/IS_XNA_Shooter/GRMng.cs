@@ -152,9 +152,9 @@ namespace IS_XNA_Shooter
         public static Texture2D textureFinalBoss1Turret1;
         public static short frameWidthFinalBoss1Turret1 = 20;
         public static short frameHeightFinalBoss1Turret1 = 20;
-        public static short numAnimsFinalBoss1Turret1 = 2;
-        public static short[] frameCountFinalBoss1Turret1 = { 1, 3 };
-        public static bool[] loopingFinalBoss1Turret1 = { true };
+        public static short numAnimsFinalBoss1Turret1 = 3;
+        public static short[] frameCountFinalBoss1Turret1 = { 1, 3, 4 };
+        public static bool[] loopingFinalBoss1Turret1 = { true, true, false };
 
         /* ------------------- FINAL BOSS 1 TURRET 1 SHOT -------------------- */
         public static Texture2D textureFinalBoss1Turret1Shot;
@@ -168,9 +168,9 @@ namespace IS_XNA_Shooter
         public static Texture2D textureFinalBoss1Turret2;
         public static short frameWidthFinalBoss1Turret2 = 90;
         public static short frameHeightFinalBoss1Turret2 = 30;
-        public static short numAnimsFinalBoss1Turret2 = 1;
-        public static short[] frameCountFinalBoss1Turret2 = { 1 };
-        public static bool[] loopingFinalBoss1Turret2 = { true };
+        public static short numAnimsFinalBoss1Turret2 = 2;
+        public static short[] frameCountFinalBoss1Turret2 = { 1, 4 };
+        public static bool[] loopingFinalBoss1Turret2 = { true, false };
 
         #endregion
 

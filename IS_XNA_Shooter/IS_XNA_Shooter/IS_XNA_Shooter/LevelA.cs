@@ -167,8 +167,9 @@ namespace IS_XNA_Shooter
             // FinalBoss
             if (Keyboard.GetState().IsKeyDown(Keys.NumPad5))
             {
+                ship.SetLife(1);
                 Vector2 positionBoss = new Vector2(GRMng.frameWidthFinalBossHeroe, GRMng.frameHeightFinalBossHeroe);
-                enemy = new FinalBossHeroe1(camera, this, positionBoss, ship, shotEnemies);
+                enemy = new FinalBossHeroe1(camera, this, positionBoss, ship, enemies, shotEnemies);
                 enemies.Add(enemy);
                 timeToSpawnEnemy = 0.5f;
             }

@@ -66,36 +66,39 @@ namespace IS_XNA_Shooter
             else if (velocity <= 0)
                 velocity = 200;
 
-            rotation += rotationVelocity * deltaTime;
+            if (!isDead())
+            {
+                rotation += rotationVelocity * deltaTime;
 
-            float dY = position.Y - ship.position.Y;
-            float dX = position.X - ship.position.X;
+                float dY = position.Y - ship.position.Y;
+                float dX = position.X - ship.position.X;
 
-            float gyre = Math.Abs((float)Math.Atan(dY / dX));
+                float gyre = Math.Abs((float)Math.Atan(dY / dX));
 
-            //look to first clock
-            if (dX <= 0 && dY <= 0)
-            {
-                position.X += velocity * deltaTime * (float)Math.Cos(gyre);
-                position.Y += velocity * deltaTime * (float)Math.Sin(gyre);
-            }
-            //look to second clock
-            else if (dX >= 0 && dY <= 0)
-            {
-                position.X -= velocity * deltaTime * (float)Math.Cos(gyre);
-                position.Y += velocity * deltaTime * (float)Math.Sin(gyre);
-            }
-            //look to third clock
-            else if (dX >= 0 && dY >= 0)
-            {
-                position.X -= velocity * deltaTime * (float)Math.Cos(gyre);
-                position.Y -= velocity * deltaTime * (float)Math.Sin(gyre);
-            }
-            //look to fourth clock
-            else
-            {
-                position.X += velocity * deltaTime * (float)Math.Cos(gyre);
-                position.Y -= velocity * deltaTime * (float)Math.Sin(gyre);
+                //look to first clock
+                if (dX <= 0 && dY <= 0)
+                {
+                    position.X += velocity * deltaTime * (float)Math.Cos(gyre);
+                    position.Y += velocity * deltaTime * (float)Math.Sin(gyre);
+                }
+                //look to second clock
+                else if (dX >= 0 && dY <= 0)
+                {
+                    position.X -= velocity * deltaTime * (float)Math.Cos(gyre);
+                    position.Y += velocity * deltaTime * (float)Math.Sin(gyre);
+                }
+                //look to third clock
+                else if (dX >= 0 && dY >= 0)
+                {
+                    position.X -= velocity * deltaTime * (float)Math.Cos(gyre);
+                    position.Y -= velocity * deltaTime * (float)Math.Sin(gyre);
+                }
+                //look to fourth clock
+                else
+                {
+                    position.X += velocity * deltaTime * (float)Math.Cos(gyre);
+                    position.Y -= velocity * deltaTime * (float)Math.Sin(gyre);
+                }
             }
         }
 
@@ -114,6 +117,14 @@ namespace IS_XNA_Shooter
 
             collider = new Collider(camera, true, position, rotation, points, frameWidth, frameHeight);
 
+        }
+
+        public override void  Damage(int i)
+        {
+            base.Damage(i);
+
+            if (life <= 0) 
+                setAnim(1, -1);
         }
     }
 }

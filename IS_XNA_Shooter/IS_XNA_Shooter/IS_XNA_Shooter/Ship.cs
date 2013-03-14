@@ -200,6 +200,11 @@ namespace IS_XNA_Shooter
             this.position = position;
         }
 
+        public void SetLife(int life)
+        {
+            this.life = life;
+        }
+
         public virtual bool IsColisionable()
         {
             return colisionable;

@@ -18,8 +18,9 @@ namespace IS_XNA_Shooter
         private enum State
         {
             move,
-            attack,
-            turret
+            shoot,
+            turret,
+            duplicate
         };
 
         /// <summary>
@@ -47,6 +48,10 @@ namespace IS_XNA_Shooter
         /// </summary>
         private List<Shot> shots;
 
+        private List<Enemy> enemies;
+
+        private bool isDuplicate;
+
         //-----------------------------------------------------------------------------------------------------------------
 
         /// <summary>
@@ -67,16 +72,18 @@ namespace IS_XNA_Shooter
         /// <param name="life"></param>
         /// <param name="value"></param>
         /// <param name="Ship"></param>
-        public FinalBossHeroe1(Camera camera, Level level, Vector2 position, Ship Ship, List<Shot> shots)
+        public FinalBossHeroe1(Camera camera, Level level, Vector2 position, Ship Ship, List<Enemy> enemies, List<Shot> shots)
             : base(camera, level, position, 0, GRMng.frameWidthHeroe1, GRMng.frameHeightHeroe1,
             GRMng.numAnimsHeroe1, GRMng.frameCountHeroe1, GRMng.loopingHeroe1, SuperGame.frameTime12, 
-            GRMng.textureHeroe1, 0, 500, 1, 1, Ship)
+            GRMng.textureHeroe1, 0, 1000, 1, 10, Ship)
         {
-            this.position = position;         
-            destiny = position;
-            currentState = State.attack;
+            this.position = position;
+            destiny = new Vector2();
+            newPosition();
+            currentState = State.move;
             totalTime = 0;
             this.shots = shots;
+            this.enemies = enemies;
             setAnim(1);
 
             //I'm making a copy because collider midifies the points
@@ -88,6 +95,8 @@ namespace IS_XNA_Shooter
 
             active = true;
             colisionable = true;
+
+            isDuplicate = false;
         }
 
         //-----------------------------------------------------------------------------------------------------------------
@@ -121,14 +130,12 @@ namespace IS_XNA_Shooter
 
             switch (currentState) 
             {
-                case State.attack :
-                    attack(deltaTime);
+                case State.shoot :
+                    shoot(deltaTime);
                     if (totalTime > 1)
                     {
                         currentState = State.move;
-                        Random random = new Random();
-                        destiny.X = random.Next(frameWidth, level.width - frameHeight);
-                        destiny.Y = random.Next(frameHeight, level.height - frameHeight);
+                        newPosition();
                     }
                     break;
 
@@ -136,13 +143,21 @@ namespace IS_XNA_Shooter
                     move(deltaTime);
                     if (Math.Abs(destiny.X - position.X) < 10 && Math.Abs(destiny.Y - position.Y) < 10)
                     {
-                        currentState = State.attack;
+                        chooseModeAttack();
                         totalTime = 0;
                     }
                     break;
 
                 case State.turret :
-                    //TO DO: put a turret
+                    currentState = State.move;
+                    buildTurret();
+                    newPosition();
+                    break;
+
+                case State.duplicate :
+                    currentState = State.move;
+                    newPosition();
+                    duplicate();
                     break;
 
                 default :                    
@@ -152,11 +167,41 @@ namespace IS_XNA_Shooter
 
         //-----------------------------------------------------------------------------------------------------------------
 
+        private void chooseModeAttack()
+        {
+            Random random = new Random();
+            if (!isDuplicate)
+            {
+                int numState = random.Next(0, 3);
+                if (numState == 0)
+                    currentState = State.shoot;
+                else if (numState == 1)
+                    currentState = State.turret;
+                else if (numState == 2)
+                    currentState = State.duplicate;
+            }
+            else
+            {
+                int numState = random.Next(0, 2);
+                if (numState == 0)
+                    currentState = State.shoot;
+                else if (numState == 1)
+                    currentState = State.turret;
+            }
+        }
+
+        private void newPosition()
+        {
+            Random random = new Random();
+            destiny.X = random.Next(frameWidth, level.width - frameHeight);
+            destiny.Y = random.Next(frameHeight, level.height - frameHeight);
+        }
+
         /// <summary>
         /// The enemy looks to our ship and attack us
         /// </summary>
         /// <param name="deltaTime"></param>
-        private void attack(float deltaTime)
+        private void shoot(float deltaTime)
         {
             shotLastTime += deltaTime;
 
@@ -241,5 +286,26 @@ namespace IS_XNA_Shooter
             }
         }
 
+        private void buildTurret()
+        {
+            Random random = new Random();
+            if (random.Next(0, 2) == 0)
+            {
+                Enemy enemy = new FinalBoss1Turret1(camera, level, position, ship, shots);
+                enemies.Add(enemy);
+            }
+            else
+            {
+                Enemy enemy = new FinalBoss1Turret2(camera, level, position, ship);
+                enemies.Add(enemy);
+            }
+        }
+
+        private void duplicate()
+        {
+            isDuplicate = true;
+            Enemy enemy = new FinalBossHeroe1(camera, level, position, ship, enemies, shots);
+            enemies.Add(enemy);
+        }
     }
 }

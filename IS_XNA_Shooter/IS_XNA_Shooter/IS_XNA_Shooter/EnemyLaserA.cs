@@ -10,7 +10,7 @@ namespace IS_XNA_Shooter
     class EnemyLaserA : Enemy
     {
         /* ------------------- ATTRIBUTES ------------------- */
-        private Boolean shooting = true;
+        private Boolean shooting = false;
         private Matrix rotationMatrix;
 
         //For the Laser
@@ -31,15 +31,17 @@ namespace IS_XNA_Shooter
             : base(camera, level, position, rotation, frameWidth, frameHeight, numAnim, frameCount,
                 looping, frametime, texture, timeToSpawn, 50, 100, value, ship)
         {
-            setAnim(3);
-
-            Vector2[] points = new Vector2[6];
-            points[0] = new Vector2(20, 20);
-            points[1] = new Vector2(40, 13);
-            points[2] = new Vector2(60, 20);
-            points[3] = new Vector2(60, 60);
-            points[4] = new Vector2(40, 65);
-            points[5] = new Vector2(20, 60);
+            setAnim(0);
+            frameTime = SuperGame.frameTime10;
+            Vector2[] points = new Vector2[8];
+            points[0] = new Vector2(14, 37.5f);
+            points[1] = new Vector2(19, 29);
+            points[2] = new Vector2(31, 19);
+            points[3] = new Vector2(44, 16);
+            points[4] = new Vector2(69, 37.5f);
+            points[5] = new Vector2(44, 59);
+            points[6] = new Vector2(31, 56);
+            points[7] = new Vector2(19, 46);
             collider = new Collider(camera, true, position, rotation, points, 40, frameWidth, frameHeight);
 
             //For the Laser
@@ -65,27 +67,33 @@ namespace IS_XNA_Shooter
 
             if (life > 0)
             {
-                // it allways rotates
-                rotation += 0.4f * deltaTime;
-
                 timeToShot -= deltaTime;
-                if (timeToShot <= 0)
-                {
-                    timeToShot = 3.0f;
-                    shooting = !shooting;
-                    /*if (shooting)
-                        shots.Add(shot);
-                    else shots.Remove(shot);*/
-                }
-
-                //it shoots if it has to
+                //It shoots if it has to
                 if (shooting)
                 {
+                    if (currentAnim != 2) setAnim(2);
                     LaserShot();
                     shot.Update(deltaTime);
+                    //Rotates slowly
+                    rotation += 0.2f * deltaTime;
+
+                }//Spin
+                else if (timeToShot > 1)
+                    rotation += 0.45f * deltaTime;
+                //Prepare to shoot
+                else if (timeToShot > 0)
+                {
+                    if (currentAnim != 1) setAnim(1);
+                    //Rotates slowly
+                    rotation += 0.2f * deltaTime;
+                }
+                if (timeToShot <= 0)
+                {
+                    setAnim(0);
+                    timeToShot = 3.0f;
+                    shooting = !shooting;
                 }
             }
-
             // shots:
             if (shooting)
             {

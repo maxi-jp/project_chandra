@@ -88,6 +88,12 @@ namespace IS_XNA_Shooter
 
 
         /* ------------------- ENEMY LASER-------------------- */
+        public static Texture2D textureEL;
+        public static short frameWidthEL = 80;
+        public static short frameHeightEL = 75;
+        public static short numAnimsEL = 6;
+        public static short[] frameCountEL = { 1, 10, 1, 5 };
+        public static bool[] loopingEL = { true, false, true, false };
         /* ------------------- BULLET LASER-------------------- */
         public static Texture2D textureELBullet;
         public static short frameWidthELBulletA = 600;
@@ -216,6 +222,7 @@ namespace IS_XNA_Shooter
                     textureESBullet = content.Load<Texture2D>("Graphics/scaredBullet");
                     textureEMS =  content.Load<Texture2D>("Graphics/Ships/mineAnimation");
                     textureEMSBullet = content.Load<Texture2D>("Graphics/mineShot");
+                    textureEL = content.Load<Texture2D>("Graphics/Ships/enemyLaser");
                     textureELBullet = content.Load<Texture2D>("Graphics/yellowpixel");
                     
                     textureCell = content.Load<Texture2D>("Graphics/celdasuelo");
@@ -301,6 +308,7 @@ namespace IS_XNA_Shooter
                     textureESBullet = null;
                     textureEMS = null;
                     textureEMSBullet = null;
+                    textureEL = null;
                     textureELBullet = null;
 
                     textureCell = null;

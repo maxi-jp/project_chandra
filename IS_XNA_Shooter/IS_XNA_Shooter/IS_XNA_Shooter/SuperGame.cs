@@ -57,6 +57,7 @@ namespace IS_XNA_Shooter
         // tiempo de duración de un frame en una animación:
         public static float frameTime24 =   ((float)1 / 24);
         public static float frameTime12 =   ((float)1 / 12);
+        public static float frameTime10 =   ((float)1 / 10);
         public static float frameTime8 =    ((float)1 / 8);
 
         public static float timeToResume = 2f; // t que tarda en volver después de pause

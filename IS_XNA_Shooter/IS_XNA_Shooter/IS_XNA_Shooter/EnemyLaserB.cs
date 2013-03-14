@@ -10,7 +10,7 @@ namespace IS_XNA_Shooter
     class EnemyLaserB : Enemy
     {
         /* ------------------- ATTRIBUTES ------------------- */
-        private Boolean shooting = true;
+        private Boolean shooting = false;
         private Matrix rotationMatrix;
 
         //For the Laser
@@ -32,15 +32,17 @@ namespace IS_XNA_Shooter
             : base(camera, level, position, rotation, frameWidth, frameHeight, numAnim, frameCount,
                 looping, frametime, texture, timeToSpawn, 100, 100, value, ship)
         {
-            setAnim(3);
-
-            Vector2[] points = new Vector2[6];
-            points[0] = new Vector2(20, 20);
-            points[1] = new Vector2(40, 13);
-            points[2] = new Vector2(60, 20);
-            points[3] = new Vector2(60, 60);
-            points[4] = new Vector2(40, 65);
-            points[5] = new Vector2(20, 60);
+            setAnim(0);
+            frameTime = SuperGame.frameTime10;
+            Vector2[] points = new Vector2[8];
+            points[0] = new Vector2(14, 37.5f);
+            points[1] = new Vector2(19, 29);
+            points[2] = new Vector2(31, 19);
+            points[3] = new Vector2(44, 16);
+            points[4] = new Vector2(69, 37.5f);
+            points[5] = new Vector2(44, 59);
+            points[6] = new Vector2(31, 56);
+            points[7] = new Vector2(19, 46);
             collider = new Collider(camera, true, position, rotation, points, 40, frameWidth, frameHeight);
 
             //For the Laser
@@ -48,7 +50,7 @@ namespace IS_XNA_Shooter
             p1 = new Vector2();
             p2 = new Vector2();
             p1Orig = new Vector2(0, 0);
-            p2Orig = new Vector2(650, 0);
+            p2Orig = new Vector2(675, 0);
             shot = new Shot(camera, level, p1, rotation, GRMng.frameWidthELBulletB, GRMng.frameHeightELBullet,
                 GRMng.numAnimsELBullet, GRMng.frameCountELBullet, GRMng.loopingELBullet, SuperGame.frameTime8,
                 GRMng.textureELBullet, SuperGame.shootType.normal, shotVelocity, shotPower);
@@ -69,61 +71,79 @@ namespace IS_XNA_Shooter
                 if (goingUp)
                 {
                     timeToShot -= deltaTime;
-                    //If itsn't shooting it mooves
-                    if (timeToShot >3)
+                    //If itsn't shooting it moves
+                    if (timeToShot > 4)
                     {
                         if (position.Y >= 50)
                             position.Y -= velocity * deltaTime;
                         else
                             goingUp = false;
-                      
+
                     }
-                    //If it is shooting he only shots
-                    else if (timeToShot >0)
+                    //Prepare to shoot
+                    else if (timeToShot > 3)
                     {
+                        if (currentAnim != 1) setAnim(1, 2);
+                        if (position.Y >= 50)
+                            position.Y -= velocity * 0.5f * deltaTime;
+                        else
+                            goingUp = false;
+                    }
+                    //Shoot
+                    else if (timeToShot > 0)
+                    {
+                        if (currentAnim != 2) setAnim(2);
                         shooting = true;
                         LaserShot();
                         shot.Update(deltaTime);
-                       
+
                     }
                     //If it stops shooting, it has to move again
                     else
                     {
+                        setAnim(0);
                         shooting = false;
                         timeToShot = 6.0f;
                     }
                 }
-                    //if it is going down
-                else {
+                //if it is going down
+                else
+                {
                     timeToShot -= deltaTime;
                     //If itsn't shooting it mooves
-                    if (timeToShot > 3)
+                    if (timeToShot > 4)
                     {
-                        if (position.Y <= level.height-50)
+                        if (position.Y <= level.height - 50)
                             position.Y += velocity * deltaTime;
                         else
                             goingUp = true;
-        
                     }
-                    //If it is shooting he only shots
-                    else if (timeToShot >0)
+                    //Prepare to shoot
+                    else if (timeToShot > 3)
                     {
+                        if (currentAnim != 1) setAnim(1, 2);
+                        if (position.Y <= level.height - 50)
+                            position.Y += velocity * 0.5f * deltaTime;
+                        else
+                            goingUp = true;
+                    }
+                    //Shoot
+                    else if (timeToShot > 0)
+                    {
+                        if (currentAnim != 2) setAnim(2);
                         shooting = true;
                         LaserShot();
                         shot.Update(deltaTime);
-                        
                     }
                     //If it stops shooting, it has to move again
                     else
                     {
+                        setAnim(0);
                         timeToShot = 6.0f;
                         shooting = false;
                     }
-
                 }
-               
             }
-
             // shots:
             if (shooting)
             {

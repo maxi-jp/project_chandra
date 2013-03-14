@@ -57,10 +57,10 @@ namespace IS_XNA_Shooter
             readRectangles();
 
             //Enemigo
-            Enemy e1 = new EnemyLaserB(camera, this, new Vector2(SuperGame.screenWidth + 100, 
-                50)/*new Random().Next(SuperGame.screenHeight))*/, (float)Math.PI, GRMng.frameWidthES, 
-                GRMng.frameHeightES, GRMng.numAnimsES, GRMng.frameCountES, GRMng.loopingES, SuperGame.frameTime12, 
-                GRMng.textureES, 1, -200, 100, 1, null);
+            Enemy e1 = new EnemyLaserB(camera, this, new Vector2(SuperGame.screenWidth - 100, 
+                50)/*new Random().Next(SuperGame.screenHeight))*/, (float)Math.PI, GRMng.frameWidthEL, 
+                GRMng.frameHeightEL, GRMng.numAnimsEL, GRMng.frameCountEL, GRMng.loopingEL, SuperGame.frameTime10, 
+                GRMng.textureEL, 1, -200, 100, 1, null);
             e1.SetActive();
 
             enemies.Add(e1);

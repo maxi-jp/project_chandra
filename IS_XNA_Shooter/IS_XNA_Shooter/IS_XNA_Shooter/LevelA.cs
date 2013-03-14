@@ -150,9 +150,9 @@ namespace IS_XNA_Shooter
             // EnemyLaser
             if (ControlMng.f5Preshed)
             {
-                enemy = new EnemyLaserA(camera, this, new Vector2(60, 60), 0, GRMng.frameWidthES,
-                    GRMng.frameHeightES, GRMng.numAnimsES, GRMng.frameCountES, GRMng.loopingES,
-                    SuperGame.frameTime12, GRMng.textureES, 0, 100, 100, 1, ship);
+                enemy = new EnemyLaserA(camera, this, new Vector2(60, 60), 0, GRMng.frameWidthEL,
+                    GRMng.frameHeightEL, GRMng.numAnimsEL, GRMng.frameCountEL, GRMng.loopingEL,
+                    SuperGame.frameTime10, GRMng.textureEL, 0, 100, 100, 1, ship);
                 enemies.Add(enemy);
             }
 

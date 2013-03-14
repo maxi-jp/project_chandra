@@ -135,6 +135,7 @@ namespace IS_XNA_Shooter
 
             grManager.LoadContent(0); // se cargan los recursos del menu
             grManager.LoadContent(1); // se cargan los recursos del menu ingame
+            grManager.LoadContent(99);// se cargan los recursos del menu gameover
             audio.LoadContent(0);
 
             fontDebug = Content.Load<SpriteFont>("FontDebug");
@@ -172,7 +173,7 @@ namespace IS_XNA_Shooter
             // tiempo que ha pasado desde la ultima vez que ejecutamos el metodo
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            // contadores de frames:
+            // update the frames counters:
             timeCounterSecondAux -= deltaTime;
             if (timeCounterSecondAux <= 0)
             {
@@ -184,10 +185,16 @@ namespace IS_XNA_Shooter
             }
             updateFramesCounterAux++;
 
-            if (Keyboard.GetState().IsKeyDown(Keys.F))
-                debug = !debug;
+            // update the controls manager
+            controlMng.Update(deltaTime);
 
-            // posición actual del ratón:
+            // active/deactive the debug mode:
+            if (ControlMng.fPreshed && !debug)
+                debug = true;
+            else if (ControlMng.fPreshed && debug)
+                debug = false;
+
+            // actual position of the mouse:
             pointer.X = Mouse.GetState().X;
             pointer.Y = Mouse.GetState().Y;
 
@@ -395,6 +402,8 @@ namespace IS_XNA_Shooter
             menu.menuState = Menu.MenuState.main;
             grManager.UnloadContentGame();
             audio.UnloadContent(1);
+
+            player = new Player(playerLifes);
         }
 
         public void GameOver()

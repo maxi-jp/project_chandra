@@ -185,6 +185,7 @@ namespace IS_XNA_Shooter
             // 1=Menú ingame
             // 2=GameA nivel 1
             // 3=GameB nivel 1
+            // 99=GameOver Menu
 
             switch (i)
             {
@@ -223,9 +224,6 @@ namespace IS_XNA_Shooter
                     textureBg02 = content.Load<Texture2D>("Graphics/Backgrounds/bg02");
                     textureBg03 = content.Load<Texture2D>("Graphics/Backgrounds/bg03");
 
-                    menuGameOver = content.Load<Texture2D>("Graphics/Menu/gameover");
-                    gameOverSplash = content.Load<Texture2D>("Graphics/Splash/splash_gameover_2");
-
                     break;
 
                 case 3: // GameB nivel 1
@@ -252,10 +250,13 @@ namespace IS_XNA_Shooter
                     textureFinalBoss1 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBoss1");
                     textureBFB = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBossPhase2");
 
+                    break;
+
+                case 99: // menu game over:
                     menuGameOver = content.Load<Texture2D>("Graphics/Menu/gameover");
                     gameOverSplash = content.Load<Texture2D>("Graphics/Splash/splash_gameover_2");
-
                     break;
+
             }
 
             whitepixel = content.Load<Texture2D>("Graphics/whitepixel");
@@ -271,6 +272,7 @@ namespace IS_XNA_Shooter
             // 1=Menú ingame
             // 2=GameA nivel 1
             // 3=GameB nivel 1
+            // 99=GameOver Menu
 
             switch (i)
             {
@@ -309,9 +311,6 @@ namespace IS_XNA_Shooter
                     textureBg02 = null;
                     textureBg03 = null;
 
-                    menuGameOver = null;
-                    gameOverSplash = null;
-
                     break;
 
                 case 3: // GameB nivel 1
@@ -333,10 +332,13 @@ namespace IS_XNA_Shooter
                     textureBgCol2 = null;
                     textureBgCol3 = null;
 
+                    break;
+
+                case 99:
                     menuGameOver = null;
                     gameOverSplash = null;
-
                     break;
+
             }
         } // UnloadContent
 

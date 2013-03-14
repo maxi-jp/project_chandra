@@ -89,12 +89,12 @@ namespace IS_XNA_Shooter
                     //if (enemies[i].isActive() && shots[j].isActive() && enemies[i].collider.collision(shots[j].collider))
                     {                       
                         // nueva explosión:
-                        /*Explosion newExp = new Explosion(camera, level, eAux.position, eAux.rotation, GRMng.frameWidthEx1,
+                        /*Explosion newExp = new Explosion(camera, level, enemies[i].position, enemies[i].rotation, GRMng.frameWidthEx1,
                             GRMng.frameHeightEx1, GRMng.frameCountEx1, SuperGame.frameTime24, GRMng.textureExplosion1);
                         explosions.Add(newExp);*/
 
                         enemies[i].Damage(shots[j].GetPower());
-
+                        
                         shots.RemoveAt(j);
                     }
                 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace IS_XNA_Shooter
 {
@@ -112,6 +113,25 @@ namespace IS_XNA_Shooter
         public static short[] frameCountFinalBossHeroe = { 1 };
         public static bool[] loopingFinalBossHeroe = {true};
 
+        /* ------------------- FINAL BOSS HEROE anim-------------------- */
+        public static Texture2D textureHeroe1;
+        public static short frameWidthHeroe1 = 100;
+        public static short frameHeightHeroe1 = 100;
+        public static short numAnimsHeroe1 = 3;
+        public static short[] frameCountHeroe1 = { 1, 3, 4 };
+        public static bool[] loopingHeroe1 = { false, true, false };
+        public static Vector2[] colliderHeroe1 = {new Vector2(11, 50), new Vector2(51, 30), new Vector2(89, 49), new Vector2(51, 69)};
+
+        /* ------------------- SHOT FINAL BOSS HEROE-------------------- */
+        public static Texture2D textureShotFinalBossHeroe;
+        public static short frameWidthShotFinalBossHeroe = 20;
+        public static short frameHeightShotFinalBossHeroe = 20;
+        public static short numAnimsShotFinalBossHeroe = 1;
+        public static short[] frameCountShotFinalBossHeroe = { 1 };
+        public static bool[] loopingShotFinalBossHeroe = { true };
+        public static Vector2[] colliderShotFinalBossHeroe = {new Vector2(3, 3), new Vector2(10, 0), new Vector2(16, 3), new Vector2(19, 10), new Vector2(16, 16), 
+                                                                 new Vector2(10, 19), new Vector2(3, 16), new Vector2(0, 10) };
+
         /* ------------------- BULLET LASER BOSS-------------------- */
         public static Texture2D textureLaserBoss;
         public static short frameWidthLaserBoss = 512;
@@ -127,6 +147,8 @@ namespace IS_XNA_Shooter
         public static short numAnimsELBulletHeroe = 1;
         public static short[] frameCountELBulletHeroe = { 1 };
         public static bool[] loopingELBulletHeroe = { true };
+
+
 
         #endregion
 
@@ -226,7 +248,9 @@ namespace IS_XNA_Shooter
                     textureBg02 = content.Load<Texture2D>("Graphics/Backgrounds/bg02");
                     textureBg03 = content.Load<Texture2D>("Graphics/Backgrounds/bg03");
 
+                    textureHeroe1 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/heroe1");
                     textureFinalBossHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBossHeroe1");
+                    textureShotFinalBossHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/shotHeroe1");
 
                     break;
 

@@ -34,6 +34,16 @@ namespace IS_XNA_Shooter
         }
 
         /* ------------------- MÉTODOS ------------------- */
+
+        /// <summary>
+        /// Update the collider with points
+        /// </summary>
+        /// <param name="points"></param>
+        public void setCollider(Vector2[] points)
+        {
+            collider = new Collider(camera, true, position, rotation, points, frameWidth, frameHeight);
+        }
+
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);

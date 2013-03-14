@@ -18,7 +18,8 @@ namespace IS_XNA_Shooter
         private enum State
         {
             move,
-            attack
+            attack,
+            turret
         };
 
         /// <summary>
@@ -67,18 +68,45 @@ namespace IS_XNA_Shooter
         /// <param name="value"></param>
         /// <param name="Ship"></param>
         public FinalBossHeroe1(Camera camera, Level level, Vector2 position, Ship Ship, List<Shot> shots)
-            : base(camera, level, position, 0, GRMng.frameWidthFinalBossHeroe, GRMng.frameHeightFinalBossHeroe,
-            GRMng.numAnimsFinalBossHeroe, GRMng.frameCountFinalBossHeroe, GRMng.loopingFinalBossHeroe, SuperGame.frameTime12, 
-            GRMng.textureFinalBossHeroe, 0, 500, 100, 1, Ship)
+            : base(camera, level, position, 0, GRMng.frameWidthHeroe1, GRMng.frameHeightHeroe1,
+            GRMng.numAnimsHeroe1, GRMng.frameCountHeroe1, GRMng.loopingHeroe1, SuperGame.frameTime12, 
+            GRMng.textureHeroe1, 0, 10, 1, 1, Ship)
         {
             this.position = position;         
             destiny = position;
             currentState = State.attack;
             totalTime = 0;
             this.shots = shots;
+            setAnim(1);
+
+            //I'm making a copy because collider midifies the points
+            Vector2[] pointsCollider = new Vector2[GRMng.colliderHeroe1.Length];
+            for (int i = 0; i < GRMng.colliderHeroe1.Length; i++)
+                pointsCollider[i] = GRMng.colliderHeroe1[i];
+
+            collider = new Collider(camera, true, position, rotation, pointsCollider, frameWidth, frameHeight);
+
+            active = true;
+            colisionable = true;
         }
 
         //-----------------------------------------------------------------------------------------------------------------
+
+        /// <summary>
+        /// Overwrite the method Damage. When it dies, the animation changes.
+        /// </summary>
+        /// <param name="i"></param>
+        public override void Damage(int i)
+        {
+            base.Damage(i);
+
+            // if the enemy is dead, play the new animation and the death sound
+            if (life <= 0)
+            {
+                setAnim(2, -1);
+                Audio.PlayEffect("brokenBone01");
+            }
+        }
 
         /// <summary>
         /// Updates the final boss heroe 1
@@ -110,6 +138,10 @@ namespace IS_XNA_Shooter
                         currentState = State.attack;
                         totalTime = 0;
                     }
+                    break;
+
+                case State.turret :
+                    //TO DO: put a turret
                     break;
 
                 default :                    
@@ -167,13 +199,17 @@ namespace IS_XNA_Shooter
 
             if (shotLastTime >= 0.2f)
             {
+                setAnim(0);
+
                 shotLastTime = 0;
 
                 Vector2 shotPos = new Vector2(pX, pY);
-                /*Shot shot = new Shot(camera, level, shotPos, rotation, GRMng.frame_width_shot_fbh1, GRMng.frame_height_shot_fbh1, 
-                    GRMng.num_anims_shot_fbh1, GRMng.frame_count_shot_fbh1, GRMng.looping_shot_fbh1, SuperGame.frameTime8, GRMng.texture_shot_fbh1, 
+                Shot shot = new Shot(camera, level, shotPos, rotation, GRMng.frameWidthShotFinalBossHeroe, GRMng.frameHeightShotFinalBossHeroe, 
+                    GRMng.numAnimsShotFinalBossHeroe, GRMng.frameCountShotFinalBossHeroe, GRMng.loopingShotFinalBossHeroe, SuperGame.frameTime8, GRMng.textureShotFinalBossHeroe, 
                     SuperGame.shootType.normal, 500, 100);
-                shots.Add(shot);*/
+
+                shot.setCollider(GRMng.colliderShotFinalBossHeroe);
+                shots.Add(shot);
             }
         }
 

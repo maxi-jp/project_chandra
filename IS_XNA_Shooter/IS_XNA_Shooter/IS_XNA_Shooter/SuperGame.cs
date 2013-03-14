@@ -314,7 +314,7 @@ namespace IS_XNA_Shooter
             LvlMng.LoadContent(1); // cargamos los rectangulos
             LvlMng.LoadContent(0); // cargamos enemigos del levelA
 
-            game = new GameStory(this, 1, GRMng.textureAim,
+            game = new GameStory(this, player,1, GRMng.textureAim,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
            
             currentState = gameState.playing; // cambiamos el estado del juego a modo juego

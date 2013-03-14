@@ -200,6 +200,7 @@ namespace IS_XNA_Shooter
                     LoadIngameMenu();
 
                     hubBase = content.Load<Texture2D>("Graphics/Hub/base256");
+                    
 
                     texturePA1 = content.Load<Texture2D>("Graphics/Ships/sprites80x80");
                     textureAim = content.Load<Texture2D>("Graphics/aimpoint");

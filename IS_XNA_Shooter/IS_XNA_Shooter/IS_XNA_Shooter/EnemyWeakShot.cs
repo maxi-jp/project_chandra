@@ -35,7 +35,7 @@ namespace IS_XNA_Shooter
             points[5] = new Vector2(49, 51);
             points[6] = new Vector2(32, 57);
             points[7] = new Vector2(21, 57);
-            collider = new Collider(camera, true, position, rotation, points, frameWidth, frameHeight);
+            collider = new Collider(camera, true, position, rotation, points, 35, frameWidth, frameHeight);
 
             setAnim(1);
 

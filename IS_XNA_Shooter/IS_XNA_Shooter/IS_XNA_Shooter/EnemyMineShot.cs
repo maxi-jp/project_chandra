@@ -43,7 +43,7 @@ namespace IS_XNA_Shooter
             points[1] = new Vector2(60, 35);
             points[2] = new Vector2(60, 45);
             points[3] = new Vector2(20, 60);*/
-            collider = new Collider(camera, true, position, rotation, points, frameWidth, frameHeight);
+            collider = new Collider(camera, true, position, rotation, points, 35, frameWidth, frameHeight);
 
             this.shots = new List<Shot>();
         }

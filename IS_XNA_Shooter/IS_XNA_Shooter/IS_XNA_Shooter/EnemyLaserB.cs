@@ -124,6 +124,25 @@ namespace IS_XNA_Shooter
                
             }
 
+            // shots:
+            if (shooting)
+            {
+                shot.Update(deltaTime);
+                //shot-player colisions
+                
+                if (ship.collider.CollisionTwoPoints(position,new Vector2(0,position.Y)))
+                {
+                    // the player is hitted:
+                    ship.Damage(shot.GetPower());
+
+                    // the shot must be erased only if it hasn't provoked the
+                    // player ship death, otherwise the shot will had be removed
+                    // before from the game in: Game.PlayerDead() -> Enemy.Kill()
+                    /*if (ship.GetLife() > 0)
+                        shots.RemoveAt(i);*/
+                }
+            }
+
         } // Update
 
         public override void Draw(SpriteBatch spriteBatch)

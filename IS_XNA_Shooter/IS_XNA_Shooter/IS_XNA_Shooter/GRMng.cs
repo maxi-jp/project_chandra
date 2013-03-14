@@ -159,7 +159,7 @@ namespace IS_XNA_Shooter
         #region MENUS
         /* ------------------- MENU ------------------- */
         public static Texture2D menuMain;
-        public static Texture2D menuHistory;
+        public static Texture2D menuStory;
         public static Texture2D menuArcade;
         public static Texture2D menuConfig;
         public static Texture2D menuSplash;
@@ -343,7 +343,7 @@ namespace IS_XNA_Shooter
         private void LoadMenu()
         {
             menuMain = content.Load<Texture2D>("Graphics/Menu/main");
-            menuHistory = content.Load<Texture2D>("Graphics/Menu/history");
+            menuStory = content.Load<Texture2D>("Graphics/Menu/history");
             menuArcade = content.Load<Texture2D>("Graphics/Menu/arcade");
             menuConfig = content.Load<Texture2D>("Graphics/Menu/configuration");
             menuSplash = content.Load<Texture2D>("Graphics/Splash/splash_mainmenu_2");
@@ -352,7 +352,7 @@ namespace IS_XNA_Shooter
         private void UnloadMenu()
         {
             menuMain = null;
-            menuHistory = null;
+            menuStory = null;
             menuArcade = null;
             menuConfig = null;
             menuSplash = null;

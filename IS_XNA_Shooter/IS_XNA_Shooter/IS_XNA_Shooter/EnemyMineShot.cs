@@ -86,7 +86,7 @@ namespace IS_XNA_Shooter
                     shots.RemoveAt(i);
                 else  // shots-player colisions
                 {
-                    if (ship.collider.collision(shots[i].position))
+                    if (ship.collider.Collision(shots[i].position))
                     {
                         // the player is hitted:
                         ship.Damage(shots[i].GetPower());

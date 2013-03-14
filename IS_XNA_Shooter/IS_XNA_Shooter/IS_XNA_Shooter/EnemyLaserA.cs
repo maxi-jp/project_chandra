@@ -15,8 +15,8 @@ namespace IS_XNA_Shooter
 
         //For the Laser
         private Rectangle rect;
-        private Vector2 p1, p2;
-        private Vector2 p1Orig, p2Orig;
+        private Vector2 p1, p2, p3;
+        private Vector2 p1Orig, p2Orig, p3Orig;
 
         private float shotVelocity = 80f;
         private float timeToShot = 3.0f;
@@ -46,8 +46,12 @@ namespace IS_XNA_Shooter
             Rectangle rect = new Rectangle(0, 0, 2000, 2);
             p1 = new Vector2();
             p2 = new Vector2();
+            p3 = new Vector2();
+            
             p1Orig = new Vector2(0, 0);
             p2Orig = new Vector2(320, 0);
+            p3Orig = new Vector2(600, 0);
+
             shot = new Shot(camera, level, p1, rotation, GRMng.frameWidthELBulletA, GRMng.frameHeightELBullet,
                 GRMng.numAnimsELBullet, GRMng.frameCountELBullet, GRMng.loopingELBullet, SuperGame.frameTime8,
                 GRMng.textureELBullet, SuperGame.shootType.normal, shotVelocity, shotPower);
@@ -82,6 +86,24 @@ namespace IS_XNA_Shooter
                 }
             }
 
+            // shots:
+            if (shooting)
+            {
+                shot.Update(deltaTime);
+                //shot-player colisions
+                if (ship.collider.CollisionTwoPoints(p1, p3))
+                {
+                    // the player is hitted:
+                    ship.Damage(shot.GetPower());
+
+                    // the shot must be erased only if it hasn't provoked the
+                    // player ship death, otherwise the shot will had be removed
+                    // before from the game in: Game.PlayerDead() -> Enemy.Kill()
+                    /*if (ship.GetLife() > 0)
+                        shots.RemoveAt(i);*/
+                }
+            }
+
         } // Update
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -104,6 +126,9 @@ namespace IS_XNA_Shooter
 
             p2 = Vector2.Transform(p2Orig, rotationMatrix);
             p2 += position;
+
+            p3 = Vector2.Transform(p3Orig, rotationMatrix);
+            p3 += position;
 
             rect.X = (int)position.X;
             rect.Y = (int)position.Y;

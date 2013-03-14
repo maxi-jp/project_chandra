@@ -192,8 +192,17 @@ namespace IS_XNA_Shooter
             else return false;
         }
 
+        public bool CollisionTwoPoints(Vector2 A, Vector2 B)
+        {
+            for (int i = 0; i < points.Length; i++)
+                if (TwoSegmentIntersects(points[i], points[(i + 1) % points.Length],
+                    A, B))
+                    return true;
+            return false;
+        }
+
         // comprueba si el punto other esta dentro de this
-        public bool collision(Vector2 other)
+        public bool Collision(Vector2 other)
         {
             float AX = MathHelper.Distance(other.X, position.X);
             float AY = MathHelper.Distance(other.Y, position.Y);

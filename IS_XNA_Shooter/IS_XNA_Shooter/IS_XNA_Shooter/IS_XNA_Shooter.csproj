@@ -120,6 +120,7 @@
     <Compile Include="ControlMng.cs" />
     <Compile Include="EnemyBeamA.cs" />
     <Compile Include="EnemyLaserA.cs" />
+    <Compile Include="EnemyLaserB.cs" />
     <Compile Include="EnemyMineShot.cs" />
     <Compile Include="EnemyScared.cs" />
     <Compile Include="EnemyWeak.cs" />

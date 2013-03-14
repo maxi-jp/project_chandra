@@ -57,17 +57,19 @@ namespace IS_XNA_Shooter
             readRectangles();
 
             //Enemigo
-            //Enemy e1 = new EnemyWeakB(camera, this, new Vector2(SuperGame.screenWidth + 100, 
-                //50)/*new Random().Next(SuperGame.screenHeight))*/, (float)Math.PI, GRMng.frameWidthEW1, 
-                //GRMng.frameHeightEW1, GRMng.numAnimsEW1, GRMng.frameCountEW1, GRMng.loopingEW1, SuperGame.frameTime12, 
-                //GRMng.textureEW1, 1, -200, 100, 1, null);
-            //e1.SetActive();
-            Vector2 positionFinalBoss = new Vector2(SuperGame.screenWidth - GRMng.frameWidthFinalBoss1/2,
+            Enemy e1 = new EnemyLaserB(camera, this, new Vector2(SuperGame.screenWidth + 100, 
+                50)/*new Random().Next(SuperGame.screenHeight))*/, (float)Math.PI, GRMng.frameWidthES, 
+                GRMng.frameHeightES, GRMng.numAnimsES, GRMng.frameCountES, GRMng.loopingES, SuperGame.frameTime12, 
+                GRMng.textureES, 1, -200, 100, 1, null);
+            e1.SetActive();
+
+            enemies.Add(e1);
+            /*Vector2 positionFinalBoss = new Vector2(SuperGame.screenWidth - GRMng.frameWidthFinalBoss1/2,
                                                     SuperGame.screenHeight / 2);
             Enemy finalBoss = new FinalBoss1(camera, this, positionFinalBoss, shots, enemiesBot);
             finalBoss.SetActive();
             enemies = new List<Enemy>();
-            enemies.Add(finalBoss);
+            enemies.Add(finalBoss);*/
 
         }
 

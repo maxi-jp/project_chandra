@@ -277,11 +277,11 @@ namespace IS_XNA_Shooter
                 life -= i;
 
                 if (life <= 0)
-                    Dead();
+                    Kill();
             }
         }
 
-        private void Dead()
+        public void Kill()
         {
             game.PlayerDead();
 

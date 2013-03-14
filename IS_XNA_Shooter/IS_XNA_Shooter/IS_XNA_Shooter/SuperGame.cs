@@ -306,9 +306,9 @@ namespace IS_XNA_Shooter
             grManager.UnloadContent(0); // descargamos los recursos del menú
         }
 
-        public void newHistory()
+        public void NewStory()
         {
-            grManager.LoadContent(3); // cargamos los recursos del nivel 1 de GameA
+            grManager.LoadContent(3); // cargamos los recursos del nivel 1 de GameB
             grManager.LoadContent(2); // cargamos los recursos del nivel 1 de GameA
             audio.LoadContent(1);
             LvlMng.LoadContent(1); // cargamos los rectangulos

@@ -17,7 +17,7 @@ namespace IS_XNA_Shooter
         private List<Shot> shots;
         private float timeToShot = 4.0f;
         private float shotVelocity = 140f;
-        private int shotPower = 10;
+        private int shotPower = 200;
 
         /* ------------------- CONSTRUCTORS ------------------- */
         public EnemyMineShot(Camera camera, Level level, Vector2 position, float rotation,
@@ -29,21 +29,14 @@ namespace IS_XNA_Shooter
         {
             setAnim(0);
 
-            Vector2[] points = new Vector2[8];
-            points[0] = new Vector2(21, 21);
-            points[1] = new Vector2(32, 22);
-            points[2] = new Vector2(49, 28);
-            points[3] = new Vector2(57, 37);
-            points[4] = new Vector2(57, 42);
-            points[5] = new Vector2(49, 51);
-            points[6] = new Vector2(32, 57);
-            points[7] = new Vector2(21, 57);
-            /*Vector2[] points = new Vector2[4];
+            Vector2[] points = new Vector2[6];
             points[0] = new Vector2(20, 20);
-            points[1] = new Vector2(60, 35);
-            points[2] = new Vector2(60, 45);
-            points[3] = new Vector2(20, 60);*/
-            collider = new Collider(camera, true, position, rotation, points, frameWidth, frameHeight);
+            points[1] = new Vector2(39, 14);
+            points[2] = new Vector2(60, 20);
+            points[3] = new Vector2(60, 60);
+            points[4] = new Vector2(39, 66);
+            points[5] = new Vector2(20, 60);
+            collider = new Collider(camera, true, position, rotation, points, 35, frameWidth, frameHeight);
 
             this.shots = new List<Shot>();
         }
@@ -84,13 +77,27 @@ namespace IS_XNA_Shooter
                 }
 
             } // if (life > 0)
-
+            
             // shots:
             for (int i = 0; i < shots.Count(); i++)
             {
                 shots[i].Update(deltaTime);
                 if (!shots[i].IsActive())
                     shots.RemoveAt(i);
+                else  // shots-player colisions
+                {
+                    if (ship.collider.Collision(shots[i].position))
+                    {
+                        // the player is hitted:
+                        ship.Damage(shots[i].GetPower());
+
+                        // the shot must be erased only if it hasn't provoked the
+                        // player ship death, otherwise the shot will had be removed
+                        // before from the game in: Game.PlayerDead() -> Enemy.Kill()
+                        if (ship.GetLife() > 0)
+                            shots.RemoveAt(i);
+                    }
+                }
             }
 
             // comprobamos que el enemigo no se salga del nivel
@@ -178,6 +185,13 @@ namespace IS_XNA_Shooter
                 setAnim(2, -1);
                 Audio.PlayEffect("brokenBone01");
             }
+        }
+
+        public override void Kill()
+        {
+            base.Kill();
+
+            shots.Clear();
         }
 
         public override bool DeadCondition()

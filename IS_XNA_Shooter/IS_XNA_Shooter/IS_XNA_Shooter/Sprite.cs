@@ -17,6 +17,7 @@ namespace IS_XNA_Shooter
 
         // graphic resources
         public Texture2D texture;
+        protected Color color;
 
         private Rectangle rectangle;
 
@@ -32,6 +33,8 @@ namespace IS_XNA_Shooter
                 drawPoint = new Vector2(texture.Width / 2, texture.Height / 2);
             else
                 drawPoint = Vector2.Zero;
+
+            color = Color.White;
         }
 
         public Sprite(bool middlePosition, Vector2 position, float rotation, Texture2D texture,
@@ -46,24 +49,31 @@ namespace IS_XNA_Shooter
                     rectangle.Height / 2 + rectangle.Y);
             else
                 drawPoint = Vector2.Zero;
+
+            color = Color.White;
         }
 
         /* ------------------- MÉTODOS ------------------- */
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, null, Color.White, rotation, drawPoint,
+            spriteBatch.Draw(texture, position, null, color, rotation, drawPoint,
                 Program.scale, SpriteEffects.None, 0);
         }
 
         public virtual void DrawRectangle(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, rectangle, Color.White, rotation, drawPoint,
+            spriteBatch.Draw(texture, position, rectangle, color, rotation, drawPoint,
                 Program.scale, SpriteEffects.None, 0);
         }
 
         public void SetRectangle(Rectangle rectangle)
         {
             this.rectangle = rectangle;
+        }
+
+        protected void SetTransparency(byte i)
+        {
+            color = new Color(i, i, i, i);
         }
 
     } // class Sprite

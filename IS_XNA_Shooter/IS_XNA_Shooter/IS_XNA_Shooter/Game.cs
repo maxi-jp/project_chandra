@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace IS_XNA_Shooter
 {
@@ -14,6 +15,7 @@ namespace IS_XNA_Shooter
         /*                           ATTRIBUTES                          */
         /* ------------------------------------------------------------- */
         protected SuperGame mainGame;
+        protected Player player;
         protected IngameHub hub;
 
         protected Camera camera;
@@ -23,21 +25,23 @@ namespace IS_XNA_Shooter
         protected float shipVelocity;
         protected int shipLife;
 
-        protected List<Enemy> enemies;
+        protected List<Enemy> enemies, enemiesBot;
         protected List<Shot> shots;
         protected List<Explosion> explosions;
 
         /* ------------------------------------------------------------- */
         /*                          CONSTRUCTOR                          */
         /* ------------------------------------------------------------- */
-        public Game (SuperGame mainGame, float shipVelocity, int shipLife)
+        public Game (SuperGame mainGame, Player player, float shipVelocity, int shipLife)
         {
             this.mainGame = mainGame;
+            this.player = player;
             this.shipLife = shipLife;
             this.shipVelocity = shipVelocity;
 
             camera = new Camera();
             enemies = new List<Enemy>();
+            enemiesBot = new List<Enemy>();
             shots = new List<Shot>();
             explosions = new List<Explosion>();
 
@@ -66,6 +70,17 @@ namespace IS_XNA_Shooter
                     enemies[i].UpdateTimeToSpawn(deltaTime);
             }
 
+            for (int i = 0; i < enemiesBot.Count(); i++)   // enemies
+            {
+
+                if (enemiesBot[i].IsErasable())
+                    enemiesBot.RemoveAt(i);
+                else if (enemiesBot[i].IsActive())
+                    enemiesBot[i].Update(deltaTime);
+                else
+                    enemiesBot[i].UpdateTimeToSpawn(deltaTime);
+            }
+
             for (int i = 0; i < shots.Count(); i++)     // shots
             {
                 shots[i].Update(deltaTime);
@@ -85,22 +100,31 @@ namespace IS_XNA_Shooter
             {
                 for (int j = 0; j < shots.Count(); j++)
                 {
-                    if (enemies[i].IsColisionable() && shots[j].IsActive() && enemies[i].collider.collision(shots[j].position))
+                    if (enemies[i].IsColisionable() && shots[j].IsActive() &&
+                        enemies[i].collider.CollisionPoint(shots[j].collider))
                     //if (enemies[i].isActive() && shots[j].isActive() && enemies[i].collider.collision(shots[j].collider))
                     {                       
-                        // nueva explosión:
-                        /*Explosion newExp = new Explosion(camera, level, eAux.position, eAux.rotation, GRMng.frameWidthEx1,
-                            GRMng.frameHeightEx1, GRMng.frameCountEx1, SuperGame.frameTime24, GRMng.textureExplosion1);
-                        explosions.Add(newExp);*/
-
                         enemies[i].Damage(shots[j].GetPower());
-
                         shots.RemoveAt(j);
                     }
                 }
             }
 
+            // enemies-player collision:
+            for (int i = 0; i < enemies.Count(); i++)
+            {
+                if (enemies[i].IsColisionable() && ship.collider.Collision(enemies[i].collider))
+                {
+                    // the player has been hit by an enemy
+                    ship.Kill();
+                }
+            }
+
             camera.Update(deltaTime);   // cámara
+
+            if (SuperGame.debug)
+                if (Keyboard.GetState().IsKeyDown(Keys.K))
+                    PlayerDead();
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
@@ -108,6 +132,10 @@ namespace IS_XNA_Shooter
             level.Draw(spriteBatch);
 
             foreach (Enemy e in enemies)
+                if (e.IsActive())
+                    e.Draw(spriteBatch);
+
+            foreach (Enemy e in enemiesBot)
                 if (e.IsActive())
                     e.Draw(spriteBatch);
 
@@ -121,6 +149,23 @@ namespace IS_XNA_Shooter
                     e.Draw(spriteBatch);*/
 
             hub.Draw(spriteBatch);
+        }
+
+        // This methods is called when the ship of the player has been
+        // hitted by an enemy shot and its life is < 0
+        public virtual void PlayerDead()
+        {
+            //mainGame.TargetElapsedTime = TimeSpan.FromTicks(2000000);
+            player.LoseLife();
+            hub.PlayerLosesLive();
+
+            // All the enemies and the shots must be erased:
+            for (int i = 0; i < enemies.Count(); i++)
+                enemies[i].Kill();
+            shots.Clear();
+
+            if (player.GetLife() == 0)
+                mainGame.GameOver();
         }
 
     } // class Game

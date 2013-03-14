@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IS_XNA_Shooter", "IS_XNA_Shooter\IS_XNA_Shooter\IS_XNA_Shooter.csproj", "{9F22D5F3-6CFA-489B-9CD8-0AA75EA58926}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IS_XNA_ShooterContent", "IS_XNA_Shooter\IS_XNA_ShooterContent\IS_XNA_ShooterContent.contentproj", "{C4A66F5D-62CB-489A-9F7D-79F292059373}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IS_XNA_ShooterContent", "IS_XNA_Shooter\IS_XNA_ShooterContent\IS_XNA_ShooterContent.contentproj", "{2AB71696-A856-4499-AC78-9697BD4FED59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +15,8 @@ Global
 		{9F22D5F3-6CFA-489B-9CD8-0AA75EA58926}.Debug|x86.Build.0 = Debug|x86
 		{9F22D5F3-6CFA-489B-9CD8-0AA75EA58926}.Release|x86.ActiveCfg = Release|x86
 		{9F22D5F3-6CFA-489B-9CD8-0AA75EA58926}.Release|x86.Build.0 = Release|x86
-		{C4A66F5D-62CB-489A-9F7D-79F292059373}.Debug|x86.ActiveCfg = Debug|x86
-		{C4A66F5D-62CB-489A-9F7D-79F292059373}.Release|x86.ActiveCfg = Release|x86
+		{2AB71696-A856-4499-AC78-9697BD4FED59}.Debug|x86.ActiveCfg = Debug|x86
+		{2AB71696-A856-4499-AC78-9697BD4FED59}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

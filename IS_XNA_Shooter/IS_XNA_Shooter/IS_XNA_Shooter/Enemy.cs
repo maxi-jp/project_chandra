@@ -53,11 +53,11 @@ namespace IS_XNA_Shooter
             if (DeadCondition())
                 erasable = true;
             
-            if (colisionable)
+            if (colisionable && collider != null)
                 collider.Update(position, rotation);
 
             if (outOfScreen())
-                Kill();
+                ForceKill();
 
         } // Update
 
@@ -72,7 +72,7 @@ namespace IS_XNA_Shooter
         {
             base.Draw(spriteBatch);
 
-            if (SuperGame.debug && colisionable ) 
+            if (SuperGame.debug && colisionable)
                 collider.Draw(spriteBatch);
         }
 
@@ -89,10 +89,22 @@ namespace IS_XNA_Shooter
 
         public virtual void Damage(int i)
         {
-            life -= i;
+            if (i == -1)
+                life = 0;
+            else
+                life -= i;
 
             if (life <= 0)
                 colisionable = false;
+        }
+
+        // this method is called when the enemy its destroyed
+        // it has to play its death animation and its shots must
+        // be erase from the game. eg when the player loses a life
+        public virtual void Kill()
+        {
+            life = 0;
+            Damage(0);
         }
 
         public bool IsActive()
@@ -132,7 +144,9 @@ namespace IS_XNA_Shooter
             this.ship = ship;
         }
 
-        public void Kill()
+        // this method is called when we want to force the enemy
+        // to be erase from the game, eg when it get lost in the space
+        public void ForceKill()
         {
             life = -1;
             active = false;

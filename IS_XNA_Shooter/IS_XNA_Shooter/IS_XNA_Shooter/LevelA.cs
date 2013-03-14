@@ -124,8 +124,18 @@ namespace IS_XNA_Shooter
                 timeToSpawnEnemy = 0.5f;
             }
 
-            // EnemyBeamA:
+            // EnemyWeakShot:
             if (Keyboard.GetState().IsKeyDown(Keys.F2))
+            {
+                enemy = new EnemyWeakShot(camera, this, new Vector2(20, 20), 0, GRMng.frameWidthEW2,
+                    GRMng.frameHeightEW2, GRMng.numAnimsEW2, GRMng.frameCountEW2, GRMng.loopingEW2,
+                    SuperGame.frameTime12, GRMng.textureEW2, 0, 100, 100, 1, ship);
+                enemies.Add(enemy);
+                timeToSpawnEnemy = 0.5f;
+            }
+
+            // EnemyBeamA:
+            if (Keyboard.GetState().IsKeyDown(Keys.F3))
             {
                 enemy = new EnemyBeamA(camera, this, new Vector2(60, 60), 0, GRMng.frameWidthEB1,
                     GRMng.frameHeightEB1, GRMng.numAnimsEB1, GRMng.frameCountEB1, GRMng.loopingEB1,
@@ -135,7 +145,7 @@ namespace IS_XNA_Shooter
             }
 
             // EnemyMineShot
-            if (Keyboard.GetState().IsKeyDown(Keys.F3))
+            if (Keyboard.GetState().IsKeyDown(Keys.F4))
             {
                 enemy = new EnemyMineShot(camera, this, new Vector2(60, 60), 0, GRMng.frameWidthEMS,
                     GRMng.frameHeightEMS, GRMng.numAnimsEMS, GRMng.frameCountEMS, GRMng.loopingEMS,
@@ -145,7 +155,7 @@ namespace IS_XNA_Shooter
             }
 
             // EnemyLaser
-            if (Keyboard.GetState().IsKeyDown(Keys.F4))
+            if (Keyboard.GetState().IsKeyDown(Keys.F5))
             {
                 enemy = new EnemyLaserA(camera, this, new Vector2(60, 60), 0, GRMng.frameWidthES,
                     GRMng.frameHeightES, GRMng.numAnimsES, GRMng.frameCountES, GRMng.loopingES,
@@ -155,7 +165,7 @@ namespace IS_XNA_Shooter
             }
 
             // EnemyScared
-            if (Keyboard.GetState().IsKeyDown(Keys.F5))
+            if (Keyboard.GetState().IsKeyDown(Keys.F6))
             {
                 enemy = new EnemyScared(camera, this, new Vector2(60, 60), 0, GRMng.frameWidthES,
                     GRMng.frameHeightES, GRMng.numAnimsES, GRMng.frameCountES, GRMng.loopingES,

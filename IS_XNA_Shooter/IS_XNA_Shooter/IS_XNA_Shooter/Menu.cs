@@ -15,7 +15,7 @@ namespace IS_XNA_Shooter
         {
             profile,
             main,
-            history,
+            story,
             arcade,
             config,
             controlls,
@@ -31,11 +31,13 @@ namespace IS_XNA_Shooter
         private int horizontalSep; // separación horizontal de las opciones
         private Vector2 backButtonPosition; // posicion de la opcion "back"
 
+        private Texture2D splash;
+
         private Sprite spriteHistTitle, spriteArcadeTitle, spriteConfigTitle;
         private MenuItem itemBack;
-        private MenuItem itemMainHistory, itemMainArcade, itemMainScores;
+        private MenuItem itemMainStory, itemMainArcade, itemMainScores;
         private MenuItem itemMainChangeProfile, itemMainConfig, itemMainQuit;
-        private MenuItem itemHistoryContinue, itemHistoryLoad, itemHistoryNew;
+        private MenuItem itemStoryContinue, itemStoryLoad, itemStoryNew;
         private MenuItem itemArcadeScroll, itemArcadeSurvival, itemArcadeDefense, itemArcadeKiller;
         private MenuItem itemConfigControlls, itemConfigGraphics, itemConfigAudio, itemConfigProfile;
 
@@ -49,11 +51,13 @@ namespace IS_XNA_Shooter
             horizontalSep = 48;
             backButtonPosition = new Vector2(5, SuperGame.screenHeight - 45);
 
+            splash = GRMng.menuSplash;
+
             itemBack = new MenuItem(false, backButtonPosition, GRMng.menuMain,
                 new Rectangle(120, 360, 100, 40), new Rectangle(220, 360, 100, 40), new Rectangle(320, 360, 100, 40));
 
             // main Menu
-            itemMainHistory = new MenuItem(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight / 2 - horizontalSep),
+            itemMainStory = new MenuItem(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight / 2 - horizontalSep),
                 GRMng.menuMain, new Rectangle(0, 0, 512, 40), new Rectangle(0, 40, 512, 40), new Rectangle(0, 80, 512, 40));
             itemMainArcade = new MenuItem(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight / 2),
                 GRMng.menuMain, new Rectangle(0, 120, 512, 40), new Rectangle(0, 160, 512, 40), new Rectangle(0, 200, 512, 40));
@@ -66,14 +70,14 @@ namespace IS_XNA_Shooter
             itemMainQuit = new MenuItem(false, new Vector2(SuperGame.screenWidth-45, 5), GRMng.menuMain,
                 new Rectangle(0, 360, 40, 40), new Rectangle(40, 360, 40, 40), new Rectangle(80, 360, 40, 40));
 
-            // menu History
-            spriteHistTitle = new Sprite(false, Vector2.Zero, 0, GRMng.menuHistory, new Rectangle(0, 360, 160, 40));
-            itemHistoryContinue = new MenuItem(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight / 2 - horizontalSep),
-                GRMng.menuHistory, new Rectangle(0, 0, 512, 40), new Rectangle(0, 40, 512, 40), new Rectangle(0, 80, 512, 40));
-            itemHistoryLoad = new MenuItem(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight / 2),
-                GRMng.menuHistory, new Rectangle(0, 120, 512, 40), new Rectangle(0, 160, 512, 40), new Rectangle(0, 200, 512, 40));
-            itemHistoryNew = new MenuItem(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight / 2 + horizontalSep),
-                GRMng.menuHistory, new Rectangle(0, 240, 512, 40), new Rectangle(0, 280, 512, 40), new Rectangle(0, 320, 512, 40));
+            // menu Story
+            spriteHistTitle = new Sprite(false, Vector2.Zero, 0, GRMng.menuStory, new Rectangle(0, 360, 160, 40));
+            itemStoryContinue = new MenuItem(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight / 2 - horizontalSep),
+                GRMng.menuStory, new Rectangle(0, 0, 512, 40), new Rectangle(0, 40, 512, 40), new Rectangle(0, 80, 512, 40));
+            itemStoryLoad = new MenuItem(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight / 2),
+                GRMng.menuStory, new Rectangle(0, 120, 512, 40), new Rectangle(0, 160, 512, 40), new Rectangle(0, 200, 512, 40));
+            itemStoryNew = new MenuItem(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight / 2 + horizontalSep),
+                GRMng.menuStory, new Rectangle(0, 240, 512, 40), new Rectangle(0, 280, 512, 40), new Rectangle(0, 320, 512, 40));
 
             // menu Arcade
             spriteArcadeTitle = new Sprite(false, Vector2.Zero, 0, GRMng.menuArcade, new Rectangle(0, 480, 160, 32));
@@ -104,7 +108,7 @@ namespace IS_XNA_Shooter
             switch (menuState)
             {
                 case MenuState.main:
-                    itemMainHistory.Update(X, Y);
+                    itemMainStory.Update(X, Y);
                     itemMainArcade.Update(X, Y);
                     itemMainScores.Update(X, Y);
                     itemMainChangeProfile.Update(X, Y);
@@ -112,10 +116,10 @@ namespace IS_XNA_Shooter
                     itemMainQuit.Update(X, Y);
                     break;
 
-                case MenuState.history:
-                    itemHistoryContinue.Update(X, Y);
-                    itemHistoryLoad.Update(X, Y);
-                    itemHistoryNew.Update(X, Y);
+                case MenuState.story:
+                    itemStoryContinue.Update(X, Y);
+                    itemStoryLoad.Update(X, Y);
+                    itemStoryNew.Update(X, Y);
                     itemBack.Update(X, Y);
                     break;
 
@@ -139,10 +143,12 @@ namespace IS_XNA_Shooter
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.Draw(splash, Vector2.Zero, Color.White);
+
             switch (menuState)
             {
                 case MenuState.main:
-                    itemMainHistory.Draw(spriteBatch);
+                    itemMainStory.Draw(spriteBatch);
                     itemMainArcade.Draw(spriteBatch);
                     itemMainScores.Draw(spriteBatch);
                     itemMainChangeProfile.Draw(spriteBatch);
@@ -150,11 +156,11 @@ namespace IS_XNA_Shooter
                     itemMainQuit.Draw(spriteBatch);
                     break;
 
-                case MenuState.history:
+                case MenuState.story:
                     spriteHistTitle.DrawRectangle(spriteBatch);
-                    itemHistoryContinue.Draw(spriteBatch);
-                    itemHistoryLoad.Draw(spriteBatch);
-                    itemHistoryNew.Draw(spriteBatch);
+                    itemStoryContinue.Draw(spriteBatch);
+                    itemStoryLoad.Draw(spriteBatch);
+                    itemStoryNew.Draw(spriteBatch);
                     itemBack.Draw(spriteBatch);
                     break;
 
@@ -184,16 +190,16 @@ namespace IS_XNA_Shooter
             switch (menuState)
             {
                 case MenuState.main:
-                    itemMainHistory.Click(X, Y);
+                    itemMainStory.Click(X, Y);
                     itemMainArcade.Click(X, Y);
                     itemMainScores.Click(X, Y);
                     itemMainConfig.Click(X, Y);
                     itemMainQuit.Click(X, Y);
                     break;
 
-                case MenuState.history:
+                case MenuState.story:
                     itemBack.Click(X, Y);
-                    itemHistoryNew.Click(X, Y);
+                    itemStoryNew.Click(X, Y);
                     break;
 
                 case MenuState.arcade:
@@ -216,10 +222,10 @@ namespace IS_XNA_Shooter
             switch (menuState)
             {
                 case MenuState.main:
-                    if (itemMainHistory.Unclick(X, Y))
+                    if (itemMainStory.Unclick(X, Y))
                     {
                         Audio.PlayEffect("digitalAcent01");
-                        menuState = MenuState.history;
+                        menuState = MenuState.story;
                     }
                     else if (itemMainArcade.Unclick(X, Y))
                     {
@@ -242,16 +248,16 @@ namespace IS_XNA_Shooter
                     }
                     break;
 
-                case MenuState.history:
+                case MenuState.story:
                     if (itemBack.Unclick(X, Y))
                     {
                         Audio.PlayEffect("digitalAcent01");
                         menuState = MenuState.main;
                     }
-                    else if (itemHistoryNew.Unclick(X, Y))
+                    else if (itemStoryNew.Unclick(X, Y))
                     {
                         Audio.PlayEffect("digitalAcent01");
-                        mainGame.newHistory();
+                        mainGame.NewStory();
                     }
                     break;
 

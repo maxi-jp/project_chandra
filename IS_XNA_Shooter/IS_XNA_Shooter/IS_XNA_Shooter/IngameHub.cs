@@ -9,10 +9,14 @@ namespace IS_XNA_Shooter
     class IngameHub
     {
         /* ------------------- ATRIBUTOS ------------------- */
+        protected int lifesBase; // number of lifes of the Ship
+        protected int lifesActual;
 
         /* ------------------- CONSTRUCTORES ------------------- */
         public IngameHub(int playerLifes)
         {
+            this.lifesBase = playerLifes;
+            this.lifesActual = playerLifes;
         }
 
         /* ------------------- MÉTODOS ------------------- */
@@ -22,6 +26,11 @@ namespace IS_XNA_Shooter
         
         public virtual void Draw(SpriteBatch spriteBatch)
         {
+        }
+
+        public virtual void PlayerLosesLive()
+        {
+            lifesActual--;
         }
 
     } // class IngameHub

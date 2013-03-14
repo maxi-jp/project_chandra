@@ -29,7 +29,6 @@ namespace IS_XNA_Shooter
             this.power = power;
             active = true;
 
-
             collider = new Collider(camera, true, position, rotation, frameWidth, frameHeight);
         }
 

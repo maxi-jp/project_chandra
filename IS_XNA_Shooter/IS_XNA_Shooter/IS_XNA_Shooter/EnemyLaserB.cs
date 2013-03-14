@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace IS_XNA_Shooter
 {
     //Class for the enemy that shoots one laser
-    class EnemyLaserA : Enemy
+    class EnemyLaserB : Enemy
     {
         /* ------------------- ATTRIBUTES ------------------- */
         private Boolean shooting = true;
@@ -15,21 +15,22 @@ namespace IS_XNA_Shooter
 
         //For the Laser
         private Rectangle rect;
-        private Vector2 p1, p2, p3;
-        private Vector2 p1Orig, p2Orig, p3Orig;
+        private Vector2 p1, p2;
+        private Vector2 p1Orig, p2Orig;
 
         private float shotVelocity = 80f;
-        private float timeToShot = 3.0f;
+        private float timeToShot = 6.0f;
         private int shotPower = 1;
         private Shot shot;
+        private Boolean goingUp = true;
 
         /* ------------------- CONSTRUCTORS ------------------- */
-        public EnemyLaserA(Camera camera, Level level, Vector2 position, float rotation,
+        public EnemyLaserB(Camera camera, Level level, Vector2 position, float rotation,
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
             float frametime, Texture2D texture, float timeToSpawn, float velocity, int life,
             int value, Ship ship)
             : base(camera, level, position, rotation, frameWidth, frameHeight, numAnim, frameCount,
-                looping, frametime, texture, timeToSpawn, 50, 100, value, ship)
+                looping, frametime, texture, timeToSpawn, 100, 100, value, ship)
         {
             setAnim(3);
 
@@ -46,15 +47,13 @@ namespace IS_XNA_Shooter
             Rectangle rect = new Rectangle(0, 0, 2000, 2);
             p1 = new Vector2();
             p2 = new Vector2();
-            p3 = new Vector2();
-            
             p1Orig = new Vector2(0, 0);
-            p2Orig = new Vector2(320, 0);
-            p3Orig = new Vector2(600, 0);
-
-            shot = new Shot(camera, level, p1, rotation, GRMng.frameWidthELBulletA, GRMng.frameHeightELBullet,
+            p2Orig = new Vector2(650, 0);
+            shot = new Shot(camera, level, p1, rotation, GRMng.frameWidthELBulletB, GRMng.frameHeightELBullet,
                 GRMng.numAnimsELBullet, GRMng.frameCountELBullet, GRMng.loopingELBullet, SuperGame.frameTime8,
                 GRMng.textureELBullet, SuperGame.shootType.normal, shotVelocity, shotPower);
+
+            
 
         }
 
@@ -65,25 +64,64 @@ namespace IS_XNA_Shooter
 
             if (life > 0)
             {
-                // it allways rotates
-                rotation += 0.4f * deltaTime;
-
-                timeToShot -= deltaTime;
-                if (timeToShot <= 0)
+                //We have to see if it is mooving up or down
+                //Is it is going up
+                if (goingUp)
                 {
-                    timeToShot = 3.0f;
-                    shooting = !shooting;
-                    /*if (shooting)
-                        shots.Add(shot);
-                    else shots.Remove(shot);*/
+                    timeToShot -= deltaTime;
+                    //If itsn't shooting it mooves
+                    if (timeToShot >3)
+                    {
+                        if (position.Y >= 50)
+                            position.Y -= velocity * deltaTime;
+                        else
+                            goingUp = false;
+                      
+                    }
+                    //If it is shooting he only shots
+                    else if (timeToShot >0)
+                    {
+                        shooting = true;
+                        LaserShot();
+                        shot.Update(deltaTime);
+                       
+                    }
+                    //If it stops shooting, it has to move again
+                    else
+                    {
+                        shooting = false;
+                        timeToShot = 6.0f;
+                    }
                 }
+                    //if it is going down
+                else {
+                    timeToShot -= deltaTime;
+                    //If itsn't shooting it mooves
+                    if (timeToShot > 3)
+                    {
+                        if (position.Y <= level.height-50)
+                            position.Y += velocity * deltaTime;
+                        else
+                            goingUp = true;
+        
+                    }
+                    //If it is shooting he only shots
+                    else if (timeToShot >0)
+                    {
+                        shooting = true;
+                        LaserShot();
+                        shot.Update(deltaTime);
+                        
+                    }
+                    //If it stops shooting, it has to move again
+                    else
+                    {
+                        timeToShot = 6.0f;
+                        shooting = false;
+                    }
 
-                //it shoots if it has to
-                if (shooting)
-                {
-                    LaserShot();
-                    shot.Update(deltaTime);
                 }
+               
             }
 
             // shots:
@@ -91,7 +129,8 @@ namespace IS_XNA_Shooter
             {
                 shot.Update(deltaTime);
                 //shot-player colisions
-                if (ship.collider.CollisionTwoPoints(p1, p3))
+                
+                if (ship.collider.CollisionTwoPoints(position,new Vector2(0,position.Y)))
                 {
                     // the player is hitted:
                     ship.Damage(shot.GetPower());
@@ -115,8 +154,8 @@ namespace IS_XNA_Shooter
         }
 
         //The enemy Shoot a Laser, we calculate previously the rectangle of it
-        private void LaserShot() 
-        { 
+        private void LaserShot()
+        {
             //The calculation of the rectangle
             rotationMatrix = Matrix.CreateRotationZ(rotation);
             int width = level.width + 200;
@@ -126,9 +165,6 @@ namespace IS_XNA_Shooter
 
             p2 = Vector2.Transform(p2Orig, rotationMatrix);
             p2 += position;
-
-            p3 = Vector2.Transform(p3Orig, rotationMatrix);
-            p3 += position;
 
             rect.X = (int)position.X;
             rect.Y = (int)position.Y;

@@ -12,7 +12,9 @@ namespace IS_XNA_Shooter
     abstract class Ship : Animation
     {
         /* ------------------- ATRIBUTOS ------------------- */
-        protected Collider collider;
+        protected Game game;
+
+        public Collider collider;
 
         protected float velocity;
         protected Vector2 movement;
@@ -27,19 +29,42 @@ namespace IS_XNA_Shooter
         private float timeVibShot = 0.1f; // tiempo que vibra el mando tras disparo
         private float timeVibShotAux;
 
+        // state of the ship
+        protected enum shipState
+        {
+            ONNORMAL,
+            ONDYING,
+            ONINVINCIBLE
+        };
+        protected shipState currentState; // current state of the enemy
+
+        private float timeDying = 2, timeDyingAux;
+        private float timeInvencible=2, timeInvencibleAux;
+        private byte transparency;
+
         /* ------------------- CONSTRUCTORES ------------------- */
-        public Ship(Camera camera, Level level, Vector2 position, float rotation, Vector2[] colliderPoints,
-            short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping, float frametime,
-            Texture2D texture, float velocity, int life, List<Shot> shots)
-            : base(camera, level, true, position, rotation, texture, frameWidth, frameHeight, numAnim, frameCount, looping,
-                frametime)
+        public Ship(Game game, Camera camera, Level level, Vector2 position, float rotation,
+            Vector2[] colliderPoints,
+            short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
+            float frametime, Texture2D texture,
+            float velocity, int life, List<Shot> shots)
+            : base(camera, level, true, position, rotation, texture, frameWidth, frameHeight, numAnim,
+                frameCount, looping, frametime)
         {
             movement = new Vector2(1, 0);
+
+            this.game = game;
             this.velocity = velocity;
             this.life = life;
             this.shots = shots;
 
-            collider = new Collider(camera, true, position, rotation, colliderPoints, frameWidth, frameHeight);
+            collider = new Collider(camera, true, position, rotation, colliderPoints, 35, frameWidth, frameHeight);
+
+            currentState = shipState.ONNORMAL;
+
+            timeInvencibleAux = timeInvencible;
+            timeDyingAux = timeDying;
+            transparency = 0;
 
             setAnim(1);
         }
@@ -118,7 +143,58 @@ namespace IS_XNA_Shooter
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
-            // movimiento del jugado
+
+            switch (currentState)
+            {
+                case shipState.ONNORMAL:
+                    Move(deltaTime);
+                    collider.Update(position, rotation);
+                    break;
+
+                case shipState.ONDYING:
+                    timeDyingAux -= deltaTime;
+                    if (timeDyingAux <= 0)
+                    {
+                        timeDyingAux = timeDying;
+                        Respawn();
+                    }
+
+                    break;
+
+                case shipState.ONINVINCIBLE:
+                    timeInvencibleAux -= deltaTime;
+                    if (timeInvencibleAux <= 0)
+                    {
+                        timeInvencibleAux = timeInvencible;
+                        transparency = 255;
+                        SetTransparency(transparency);
+                        frameTime = SuperGame.frameTime24;
+
+                        currentState = shipState.ONNORMAL;
+                    }
+                    else
+                    {
+                        transparency += (byte)(deltaTime * 120);
+                        SetTransparency(transparency);
+                    }
+                    
+                    Move(deltaTime);
+                    collider.Update(position, rotation);
+
+                    break;
+            }
+            
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            base.Draw(spriteBatch);
+            if (SuperGame.debug)
+                collider.Draw(spriteBatch);     
+        }
+
+        private void Move(float deltaTime)
+        {
             movement = Vector2.Zero;
             float disp = 0;
 
@@ -136,7 +212,7 @@ namespace IS_XNA_Shooter
 
                 timeVibShotAux -= deltaTime;
             }
-            else // teclado
+            else // keyboard
             {
                 if (Keyboard.GetState().IsKeyDown(ControlMng.controlUp))
                     movement.Y = -1;
@@ -151,26 +227,17 @@ namespace IS_XNA_Shooter
                     disp = 1;
             }
 
-            // movimiento:
+            // final movement:
             if ((movement.X + movement.Y) > 1)
                 movement.Normalize();
             position.X += movement.X * velocity * deltaTime;
             position.Y += movement.Y * velocity * deltaTime;
 
-            // disparos:
+            // shots:
             if ((disp > 0) && (timeToShotAux <= 0))
                 ShipShot(disp);
 
             timeToShotAux -= deltaTime;
-
-            collider.Update(position, rotation);
-        }
-
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            base.Draw(spriteBatch);
-            if (SuperGame.debug)
-                collider.Draw(spriteBatch);     
         }
 
         private void ShipShot(float disp)
@@ -196,6 +263,40 @@ namespace IS_XNA_Shooter
         public void SetPosition(Vector2 position)
         {
             this.position = position;
+        }
+
+        public int GetLife()
+        {
+            return life;
+        }
+
+        public void Damage(int i)
+        {
+            if (currentState == shipState.ONNORMAL)
+            {
+                life -= i;
+
+                if (life <= 0)
+                    Kill();
+            }
+        }
+
+        public void Kill()
+        {
+            game.PlayerDead();
+
+            currentState = shipState.ONDYING;
+            
+            Audio.PlayEffect("tackled1");
+            frameTime = timeDying / frameCount[3];
+            setAnim(3);
+        }
+
+        private void Respawn()
+        {
+            currentState = shipState.ONINVINCIBLE;
+            transparency = 0;
+            SetTransparency(transparency);
         }
 
         public void EraseShots()

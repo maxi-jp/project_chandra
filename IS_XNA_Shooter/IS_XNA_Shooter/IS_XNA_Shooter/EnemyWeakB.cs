@@ -55,5 +55,20 @@ namespace IS_XNA_Shooter
                 Audio.PlayEffect("brokenBone01");
             }
         }
+
+        public override void Damage(int i)
+        {
+            base.Damage(i);
+
+            // if the enemy is dead, play the new animation and the death sound
+            if (life <= 0)
+            {
+                setAnim(2, -1);
+                Audio.PlayEffect("brokenBone01");
+            }
+        }
+        
+
+        
     }
 }

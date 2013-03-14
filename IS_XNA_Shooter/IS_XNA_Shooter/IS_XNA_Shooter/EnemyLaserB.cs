@@ -41,7 +41,7 @@ namespace IS_XNA_Shooter
             points[3] = new Vector2(60, 60);
             points[4] = new Vector2(40, 65);
             points[5] = new Vector2(20, 60);
-            collider = new Collider(camera, true, position, rotation, points, frameWidth, frameHeight);
+            collider = new Collider(camera, true, position, rotation, points, 40, frameWidth, frameHeight);
 
             //For the Laser
             Rectangle rect = new Rectangle(0, 0, 2000, 2);

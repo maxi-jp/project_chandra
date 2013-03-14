@@ -173,6 +173,24 @@ namespace IS_XNA_Shooter
                 timeToSpawnEnemy = 0.5f;
             }
 
+            if (Keyboard.GetState().IsKeyDown(Keys.NumPad6))
+            {
+                //Vector2 positionTurret = new Vector2(GRMng.frameWidthFinalBoss1Turret1, GRMng.frameHeightFinalBoss1Turret1);
+                Vector2 positionTurret = new Vector2(100, 100);
+                enemy = new FinalBoss1Turret1(camera, this, positionTurret, ship, shotEnemies);
+                enemies.Add(enemy);
+                timeToSpawnEnemy = 0.5f;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.NumPad7))
+            {
+                //Vector2 positionTurret = new Vector2(GRMng.frameWidthFinalBoss1Turret1, GRMng.frameHeightFinalBoss1Turret1);
+                Vector2 positionTurret = new Vector2(100, 100);
+                enemy = new FinalBoss1Turret2(camera, this, positionTurret, ship);
+                enemies.Add(enemy);
+                timeToSpawnEnemy = 0.5f;
+            }
+
         } // TestEnemies
 
     } // class LevelA

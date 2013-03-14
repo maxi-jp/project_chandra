@@ -12,7 +12,7 @@ namespace IS_XNA_Shooter
     abstract class Ship : Animation
     {
         /* ------------------- ATRIBUTOS ------------------- */
-        protected Collider collider;
+        public Collider collider;
 
         protected float velocity;
         protected Vector2 movement;
@@ -26,6 +26,8 @@ namespace IS_XNA_Shooter
 
         private float timeVibShot = 0.1f; // tiempo que vibra el mando tras disparo
         private float timeVibShotAux;
+
+        protected bool colisionable = true;
 
         /* ------------------- CONSTRUCTORES ------------------- */
         public Ship(Camera camera, Level level, Vector2 position, float rotation, Vector2[] colliderPoints,
@@ -196,6 +198,22 @@ namespace IS_XNA_Shooter
         public void SetPosition(Vector2 position)
         {
             this.position = position;
+        }
+
+        public virtual bool IsColisionable()
+        {
+            return colisionable;
+        }
+
+        public virtual void Damage(int i)
+        {
+            life -= i;
+
+            if (life <= 0)
+            {
+                colisionable = false;
+                setAnim(2, -1);
+            }
         }
 
     } // class Ship

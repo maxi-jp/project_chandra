@@ -30,7 +30,6 @@ namespace IS_XNA_Shooter
         {
             hub = new IngameHubA(GRMng.hubLeft, GRMng.hubCenter, GRMng.hubRight, mainGame.player.GetLife());
             camera = new Camera();
-            shots = new List<Shot>();
             this.textureAim = textureAim;
             this.shipVelocity = shipVelocity;
             this.shipLife = shipLife;
@@ -44,7 +43,7 @@ namespace IS_XNA_Shooter
         {
             colliderList = new List<Collider>();
             //level = new LevelB(camera, numLevel);
-            level = new LevelB(camera, numLevel, shots);
+            level = new LevelB(camera, numLevel, shotsEnemies);
             enemies = ((LevelB)level).getEnemies();
             camera.setLevel(level);
             // crashList = ((LevelB)level).getRectangles();

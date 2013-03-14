@@ -25,6 +25,7 @@ namespace IS_XNA_Shooter
 
         protected List<Enemy> enemies;
         protected List<Shot> shots;
+        protected List<Shot> shotsEnemies;
         protected List<Explosion> explosions;
 
         /* ------------------------------------------------------------- */
@@ -39,6 +40,7 @@ namespace IS_XNA_Shooter
             camera = new Camera();
             enemies = new List<Enemy>();
             shots = new List<Shot>();
+            shotsEnemies = new List<Shot>();
             explosions = new List<Explosion>();
 
             //Audio.PlayMusic(1);
@@ -73,6 +75,13 @@ namespace IS_XNA_Shooter
                     shots.RemoveAt(i);
             }
 
+            for (int i = 0; i < shotsEnemies.Count(); i++)     // shots enemies
+            {
+                shotsEnemies[i].Update(deltaTime);
+                if (!shotsEnemies[i].IsActive())
+                    shotsEnemies.RemoveAt(i);
+            }
+
             /*for (int i = 0; i < explosions.Count(); i++)// explosiones
             {
                 explosions[i].Update(deltaTime);
@@ -100,6 +109,24 @@ namespace IS_XNA_Shooter
                 }
             }
 
+            // enemies-shots vs player collision:
+            for (int z = 0; z < shotsEnemies.Count; z ++)
+            {
+                Shot shot = shotsEnemies[z];
+
+                if (ship.collider != null && ship.IsColisionable() && shot.IsActive() && ship.collider.collision(shot.position))
+                {
+                    // nueva explosión:
+                    /*Explosion newExp = new Explosion(camera, level, enemies[i].position, enemies[i].rotation, GRMng.frameWidthEx1,
+                        GRMng.frameHeightEx1, GRMng.frameCountEx1, SuperGame.frameTime24, GRMng.textureExplosion1);
+                    explosions.Add(newExp);*/
+
+                    ship.Damage(shot.GetPower());
+
+                    shotsEnemies.RemoveAt(z);
+                }
+            }
+
             camera.Update(deltaTime);   // cámara
         }
 
@@ -112,6 +139,9 @@ namespace IS_XNA_Shooter
                     e.Draw(spriteBatch);
 
             foreach (Shot shot in shots)    // player shots
+                shot.Draw(spriteBatch);
+
+            foreach (Shot shot in shotsEnemies)    // enemies shots
                 shot.Draw(spriteBatch);
 
             ship.Draw(spriteBatch);

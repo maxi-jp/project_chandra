@@ -25,7 +25,7 @@ namespace IS_XNA_Shooter
         {
             hub = new IngameHubA(GRMng.hubLeft, GRMng.hubCenter, GRMng.hubRight, mainGame.player.GetLife());
             level = new LevelA(camera, num, enemies);
-            level.setShotEnemies(shots);
+            level.setShotEnemies(shotsEnemies);
             backGround = new BackgroundGameA(camera, level);
             
             camera.setLevel(level);

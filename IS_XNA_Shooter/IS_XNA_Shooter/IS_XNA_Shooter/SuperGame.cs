@@ -312,7 +312,7 @@ namespace IS_XNA_Shooter
             grManager.LoadContent(2);   // loads the resources of GameA
             grManager.LoadContent(3);   // loads the resources of GameB
             audio.LoadContent(1);
-            game = new GameB(this, 0, GRMng.textureAim, 200, 100);
+            game = new GameB(this, 0, GRMng.textureAim, 200, 1);
             currentState = gameState.playing;
             grManager.UnloadContent(0); //unloads the resources of Menu
         }

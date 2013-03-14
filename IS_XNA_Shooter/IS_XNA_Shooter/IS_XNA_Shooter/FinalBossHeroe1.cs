@@ -70,7 +70,7 @@ namespace IS_XNA_Shooter
         public FinalBossHeroe1(Camera camera, Level level, Vector2 position, Ship Ship, List<Shot> shots)
             : base(camera, level, position, 0, GRMng.frameWidthHeroe1, GRMng.frameHeightHeroe1,
             GRMng.numAnimsHeroe1, GRMng.frameCountHeroe1, GRMng.loopingHeroe1, SuperGame.frameTime12, 
-            GRMng.textureHeroe1, 0, 10, 1, 1, Ship)
+            GRMng.textureHeroe1, 0, 500, 1, 1, Ship)
         {
             this.position = position;         
             destiny = position;
@@ -103,6 +103,7 @@ namespace IS_XNA_Shooter
             // if the enemy is dead, play the new animation and the death sound
             if (life <= 0)
             {
+                velocity = 0;
                 setAnim(2, -1);
                 Audio.PlayEffect("brokenBone01");
             }
@@ -197,7 +198,7 @@ namespace IS_XNA_Shooter
                 pY -= distance * (float)Math.Sin(gyre);
             }
 
-            if (shotLastTime >= 0.2f)
+            if (shotLastTime >= 0.2f && !isDead())
             {
                 setAnim(0);
 

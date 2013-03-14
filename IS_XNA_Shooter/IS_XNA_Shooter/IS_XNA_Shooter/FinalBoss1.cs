@@ -95,7 +95,7 @@ namespace IS_XNA_Shooter
             movingToBack = true;
             singletonEnemyHeroe = true;
             singletonLaserVelocityBoss = true;
-            seconds = 10f;
+            seconds = 500;
             
             //Front shot
             timeToShotFront = 0.5f;
@@ -164,11 +164,11 @@ namespace IS_XNA_Shooter
         {
             if (movingToCenter){
 
-                if (position.Y < SuperGame.screenHeight / 2) { position.Y += deltaTime * velocity *3; }
-                else if (position.Y > SuperGame.screenHeight / 2) { position.Y -= deltaTime * velocity * 3; }
+                if (position.Y < SuperGame.screenHeight / 2) { position.Y += deltaTime * velocity *1.2f; }
+                else if (position.Y > SuperGame.screenHeight / 2) { position.Y -= deltaTime * velocity * 1.2f; }
 
-                if (position.X < (SuperGame.screenWidth * 4 / 6)) { position.X += deltaTime * velocity * 3; }
-                else if (position.X > (SuperGame.screenWidth * 4 / 6)) { position.X -= deltaTime * velocity * 3; }
+                if (position.X < (SuperGame.screenWidth * 4 / 6)) { position.X += deltaTime * velocity * 1.2f; }
+                else if (position.X > (SuperGame.screenWidth * 4 / 6)) { position.X -= deltaTime * velocity * 1.2f; }
 
                if (position.X == this.frameWidth / 2 && position.Y == this.frameHeight / 2) { movingToCenter = false; }
             }
@@ -190,29 +190,29 @@ namespace IS_XNA_Shooter
             timeToShotWingsAux -= deltaTime;
 
             seconds +=  deltaTime;
-            if (seconds > 5)
+            if (seconds > 500)
             {
                 Vector2 positionEnemy = new Vector2(position.X , position.Y  + this.frameHeight / 2); ///(470, 100);
                 Enemy e = new BotFinalBoss(camera, level, positionEnemy, (float)Math.PI, GRMng.frameWidthBFB, GRMng.frameHeightBFB,
-                    GRMng.numAnimsBFB, GRMng.frameCountBFB, GRMng.loopingBFB, SuperGame.frameTime12, GRMng.textureBFB, 150, 100, 1, ship, shots,true);
+                    GRMng.numAnimsBFB, GRMng.frameCountBFB, GRMng.loopingBFB, SuperGame.frameTime12, GRMng.textureBFB, 50, 1, 1, ship, shots,true);
                 e.SetActive();
                 enemies.Add(e);
 
                 Vector2 positionEnemy1 = new Vector2(position.X, position.Y + this.frameHeight / 2); //(470, 300);
                 Enemy e1 = new BotFinalBoss(camera, level, positionEnemy1, (float)Math.PI, GRMng.frameWidthBFB, GRMng.frameHeightBFB,
-                    GRMng.numAnimsBFB, GRMng.frameCountBFB, GRMng.loopingBFB, SuperGame.frameTime12, GRMng.textureBFB, 150, 100, 1, ship, shots,false);
+                    GRMng.numAnimsBFB, GRMng.frameCountBFB, GRMng.loopingBFB, SuperGame.frameTime12, GRMng.textureBFB, 50, 1, 1, ship, shots,false);
                 e1.SetActive();
                 enemies.Add(e1);
 
                 Vector2 positionEnemy2 = new Vector2(position.X , position.Y  - this.frameHeight / 2);//(470, 500);
                 Enemy e2 = new BotFinalBoss(camera, level, positionEnemy2, (float)Math.PI, GRMng.frameWidthBFB, GRMng.frameHeightBFB,
-                    GRMng.numAnimsBFB, GRMng.frameCountBFB, GRMng.loopingBFB, SuperGame.frameTime12, GRMng.textureBFB, 150, 100, 1, ship, shots,true);
+                    GRMng.numAnimsBFB, GRMng.frameCountBFB, GRMng.loopingBFB, SuperGame.frameTime12, GRMng.textureBFB, 50, 1, 1, ship, shots,true);
                 e2.SetActive();
                 enemies.Add(e2);
 
                 Vector2 positionEnemy3 = new Vector2(position.X , position.Y  - this.frameHeight / 2);
                 Enemy e3 = new BotFinalBoss(camera, level, positionEnemy3, (float)Math.PI, GRMng.frameWidthBFB, GRMng.frameHeightBFB,
-                    GRMng.numAnimsBFB, GRMng.frameCountBFB, GRMng.loopingBFB, SuperGame.frameTime12, GRMng.textureBFB, 150, 100, 1, ship, shots,false);
+                    GRMng.numAnimsBFB, GRMng.frameCountBFB, GRMng.loopingBFB, SuperGame.frameTime12, GRMng.textureBFB, 50, 1, 1, ship, shots,false);
                 e3.SetActive();
                 enemies.Add(e3);
 
@@ -262,25 +262,25 @@ namespace IS_XNA_Shooter
             {
                 Vector2 positionEnemy = new Vector2(position.X, position.Y + this.frameHeight / 2); ///(470, 100);
                 Enemy e = new BotFinalBoss(camera, level, positionEnemy, (float)Math.PI, GRMng.frameWidthBFB, GRMng.frameHeightBFB,
-                    GRMng.numAnimsBFB, GRMng.frameCountBFB, GRMng.loopingBFB, SuperGame.frameTime12, GRMng.textureBFB, 150, 100, 1, ship, shots, true);
+                    GRMng.numAnimsBFB, GRMng.frameCountBFB, GRMng.loopingBFB, SuperGame.frameTime12, GRMng.textureBFB, 50, 1, 1, ship, shots, true);
                 e.SetActive();
                 enemies.Add(e);
 
                 Vector2 positionEnemy1 = new Vector2(position.X, position.Y + this.frameHeight / 2); //(470, 300);
                 Enemy e1 = new BotFinalBoss(camera, level, positionEnemy1, (float)Math.PI, GRMng.frameWidthBFB, GRMng.frameHeightBFB,
-                    GRMng.numAnimsBFB, GRMng.frameCountBFB, GRMng.loopingBFB, SuperGame.frameTime12, GRMng.textureBFB, 150, 100, 1, ship, shots, false);
+                    GRMng.numAnimsBFB, GRMng.frameCountBFB, GRMng.loopingBFB, SuperGame.frameTime12, GRMng.textureBFB, 50, 1, 1, ship, shots, false);
                 e1.SetActive();
                 enemies.Add(e1);
 
                 Vector2 positionEnemy2 = new Vector2(position.X, position.Y - this.frameHeight / 2);//(470, 500);
                 Enemy e2 = new BotFinalBoss(camera, level, positionEnemy2, (float)Math.PI, GRMng.frameWidthBFB, GRMng.frameHeightBFB,
-                    GRMng.numAnimsBFB, GRMng.frameCountBFB, GRMng.loopingBFB, SuperGame.frameTime12, GRMng.textureBFB, 150, 100, 1, ship, shots, true);
+                    GRMng.numAnimsBFB, GRMng.frameCountBFB, GRMng.loopingBFB, SuperGame.frameTime12, GRMng.textureBFB, 50, 1, 1, ship, shots, true);
                 e2.SetActive();
                 enemies.Add(e2);
 
                 Vector2 positionEnemy3 = new Vector2(position.X, position.Y - this.frameHeight / 2);
                 Enemy e3 = new BotFinalBoss(camera, level, positionEnemy3, (float)Math.PI, GRMng.frameWidthBFB, GRMng.frameHeightBFB,
-                    GRMng.numAnimsBFB, GRMng.frameCountBFB, GRMng.loopingBFB, SuperGame.frameTime12, GRMng.textureBFB, 150, 100, 1, ship, shots, false);
+                    GRMng.numAnimsBFB, GRMng.frameCountBFB, GRMng.loopingBFB, SuperGame.frameTime12, GRMng.textureBFB, 50, 1, 1, ship, shots, false);
                 e3.SetActive();
                 enemies.Add(e3);
 
@@ -328,7 +328,7 @@ namespace IS_XNA_Shooter
                     shot.Update(deltaTime);
                     timeShoting -= deltaTime;
                     //More speed if it's shooting
-                    if (singletonLaserVelocityBoss) {velocity = velocity * 6f; singletonLaserVelocityBoss = !singletonLaserVelocityBoss;}
+                    if (singletonLaserVelocityBoss) {velocity = velocity * 3f; singletonLaserVelocityBoss = !singletonLaserVelocityBoss;}
 
                 }
                 else
@@ -338,7 +338,7 @@ namespace IS_XNA_Shooter
                     timeToShot = 3.0f;
                     velocity = velocity / 1.05f;
                     //When the laser do not shoot , the velocity get the before value
-                    if (!singletonLaserVelocityBoss) { velocity = velocity / 6f; singletonLaserVelocityBoss = !singletonLaserVelocityBoss; }
+                    if (!singletonLaserVelocityBoss) { velocity = velocity / 3f; singletonLaserVelocityBoss = !singletonLaserVelocityBoss; }
                 }
             }
         }
@@ -458,8 +458,8 @@ namespace IS_XNA_Shooter
                 GRMng.textureLaserBoss, SuperGame.shootType.normal, shotVelocity, shotPower);*/
 
             shot = new Shot(camera, level, positionShot, rotation, GRMng.frameWidthELBulletHeroe, GRMng.frameHeightELBulletHeroe,
-    GRMng.numAnimsELBulletHeroe, GRMng.frameCountELBulletHeroe, GRMng.loopingELBulletHeroe, SuperGame.frameTime8,
-    GRMng.textureELBulletHeroe, SuperGame.shootType.normal, shotVelocity, shotPower);
+                GRMng.numAnimsELBulletHeroe, GRMng.frameCountELBulletHeroe, GRMng.loopingELBulletHeroe, SuperGame.frameTime8,
+                GRMng.textureELBulletHeroe, SuperGame.shootType.normal, shotVelocity, shotPower);
             
             //   shot.rotation = rotation;
 

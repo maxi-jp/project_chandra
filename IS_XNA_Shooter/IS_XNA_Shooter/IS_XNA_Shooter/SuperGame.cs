@@ -16,10 +16,19 @@ namespace IS_XNA_Shooter
     /// </summary>
     public class SuperGame : Microsoft.Xna.Framework.Game
     {
+        /// <summary>
+        /// XNA's atribute for graphics
+        /// </summary>
         GraphicsDeviceManager graphics;
+        
+        /// <summary>
+        /// The screen's canvas
+        /// </summary>
         SpriteBatch spriteBatch;
 
-        // estado del juego
+        /// <summary>
+        /// Game's states
+        /// </summary>
         public enum gameState
         {
             mainMenu,
@@ -28,59 +37,160 @@ namespace IS_XNA_Shooter
             gameOver
         };
 
-        /* ------------------------------------------------------------- */
-        /*                           ATRIBUTOS                           */
-        /* ------------------------------------------------------------- */
-        public gameState currentState; // estado actual del juego
-
+        /// <summary>
+        /// Game's current state
+        /// </summary>
+        public gameState currentState;
+       
+        /// <summary>
+        /// Says if it's in debug's mode
+        /// </summary>
         public static bool debug = true;
+        
+        /// <summary>
+        /// Screen's width
+        /// </summary>
+        public static int screenWidth;
+        
+        /// <summary>
+        /// Screen's height
+        /// </summary>
+        public static int screenHeight;
+       
+        /// <summary>
+        /// Resources' manager
+        /// </summary>
+        private GRMng grManager;     
+        
+        /// <summary>
+        /// Controlls' manager
+        /// </summary>
+        public ControlMng controlMng;
+        
+        /// <summary>
+        /// XML's manager
+        /// </summary>
+        private XMLLvlMng LvlMng;
+        
+        /// <summary>
+        /// Audio's manager
+        /// </summary>
+        private Audio audio; 
+        
+        /// <summary>
+        /// Mouse's position
+        /// </summary>
+        public Vector2 pointer;
+        
+        /// <summary>
+        /// Total time
+        /// </summary>
+        protected float totalTime;
 
-        public static int screenWidth;  // ancho de la pantalla
-        public static int screenHeight; // alto de la pantalla
-
-        private GRMng grManager;        // gestor de recursos gráficos
-        public ControlMng controlMng;   // gestor de controles
-        private XMLLvlMng LvlMng;       // gestor de XML
-        private Audio audio;            // gestor del Audio del juego
-
-        public Vector2 pointer; // posicion del raton
-
-        protected float totalTime; // contador del tiempo total
-
+        /// <summary>
+        /// Draw frames' counter
+        /// </summary>
         private int     drawFramesCounter;
+        
+        /// <summary>
+        /// Draw frames' auxiliar counter
+        /// </summary>
         private int     drawFramesCounterAux;
+        
+        /// <summary>
+        /// Update frames' counter
+        /// </summary>
         private int     updateFramesCounter;
+        
+        /// <summary>
+        /// Update frames' auxiliar counter
+        /// </summary>
         private int     updateFramesCounterAux;
+        
+        /// <summary>
+        /// Time frames' counter
+        /// </summary>
         private float   timeCounterSecond;
+        
+        /// <summary>
+        /// Time frames' auxiliar counter
+        /// </summary>
         private float   timeCounterSecondAux;
 
-        // tiempo de duración de un frame en una animación:
+        // Refresh time between frames:
+        /// <summary>
+        /// Refresh time between frames = 24
+        /// </summary>
         public static float frameTime24 =   ((float)1 / 24);
+        
+        /// <summary>
+        /// Refresh time between frames = 12
+        /// </summary>
         public static float frameTime12 =   ((float)1 / 12);
+        
+        /// <summary>
+        /// Refresh time between frames = 10
+        /// </summary>
         public static float frameTime10 =   ((float)1 / 10);
+        
+        /// <summary>
+        /// Refresh time between frames = 8
+        /// </summary>
         public static float frameTime8 =    ((float)1 / 8);
+        
+        /// <summary>
+        /// Time to resume after pause
+        /// </summary>
+        public static float timeToResume = 2f;
 
-        public static float timeToResume = 2f; // t que tarda en volver después de pause
-
-        // objetos del juego:
+        // Game's objects:
+        /// <summary>
+        /// Menu
+        /// </summary>
         private Menu        menu;
+        
+        /// <summary>
+        /// Menu of the pause
+        /// </summary>
         private MenuIngame  menuIngame;
+        
+        /// <summary>
+        /// Menu of game over
+        /// </summary>
         private MenuGameOver menuGameOver;
+        
+        /// <summary>
+        /// Game
+        /// </summary>
         private Game        game;
+       
+        /// <summary>
+        /// Player
+        /// </summary>
         public Player       player;
+       
+        /// <summary>
+        /// Player lifes
+        /// </summary>
         private int         playerLifes = 4;
-
+        
+        /// <summary>
+        /// Shoot type
+        /// </summary>
         public enum shootType
         {
             normal,
         };
 
         // fuentes:
-        public static SpriteFont fontDebug; // courier new 12 regular
+        /// <summary>
+        /// courier new 12 regular
+        /// </summary>
+        public static SpriteFont fontDebug; 
 
-        /* ------------------------------------------------------------- */
-        /*                          CONSTRUCTOR                          */
-        /* ------------------------------------------------------------- */
+        /// <summary>
+        /// SuperGame's constructor
+        /// </summary>
         public SuperGame ()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -113,7 +223,7 @@ namespace IS_XNA_Shooter
             updateFramesCounter = updateFramesCounterAux = 0;
             timeCounterSecond = timeCounterSecondAux = 1;
 
-            currentState = gameState.mainMenu; // ponemos el estado de juego a modo menu
+            currentState = gameState.mainMenu; // puts game's state at menu mode
             pointer = new Vector2();
 
             base.Initialize();
@@ -132,7 +242,7 @@ namespace IS_XNA_Shooter
             screenWidth = GraphicsDevice.Viewport.Width;
             screenHeight = GraphicsDevice.Viewport.Height;
 
-            // TODO: use this.Content to load your game content here
+            // ALL: use this.Content to load your game content here
 
             grManager.LoadContent(0); // se cargan los recursos del menu
             grManager.LoadContent(1); // se cargan los recursos del menu ingame
@@ -171,7 +281,7 @@ namespace IS_XNA_Shooter
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
-            // tiempo que ha pasado desde la ultima vez que ejecutamos el metodo
+            // Time since the last method's execution
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             // update the frames counters:
@@ -199,7 +309,7 @@ namespace IS_XNA_Shooter
             pointer.X = Mouse.GetState().X;
             pointer.Y = Mouse.GetState().Y;
 
-            // actualizamos el juego:
+            // Game's update:
             switch (currentState)
             {
                 case gameState.mainMenu:
@@ -301,101 +411,122 @@ namespace IS_XNA_Shooter
             base.Draw(gameTime);
         }
 
-        /* ------------------------------------------------------------- */
-        /*                            MÉTODOS                            */
-        /* ------------------------------------------------------------- */
+        /// <summary>
+        /// Create a GameA for tests
+        /// </summary>
         private void NewGameATest()
         {
-            grManager.LoadContent(2); // cargamos los recursos del nivel 1 de GameA
+            grManager.LoadContent(2); // Load the gameA's level 1 resources
             audio.LoadContent(1);
             game = new GameA(this, player, 0, GRMng.textureAim, GRMng.textureCell,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
-            currentState = gameState.playing; // cambiamos el estado del juego a modo juego
-            grManager.UnloadContent(0); // descargamos los recursos del menú
+            currentState = gameState.playing; // Change game's state to game mode
+            grManager.UnloadContent(0); // Unload the menu's resources
         }
 
+        /// <summary>
+        /// Create a new Story
+        /// </summary>
         public void NewStory()
         {
-            grManager.LoadContent(3); // cargamos los recursos del nivel 1 de GameB
-            grManager.LoadContent(2); // cargamos los recursos del nivel 1 de GameA
+            grManager.LoadContent(3); // Load the gameB's level 1 resources
+            grManager.LoadContent(2); // Load the gameA's level 1 resources
             audio.LoadContent(1);
-            LvlMng.LoadContent(1); // cargamos los rectangulos
-            LvlMng.LoadContent(0); // cargamos enemigos del levelA
+            LvlMng.LoadContent(1); // Load the rectangles
+            LvlMng.LoadContent(0); // Load the levelA's enemies
 
             game = new GameB(this, player, 1, GRMng.textureAim,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
-           
-            currentState = gameState.playing; // cambiamos el estado del juego a modo juego
 
-            grManager.UnloadContent(0); // descargamos los recursos del menú
+            currentState = gameState.playing; // Change game's state to game mode
+
+            grManager.UnloadContent(0); // Unload the menu's resources
         }
 
+        /// <summary>
+        /// Create a new Survival
+        /// </summary>
         public void newSurvival()
         {
-            grManager.LoadContent(2); // cargamos los recursos del nivel 1 de GameA
+            grManager.LoadContent(2);  // Load the gameA's level 1 resources
             audio.LoadContent(1);
-            LvlMng.LoadContent(0); // cargamos los XML
+            LvlMng.LoadContent(0); // Load XML
 
             game = new GameA(this, player, 1, GRMng.textureAim, GRMng.textureCell,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
 
-            currentState = gameState.playing; // cambiamos el estado del juego a modo juego
+            currentState = gameState.playing; // Change game's state to game mode
 
             LvlMng.UnloadContent(0);
-            grManager.UnloadContent(0); // descargamos los recursos del menú
+            grManager.UnloadContent(0); /// Unload the menu's resources
         }
 
+        /// <summary>
+        /// Create a new Killer
+        /// </summary>
         public void newKiller()
         {
-            grManager.LoadContent(2); // cargamos los recursos del nivel 1 de GameA
+            grManager.LoadContent(2); // Load the gameB's level 1 resources
             audio.LoadContent(1);
-            LvlMng.LoadContent(0); // cargamos los XML
+            LvlMng.LoadContent(0); // Load XML
 
             game = new GameA(this, player, 1, GRMng.textureAim, GRMng.textureCell,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
 
-            currentState = gameState.playing; // cambiamos el estado del juego a modo juego
+            currentState = gameState.playing; // Change game's state to game mode
 
             LvlMng.UnloadContent(0);
-            grManager.UnloadContent(0); // descargamos los recursos del menú
+            grManager.UnloadContent(0); // Unload the menu's resources
 
         }
 
+        /// <summary>
+        /// Create a new Defense
+        /// </summary>
         public void newDefense()
         {
-            grManager.LoadContent(2); // cargamos los recursos del nivel 1 de GameA
+            grManager.LoadContent(2); // Load the gameB's level 1 resources
             audio.LoadContent(1);
             LvlMng.LoadContent(0);
 
             game = new GameA(this, player, 1, GRMng.textureAim, GRMng.textureCell,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
 
-            currentState = gameState.playing; // cambiamos el estado del juego a modo juego
+            currentState = gameState.playing; // Change game's state to game mode
 
             LvlMng.UnloadContent(0);
-            grManager.UnloadContent(0); // descargamos los recursos del menú
+            grManager.UnloadContent(0); // Unload the menu's resources
         }
 
+        /// <summary>
+        /// Create a new Scroll
+        /// </summary>
         public void newScroll()
         {
-            grManager.LoadContent(2); // cargamos los recursos del nivel 1 de GameA
+            grManager.LoadContent(2); // Load the gameB's level 1 resources
             audio.LoadContent(1);
-            LvlMng.LoadContent(1); // cargamos los rectangulos
+            LvlMng.LoadContent(1); // Load the rectangles
 
             game = new GameB(this, player, 1, GRMng.textureAim,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
 
-            currentState = gameState.playing; // cambiamos el estado del juego a modo juego
+            currentState = gameState.playing; // Change game's state to game mode
 
             LvlMng.UnloadContent(1);
-            grManager.UnloadContent(0); // descargamos los recursos del menú
+            grManager.UnloadContent(0); // Unload the menu's resources
         }
 
+        /// <summary>
+        /// Puts gameState = playing
+        /// </summary>
         public void Resume()
         {
             currentState = gameState.playing;
         }
 
+        /// <summary>
+        /// Load the main menu content
+        /// </summary>
         public void ExitToMenu()
         {
             grManager.LoadContent(0);
@@ -407,6 +538,9 @@ namespace IS_XNA_Shooter
             player = new Player(playerLifes);
         }
 
+        /// <summary>
+        /// Puts gameState = gameOver
+        /// </summary>
         public void GameOver()
         {
             currentState = gameState.gameOver;

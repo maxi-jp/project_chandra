@@ -7,22 +7,87 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace IS_XNA_Shooter
 {
+    /// <summary>
+    /// Class of the collider
+    /// </summary>
     class Collider
     {
-        /* ------------------- ATRIBUTOS ------------------- */
-        public Vector2 position, prevPosition;
+        /// <summary>
+        /// Collider's position.
+        /// </summary>
+        public Vector2 position;
+        
+        /// <summary>
+        /// Collider's previous position
+        /// </summary>
+        public Vector2 prevPosition;
+        
+        /// <summary>
+        /// Collider's rotation
+        /// </summary>
         private float rotation;
+        
+        /// <summary>
+        /// Collider's rectangles
+        /// </summary>
         private Rectangle rectangle;
-        public int Width, Height;
-        public float radius;
-        private bool middlePos;
-        private Camera camera;
-        private Vector2[] pointsOrig;
-        public Vector2[] points;
-        private Vector2 pivotPoint; // centro del objeto (para la rotación)
-        private Matrix rotationMatrix; // matriz de rotación
+       
+        /// <summary>
+        /// Collider's width
+        /// </summary>
+        public int Width;
 
-        /* ------------------- CONSTRUCTORES ------------------- */
+        /// <summary>
+        /// Collider's height
+        /// </summary>
+        public int Height;
+        
+        /// <summary>
+        /// Collider's radious
+        /// </summary>
+        public float radius;
+        
+        /// <summary>
+        /// Collider's middle position
+        /// </summary>
+        private bool middlePos;
+        
+        /// <summary>
+        /// Camera
+        /// </summary>
+        private Camera camera;
+        
+        /// <summary>
+        /// Collider's Original points 
+        /// </summary>
+        private Vector2[] pointsOrig;
+       
+        /// <summary>
+        /// Collider's actual points
+        /// </summary>
+        public Vector2[] points;
+       
+        /// <summary>
+        /// Center of the object (for the rotation)
+        /// </summary>
+        private Vector2 pivotPoint;
+       
+        /// <summary>
+        /// Matrix of the collider's points
+        /// </summary>
+        private Matrix rotationMatrix;
+
+        /// <summary>
+        /// Collider's constructor
+        /// </summary>
+        /// <param name="camera">The camera</param>
+        /// <param name="middlePos">Collider's  middle position</param>
+        /// <param name="position">Collider's position</param>
+        /// <param name="rotation">Collider's rotation</param>
+        /// <param name="points">Collider's points</param>
+        /// <param name="radius">Collider's radious</param>
+        /// <param name="frameWidth">Collider's frame width</param>
+        /// <param name="frameHeight">Collider's frame height</param>
         public Collider(Camera camera, bool middlePos, Vector2 position, float rotation, Vector2[] points,
             float radius, int frameWidth, int frameHeight)
         {
@@ -51,7 +116,15 @@ namespace IS_XNA_Shooter
             rectangle = new Rectangle((int)position.X, (int)position.Y, frameWidth, frameHeight);
         }
 
-        // constructura sin lista de puntos
+        /// <summary>
+        /// Collider's constructor without list of points
+        /// </summary>
+        /// <param name="camera">The camera</param>
+        /// <param name="middlePos">Collider's  middle position</param>
+        /// <param name="position">Collider's position</param>
+        /// <param name="rotation">Collider's rotation</param>
+        /// <param name="frameWidth">Collider's frame width</param>
+        /// <param name="frameHeight">Collider's frame height</param>
         public Collider(Camera camera, bool middlePos, Vector2 position, float rotation,
             int frameWidth, int frameHeight)
         {
@@ -81,7 +154,11 @@ namespace IS_XNA_Shooter
             rectangle = new Rectangle((int)position.X, (int)position.Y, frameWidth, frameHeight);
         }
 
-        /* ------------------- MÉTODOS ------------------- */
+        /// <summary>
+        /// Updates the logic of the Collider
+        /// </summary>
+        /// <param name="newPosition">The new collider's position</param>
+        /// <param name="newRotation">The new collider's rotation</param>
         public void Update(Vector2 newPosition, float newRotation)
         {
             prevPosition = position;
@@ -102,12 +179,20 @@ namespace IS_XNA_Shooter
             }
         }
 
+        /// <summary>
+        /// Gives the collider´s rectangle
+        /// </summary>
+        /// <returns>rectangle</returns>
         public Rectangle getRectangle()
         {
             return rectangle;
         }
 
-        // comprueba si this esta colisionando con el Collider other
+        /// <summary>
+        /// Tests if its colliding to another collider
+        /// </summary>
+        /// <param name="other">The other collider</param>
+        /// <returns>True if there is a collision</returns>
         public bool Collision(Collider other)
         {
             float AX = MathHelper.Distance(other.position.X, position.X);
@@ -116,27 +201,24 @@ namespace IS_XNA_Shooter
             bool collision = false;
             int cont, it = 0;
 
-            // PRIMERA COMPROBACIÓN (distancia de Manhattan):
-            // miramos si la distancia de separación entre los colliders
-            // es menor que la suma de los radios.
+            // FIRST COMPROBATION (Manhattan's distance)
+            // We look if the distance between both colliders is less than the sum of the radiuos.
             if ((AX + AY) < (other.radius + radius))
             {
-                // SEGUNDA COMPROBACIÓN (teorema de Pitágoras):
-                // se mira si la distancia real entre los position de ambos collider
-                // es menor que la suma de sus radios.
+                // SECOND COMPROBATION (Pitagoras' theorem)
+                // We look if the real distance between both positions is less than the sum of the radious
                 if (((position.X - other.position.X) * (position.X - other.position.X) +
                     (position.Y - other.position.Y) * (position.Y - other.position.Y)) <
                     (radius + other.radius) * (radius + other.radius))
                 {
-                    // TERCERA COMPROBACIÓN (distancias de cada punto a las rectas del collider this):
-                    // por cada uno de los puntos que componen other se mira si esta
-                    // dentro de this.
+                    // THIRD COMPROBATION (each point distances to the collider's straight line):
+                    // for each "other's" point we look if is inside of "this"
                     while (!collision && it < other.points.Length)
                     {
-                        // calcular ecuaciones de cada una de las 4 rectas y - y1 = ((y2 - y1) / (x2 - x1)) * (x - x1)
-                        // calcular la distancia del punto other.points[i] con cada
-                        // una de esas 4 rectas
-                        // si todas son positivas el punto esta dentro, si no, no.
+                        // We calculate each ecuation of the 4 straight lines:
+                        // y - y1 = ((y2 - y1) / (x2 - x1)) * (x - x1)
+                        // We calculate the distance of the point (other.points[i]) with each straight lines.
+                        // If all are positives the point is inside, if they aren't it isn't inside.
                         cont = points.Length;
                         for (int j = 0; j < points.Length; j++)
                         {
@@ -155,8 +237,12 @@ namespace IS_XNA_Shooter
             else return false;
         }
 
-        // Check colision between two colliders, but only checking if the position of the
-        // collider other is inside the collider this
+        /// <summary>
+        /// Check colision between two colliders, but only checking if the position of the
+        /// collider other is inside the collider this
+        /// </summary>
+        /// <param name="other">The other collider</param>
+        /// <returns>True if there is a collision</returns>
         public bool CollisionPoint(Collider other)
         {
             float AX = MathHelper.Distance(other.position.X, position.X);
@@ -192,6 +278,12 @@ namespace IS_XNA_Shooter
             else return false;
         }
 
+        /// <summary>
+        /// Check colision between "this" and a straight line (A,B)
+        /// </summary>
+        /// <param name="A">The first point of the straight line</param>
+        /// <param name="B">The second point of the straight line</param>
+        /// <returns>True if there is a collision</returns>
         public bool CollisionTwoPoints(Vector2 A, Vector2 B)
         {
             for (int i = 0; i < points.Length; i++)
@@ -201,7 +293,11 @@ namespace IS_XNA_Shooter
             return false;
         }
 
-        // comprueba si el punto other esta dentro de this
+        /// <summary>
+        /// Check if the point is inside "this"
+        /// </summary>
+        /// <param name="other">the point</param>
+        /// <returns>True if there is a collision</returns>
         public bool Collision(Vector2 other)
         {
             float AX = MathHelper.Distance(other.X, position.X);
@@ -224,6 +320,10 @@ namespace IS_XNA_Shooter
             else return false;
         }
 
+        /// <summary>
+        /// This is called when the game should draw itself.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public void Draw(SpriteBatch spriteBatch)
         {
             /*spriteBatch.Draw(GRMng.whitepixel, new Rectangle(rectangle.X+(int)camera.displacement.X, rectangle.Y + (int)camera.displacement.Y,
@@ -232,6 +332,9 @@ namespace IS_XNA_Shooter
                 spriteBatch.Draw(GRMng.redpixel, points[i] + camera.displacement, Color.White);
         }
 
+        /// <summary>
+        /// Update the points with the rotation matrix
+        /// </summary>
         private void UpdatePoints()
         {
             rotationMatrix = Matrix.CreateRotationZ(rotation);
@@ -242,6 +345,13 @@ namespace IS_XNA_Shooter
             }
         }
 
+        /// <summary>
+        /// The distance of the point to the segment
+        /// </summary>
+        /// <param name="A">First point of the segment</param>
+        /// <param name="B">Second point of the segment</param>
+        /// <param name="p">The point</param>
+        /// <returns>The distance</returns>
         private float DistancePointToSegment(Vector2 A, Vector2 B, Vector2 p)
         {
             /*
@@ -290,6 +400,14 @@ namespace IS_XNA_Shooter
                 (float)(Math.Sqrt((B.X - A.X)*(B.X - A.X) + (B.Y - A.Y)*(B.Y - A.Y))));
         }
 
+        /// <summary>
+        /// The distance between two segments
+        /// </summary>
+        /// <param name="p1">First point of the first segment</param>
+        /// <param name="p2">Second point of the first segment</param>
+        /// <param name="p3">First point of the second segment</param>
+        /// <param name="p4">Second point of the second segment</param>
+        /// <returns></returns>
         private bool TwoSegmentIntersects(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4)
         {
             float dx, dy, dx1, dy1, dx2, dy2, side1, side2;
@@ -316,6 +434,10 @@ namespace IS_XNA_Shooter
             return ((side1 < 0) && (side2 < 0));
         }
 
+        /// <summary>
+        /// Inside
+        /// </summary>
+        /// <returns>false</returns>
         private bool Inside()
         {
             return false;

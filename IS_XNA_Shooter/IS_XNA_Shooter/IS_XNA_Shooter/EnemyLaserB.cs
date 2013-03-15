@@ -6,25 +6,83 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 namespace IS_XNA_Shooter
 {
-    //Class for the enemy that shoots one laser
+    /// <summary>
+    /// Class for the enemy that shoots one laser in GameB
+    /// </summary>
     class EnemyLaserB : Enemy
     {
-        /* ------------------- ATTRIBUTES ------------------- */
+        /// <summary>
+        /// Says if it has to shoot or not
+        /// </summary>
         private Boolean shooting = false;
+       
+        /// <summary>
+        /// Rotatio Matrix for the laser's points
+        /// </summary>
         private Matrix rotationMatrix;
 
+        
         //For the Laser
-        private Rectangle rect;
-        private Vector2 p1, p2;
-        private Vector2 p1Orig, p2Orig;
 
+        /// <summary>
+        /// Laser's rectanlge
+        /// </summary>
+        private Rectangle rect;
+        
+        /// <summary>
+        /// Laser's actual points
+        /// </summary>
+        private Vector2 p1, p2;
+        
+        /// <summary>
+        /// Laser's original points
+        /// </summary>
+        private Vector2 p1Orig, p2Orig;
+        
+        /// <summary>
+        /// Shot velocity
+        /// </summary>
         private float shotVelocity = 80f;
+        
+        /// <summary>
+        /// Time between shots
+        /// </summary>
         private float timeToShot = 6.0f;
+        
+        /// <summary>
+        /// Shot power
+        /// </summary>
         private int shotPower = 1;
+        
+        /// <summary>
+        /// Enemy's shot, in this case a laser
+        /// </summary>
         private Shot shot;
+        
+        /// <summary>
+        /// Says if the enemy is going up or down
+        /// </summary>
         private Boolean goingUp = true;
 
-        /* ------------------- CONSTRUCTORS ------------------- */
+        /// <summary>
+        /// EnemyLaserB's constructor
+        /// </summary>
+        /// <param name="camera">The camera of the game</param>
+        /// <param name="level">The level of the game</param>
+        /// <param name="position">The position of the enemy</param>
+        /// <param name="rotation">The rotation of the enemy</param>
+        /// <param name="frameWidth">The width of each frame of the enemy's animation</param>
+        /// <param name="frameHeight">The height of each frame of the enemy's animation </param>
+        /// <param name="numAnim">The number of the enemy's animations</param>
+        /// <param name="frameCount">The number of the frames in each animation's fil</param>
+        /// <param name="looping">Indicates if the animation has to loop</param>
+        /// <param name="frametime">Indicates how long the frame lasts</param>
+        /// <param name="texture">The texture of the enemy</param>
+        /// <param name="timeToSpawn">The time that the enemy has to wait for appear in the game</param>
+        /// <param name="velocity">The velocity of the enemy</param>
+        /// <param name="life">The life of the enemy</param>
+        /// <param name="value">The points you obtain if you kill it</param>
+        /// <param name="ship">The player's ship</param>
         public EnemyLaserB(Camera camera, Level level, Vector2 position, float rotation,
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
             float frametime, Texture2D texture, float timeToSpawn, float velocity, int life,
@@ -59,7 +117,10 @@ namespace IS_XNA_Shooter
 
         }
 
-        /* ------------------- METHODS ------------------- */
+        /// <summary>
+        /// Updates the logic of the enemy
+        /// </summary>
+        /// <param name="deltaTime">The time since the last update</param>
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
@@ -165,6 +226,10 @@ namespace IS_XNA_Shooter
 
         } // Update
 
+        /// <summary>
+        /// Draws the enemy 
+        /// </summary>
+        /// <param name="spriteBatch">The screen's canvas</param>
         public override void Draw(SpriteBatch spriteBatch)
         {
             if (shooting)
@@ -173,7 +238,9 @@ namespace IS_XNA_Shooter
             base.Draw(spriteBatch);
         }
 
-        //The enemy Shoot a Laser, we calculate previously the rectangle of it
+        /// <summary>
+        /// Calculates the enemy's laser points and rectangle
+        /// </summary>
         private void LaserShot()
         {
             //The calculation of the rectangle
@@ -194,6 +261,10 @@ namespace IS_XNA_Shooter
 
         }
 
+        /// <summary>
+        /// Causes damage to the enemy
+        /// </summary>
+        /// <param name="i">The amount of damage that the enemy receives</param>
         public override void Damage(int i)
         {
             base.Damage(i);

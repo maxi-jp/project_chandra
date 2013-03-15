@@ -29,7 +29,7 @@ namespace IS_XNA_Shooter
         protected float timeToSpawn; 
 
        
-        /// Enemy stats:
+        // Enemy stats:
         
         /// <summary>
         /// Enemy's life
@@ -47,7 +47,7 @@ namespace IS_XNA_Shooter
         protected int value;
 
         
-        /// control variables:
+        // control variables:
        
         /// <summary>
         /// if it isn't active you cant see it
@@ -66,7 +66,7 @@ namespace IS_XNA_Shooter
         
        
         /// <summary>
-        /// Constructor
+        /// Enemy's constructor
         /// </summary>
         /// <param name="camera">The camera of the game</param>
         /// <param name="level">The level of the game</param>
@@ -135,7 +135,7 @@ namespace IS_XNA_Shooter
         /// <summary>
         /// Draws the enemy 
         /// </summary>
-        /// <param name="spriteBatch"></param>
+        /// <param name="spriteBatch">The screen's canvas</param>
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);

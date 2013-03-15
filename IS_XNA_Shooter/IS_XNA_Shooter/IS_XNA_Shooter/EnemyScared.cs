@@ -2,27 +2,75 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace IS_XNA_Shooter
 {
-    // clase para el tipo de enemigo asustadizo
+    /// <summary>
+    /// Class for the enemy scared that shoots 2 shots
+    /// </summary>
     class EnemyScared : Enemy
     {
-        /* ------------------- ATTRIBUTES ------------------- */
+        /// <summary>
+        /// Says if it's rotating or not
+        /// </summary>
         private bool isRotating = false;
+        
+        /// <summary>
+        /// Says if it's fleeing or not
+        /// </summary>
         private bool isFleeing = false;
-
+        
+        /// <summary>
+        /// The final position when it's rotating
+        /// </summary>
         private float rotationPosition;
-        private Matrix rotationMatrix; // matriz de rotación
-
+        
+        /// <summary>
+        /// Rotation matrix for the two shots
+        /// </summary>
+        private Matrix rotationMatrix;
+        
+        /// <summary>
+        /// List of the enemy's shots
+        /// </summary>
         private List<Shot> shots;
+        
+        /// <summary>
+        /// time between two different shoots
+        /// </summary>
         private float timeToShot = 4.0f;
+        
+        /// <summary>
+        /// Shot velocity
+        /// </summary>
         private float shotVelocity = 300f;
+        
+        /// <summary>
+        /// Shot power
+        /// </summary>
         private int shotPower = 200;
 
-        /* ------------------- CONSTRUCTORS ------------------- */
+        /// <summary>
+        /// EnemyScared's constructor
+        /// </summary>
+        /// <param name="camera">The camera of the game</param>
+        /// <param name="level">The level of the game</param>
+        /// <param name="position">The position of the enemy</param>
+        /// <param name="rotation">The rotation of the enemy</param>
+        /// <param name="frameWidth">The width of each frame of the enemy's animation</param>
+        /// <param name="frameHeight">The height of each frame of the enemy's animation </param>
+        /// <param name="numAnim">The number of the enemy's animations</param>
+        /// <param name="frameCount">The number of the frames in each animation's fil</param>
+        /// <param name="looping">Indicates if the animation has to loop</param>
+        /// <param name="frametime">Indicates how long the frame lasts</param>
+        /// <param name="texture">The texture of the enemy</param>
+        /// <param name="timeToSpawn">The time that the enemy has to wait for appear in the game</param>
+        /// <param name="velocity">The velocity of the enemy</param>
+        /// <param name="life">The life of the enemy</param>
+        /// <param name="value">The points you obtain if you kill it</param>
+        /// <param name="ship">The player's ship</param>
         public EnemyScared(Camera camera, Level level, Vector2 position, float rotation,
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
             float frametime, Texture2D texture, float timeToSpawn, float velocity, int life, int value,
@@ -44,15 +92,18 @@ namespace IS_XNA_Shooter
             shots = new List<Shot>();
         }
         
-        /* ------------------- METHODS ------------------- */
-        /*
-        Si la nave del jugador no nos mira en un rango de +- PI/8, avanzamos hacia ella y disparamos.      
-        Si no, cambiamos nuestro color a rojo, nos giramos, y huimos.
-        */
+        /// <summary>
+        /// Updates the logic of the enemy
+        /// </summary>
+        /// <param name="deltaTime">The time since the last update</param>
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
-
+            
+            /*
+             * if the player's ship doesn't look at the enemy in a range of +- PI/8, the enemy has to chase and shoot him.
+             * if it doesn't the enemy has to change the color to red, turns and flee.
+             */
             if (life > 0)
             {
                 float dY = -ship.position.Y + position.Y;
@@ -62,26 +113,26 @@ namespace IS_XNA_Shooter
 
                 if (isRotating)
                 {
-                    //Si ha llegado a la posición final del giro, deja de rotar
+                    //If it's the final position of the rotation it has to stop rotating
                     if ((rotation < (rotationPosition + ((float)Math.PI) / 12)) && (rotation > rotationPosition - ((float)Math.PI) / 12))
-                    {//----todavía no funciona la comprobación esta -----
+                    {
                         isRotating = false;
 
-                        //Cambia el color
+                        //Change the color
                         if (isFleeing)
                             setAnim(4);
                         else
                             setAnim(3);
 
                     }
-                    //Si no, sigue girando
+                    //If itsn't it has to keep rotating
                     else
                     {
                         rotation += 10 * deltaTime;
                         rotation = rotation % (2 * (float)Math.PI);
                     }
                 }
-                //Si no está en fase de rotación
+                //If itsn't in the rotation phase
                 else
                 {
                     float r = ((float)Math.PI) / 8;
@@ -89,21 +140,21 @@ namespace IS_XNA_Shooter
                     float ang = 0;
                     float rot = ship.rotation;
 
-                    //Si estamos huyendo
+                    //If its fleeing
                     if (isFleeing)
                     {
 
-                        // comprobamos que el player no se salga del nivel
+                        // Tests that the player doesn't go out of the level
                         position.X = MathHelper.Clamp(position.X, 0 + collider.Width / 2, level.width - collider.Width / 2);
                         position.Y = MathHelper.Clamp(position.Y, 0 + collider.Height / 2, level.height - collider.Height / 2);
 
-                        //1er cuadrante
+                        //First quadrant
                         if (dX < 0 && dY > 0)
                         {
 
                             ang = (float)Math.Abs(Math.Acos(dY / h));
                             ang += (float)Math.PI / 2;
-                            //Si la nave del jugador no nos mira, empezamos a girar para perseguirle
+                            //If the player's ship doesn't look the enemy, it has to rotate to pursuit him
                             if (!(ang < rot + r && ang > rot - r))
                             {
                                 if (dX >= 0)
@@ -115,16 +166,16 @@ namespace IS_XNA_Shooter
                                     rotationPosition += 2 * (float)Math.PI;
                                 isRotating = true;
                                 isFleeing = false;
-                                //Cambia el color
+                                //Change the color
                                 setAnim(2);
                             }
 
                         }
-                        //2º cuadrante
+                        //Second quadrant
                         else if (dX >= 0 && dY >= 0)
                         {
                             ang = (float)Math.Abs(Math.Asin(dY / h));
-                            //Si la nave del jugador no nos mira, empezamos a girar para perseguirle
+                            //If the player's ship doesn't look the enemy, it has to rotate to chase him
                             if (!(ang < rot + r && ang > rot - r))
                             {
                                 if (dX >= 0)
@@ -137,16 +188,16 @@ namespace IS_XNA_Shooter
 
                                 isRotating = true;
                                 isFleeing = false;
-                                //Cambia el color
+                                //Change the color
                                 setAnim(2);
                             }
                         }
-                        //3er cuadrante
+                        //Third quadrant
                         else if (dX > 0 && dY < 0)
                         {
                             ang = (float)Math.Abs(Math.Asin(dY / h));
                             ang = -ang;
-                            //Si la nave del jugador no nos mira, empezamos a girar para perseguirle
+                            //If the player's ship doesn't look the enemy, it has to rotate to chase him
                             if (!(ang < rot + r && ang > rot - r))
                             {
                                 if (dX >= 0)
@@ -159,11 +210,11 @@ namespace IS_XNA_Shooter
 
                                 isRotating = true;
                                 isFleeing = false;
-                                //Cambia el color
+                                //Change the color
                                 setAnim(2);
                             }
                         }
-                        //4º cuadrante
+                        //Fourth quadrant
                         else if (dX <= 0 && dY <= 0)
                         {
 
@@ -173,7 +224,7 @@ namespace IS_XNA_Shooter
                             if (ship.rotation < 0)
                                 rot += 2 * (float)Math.PI;
 
-                            //Si la nave del jugador no nos mira, empezamos a girar para perseguirle
+                            //If the player's ship doesn't look the enemy, it has to rotate to chase him
                             if (!(ang < rot + r && ang > rot - r))
                             {
                                 if (dX >= 0)
@@ -186,12 +237,12 @@ namespace IS_XNA_Shooter
 
                                 isRotating = true;
                                 isFleeing = false;
-                                //Cambia el color
+                                //Change the color
                                 setAnim(2);
                             }
                         }
 
-                        //si no, seguimos huyendo
+                        //Keep fleeing
                         if (ang < rot + r && ang > rot - r)
                         {
 
@@ -199,23 +250,23 @@ namespace IS_XNA_Shooter
                         }
 
                     }
-                    //Si no estamos huyendo
+                    // If the enemy isn't fleeing
                     else
                     {
-                        //Dispara si toca
+                        // It shots if it has to
                         timeToShot -= deltaTime;
                         if (timeToShot <= 0)
                         {
                             TwoShots();
                             timeToShot = 1.7f;
                         }
-                        //1er cuadrante
+                        //First quadrant
                         if (dX <= 0 && dY >= 0)
                         {
                             ang = (float)Math.Abs(Math.Acos(dY / h));
                             ang += (float)Math.PI / 2;
 
-                            //Si la nave del jugador nos mira, empezamos a girar para huir
+                            //If the player's ship doesn't look the enemy, it has to rotate to chase him
                             if (ang < ship.rotation + r && ang > ship.rotation - r)
                             {
                                 rotationPosition = ship.rotation;
@@ -223,16 +274,16 @@ namespace IS_XNA_Shooter
                                     rotationPosition += 2 * (float)Math.PI;
                                 isRotating = true;
                                 isFleeing = true;
-                                //Cambia el color
+                                //Change the color
                                 setAnim(2);
                             }
                         }
-                        //2º cuadrante
+                        //Second quadrant
                         else if (dX >= 0 && dY >= 0)
                         {
                             ang = (float)Math.Abs(Math.Asin(dY / h));
 
-                            //Si la nave del jugador nos mira, empezamos a girar para huir
+                            //If the player's ship doesn't look the enemy, it has to rotate to chase him
                             if (ang < ship.rotation + r && ang > ship.rotation - r)
                             {
 
@@ -241,17 +292,17 @@ namespace IS_XNA_Shooter
                                     rotationPosition += 2 * (float)Math.PI;
                                 isRotating = true;
                                 isFleeing = true;
-                                //Cambia el color
+                                //Change the color
                                 setAnim(2);
                             }
                         }
-                        //3er cuadrante
+                        //Third quadrant
                         else if (dX >= 0 && dY <= 0)
                         {
                             ang = (float)Math.Abs(Math.Asin(dY / h));
                             ang = -ang;
 
-                            //Si la nave del jugador nos mira, empezamos a girar para huir
+                            //If the player's ship doesn't look the enemy, it has to rotate to chase him
                             if (ang < ship.rotation + r && ang > ship.rotation - r)
                             {
                                 rotationPosition = ship.rotation;
@@ -259,17 +310,17 @@ namespace IS_XNA_Shooter
                                     rotationPosition += 2 * (float)Math.PI;
                                 isRotating = true;
                                 isFleeing = true;
-                                //Cambia el color
+                                //Change the colorr
                                 setAnim(2);
                             }
                         }
-                        //4º cuadrante if (dX <= 0 && dY <= 0)
+                        //Fourth quadrant if (dX <= 0 && dY <= 0)
                         else
                         {
                             ang = (float)Math.Abs(Math.Asin(dY / h));
                             ang += (float)Math.PI;
 
-                            //Si la nave del jugador nos mira, empezamos a girar para huir
+                            //If the player's ship doesn't look the enemy, it has to rotate to chase him
                             if (ang < ship.rotation + r && ang > ship.rotation - r)
                             {
                                 rotationPosition = ship.rotation;
@@ -277,7 +328,7 @@ namespace IS_XNA_Shooter
                                     rotationPosition += 2 * (float)Math.PI;
                                 isRotating = true;
                                 isFleeing = true;
-                                //Cambia el color
+                                //Change the color
                                 setAnim(2);
                             }
                         }
@@ -309,6 +360,10 @@ namespace IS_XNA_Shooter
                        
         } // Update
 
+        /// <summary>
+        /// Draws the enemy 
+        /// </summary>
+        /// <param name="spriteBatch">The screen's canvas</param>
         public override void Draw(SpriteBatch spriteBatch)
         {
             foreach (Shot shot in shots)
@@ -316,7 +371,10 @@ namespace IS_XNA_Shooter
 
             base.Draw(spriteBatch);
         }
-
+        
+        /// <summary>
+        /// Calculates the shots' points and create the shots
+        /// </summary>
         private void TwoShots() 
         {
             rotationMatrix = Matrix.CreateRotationZ(rotation);
@@ -346,7 +404,12 @@ namespace IS_XNA_Shooter
             shots.Add(nuevo);
         }
 
-        //Función para perseguir al jugador
+        /// <summary>
+        /// Chasing function
+        /// </summary>
+        /// <param name="dX">Position's x difference between player's ship and the enemy</param>
+        /// <param name="gyre">The new rotation</param>
+        /// <param name="deltaTime">The time since the last update</param>
         private void Chase(float dX, float gyre, float deltaTime)
         {
 
@@ -365,7 +428,12 @@ namespace IS_XNA_Shooter
 
         }
 
-        //Funcion para huir del jugador
+        /// <summary>
+        /// Fleeing function
+        /// </summary>
+        /// <param name="dX">Position's x difference between player's ship and the enemy</param>
+        /// <param name="gyre">The new rotation</param>
+        /// <param name="deltaTime">The time since the last update</param>
         private void Flee(float dX, float gyre, float deltaTime)
         {
 
@@ -385,6 +453,10 @@ namespace IS_XNA_Shooter
 
         }
 
+        /// <summary>
+        /// Causes damage to the enemy
+        /// </summary>
+        /// <param name="i">The amount of damage that the enemy receives</param>
         public override void Damage(int i)
         {
             base.Damage(i);
@@ -397,6 +469,9 @@ namespace IS_XNA_Shooter
             }
         }
 
+        /// <summary>
+        /// Kills the enemy and its shots
+        /// </summary>
         public override void Kill()
         {
             base.Kill();
@@ -404,6 +479,11 @@ namespace IS_XNA_Shooter
             shots.Clear();
         }
 
+        /// <summary>
+        /// The dead condition of this enemy is when its death animation has ended
+        /// and the shots shoted when it was alive are no longer active
+        /// </summary>
+        /// <returns>dead condition</returns>
         public override bool DeadCondition()
         {
             // the dead condition of this enemy is when its death animation has ended

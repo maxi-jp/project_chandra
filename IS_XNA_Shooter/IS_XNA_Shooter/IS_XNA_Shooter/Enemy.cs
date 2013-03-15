@@ -13,21 +13,56 @@ namespace IS_XNA_Shooter
     /// </summary>
     abstract class Enemy : Animation
     {
-        /* ------------------- ATTRIBUTES ------------------- */
+        /// <summary>
+        /// Enemy's collider
+        /// </summary>
         public Collider collider;
-        protected Ship ship;        /// player ship
+        
+        /// <summary>
+        /// player's ship
+        /// </summary>
+        protected Ship ship;     
 
-        protected float timeToSpawn;    /// indicates the time when the Enemy has to turn active
+        /// <summary>
+        /// indicates the time when the Enemy has to turn active
+        /// </summary>
+        protected float timeToSpawn; 
 
+       
         /// Enemy stats:
-        protected int life;         /// life
-        protected float velocity;   /// velocity
-        protected int value;        /// the points you obtain if you kill it
+        
+        /// <summary>
+        /// Enemy's life
+        /// </summary>
+        protected int life;
 
+        /// <summary>
+        /// Enemy's velocity
+        /// </summary>
+        protected float velocity;
+
+        /// <summary>
+        /// the points you obtain if you kill it
+        /// </summary>
+        protected int value;
+
+        
         /// control variables:
-        protected bool active;      /// if it isn't active you cant see it
-        protected bool colisionable;/// indicates if the Enemy is colisionable or not
-        protected bool erasable;    /// indicates if the Enemy is no longer necesary in the Game
+       
+        /// <summary>
+        /// if it isn't active you cant see it
+        /// </summary>
+        protected bool active;
+       
+        /// <summary>
+        /// indicates if the Enemy is colisionable or not
+        /// </summary>
+        protected bool colisionable;
+        
+        /// <summary>
+        /// indicates if the Enemy is no longer necesary in the Game
+        /// </summary>
+        protected bool erasable;
         
        
         /// <summary>

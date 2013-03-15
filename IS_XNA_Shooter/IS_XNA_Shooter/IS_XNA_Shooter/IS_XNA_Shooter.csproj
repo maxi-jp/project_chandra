@@ -119,6 +119,7 @@
     <Compile Include="Collider.cs" />
     <Compile Include="ControlMng.cs" />
     <Compile Include="EnemyBeamA.cs" />
+    <Compile Include="EnemyFinalHeroe2.cs" />
     <Compile Include="EnemyLaserA.cs" />
     <Compile Include="EnemyLaserB.cs" />
     <Compile Include="EnemyMineShot.cs" />
@@ -128,7 +129,11 @@
     <Compile Include="EnemyWeakShot.cs" />
     <Compile Include="Explosion.cs" />
     <Compile Include="FinalBoss1.cs" />
+    <Compile Include="FinalBoss1Turret1.cs" />
+    <Compile Include="FinalBoss1Turret2.cs" />
+    <Compile Include="FinalBossHeroe1.cs" />
     <Compile Include="GameB.cs" />
+    <Compile Include="GameScroll.cs" />
     <Compile Include="GRMng.cs" />
     <Compile Include="IngameHub.cs" />
     <Compile Include="IngameHubA.cs" />

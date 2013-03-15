@@ -35,6 +35,8 @@ namespace IS_XNA_Shooter
         /// </summary>
         private List<Shot> shots;
 
+        protected int life;
+
         // ---------------------------
         // -----     BUILDER     -----
         // ---------------------------
@@ -78,6 +80,8 @@ namespace IS_XNA_Shooter
             //Shots' list
             this.shots = shots;
 
+            //Collider points
+            colliderPoints();
        }
 
         // ------------------------------------
@@ -100,9 +104,9 @@ namespace IS_XNA_Shooter
 
             //Bot move
             if (down)
-                position.Y += deltaTime * velocity;
+                position.Y += deltaTime * velocity * 3;
             else
-                position.Y -= deltaTime * velocity;
+                position.Y -= deltaTime * velocity * 3;
             changeDirection();
 
             if (position.X < SuperGame.screenWidth/2) { position.X += deltaTime * velocity; }
@@ -187,10 +191,36 @@ namespace IS_XNA_Shooter
 
             timeToShotWingsAux = timeToShotWings;
         }
-    
 
+
+
+
+        private void colliderPoints()
+        {
+            Vector2[] points = new Vector2[4];
+            points[0] = new Vector2(29, 12);
+            points[1] = new Vector2(8, 23);
+            points[2] = new Vector2(1, 12);
+            points[3] = new Vector2(8, 2);
+
+            float radius = (float)Math.Sqrt(frameWidth / 2 * frameWidth / 2 + frameHeight / 2 * frameHeight / 2);
+            collider = new Collider(camera, true, position, rotation, points, radius, frameWidth, frameHeight);
+        }
+
+        public override void Damage(int i)
+        {
+            life -= i;
+
+            if (life <= 0)
+            {
+                colisionable = false;
+                setAnim(0, -1);
+            }
+        }
 
     }
+
+
 
 
 }

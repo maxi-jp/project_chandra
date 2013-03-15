@@ -38,6 +38,7 @@ namespace IS_XNA_Shooter
                 50)/*new Random().Next(SuperGame.screenHeight))*/, (float)Math.PI, GRMng.frameWidthEW1, 
                 GRMng.frameHeightEW1, GRMng.numAnimsEW1, GRMng.frameCountEW1, GRMng.loopingEW1, SuperGame.frameTime12, 
                 GRMng.textureEW1, 1, -200, 100, 1, null);
+            e1 = new FinalBoss1(camera, this, new Vector2(SuperGame.screenWidth - GRMng.frameWidthFinalBoss1, SuperGame.screenHeight / 2), enemies);
             e1.SetActive();
 
             enemies = new List<Enemy>();
@@ -61,8 +62,8 @@ namespace IS_XNA_Shooter
                 50)/*new Random().Next(SuperGame.screenHeight))*/, (float)Math.PI, GRMng.frameWidthEL, 
                 GRMng.frameHeightEL, GRMng.numAnimsEL, GRMng.frameCountEL, GRMng.loopingEL, SuperGame.frameTime10, 
                 GRMng.textureEL, 1, -200, 100, 1, null);
+            e1 = new FinalBoss1(camera, this, new Vector2(SuperGame.screenWidth - GRMng.frameWidthFinalBoss1, SuperGame.screenHeight / 2), enemies);
             e1.SetActive();
-
             enemies.Add(e1);
             /*Vector2 positionFinalBoss = new Vector2(SuperGame.screenWidth - GRMng.frameWidthFinalBoss1/2,
                                                     SuperGame.screenHeight / 2);

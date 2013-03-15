@@ -165,6 +165,27 @@ namespace IS_XNA_Shooter
                 enemies.Add(enemy);
             }
 
+            // Final Boss 1 Phase 4
+            if (ControlMng.f7Preshed)
+            {
+                enemy = new FinalBoss1Turret1(camera, this, new Vector2(60, 60), ship);
+                enemies.Add(enemy);
+            }
+
+            // Final Boss 1 Phase 4
+            if (ControlMng.f8Preshed)
+            {
+                enemy = new FinalBoss1Turret2(camera, this, new Vector2(60, 60), ship);
+                enemies.Add(enemy);
+            }
+
+            // Final Boss 1 Phase 4
+            if (ControlMng.f9Preshed)
+            {
+                enemy = new FinalBossHeroe1(camera, this, new Vector2(60, 60), ship, enemies);
+                enemies.Add(enemy);
+            }
+
         } // TestEnemies
 
     } // class LevelA

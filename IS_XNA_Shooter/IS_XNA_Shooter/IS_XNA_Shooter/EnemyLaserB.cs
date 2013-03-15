@@ -202,7 +202,7 @@ namespace IS_XNA_Shooter
             if (life <= 0)
             {
                 shooting = false;
-                setAnim(5, -1);
+                setAnim(3, -1);
                 Audio.PlayEffect("brokenBone02");
             }
         }

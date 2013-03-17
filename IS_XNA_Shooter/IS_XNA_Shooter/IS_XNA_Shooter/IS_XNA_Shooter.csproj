@@ -118,6 +118,7 @@
     <Compile Include="Camera.cs" />
     <Compile Include="Collider.cs" />
     <Compile Include="ControlMng.cs" />
+    <Compile Include="MenuStart.cs" />
     <Compile Include="EnemyBeamA.cs" />
     <Compile Include="EnemyFinalHeroe2.cs" />
     <Compile Include="EnemyLaserA.cs" />

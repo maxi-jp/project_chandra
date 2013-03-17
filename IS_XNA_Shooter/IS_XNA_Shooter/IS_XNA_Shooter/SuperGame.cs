@@ -31,6 +31,7 @@ namespace IS_XNA_Shooter
         /// </summary>
         public enum gameState
         {
+            starting,
             mainMenu,
             playing,
             pause,
@@ -118,6 +119,7 @@ namespace IS_XNA_Shooter
         private float   timeCounterSecondAux;
 
         // Refresh time between frames:
+
         /// <summary>
         /// Refresh time between frames = 24
         /// </summary>
@@ -144,6 +146,12 @@ namespace IS_XNA_Shooter
         public static float timeToResume = 2f;
 
         // Game's objects:
+
+        /// <summary>
+        /// Start Menu
+        /// </summary>
+        private MenuStart menuStart;
+
         /// <summary>
         /// Menu
         /// </summary>
@@ -223,7 +231,7 @@ namespace IS_XNA_Shooter
             updateFramesCounter = updateFramesCounterAux = 0;
             timeCounterSecond = timeCounterSecondAux = 1;
 
-            currentState = gameState.mainMenu; // puts game's state at menu mode
+            currentState = gameState.starting; // puts game's state to starting
             pointer = new Vector2();
 
             base.Initialize();
@@ -244,17 +252,19 @@ namespace IS_XNA_Shooter
 
             // ALL: use this.Content to load your game content here
 
-            grManager.LoadContent(0); // se cargan los recursos del menu
-            grManager.LoadContent(1); // se cargan los recursos del menu ingame
+            grManager.LoadContent(0); // se cargan los recursos del menu start
+            grManager.LoadContent(1); // se cargan los recursos del menu
+            grManager.LoadContent(2); // se cargan los recursos del menu ingame
             grManager.LoadContent(99);// se cargan los recursos del menu gameover
             audio.LoadContent(0);
 
             fontDebug = Content.Load<SpriteFont>("FontDebug");
 
             // Create the Menus
-            menu = new Menu(this);
-            menuIngame = new MenuIngame(this);
-            menuGameOver = new MenuGameOver(this);
+            menuStart =     new MenuStart(this);
+            menu =          new Menu(this);
+            menuIngame =    new MenuIngame(this);
+            menuGameOver =  new MenuGameOver(this);
 
             // Create the player
             player = new Player(playerLifes);
@@ -312,6 +322,16 @@ namespace IS_XNA_Shooter
             // Game's update:
             switch (currentState)
             {
+                case gameState.starting:
+
+                    menuStart.Update(Mouse.GetState().X, Mouse.GetState().Y);
+                    if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                        menuStart.Click(Mouse.GetState().X, Mouse.GetState().Y);
+                    else if (Mouse.GetState().LeftButton == ButtonState.Released)
+                        menuStart.Unclick(Mouse.GetState().X, Mouse.GetState().Y);
+
+                    break;
+
                 case gameState.mainMenu:
 
                     if (debug && Keyboard.GetState().IsKeyDown(Keys.T))
@@ -375,6 +395,10 @@ namespace IS_XNA_Shooter
 
             switch (currentState)
             {
+                case gameState.starting:
+                    menuStart.Draw(spriteBatch);
+                    break;
+
                 case gameState.mainMenu:
                     menu.Draw(spriteBatch);
                     break;
@@ -416,12 +440,12 @@ namespace IS_XNA_Shooter
         /// </summary>
         private void NewGameATest()
         {
-            grManager.LoadContent(2); // Load the gameA's level 1 resources
+            grManager.LoadContent(3); // Load the gameA's level 1 resources
             audio.LoadContent(1);
             game = new GameA(this, player, 0, GRMng.textureAim, GRMng.textureCell,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
             currentState = gameState.playing; // Change game's state to game mode
-            grManager.UnloadContent(0); // Unload the menu's resources
+            grManager.UnloadContent(1); // Unload the menu's resources
         }
 
         /// <summary>
@@ -429,8 +453,8 @@ namespace IS_XNA_Shooter
         /// </summary>
         public void NewStory()
         {
-            grManager.LoadContent(3); // Load the gameB's level 1 resources
-            grManager.LoadContent(2); // Load the gameA's level 1 resources
+            grManager.LoadContent(4); // Load the gameB's level 1 resources
+            grManager.LoadContent(3); // Load the gameA's level 1 resources
             audio.LoadContent(1);
             LvlMng.LoadContent(1); // Load the rectangles
             LvlMng.LoadContent(0); // Load the levelA's enemies
@@ -440,7 +464,7 @@ namespace IS_XNA_Shooter
 
             currentState = gameState.playing; // Change game's state to game mode
 
-            grManager.UnloadContent(0); // Unload the menu's resources
+            grManager.UnloadContent(1); // Unload the menu's resources
         }
 
         /// <summary>
@@ -448,7 +472,7 @@ namespace IS_XNA_Shooter
         /// </summary>
         public void newSurvival()
         {
-            grManager.LoadContent(2);  // Load the gameA's level 1 resources
+            grManager.LoadContent(3);  // Load the gameA's level 1 resources
             audio.LoadContent(1);
             LvlMng.LoadContent(0); // Load XML
 
@@ -458,7 +482,7 @@ namespace IS_XNA_Shooter
             currentState = gameState.playing; // Change game's state to game mode
 
             LvlMng.UnloadContent(0);
-            grManager.UnloadContent(0); /// Unload the menu's resources
+            grManager.UnloadContent(1); /// Unload the menu's resources
         }
 
         /// <summary>
@@ -466,7 +490,7 @@ namespace IS_XNA_Shooter
         /// </summary>
         public void newKiller()
         {
-            grManager.LoadContent(2); // Load the gameB's level 1 resources
+            grManager.LoadContent(3); // Load the gameB's level 1 resources
             audio.LoadContent(1);
             LvlMng.LoadContent(0); // Load XML
 
@@ -476,8 +500,7 @@ namespace IS_XNA_Shooter
             currentState = gameState.playing; // Change game's state to game mode
 
             LvlMng.UnloadContent(0);
-            grManager.UnloadContent(0); // Unload the menu's resources
-
+            grManager.UnloadContent(1); // Unload the menu's resources
         }
 
         /// <summary>
@@ -485,7 +508,7 @@ namespace IS_XNA_Shooter
         /// </summary>
         public void newDefense()
         {
-            grManager.LoadContent(2); // Load the gameB's level 1 resources
+            grManager.LoadContent(3); // Load the gameB's level 1 resources
             audio.LoadContent(1);
             LvlMng.LoadContent(0);
 
@@ -495,7 +518,7 @@ namespace IS_XNA_Shooter
             currentState = gameState.playing; // Change game's state to game mode
 
             LvlMng.UnloadContent(0);
-            grManager.UnloadContent(0); // Unload the menu's resources
+            grManager.UnloadContent(1); // Unload the menu's resources
         }
 
         /// <summary>
@@ -503,7 +526,7 @@ namespace IS_XNA_Shooter
         /// </summary>
         public void newScroll()
         {
-            grManager.LoadContent(2); // Load the gameB's level 1 resources
+            grManager.LoadContent(3); // Load the gameB's level 1 resources
             audio.LoadContent(1);
             LvlMng.LoadContent(1); // Load the rectangles
 
@@ -513,7 +536,7 @@ namespace IS_XNA_Shooter
             currentState = gameState.playing; // Change game's state to game mode
 
             LvlMng.UnloadContent(1);
-            grManager.UnloadContent(0); // Unload the menu's resources
+            grManager.UnloadContent(1); // Unload the menu's resources
         }
 
         /// <summary>
@@ -529,7 +552,7 @@ namespace IS_XNA_Shooter
         /// </summary>
         public void ExitToMenu()
         {
-            grManager.LoadContent(0);
+            grManager.LoadContent(1);
             currentState = gameState.mainMenu;
             menu.menuState = Menu.MenuState.main;
             grManager.UnloadContentGame();

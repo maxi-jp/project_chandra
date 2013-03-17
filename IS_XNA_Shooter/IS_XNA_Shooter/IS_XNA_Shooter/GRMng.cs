@@ -223,7 +223,10 @@ namespace IS_XNA_Shooter
         #endregion
 
         #region MENUS
-        /* ------------------- MENU ------------------- */
+        /* ------------------- START MENU ------------------- */
+        public static Texture2D startSplash;
+
+        /* ------------------- MAIN MENU ------------------- */
         public static Texture2D menuMain;
         public static Texture2D menuStory;
         public static Texture2D menuArcade;
@@ -247,23 +250,28 @@ namespace IS_XNA_Shooter
         public void LoadContent(int i)
         {
             // i:
-            // 0=Menú principal
-            // 1=Menú ingame
-            // 2=GameA nivel 1
-            // 3=GameB nivel 1
+            // 0=Start Menu
+            // 1=Main Menu
+            // 2=Ingame Menu
+            // 3=GameA level 1
+            // 4=GameB level 1
             // 99=GameOver Menu
 
             switch (i)
             {
-                case 0: // menu:
+                case 0: // start menu:
+                    LoadStart();
+                    break;
+
+                case 1: // menu:
                     LoadMenu();
                     break;
 
-                case 1: // menuIngame:
+                case 2: // menuIngame:
                     LoadIngameMenu();
                     break;
 
-                case 2: // GameA nivel 1
+                case 3: // GameA nivel 1
                     LoadIngameMenu();
 
                     hubBase = content.Load<Texture2D>("Graphics/Hub/base256");
@@ -303,7 +311,7 @@ namespace IS_XNA_Shooter
 
                     break;
 
-                case 3: // GameB nivel 1
+                case 4: // GameB nivel 1
                     LoadIngameMenu();
 
                     texturePA1 = content.Load<Texture2D>("Graphics/Ships/sprites80x80");
@@ -345,23 +353,28 @@ namespace IS_XNA_Shooter
         public void UnloadContent(int i)
         {
             // i:
-            // 0=Menú principal
-            // 1=Menú ingame
-            // 2=GameA nivel 1
-            // 3=GameB nivel 1
+            // 0=Start Menu
+            // 1=Main Menu
+            // 2=Ingame Menu
+            // 3=GameA level 1
+            // 4=GameB level 1
             // 99=GameOver Menu
 
             switch (i)
             {
-                case 0: // menu:
+                case 0: // start menu:
+                    UnloadStart();
+                    break;
+
+                case 1: // menu:
                     UnloadMenu();
                     break;
 
-                case 1: // menuIngame:
+                case 2: // menuIngame:
                     UnloadIngameMenu();
                     break;
 
-                case 2: // GameA nivel 1
+                case 3: // GameA nivel 1
 
                     hubBase = null;
 
@@ -401,7 +414,7 @@ namespace IS_XNA_Shooter
 
                     break;
 
-                case 3: // GameB nivel 1
+                case 4: // GameB nivel 1
 
                     texturePA1 = null;
                     textureL1 = null;
@@ -429,6 +442,16 @@ namespace IS_XNA_Shooter
 
             }
         } // UnloadContent
+
+        private void LoadStart()
+        {
+            startSplash = content.Load<Texture2D>("Graphics/Splash/splash_start_2");
+        }
+
+        private void UnloadStart()
+        {
+            startSplash = null;
+        }
 
         private void LoadMenu()
         {

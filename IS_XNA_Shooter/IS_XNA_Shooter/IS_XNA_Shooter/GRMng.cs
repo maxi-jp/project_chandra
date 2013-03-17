@@ -118,7 +118,7 @@ namespace IS_XNA_Shooter
         public static short frameHeightBFB = 25;
         public static short numAnimsBFB = 2;
         public static short[] frameCountBFB = { 2, 3 };
-        public static bool[] loopingBFB = { true };
+        public static bool[] loopingBFB = { false, true };
 
         /* ------------------- FINAL BOSS HEROE-------------------- */
         public static Texture2D textureFinalBossHeroe;

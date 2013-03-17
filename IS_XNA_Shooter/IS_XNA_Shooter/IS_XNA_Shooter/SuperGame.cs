@@ -460,7 +460,7 @@ namespace IS_XNA_Shooter
             LvlMng.LoadContent(0); // Load the levelA's enemies
 
             game = new GameB(this, player, 1, GRMng.textureAim,
-                /*ShipVelocity*/200f, /*ShipLife*/100);
+                /*ShipVelocity*/200f, /*ShipLife*/100000);
 
             currentState = gameState.playing; // Change game's state to game mode
 

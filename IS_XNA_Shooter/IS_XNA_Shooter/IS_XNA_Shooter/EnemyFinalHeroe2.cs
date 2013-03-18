@@ -52,7 +52,7 @@ namespace IS_XNA_Shooter
                  p2Orig = new Vector2(320, 0);*/
 
 
-
+            setCollider();
         }
 
         /* ------------------- METHODS ------------------- */
@@ -144,7 +144,7 @@ namespace IS_XNA_Shooter
             if (life <= 0)
             {
                 shooting = false;
-                setAnim(5, -1);
+                setAnim(2, -1);
                 Audio.PlayEffect("brokenBone02");
             }
         }
@@ -155,6 +155,18 @@ namespace IS_XNA_Shooter
                 down = false;
             else if (position.Y - this.frameHeight / 2 <= 0)
                 down = true;
+        }
+
+        private void setCollider()
+        {
+            //I'm making a copy because collider midifies the points
+            Vector2[] pointsCollider = new Vector2[GRMng.colliderHeroe1.Length];
+            for (int i = 0; i < GRMng.colliderHeroe1.Length; i++)
+                pointsCollider[i] = GRMng.colliderHeroe1[i];
+
+            float radius = (float)Math.Sqrt(frameHeight / 2 * frameHeight / 2 + frameWidth / 2 * frameWidth / 2);
+
+            collider = new Collider(camera, true, position, rotation, pointsCollider, radius, frameWidth, frameHeight);
         }
 
     } // Class EnemyMineShot

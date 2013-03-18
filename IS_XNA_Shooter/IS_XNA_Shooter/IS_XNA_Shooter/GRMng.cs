@@ -456,7 +456,7 @@ namespace IS_XNA_Shooter
         private void LoadMenu()
         {
             menuMain = content.Load<Texture2D>("Graphics/Menu/main");
-            menuStory = content.Load<Texture2D>("Graphics/Menu/history");
+            menuStory = content.Load<Texture2D>("Graphics/Menu/story");
             menuArcade = content.Load<Texture2D>("Graphics/Menu/arcade");
             menuConfig = content.Load<Texture2D>("Graphics/Menu/configuration");
             menuSplash = content.Load<Texture2D>("Graphics/Splash/splash_mainmenu_2");

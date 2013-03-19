@@ -57,5 +57,10 @@
 		<rectangle x="700" y="650" width="250" height="150" />
 		<rectangle x="950" y="750" width="250" height="50" />
 	</listaRectangles>
-    
+    <mapaRectangles>
+		<map lista="1" />
+		<map lista="2" />
+		<map lista="3" />
+		<map lista="1" />
+	</mapaRectangles>
 </level>

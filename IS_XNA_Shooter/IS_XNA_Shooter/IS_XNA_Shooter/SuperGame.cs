@@ -17,6 +17,11 @@ namespace IS_XNA_Shooter
     public class SuperGame : Microsoft.Xna.Framework.Game
     {
         /// <summary>
+        /// String that indicates the current version of the project
+        /// </summary>
+        public String currentVersion = "0.5";
+
+        /// <summary>
         /// XNA's atribute for graphics
         /// </summary>
         GraphicsDeviceManager graphics;
@@ -397,6 +402,10 @@ namespace IS_XNA_Shooter
             {
                 case gameState.starting:
                     menuStart.Draw(spriteBatch);
+                    spriteBatch.DrawString(fontDebug, "build version: " + currentVersion,
+                        new Vector2((screenWidth / 2) - fontDebug.MeasureString("build version: " + currentVersion).X/2, 6),
+                        Color.White, 0, Vector2.Zero, 1,
+                        SpriteEffects.None, 0);
                     break;
 
                 case gameState.mainMenu:
@@ -434,6 +443,9 @@ namespace IS_XNA_Shooter
 
             base.Draw(gameTime);
         }
+
+
+        /* ---------------------------- SUPERGAME METHODS ---------------------------- */
 
         /// <summary>
         /// Create a GameA for tests
@@ -526,12 +538,12 @@ namespace IS_XNA_Shooter
         /// </summary>
         public void newScroll()
         {
-            grManager.LoadContent(3); // Load the gameB's level 1 resources
+            grManager.LoadContent(4); // Load the gameB's level 1 resources
             audio.LoadContent(1);
             LvlMng.LoadContent(1); // Load the rectangles
 
             game = new GameB(this, player, 1, GRMng.textureAim,
-                /*ShipVelocity*/200f, /*ShipLife*/100);
+                /*ShipVelocity*/200f + 200, /*ShipLife*/100);
 
             currentState = gameState.playing; // Change game's state to game mode
 

@@ -151,13 +151,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Graphics\Menu\history.png">
-      <Name>history</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Graphics\Menu\arcade.png">
       <Name>arcade</Name>
       <Importer>TextureImporter</Importer>
@@ -419,6 +412,13 @@
     </Compile>
     <Compile Include="Graphics\Splash\splash_start_2.jpg">
       <Name>splash_start_2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Graphics\Menu\story.png">
+      <Name>story</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

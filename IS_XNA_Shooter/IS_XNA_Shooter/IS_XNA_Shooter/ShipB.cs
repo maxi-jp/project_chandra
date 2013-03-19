@@ -12,7 +12,7 @@ namespace IS_XNA_Shooter
         //---------------------------
         //----    Constructor    ----
         //---------------------------
-        public ShipB(Game game, Camera camera, LevelB level, Vector2 position, float rotation,
+        public ShipB(Game game, Camera camera, Level level, Vector2 position, float rotation,
             Vector2[] colliderPoints,
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
             float frametime, Texture2D texture,
@@ -22,8 +22,6 @@ namespace IS_XNA_Shooter
         {
 
         }
-
-
 
         //--------------------------------
         //----    Métodos públicos    ----
@@ -35,5 +33,6 @@ namespace IS_XNA_Shooter
             position.X = MathHelper.Clamp(position.X, 0 + collider.Width / 2, SuperGame.screenWidth - collider.Width / 2);
             position.Y = MathHelper.Clamp(position.Y, 0 + collider.Height / 2, SuperGame.screenHeight - collider.Height / 2);
         }
-    }
+
+    } // class ShipB
 }

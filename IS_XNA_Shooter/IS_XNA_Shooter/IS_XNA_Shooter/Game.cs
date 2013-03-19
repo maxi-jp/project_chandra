@@ -123,7 +123,7 @@ namespace IS_XNA_Shooter
             camera.Update(deltaTime);   // cámara
 
             if (SuperGame.debug)
-                if (Keyboard.GetState().IsKeyDown(Keys.K))
+                if (ControlMng.kPreshed)
                     PlayerDead();
         }
 

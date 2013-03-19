@@ -281,8 +281,6 @@ namespace IS_XNA_Shooter
                     textureL1 = content.Load<Texture2D>("Graphics/laserShotAnim");
                     textureL2 = content.Load<Texture2D>("Graphics/laserShotAnim2");
                     
-                    textureExplosion1 = content.Load<Texture2D>("Graphics/Explosions/sprites_explosion100x100");
-                    
                     textureEW1 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy01_80x80");
                     textureEW2 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy02_80x80");
                     textureEB1 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy03_80x80");
@@ -314,10 +312,10 @@ namespace IS_XNA_Shooter
                 case 4: // GameB nivel 1
                     LoadIngameMenu();
 
+                    hubBase = content.Load<Texture2D>("Graphics/Hub/base256");
+
                     texturePA1 = content.Load<Texture2D>("Graphics/Ships/sprites80x80");
                     textureL1 = content.Load<Texture2D>("Graphics/laserShotAnim");
-                    
-                    textureExplosion1 = content.Load<Texture2D>("Graphics/Explosions/sprites_explosion100x100");
                     
                     textureEW1 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy01_80x80");
                     
@@ -382,7 +380,6 @@ namespace IS_XNA_Shooter
                     textureAim = null;
                     textureL1 = null;
                     textureL2 = null;
-                    textureExplosion1 = null;
 
                     textureEW1 = null;
                     textureEW2 = null;
@@ -416,10 +413,10 @@ namespace IS_XNA_Shooter
 
                 case 4: // GameB nivel 1
 
+                    hubBase = null;
+
                     texturePA1 = null;
                     textureL1 = null;
-
-                    textureExplosion1 = null;
 
                     textureEW1 = null;
 

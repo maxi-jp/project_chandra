@@ -10,18 +10,16 @@ namespace IS_XNA_Shooter
 {
     class LevelA : Level
     {
-        //private Camera camera;
+
         private Texture2D whitePixel;
-        private Texture2D textureBg;
+        private Texture2D textureCell;
 
         private bool testingEnemies;
 
         public LevelA(Camera camera, int num, List<Enemy> enemies)
-            : base()
+            : base(camera, num, enemies)
         {
             testingEnemies = false;
-
-            this.camera = camera;
 
             switch (num)
             {
@@ -47,12 +45,11 @@ namespace IS_XNA_Shooter
             }
 
             whitePixel = GRMng.whitepixel;
-            textureBg = GRMng.textureCell;
+            textureCell = GRMng.textureCell;
         }
 
         public override void Update(float deltaTime)
         {
-            base.Update(deltaTime);
 
             int i = 0; // iterator for the list of enemies
             bool stillAlive = false; // is true if there is any enemie alive
@@ -80,12 +77,10 @@ namespace IS_XNA_Shooter
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            base.Draw(spriteBatch);
-
             // grid del suelo
-            for (int i = 0; i < width; i += textureBg.Width)
-                for (int j = 0; j < height; j += textureBg.Height)
-                    spriteBatch.Draw(textureBg, new Vector2(i + camera.displacement.X, j + camera.displacement.Y),
+            for (int i = 0; i < width; i += textureCell.Width)
+                for (int j = 0; j < height; j += textureCell.Height)
+                    spriteBatch.Draw(textureCell, new Vector2(i + camera.displacement.X, j + camera.displacement.Y),
                         Color.White);
 
             // linea de arriba:

@@ -298,7 +298,13 @@ namespace IS_XNA_Shooter
 
                 float radius = (float)Math.Sqrt(frameWidth/2 * frameWidth/2 + frameHeight/2 * frameHeight/2);
 
-                shot.setCollider(GRMng.colliderShotFinalBossHeroe, radius);
+                //I'm making a copy because collider midifies the points
+                Vector2[] pointsCollider = new Vector2[GRMng.colliderShotFinalBossHeroe.Length];
+                for (int i = 0; i < GRMng.colliderShotFinalBossHeroe.Length; i++)
+                    pointsCollider[i] = GRMng.colliderShotFinalBossHeroe[i];
+
+                shot.setCollider(pointsCollider, radius); //hacer copia
+
                 shots.Add(shot);
             }
         }

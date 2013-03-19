@@ -167,6 +167,19 @@ namespace IS_XNA_Shooter
             base.Draw(spriteBatch);
         }
 
+        public override void Damage(int i)
+        {
+            base.Damage(i);
+
+            // if the enemy is dead, play the new animation and the death sound
+            if (life <= 0)
+            {
+                shooting = false;
+                setAnim(1, -1);
+                Audio.PlayEffect("brokenBone02");
+            }
+        }
+
         // -------------------------------------
         // -----     Private functions     -----
         // -------------------------------------
@@ -438,16 +451,38 @@ namespace IS_XNA_Shooter
 
                 Audio.PlayEffect("laserShot01");
             //position.X - 10, position.Y + collider.Height / 2
-            Shot nuevo = new Shot(camera, level, new Vector2(position.X , position.Y  + this.frameHeight / 2), angleDown, GRMng.frameWidthL1, GRMng.frameHeightL1,
-                GRMng.numAnimsL1, GRMng.frameCountL1, GRMng.loopingL1, SuperGame.frameTime8, GRMng.textureL1, SuperGame.shootType.normal, shotWingsVelocity, shotWingsPower);
+            Shot nuevo = new Shot(camera, level, new Vector2(position.X , position.Y  + this.frameHeight / 2), angleDown, GRMng.frameWidthShotFinalBoss1, 
+                GRMng.frameHeightShotFinalBoss1, GRMng.numAnimsShotFinalBoss1, GRMng.frameCountShotFinalBoss1, GRMng.loopingShotFinalBoss1, SuperGame.frameTime8, 
+                GRMng.textureShotFinalBoss1, SuperGame.shootType.normal, shotWingsVelocity, shotWingsPower);
+
+            float radius = (float)(Math.Sqrt(GRMng.frameHeightShotFinalBoss1/2 * GRMng.frameHeightShotFinalBoss1/2 +
+                GRMng.frameWidthShotFinalBoss1/2 * GRMng.frameWidthShotFinalBoss1/2));
+
+            //I'm making a copy because collider midifies the points
+            Vector2[] pointsCollider = new Vector2[GRMng.colliderShotFinalBoss1.Length];
+            for (int i = 0; i < GRMng.colliderShotFinalBoss1.Length; i++)
+                pointsCollider[i] = GRMng.colliderShotFinalBoss1[i];
+
+            nuevo.setCollider(pointsCollider, radius);
+
             shots.Add(nuevo);
            
            
             //position.X - 10, position.Y - collider.Height / 2
-            nuevo = new Shot(camera, level, new Vector2(position.X , position.Y - this.frameHeight / 2), angleUp, GRMng.frameWidthL1, GRMng.frameHeightL1,
-                GRMng.numAnimsL1, GRMng.frameCountL1, GRMng.loopingL1, SuperGame.frameTime8, GRMng.textureL1, SuperGame.shootType.normal, shotWingsVelocity, shotWingsPower);
+            nuevo = new Shot(camera, level, new Vector2(position.X , position.Y - this.frameHeight / 2), angleUp, GRMng.frameWidthShotFinalBoss1, 
+                GRMng.frameHeightShotFinalBoss1, GRMng.numAnimsShotFinalBoss1, GRMng.frameCountShotFinalBoss1, GRMng.loopingShotFinalBoss1, SuperGame.frameTime8, 
+                GRMng.textureShotFinalBoss1, SuperGame.shootType.normal, shotWingsVelocity, shotWingsPower);
             shots.Add(nuevo);
-            
+
+            radius = (float)(Math.Sqrt(GRMng.frameHeightShotFinalBoss1 / 2 * GRMng.frameHeightShotFinalBoss1 / 2 +
+               GRMng.frameWidthShotFinalBoss1 / 2 * GRMng.frameWidthShotFinalBoss1 / 2));
+
+            //I'm making a copy because collider midifies the points
+            pointsCollider = new Vector2[GRMng.colliderShotFinalBoss1.Length];
+            for (int i = 0; i < GRMng.colliderShotFinalBoss1.Length; i++)
+                pointsCollider[i] = GRMng.colliderShotFinalBoss1[i];
+
+            nuevo.setCollider(pointsCollider, radius);
 
             timeToShotWingsAux = timeToShotWings;
         }
@@ -455,10 +490,10 @@ namespace IS_XNA_Shooter
         private void colliderPoints()
         {
             Vector2[] points = new Vector2[4];            
-            points[0] = new Vector2(24, 240);
-            points[1] = new Vector2(24, 0);
-            points[2] = new Vector2(240, 111);
-            points[3] = new Vector2(240, 128);
+            points[0] = new Vector2(60, 20);
+            points[1] = new Vector2(238, 112);
+            points[2] = new Vector2(238, 126);
+            points[3] = new Vector2(60, 220);
 
             float radius = (float)Math.Sqrt(frameWidth / 2 * frameWidth / 2 + frameHeight / 2 * frameHeight / 2);
             collider = new Collider(camera, true, position, rotation, points, radius, frameWidth, frameHeight);

@@ -151,6 +151,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Graphics\Menu\history.png">
+      <Name>history</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Graphics\Menu\arcade.png">
       <Name>arcade</Name>
       <Importer>TextureImporter</Importer>

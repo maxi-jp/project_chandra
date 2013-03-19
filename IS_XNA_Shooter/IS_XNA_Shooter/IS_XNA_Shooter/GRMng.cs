@@ -108,25 +108,27 @@ namespace IS_XNA_Shooter
         public static Texture2D textureFinalBoss1;
         public static short frameWidthFinalBoss1 = 240;
         public static short frameHeightFinalBoss1 = 240;
-        public static short numAnimsFinalBoss1 = 1;
-        public static short[] frameCountFinalBoss1 = { 3 };
-        public static bool[] loopingFinalBoss1 = { true };
+        public static short numAnimsFinalBoss1 = 2;
+        public static short[] frameCountFinalBoss1 = { 3, 4 };
+        public static bool[] loopingFinalBoss1 = { true, false };
+
+        /* ------------------- SHOT FINAL BOSS 1-------------------- */
+        public static Texture2D textureShotFinalBoss1;
+        public static short frameWidthShotFinalBoss1 = 20;
+        public static short frameHeightShotFinalBoss1 = 20;
+        public static short numAnimsShotFinalBoss1 = 1;
+        public static short[] frameCountShotFinalBoss1 = { 1 };
+        public static bool[] loopingShotFinalBoss1 = { true };
+        public static Vector2[] colliderShotFinalBoss1 = { new Vector2(2, 9), new Vector2(4, 4), new Vector2(9, 2), new Vector2(15, 4), new Vector2(16, 9), new Vector2(15, 14), 
+                                                             new Vector2(9, 17), new Vector2(4, 14) };
 
         /* ------------------- BOT FINAL BOSS 1-------------------- */
         public static Texture2D textureBFB;
-        public static short frameWidthBFB = 40;
-        public static short frameHeightBFB = 25;
+        public static short frameWidthBFB = 60;
+        public static short frameHeightBFB = 60;
         public static short numAnimsBFB = 2;
-        public static short[] frameCountBFB = { 2, 3 };
-        public static bool[] loopingBFB = { false, true };
-
-        /* ------------------- FINAL BOSS HEROE-------------------- */
-        public static Texture2D textureFinalBossHeroe;
-        public static short frameWidthFinalBossHeroe = 80;
-        public static short frameHeightFinalBossHeroe = 60;
-        public static short numAnimsFinalBossHeroe = 1;
-        public static short[] frameCountFinalBossHeroe = { 1 };
-        public static bool[] loopingFinalBossHeroe = { true };
+        public static short[] frameCountBFB = { 3, 4 };
+        public static bool[] loopingBFB = { true, false };
 
         /* ------------------- BULLET LASER Heroe-------------------- */
         public static Texture2D textureELBulletHeroe;
@@ -304,7 +306,6 @@ namespace IS_XNA_Shooter
                     textureFinalBoss1Turret1Shot = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/shotTurret1");
 
                     textureHeroe1 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/heroe1");
-                    textureFinalBossHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBossHeroe1");
                     textureShotFinalBossHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/shotHeroe1");
 
                     break;
@@ -331,6 +332,7 @@ namespace IS_XNA_Shooter
                     textureBgCol3 = content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable3");
 
                     textureFinalBoss1 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBoss1");
+                    textureShotFinalBoss1 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/shotFinalBoss1");
                     textureBFB = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBossPhase2");
 
                     break;
@@ -406,7 +408,6 @@ namespace IS_XNA_Shooter
                     textureFinalBoss1Turret1Shot = null;
 
                     textureHeroe1 = null;
-                    textureFinalBossHeroe = null;
                     textureShotFinalBossHeroe = null;
 
                     break;
@@ -429,6 +430,10 @@ namespace IS_XNA_Shooter
                     textureBgCol1 = null;
                     textureBgCol2 = null;
                     textureBgCol3 = null;
+
+                    textureFinalBoss1 = null;
+                    textureShotFinalBoss1 = null;
+                    textureBFB = null;
 
                     break;
 

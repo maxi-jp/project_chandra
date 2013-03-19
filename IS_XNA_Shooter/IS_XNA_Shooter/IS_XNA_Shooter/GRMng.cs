@@ -149,6 +149,11 @@ namespace IS_XNA_Shooter
         public static short frameWidthEx1 = 100;
         public static short frameHeightEx1 = 100;
         public static short frameCountEx1 = 8;
+
+        /* ------------------- CHARACTERS ------------------- */
+        public static Texture2D textureCaptain;
+        public static Texture2D texturePilot;
+        public static Texture2D texturePilotCyborg;
         #endregion
 
         #region HUBS
@@ -172,6 +177,8 @@ namespace IS_XNA_Shooter
         public static Texture2D menuGameOver;
         public static Texture2D gameOverSplash;
         #endregion
+
+        
 
         public GRMng(ContentManager content)
         {
@@ -240,6 +247,9 @@ namespace IS_XNA_Shooter
                     textureEW1 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy01_80x80");
                     
                     textureRed = content.Load<Texture2D>("Graphics/Rojazo");
+                    textureCaptain = content.Load<Texture2D>("Graphics/Images/Captain");
+                    texturePilot = content.Load<Texture2D>("Graphics/Images/Pilot");
+                    texturePilotCyborg = content.Load<Texture2D>("Graphics/Images/PilotCyborg");
                     
                     textureBgGame1A = content.Load<Texture2D>("Graphics/Backgrounds/backgroundTile1");
                     textureBg00 = content.Load<Texture2D>("Graphics/Backgrounds/bg00");
@@ -325,6 +335,9 @@ namespace IS_XNA_Shooter
                     textureEW1 = null;
 
                     textureRed = null;
+                    textureCaptain = null;
+                    texturePilot = null;
+                    texturePilotCyborg = null;
                     textureBgGame1A = null;
                     textureBg00 = null;
                     textureBg01 = null;

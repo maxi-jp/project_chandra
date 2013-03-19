@@ -329,6 +329,7 @@ namespace IS_XNA_Shooter
             audio.LoadContent(1);
             LvlMng.LoadContent(0); // cargamos los XML
 
+
             game = new GameA(this, player, 1, GRMng.textureAim, GRMng.textureCell,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
 

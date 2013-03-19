@@ -14,12 +14,20 @@ namespace IS_XNA_Shooter
     {
         public static XmlDocument lvl1;     // XML level 1
         public static XmlDocument rect1;    // rectangles level 1 side scroll mode
+        public static XmlDocument dialog1;  // dialog of the first level of mode history
 
+        /// <summary>
+        /// Constructor for XMLLvl manager
+        /// </summary>
         public XMLLvlMng()
         {
             // TODO: Complete member initialization
         }
 
+        /// <summary>
+        /// Load the content of the game indicated by the param i
+        /// </summary>
+        /// <param name="i">indicator for the content loaded</param>
         public void LoadContent(int i)
         {
             // i:
@@ -35,12 +43,17 @@ namespace IS_XNA_Shooter
                 case 1: // gameB
                     rect1 = new XmlDocument();
                     rect1.Load("../../../../IS_XNA_ShooterContent/Levels/levelRectangle1.xml");
+                    dialog1 = new XmlDocument();
+                    dialog1.Load("../../../../IS_XNA_ShooterContent/Levels/dialog1.xml");
                     break;
             }
 
         } // LoadContent
 
-       //unloadContent
+       /// <summary>
+       /// Unload the content of the XML level manager
+       /// </summary>
+       /// <param name="i">indicates the resources to unload</param>
         public void UnloadContent(int i)
         {
             //i:
@@ -53,6 +66,7 @@ namespace IS_XNA_Shooter
                     break;
                 case 1: //gameB
                     rect1 = null;
+                    dialog1 = null;
                     break;
             }
         }

@@ -33,7 +33,7 @@ namespace IS_XNA_Shooter
             : base(camera, level, position, rotation, frameWidth, frameHeight, numAnim, frameCount,
                 looping, frametime, texture, timeToSpawn, 50, 100, value, ship)
         {
-            // setAnim(3);
+            setAnim(1);
 
             /*  Vector2[] points = new Vector2[6];
               points[0] = new Vector2(20, 20);
@@ -132,6 +132,7 @@ namespace IS_XNA_Shooter
             shot = new Shot(camera, level, positionShot, 0, GRMng.frameWidthELBulletHeroe, GRMng.frameHeightELBulletHeroe,
                 GRMng.numAnimsELBulletHeroe, GRMng.frameCountELBulletHeroe, GRMng.loopingELBulletHeroe, SuperGame.frameTime8,
                 GRMng.textureELBulletHeroe, SuperGame.shootType.normal, shotVelocity, shotPower);
+            setAnim(0);
             //   shot.rotation = rotation;
 
         }

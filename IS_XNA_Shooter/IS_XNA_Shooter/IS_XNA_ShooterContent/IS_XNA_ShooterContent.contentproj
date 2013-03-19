@@ -248,11 +248,6 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Graphics\Ships\Final Boss 1\finalBossHeroe1.png">
-      <Name>finalBossHeroe1</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Graphics\Ships\Final Boss 1\finalBossPhase2.png">
@@ -419,6 +414,20 @@
   <ItemGroup>
     <Compile Include="Graphics\Menu\story.png">
       <Name>story</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Graphics\Ships\Final Boss 1\finalBossHeroe1.png">
+      <Name>finalBossHeroe1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Graphics\Ships\Final Boss 1\shotFinalBoss1.png">
+      <Name>shotFinalBoss1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

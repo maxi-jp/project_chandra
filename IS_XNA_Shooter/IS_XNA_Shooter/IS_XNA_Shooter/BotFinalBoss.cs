@@ -197,11 +197,15 @@ namespace IS_XNA_Shooter
 
         private void colliderPoints()
         {
-            Vector2[] points = new Vector2[4];
-            points[0] = new Vector2(29, 12);
-            points[1] = new Vector2(8, 23);
-            points[2] = new Vector2(1, 12);
-            points[3] = new Vector2(8, 2);
+            Vector2[] points = new Vector2[8];
+            points[0] = new Vector2(4, 27);
+            points[1] = new Vector2(13, 13);
+            points[2] = new Vector2(27, 13);
+            points[3] = new Vector2(41, 25);
+            points[4] = new Vector2(53, 27);
+            points[5] = new Vector2(41, 29);
+            points[6] = new Vector2(27, 40);
+            points[7] = new Vector2(13, 40);        
 
             float radius = (float)Math.Sqrt(frameWidth / 2 * frameWidth / 2 + frameHeight / 2 * frameHeight / 2);
             collider = new Collider(camera, true, position, rotation, points, radius, frameWidth, frameHeight);
@@ -214,7 +218,9 @@ namespace IS_XNA_Shooter
             if (life <= 0)
             {
                 colisionable = false;
-                setAnim(0, -1);
+                velocity = 0;
+                setAnim(1, -1);
+                Audio.PlayEffect("brokenBone02");
             }
         }
 

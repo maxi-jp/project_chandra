@@ -25,8 +25,9 @@ namespace IS_XNA_Shooter
         private int currentLevel=0;
         public Sprite spriteGetReady;
         public Sprite spriteNum;
-        private float timeToResumeAux=5f;
-        private bool dialogStop=false;
+        private float timeToResumeAux;
+        private int currentConver=0;
+        private int currentParagraph=0;
         private List<List<Talk>> gameDialog;
 
         public enum playState
@@ -40,7 +41,8 @@ namespace IS_XNA_Shooter
 
         private struct Talk
         {
-            public String whoTalk;
+            // 0=Chandra, 1=Captain, 2=Robot
+            public int whoTalk;
             public String whatSaid;
         }
 
@@ -59,11 +61,22 @@ namespace IS_XNA_Shooter
             levelList = new List<int>();
             levelList.Add(0); levelList.Add(1); levelList.Add(0); // add 3 levels
             gameDialog = new List<List<Talk>>();
+            readConversationXML(0);
+            setTimeToResume();
             spriteGetReady = new Sprite(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight / 2 - 90), 0,
                GRMng.getready321, new Rectangle(0, 0, 512, 80));
             spriteNum = new Sprite(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight / 2 + 80), 0,
                 GRMng.getready321, new Rectangle(0, 80, 170, 150));
             initLevelB(1);
+        }
+
+        /// <summary>
+        /// set timeToResumeAux to an apropiate time corresponding to the lenght of the text
+        /// </summary>
+        private void setTimeToResume()
+        {
+            if (currentConver < gameDialog.Count && currentParagraph < gameDialog[currentConver].Count)
+            timeToResumeAux= gameDialog[currentConver][currentParagraph].whatSaid.Length * 0.07f;
         }
 
         private void initLevelB(int numLevel)
@@ -125,15 +138,24 @@ namespace IS_XNA_Shooter
             switch (currentState)
             {
                 case playState.levelDialog:
+
                     timeToResumeAux -= deltaTime;
                     if (timeToResumeAux <= 0)
                     {
-                        currentState = playState.beginLevel;
-                        timeToResumeAux = 3f;
+                        currentParagraph++; //update the current conversation 
+                        setTimeToResume();
+                        if (currentParagraph >= gameDialog[currentConver].Count)
+                        {
+                            currentConver++;
+                            currentParagraph = 0;
+                            currentState = playState.beginLevel;
+                            timeToResumeAux = 3f;
+                        }
                     }
                     if (backGroundB != null)
                         backGroundB.Update(deltaTime);
                     break;
+
                 case playState.beginLevel:
                     //base.Update(gameTime);
                     timeToResumeAux -= deltaTime;
@@ -174,7 +196,7 @@ namespace IS_XNA_Shooter
                             initNextLevel(levelList[currentLevel]);
                         else
                             mainGame.ExitToMenu();
-                        currentState = playState.beginLevel;
+                        currentState = playState.levelDialog;
                         timeToResumeAux = 5f;
                     }
                     else if (timeToResumeAux >= 5f * 2 / 3)
@@ -218,14 +240,30 @@ namespace IS_XNA_Shooter
             switch (currentState)
             {
                 case playState.levelDialog:
-                    spriteBatch.Draw(GRMng.redpixel,new Rectangle(100,500,1100,200),Color.Green);
-                    spriteBatch.Draw(GRMng.textureCaptain, new Rectangle(110,510,280,180), Color.White);
+
+                    spriteBatch.Draw(GRMng.blackpixeltrans,new Rectangle(100,500,1100,200),Color.White);
+                    switch (gameDialog[currentConver][currentParagraph].whoTalk)
+                        {
+                            case 0:
+                                spriteBatch.Draw(GRMng.texturePilot, new Rectangle(110,510,280,180), Color.White);
+                                break;
+                            case 1:
+                                spriteBatch.Draw(GRMng.textureCaptain, new Rectangle(110,510,280,180), Color.White);
+                                break;
+                        }
+                    
+                    //DrawString(SpriteFont spriteFont, StringBuilder text, Vector2 position, Color color, float rotation, Vector2 origin, float scale, SpriteEffects effects, float layerDepth);
+                    spriteBatch.DrawString(SuperGame.fontDebug, gameDialog[currentConver][currentParagraph].whatSaid, new Vector2(400, 510), Color.White, 0, new Vector2(0, 0), 2, SpriteEffects.None, 0);
                     break;
+
                 case playState.beginLevel:
+
                     spriteGetReady.DrawRectangle(spriteBatch);
                     spriteNum.DrawRectangle(spriteBatch);
                     break;
+
                 case playState.playing:
+
                     if (SuperGame.debug)
                     {
                         spriteBatch.DrawString(SuperGame.fontDebug, "Camera=" + camera.position + ".",
@@ -238,6 +276,7 @@ namespace IS_XNA_Shooter
                     spriteGetReady.DrawRectangle(spriteBatch);
                     spriteNum.DrawRectangle(spriteBatch);
                     break;
+
             }
          }
 
@@ -291,7 +330,7 @@ namespace IS_XNA_Shooter
                     {
                         talk = new Talk();
                         XmlAttributeCollection paragraph = nodo.Attributes;
-                        talk.whoTalk = Convert.ToString(paragraph[0].Value);
+                        talk.whoTalk = Convert.ToInt16(paragraph[0].Value);
                         talk.whatSaid = Convert.ToString(paragraph[1].Value);
                         
                         conver.Add(talk);

@@ -13,14 +13,13 @@ namespace IS_XNA_Shooter
         //-------------------------
         //----    Atributos    ----
         //-------------------------
+        private List<List<Rectangle>> listRectCollider;
+        private int[] rectangleMap;
 
-        // private List<List<Rectangle>> crashList;  //objetos de colisión en el parallax donde se juega
-        private List<Collider> colliderList; //lista de colliders para crashlist
-        private BackgroundGameB backGroundB; //Fondo con los parallax
-        private BackgroundGameA backGroundA;
-        private Texture2D textureAim;
-        private List<int> levelList;
-        private int currentLevel=0;
+        private BackgroundGameB backGround; //Fondo con los parallax
+
+        private float scrollVelocity;
+        private float scrollPosition;
 
         //---------------------------
         //----    Constructor    ----
@@ -29,44 +28,15 @@ namespace IS_XNA_Shooter
             float shipVelocity, int shipLife)
             : base(mainGame, player, shipVelocity, shipLife)
         {
+            scrollVelocity = 100;
+            scrollPosition = 0;
+
+            listRectCollider = new List<List<Rectangle>>();
+
             hub = new IngameHubA(GRMng.hubBase, mainGame.player.GetLife());
-            camera = new Camera();
-            shots = new List<Shot>();
-            this.textureAim = textureAim;
-            this.shipVelocity = shipVelocity;
-            this.shipLife = shipLife;
-            levelList = new List<int>();
-            levelList.Add(0); levelList.Add(1);
-            levelList.Add(0); levelList.Add(1);
-            initLevelB(1);
-        }
-
-        private void initLevelB(int numLevel)
-        {
-            colliderList = new List<Collider>();
-            //level = new LevelB(camera, numLevel);
-            level = new LevelB(camera, numLevel, shots, enemiesBot);
-            enemies = ((LevelB)level).getEnemies();
-            camera.setLevel(level);
-            // crashList = ((LevelB)level).getRectangles();
-            backGroundB = new BackgroundGameB(level);
-            //backGroundA.Dispose();
-            backGroundA = null;
-            ship = new ShipB(this, camera, ((LevelB)level), Vector2.Zero, 0, puntosColliderShip(),
-                GRMng.frameWidthPA1,
-                GRMng.frameHeightPA1, GRMng.numAnimsPA1, GRMng.frameCountPA1, GRMng.loopingPA1, SuperGame.frameTime24,
-                GRMng.texturePA1, shipVelocity + 200, shipLife, shots);
-            level.setShip(ship);
-            camera.setShip(ship);
-        }
-
-        private void initLevelA(int numLevel, Texture2D textureAim)
-        {
-            hub = new IngameHubA(GRMng.hubBase, 3); // three lifes because yes
-            level = new LevelA(camera, numLevel, enemies);
-            backGroundA = new BackgroundGameA(camera, level);
-            //backGroundB.Dispose();
-            backGroundB = null;
+            level = new LevelB(camera, numLevel, enemies, listRectCollider);
+            rectangleMap = (LevelB)level.GetLevelMap();
+            backGround = new BackgroundGameB(level);
 
             camera.setLevel(level);
 
@@ -79,19 +49,22 @@ namespace IS_XNA_Shooter
             points[5] = new Vector2(34, 66);
             points[6] = new Vector2(26, 47);
             points[7] = new Vector2(15, 45);
-            ship = new ShipA(this, camera, level, Vector2.Zero, 0, points,
-                GRMng.frameWidthPA1, GRMng.frameHeightPA1,
-                GRMng.numAnimsPA1, GRMng.frameCountPA1, GRMng.loopingPA1, SuperGame.frameTime24, 
-                GRMng.texturePA1, shipVelocity + 200, shipLife, shots);
-
-
-            //aimPointSprite = new Sprite(true, Vector2.Zero, 0, textureAim);
-
+            ship = new ShipB(this, camera, level, Vector2.Zero, 0, points,
+                GRMng.frameWidthPA1, GRMng.frameHeightPA1, GRMng.numAnimsPA1, GRMng.frameCountPA1,
+                GRMng.loopingPA1, SuperGame.frameTime24, GRMng.texturePA1,
+                shipVelocity, shipLife, shots);
 
             level.setShip(ship);
-            camera.setShip(ship);            
-        }
 
+            camera.setShip(ship);
+
+            /*levelList = new List<int>();
+            levelList.Add(0); levelList.Add(1);
+            levelList.Add(0); levelList.Add(1);
+
+            colliderList = new List<Collider>();
+            enemies = ((LevelB)level).getEnemies();*/
+        }
 
         //--------------------------------
         //----    Métodos públicos    ----
@@ -99,20 +72,22 @@ namespace IS_XNA_Shooter
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (level.getFinish())
+
+            scrollPosition += scrollVelocity * deltaTime;
+            /*if (level.getFinish())
             {
                 currentLevel++;
                 if (currentLevel< levelList.Count)
                     initNextLevel(levelList[currentLevel]);
-            }
+            }*/
 
-            //actualiza background
-            if (backGroundB!=null)
-                backGroundB.Update(deltaTime);
-        }
+            backGround.Update(deltaTime);
 
-        private void initNextLevel(int level)
+        } // Update
+
+        /*private void initNextLevel(int level)
         {
             enemies.Clear();
                 switch (level)
@@ -124,45 +99,32 @@ namespace IS_XNA_Shooter
                         initLevelA(1, textureAim);
                         break;
                 }
-        }
+        }*/
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            //dibuja background
-            if (backGroundB != null)
-                backGroundB.Draw(spriteBatch);
-            //dibuja Ship, enemigos y balas
-            if (backGroundA != null)
-                backGroundA.Draw(spriteBatch);
-            base.Draw(spriteBatch);
+            backGround.Draw(spriteBatch);
+
+            for (int i = 0; i < listRectCollider[rectangleMap[0]].Count; i++)
+            {
+                spriteBatch.Draw(GRMng.redpixel, listRectCollider[rectangleMap[0]][i], new Color(128, 128, 128, 128));
+            }
+
+            base.Draw(spriteBatch); // Ship, enemies, shots
+
             if (SuperGame.debug)
             {
                 spriteBatch.DrawString(SuperGame.fontDebug, "Camera=" + camera.position + ".",
                     new Vector2(5, 3), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
                 spriteBatch.DrawString(SuperGame.fontDebug, "Ship=" + ship.position + ".",
                     new Vector2(5, 15), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+
+                // number of enemies:
+                spriteBatch.DrawString(SuperGame.fontDebug, "Enemies in game = " + enemies.Count() + ".",
+                    new Vector2(5, 27), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             }
-         }
 
-        //--------------------------------
-        //----    Métodos privados    ----
-        //--------------------------------
-
-        //Método privado que calcula los puntos de colisión de la nave
-        private Vector2[] puntosColliderShip()
-        {
-            Vector2[] points = new Vector2[8];
-            points[0] = new Vector2(15, 35);
-            points[1] = new Vector2(26, 33);
-            points[2] = new Vector2(34, 15);
-            points[3] = new Vector2(65, 30);
-            points[4] = new Vector2(65, 50);
-            points[5] = new Vector2(34, 66);
-            points[6] = new Vector2(26, 47);
-            points[7] = new Vector2(15, 45);
-
-            return points;
-        }
+         } // Draw
 
     }//GameB
 }

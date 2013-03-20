@@ -127,30 +127,33 @@ namespace IS_XNA_Shooter
         
         public override void Update(float deltaTime)
         {
-            base.Update(deltaTime);
-
-            if (phase == 1) phase1(deltaTime);
-            if (phase == 2) phase2(deltaTime);
-            if (phase == 3) phase3(deltaTime);
-
-            // shots:
-            for (int i = 0; i < shots.Count(); i++)
+            if (ship.GetLife() > 0)
             {
-                shots[i].Update(deltaTime);
-                if (!shots[i].IsActive())
-                    shots.RemoveAt(i);
-                else  // shots-player colisions
-                {
-                    if (ship.collider.Collision(shots[i].position))
-                    {
-                        // the player is hitted:
-                        ship.Damage(shots[i].GetPower());
+                base.Update(deltaTime);
 
-                        // the shot must be erased only if it hasn't provoked the
-                        // player ship death, otherwise the shot will had be removed
-                        // before from the game in: Game.PlayerDead() -> Enemy.Kill()
-                        if (ship.GetLife() > 0)
-                            shots.RemoveAt(i);
+                if (phase == 1 && !isDead()) phase1(deltaTime);
+                if (phase == 2 && !isDead()) phase2(deltaTime);
+                if (phase == 3 && !isDead()) phase3(deltaTime);
+
+                // shots:
+                for (int i = 0; i < shots.Count(); i++)
+                {
+                    shots[i].Update(deltaTime);
+                    if (!shots[i].IsActive())
+                        shots.RemoveAt(i);
+                    else  // shots-player colisions
+                    {
+                        if (ship.collider.Collision(shots[i].position))
+                        {
+                            // the player is hitted:
+                            ship.Damage(shots[i].GetPower());
+
+                            // the shot must be erased only if it hasn't provoked the
+                            // player ship death, otherwise the shot will had be removed
+                            // before from the game in: Game.PlayerDead() -> Enemy.Kill()
+                            if (ship.GetLife() > 0)
+                                shots.RemoveAt(i);
+                        }
                     }
                 }
             }
@@ -162,6 +165,19 @@ namespace IS_XNA_Shooter
                 s.Draw(spriteBatch);
 
             base.Draw(spriteBatch);
+        }
+
+        public override void Damage(int i)
+        {
+            base.Damage(i);
+
+            // if the enemy is dead, play the new animation and the death sound
+            if (life <= 0)
+            {
+                shooting = false;
+                setAnim(1, -1);
+                Audio.PlayEffect("brokenBone02");
+            }
         }
 
         // -------------------------------------
@@ -320,26 +336,26 @@ namespace IS_XNA_Shooter
             if (singletonEnemyHeroe)
             {
                 Vector2 positionEnemy4 = new Vector2(position.X, position.Y + this.frameHeight / 2);
-                Enemy e4 = new EnemyFinalHeroe2(camera, level, positionEnemy4, (float)Math.PI, GRMng.frameWidthFinalBossHeroe, GRMng.frameHeightFinalBossHeroe,
-                    GRMng.numAnimsFinalBossHeroe, GRMng.frameCountFinalBossHeroe, GRMng.loopingFinalBossHeroe, SuperGame.frameTime12, GRMng.textureFinalBossHeroe, 0, 150, 100, 1, ship, true);
+                Enemy e4 = new EnemyFinalHeroe2(camera, level, positionEnemy4, (float)Math.PI, GRMng.frameWidthHeroe1, GRMng.frameHeightHeroe1,
+                    GRMng.numAnimsHeroe1, GRMng.frameCountHeroe1, GRMng.loopingHeroe1, SuperGame.frameTime12, GRMng.textureHeroe1, 0, 150, 100, 1, ship, true);
                 e4.SetActive();
                 enemies.Add(e4);
 
                 Vector2 positionEnemy5 = new Vector2(position.X, position.Y + this.frameHeight / 2);
-                Enemy e5 = new EnemyFinalHeroe2(camera, level, positionEnemy5, (float)Math.PI, GRMng.frameWidthFinalBossHeroe, GRMng.frameHeightFinalBossHeroe,
-                    GRMng.numAnimsFinalBossHeroe, GRMng.frameCountFinalBossHeroe, GRMng.loopingFinalBossHeroe, SuperGame.frameTime12, GRMng.textureFinalBossHeroe, 0, 150, 100, 1, ship, false);
+                Enemy e5 = new EnemyFinalHeroe2(camera, level, positionEnemy5, (float)Math.PI, GRMng.frameWidthHeroe1, GRMng.frameHeightHeroe1,
+                    GRMng.numAnimsHeroe1, GRMng.frameCountHeroe1, GRMng.loopingHeroe1, SuperGame.frameTime12, GRMng.textureHeroe1, 0, 150, 100, 1, ship, false);
                 e5.SetActive();
                 enemies.Add(e5);
 
                 Vector2 positionEnemy6 = new Vector2(position.X, position.Y - this.frameHeight / 2);
-                Enemy e6 = new EnemyFinalHeroe2(camera, level, positionEnemy6, (float)Math.PI, GRMng.frameWidthFinalBossHeroe, GRMng.frameHeightFinalBossHeroe,
-                    GRMng.numAnimsFinalBossHeroe, GRMng.frameCountFinalBossHeroe, GRMng.loopingFinalBossHeroe, SuperGame.frameTime12, GRMng.textureFinalBossHeroe, 0, 150, 100, 1, ship, false);
+                Enemy e6 = new EnemyFinalHeroe2(camera, level, positionEnemy6, (float)Math.PI, GRMng.frameWidthHeroe1, GRMng.frameHeightHeroe1,
+                    GRMng.numAnimsHeroe1, GRMng.frameCountHeroe1, GRMng.loopingHeroe1, SuperGame.frameTime12, GRMng.textureHeroe1, 0, 150, 100, 1, ship, false);
                 e6.SetActive();
                 enemies.Add(e6);
 
                 Vector2 positionEnemy7 = new Vector2(position.X, position.Y - this.frameHeight / 2);
-                Enemy e7 = new EnemyFinalHeroe2(camera, level, positionEnemy7, (float)Math.PI, GRMng.frameWidthFinalBossHeroe, GRMng.frameHeightFinalBossHeroe,
-                    GRMng.numAnimsFinalBossHeroe, GRMng.frameCountFinalBossHeroe, GRMng.loopingFinalBossHeroe, SuperGame.frameTime12, GRMng.textureFinalBossHeroe, 0, 150, 100, 1, ship, true);
+                Enemy e7 = new EnemyFinalHeroe2(camera, level, positionEnemy7, (float)Math.PI, GRMng.frameWidthHeroe1, GRMng.frameHeightHeroe1,
+                    GRMng.numAnimsHeroe1, GRMng.frameCountHeroe1, GRMng.loopingHeroe1, SuperGame.frameTime12, GRMng.textureHeroe1, 0, 150, 100, 1, ship, true);
                 e7.SetActive();
                 enemies.Add(e7);
 
@@ -435,16 +451,38 @@ namespace IS_XNA_Shooter
 
                 Audio.PlayEffect("laserShot01");
             //position.X - 10, position.Y + collider.Height / 2
-            Shot nuevo = new Shot(camera, level, new Vector2(position.X , position.Y  + this.frameHeight / 2), angleDown, GRMng.frameWidthL1, GRMng.frameHeightL1,
-                GRMng.numAnimsL1, GRMng.frameCountL1, GRMng.loopingL1, SuperGame.frameTime8, GRMng.textureL1, SuperGame.shootType.normal, shotWingsVelocity, shotWingsPower);
+            Shot nuevo = new Shot(camera, level, new Vector2(position.X , position.Y  + this.frameHeight / 2), angleDown, GRMng.frameWidthShotFinalBoss1, 
+                GRMng.frameHeightShotFinalBoss1, GRMng.numAnimsShotFinalBoss1, GRMng.frameCountShotFinalBoss1, GRMng.loopingShotFinalBoss1, SuperGame.frameTime8, 
+                GRMng.textureShotFinalBoss1, SuperGame.shootType.normal, shotWingsVelocity, shotWingsPower);
+
+            float radius = (float)(Math.Sqrt(GRMng.frameHeightShotFinalBoss1/2 * GRMng.frameHeightShotFinalBoss1/2 +
+                GRMng.frameWidthShotFinalBoss1/2 * GRMng.frameWidthShotFinalBoss1/2));
+
+            //I'm making a copy because collider midifies the points
+            Vector2[] pointsCollider = new Vector2[GRMng.colliderShotFinalBoss1.Length];
+            for (int i = 0; i < GRMng.colliderShotFinalBoss1.Length; i++)
+                pointsCollider[i] = GRMng.colliderShotFinalBoss1[i];
+
+            nuevo.setCollider(pointsCollider, radius);
+
             shots.Add(nuevo);
            
            
             //position.X - 10, position.Y - collider.Height / 2
-            nuevo = new Shot(camera, level, new Vector2(position.X , position.Y - this.frameHeight / 2), angleUp, GRMng.frameWidthL1, GRMng.frameHeightL1,
-                GRMng.numAnimsL1, GRMng.frameCountL1, GRMng.loopingL1, SuperGame.frameTime8, GRMng.textureL1, SuperGame.shootType.normal, shotWingsVelocity, shotWingsPower);
+            nuevo = new Shot(camera, level, new Vector2(position.X , position.Y - this.frameHeight / 2), angleUp, GRMng.frameWidthShotFinalBoss1, 
+                GRMng.frameHeightShotFinalBoss1, GRMng.numAnimsShotFinalBoss1, GRMng.frameCountShotFinalBoss1, GRMng.loopingShotFinalBoss1, SuperGame.frameTime8, 
+                GRMng.textureShotFinalBoss1, SuperGame.shootType.normal, shotWingsVelocity, shotWingsPower);
             shots.Add(nuevo);
-            
+
+            radius = (float)(Math.Sqrt(GRMng.frameHeightShotFinalBoss1 / 2 * GRMng.frameHeightShotFinalBoss1 / 2 +
+               GRMng.frameWidthShotFinalBoss1 / 2 * GRMng.frameWidthShotFinalBoss1 / 2));
+
+            //I'm making a copy because collider midifies the points
+            pointsCollider = new Vector2[GRMng.colliderShotFinalBoss1.Length];
+            for (int i = 0; i < GRMng.colliderShotFinalBoss1.Length; i++)
+                pointsCollider[i] = GRMng.colliderShotFinalBoss1[i];
+
+            nuevo.setCollider(pointsCollider, radius);
 
             timeToShotWingsAux = timeToShotWings;
         }
@@ -452,10 +490,10 @@ namespace IS_XNA_Shooter
         private void colliderPoints()
         {
             Vector2[] points = new Vector2[4];            
-            points[0] = new Vector2(24, 240);
-            points[1] = new Vector2(24, 0);
-            points[2] = new Vector2(240, 111);
-            points[3] = new Vector2(240, 128);
+            points[0] = new Vector2(60, 20);
+            points[1] = new Vector2(238, 112);
+            points[2] = new Vector2(238, 126);
+            points[3] = new Vector2(60, 220);
 
             float radius = (float)Math.Sqrt(frameWidth / 2 * frameWidth / 2 + frameHeight / 2 * frameHeight / 2);
             collider = new Collider(camera, true, position, rotation, points, radius, frameWidth, frameHeight);

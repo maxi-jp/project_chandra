@@ -16,6 +16,7 @@ namespace IS_XNA_Shooter
         public int width;
         public int height;
         protected List<Enemy> enemies;
+        protected int numLevel;
         protected bool levelFinished = false;
 
         /* ------------------- CONSTRUCTORES ------------------- */
@@ -26,18 +27,19 @@ namespace IS_XNA_Shooter
 
         public Level(Camera camera, int num, List<Enemy> enemies)
         {
-            
+            this.camera = camera;
+            this.numLevel = num;
+            this.enemies = enemies;
         }
 
-        /* ------------------- MÉTODOS ------------------- */
         public virtual void Update(float deltaTime)
         {
             
         }
-        
+
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            
+
         }
 
  	    protected void LeerArchivoXML(int modoDeJuego, int levelModo)

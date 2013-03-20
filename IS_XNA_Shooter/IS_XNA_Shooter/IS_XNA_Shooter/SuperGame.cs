@@ -104,54 +104,54 @@ namespace IS_XNA_Shooter
         /// <summary>
         /// Draw frames' counter
         /// </summary>
-        private int     drawFramesCounter;
+        private int drawFramesCounter;
         
         /// <summary>
         /// Draw frames' auxiliar counter
         /// </summary>
-        private int     drawFramesCounterAux;
+        private int drawFramesCounterAux;
         
         /// <summary>
         /// Update frames' counter
         /// </summary>
-        private int     updateFramesCounter;
+        private int updateFramesCounter;
         
         /// <summary>
         /// Update frames' auxiliar counter
         /// </summary>
-        private int     updateFramesCounterAux;
+        private int updateFramesCounterAux;
         
         /// <summary>
         /// Time frames' counter
         /// </summary>
-        private float   timeCounterSecond;
+        private float timeCounterSecond;
         
         /// <summary>
         /// Time frames' auxiliar counter
         /// </summary>
-        private float   timeCounterSecondAux;
+        private float timeCounterSecondAux;
 
         // Refresh time between frames:
 
         /// <summary>
         /// Refresh time between frames = 24
         /// </summary>
-        public static float frameTime24 =   ((float)1 / 24);
+        public static float frameTime24 = ((float)1 / 24);
         
         /// <summary>
         /// Refresh time between frames = 12
         /// </summary>
-        public static float frameTime12 =   ((float)1 / 12);
+        public static float frameTime12 = ((float)1 / 12);
         
         /// <summary>
         /// Refresh time between frames = 10
         /// </summary>
-        public static float frameTime10 =   ((float)1 / 10);
+        public static float frameTime10 = ((float)1 / 10);
         
         /// <summary>
         /// Refresh time between frames = 8
         /// </summary>
-        public static float frameTime8 =    ((float)1 / 8);
+        public static float frameTime8 = ((float)1 / 8);
         
         /// <summary>
         /// Time to resume after pause
@@ -168,12 +168,12 @@ namespace IS_XNA_Shooter
         /// <summary>
         /// Menu
         /// </summary>
-        private Menu        menu;
+        private Menu menu;
         
         /// <summary>
         /// Menu of the pause
         /// </summary>
-        private MenuIngame  menuIngame;
+        private MenuIngame menuIngame;
         
         /// <summary>
         /// Menu of game over
@@ -183,17 +183,17 @@ namespace IS_XNA_Shooter
         /// <summary>
         /// Game
         /// </summary>
-        private Game        game;
+        private Game game;
        
         /// <summary>
         /// Player
         /// </summary>
-        public Player       player;
+        public Player player;
        
         /// <summary>
         /// Player lifes
         /// </summary>
-        private int         playerLifes = 4;
+        private int playerLifes = 4;
         
         /// <summary>
         /// Shoot type

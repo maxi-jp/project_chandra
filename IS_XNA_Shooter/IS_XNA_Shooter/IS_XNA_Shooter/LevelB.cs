@@ -13,7 +13,7 @@ namespace IS_XNA_Shooter
         //-------------------------
         //----    Atributos    ----
         //-------------------------
-        private List<List<Rectangle>> listRectCollider;
+        private List<RectangleMap> listRecMap;
         private int[] rectangleMap;
 
         private bool testingEnemies;
@@ -22,13 +22,12 @@ namespace IS_XNA_Shooter
         //----    Constructor    ----
         //---------------------------
         public LevelB(Camera camera, int numLevel, List<Enemy> enemies,
-            List<List<Rectangle>> listRectCollider)
+            List<RectangleMap> listRecMap)
             : base(camera, numLevel, enemies)
         {
             testingEnemies = false;
 
-            this.listRectCollider = listRectCollider;
-            this.rectangleMap = rectangleMap;
+            this.listRecMap = listRecMap;
 
             if (numLevel == 0)
             {
@@ -117,14 +116,49 @@ namespace IS_XNA_Shooter
 
         public void ReadRectangles()
         {
+            int nR, lW, lH; // rectangle list map component
             int rX, rY, rW, rH; // rectangle components
 
             XmlDocument lvl = XMLLvlMng.rect1;
 
             XmlNodeList level = lvl.GetElementsByTagName("level");
 
-            XmlAttributeCollection RectangleN;
-            XmlNodeList listaRectangles =
+            // variables auxiliares para la lectura del XML
+            XmlAttributeCollection rectangleList, rectangleNode;
+            Rectangle recAux;
+            List<Rectangle> listAux;
+            RectangleMap recMapAux;
+
+            XmlNodeList listsRect = ((XmlElement)level[0]).GetElementsByTagName("listaRectangles");
+            foreach (XmlElement nodo1 in listsRect)
+            {
+                listAux = new List<Rectangle>();
+
+                rectangleList = nodo1.Attributes;
+
+                nR = (int)Convert.ToDouble(rectangleList[0].Value);
+                lW = (int)Convert.ToDouble(rectangleList[1].Value);
+                lH = (int)Convert.ToDouble(rectangleList[2].Value);
+
+                XmlNodeList listaRectangles = nodo1.GetElementsByTagName("rectangle");
+                foreach (XmlElement nodo2 in listaRectangles)
+                {
+                    rectangleNode = nodo2.Attributes;
+
+                    rX = (int)Convert.ToDouble(rectangleNode[0].Value);
+                    rY = (int)Convert.ToDouble(rectangleNode[1].Value);
+                    rW = (int)Convert.ToDouble(rectangleNode[2].Value);
+                    rH = (int)Convert.ToDouble(rectangleNode[3].Value);
+
+                    recAux = new Rectangle(rX, rY, rW, rH);
+                    listAux.Add(recAux);
+                }
+
+                recMapAux = new RectangleMap(lW, lH, listAux);
+                listRecMap.Add(recMapAux);
+            }
+            
+            /*XmlNodeList listaRectangles =
                         ((XmlElement)level[0]).GetElementsByTagName("rectangle");
             foreach (XmlElement nodo in listaRectangles)
             {
@@ -144,7 +178,7 @@ namespace IS_XNA_Shooter
 
                 // añadimos a la lista actual los rectangulos
                 listRectCollider[listRectCollider.Count-1].Add(rectangulo); 
-            }
+            }*/
 
             // lista de mapas de rectángulos
             int ind;
@@ -162,7 +196,7 @@ namespace IS_XNA_Shooter
         //devuelve la lista de rectangulos de colisión del parallax donde se juega
         public List<List<Rectangle>> getRectangles()
         {
-            return listRectCollider;
+            return null;// listRectCollider;
         }
 
         public int[] GetLevelMap()

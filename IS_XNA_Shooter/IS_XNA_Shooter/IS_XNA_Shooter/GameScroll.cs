@@ -64,8 +64,8 @@ namespace IS_XNA_Shooter
         public override void Draw(SpriteBatch spriteBatch)
         {
             //dibuja background
-            if (backGroundB != null)
-                backGroundB.Draw(spriteBatch);
+            /*if (backGroundB != null)
+                backGroundB.Draw(spriteBatch);*/
             //dibuja player, enemigos y balas
             base.Draw(spriteBatch);
             if (SuperGame.debug)

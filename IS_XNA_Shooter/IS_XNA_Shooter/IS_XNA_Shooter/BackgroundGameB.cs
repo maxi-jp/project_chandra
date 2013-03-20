@@ -10,16 +10,31 @@ namespace IS_XNA_Shooter
     class BackgroundGameB
     {
         private BackgroundLayerB bgLayer0, bgLayer1, bgLayer2, bgLayer3, bgLayerC;
+        private int[] rectangleMap;
 
         public BackgroundGameB(Level level)
         {
+            rectangleMap = ((LevelB)level).GetLevelMap();
+
             Vector2 middleScreenPos = new Vector2(level.width / 4, level.height / 2);
 
-            bgLayer0 = new BackgroundLayerB(true, middleScreenPos, 0, GRMng.textureBg00, -50f, true, 0.8f, false, null);
+            // last layer
+            int[] textureIndex = new int[1];
+            textureIndex[0] = 0;
+            List<Texture2D> textures0 = new List<Texture2D>();
+            textures0.Add(GRMng.textureBgB00);
+            bgLayer0 = new BackgroundLayerB(textureIndex, textures0, 20f, true, 1.4f, false);
+
             //bgLayer1 = new BackgroundLayerB(true, middleScreenPos, 0, GRMng.textureBg01, -70f, true, 1);
             //bgLayer2 = new BackgroundLayerB(true, middleScreenPos, 0, GRMng.textureBg02, -90f, true, 0.7f, false, null);
             //bgLayer3 = new BackgroundLayerB(true, middleScreenPos, 0, GRMng.textureBg03, -110f, true, 0.7f);
-            //bgLayerC =new BackgroundLayerB(true, middleScreenPos, 0, GRMng.textureBgCol1,-200f,true,0.7f, true, ((LevelB)level).getRectangles());
+            
+            // Layer colisionable
+            List<Texture2D> texturesC = new List<Texture2D>();
+            texturesC.Add(GRMng.textureBgCol1);
+            texturesC.Add(GRMng.textureBgCol2);
+            texturesC.Add(GRMng.textureBgCol3);
+            bgLayerC = new BackgroundLayerB(rectangleMap, texturesC, 0, false, 1, true);
         }
 
         public void Update(float deltaTime)
@@ -28,21 +43,17 @@ namespace IS_XNA_Shooter
             //bgLayer1.Update(deltaTime);
             //bgLayer2.Update(deltaTime);
             //bgLayer3.Update(deltaTime);
-            //bgLayerC.Update(deltaTime);
+            bgLayerC.Update(deltaTime);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, float scrollPosition)
         {
-            bgLayer0.Draw(spriteBatch);
+            bgLayer0.Draw(spriteBatch, scrollPosition);
             //bgLayer1.Draw(spriteBatch);
             //bgLayer2.Draw(spriteBatch);
             //bgLayer3.Draw(spriteBatch);
-            //bgLayerC.Draw(spriteBatch);
+            bgLayerC.Draw(spriteBatch, scrollPosition);
         }
 
-        internal void Dispose()
-        {
-            //TO DO
-        }
-    }
+    } // class BackgroundGameB
 }

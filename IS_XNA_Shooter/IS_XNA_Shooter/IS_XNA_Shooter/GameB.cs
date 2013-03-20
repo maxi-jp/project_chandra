@@ -13,7 +13,7 @@ namespace IS_XNA_Shooter
         //-------------------------
         //----    Atributos    ----
         //-------------------------
-        private List<List<Rectangle>> listRectCollider;
+        private List<RectangleMap> listRecMap;
         private int[] rectangleMap;
 
         private BackgroundGameB backGround; //Fondo con los parallax
@@ -31,11 +31,11 @@ namespace IS_XNA_Shooter
             scrollVelocity = 100;
             scrollPosition = 0;
 
-            listRectCollider = new List<List<Rectangle>>();
+            listRecMap = new List<RectangleMap>();
 
             hub = new IngameHubA(GRMng.hubBase, mainGame.player.GetLife());
-            level = new LevelB(camera, numLevel, enemies, listRectCollider);
-            //rectangleMap = (LevelB)level.GetLevelMap();
+            level = new LevelB(camera, numLevel, enemies, listRecMap);
+            rectangleMap = ((LevelB)level).GetLevelMap();
             backGround = new BackgroundGameB(level);
 
             camera.setLevel(level);
@@ -57,13 +57,6 @@ namespace IS_XNA_Shooter
             level.setShip(ship);
 
             camera.setShip(ship);
-
-            /*levelList = new List<int>();
-            levelList.Add(0); levelList.Add(1);
-            levelList.Add(0); levelList.Add(1);
-
-            colliderList = new List<Collider>();
-            enemies = ((LevelB)level).getEnemies();*/
         }
 
         //--------------------------------
@@ -76,44 +69,53 @@ namespace IS_XNA_Shooter
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             scrollPosition += scrollVelocity * deltaTime;
-            /*if (level.getFinish())
-            {
-                currentLevel++;
-                if (currentLevel< levelList.Count)
-                    initNextLevel(levelList[currentLevel]);
-            }*/
 
             backGround.Update(deltaTime);
 
-        } // Update
-
-        /*private void initNextLevel(int level)
-        {
-            enemies.Clear();
-                switch (level)
+            // player-walls(rectangles) collision:
+            int cont = 0;
+            Rectangle recAux;
+            for (int i = 0; i < listRecMap.Count(); i++)
+            {
+                for (int j = 0; j < listRecMap[i].rectangleList.Count; j++)
                 {
-                    case 0:
-                        initLevelB(1);
-                        break;
-                    case 1:
-                        initLevelA(1, textureAim);
-                        break;
+                    recAux = new Rectangle(
+                        listRecMap[i].rectangleList[j].X - (int)scrollPosition + cont,
+                        listRecMap[i].rectangleList[j].Y,
+                        listRecMap[i].rectangleList[j].Width,
+                        listRecMap[i].rectangleList[j].Height);
+                    for (int k = 0; k < ship.collider.points.Length; k++)
+                    { 
+                        if (recAux.Contains((int)ship.collider.points[k].X, (int)ship.collider.points[k].Y))
+                            ship.Kill();
+                    }
                 }
-        }*/
+                cont += listRecMap[rectangleMap[i]].width;
+            }
+            // TODO: hay que descargar la mayoría de casos
+
+        } // Update
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            backGround.Draw(spriteBatch);
-
-            /*for (int i = 0; i < listRectCollider[rectangleMap[0]].Count; i++)
-            {
-                spriteBatch.Draw(GRMng.redpixel, listRectCollider[rectangleMap[0]][i], new Color(128, 128, 128, 128));
-            }*/
+            backGround.Draw(spriteBatch, scrollPosition);
 
             base.Draw(spriteBatch); // Ship, enemies, shots
 
             if (SuperGame.debug)
             {
+                int cont = 0;
+                /*for (int i = 0; i < listRecMap.Count; i++)
+                {
+                    listRecMap[i].Draw(spriteBatch, -(int)scrollPosition + cont);
+                    cont += listRecMap[i].width;
+                }*/
+                for (int i = 0; i < rectangleMap.Length; i++)
+                {
+                    listRecMap[rectangleMap[i]].Draw(spriteBatch, -(int)scrollPosition + cont);
+                    cont += listRecMap[rectangleMap[i]].width;
+                }
+
                 spriteBatch.DrawString(SuperGame.fontDebug, "Camera=" + camera.position + ".",
                     new Vector2(5, 3), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
                 spriteBatch.DrawString(SuperGame.fontDebug, "Ship=" + ship.position + ".",

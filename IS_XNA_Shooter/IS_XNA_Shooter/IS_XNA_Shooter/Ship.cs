@@ -39,7 +39,7 @@ namespace IS_XNA_Shooter
         protected shipState currentState; // current state of the enemy
 
         private float timeDying = 2, timeDyingAux;
-        private float timeInvencible=2, timeInvencibleAux;
+        private float timeInvencible=3, timeInvencibleAux;
         private byte transparency;
 
         /* ------------------- CONSTRUCTORES ------------------- */
@@ -283,13 +283,16 @@ namespace IS_XNA_Shooter
 
         public void Kill()
         {
-            game.PlayerDead();
+            if (currentState == shipState.ONNORMAL)
+            {
+                game.PlayerDead();
 
-            currentState = shipState.ONDYING;
-            
-            Audio.PlayEffect("tackled1");
-            frameTime = timeDying / frameCount[3];
-            setAnim(3);
+                currentState = shipState.ONDYING;
+
+                Audio.PlayEffect("tackled1");
+                frameTime = timeDying / frameCount[3];
+                setAnim(3);
+            }
         }
 
         private void Respawn()

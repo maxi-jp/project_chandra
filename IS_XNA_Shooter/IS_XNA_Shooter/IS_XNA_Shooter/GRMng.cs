@@ -19,6 +19,11 @@ namespace IS_XNA_Shooter
         public static Texture2D whitepixel;     // textura pixel blanco
         public static Texture2D redpixel;       // textura pixel rojo
         public static Texture2D blackpixeltrans;// textura pixel negro transparente
+        public static Texture2D redpixeltrans;  // textura pixel rojo transparente
+        public static Texture2D bluepixeltrans; // textura pixel azul transparente
+        public static Texture2D greenpixeltrans;// textura pixel verde transparente
+        public static Texture2D yellowpixeltrans;  // textura pixel amarillo transparente
+
 
         #region BACKGROUNDS
         /* ------------------- FONDOS ------------------- */
@@ -31,6 +36,7 @@ namespace IS_XNA_Shooter
         public static Texture2D textureBgCol1;
         public static Texture2D textureBgCol2;
         public static Texture2D textureBgCol3;
+        public static Texture2D textureBgB00; // fondo LevelB
         #endregion
 
         #region ENEMIES
@@ -328,7 +334,8 @@ namespace IS_XNA_Shooter
                     textureEW1 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy01_80x80");
                     
                     textureRed = content.Load<Texture2D>("Graphics/Rojazo");
-                    
+
+                    textureBgB00 = content.Load<Texture2D>("Graphics/Backgrounds/bgB00");
                     textureBgGame1A = content.Load<Texture2D>("Graphics/Backgrounds/backgroundTile1");
                     textureBg00 = content.Load<Texture2D>("Graphics/Backgrounds/bg00");
                     textureBg01 = content.Load<Texture2D>("Graphics/Backgrounds/bg01");
@@ -354,6 +361,10 @@ namespace IS_XNA_Shooter
             whitepixel = content.Load<Texture2D>("Graphics/whitepixel");
             redpixel = content.Load<Texture2D>("Graphics/redpixel");
             blackpixeltrans = content.Load<Texture2D>("Graphics/blackpixeltransparent");
+            redpixeltrans = content.Load<Texture2D>("Graphics/redpixeltransparent");
+            bluepixeltrans = content.Load<Texture2D>("Graphics/bluepixeltransparent");
+            greenpixeltrans = content.Load<Texture2D>("Graphics/greenpixeltransparent");
+            yellowpixeltrans = content.Load<Texture2D>("Graphics/yellowpixeltransparent");
 
         } // LoadContent
 
@@ -429,6 +440,7 @@ namespace IS_XNA_Shooter
                     textureEW1 = null;
 
                     textureRed = null;
+                    textureBgB00 = null;
                     textureBgGame1A = null;
                     textureBg00 = null;
                     textureBg01 = null;

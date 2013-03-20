@@ -143,6 +143,7 @@
     <Compile Include="MenuGameOver.cs" />
     <Compile Include="MenuIngame.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="RectangleMap.cs" />
     <Compile Include="ShipA.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="GameA.cs" />

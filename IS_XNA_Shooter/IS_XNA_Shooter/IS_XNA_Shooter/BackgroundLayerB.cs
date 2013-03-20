@@ -8,66 +8,96 @@ using Microsoft.Xna.Framework.Graphics;
 namespace IS_XNA_Shooter
 {
     // Es la clase que gestiona los parallax del juego B.
-    class BackgroundLayerB : Sprite
+    class BackgroundLayerB
     {
         private float speed; // velocidad a la que se desplaza la capa
 
         private bool tileable;
+        // An array of positions of the parallaxing background
+        private Vector2[] positions;
 
-        private int screenWidth;
-        private int screenHeight;
         private float scale;
-        private List<List<Rectangle>> listForCollision;
-        private List<Texture2D> textureList;
+
+        private List<Texture2D> textures;
+        private int[] rectangleMap;
+
         private bool collisionable;
 
         private int tileX, tileY;
         private int numtex1 = 0;
         private int numtex2;
 
-        public BackgroundLayerB (bool middlePosition, Vector2 position,
-            float rotation, Texture2D texture, float speed, bool tileable, float scale, bool collisionable, List<List<Rectangle>> listForCollision)
-            : base(middlePosition, position, rotation, texture)
+        public BackgroundLayerB (int[] rectangleMap, List<Texture2D> textures,
+            float speed, bool tileable, float scale, bool collisionable)
         {
+            this.rectangleMap = rectangleMap;
+            this.textures = textures;
+
             this.speed = speed;
             this.tileable = tileable;
             this.scale = scale;
             this.collisionable = collisionable;
-            // añadimos los terrenos colisionables
-            textureList = new List<Texture2D>();
-            textureList.Add(GRMng.textureBgCol1);
-            textureList.Add(GRMng.textureBgCol2);
-            textureList.Add(GRMng.textureBgCol3);
-
-            numtex2 = new Random().Next(textureList.Count);
-
-            screenWidth = SuperGame.screenWidth;
-            screenHeight = SuperGame.screenHeight;
-
-            if (collisionable) 
-            {
-                this.listForCollision = listForCollision;
-            }
 
             if (tileable)
             {
-                //tileX = screenWidth / texture.Width + 2;
-                tileY = screenHeight / texture.Height + 1;
-                tileX = 1;
+                // If we divide the screen with the texture width then we can determine the number of tiles need.
+                // We add 1 to it so that we won't have a gap in the tiling
+                positions = new Vector2[SuperGame.screenWidth / (int)(textures[0].Width*scale) + 2];
+                // Set the initial positions of the parallaxing background
+                for (int i = 0; i < positions.Length; i++)
+                {
+                    // We need the tiles to be side by side to create a tiling effect
+                    positions[i] = new Vector2(i * textures[0].Width * scale, 0);
+                }
             }
-            else tileX = tileY = 1;
+            else
+            {
+                positions = new Vector2[1];
+                positions[0] = new Vector2();
+            }
+
         }
 
         public void Update(float deltaTime)
         {
-            position.X += speed * deltaTime;
-        }
+            // Update the positions of the background
+            for (int i = 0; i < positions.Length; i++)
+            {
+                // Update the position of the screen by adding the speed
+                positions[i].X -= speed * deltaTime;
+                // Check the texture is out of view then put that texture at the end of the screen
+                if (positions[i].X <= -textures[0].Width * scale)
+                {
+                    positions[i].X = textures[0].Width * scale * (positions.Length - 1);
+                }
+            }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        } // Update
+
+        public void Draw(SpriteBatch spriteBatch, float scrollPosition)
         {
+            if (tileable)
+            {
+                for (int i = 0; i < positions.Length; i++)
+                {
+                    spriteBatch.Draw(textures[0], positions[i], null, Color.White, 0, Vector2.Zero, scale,
+                        SpriteEffects.None, 1);
+                }
+            }
+            else
+            {
+                int cont = (int)positions[0].X;
+                for (int i = 0; i < rectangleMap.Length; i++)
+                {
+                    spriteBatch.Draw(textures[rectangleMap[i]], new Vector2(-scrollPosition + cont, 0), null,
+                        Color.White, 0, Vector2.Zero, scale, SpriteEffects.None, 1);
+                    cont += textures[rectangleMap[i]].Width;
+                }
+            }
+            // TODO: hay que comprobar si la posicion de la textura esta en pantalla para ahorrar draw calls
 
             //base.Draw(spriteBatch);
-            if (tileable)
+            /*if (tileable)
                 if (collisionable)
                     for (int j = 0; j < tileY; j++)
                     {
@@ -101,6 +131,8 @@ namespace IS_XNA_Shooter
             else
                 spriteBatch.Draw(texture, position,
                        null, Color.White, rotation, base.drawPoint, (float)(Program.scale * scale), SpriteEffects.None, 0);
-        }
-    }
+        */
+        } // Draw
+
+    } // class BackgroundLayerB
 }

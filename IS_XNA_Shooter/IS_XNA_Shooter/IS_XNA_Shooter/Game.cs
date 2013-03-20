@@ -161,7 +161,8 @@ namespace IS_XNA_Shooter
 
             // All the enemies and the shots must be erased:
             for (int i = 0; i < enemies.Count(); i++)
-                enemies[i].Kill();
+                if (enemies[i].IsActive())
+                    enemies[i].Kill();
             shots.Clear();
 
             if (player.GetLife() == 0)

@@ -52,7 +52,7 @@ namespace IS_XNA_Shooter
         /// <summary>
         /// Shot power
         /// </summary>
-        private int shotPower = 1;
+        private int shotPower = 1000;
         
         /// <summary>
         /// Enemy's shot, in this case a laser
@@ -148,16 +148,19 @@ namespace IS_XNA_Shooter
                     setAnim(0);
                     timeToShot = 3.0f;
                     shooting = !shooting;
+                    if (shooting)
+                        LaserShot();
                 }
             }
 
             if (shooting)// shots
             {
                 shot.Update(deltaTime);
+                //shot-player colisions
 
-                if (ship.collider.CollisionTwoPoints(p1, p3))///shot-player colisions
+                if (ship.collider.CollisionTwoPoints(p1, p3))
                 {
-                    // the player is hitted
+                    // the player is hitted:
                     ship.Damage(shot.GetPower());
 
                     // the shot must be erased only if it hasn't provoked the

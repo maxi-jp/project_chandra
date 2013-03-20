@@ -52,7 +52,7 @@ namespace IS_XNA_Shooter
         /// <summary>
         /// Shot power
         /// </summary>
-        private int shotPower = 1;
+        private int shotPower = 1000;
         
         /// <summary>
         /// Enemy's shot, in this case a laser
@@ -211,7 +211,7 @@ namespace IS_XNA_Shooter
                 shot.Update(deltaTime);
                 //shot-player colisions
                 
-                if (ship.collider.CollisionTwoPoints(position,new Vector2(0,position.Y)))
+                if (ship.collider.CollisionTwoPoints(shot.collider.points[0], shot.collider.points[1]))
                 {
                     // the player is hitted:
                     ship.Damage(shot.GetPower());

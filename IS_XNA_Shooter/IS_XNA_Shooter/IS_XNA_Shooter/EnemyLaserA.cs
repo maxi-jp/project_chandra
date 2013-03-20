@@ -60,6 +60,16 @@ namespace IS_XNA_Shooter
         private Shot shot;
 
         /// <summary>
+        /// Time to set the shot
+        /// </summary>
+        private float shootingCont = 0.1f;
+
+        /// <summary>
+        /// To set shootingCont only once
+        /// </summary>
+        private Boolean shootingContSet = false;
+
+        /// <summary>
         /// EnemyLaserA's constructor
         /// </summary>
         /// <param name="camera">The camera of the game</param>
@@ -129,6 +139,7 @@ namespace IS_XNA_Shooter
                 if (shooting)//It shoots if it has to
                 {
                     if (currentAnim != 2) setAnim(2);
+
                     LaserShot();
                     shot.Update(deltaTime);
 
@@ -149,7 +160,14 @@ namespace IS_XNA_Shooter
                     timeToShot = 3.0f;
                     shooting = !shooting;
                     if (shooting)
+                    {
+                        if (!shootingContSet)
+                        {
+                            shootingContSet = true;
+                            shootingCont = 0.1f;
+                        }
                         LaserShot();
+                    }
                 }
             }
 
@@ -157,18 +175,20 @@ namespace IS_XNA_Shooter
             {
                 shot.Update(deltaTime);
                 //shot-player colisions
+                if (shootingCont >= 0)
+                    shootingCont -= deltaTime;
+                else
+                    if (ship.collider.CollisionTwoPoints(p1, p3))
+                    {
+                        // the player is hitted:
+                        ship.Damage(shot.GetPower());
 
-                if (ship.collider.CollisionTwoPoints(p1, p3))
-                {
-                    // the player is hitted:
-                    ship.Damage(shot.GetPower());
-
-                    // the shot must be erased only if it hasn't provoked the
-                    // player ship death, otherwise the shot will had be removed
-                    // before from the game in: Game.PlayerDead() -> Enemy.Kill()
-                    /*if (ship.GetLife() > 0)
-                        shots.RemoveAt(i);*/
-                }
+                        // the shot must be erased only if it hasn't provoked the
+                        // player ship death, otherwise the shot will had be removed
+                        // before from the game in: Game.PlayerDead() -> Enemy.Kill()
+                        /*if (ship.GetLife() > 0)
+                            shots.RemoveAt(i);*/
+                    }
             }
 
         } // Update

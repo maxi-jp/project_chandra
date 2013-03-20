@@ -109,7 +109,7 @@ namespace IS_XNA_Shooter
             // EnemyWeak:
             if (ControlMng.f1Preshed)
             {
-                enemy = new EnemyWeak(camera, this, new Vector2(20, 20), 0, GRMng.frameWidthEW1,
+                enemy = new EnemyWeakA(camera, this, new Vector2(20, 20), 0, GRMng.frameWidthEW1,
                     GRMng.frameHeightEW1, GRMng.numAnimsEW1, GRMng.frameCountEW1, GRMng.loopingEW1,
                     SuperGame.frameTime12, GRMng.textureEW1, 0, 100, 100, 1, ship);
                 enemies.Add(enemy);
@@ -118,7 +118,7 @@ namespace IS_XNA_Shooter
             // EnemyWeakShot:
             if (ControlMng.f2Preshed)
             {
-                enemy = new EnemyWeakShot(camera, this, new Vector2(20, 20), 0, GRMng.frameWidthEW2,
+                enemy = new EnemyWeakShotA(camera, this, new Vector2(20, 20), 0, GRMng.frameWidthEW2,
                     GRMng.frameHeightEW2, GRMng.numAnimsEW2, GRMng.frameCountEW2, GRMng.loopingEW2,
                     SuperGame.frameTime12, GRMng.textureEW2, 0, 100, 100, 1, ship);
                 enemies.Add(enemy);
@@ -136,7 +136,7 @@ namespace IS_XNA_Shooter
             // EnemyMineShot
             if (ControlMng.f4Preshed)
             {
-                enemy = new EnemyMineShot(camera, this, new Vector2(60, 60), 0, GRMng.frameWidthEMS,
+                enemy = new EnemyMineShotA(camera, this, new Vector2(60, 60), 0, GRMng.frameWidthEMS,
                     GRMng.frameHeightEMS, GRMng.numAnimsEMS, GRMng.frameCountEMS, GRMng.loopingEMS,
                     SuperGame.frameTime12, GRMng.textureEMS, 0, 20, 100, 1, ship);
                 enemies.Add(enemy);
@@ -154,7 +154,7 @@ namespace IS_XNA_Shooter
             // EnemyScared
             if (ControlMng.f6Preshed)
             {
-                enemy = new EnemyScared(camera, this, new Vector2(60, 60), 0, GRMng.frameWidthES,
+                enemy = new EnemyScaredA(camera, this, new Vector2(60, 60), 0, GRMng.frameWidthES,
                     GRMng.frameHeightES, GRMng.numAnimsES, GRMng.frameCountES, GRMng.loopingES,
                     SuperGame.frameTime12, GRMng.textureES, 0, 200, 100, 1, ship);
                 enemies.Add(enemy);

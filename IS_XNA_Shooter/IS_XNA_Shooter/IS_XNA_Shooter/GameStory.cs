@@ -17,7 +17,7 @@ namespace IS_XNA_Shooter
 
         // private List<List<Rectangle>> crashList;  //objetos de colisión en el parallax donde se juega
         private playState currentState;
-        private List<Collider> colliderList; //lista de colliders para crashlist
+        private List<List<Rectangle>> listRectCollider; //lista de colliders para crashlist
         private BackgroundGameB backGroundB; //Fondo con los parallax
         private BackgroundGameA backGroundA;
         private Texture2D textureAim;
@@ -75,26 +75,55 @@ namespace IS_XNA_Shooter
         /// </summary>
         private void setTimeToResume()
         {
-            if (currentConver < gameDialog.Count && currentParagraph < gameDialog[currentConver].Count)
+            if (currentConver < gameDialog.Count && currentParagraph < gameDialog[currentConver].Count) //if not out of range
             timeToResumeAux= gameDialog[currentConver][currentParagraph].whatSaid.Length * 0.07f;
         }
 
         private void initLevelB(int numLevel)
         {
             currentState = playState.levelDialog;
-            colliderList = new List<Collider>();
-            level = new LevelB(camera, numLevel);
+
+            listRectCollider = new List<List<Rectangle>>();
+
+            hub = new IngameHubA(GRMng.hubBase, mainGame.player.GetLife());
+            level = new LevelB(camera, numLevel, enemies, listRectCollider);
+            //rectangleMap = (LevelB)level.GetLevelMap();
+            backGroundB = new BackgroundGameB(level);
+
+            camera.setLevel(level);
+
+            Vector2[] points = new Vector2[8];
+            points[0] = new Vector2(15, 35);
+            points[1] = new Vector2(26, 33);
+            points[2] = new Vector2(34, 15);
+            points[3] = new Vector2(65, 30);
+            points[4] = new Vector2(65, 50);
+            points[5] = new Vector2(34, 66);
+            points[6] = new Vector2(26, 47);
+            points[7] = new Vector2(15, 45);
+            ship = new ShipB(this, camera, level, Vector2.Zero, 0, points,
+                GRMng.frameWidthPA1, GRMng.frameHeightPA1, GRMng.numAnimsPA1, GRMng.frameCountPA1,
+                GRMng.loopingPA1, SuperGame.frameTime24, GRMng.texturePA1,
+                shipVelocity, shipLife, shots);
+
+            level.setShip(ship);
+
+            camera.setShip(ship);
+
+            /*listRectCollider = new List<List<Rectangle>>();
+            level = new LevelB(camera,numLevel,enemies,listRectCollider);
             enemies = ((LevelB)level).getEnemies();
             camera.setLevel(level);
             // crashList = ((LevelB)level).getRectangles();
             backGroundB = new BackgroundGameB(level);
             //backGroundA.Dispose();
             backGroundA = null;
+
             ship = new ShipB(this,camera, ((LevelB)level), new Vector2(150f,380f), 0, puntosColliderShip(), GRMng.frameWidthPA1,
                 GRMng.frameHeightPA1, GRMng.numAnimsPA1, GRMng.frameCountPA1, GRMng.loopingPA1, SuperGame.frameTime24,
                 GRMng.texturePA1, shipVelocity + 200, shipLife, shots);
             level.setShip(ship);
-            camera.setShip(ship);
+            camera.setShip(ship);*/
         }
 
         private void initLevelA(int numLevel, Texture2D textureAim)

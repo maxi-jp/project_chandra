@@ -14,7 +14,6 @@ Content\Graphics\redpixel.xnb
 Content\Graphics\Ships\sprites_enemy01_80x80.xnb
 Content\Graphics\Explosions\sprites_explosion100x100.xnb
 Content\Graphics\Menu\main.xnb
-Content\Graphics\Menu\history.xnb
 Content\Graphics\Menu\arcade.xnb
 Content\Graphics\Menu\configuration.xnb
 Content\Graphics\Menu\ingame.xnb
@@ -52,4 +51,16 @@ Content\Audio\FXEffects\tackled_1.xnb
 Content\Graphics\Images\Captain.xnb
 Content\Graphics\Images\Pilot.xnb
 Content\Graphics\Images\PilotCyborg.xnb
+Content\Graphics\Ships\enemyLaser.xnb
+Content\Graphics\Ships\Final Boss 1\finalBoss1Laser.xnb
+Content\Graphics\Ships\Final Boss 1\finalBossLaser.xnb
+Content\Graphics\Ships\Final Boss 1\heroe1.xnb
+Content\Graphics\Ships\Final Boss 1\shotTurret1.xnb
+Content\Graphics\Ships\Final Boss 1\turret2.xnb
+Content\Graphics\Splash\splash_start_1.xnb
+Content\Graphics\Splash\splash_start_2.xnb
+Content\Graphics\Menu\story.xnb
+Content\Graphics\Ships\Final Boss 1\shotFinalBoss1.xnb
+Content\Video\VideoIntroProjectChandra.xnb
 Content\Audio\Music\music_01.wma
+Content\Video\VideoIntroProjectChandra.wmv

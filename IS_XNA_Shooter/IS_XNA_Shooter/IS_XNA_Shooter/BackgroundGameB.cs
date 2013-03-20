@@ -20,7 +20,6 @@ namespace IS_XNA_Shooter
             //bgLayer2 = new BackgroundLayerB(true, middleScreenPos, 0, GRMng.textureBg02, -90f, true, 0.7f, false, null);
             //bgLayer3 = new BackgroundLayerB(true, middleScreenPos, 0, GRMng.textureBg03, -110f, true, 0.7f);
             //bgLayerC =new BackgroundLayerB(true, middleScreenPos, 0, GRMng.textureBgCol1,-200f,true,0.7f, true, ((LevelB)level).getRectangles());
-            
         }
 
         public void Update(float deltaTime)

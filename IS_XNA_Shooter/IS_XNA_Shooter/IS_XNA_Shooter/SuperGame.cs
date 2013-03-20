@@ -31,6 +31,8 @@ namespace IS_XNA_Shooter
         /// </summary>
         SpriteBatch spriteBatch;
 
+ 
+
         /// <summary>
         /// Game's states
         /// </summary>
@@ -403,7 +405,8 @@ namespace IS_XNA_Shooter
 
         /// <summary>
         /// This is called when the game should draw itself.
-        /// </summary>
+        /// </summary>fe
+        /// 
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
@@ -498,7 +501,7 @@ namespace IS_XNA_Shooter
             duration = 0;
 
             game = new GameStory(this, player,1, GRMng.textureAim,
-                /*ShipVelocity*/200f, /*ShipLife*/100000);
+                /*ShipVelocity*/200f, /*ShipLife*/100);
 
             //currentState = gameState.playing; // Change game's state to game mode
 
@@ -512,11 +515,12 @@ namespace IS_XNA_Shooter
         /// <summary>
         /// Create a new Survival
         /// </summary>
-        public void newSurvival()
+        /// <param name="lvl">The number of the level</param>
+        public void newSurvival(int lvl)
         {
             grManager.LoadContent(3);  // Load the gameA's level 1 resources
             audio.LoadContent(1);
-            LvlMng.LoadContent(0); // Load XML
+            LvlMng.LoadContent(lvl); // Load XML
 
 
             game = new GameA(this, player, 1, GRMng.textureAim, GRMng.textureCell,
@@ -524,62 +528,65 @@ namespace IS_XNA_Shooter
 
             currentState = gameState.playing; // Change game's state to game mode
 
-            LvlMng.UnloadContent(0);
+            LvlMng.UnloadContent(lvl);
             grManager.UnloadContent(1); /// Unload the menu's resources
         }
 
         /// <summary>
         /// Create a new Killer
         /// </summary>
-        public void newKiller()
+        /// <param name="lvl">The number of the level</param>
+        public void newKiller(int lvl)
         {
             grManager.LoadContent(3); // Load the gameB's level 1 resources
             audio.LoadContent(1);
-            LvlMng.LoadContent(0); // Load XML
+            LvlMng.LoadContent(lvl); // Load XML
 
             game = new GameA(this, player, 1, GRMng.textureAim, GRMng.textureCell,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
 
             currentState = gameState.playing; // Change game's state to game mode
 
-            LvlMng.UnloadContent(0);
+            LvlMng.UnloadContent(lvl);
             grManager.UnloadContent(1); // Unload the menu's resources
         }
 
         /// <summary>
         /// Create a new Defense
         /// </summary>
-        public void newDefense()
+        /// <param name="lvl">The number of the level</param>
+        public void newDefense(int lvl)
         {
             grManager.LoadContent(3); // Load the gameB's level 1 resources
             audio.LoadContent(1);
-            LvlMng.LoadContent(0);
+            LvlMng.LoadContent(lvl);
 
             game = new GameA(this, player, 1, GRMng.textureAim, GRMng.textureCell,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
 
             currentState = gameState.playing; // Change game's state to game mode
 
-            LvlMng.UnloadContent(0);
+            LvlMng.UnloadContent(lvl);
             grManager.UnloadContent(1); // Unload the menu's resources
         }
 
         /// <summary>
         /// Create a new Scroll
         /// </summary>
-        public void newScroll()
+        /// <param name="lvl">The number of the level</param>
+        public void newScroll(int lvl)
         {
             grManager.LoadContent(4); // Load the gameB's level 1 resources
             grManager.LoadContent(2); // cargamos los recursos del nivel 1 de GameA Pa que funcione
             audio.LoadContent(1);
-            LvlMng.LoadContent(1); // Load the rectangles
+            LvlMng.LoadContent(lvl); // Load the rectangles
 
             game = new GameB(this, player, 1, GRMng.textureAim,
                 /*ShipVelocity*/200f + 200, /*ShipLife*/100);
 
             currentState = gameState.playing; // Change game's state to game mode
 
-            LvlMng.UnloadContent(1);
+            LvlMng.UnloadContent(lvl);
             grManager.UnloadContent(1); // Unload the menu's resources
             //grManager.UnloadContent(3); // descargamos los recursos del menú
         }

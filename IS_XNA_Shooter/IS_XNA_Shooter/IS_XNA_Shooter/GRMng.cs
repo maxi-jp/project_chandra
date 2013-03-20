@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Media;
 
 namespace IS_XNA_Shooter
 {
@@ -244,6 +245,10 @@ namespace IS_XNA_Shooter
         public static Texture2D gameOverSplash;
         #endregion
 
+        #region VIDEO
+        public static Video videoIntroStory;
+        #endregion
+
         public GRMng(ContentManager content)
         {
             this.content = content;
@@ -312,6 +317,8 @@ namespace IS_XNA_Shooter
 
                 case 4: // GameB nivel 1
                     LoadIngameMenu();
+
+                    videoIntroStory = content.Load<Video>("Video/VideoIntroProjectChandra");
 
                     hubBase = content.Load<Texture2D>("Graphics/Hub/base256");
 

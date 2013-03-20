@@ -151,13 +151,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Graphics\Menu\history.png">
-      <Name>history</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Graphics\Menu\arcade.png">
       <Name>arcade</Name>
       <Importer>TextureImporter</Importer>
@@ -426,6 +419,20 @@
   <ItemGroup>
     <Compile Include="Graphics\Menu\story.png">
       <Name>story</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Video\VideoIntroProjectChandra.wmv">
+      <Name>VideoIntroProjectChandra</Name>
+      <Importer>WmvImporter</Importer>
+      <Processor>VideoProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Graphics\Ships\Final Boss 1\shotFinalBoss1.png">
+      <Name>shotFinalBoss1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

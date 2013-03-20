@@ -40,8 +40,16 @@ namespace IS_XNA_Shooter
             mainMenu,
             playing,
             pause,
-            gameOver
+            gameOver,
+            playingVideo
         };
+
+        /// <summary>
+        /// Video introduction mode story
+        /// </summary>
+        public VideoPlayer videoPlayer;
+
+        public float duration;
 
         /// <summary>
         /// Game's current state
@@ -382,6 +390,12 @@ namespace IS_XNA_Shooter
                         menuGameOver.Unclick(Mouse.GetState().X, Mouse.GetState().Y);
 
                     break;
+
+                case gameState.playingVideo:
+                    duration += deltaTime;
+                    if (duration > GRMng.videoIntroStory.Duration.Seconds || Mouse.GetState().LeftButton == ButtonState.Pressed)
+                        currentState = gameState.playing;
+                    break;
             }
 
             base.Update(gameTime);
@@ -424,6 +438,10 @@ namespace IS_XNA_Shooter
                 case gameState.gameOver:
                     menuGameOver.Draw(spriteBatch);
                     break;
+
+                case gameState.playingVideo:
+                    spriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0, screenWidth, screenHeight), Color.White);
+                    break;
             }
 
             // fps:
@@ -465,18 +483,28 @@ namespace IS_XNA_Shooter
         /// </summary>
         public void NewStory()
         {
+
             grManager.LoadContent(4); // Load the gameB's level 1 resources
             grManager.LoadContent(3); // Load the gameA's level 1 resources
             audio.LoadContent(1);
             LvlMng.LoadContent(1); // Load the rectangles
             LvlMng.LoadContent(0); // Load the levelA's enemies
 
+            //include video
+            videoPlayer = new VideoPlayer();
+            videoPlayer.Play(GRMng.videoIntroStory);
+            currentState = gameState.playingVideo;
+
+            duration = 0;
+
             game = new GameB(this, player, 1, GRMng.textureAim,
                 /*ShipVelocity*/200f, /*ShipLife*/100000);
 
-            currentState = gameState.playing; // Change game's state to game mode
+            //currentState = gameState.playing; // Change game's state to game mode
 
             grManager.UnloadContent(1); // Unload the menu's resources
+
+
         }
 
         /// <summary>

@@ -35,7 +35,7 @@ namespace IS_XNA_Shooter
 
             hub = new IngameHubA(GRMng.hubBase, mainGame.player.GetLife());
             level = new LevelB(camera, numLevel, enemies, listRectCollider);
-            rectangleMap = (LevelB)level.GetLevelMap();
+            //rectangleMap = (LevelB)level.GetLevelMap();
             backGround = new BackgroundGameB(level);
 
             camera.setLevel(level);
@@ -105,10 +105,10 @@ namespace IS_XNA_Shooter
         {
             backGround.Draw(spriteBatch);
 
-            for (int i = 0; i < listRectCollider[rectangleMap[0]].Count; i++)
+            /*for (int i = 0; i < listRectCollider[rectangleMap[0]].Count; i++)
             {
                 spriteBatch.Draw(GRMng.redpixel, listRectCollider[rectangleMap[0]][i], new Color(128, 128, 128, 128));
-            }
+            }*/
 
             base.Draw(spriteBatch); // Ship, enemies, shots
 

@@ -224,6 +224,11 @@ namespace IS_XNA_Shooter
         public static short frameWidthEx1 = 100;
         public static short frameHeightEx1 = 100;
         public static short frameCountEx1 = 8;
+
+        /* ------------------- CHARACTERS ------------------- */
+        public static Texture2D textureCaptain;
+        public static Texture2D texturePilot;
+        public static Texture2D texturePilotCyborg;
         #endregion
 
         #region HUBS
@@ -288,6 +293,7 @@ namespace IS_XNA_Shooter
                     LoadIngameMenu();
 
                     hubBase = content.Load<Texture2D>("Graphics/Hub/base256");
+                    
 
                     texturePA1 = content.Load<Texture2D>("Graphics/Ships/sprites80x80");
                     textureAim = content.Load<Texture2D>("Graphics/aimpoint");
@@ -340,6 +346,9 @@ namespace IS_XNA_Shooter
                     textureEL = content.Load<Texture2D>("Graphics/Ships/enemyLaser");
                     textureELBullet = content.Load<Texture2D>("Graphics/yellowpixel");
                     textureRed = content.Load<Texture2D>("Graphics/Rojazo");
+                    textureCaptain = content.Load<Texture2D>("Graphics/Images/Captain");
+                    texturePilot = content.Load<Texture2D>("Graphics/Images/Pilot");
+                    texturePilotCyborg = content.Load<Texture2D>("Graphics/Images/PilotCyborg");
 
                     textureBgB00 = content.Load<Texture2D>("Graphics/Backgrounds/bgB00");
                     textureBgGame1A = content.Load<Texture2D>("Graphics/Backgrounds/backgroundTile1");
@@ -447,6 +456,9 @@ namespace IS_XNA_Shooter
 
                     textureRed = null;
                     textureBgB00 = null;
+                    textureCaptain = null;
+                    texturePilot = null;
+                    texturePilotCyborg = null;
                     textureBgGame1A = null;
                     textureBg00 = null;
                     textureBg01 = null;

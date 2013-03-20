@@ -183,5 +183,6 @@ namespace IS_XNA_Shooter
 
         } // TestEnemies
 
+
     } // class LevelA
 }

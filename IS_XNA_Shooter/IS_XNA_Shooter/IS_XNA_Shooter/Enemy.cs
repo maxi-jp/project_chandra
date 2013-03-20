@@ -112,7 +112,7 @@ namespace IS_XNA_Shooter
 
             if (DeadCondition())
                 erasable = true;
-
+            
             if (colisionable && collider != null)
                 collider.Update(position, rotation);
 
@@ -140,7 +140,7 @@ namespace IS_XNA_Shooter
         {
             base.Draw(spriteBatch);
 
-            if (SuperGame.debug && colisionable && collider != null)
+            if (SuperGame.debug && colisionable)
                 collider.Draw(spriteBatch);
         }
 

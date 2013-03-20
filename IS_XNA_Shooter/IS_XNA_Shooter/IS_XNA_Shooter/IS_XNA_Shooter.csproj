@@ -137,6 +137,7 @@
     <Compile Include="FinalBossHeroe1.cs" />
     <Compile Include="GameB.cs" />
     <Compile Include="GameScroll.cs" />
+    <Compile Include="GameStory.cs" />
     <Compile Include="GRMng.cs" />
     <Compile Include="IngameHub.cs" />
     <Compile Include="IngameHubA.cs" />

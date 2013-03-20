@@ -44,7 +44,7 @@ namespace IS_XNA_Shooter
                 ReadRectangles();
 
                 this.enemies = enemies;
-                LeerArchivoXML(1,1);
+                LeerArchivoXML(1,0);
 
                 //Enemigo
                /* Enemy e1 = new EnemyWeakB(camera, this, new Vector2(SuperGame.screenWidth + 100, 
@@ -92,7 +92,7 @@ namespace IS_XNA_Shooter
         public override void Update(float deltaTime)
         {
 
-            /*int i=0; // iterator for the list of enemies
+            int i=0; // iterator for the list of enemies
             bool stillAlive = false; // is true if there is any enemie alive
             //the next loop searches an enemy alive for controlling the end of level 
             if (!levelFinished)
@@ -107,7 +107,7 @@ namespace IS_XNA_Shooter
                 }
                 if (!stillAlive)
                     levelFinished = true;
-            }*/
+            }
         } // Update
 
         public override void Draw(SpriteBatch spriteBatch)

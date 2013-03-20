@@ -302,5 +302,10 @@ namespace IS_XNA_Shooter
             SetTransparency(transparency);
         }
 
+        public void EraseShots()
+        {
+            shots.Clear();
+        }
+
     } // class Ship
 }

@@ -48,13 +48,25 @@ namespace IS_XNA_Shooter
 
             try
             {
+                
+
+
                 //  Leer los datos del archivo
                 String enemyType;
                 float positionX;
                 float positionY;
                 float time;
-                XmlDocument lvl = XMLLvlMng.lvl;
-              
+                XmlDocument lvl=null;
+                switch (modoDeJuego)
+                {
+                    case 0: // game mode A
+                        lvl = XMLLvlMng.lvl1A;
+                        break;
+                    case 1: // game mode B
+                        lvl = XMLLvlMng.lvl1B;
+                        break;
+                
+                }
                 XmlNodeList level = lvl.GetElementsByTagName("level");
 
                 XmlNodeList lista =
@@ -126,7 +138,7 @@ namespace IS_XNA_Shooter
                     enemies.Add(enemy); 
                     
                 }
-
+            
             }
             catch (Exception e)
             {/*
@@ -155,5 +167,6 @@ namespace IS_XNA_Shooter
         }
 
         public XMLLvlMng LvlMng { get; set; }
+
     } // class Level
 }

@@ -70,5 +70,11 @@ namespace IS_XNA_Shooter
             return active;
         }
 
+
+        public void SetActive(bool b) 
+        {
+            active = b;
+        }
+
     } // class Shoot
 }

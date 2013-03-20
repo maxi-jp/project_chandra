@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace IS_XNA_Shooter
 {
     class BackgroundGameB
-    {
+    { 
         private BackgroundLayerB bgLayer0, bgLayer1, bgLayer2, bgLayer3, bgLayerC;
         private int[] rectangleMap;
 
@@ -25,7 +25,7 @@ namespace IS_XNA_Shooter
             textures0.Add(GRMng.textureBgB00);
             bgLayer0 = new BackgroundLayerB(textureIndex, textures0, 20f, true, 1.4f, false);
 
-            //bgLayer1 = new BackgroundLayerB(true, middleScreenPos, 0, GRMng.textureBg01, -70f, true, 1);
+            //bgLayer1 = new BackgroundLayerB(true, middleScreenPos, 0,  GRMng.textureBg01, -70f, true, 1);
             //bgLayer2 = new BackgroundLayerB(true, middleScreenPos, 0, GRMng.textureBg02, -90f, true, 0.7f, false, null);
             //bgLayer3 = new BackgroundLayerB(true, middleScreenPos, 0, GRMng.textureBg03, -110f, true, 0.7f);
             

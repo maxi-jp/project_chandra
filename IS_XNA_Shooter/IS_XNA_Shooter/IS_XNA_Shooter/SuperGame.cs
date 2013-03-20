@@ -406,7 +406,8 @@ namespace IS_XNA_Shooter
 
         /// <summary>
         /// This is called when the game should draw itself.
-        /// </summary>
+        /// </summary>fe
+        /// 
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
@@ -500,7 +501,7 @@ namespace IS_XNA_Shooter
 
             duration = 0;
 
-            game = new GameB(this, player, 1, GRMng.textureAim,
+            game = new GameStory(this, player,1, GRMng.textureAim,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
 
             //currentState = gameState.playing; // Change game's state to game mode
@@ -508,6 +509,8 @@ namespace IS_XNA_Shooter
             grManager.UnloadContent(1); // Unload the menu's resources
 
 
+            //grManager.UnloadContent(2); 
+            //grManager.UnloadContent(3); // descargamos los recursos del menú
         }
 
         /// <summary>
@@ -519,6 +522,7 @@ namespace IS_XNA_Shooter
             grManager.LoadContent(3);  // Load the gameA's level 1 resources
             audio.LoadContent(1);
             LvlMng.LoadContent(lvl); // Load XML
+
 
             game = new GameA(this, player, 1, GRMng.textureAim, GRMng.textureCell,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
@@ -574,6 +578,7 @@ namespace IS_XNA_Shooter
         public void newScroll(int lvl)
         {
             grManager.LoadContent(4); // Load the gameB's level 1 resources
+            grManager.LoadContent(2); // cargamos los recursos del nivel 1 de GameA Pa que funcione
             audio.LoadContent(1);
             LvlMng.LoadContent(lvl); // Load the rectangles
 
@@ -584,6 +589,7 @@ namespace IS_XNA_Shooter
 
             LvlMng.UnloadContent(lvl);
             grManager.UnloadContent(1); // Unload the menu's resources
+            //grManager.UnloadContent(3); // descargamos los recursos del menú
         }
 
         /// <summary>

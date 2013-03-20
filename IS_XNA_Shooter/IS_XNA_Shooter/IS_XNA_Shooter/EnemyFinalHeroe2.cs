@@ -19,10 +19,10 @@ namespace IS_XNA_Shooter
         private Vector2 p1, p2;
         private Vector2 p1Orig, p2Orig;
 
-        private float shotVelocity = 80f;
+        private float shotVelocity = 100f;
         private float timeToShot = 3.0f;
         private float timeShoting = 0.5f;
-        private int shotPower = 1;
+        private int shotPower = 100;
         private Shot shot;
 
         /* ------------------- CONSTRUCTORS ------------------- */
@@ -72,6 +72,18 @@ namespace IS_XNA_Shooter
                         LaserShot();
                         shot.Update(deltaTime);
                         timeShoting -= deltaTime;
+                        if (ship.collider.CollisionTwoPoints(new Vector2(position.X, position.Y),new Vector2(position.X - 1040, position.Y) ))
+                        {
+                            // the player is hitted:
+                            ship.Damage(shotPower);
+
+                            // the shot must be erased only if it hasn't provoked the
+                            // player ship death, otherwise the shot will had be removed
+                            // before from the game in: Game.PlayerDead() -> Enemy.Kill()
+                            /*if (ship.GetLife() > 0)
+                                shots.RemoveAt(i);*/
+                        }
+                
 
                     }
                     else
@@ -132,6 +144,8 @@ namespace IS_XNA_Shooter
             shot = new Shot(camera, level, positionShot, 0, GRMng.frameWidthELBulletHeroe, GRMng.frameHeightELBulletHeroe,
                 GRMng.numAnimsELBulletHeroe, GRMng.frameCountELBulletHeroe, GRMng.loopingELBulletHeroe, SuperGame.frameTime8,
                 GRMng.textureELBulletHeroe, SuperGame.shootType.normal, shotVelocity, shotPower);
+
+
             setAnim(0);
             //   shot.rotation = rotation;
 

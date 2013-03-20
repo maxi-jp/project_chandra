@@ -47,7 +47,8 @@ namespace IS_XNA_Shooter
         /// </summary>
         private List<Shot> shots;
         private List<Enemy> enemies;
-        private float seconds;
+        private float secondsBot;
+        private float secondsHeroe;
         private bool movingToCenter;
         private bool movingToBack;
 
@@ -84,7 +85,7 @@ namespace IS_XNA_Shooter
         public FinalBoss1(Camera camera, Level level,Vector2 position, List <Enemy> enemies)
             : base (camera, level, position, (float)Math.PI, GRMng.frameWidthFinalBoss1, GRMng.frameHeightFinalBoss1, 
                 GRMng.numAnimsFinalBoss1, GRMng.frameCountFinalBoss1, GRMng.loopingFinalBoss1, SuperGame.frameTime12,
-                GRMng.textureFinalBoss1, 0, 40, 5000, 1, null)
+                GRMng.textureFinalBoss1, 0, 40, 40000, 1, null)
         {
             //collider points
             colliderPoints();
@@ -95,15 +96,16 @@ namespace IS_XNA_Shooter
             movingToBack = true;
             singletonEnemyHeroe = true;
             singletonLaserVelocityBoss = true;
-            seconds = 500;
+            secondsBot = 500;
+            secondsHeroe = 500;
             
             //Front shot
-            timeToShotFront = 0.5f;
+            timeToShotFront = 1f;
             shotFrontPower = 200;
             shotFrontVelocity = 500f;
 
             //Wing shots
-            timeToShotWings = 0.5f;
+            timeToShotWings = 1f;
             shotWingsPower = 200;
             shotWingsVelocity = 500f;
 
@@ -202,7 +204,7 @@ namespace IS_XNA_Shooter
                 ShotWings();
             timeToShotWingsAux -= deltaTime;
 
-            if (life < 4900) 
+            if (life < 39000) 
                 phase = 2;
         }
 
@@ -223,7 +225,7 @@ namespace IS_XNA_Shooter
             if (timeToShotFrontAux <= 0)
             {
                 ShotFront();
-                timeToShotFrontAux = 0.35f;
+                //timeToShotFrontAux = 0.35f;
             }
             timeToShotFrontAux -= deltaTime;
 
@@ -231,12 +233,12 @@ namespace IS_XNA_Shooter
             if (timeToShotWingsAux <= 0)
             {
                 ShotWings();
-                timeToShotWingsAux = 0.35f;
+               // timeToShotWingsAux = 0.35f;
             }
             timeToShotWingsAux -= deltaTime;
 
-            seconds +=  deltaTime;
-            if (seconds > 500)
+            secondsBot +=  deltaTime;
+            if (secondsBot > 7)
             {
                 Vector2 positionEnemy = new Vector2(position.X , position.Y  + this.frameHeight / 2); ///(470, 100);
                 Enemy e = new BotFinalBoss(camera, level, positionEnemy, (float)Math.PI, GRMng.frameWidthBFB, GRMng.frameHeightBFB,
@@ -262,10 +264,10 @@ namespace IS_XNA_Shooter
                 e3.SetActive();
                 enemies.Add(e3);
 
-                seconds = 0;
+                secondsBot = 0;
             }
 
-            if (life < 1000) phase = 3;
+            if (life < 38000) phase = 3;
         }
 
 
@@ -291,7 +293,7 @@ namespace IS_XNA_Shooter
             if (timeToShotFrontAux <= 0)
             {
                 ShotFront();
-                timeToShotFrontAux = 0.35f;
+                timeToShotFrontAux = 1f;
             }
             timeToShotFrontAux -= deltaTime;
 
@@ -299,12 +301,12 @@ namespace IS_XNA_Shooter
             if (timeToShotWingsAux <= 0)
             {
                 ShotWings();
-                timeToShotWingsAux = 0.35f;
+                timeToShotWingsAux = 1f;
             }
             timeToShotWingsAux -= deltaTime;
 
-            seconds += deltaTime;
-            if (seconds > 5)
+            secondsBot += deltaTime;
+            if (secondsBot > 10)
             {
                 Vector2 positionEnemy = new Vector2(position.X, position.Y + this.frameHeight / 2); ///(470, 100);
                 Enemy e = new BotFinalBoss(camera, level, positionEnemy, (float)Math.PI, GRMng.frameWidthBFB, GRMng.frameHeightBFB,
@@ -330,36 +332,37 @@ namespace IS_XNA_Shooter
                 e3.SetActive();
                 enemies.Add(e3);
 
-                seconds = 0;
+                secondsBot = 0;
             }
 
-            if (singletonEnemyHeroe)
+            secondsHeroe += deltaTime;
+            if (secondsHeroe > 12)
             {
                 Vector2 positionEnemy4 = new Vector2(position.X, position.Y + this.frameHeight / 2);
                 Enemy e4 = new EnemyFinalHeroe2(camera, level, positionEnemy4, (float)Math.PI, GRMng.frameWidthHeroe1, GRMng.frameHeightHeroe1,
-                    GRMng.numAnimsHeroe1, GRMng.frameCountHeroe1, GRMng.loopingHeroe1, SuperGame.frameTime12, GRMng.textureHeroe1, 0, 150, 100, 1, ship, true);
+                    GRMng.numAnimsHeroe1, GRMng.frameCountHeroe1, GRMng.loopingHeroe1, SuperGame.frameTime12, GRMng.textureHeroe1, 0, 400, 100, 1, ship, true);
                 e4.SetActive();
                 enemies.Add(e4);
 
                 Vector2 positionEnemy5 = new Vector2(position.X, position.Y + this.frameHeight / 2);
                 Enemy e5 = new EnemyFinalHeroe2(camera, level, positionEnemy5, (float)Math.PI, GRMng.frameWidthHeroe1, GRMng.frameHeightHeroe1,
-                    GRMng.numAnimsHeroe1, GRMng.frameCountHeroe1, GRMng.loopingHeroe1, SuperGame.frameTime12, GRMng.textureHeroe1, 0, 150, 100, 1, ship, false);
+                    GRMng.numAnimsHeroe1, GRMng.frameCountHeroe1, GRMng.loopingHeroe1, SuperGame.frameTime12, GRMng.textureHeroe1, 0, 400, 100, 1, ship, false);
                 e5.SetActive();
                 enemies.Add(e5);
 
                 Vector2 positionEnemy6 = new Vector2(position.X, position.Y - this.frameHeight / 2);
                 Enemy e6 = new EnemyFinalHeroe2(camera, level, positionEnemy6, (float)Math.PI, GRMng.frameWidthHeroe1, GRMng.frameHeightHeroe1,
-                    GRMng.numAnimsHeroe1, GRMng.frameCountHeroe1, GRMng.loopingHeroe1, SuperGame.frameTime12, GRMng.textureHeroe1, 0, 150, 100, 1, ship, false);
+                    GRMng.numAnimsHeroe1, GRMng.frameCountHeroe1, GRMng.loopingHeroe1, SuperGame.frameTime12, GRMng.textureHeroe1, 0, 400, 100, 1, ship, false);
                 e6.SetActive();
                 enemies.Add(e6);
 
                 Vector2 positionEnemy7 = new Vector2(position.X, position.Y - this.frameHeight / 2);
                 Enemy e7 = new EnemyFinalHeroe2(camera, level, positionEnemy7, (float)Math.PI, GRMng.frameWidthHeroe1, GRMng.frameHeightHeroe1,
-                    GRMng.numAnimsHeroe1, GRMng.frameCountHeroe1, GRMng.loopingHeroe1, SuperGame.frameTime12, GRMng.textureHeroe1, 0, 150, 100, 1, ship, true);
+                    GRMng.numAnimsHeroe1, GRMng.frameCountHeroe1, GRMng.loopingHeroe1, SuperGame.frameTime12, GRMng.textureHeroe1, 0, 400, 100, 1, ship, true);
                 e7.SetActive();
                 enemies.Add(e7);
 
-                singletonEnemyHeroe = false;
+                secondsHeroe = 0;
              }
 
 

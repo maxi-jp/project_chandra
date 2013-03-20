@@ -107,7 +107,7 @@ namespace IS_XNA_Shooter
                             GRMng.frameWidthEW1, GRMng.frameHeightEW1, GRMng.numAnimsEW1, GRMng.frameCountEW1,
                             GRMng.loopingEW1, SuperGame.frameTime12, GRMng.textureEW1, time, 100, 100,
                             1, null);
-                    enemies.Add(enemy);
+                    enemies.Add(enemy); 
                     
                 }
 

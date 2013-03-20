@@ -158,7 +158,7 @@
 				<enemy type="enemyLaserA" positionX="100" positionY="500" time="98"></enemy>
 				<enemy type="enemyMineShot" positionX="1100" positionY="300" time="98"></enemy>
 				<enemy type="enemyWeakShot" positionX="1100" positionY="500" time="98"></enemy>
-				<enemy type="enemyWeak" positionX="1100" positionY="50" time="98"></enemy>
+				<enemy type="enemyWeak" positionX="1100" positionY="50" time="98"></enemy> 
 				
 				
 	</enemiesList>

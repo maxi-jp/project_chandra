@@ -30,7 +30,7 @@ namespace IS_XNA_Shooter
         private Rectangle rect;
         
         /// <summary>
-        /// Laser's actual points
+        /// Laser's actual points 
         /// </summary>
         private Vector2 p1, p2, p3;
         

@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace IS_XNA_Shooter
 {
-    // clase para manejar el menú principal del juego
+    // clase para manejar el menú de game over del juego
     public class MenuGameOver
     {
         /* ------------------- ATTRIBUTES ------------------- */
@@ -26,7 +26,7 @@ namespace IS_XNA_Shooter
             this.mainGame = mainGame;
 
             horizontalSep = 48;
-            mainMenuPosition = new Vector2(SuperGame.screenWidth, SuperGame.screenHeight - 100);
+            mainMenuPosition = new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight - 100);
 
             splash = GRMng.gameOverSplash;
 
@@ -43,8 +43,8 @@ namespace IS_XNA_Shooter
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(GRMng.gameOverSplash, Vector2.Zero, Color.White);
-            //itemMainMenu.Draw(spriteBatch);
+            spriteBatch.Draw(splash, Vector2.Zero, Color.White);
+            itemMainMenu.Draw(spriteBatch);
         }
 
         // comprueba si se ha seleccionas alguna opcion

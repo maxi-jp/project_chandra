@@ -6,24 +6,78 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 namespace IS_XNA_Shooter
 {
-    //Class for the enemy that shoots one laser
+    /// <summary>
+    /// Class for the enemy that shoots one laser in GameA
+    /// </summary>
     class EnemyLaserA : Enemy
     {
-        /* ------------------- ATTRIBUTES ------------------- */
-        private Boolean shooting = true;
+        /// <summary>
+        /// Says if it has to shoot or not
+        /// </summary>
+        private Boolean shooting = false;
+        
+        /// <summary>
+        /// Rotatio Matrix for the laser's points
+        /// </summary>
         private Matrix rotationMatrix;
 
+        
         //For the Laser
+        
+        /// <summary>
+        /// Laser's rectanlge
+        /// </summary>
         private Rectangle rect;
+        
+        /// <summary>
+        /// Laser's actual points 
+        /// </summary>
         private Vector2 p1, p2, p3;
+        
+        /// <summary>
+        /// Laser's original points
+        /// </summary>
         private Vector2 p1Orig, p2Orig, p3Orig;
-
+        
+        /// <summary>
+        /// Shot velocity
+        /// </summary>
         private float shotVelocity = 80f;
+        
+        /// <summary>
+        /// Time between shots
+        /// </summary>
         private float timeToShot = 3.0f;
-        private int shotPower = 1;
+        
+        /// <summary>
+        /// Shot power
+        /// </summary>
+        private int shotPower = 1000;
+        
+        /// <summary>
+        /// Enemy's shot, in this case a laser
+        /// </summary>
         private Shot shot;
 
-        /* ------------------- CONSTRUCTORS ------------------- */
+        /// <summary>
+        /// EnemyLaserA's constructor
+        /// </summary>
+        /// <param name="camera">The camera of the game</param>
+        /// <param name="level">The level of the game</param>
+        /// <param name="position">The position of the enemy</param>
+        /// <param name="rotation">The rotation of the enemy</param>
+        /// <param name="frameWidth">The width of each frame of the enemy's animation</param>
+        /// <param name="frameHeight">The height of each frame of the enemy's animation </param>
+        /// <param name="numAnim">The number of the enemy's animations</param>
+        /// <param name="frameCount">The number of the frames in each animation's fil</param>
+        /// <param name="looping">Indicates if the animation has to loop</param>
+        /// <param name="frametime">Indicates how long the frame lasts</param>
+        /// <param name="texture">The texture of the enemy</param>
+        /// <param name="timeToSpawn">The time that the enemy has to wait for appear in the game</param>
+        /// <param name="velocity">The velocity of the enemy</param>
+        /// <param name="life">The life of the enemy</param>
+        /// <param name="value">The points you obtain if you kill it</param>
+        /// <param name="ship">The player's ship</param>
         public EnemyLaserA(Camera camera, Level level, Vector2 position, float rotation,
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
             float frametime, Texture2D texture, float timeToSpawn, float velocity, int life,
@@ -31,15 +85,17 @@ namespace IS_XNA_Shooter
             : base(camera, level, position, rotation, frameWidth, frameHeight, numAnim, frameCount,
                 looping, frametime, texture, timeToSpawn, 50, 100, value, ship)
         {
-            setAnim(3);
-
-            Vector2[] points = new Vector2[6];
-            points[0] = new Vector2(20, 20);
-            points[1] = new Vector2(40, 13);
-            points[2] = new Vector2(60, 20);
-            points[3] = new Vector2(60, 60);
-            points[4] = new Vector2(40, 65);
-            points[5] = new Vector2(20, 60);
+            setAnim(0);
+            frameTime = SuperGame.frameTime10;
+            Vector2[] points = new Vector2[8];
+            points[0] = new Vector2(14, 37.5f);
+            points[1] = new Vector2(19, 29);
+            points[2] = new Vector2(31, 19);
+            points[3] = new Vector2(44, 16);
+            points[4] = new Vector2(69, 37.5f);
+            points[5] = new Vector2(44, 59);
+            points[6] = new Vector2(31, 56);
+            points[7] = new Vector2(19, 46);
             collider = new Collider(camera, true, position, rotation, points, 40, frameWidth, frameHeight);
 
             //For the Laser
@@ -58,39 +114,50 @@ namespace IS_XNA_Shooter
 
         }
 
-        /* ------------------- METHODS ------------------- */
+        /// <summary>
+        /// Updates the logic of the enemy
+        /// </summary>
+        /// <param name="deltaTime">The time since the last update</param>
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
 
             if (life > 0)
             {
-                // it allways rotates
-                rotation += 0.4f * deltaTime;
-
                 timeToShot -= deltaTime;
-                if (timeToShot <= 0)
-                {
-                    timeToShot = 3.0f;
-                    shooting = !shooting;
-                    /*if (shooting)
-                        shots.Add(shot);
-                    else shots.Remove(shot);*/
-                }
 
-                //it shoots if it has to
-                if (shooting)
+                if (shooting)//It shoots if it has to
                 {
+                    if (currentAnim != 2) setAnim(2);
                     LaserShot();
                     shot.Update(deltaTime);
+
+                    rotation += 0.2f * deltaTime;//Rotates slowly
+
+                }
+                else if (timeToShot > 1)//Spin
+                    rotation += 0.45f * deltaTime;
+                else if (timeToShot > 0)//Prepare to shoot
+                {
+                    if (currentAnim != 1) setAnim(1);
+
+                    rotation += 0.2f * deltaTime;//Rotates slowly
+                }
+                if (timeToShot <= 0)
+                {
+                    setAnim(0);
+                    timeToShot = 3.0f;
+                    shooting = !shooting;
+                    if (shooting)
+                        LaserShot();
                 }
             }
 
-            // shots:
-            if (shooting)
+            if (shooting)// shots
             {
                 shot.Update(deltaTime);
                 //shot-player colisions
+
                 if (ship.collider.CollisionTwoPoints(p1, p3))
                 {
                     // the player is hitted:
@@ -106,6 +173,10 @@ namespace IS_XNA_Shooter
 
         } // Update
 
+        /// <summary>
+        /// Draws the enemy 
+        /// </summary>
+        /// <param name="spriteBatch">The screen's canvas</param>
         public override void Draw(SpriteBatch spriteBatch)
         {
             if (shooting)
@@ -114,11 +185,13 @@ namespace IS_XNA_Shooter
             base.Draw(spriteBatch);
         }
 
-        //The enemy Shoot a Laser, we calculate previously the rectangle of it
+        /// <summary>
+        /// Calculates the enemy's laser points and rectangle
+        /// </summary>
         private void LaserShot() 
-        { 
+        {
             //The calculation of the rectangle
-            rotationMatrix = Matrix.CreateRotationZ(rotation);
+            rotationMatrix = Matrix.CreateRotationZ(rotation); 
             int width = level.width + 200;
 
             p1 = Vector2.Transform(p1Orig, rotationMatrix);
@@ -138,15 +211,19 @@ namespace IS_XNA_Shooter
 
         }
 
+        /// <summary>
+        /// Causes damage to the enemy
+        /// </summary>
+        /// <param name="i">The amount of damage that the enemy receives</param>
         public override void Damage(int i)
         {
             base.Damage(i);
 
-            // if the enemy is dead, play the new animation and the death sound
-            if (life <= 0)
+
+            if (life <= 0)// if the enemy is dead, play the new animation and the death sound
             {
                 shooting = false;
-                setAnim(5, -1);
+                setAnim(3, -1);
                 Audio.PlayEffect("brokenBone02");
             }
         }

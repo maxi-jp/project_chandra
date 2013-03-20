@@ -20,30 +20,30 @@ namespace IS_XNA_Shooter
         //---------------------------
         //----    Constructor    ----
         //---------------------------
-        public GameScroll(SuperGame mainGame, int numLevel, Texture2D textureAim, float ShipVelocity, int ShipLife)
-            : base(mainGame,ShipVelocity,ShipLife)
+        public GameScroll(SuperGame mainGame, int numLevel, Texture2D textureAim, float ShipVelocity, int ShipLife, Player player)
+            : base(mainGame, player, ShipVelocity,ShipLife)
         {
             camera = new Camera();
             shots = new List<Shot>();
-            this.ShipVelocity = ShipVelocity;
+            this.shipVelocity = ShipVelocity;
             initLevelB(1);
         }
 
         private void initLevelB(int numLevel)
         {
-            hub = new IngameHubA(GRMng.hubLeft, GRMng.hubCenter, GRMng.hubRight, mainGame.player.GetLife());
+            hub = new IngameHubA(GRMng.hubBase, mainGame.player.GetLife());
             colliderList = new List<Collider>();
-            level = new LevelB(camera, numLevel);
+            level = new LevelB(camera, numLevel, enemies, null);
             enemies = ((LevelB)level).getEnemies();
             camera.setLevel(level);
             // crashList = ((LevelB)level).getRectangles();
             backGroundB = new BackgroundGameB(level);
 
-            Ship = new ShipB(camera, ((LevelB)level), Vector2.Zero, 0, puntosColliderShip(), GRMng.frameWidthPA2,
-                GRMng.frameHeightPA2, GRMng.numAnimsPA2, GRMng.frameCountPA2, GRMng.loopingPA2, SuperGame.frameTime24,
-                GRMng.texturePA2, ShipVelocity + 200, ShipLife, shots);
-            level.setShip(Ship);
-            camera.setShip(Ship);
+            ship = new ShipB(this, camera, ((LevelB)level), Vector2.Zero, 0, puntosColliderShip(), GRMng.frameWidthPA1,
+                GRMng.frameHeightPA1, GRMng.numAnimsPA1, GRMng.frameCountPA1, GRMng.loopingPA1, SuperGame.frameTime24,
+                GRMng.texturePA1, shipVelocity + 200, shipLife, shots);
+            level.setShip(ship);
+            camera.setShip(ship);
         }
 
 
@@ -72,7 +72,7 @@ namespace IS_XNA_Shooter
             {
                 spriteBatch.DrawString(SuperGame.fontDebug, "Camera=" + camera.position + ".",
                     new Vector2(5, 3), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-                spriteBatch.DrawString(SuperGame.fontDebug, "Player=" + Ship.position + ".",
+                spriteBatch.DrawString(SuperGame.fontDebug, "Player=" + ship.position + ".",
                     new Vector2(5, 15), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             }
         }

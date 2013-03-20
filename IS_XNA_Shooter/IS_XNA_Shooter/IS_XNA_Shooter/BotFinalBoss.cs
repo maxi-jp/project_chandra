@@ -35,6 +35,8 @@ namespace IS_XNA_Shooter
         /// </summary>
         private List<Shot> shots;
 
+        protected int life;
+
         // ---------------------------
         // -----     BUILDER     -----
         // ---------------------------
@@ -78,6 +80,8 @@ namespace IS_XNA_Shooter
             //Shots' list
             this.shots = shots;
 
+            //Collider points
+            colliderPoints();
        }
 
         // ------------------------------------
@@ -100,9 +104,9 @@ namespace IS_XNA_Shooter
 
             //Bot move
             if (down)
-                position.Y += deltaTime * velocity;
+                position.Y += deltaTime * velocity * 3;
             else
-                position.Y -= deltaTime * velocity;
+                position.Y -= deltaTime * velocity * 3;
             changeDirection();
 
             if (position.X < SuperGame.screenWidth/2) { position.X += deltaTime * velocity; }
@@ -187,10 +191,42 @@ namespace IS_XNA_Shooter
 
             timeToShotWingsAux = timeToShotWings;
         }
-    
 
+
+
+
+        private void colliderPoints()
+        {
+            Vector2[] points = new Vector2[8];
+            points[0] = new Vector2(4, 27);
+            points[1] = new Vector2(13, 13);
+            points[2] = new Vector2(27, 13);
+            points[3] = new Vector2(41, 25);
+            points[4] = new Vector2(53, 27);
+            points[5] = new Vector2(41, 29);
+            points[6] = new Vector2(27, 40);
+            points[7] = new Vector2(13, 40);        
+
+            float radius = (float)Math.Sqrt(frameWidth / 2 * frameWidth / 2 + frameHeight / 2 * frameHeight / 2);
+            collider = new Collider(camera, true, position, rotation, points, radius, frameWidth, frameHeight);
+        }
+
+        public override void Damage(int i)
+        {
+            life -= i;
+
+            if (life <= 0)
+            {
+                colisionable = false;
+                velocity = 0;
+                setAnim(1, -1);
+                Audio.PlayEffect("brokenBone02");
+            }
+        }
 
     }
+
+
 
 
 }

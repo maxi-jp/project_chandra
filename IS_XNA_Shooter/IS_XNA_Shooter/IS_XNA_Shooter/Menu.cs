@@ -48,13 +48,13 @@ namespace IS_XNA_Shooter
             this.mainGame = mainGame;
             menuState = MenuState.main;
 
-            horizontalSep = 48;
+            horizontalSep = 46;
             backButtonPosition = new Vector2(5, SuperGame.screenHeight - 45);
 
             splash = GRMng.menuSplash;
 
             itemBack = new MenuItem(false, backButtonPosition, GRMng.menuMain,
-                new Rectangle(120, 360, 100, 40), new Rectangle(220, 360, 100, 40), new Rectangle(320, 360, 100, 40));
+                new Rectangle(120, 360, 120, 40), new Rectangle(240, 360, 120, 40), new Rectangle(360, 360, 120, 40));
 
             // main Menu
             itemMainStory = new MenuItem(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight / 2 - horizontalSep),
@@ -91,7 +91,7 @@ namespace IS_XNA_Shooter
                 GRMng.menuArcade, new Rectangle(0, 360, 512, 40), new Rectangle(0, 400, 512, 40), new Rectangle(0, 440, 512, 40));
 
             // menu Config
-            spriteConfigTitle = new Sprite(false, new Vector2(0, 10), 0, GRMng.menuConfig, new Rectangle(0, 480, 300, 32));
+            spriteConfigTitle = new Sprite(false, new Vector2(0, 10), 0, GRMng.menuConfig, new Rectangle(0, 480, 330, 32));
             itemConfigControlls = new MenuItem(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight / 2 - horizontalSep / 2 - horizontalSep),
                 GRMng.menuConfig, new Rectangle(0, 0, 512, 40), new Rectangle(0, 40, 512, 40), new Rectangle(0, 80, 512, 40));
             itemConfigGraphics = new MenuItem(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight / 2 - horizontalSep / 2),

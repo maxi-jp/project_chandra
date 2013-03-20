@@ -7,17 +7,55 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace IS_XNA_Shooter
 {
-    // clase para el tipo de enemigo debil
+    /// <summary>
+    /// Class for Enemy Weak that shots one shot
+    /// </summary>
     class EnemyWeakShot : Enemy
     {
-        /* ------------------- ATTRIBUTES ------------------- */
+        /// <summary>
+        /// Shots' list
+        /// </summary>
         private List<Shot> shots;
+       
+        /// <summary>
+        /// Time between two different shots
+        /// </summary>
         private float timeToShot = 2.0f;
+        
+        /// <summary>
+        /// Time between two different shots (aux)
+        /// </summary>
         private float timeToShotAux;
+        
+        /// <summary>
+        /// Shot velocity
+        /// </summary>
         private float shotVelocity = 300f;
+        
+        /// <summary>
+        /// Shot power
+        /// </summary>
         private int shotPower = 200;
 
-        /* ------------------- CONSTRUCTORS ------------------- */
+        /// <summary>
+        /// EnemyWeakShot's constructor
+        /// </summary>
+        /// <param name="camera">The camera of the game</param>
+        /// <param name="level">The level of the game</param>
+        /// <param name="position">The position of the enemy</param>
+        /// <param name="rotation">The rotation of the enemy</param>
+        /// <param name="frameWidth">The width of each frame of the enemy's animation</param>
+        /// <param name="frameHeight">The height of each frame of the enemy's animation </param>
+        /// <param name="numAnim">The number of the enemy's animations</param>
+        /// <param name="frameCount">The number of the frames in each animation's fil</param>
+        /// <param name="looping">Indicates if the animation has to loop</param>
+        /// <param name="frametime">Indicates how long the frame lasts</param>
+        /// <param name="texture">The texture of the enemy</param>
+        /// <param name="timeToSpawn">The time that the enemy has to wait for appear in the game</param>
+        /// <param name="velocity">The velocity of the enemy</param>
+        /// <param name="life">The life of the enemy</param>
+        /// <param name="value">The points you obtain if you kill it</param>
+        /// <param name="ship">The player's ship</param>
         public EnemyWeakShot(Camera camera, Level level, Vector2 position, float rotation,
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
             float frametime, Texture2D texture, float timeToSpawn, float velocity, int life,
@@ -43,7 +81,10 @@ namespace IS_XNA_Shooter
             shots = new List<Shot>();
         }
 
-        /* ------------------- METHODS ------------------- */
+        /// <summary>
+        /// Updates the logic of the enemy
+        /// </summary>
+        /// <param name="deltaTime">The time since the last update</param>
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
@@ -105,6 +146,10 @@ namespace IS_XNA_Shooter
 
         } // Update
 
+        /// <summary>
+        /// Draws the enemy 
+        /// </summary>
+        /// <param name="spriteBatch">The screen's canvas</param>
         public override void Draw(SpriteBatch spriteBatch)
         {
             foreach (Shot s in shots)
@@ -113,6 +158,10 @@ namespace IS_XNA_Shooter
             base.Draw(spriteBatch);
         }
 
+        /// <summary>
+        /// Causes damage to the enemy
+        /// </summary>
+        /// <param name="i">The amount of damage that the enemy receives</param>
         public override void Damage(int i)
         {
             base.Damage(i);
@@ -124,6 +173,9 @@ namespace IS_XNA_Shooter
             }
         }
 
+        /// <summary>
+        /// Kills the enemy and its shots
+        /// </summary>
         public override void Kill()
         {
             base.Kill();
@@ -131,6 +183,11 @@ namespace IS_XNA_Shooter
             shots.Clear();
         }
 
+        /// <summary>
+        /// The dead condition of this enemy is when its death animation has ended
+        /// and the shots shoted when it was alive are no longer active
+        /// </summary>
+        /// <returns>dead condition</returns>
         public override bool DeadCondition()
         {
             // the dead condition of this enemy is when its death animation has ended

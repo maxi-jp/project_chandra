@@ -13,56 +13,68 @@ namespace IS_XNA_Shooter
         //-------------------------
         //----    Atributos    ----
         //-------------------------
-        private int numLevel;   //número de nivel
-        //private Camera camera;  //cámara
         private List<List<Rectangle>> listRectCollider;
+        private int[] rectangleMap;
 
-
+        private bool testingEnemies;
 
         //---------------------------
         //----    Constructor    ----
         //---------------------------
-        public LevelB(Camera camera, int numLevel)
-            : base()
+        public LevelB(Camera camera, int numLevel, List<Enemy> enemies,
+            List<List<Rectangle>> listRectCollider)
+            : base(camera, numLevel, enemies)
         {
-            this.numLevel = numLevel;
-            this.enemies = new List<Enemy>();
-            this.camera = camera;
-            width = SuperGame.screenWidth*2;
-            height = SuperGame.screenHeight;
-            listRectCollider = new List<List<Rectangle>>();
-            readRectangles();
+            testingEnemies = false;
 
-            //Enemigo
-            Enemy e1 = new EnemyWeakB(camera, this, new Vector2(SuperGame.screenWidth + 100, 
-                50)/*new Random().Next(SuperGame.screenHeight))*/, (float)Math.PI, GRMng.frameWidthEW1, 
-                GRMng.frameHeightEW1, GRMng.numAnimsEW1, GRMng.frameCountEW1, GRMng.loopingEW1, SuperGame.frameTime12, 
-                GRMng.textureEW1, 1, -200, 100, 1, null);
-            e1.SetActive();
+            this.listRectCollider = listRectCollider;
+            this.rectangleMap = rectangleMap;
 
-            enemies = new List<Enemy>();
-            enemies.Add(e1);
+            if (numLevel == 0)
+            {
+                // level for testing enemies
+                //TODO: hacer nivel de testeo de enemigos
+                testingEnemies = true;
+            }
+            else
+            {
+                width = SuperGame.screenWidth*2;
+                height = SuperGame.screenHeight;
+                ShipInitPosition = new Vector2(100, SuperGame.screenHeight / 2);
+                
+                ReadRectangles();
 
+                this.enemies = enemies;
+                //LeerArchivoXML(1,1);
+
+                //Enemigo
+                Enemy e1 = new EnemyWeakB(camera, this, new Vector2(SuperGame.screenWidth + 100, 
+                    50)/*new Random().Next(SuperGame.screenHeight))*/, (float)Math.PI, GRMng.frameWidthEW1, 
+                    GRMng.frameHeightEW1, GRMng.numAnimsEW1, GRMng.frameCountEW1, GRMng.loopingEW1, SuperGame.frameTime12, 
+                    GRMng.textureEW1, 1, -200, 100, 1, null);
+                e1.SetActive();
+
+                enemies.Add(e1);
+            }
         }
 
         public LevelB(Camera camera, int numLevel, List<Shot> shots, List<Enemy> enemiesBot)
             : base()
         {
             this.numLevel = numLevel;
-            this.enemies = new List<Enemy>();
             this.camera = camera;
             width = SuperGame.screenWidth*2;
             height = SuperGame.screenHeight;
-            listRectCollider = new List<List<Rectangle>>();
-            readRectangles();
+
+            ReadRectangles();
 
             //Enemigo
-            Enemy e1 = new EnemyLaserB(camera, this, new Vector2(SuperGame.screenWidth + 100, 
-                50)/*new Random().Next(SuperGame.screenHeight))*/, (float)Math.PI, GRMng.frameWidthES, 
-                GRMng.frameHeightES, GRMng.numAnimsES, GRMng.frameCountES, GRMng.loopingES, SuperGame.frameTime12, 
-                GRMng.textureES, 1, -200, 100, 1, null);
+            Enemy e1 = new EnemyLaserB(camera, this, new Vector2(SuperGame.screenWidth - 100, 
+                50)/*new Random().Next(SuperGame.screenHeight))*/, (float)Math.PI, GRMng.frameWidthEL, 
+                GRMng.frameHeightEL, GRMng.numAnimsEL, GRMng.frameCountEL, GRMng.loopingEL, SuperGame.frameTime10, 
+                GRMng.textureEL, 1, -200, 100, 1, null);
+            e1 = new FinalBoss1(camera, this, new Vector2(SuperGame.screenWidth - GRMng.frameWidthFinalBoss1, SuperGame.screenHeight / 2), enemies);
             e1.SetActive();
-
             enemies.Add(e1);
             /*Vector2 positionFinalBoss = new Vector2(SuperGame.screenWidth - GRMng.frameWidthFinalBoss1/2,
                                                     SuperGame.screenHeight / 2);
@@ -79,8 +91,8 @@ namespace IS_XNA_Shooter
         //--------------------------------
         public override void Update(float deltaTime)
         {
-            base.Update(deltaTime);
-            int i=0; // iterator for the list of enemies
+
+            /*int i=0; // iterator for the list of enemies
             bool stillAlive = false; // is true if there is any enemie alive
             //the next loop searches an enemy alive for controlling the end of level 
             if (!levelFinished)
@@ -95,52 +107,67 @@ namespace IS_XNA_Shooter
                 }
                 if (!stillAlive)
                     levelFinished = true;
-            }
-        }
+            }*/
+        } // Update
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            base.Draw(spriteBatch);
+            
         }
 
-        public void readRectangles()
+        public void ReadRectangles()
         {
-            int positionX1;
-            int positionY1;
-            int positionX2;
-            int positionY2;
+            int rX, rY, rW, rH; // rectangle components
 
             XmlDocument lvl = XMLLvlMng.rect1;
 
             XmlNodeList level = lvl.GetElementsByTagName("level");
 
+            XmlAttributeCollection RectangleN;
             XmlNodeList listaRectangles =
                         ((XmlElement)level[0]).GetElementsByTagName("rectangle");
-                foreach (XmlElement nodo in listaRectangles)
+            foreach (XmlElement nodo in listaRectangles)
+            {
+                RectangleN = nodo.Attributes;
+
+                rX = (int)Convert.ToDouble(RectangleN[0].Value);
+                rY = (int)Convert.ToDouble(RectangleN[1].Value);
+                rW = (int)Convert.ToDouble(RectangleN[2].Value);
+                rH = (int)Convert.ToDouble(RectangleN[3].Value);
+
+                if (rX == 0 && rY == 0)
                 {
-
-                    XmlAttributeCollection RectangleN = nodo.Attributes;
-
-
-                    positionX1 = (int)Convert.ToDouble(RectangleN[0].Value);
-                    positionY1 = (int)Convert.ToDouble(RectangleN[1].Value);
-                    positionX2 = (int)Convert.ToDouble(RectangleN[2].Value);
-                    positionY2 = (int)Convert.ToDouble(RectangleN[3].Value);
-
-                    if (positionX1==0 & positionY1==0){ // detectamos el primer rectangulo de un nuevo layer
-                        listRectCollider.Add(new List<Rectangle>());
-                    }
-                    Rectangle rectangulo = new Rectangle(positionX1, positionY1, positionX2, positionY2);
-                    listRectCollider[listRectCollider.Count-1].Add(rectangulo); // añadimos a la lista actual los rectangulos
-                    
-
+                    // detectamos el primer rectangulo de un nuevo layer
+                    listRectCollider.Add(new List<Rectangle>());
                 }
+                Rectangle rectangulo = new Rectangle(rX, rY, rW, rH);
+
+                // añadimos a la lista actual los rectangulos
+                listRectCollider[listRectCollider.Count-1].Add(rectangulo); 
+            }
+
+            // lista de mapas de rectángulos
+            int ind;
+            XmlAttributeCollection mapN;
+            XmlNodeList mapList = ((XmlElement)level[0]).GetElementsByTagName("map");
+            rectangleMap = new int[mapList.Count];
+            for (int i = 0; i<mapList.Count; i++)
+            {
+                mapN = mapList.Item(i).Attributes;
+                ind = (int)Convert.ToInt32(mapN[0].Value);
+                rectangleMap[i] = ind;
+            }
         }
 
         //devuelve la lista de rectangulos de colisión del parallax donde se juega
         public List<List<Rectangle>> getRectangles()
         {
             return listRectCollider;
+        }
+
+        public int[] GetLevelMap()
+        {
+            return rectangleMap;
         }
 
         //devuelve la lista de enemigos del nivel

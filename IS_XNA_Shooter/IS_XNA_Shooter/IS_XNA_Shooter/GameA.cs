@@ -39,8 +39,8 @@ namespace IS_XNA_Shooter
             points[6] = new Vector2(26, 47);
             points[7] = new Vector2(15, 45);
             ship = new ShipA(this, camera, level, Vector2.Zero, 0, points,
-                GRMng.frameWidthPA1, GRMng.frameHeightPA1,
-                GRMng.numAnimsPA1, GRMng.frameCountPA1, GRMng.loopingPA1, SuperGame.frameTime24, GRMng.texturePA1,
+                GRMng.frameWidthPA1, GRMng.frameHeightPA1, GRMng.numAnimsPA1, GRMng.frameCountPA1,
+                GRMng.loopingPA1, SuperGame.frameTime24, GRMng.texturePA1,
                 shipVelocity, shipLife, shots);
 
             level.setShip(ship);
@@ -63,8 +63,6 @@ namespace IS_XNA_Shooter
             aimPointSprite.position.X = Mouse.GetState().X;
             aimPointSprite.position.Y = Mouse.GetState().Y;
 
-            //camera.Update(deltaTime);   // cámara
-
         } // Update
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -85,18 +83,6 @@ namespace IS_XNA_Shooter
                 // number of enemies:
                 spriteBatch.DrawString(SuperGame.fontDebug, "Enemies in game = " + enemies.Count() + ".",
                     new Vector2(5, 27), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-
-                /*if (enemies.Count > 0)
-                {
-                    spriteBatch.DrawString(Game1.fontDebug, "Enemy = " + enemies[0].position.ToString() + ".",
-                        new Vector2(5, 27), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-
-                    spriteBatch.DrawString(Game1.fontDebug, "EnemyCollider = " + enemies[0].getRectangle().ToString() + ".",
-                        new Vector2(5, 39), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-
-                    spriteBatch.DrawString(Game1.fontDebug, "EnemyCollider = " + enemies[0].getPosition().ToString() + ".",
-                        new Vector2(5, 51), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-                }*/
             }
 
         } // Draw

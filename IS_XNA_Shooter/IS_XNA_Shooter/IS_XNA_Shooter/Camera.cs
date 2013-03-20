@@ -6,20 +6,46 @@ using Microsoft.Xna.Framework;
 
 namespace IS_XNA_Shooter
 {
-    // clase que gesiona la cámara del juego
+    /// <summary>
+    /// Class that manage the game's camera
+    /// </summary>
     class Camera
     {
-        /* ------------------- ATRIBUTOS ------------------- */
-        private bool followShip;  //si la camara sigue al jugador.
-        private Ship Ship;  //jugador
-        private Level level;    //nivel
-        private Vector2 screenCenter;   // punto central de la pantalla
-        public Vector2 displacement;    // posicion en pantalla de las coordenadas 0,0 del mundo
-        public Vector2 position; // punto central de la cámara
+        /// <summary>
+        /// Says if the camera follows the player's ship
+        /// </summary>
+        private bool followShip;
+       
+        /// <summary>
+        /// Player's ship
+        /// </summary>
+        private Ship Ship;
+        
+        /// <summary>
+        /// Level
+        /// </summary>
+        private Level level;
+        
+        /// <summary>
+        /// Window's center point
+        /// </summary>
+        private Vector2 screenCenter;
+        
+        /// <summary>
+        /// Camera's displacement (window's position of the 0,0 world's coordinates)
+        /// </summary>
+        public Vector2 displacement;
+        
+        /// <summary>
+        /// Camera's position (Camera's center point)
+        /// </summary>
+        public Vector2 position;
 
 
 
-        /* ------------------- CONSTRUCTORES ------------------- */
+        /// <summary>
+        /// Camera's constructor
+        /// </summary>
         public Camera()
         {
             position = new Vector2();
@@ -29,6 +55,12 @@ namespace IS_XNA_Shooter
             followShip = true;
         }
 
+        /// <summary>
+        /// Camera's constructor
+        /// </summary>
+        /// <param name="Ship">Player's ship</param>
+        /// <param name="X">Camera's X position</param>
+        /// <param name="Y">Camera's Y position</param>
         public Camera(Ship Ship, int X, int Y)
         {
             this.Ship = Ship;
@@ -40,7 +72,10 @@ namespace IS_XNA_Shooter
 
 
 
-        /* ------------------- MÉTODOS PÚBLICOS ------------------- */
+        /// <summary>
+        /// Set the level
+        /// </summary>
+        /// <param name="level">The parameter to set the level</param>
         public void setLevel(Level level)
         {
             this.level = level;
@@ -52,6 +87,10 @@ namespace IS_XNA_Shooter
             }
         }
 
+        /// <summary>
+        /// Set the player's ship
+        /// </summary>
+        /// <param name="Ship">The parameter to set the player's ship</param>
         public void setShip(Ship Ship)
         {
             this.Ship = Ship;
@@ -61,6 +100,10 @@ namespace IS_XNA_Shooter
             }
         }
 
+        /// <summary>
+        /// Updates the logic of the camera
+        /// </summary>
+        /// <param name="deltaTime">The time since the last update</param>
         public void Update(float deltaTime)
         {
             if (level is LevelA)
@@ -75,20 +118,21 @@ namespace IS_XNA_Shooter
             displacement = screenCenter - position;
         }
 
-
-        //--------------------------------
-        //----    MÉTODOS PRIVADOS    ----
-        //--------------------------------
-
-        //La nave siempre está en el centro de la cámara
+        /// <summary>
+        /// The player's ship is always in the center of the camera
+        /// </summary>
+        /// <param name="deltaTime">The time since the last update</param>
         private void movement1(float deltaTime)
         {
             //position = Ship.position;
             //position.X += 100 * deltaTime ;
         }
 
-        //Los niveles deben madir 800x800 como mínimo
-        //La cámara varía en función de la nave, cuando quedan 400 pixels para llegar a alguna de las paredes, va el doble de lento que el jugador
+        /// <summary>
+        /// The levels have to measure 800x800 at least.
+        /// The camera has to change depending on the player's ship.
+        /// When there are 400 pixels to get any wall, the camera's velocity decreases to the half
+        /// </summary>
         private void movement2()
         {
             if (Ship.position.X < level.width/2)

@@ -7,12 +7,30 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace IS_XNA_Shooter
 {
-    // clase para el tipo de enemigo debil
+    /// <summary>
+    /// Class for Enemy Weak in GameA
+    /// </summary>
     class EnemyWeak : Enemy
     {
-        /* ------------------- ATTRIBUTES ------------------- */
-
-        /* ------------------- CONSTRUCTORS ------------------- */
+        /// <summary>
+        /// EnemyWeak's constructor
+        /// </summary>
+        /// <param name="camera">The camera of the game</param>
+        /// <param name="level">The level of the game</param>
+        /// <param name="position">The position of the enemy</param>
+        /// <param name="rotation">The rotation of the enemy</param>
+        /// <param name="frameWidth">The width of each frame of the enemy's animation</param>
+        /// <param name="frameHeight">The height of each frame of the enemy's animation </param>
+        /// <param name="numAnim">The number of the enemy's animations</param>
+        /// <param name="frameCount">The number of the frames in each animation's fil</param>
+        /// <param name="looping">Indicates if the animation has to loop</param>
+        /// <param name="frametime">Indicates how long the frame lasts</param>
+        /// <param name="texture">The texture of the enemy</param>
+        /// <param name="timeToSpawn">The time that the enemy has to wait for appear in the game</param>
+        /// <param name="velocity">The velocity of the enemy</param>
+        /// <param name="life">The life of the enemy</param>
+        /// <param name="value">The points you obtain if you kill it</param>
+        /// <param name="ship">The player's ship</param>
         public EnemyWeak(Camera camera, Level level, Vector2 position, float rotation,
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
             float frametime, Texture2D texture, float timeToSpawn, float velocity, int life,
@@ -33,7 +51,10 @@ namespace IS_XNA_Shooter
             setAnim(1);
         }
 
-        /* ------------------- METHODS ------------------- */
+        /// <summary>
+        /// Updates the logic of the enemy
+        /// </summary>
+        /// <param name="deltaTime">The time since the last update</param>
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
@@ -61,6 +82,10 @@ namespace IS_XNA_Shooter
 
         } // Update
 
+        /// <summary>
+        /// Causes damage to the enemy
+        /// </summary>
+        /// <param name="i">The amount of damage that the enemy receives</param>
         public override void Damage(int i)
         {
             base.Damage(i);

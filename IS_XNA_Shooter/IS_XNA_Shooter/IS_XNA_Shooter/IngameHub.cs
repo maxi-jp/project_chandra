@@ -33,5 +33,13 @@ namespace IS_XNA_Shooter
             lifesActual--;
         }
 
+        public virtual void PlayerEarnsLife()
+        {
+            lifesActual++;
+
+            if (lifesActual > lifesBase)
+                lifesBase = lifesActual;
+        }
+
     } // class IngameHub
 }

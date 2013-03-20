@@ -66,5 +66,26 @@ namespace IS_XNA_Shooter
             }
         }
 
+        public override void PlayerEarnsLife()
+        {
+            base.PlayerEarnsLife();
+
+            if (lifesActual > center.Count())
+            {
+                center.Clear();
+                Sprite sprite;
+                for (int i = 0; i < lifesBase; i++)
+                {
+                    sprite = new Sprite(false, new Vector2((SuperGame.screenWidth / 2) - 57 * lifesBase / 2 + 57 * i, 0),
+                        0, textureBase, sorceRecCenter1);
+                    center.Add(sprite);
+                }
+                left = new Sprite(false, new Vector2((SuperGame.screenWidth / 2) - 27 - 57 * lifesBase / 2, 0),
+                0, textureBase, sorceRecLeft);
+                right = new Sprite(false, new Vector2((SuperGame.screenWidth / 2) + 57 * lifesBase / 2, 0),
+                    0, textureBase, sorceRecRight);
+            }
+        }
+
     } // class IngameHubA
 }

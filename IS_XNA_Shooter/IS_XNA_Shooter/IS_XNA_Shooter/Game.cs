@@ -123,8 +123,16 @@ namespace IS_XNA_Shooter
             camera.Update(deltaTime);   // cámara
 
             if (SuperGame.debug)
+            {
                 if (ControlMng.kPreshed)
                     PlayerDead();
+                if (ControlMng.lPreshed)
+                {
+                    // add one life to the player
+                    player.EarnLife();
+                    hub.PlayerEarnsLife();
+                }
+            }
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)

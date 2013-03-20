@@ -44,16 +44,16 @@ namespace IS_XNA_Shooter
                 ReadRectangles();
 
                 this.enemies = enemies;
-                //LeerArchivoXML(1,1);
+                LeerArchivoXML(1,1);
 
                 //Enemigo
-                Enemy e1 = new EnemyWeakB(camera, this, new Vector2(SuperGame.screenWidth + 100, 
-                    50)/*new Random().Next(SuperGame.screenHeight))*/, (float)Math.PI, GRMng.frameWidthEW1, 
+               /* Enemy e1 = new EnemyWeakB(camera, this, new Vector2(SuperGame.screenWidth + 100, 
+                    50)/*new Random().Next(SuperGame.screenHeight))*//*, (float)Math.PI, GRMng.frameWidthEW1, 
                     GRMng.frameHeightEW1, GRMng.numAnimsEW1, GRMng.frameCountEW1, GRMng.loopingEW1, SuperGame.frameTime12, 
                     GRMng.textureEW1, 1, -200, 100, 1, null);
                 e1.SetActive();
 
-                enemies.Add(e1);
+                enemies.Add(e1);*/
             }
         }
 
@@ -68,13 +68,14 @@ namespace IS_XNA_Shooter
             ReadRectangles();
 
             //Enemigo
-            Enemy e1 = new EnemyLaserB(camera, this, new Vector2(SuperGame.screenWidth - 100, 
-                50)/*new Random().Next(SuperGame.screenHeight))*/, (float)Math.PI, GRMng.frameWidthEL, 
+            /*Enemy e1 = new EnemyLaserB(camera, this, new Vector2(SuperGame.screenWidth - 100, 
+                50)/*new Random().Next(SuperGame.screenHeight))*//*, (float)Math.PI, GRMng.frameWidthEL, 
                 GRMng.frameHeightEL, GRMng.numAnimsEL, GRMng.frameCountEL, GRMng.loopingEL, SuperGame.frameTime10, 
                 GRMng.textureEL, 1, -200, 100, 1, null);
             e1 = new FinalBoss1(camera, this, new Vector2(SuperGame.screenWidth - GRMng.frameWidthFinalBoss1, SuperGame.screenHeight / 2), enemies);
             e1.SetActive();
             enemies.Add(e1);
+            */
             /*Vector2 positionFinalBoss = new Vector2(SuperGame.screenWidth - GRMng.frameWidthFinalBoss1/2,
                                                     SuperGame.screenHeight / 2);
             Enemy finalBoss = new FinalBoss1(camera, this, positionFinalBoss, shots, enemiesBot);

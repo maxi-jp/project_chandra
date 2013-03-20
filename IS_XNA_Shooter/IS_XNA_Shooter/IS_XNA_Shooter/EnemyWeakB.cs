@@ -35,8 +35,8 @@ namespace IS_XNA_Shooter
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
             float frametime, Texture2D texture, float timeToSpawn, float velocity, int life,
             int value, Ship Ship)
-            : base(camera, level, position, rotation, frameWidth, frameHeight, numAnim, frameCount,
-                looping, frametime, texture, timeToSpawn, velocity, life, value, Ship)
+            : base(camera, level, position, (float)Math.PI, frameWidth, frameHeight, numAnim, frameCount,
+                looping, frametime, texture, timeToSpawn, 300, life, value, Ship)
         {
             Vector2[] points = new Vector2[7];
             points[0] = new Vector2(21, 21);
@@ -47,7 +47,7 @@ namespace IS_XNA_Shooter
             points[5] = new Vector2(32, 57);
             points[6] = new Vector2(21, 57);
             collider = new Collider(camera, true, position, rotation, points, 40, frameWidth, frameHeight);
-
+           
             setAnim(1);
         }
 
@@ -59,7 +59,7 @@ namespace IS_XNA_Shooter
         {
             base.Update(deltaTime);
 
-            position.X += deltaTime * velocity;
+            position.X -= deltaTime * velocity;
         }
 
         /// <summary>

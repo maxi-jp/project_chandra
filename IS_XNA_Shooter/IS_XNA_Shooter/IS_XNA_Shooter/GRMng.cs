@@ -330,9 +330,15 @@ namespace IS_XNA_Shooter
 
                     texturePA1 = content.Load<Texture2D>("Graphics/Ships/sprites80x80");
                     textureL1 = content.Load<Texture2D>("Graphics/laserShotAnim");
+                    textureL2 = content.Load<Texture2D>("Graphics/laserShotAnim2");
                     
                     textureEW1 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy01_80x80");
-                    
+                    textureEW2 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy02_80x80");
+                    textureEB1 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy03_80x80");
+                    textureEMS =  content.Load<Texture2D>("Graphics/Ships/mineAnimation");
+                    textureEMSBullet = content.Load<Texture2D>("Graphics/mineShot");
+                    textureEL = content.Load<Texture2D>("Graphics/Ships/enemyLaser");
+                    textureELBullet = content.Load<Texture2D>("Graphics/yellowpixel");
                     textureRed = content.Load<Texture2D>("Graphics/Rojazo");
 
                     textureBgB00 = content.Load<Texture2D>("Graphics/Backgrounds/bgB00");

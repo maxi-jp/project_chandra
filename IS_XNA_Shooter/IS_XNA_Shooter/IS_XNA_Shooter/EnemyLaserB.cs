@@ -63,6 +63,16 @@ namespace IS_XNA_Shooter
         /// Says if the enemy is going up or down
         /// </summary>
         private Boolean goingUp = true;
+        
+        /// <summary>
+        /// Time to set the shot
+        /// </summary>
+        private float shootingCont = 0.1f;
+
+        /// <summary>
+        /// To set shootingCont only once
+        /// </summary>
+        private Boolean shootingContSet = false;
 
         /// <summary>
         /// EnemyLaserB's constructor
@@ -87,7 +97,7 @@ namespace IS_XNA_Shooter
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
             float frametime, Texture2D texture, float timeToSpawn, float velocity, int life,
             int value, Ship ship)
-            : base(camera, level, position, rotation, frameWidth, frameHeight, numAnim, frameCount,
+            : base(camera, level, position, (float)Math.PI, frameWidth, frameHeight, numAnim, frameCount,
                 looping, frametime, texture, timeToSpawn, 100, 100, value, ship)
         {
             setAnim(0);
@@ -193,6 +203,11 @@ namespace IS_XNA_Shooter
                     {
                         if (currentAnim != 2) setAnim(2);
                         shooting = true;
+                        if (!shootingContSet)
+                        {
+                            shootingContSet = true;
+                            shootingCont = 0.1f;
+                        }
                         LaserShot();
                         shot.Update(deltaTime);
                     }
@@ -202,6 +217,8 @@ namespace IS_XNA_Shooter
                         setAnim(0);
                         timeToShot = 6.0f;
                         shooting = false;
+                        shootingCont = 0.1f;
+                        shootingContSet = false;
                     }
                 }
             }
@@ -210,18 +227,21 @@ namespace IS_XNA_Shooter
             {
                 shot.Update(deltaTime);
                 //shot-player colisions
-                
-                if (ship.collider.CollisionTwoPoints(shot.collider.points[0], shot.collider.points[1]))
-                {
-                    // the player is hitted:
-                    ship.Damage(shot.GetPower());
+                if (shootingCont >= 0) 
+                    shootingCont -= deltaTime;
+                else 
+                    if (ship.collider.CollisionTwoPoints(shot.collider.points[0], shot.collider.points[1]))
+                    {
+                        // the player is hitted:
+                        ship.Damage(shot.GetPower());
 
-                    // the shot must be erased only if it hasn't provoked the
-                    // player ship death, otherwise the shot will had be removed
-                    // before from the game in: Game.PlayerDead() -> Enemy.Kill()
-                    /*if (ship.GetLife() > 0)
-                        shots.RemoveAt(i);*/
-                }
+                        // the shot must be erased only if it hasn't provoked the
+                        // player ship death, otherwise the shot will had be removed
+                        // before from the game in: Game.PlayerDead() -> Enemy.Kill()
+                        /*if (ship.GetLife() > 0)
+                            shots.RemoveAt(i);*/
+                    }
+                
             }
 
         } // Update

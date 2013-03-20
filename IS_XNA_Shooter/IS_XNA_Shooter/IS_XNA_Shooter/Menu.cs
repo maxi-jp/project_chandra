@@ -270,22 +270,22 @@ namespace IS_XNA_Shooter
                     else if (itemArcadeScroll.Unclick(X, Y))
                     {
                         Audio.PlayEffect("digitalAcent01");
-                        mainGame.newScroll();
+                        mainGame.newScroll(1);
                     }
                     else if (itemArcadeKiller.Unclick(X, Y))
                     {
                         Audio.PlayEffect("digitalAcent01");
-                        mainGame.newKiller();
+                        mainGame.newKiller(0);
                     }
                     else if (itemArcadeSurvival.Unclick(X, Y))
                     {
                         Audio.PlayEffect("digitalAcent01");
-                        mainGame.newSurvival();
+                        mainGame.newSurvival(0);
                     }
                     else if (itemArcadeDefense.Unclick(X, Y))
                     {
                         Audio.PlayEffect("digitalAcent01");
-                        mainGame.newDefense();
+                        mainGame.newDefense(0);
                     }
                     break;
 

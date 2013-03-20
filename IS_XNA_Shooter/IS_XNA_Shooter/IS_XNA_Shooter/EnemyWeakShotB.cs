@@ -10,28 +10,28 @@ namespace IS_XNA_Shooter
     /// <summary>
     /// Class for Enemy Weak that shots one shot
     /// </summary>
-    class EnemyWeakShot : Enemy
+    class EnemyWeakShotB : Enemy
     {
         /// <summary>
         /// Shots' list
         /// </summary>
         private List<Shot> shots;
-       
+
         /// <summary>
         /// Time between two different shots
         /// </summary>
         private float timeToShot = 2.0f;
-        
+
         /// <summary>
         /// Time between two different shots (aux)
         /// </summary>
         private float timeToShotAux;
-        
+
         /// <summary>
         /// Shot velocity
         /// </summary>
         private float shotVelocity = 300f;
-        
+
         /// <summary>
         /// Shot power
         /// </summary>
@@ -56,11 +56,11 @@ namespace IS_XNA_Shooter
         /// <param name="life">The life of the enemy</param>
         /// <param name="value">The points you obtain if you kill it</param>
         /// <param name="ship">The player's ship</param>
-        public EnemyWeakShot(Camera camera, Level level, Vector2 position, float rotation,
+        public EnemyWeakShotB(Camera camera, Level level, Vector2 position, float rotation,
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
             float frametime, Texture2D texture, float timeToSpawn, float velocity, int life,
             int value, Ship ship)
-            : base(camera, level, position, rotation,
+            : base(camera, level, position, (float)Math.PI,
                 frameWidth, frameHeight, numAnim, frameCount, looping, frametime,
                 texture, timeToSpawn, velocity, life, value, ship)
         {
@@ -91,24 +91,7 @@ namespace IS_XNA_Shooter
 
             if (life > 0)
             {
-                float dY = -ship.position.Y + position.Y;
-                float dX = -ship.position.X + position.X;
-
-                float gyre = (float)Math.Atan(dY / dX);
-
-                if (dX < 0)
-                {
-                    rotation = gyre;
-                    position.X += (float)(velocity * Math.Cos(gyre) * deltaTime);
-                    position.Y += (float)(velocity * Math.Sin(gyre) * deltaTime);
-                }
-                else
-                {
-                    rotation = (float)Math.PI + gyre;
-                    position.X -= (float)(velocity * Math.Cos(gyre) * deltaTime);
-                    position.Y -= (float)(velocity * Math.Sin(gyre) * deltaTime);
-                }
-
+                position.X -= deltaTime * velocity;
                 timeToShotAux -= deltaTime;
                 if (timeToShotAux <= 0)
                 {
@@ -195,5 +178,5 @@ namespace IS_XNA_Shooter
             return (!animActive && (shots.Count() == 0));
         }
 
-    } // class EnemyWeak
+    } // class EnemyWeakShotB
 }

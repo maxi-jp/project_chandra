@@ -53,7 +53,7 @@ namespace IS_XNA_Shooter
                 float positionX;
                 float positionY;
                 float time;
-                XmlDocument lvl = XMLLvlMng.lvl1;
+                XmlDocument lvl = XMLLvlMng.lvl;
               
                 XmlNodeList level = lvl.GetElementsByTagName("level");
 
@@ -67,13 +67,13 @@ namespace IS_XNA_Shooter
                     enemyType = Convert.ToString(enemyN[0].Value);
                     positionX = (float)Convert.ToDouble(enemyN[1].Value);
                     positionY = (float)Convert.ToDouble(enemyN[2].Value);
-                    time = (float)Convert.ToDouble(enemyN[3].Value); //aqui casca
+                    time = (float)Convert.ToDouble(enemyN[3].Value); 
                     //timeLeftEnemy.Add(time);
 
                     Enemy enemy = null;
 
-                    if (enemyType.Equals("enemyWeak"))
-                        enemy = new EnemyWeak(camera, this, new Vector2(positionX, positionY), 0,
+                    if (enemyType.Equals("enemyWeakA"))
+                        enemy = new EnemyWeakA(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEW1, GRMng.frameHeightEW1, GRMng.numAnimsEW1, GRMng.frameCountEW1,
                             GRMng.loopingEW1, SuperGame.frameTime12, GRMng.textureEW1, time, 100, 100,
                             1, null);
@@ -82,13 +82,13 @@ namespace IS_XNA_Shooter
                             GRMng.frameWidthEB1, GRMng.frameHeightEB1, GRMng.numAnimsEB1, GRMng.frameCountEB1,
                             GRMng.loopingEB1, SuperGame.frameTime12, GRMng.textureEB1, time, 1000, 100,
                             4, null);
-                    else if (enemyType.Equals("enemyWeakShot"))
-                        enemy = new EnemyWeakShot(camera, this, new Vector2(positionX, positionY), 0,
+                    else if (enemyType.Equals("enemyWeakShotA"))
+                        enemy = new EnemyWeakShotA(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEW2, GRMng.frameHeightEW2, GRMng.numAnimsEW2, GRMng.frameCountEW2,
                             GRMng.loopingEW2, SuperGame.frameTime12, GRMng.textureEW2, time, 100, 100,
                             1, null);
-                    else if (enemyType.Equals("enemyMineShot"))
-                        enemy = new EnemyMineShot(camera, this, new Vector2(positionX, positionY), 0,
+                    else if (enemyType.Equals("enemyMineShotA"))
+                        enemy = new EnemyMineShotA(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEMS, GRMng.frameHeightEMS, GRMng.numAnimsEMS, GRMng.frameCountEMS,
                             GRMng.loopingEMS, SuperGame.frameTime12, GRMng.textureEMS, time, 100, 100,
                             1, null);
@@ -97,8 +97,8 @@ namespace IS_XNA_Shooter
                             GRMng.frameWidthEL, GRMng.frameHeightEL, GRMng.numAnimsEL, GRMng.frameCountEL,
                             GRMng.loopingEL, SuperGame.frameTime12, GRMng.textureEL, time, 100, 100,
                             1, null);
-                    else if (enemyType.Equals("enemyScared"))
-                        enemy = new EnemyScared(camera, this, new Vector2(positionX, positionY), 0,
+                    else if (enemyType.Equals("enemyScaredA"))
+                        enemy = new EnemyScaredA(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthES, GRMng.frameHeightES, GRMng.numAnimsES, GRMng.frameCountES,
                             GRMng.loopingES, SuperGame.frameTime12, GRMng.textureES, time, 100, 100,
                             1, null);
@@ -107,6 +107,22 @@ namespace IS_XNA_Shooter
                             GRMng.frameWidthEW1, GRMng.frameHeightEW1, GRMng.numAnimsEW1, GRMng.frameCountEW1,
                             GRMng.loopingEW1, SuperGame.frameTime12, GRMng.textureEW1, time, 100, 100,
                             1, null);
+                    else if (enemyType.Equals("enemyWeakShotB"))
+                        enemy = new EnemyWeakShotB(camera, this, new Vector2(positionX, positionY), 0,
+                            GRMng.frameWidthEW2, GRMng.frameHeightEW2, GRMng.numAnimsEW2, GRMng.frameCountEW2,
+                            GRMng.loopingEW2, SuperGame.frameTime12, GRMng.textureEW2, time, 100, 100,
+                            1, null);
+                    else if (enemyType.Equals("enemyMineShotB"))
+                        enemy = new EnemyMineShotB(camera, this, new Vector2(positionX, positionY), 0,
+                            GRMng.frameWidthEMS, GRMng.frameHeightEMS, GRMng.numAnimsEMS, GRMng.frameCountEMS,
+                            GRMng.loopingEMS, SuperGame.frameTime12, GRMng.textureEMS, time, 100, 100,
+                            1, null);
+                    else if (enemyType.Equals("enemyLaserB"))
+                        enemy = new EnemyLaserB(camera, this, new Vector2(positionX, positionY), 0,
+                            GRMng.frameWidthEL, GRMng.frameHeightEL, GRMng.numAnimsEL, GRMng.frameCountEL,
+                            GRMng.loopingEL, SuperGame.frameTime12, GRMng.textureEL, time, 100, 100,
+                            1, null);
+
                     enemies.Add(enemy); 
                     
                 }

@@ -17,7 +17,12 @@ namespace IS_XNA_Shooter
 
         // private List<List<Rectangle>> crashList;  //objetos de colisión en el parallax donde se juega
         private playState currentState;
-        private List<List<Rectangle>> listRectCollider; //lista de colliders para crashlist
+        // for levelB
+        private List<RectangleMap> listRecMap; //lista de colliders para crashlist
+        private int[] rectangleMap;
+        private float scrollVelocity;
+        private float scrollPosition;
+        //for levelB
         private BackgroundGameB backGroundB; //Fondo con los parallax
         private BackgroundGameA backGroundA;
         private Texture2D textureAim;
@@ -81,13 +86,15 @@ namespace IS_XNA_Shooter
 
         private void initLevelB(int numLevel)
         {
+            scrollVelocity = 100;
+            scrollPosition = 0;
             currentState = playState.levelDialog;
 
-            listRectCollider = new List<List<Rectangle>>();
+            listRecMap = new List<RectangleMap>();
 
             hub = new IngameHubA(GRMng.hubBase, mainGame.player.GetLife());
-            level = new LevelB(camera, numLevel, enemies, listRectCollider);
-            //rectangleMap = (LevelB)level.GetLevelMap();
+            level = new LevelB(camera, numLevel, enemies, listRecMap);
+            rectangleMap = ((LevelB)level).GetLevelMap();
             backGroundB = new BackgroundGameB(level);
 
             camera.setLevel(level);
@@ -181,8 +188,8 @@ namespace IS_XNA_Shooter
                             timeToResumeAux = 3f;
                         }
                     }
-                    if (backGroundB != null)
-                        backGroundB.Update(deltaTime);
+                    /*if (backGroundB != null)
+                        backGroundB.Update(deltaTime);*/
                     break;
 
                 case playState.beginLevel:
@@ -200,8 +207,8 @@ namespace IS_XNA_Shooter
                 
                     else
                         spriteNum.SetRectangle(new Rectangle(0, 80, 170, 150));
-                    if (backGroundB != null)
-                        backGroundB.Update(deltaTime);
+                    /*if (backGroundB != null)
+                        backGroundB.Update(deltaTime);*/
                     break;
                 case playState.playing:
                     base.Update(gameTime);
@@ -209,8 +216,8 @@ namespace IS_XNA_Shooter
                     {
                         currentState = playState.levelComplete;
                     }
-                    if (backGroundB!=null)
-                        backGroundB.Update(deltaTime);
+                    /*if (backGroundB!=null)
+                        backGroundB.Update(deltaTime);*/
                     break;
                 case playState.shipDestroyed:
                     break;
@@ -237,9 +244,32 @@ namespace IS_XNA_Shooter
 
                     else
                         spriteNum.SetRectangle(new Rectangle(0, 80, 170, 150));
-                    if (backGroundB != null)
-                        backGroundB.Update(deltaTime);
                     break;
+            }
+            if (backGroundB != null)
+            {
+                scrollPosition += scrollVelocity * deltaTime;
+                backGroundB.Update(deltaTime);
+                // player-walls(rectangles) collision:
+                int cont = 0;
+                Rectangle recAux;
+                for (int i = 0; i < listRecMap.Count(); i++)
+                {
+                    for (int j = 0; j < listRecMap[i].rectangleList.Count; j++)
+                    {
+                        recAux = new Rectangle(
+                            listRecMap[i].rectangleList[j].X - (int)scrollPosition + cont,
+                            listRecMap[i].rectangleList[j].Y,
+                            listRecMap[i].rectangleList[j].Width,
+                            listRecMap[i].rectangleList[j].Height);
+                        for (int k = 0; k < ship.collider.points.Length; k++)
+                        {
+                            if (recAux.Contains((int)ship.collider.points[k].X, (int)ship.collider.points[k].Y))
+                                ship.Kill();
+                        }
+                    }
+                    cont += listRecMap[rectangleMap[i]].width;
+                }
             }
         }
 
@@ -261,51 +291,70 @@ namespace IS_XNA_Shooter
         {
             //dibuja background
             if (backGroundB != null)
-                backGroundB.Draw(spriteBatch);
-            //dibuja Ship, enemigos y balas
-            if (backGroundA != null)
-                backGroundA.Draw(spriteBatch);
-            base.Draw(spriteBatch);
-            switch (currentState)
             {
-                case playState.levelDialog:
+                backGroundB.Draw(spriteBatch, scrollPosition);
+                if (SuperGame.debug)
+                {
+                    int cont = 0;
+                    /*for (int i = 0; i < listRecMap.Count; i++)
+                    {
+                        listRecMap[i].Draw(spriteBatch, -(int)scrollPosition + cont);
+                        cont += listRecMap[i].width;
+                    }*/
+                    for (int i = 0; i < rectangleMap.Length; i++)
+                    {
+                        listRecMap[rectangleMap[i]].Draw(spriteBatch, -(int)scrollPosition + cont);
+                        cont += listRecMap[rectangleMap[i]].width;
+                    }
+                }
+                //dibuja Ship, enemigos y balas
+                if (backGroundA != null)
+                    backGroundA.Draw(spriteBatch);
+                base.Draw(spriteBatch);
+                switch (currentState)
+                {
+                    case playState.levelDialog:
 
-                    spriteBatch.Draw(GRMng.blackpixeltrans,new Rectangle(100,500,1100,200),Color.White);
-                    switch (gameDialog[currentConver][currentParagraph].whoTalk)
+                        spriteBatch.Draw(GRMng.blackpixeltrans, new Rectangle(100, 500, 1100, 200), Color.White);
+                        switch (gameDialog[currentConver][currentParagraph].whoTalk)
                         {
                             case 0:
-                                spriteBatch.Draw(GRMng.texturePilot, new Rectangle(110,510,280,180), Color.White);
+                                spriteBatch.Draw(GRMng.texturePilot, new Rectangle(110, 510, 280, 180), Color.White);
                                 break;
                             case 1:
-                                spriteBatch.Draw(GRMng.textureCaptain, new Rectangle(110,510,280,180), Color.White);
+                                spriteBatch.Draw(GRMng.textureCaptain, new Rectangle(110, 510, 280, 180), Color.White);
                                 break;
                         }
-                    
-                    //DrawString(SpriteFont spriteFont, StringBuilder text, Vector2 position, Color color, float rotation, Vector2 origin, float scale, SpriteEffects effects, float layerDepth);
-                    spriteBatch.DrawString(SuperGame.fontDebug, gameDialog[currentConver][currentParagraph].whatSaid, new Vector2(400, 510), Color.White, 0, new Vector2(0, 0), 2, SpriteEffects.None, 0);
-                    break;
 
-                case playState.beginLevel:
+                        //DrawString(SpriteFont spriteFont, StringBuilder text, Vector2 position, Color color, float rotation, Vector2 origin, float scale, SpriteEffects effects, float layerDepth);
+                        spriteBatch.DrawString(SuperGame.fontDebug, gameDialog[currentConver][currentParagraph].whatSaid, new Vector2(400, 510), Color.White, 0, new Vector2(0, 0), 2, SpriteEffects.None, 0);
+                        break;
 
-                    spriteGetReady.DrawRectangle(spriteBatch);
-                    spriteNum.DrawRectangle(spriteBatch);
-                    break;
+                    case playState.beginLevel:
 
-                case playState.playing:
+                        spriteGetReady.DrawRectangle(spriteBatch);
+                        spriteNum.DrawRectangle(spriteBatch);
+                        break;
 
-                    if (SuperGame.debug)
-                    {
-                        spriteBatch.DrawString(SuperGame.fontDebug, "Camera=" + camera.position + ".",
-                            new Vector2(5, 3), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-                        spriteBatch.DrawString(SuperGame.fontDebug, "Ship=" + ship.position + ".",
-                            new Vector2(5, 15), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-                    }
-                    break;
-                case playState.levelComplete:
-                    spriteGetReady.DrawRectangle(spriteBatch);
-                    spriteNum.DrawRectangle(spriteBatch);
-                    break;
+                    case playState.playing:
 
+                        if (SuperGame.debug)
+                        {
+                            spriteBatch.DrawString(SuperGame.fontDebug, "Camera=" + camera.position + ".",
+                                new Vector2(5, 3), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                            spriteBatch.DrawString(SuperGame.fontDebug, "Ship=" + ship.position + ".",
+                                new Vector2(5, 15), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                            // number of enemies:
+                            spriteBatch.DrawString(SuperGame.fontDebug, "Enemies in game = " + enemies.Count() + ".",
+                            new Vector2(5, 27), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                        }
+                        break;
+                    case playState.levelComplete:
+                        spriteGetReady.DrawRectangle(spriteBatch);
+                        spriteNum.DrawRectangle(spriteBatch);
+                        break;
+
+                }
             }
          }
 

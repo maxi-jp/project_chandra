@@ -169,7 +169,9 @@ namespace IS_XNA_Shooter
 
             // All the enemies and the shots must be erased:
             for (int i = 0; i < enemies.Count(); i++)
-                if (enemies[i].IsActive())
+                if (enemies[i].IsActive() && !(enemies[i].GetType() == typeof(FinalBoss1) || enemies[i].GetType() == typeof(EnemyFinalHeroe2) ||
+                     enemies[i].GetType() == typeof(BotFinalBoss) || enemies[i].GetType() == typeof(FinalBossHeroe1) ||
+                     enemies[i].GetType() == typeof(FinalBoss1Turret2) || enemies[i].GetType() == typeof(FinalBoss1Turret1)))
                     enemies[i].Kill();
             shots.Clear();
 

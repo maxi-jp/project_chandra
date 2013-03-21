@@ -129,8 +129,6 @@ namespace IS_XNA_Shooter
         
         public override void Update(float deltaTime)
         {
-            if (ship.GetLife() > 0)
-            {
                 base.Update(deltaTime);
 
                 if (phase == 1 && !isDead()) phase1(deltaTime);
@@ -155,7 +153,7 @@ namespace IS_XNA_Shooter
                             // before from the game in: Game.PlayerDead() -> Enemy.Kill()
                             if (ship.GetLife() > 0)
                                 shots.RemoveAt(i);
-                        }
+                        
                     }
                 }
             }
@@ -204,7 +202,7 @@ namespace IS_XNA_Shooter
                 ShotWings();
             timeToShotWingsAux -= deltaTime;
 
-            if (life < 39000) 
+            if (life < 25000) 
                 phase = 2;
         }
 
@@ -267,7 +265,7 @@ namespace IS_XNA_Shooter
                 secondsBot = 0;
             }
 
-            if (life < 38000) phase = 3;
+            if (life < 15000) phase = 3;
         }
 
 
@@ -280,8 +278,8 @@ namespace IS_XNA_Shooter
 
                
 
-                if (position.X + this.frameWidth/2 < SuperGame.screenWidth) { position.X += deltaTime * velocity*3; }
-                else if (position.X + this.frameWidth/2 > SuperGame.screenWidth) { position.X -= deltaTime * velocity*3; }
+                if (position.X + this.frameWidth/2 < SuperGame.screenWidth) { position.X += deltaTime * velocity*1.2f; }
+                else if (position.X + this.frameWidth/2 > SuperGame.screenWidth) { position.X -= deltaTime * velocity*1.2f; }
 
                 if ((position.X + this.frameWidth/2 == SuperGame.screenWidth)) { movingToBack = false; }
             }

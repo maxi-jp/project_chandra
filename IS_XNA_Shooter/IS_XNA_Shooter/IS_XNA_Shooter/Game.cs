@@ -88,13 +88,6 @@ namespace IS_XNA_Shooter
                     shots.RemoveAt(i);
             }
 
-            /*for (int i = 0; i < explosions.Count(); i++)// explosiones
-            {
-                explosions[i].Update(deltaTime);
-                if (!explosions[i].isActive())
-                    explosions.RemoveAt(i);
-            }*/
-
             // player-shots vs enemies collisions:
             for (int i = 0; i < enemies.Count(); i++)
             {
@@ -151,10 +144,6 @@ namespace IS_XNA_Shooter
                 shot.Draw(spriteBatch);
 
             ship.Draw(spriteBatch);
-
-            /*foreach (Explosion e in explosions)
-                if (e.isActive())
-                    e.Draw(spriteBatch);*/
 
             hub.Draw(spriteBatch);
         }

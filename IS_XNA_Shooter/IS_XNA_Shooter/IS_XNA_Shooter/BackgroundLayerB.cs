@@ -87,6 +87,7 @@ namespace IS_XNA_Shooter
             else
             {
                 int cont = (int)positions[0].X;
+                if (rectangleMap != null) // OJO: ÑAPA
                 for (int i = 0; i < rectangleMap.Length; i++)
                 {
                     spriteBatch.Draw(textures[rectangleMap[i]], new Vector2(-scrollPosition + cont, 0), null,

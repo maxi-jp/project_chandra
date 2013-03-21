@@ -31,7 +31,9 @@ namespace IS_XNA_Shooter
         public Sprite spriteGetReady;
         public Sprite spriteNum;
         private float timeToResumeAux;
-        private int currentConver=0;
+
+        // Attributes for the conversations 
+        private int currentConver = 0;
         private int currentParagraph=0;
         private List<List<Talk>> gameDialog;
 
@@ -54,24 +56,34 @@ namespace IS_XNA_Shooter
         //---------------------------
         //----    Constructor    ----
         //---------------------------
-        public GameStory(SuperGame mainGame, Player player, int numLevel, Texture2D textureAim, float shipVelocity, int shipLife)
+        public GameStory(SuperGame mainGame, Player player, int numLevel, Texture2D textureAim,
+            float shipVelocity, int shipLife)
             : base(mainGame,player, shipVelocity, shipLife)
         {
             hub = new IngameHubA(GRMng.hubBase, mainGame.player.GetLife());
             camera = new Camera();
             shots = new List<Shot>();
+
             this.textureAim = textureAim;
             this.shipVelocity = shipVelocity;
             this.shipLife = shipLife;
+
+            // levels which compounds the Story
             levelList = new List<int>();
-            levelList.Add(0); levelList.Add(1); levelList.Add(0); // add 3 levels
+            levelList.Add(0); // level for GameB
+            levelList.Add(1); // level for GameA
+            levelList.Add(2); // level for GameB final boss
+
             gameDialog = new List<List<Talk>>();
             readConversationXML(0);
+
             setTimeToResume();
             spriteGetReady = new Sprite(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight / 2 - 90), 0,
                GRMng.getready321, new Rectangle(0, 0, 512, 80));
             spriteNum = new Sprite(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight / 2 + 80), 0,
                 GRMng.getready321, new Rectangle(0, 80, 170, 150));
+
+            // Initialized the first Level from the story
             initLevelB(1);
         }
 
@@ -80,8 +92,9 @@ namespace IS_XNA_Shooter
         /// </summary>
         private void setTimeToResume()
         {
-            if (currentConver < gameDialog.Count && currentParagraph < gameDialog[currentConver].Count) //if not out of range
-            timeToResumeAux= gameDialog[currentConver][currentParagraph].whatSaid.Length * 0.07f;
+            if ((currentConver < gameDialog.Count) &&
+                (currentParagraph < gameDialog[currentConver].Count)) //if not out of range
+                timeToResumeAux = gameDialog[currentConver][currentParagraph].whatSaid.Length * 0.07f;
         }
 
         private void initLevelB(int numLevel)
@@ -92,8 +105,13 @@ namespace IS_XNA_Shooter
 
             listRecMap = new List<RectangleMap>();
 
-            hub = new IngameHubA(GRMng.hubBase, mainGame.player.GetLife());
-            level = new LevelB(camera, numLevel, enemies, listRecMap);
+            hub = new IngameHubA(GRMng.hubBase, player.GetLife());
+
+            if (numLevel == 1)
+                level = new LevelB(camera, numLevel, enemies, listRecMap);
+            else // OJO: esto es una ÑAPA de cojones
+                level = new LevelB(camera, numLevel, enemies);
+
             rectangleMap = ((LevelB)level).GetLevelMap();
             backGroundB = new BackgroundGameB(level);
 
@@ -111,7 +129,7 @@ namespace IS_XNA_Shooter
             ship = new ShipB(this, camera, level, Vector2.Zero, 0, points,
                 GRMng.frameWidthPA1, GRMng.frameHeightPA1, GRMng.numAnimsPA1, GRMng.frameCountPA1,
                 GRMng.loopingPA1, SuperGame.frameTime24, GRMng.texturePA1,
-                shipVelocity, shipLife, shots);
+                shipVelocity + 100, shipLife, shots);
 
             level.setShip(ship);
 
@@ -135,7 +153,7 @@ namespace IS_XNA_Shooter
 
         private void initLevelA(int numLevel, Texture2D textureAim)
         {
-            hub = new IngameHubA(GRMng.hubBase, 3); // three lifes because yes
+            hub = new IngameHubA(GRMng.hubBase, player.GetLife());
             level = new LevelA(camera, numLevel, enemies);
             backGroundA = new BackgroundGameA(camera, level);
             //backGroundB.Dispose();
@@ -154,11 +172,9 @@ namespace IS_XNA_Shooter
             points[7] = new Vector2(15, 45);
             ship = new ShipA(this,camera, level, Vector2.Zero, 0, points, GRMng.frameWidthPA1, GRMng.frameHeightPA1,
                 GRMng.numAnimsPA1, GRMng.frameCountPA1, GRMng.loopingPA1, SuperGame.frameTime24, 
-                GRMng.texturePA1, shipVelocity + 200, shipLife, shots);
-
+                GRMng.texturePA1, shipVelocity, shipLife, shots);
 
             //aimPointSprite = new Sprite(true, Vector2.Zero, 0, textureAim);
-
 
             level.setShip(ship);
             camera.setShip(ship);            
@@ -210,20 +226,56 @@ namespace IS_XNA_Shooter
                     /*if (backGroundB != null)
                         backGroundB.Update(deltaTime);*/
                     break;
+
                 case playState.playing:
+
                     base.Update(gameTime);
+
                     if (level.getFinish())
                     {
                         currentState = playState.levelComplete;
                     }
+
+                    if (backGroundB != null)
+                    {
+                        backGroundB.Update(deltaTime);
+
+                        // player-walls(rectangles) collision:
+                        /*int cont = 0;
+                        Rectangle recAux;
+                        for (int i = 0; i < listRecMap.Count(); i++)
+                        {
+                            for (int j = 0; j < listRecMap[i].rectangleList.Count; j++)
+                            {
+                                recAux = new Rectangle(
+                                    listRecMap[i].rectangleList[j].X - (int)scrollPosition + cont,
+                                    listRecMap[i].rectangleList[j].Y,
+                                    listRecMap[i].rectangleList[j].Width,
+                                    listRecMap[i].rectangleList[j].Height);
+                                for (int k = 0; k < ship.collider.points.Length; k++)
+                                {
+                                    if (recAux.Contains((int)ship.collider.points[k].X, (int)ship.collider.points[k].Y))
+                                        ship.Kill();
+                                }
+                            }
+                            cont += listRecMap[rectangleMap[i]].width;
+                        }*/
+                    }
+
                     /*if (backGroundB!=null)
                         backGroundB.Update(deltaTime);*/
                     break;
+
                 case playState.shipDestroyed:
+
                     break;
+
                 case playState.levelComplete:
+
                     base.Update(gameTime);
-                     timeToResumeAux -= deltaTime;
+
+                    timeToResumeAux -= deltaTime;
+
                     if (timeToResumeAux <= 0)
                     {
                         ship.EraseShots();
@@ -236,14 +288,12 @@ namespace IS_XNA_Shooter
                         timeToResumeAux = 5f;
                     }
                     else if (timeToResumeAux >= 5f * 2 / 3)
-                    {
                         spriteNum.SetRectangle(new Rectangle(341, 80, 170, 150));
-                    }
                     else if (timeToResumeAux >= 5f / 3)
                         spriteNum.SetRectangle(new Rectangle(171, 80, 170, 150));
-
                     else
                         spriteNum.SetRectangle(new Rectangle(0, 80, 170, 150));
+
                     break;
             }
             if (backGroundB != null)
@@ -251,7 +301,7 @@ namespace IS_XNA_Shooter
                 scrollPosition += scrollVelocity * deltaTime;
                 backGroundB.Update(deltaTime);
                 // player-walls(rectangles) collision:
-                int cont = 0;
+                /*int cont = 0;
                 Rectangle recAux;
                 for (int i = 0; i < listRecMap.Count(); i++)
                 {
@@ -269,23 +319,9 @@ namespace IS_XNA_Shooter
                         }
                     }
                     cont += listRecMap[rectangleMap[i]].width;
-                }
+                }*/
             }
-        }
-
-        private void initNextLevel(int level)
-        {
-            enemies.Clear();
-                switch (level)
-                {
-                    case 0:
-                        initLevelB(1);
-                        break;
-                    case 1:
-                        initLevelA(1, textureAim);
-                        break;
-                }
-        }
+        } // Update
 
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -296,67 +332,71 @@ namespace IS_XNA_Shooter
                 if (SuperGame.debug)
                 {
                     int cont = 0;
-                    /*for (int i = 0; i < listRecMap.Count; i++)
-                    {
-                        listRecMap[i].Draw(spriteBatch, -(int)scrollPosition + cont);
-                        cont += listRecMap[i].width;
-                    }*/
+                    if (rectangleMap != null) // OJO: ÑAPA
                     for (int i = 0; i < rectangleMap.Length; i++)
                     {
                         listRecMap[rectangleMap[i]].Draw(spriteBatch, -(int)scrollPosition + cont);
                         cont += listRecMap[rectangleMap[i]].width;
                     }
                 }
-                //dibuja Ship, enemigos y balas
-                if (backGroundA != null)
-                    backGroundA.Draw(spriteBatch);
-                base.Draw(spriteBatch);
-                switch (currentState)
-                {
-                    case playState.levelDialog:
-
-                        spriteBatch.Draw(GRMng.blackpixeltrans, new Rectangle(100, 500, 1100, 200), Color.White);
-                        switch (gameDialog[currentConver][currentParagraph].whoTalk)
-                        {
-                            case 0:
-                                spriteBatch.Draw(GRMng.texturePilot, new Rectangle(110, 510, 280, 180), Color.White);
-                                break;
-                            case 1:
-                                spriteBatch.Draw(GRMng.textureCaptain, new Rectangle(110, 510, 280, 180), Color.White);
-                                break;
-                        }
-
-                        //DrawString(SpriteFont spriteFont, StringBuilder text, Vector2 position, Color color, float rotation, Vector2 origin, float scale, SpriteEffects effects, float layerDepth);
-                        spriteBatch.DrawString(SuperGame.fontDebug, gameDialog[currentConver][currentParagraph].whatSaid, new Vector2(400, 510), Color.White, 0, new Vector2(0, 0), 2, SpriteEffects.None, 0);
-                        break;
-
-                    case playState.beginLevel:
-
-                        spriteGetReady.DrawRectangle(spriteBatch);
-                        spriteNum.DrawRectangle(spriteBatch);
-                        break;
-
-                    case playState.playing:
-
-                        if (SuperGame.debug)
-                        {
-                            spriteBatch.DrawString(SuperGame.fontDebug, "Camera=" + camera.position + ".",
-                                new Vector2(5, 3), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-                            spriteBatch.DrawString(SuperGame.fontDebug, "Ship=" + ship.position + ".",
-                                new Vector2(5, 15), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-                            // number of enemies:
-                            spriteBatch.DrawString(SuperGame.fontDebug, "Enemies in game = " + enemies.Count() + ".",
-                            new Vector2(5, 27), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-                        }
-                        break;
-                    case playState.levelComplete:
-                        spriteGetReady.DrawRectangle(spriteBatch);
-                        spriteNum.DrawRectangle(spriteBatch);
-                        break;
-
-                }
             }
-         }
+            if (backGroundA != null)
+                backGroundA.Draw(spriteBatch);
+
+            //dibuja Ship, enemigos y balas
+            base.Draw(spriteBatch);
+
+            switch (currentState)
+            {
+                case playState.levelDialog:
+                        
+                    spriteBatch.Draw(GRMng.blackpixeltrans, new Rectangle(100, 500, 1100, 200), Color.White);
+                    switch (gameDialog[currentConver][currentParagraph].whoTalk)
+                    {
+                        case 0:
+                            spriteBatch.Draw(GRMng.texturePilot, new Rectangle(110, 510, 280, 180), Color.White);
+                            break;
+                        case 1:
+                            spriteBatch.Draw(GRMng.textureCaptain, new Rectangle(110, 510, 280, 180), Color.White);
+                            break;
+                    }
+
+                    spriteBatch.DrawString(SuperGame.fontDebug, gameDialog[currentConver][currentParagraph].whatSaid,
+                        new Vector2(400, 510), Color.White, 0, new Vector2(0, 0), 2, SpriteEffects.None, 0);
+
+                    break;
+
+                case playState.beginLevel:
+
+                    spriteGetReady.DrawRectangle(spriteBatch);
+                    spriteNum.DrawRectangle(spriteBatch);
+
+                    break;
+
+                case playState.playing:
+
+                    if (SuperGame.debug)
+                    {
+                        spriteBatch.DrawString(SuperGame.fontDebug, "Camera=" + camera.position + ".",
+                            new Vector2(5, 3), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                        spriteBatch.DrawString(SuperGame.fontDebug, "Ship=" + ship.position + ".",
+                            new Vector2(5, 15), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                        // number of enemies:
+                        spriteBatch.DrawString(SuperGame.fontDebug, "Enemies in game = " + enemies.Count() + ".",
+                            new Vector2(5, 27), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                    }
+
+                    break;
+
+                case playState.levelComplete:
+
+                    spriteGetReady.DrawRectangle(spriteBatch);
+                    spriteNum.DrawRectangle(spriteBatch);
+
+                    break;
+            }
+
+         } // Draw
 
         //--------------------------------
         //----    Métodos privados    ----
@@ -378,6 +418,25 @@ namespace IS_XNA_Shooter
             return points;
         }
 
+        private void initNextLevel(int level)
+        {
+            enemies.Clear();
+            switch (level)
+            {
+                case 0:
+                    initLevelB(1);
+                    break;
+
+                case 1:
+                    initLevelA(1, textureAim);
+                    break;
+
+                case 2:
+                    initLevelB(2);
+                    break;
+            }
+        }
+
         /// <summary>
         /// Reads the conversation of the level to show it.
         /// </summary>
@@ -389,35 +448,35 @@ namespace IS_XNA_Shooter
             try
             {
                 //  Leer los datos del archivo
-                switch (level) 
+                switch (level)
                 {
                     case 0:
-                Talk talk;
-                int i = 1;
-                XmlDocument dialog = XMLLvlMng.dialog1;
+                        Talk talk;
+                        int i = 1;
+                        XmlDocument dialog = XMLLvlMng.dialog1;
 
-                XmlNodeList conversation = dialog.GetElementsByTagName("conversation" + i);
+                        XmlNodeList conversation = dialog.GetElementsByTagName("conversation" + i);
 
-                while (conversation != null)
-                {
+                        while (conversation != null)
+                        {
 
-                    XmlNodeList lista =
-                        ((XmlElement)conversation[0]).GetElementsByTagName("paragraph");
-                    List<Talk> conver = new List<Talk>();
-                    foreach (XmlElement nodo in lista)
-                    {
-                        talk = new Talk();
-                        XmlAttributeCollection paragraph = nodo.Attributes;
-                        talk.whoTalk = Convert.ToInt16(paragraph[0].Value);
-                        talk.whatSaid = Convert.ToString(paragraph[1].Value);
-                        
-                        conver.Add(talk);
+                            XmlNodeList lista =
+                                ((XmlElement)conversation[0]).GetElementsByTagName("paragraph");
+                            List<Talk> conver = new List<Talk>();
+                            foreach (XmlElement nodo in lista)
+                            {
+                                talk = new Talk();
+                                XmlAttributeCollection paragraph = nodo.Attributes;
+                                talk.whoTalk = Convert.ToInt16(paragraph[0].Value);
+                                talk.whatSaid = Convert.ToString(paragraph[1].Value);
 
-                    }
-                    gameDialog.Add(conver);
-                    i++;
-                    conversation = dialog.GetElementsByTagName("conversation" + i);
-                    }
+                                conver.Add(talk);
+
+                            }
+                            gameDialog.Add(conver);
+                            i++;
+                            conversation = dialog.GetElementsByTagName("conversation" + i);
+                        }
                         break;
                 }
 
@@ -432,7 +491,7 @@ namespace IS_XNA_Shooter
                                 Console.WriteLine("        La clave es '{0}' y el valor es: {1}", entrada.Key, entrada.Value);
                         }*/
             }
+        } // readConversationXML
 
-        }
-    }//GameB
+    } // class GameB
 }

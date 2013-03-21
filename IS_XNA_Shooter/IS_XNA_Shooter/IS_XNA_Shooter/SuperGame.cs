@@ -448,13 +448,9 @@ namespace IS_XNA_Shooter
                     break;
             }
 
-            // fps:
-            /*if (debug)
-                 spriteBatch.DrawString(SuperGame.fontDebug,
-                     "FPS=" + (float)1 / gameTime.ElapsedGameTime.Milliseconds * 1000 + ".",
-                     new Vector2(screenWidth-100, 3), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);*/
             if (debug)
             {
+                // Frame counters
                 spriteBatch.DrawString(SuperGame.fontDebug, "Draw FPS=" + drawFramesCounter + ".",
                     new Vector2(screenWidth - 150, 3), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
                 spriteBatch.DrawString(SuperGame.fontDebug, "Update FPS=" + updateFramesCounter + ".",
@@ -487,27 +483,25 @@ namespace IS_XNA_Shooter
         /// </summary>
         public void NewStory()
         {
-
             grManager.LoadContent(4); // Load the gameB's level 1 resources
             grManager.LoadContent(3); // Load the gameA's level 1 resources
             audio.LoadContent(1);
             LvlMng.LoadContent(1); // Load the rectangles
             LvlMng.LoadContent(0); // Load the levelA's enemies
 
-            //include video
+            // introduction video
             videoPlayer = new VideoPlayer();
             videoPlayer.Play(GRMng.videoIntroStory);
             currentState = gameState.playingVideo;
 
             duration = 0;
 
-            game = new GameStory(this, player,1, GRMng.textureAim,
+            game = new GameStory(this, player, 1, GRMng.textureAim,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
 
             //currentState = gameState.playing; // Change game's state to game mode
 
             grManager.UnloadContent(1); // Unload the menu's resources
-
 
             //grManager.UnloadContent(2); 
             //grManager.UnloadContent(3); // descargamos los recursos del menú
@@ -522,7 +516,6 @@ namespace IS_XNA_Shooter
             grManager.LoadContent(3);  // Load the gameA's level 1 resources
             audio.LoadContent(1);
             LvlMng.LoadContent(lvl); // Load XML
-
 
             game = new GameA(this, player, 1, GRMng.textureAim, GRMng.textureCell,
                 /*ShipVelocity*/200f, /*ShipLife*/100);

@@ -85,6 +85,12 @@ namespace IS_XNA_Shooter
                 right = new Sprite(false, new Vector2((SuperGame.screenWidth / 2) + 57 * lifesBase / 2, 0),
                     0, textureBase, sorceRecRight);
             }
+            else
+            {
+                center[lifesActual-1] = new Sprite(false,
+                    new Vector2((SuperGame.screenWidth / 2) - 57 * lifesBase / 2 + 57 * (lifesActual-1), 0),
+                    0, textureBase, sorceRecCenter1);
+            }
         }
 
     } // class IngameHubA

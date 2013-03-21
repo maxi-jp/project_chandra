@@ -40,11 +40,12 @@ namespace IS_XNA_Shooter
                 width = SuperGame.screenWidth*2;
                 height = SuperGame.screenHeight;
                 ShipInitPosition = new Vector2(100, SuperGame.screenHeight / 2);
-                
+
                 ReadRectangles();
+                LeerArchivoXML(1, 0);
 
                 this.enemies = enemies;
-                LeerArchivoXML(1,0);
+                
 
                 //Enemigo
                /* Enemy e1 = new EnemyWeakB(camera, this, new Vector2(SuperGame.screenWidth + 100, 
@@ -57,15 +58,14 @@ namespace IS_XNA_Shooter
             }
         }
 
-        public LevelB(Camera camera, int numLevel, List<Shot> shots, List<Enemy> enemiesBot)
-            : base()
+        public LevelB(Camera camera, int numLevel, List<Enemy> enemies)
+            : base(camera, numLevel, enemies)
         {
-            this.numLevel = numLevel;
-            this.camera = camera;
             width = SuperGame.screenWidth*2;
             height = SuperGame.screenHeight;
 
-            ReadRectangles();
+            this.enemies = enemies;
+            //ReadRectangles();
 
             //Enemigo
             /*Enemy e1 = new EnemyLaserB(camera, this, new Vector2(SuperGame.screenWidth - 100, 
@@ -76,12 +76,12 @@ namespace IS_XNA_Shooter
             e1.SetActive();
             enemies.Add(e1);
             */
-            /*Vector2 positionFinalBoss = new Vector2(SuperGame.screenWidth - GRMng.frameWidthFinalBoss1/2,
+            Vector2 positionFinalBoss = new Vector2(SuperGame.screenWidth - GRMng.frameWidthFinalBoss1/2,
                                                     SuperGame.screenHeight / 2);
-            Enemy finalBoss = new FinalBoss1(camera, this, positionFinalBoss, shots, enemiesBot);
+            Enemy finalBoss = new FinalBoss1(camera, this, positionFinalBoss, enemies);
             finalBoss.SetActive();
-            enemies = new List<Enemy>();
-            enemies.Add(finalBoss);*/
+
+            enemies.Add(finalBoss);
 
         }
 

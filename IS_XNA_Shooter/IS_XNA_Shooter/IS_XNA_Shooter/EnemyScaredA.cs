@@ -353,7 +353,8 @@ namespace IS_XNA_Shooter
                     {
                         // the player is hitted:
                         ship.Damage(shots[i].GetPower());
-                        shots.RemoveAt(i);
+                        if (ship.GetLife() > 0)
+                            shots.RemoveAt(i);
                     }
                 }
             }

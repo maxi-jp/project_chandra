@@ -227,7 +227,7 @@ namespace IS_XNA_Shooter
             //int resX = 1024, resY = 768;
             graphics.PreferredBackBufferWidth = resX;
             graphics.PreferredBackBufferHeight = resY;
-            graphics.IsFullScreen = true;
+            graphics.IsFullScreen = false;
 
             Content.RootDirectory = "Content";
         }
@@ -517,7 +517,7 @@ namespace IS_XNA_Shooter
             audio.LoadContent(1);
             LvlMng.LoadContent(lvl); // Load XML
 
-            game = new GameA(this, player, 1, GRMng.textureAim, GRMng.textureCell,
+            game = new GameC(this, player, 1, GRMng.textureAim, GRMng.textureCell,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
 
             currentState = gameState.playing; // Change game's state to game mode

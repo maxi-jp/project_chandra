@@ -94,7 +94,7 @@ namespace IS_XNA_Shooter
         public void setShip(Ship Ship)
         {
             this.Ship = Ship;
-            if (level != null && level is LevelA)
+            if (level != null && (level is LevelA || level is LevelC))
             {
                 position = Ship.position;
             }
@@ -106,7 +106,7 @@ namespace IS_XNA_Shooter
         /// <param name="deltaTime">The time since the last update</param>
         public void Update(float deltaTime)
         {
-            if (level is LevelA)
+            if (level is LevelA || level is LevelC)
             {
                 movement2();
             }

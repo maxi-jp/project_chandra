@@ -116,6 +116,8 @@
     <Compile Include="BackgroundLayerB.cs" />
     <Compile Include="BotFinalBoss.cs" />
     <Compile Include="Camera.cs" />
+    <Compile Include="LevelC.cs" />
+    <Compile Include="GameC.cs" />
     <Compile Include="Collider.cs" />
     <Compile Include="ControlMng.cs" />
     <Compile Include="EnemyMineShotB.cs" />

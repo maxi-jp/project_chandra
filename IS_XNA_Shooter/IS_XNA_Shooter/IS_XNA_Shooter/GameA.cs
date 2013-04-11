@@ -15,7 +15,7 @@ namespace IS_XNA_Shooter
         /* ------------------------------------------------------------- */
         private Sprite aimPointSprite;
         private BackgroundGameA backGround;
-
+        private int num;
         /* ------------------------------------------------------------- */
         /*                          CONSTRUCTOR                          */
         /* ------------------------------------------------------------- */
@@ -26,7 +26,7 @@ namespace IS_XNA_Shooter
             hub = new IngameHubA(GRMng.hubBase, mainGame.player.GetLife());
             level = new LevelA(camera, num, enemies);
             backGround = new BackgroundGameA(camera, level);
-            
+            this.num = num;
             camera.setLevel(level);
 
             Vector2[] points = new Vector2[8];
@@ -62,6 +62,12 @@ namespace IS_XNA_Shooter
             // actualizamos posicion del puntero:
             aimPointSprite.position.X = Mouse.GetState().X;
             aimPointSprite.position.Y = Mouse.GetState().Y;
+            
+            //comprobamos que el tipo de juego no sea de prueba
+            if (level.getFinish() && num!=0)
+            {
+                mainGame.ExitToMenu();
+            }
 
         } // Update
 

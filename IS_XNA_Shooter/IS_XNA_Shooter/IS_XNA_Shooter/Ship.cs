@@ -300,6 +300,7 @@ namespace IS_XNA_Shooter
             currentState = shipState.ONINVINCIBLE;
             transparency = 0;
             SetTransparency(transparency);
+            setAnim(1);
         }
 
         public void EraseShots()

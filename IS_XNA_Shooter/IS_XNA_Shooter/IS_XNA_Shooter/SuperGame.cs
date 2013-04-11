@@ -227,7 +227,7 @@ namespace IS_XNA_Shooter
             //int resX = 1024, resY = 768;
             graphics.PreferredBackBufferWidth = resX;
             graphics.PreferredBackBufferHeight = resY;
-            graphics.IsFullScreen = false;
+            graphics.IsFullScreen = true;
 
             Content.RootDirectory = "Content";
         }

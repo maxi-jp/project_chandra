@@ -396,8 +396,10 @@ namespace IS_XNA_Shooter
                 case gameState.playingVideo:
                     duration += deltaTime;
                     if (duration > GRMng.videoIntroStory.Duration.Seconds || Mouse.GetState().LeftButton == ButtonState.Pressed)
-                        {currentState = gameState.playing;
-                        videoPlayer.Stop();}
+                    {
+                        currentState = gameState.playing;
+                        videoPlayer.Stop();
+                    }
                     break;
             }
 
@@ -496,8 +498,9 @@ namespace IS_XNA_Shooter
 
             duration = 0;
 
-            game = new GameStory(this, player, 1, GRMng.textureAim,
-                /*ShipVelocity*/200f, /*ShipLife*/100);
+            /*game = new GameStory(this, player, 1, GRMng.textureAim,
+                ShipVelocity200f, ShipLife100);*/
+            game = new GameStory(this, player, /*ShipVelocity*/200f, /*ShipLife*/100);
 
             //currentState = gameState.playing; // Change game's state to game mode
 

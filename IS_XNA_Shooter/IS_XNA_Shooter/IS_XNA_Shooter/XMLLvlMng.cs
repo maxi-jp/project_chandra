@@ -44,10 +44,13 @@ namespace IS_XNA_Shooter
                 case 1: // gameB
                     rect1 = new XmlDocument();
                     rect1.Load("../../../../IS_XNA_ShooterContent/Levels/levelRectangle1.xml");
-                    dialog1 = new XmlDocument();
-                    dialog1.Load("../../../../IS_XNA_ShooterContent/Levels/dialog1.xml");
                     lvl1B = new XmlDocument();
                     lvl1B.Load("../../../../IS_XNA_ShooterContent/Levels/level1B.xml");
+                    break;
+
+                case 2: // dialogs
+                    dialog1 = new XmlDocument();
+                    dialog1.Load("../../../../IS_XNA_ShooterContent/Levels/dialog1.xml");
                     break;
             }
 

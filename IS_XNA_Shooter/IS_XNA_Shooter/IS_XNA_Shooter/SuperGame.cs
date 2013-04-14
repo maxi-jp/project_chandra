@@ -485,12 +485,7 @@ namespace IS_XNA_Shooter
         /// </summary>
         public void NewStory()
         {
-            grManager.LoadContent(4); // Load the gameB's level 1 resources
-            grManager.LoadContent(3); // Load the gameA's level 1 resources
-            audio.LoadContent(1);
-            LvlMng.LoadContent(1); // Load the rectangles
-            LvlMng.LoadContent(0); // Load the levelA's enemies
-
+            grManager.LoadVideo(1);
             // introduction video
             videoPlayer = new VideoPlayer();
             videoPlayer.Play(GRMng.videoIntroStory);
@@ -500,7 +495,8 @@ namespace IS_XNA_Shooter
 
             /*game = new GameStory(this, player, 1, GRMng.textureAim,
                 ShipVelocity200f, ShipLife100);*/
-            game = new GameStory(this, player, /*ShipVelocity*/200f, /*ShipLife*/100);
+            game = new GameStory(this, grManager, audio, LvlMng, player,
+                /*ShipVelocity*/200f, /*ShipLife*/100);
 
             //currentState = gameState.playing; // Change game's state to game mode
 
@@ -594,6 +590,16 @@ namespace IS_XNA_Shooter
         public void Resume()
         {
             currentState = gameState.playing;
+        }
+
+        /// <summary>
+        /// Enter in the main menu from the start splash screen
+        /// </summary>
+        public void EnterToMenu()
+        {
+            grManager.UnloadContent(0); // unload the gamestartmenu
+            currentState = gameState.mainMenu;
+            menu.menuState = Menu.MenuState.main;
         }
 
         /// <summary>

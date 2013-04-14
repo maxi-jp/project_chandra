@@ -24,6 +24,7 @@ namespace IS_XNA_Shooter
             switch (num)
             {
                 case 0: // Level for testing enemies
+                    levelEndCond = LevelEndCondition.infinite;
                     width = 1200;
                     height = 800;
                     ShipInitPosition = new Vector2(width / 2, height / 2);
@@ -34,6 +35,7 @@ namespace IS_XNA_Shooter
                     break;
 
                 case 1:
+                    levelEndCond = LevelEndCondition.killemall;
                     width = 1200;
                     height = 800;
                     ShipInitPosition = new Vector2(width / 2, height / 2);
@@ -50,7 +52,6 @@ namespace IS_XNA_Shooter
 
         public override void Update(float deltaTime)
         {
-
             int i = 0; // iterator for the list of enemies
             bool stillAlive = false; // is true if there is any enemie alive
             //the next loop searches an enemy alive for controlling the end of level 

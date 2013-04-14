@@ -273,6 +273,7 @@ namespace IS_XNA_Shooter
             // 2=Ingame Menu
             // 3=GameA level 1
             // 4=GameB level 1
+            // 98=characters
             // 99=GameOver Menu
 
             switch (i)
@@ -330,8 +331,6 @@ namespace IS_XNA_Shooter
                 case 4: // GameB nivel 1
                     LoadIngameMenu();
 
-                    videoIntroStory = content.Load<Video>("Video/VideoIntroProjectChandra");
-
                     hubBase = content.Load<Texture2D>("Graphics/Hub/base256");
 
                     texturePA1 = content.Load<Texture2D>("Graphics/Ships/sprites80x80");
@@ -346,9 +345,6 @@ namespace IS_XNA_Shooter
                     textureEL = content.Load<Texture2D>("Graphics/Ships/enemyLaser");
                     textureELBullet = content.Load<Texture2D>("Graphics/yellowpixel");
                     textureRed = content.Load<Texture2D>("Graphics/Rojazo");
-                    textureCaptain = content.Load<Texture2D>("Graphics/Images/Captain");
-                    texturePilot = content.Load<Texture2D>("Graphics/Images/Pilot");
-                    texturePilotCyborg = content.Load<Texture2D>("Graphics/Images/PilotCyborg");
 
                     textureBgB00 = content.Load<Texture2D>("Graphics/Backgrounds/bgB00");
                     textureBgGame1A = content.Load<Texture2D>("Graphics/Backgrounds/backgroundTile1");
@@ -364,6 +360,12 @@ namespace IS_XNA_Shooter
                     textureShotFinalBoss1 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/shotFinalBoss1");
                     textureBFB = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBossPhase2");
 
+                    break;
+
+                case 98: // characters:
+                    textureCaptain = content.Load<Texture2D>("Graphics/Images/Captain");
+                    texturePilot = content.Load<Texture2D>("Graphics/Images/Pilot");
+                    texturePilotCyborg = content.Load<Texture2D>("Graphics/Images/PilotCyborg");
                     break;
 
                 case 99: // menu game over:
@@ -391,6 +393,7 @@ namespace IS_XNA_Shooter
             // 2=Ingame Menu
             // 3=GameA level 1
             // 4=GameB level 1
+            // 98=characters
             // 99=GameOver Menu
 
             switch (i)
@@ -456,9 +459,6 @@ namespace IS_XNA_Shooter
 
                     textureRed = null;
                     textureBgB00 = null;
-                    textureCaptain = null;
-                    texturePilot = null;
-                    texturePilotCyborg = null;
                     textureBgGame1A = null;
                     textureBg00 = null;
                     textureBg01 = null;
@@ -474,6 +474,12 @@ namespace IS_XNA_Shooter
 
                     break;
 
+                case 98: // characters:
+                    textureCaptain = null;
+                    texturePilot = null;
+                    texturePilotCyborg = null;
+                    break;
+
                 case 99:
                     menuGameOver = null;
                     gameOverSplash = null;
@@ -481,6 +487,34 @@ namespace IS_XNA_Shooter
 
             }
         } // UnloadContent
+
+        public void LoadVideo(int i)
+        {
+            switch (i)
+            {
+                case 0:
+
+                    break;
+
+                case 1:
+                    videoIntroStory = content.Load<Video>("Video/VideoIntroProjectChandra");
+                    break;
+            }
+        } // LoadVideo
+
+        public void UnloadVideo(int i)
+        {
+            switch (i)
+            {
+                case 0:
+
+                    break;
+
+                case 1:
+                    videoIntroStory = null;
+                    break;
+            }
+        } // UnloadVideo
 
         private void LoadStart()
         {

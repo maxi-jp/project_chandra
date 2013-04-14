@@ -63,12 +63,6 @@ namespace IS_XNA_Shooter
             aimPointSprite.position.X = Mouse.GetState().X;
             aimPointSprite.position.Y = Mouse.GetState().Y;
             
-            //comprobamos que el tipo de juego no sea de prueba
-            if (level.getFinish() && num!=0)
-            {
-                mainGame.ExitToMenu();
-            }
-
         } // Update
 
         public override void Draw(SpriteBatch spriteBatch)

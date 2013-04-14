@@ -65,7 +65,7 @@ namespace IS_XNA_Shooter
             if (itemMainMenu.Unclick(X, Y))
             {
                 Audio.PlayEffect("digitalAcent01");
-                mainGame.ExitToMenu();
+                mainGame.EnterToMenu();
             }
             else if (itemQuit.Unclick(X, Y))
             {

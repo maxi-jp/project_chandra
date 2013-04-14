@@ -44,7 +44,7 @@ namespace IS_XNA_Shooter
             enemiesBot = new List<Enemy>();
             shots = new List<Shot>();
             explosions = new List<Explosion>();
-
+            
             //Audio.PlayMusic(1);
         }
 
@@ -61,7 +61,6 @@ namespace IS_XNA_Shooter
 
             for (int i = 0; i < enemies.Count(); i++)   // enemies
             {
-
                 if (enemies[i].IsErasable())
                     enemies.RemoveAt(i);
                 else if (enemies[i].IsActive())
@@ -72,7 +71,6 @@ namespace IS_XNA_Shooter
 
             for (int i = 0; i < enemiesBot.Count(); i++)   // enemies
             {
-
                 if (enemiesBot[i].IsErasable())
                     enemiesBot.RemoveAt(i);
                 else if (enemiesBot[i].IsActive())
@@ -166,6 +164,11 @@ namespace IS_XNA_Shooter
 
             if (player.GetLife() == 0)
                 mainGame.GameOver();
+        }
+
+        public bool IsFinished()
+        {
+            return level.IsFinished();
         }
 
     } // class Game

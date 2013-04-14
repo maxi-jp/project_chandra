@@ -17,25 +17,31 @@ namespace IS_XNA_Shooter
         public int height;
         protected List<Enemy> enemies;
         protected int numLevel;
-        protected bool levelFinished = false;
+
+        protected enum LevelEndCondition
+        {
+            killemall,      /* Kill all the enemies of the level */
+            survivetime,    /* Survive the time given */
+            reachfinalpoint,/* Reach one point in the level */
+            infinite        /* Never ends */
+        };
+        protected LevelEndCondition levelEndCond;
+        protected bool levelFinished;
 
         /* ------------------- CONSTRUCTORES ------------------- */
-        public Level() 
-        { 
-            //Lo ponemos para que compile LevelB ya que no tiene camara y demas atributos.
-        }
-
         public Level(Camera camera, int num, List<Enemy> enemies)
         {
             this.camera = camera;
             this.numLevel = num;
             this.enemies = enemies;
+
+            levelFinished = false;
         }
 
         public virtual void Update(float deltaTime)
         {
-            
-        }
+
+        } // Update
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
@@ -48,9 +54,6 @@ namespace IS_XNA_Shooter
 
             try
             {
-                
-
-
                 //  Leer los datos del archivo
                 String enemyType;
                 float positionX;
@@ -142,13 +145,13 @@ namespace IS_XNA_Shooter
             }
             catch (Exception e)
             {/*
-                        System.Diagnostics.Debug.WriteLine("Excepción al leer fichero XML: " + e.Message);
-                        if (e.Data != null)
-                        {
-                            System.Diagnostics.Debug.WriteLine("    Detalles extras:");
-                            foreach (DictionaryEntry entrada in e.Data)
-                                Console.WriteLine("        La clave es '{0}' y el valor es: {1}", entrada.Key, entrada.Value);
-                        }*/
+                System.Diagnostics.Debug.WriteLine("Excepción al leer fichero XML: " + e.Message);
+                if (e.Data != null)
+                {
+                    System.Diagnostics.Debug.WriteLine("    Detalles extras:");
+                    foreach (DictionaryEntry entrada in e.Data)
+                        Console.WriteLine("        La clave es '{0}' y el valor es: {1}", entrada.Key, entrada.Value);
+                }*/
             }
         }   //  end LeerArchivoXML()
 
@@ -161,8 +164,14 @@ namespace IS_XNA_Shooter
         }
 
         // This method returns true when the level is finished.
-        public bool getFinish()
+        public bool IsFinished()
         {
+            switch (levelEndCond)
+            {
+                case LevelEndCondition.killemall:
+                    levelFinished = (enemies.Count() == 0);
+                    break;
+            }
             return levelFinished;
         }
 

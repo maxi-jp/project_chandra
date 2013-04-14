@@ -72,12 +72,6 @@ namespace IS_XNA_Shooter
 
             backGround.Update(deltaTime);
 
-            //comprobamos que el tipo de juego no sea de prueba
-            if (level.getFinish())
-            {
-                mainGame.ExitToMenu();
-            }
-
             // player-walls(rectangles) collision:
             int cont = 0;
             Rectangle recAux;

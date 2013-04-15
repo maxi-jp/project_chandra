@@ -108,61 +108,62 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Animation.cs" />
-    <Compile Include="Audio.cs" />
-    <Compile Include="BackgroundGameA.cs" />
-    <Compile Include="BackgroundGameB.cs" />
-    <Compile Include="BackgroundLayer.cs" />
-    <Compile Include="BackgroundLayerB.cs" />
-    <Compile Include="BotFinalBoss.cs" />
-    <Compile Include="Camera.cs" />
-    <Compile Include="Collider.cs" />
-    <Compile Include="ControlMng.cs" />
-    <Compile Include="EnemyMineShotB.cs" />
-    <Compile Include="EnemyWeakShotB.cs" />
-    <Compile Include="MenuStart.cs" />
-    <Compile Include="EnemyBeamA.cs" />
-    <Compile Include="EnemyFinalHeroe2.cs" />
-    <Compile Include="EnemyLaserA.cs" />
-    <Compile Include="EnemyLaserB.cs" />
-    <Compile Include="EnemyMineShotA.cs" />
-    <Compile Include="EnemyScaredA.cs" />
-    <Compile Include="EnemyWeakA.cs" />
-    <Compile Include="EnemyWeakB.cs" />
-    <Compile Include="EnemyWeakShotA.cs" />
-    <Compile Include="Explosion.cs" />
-    <Compile Include="FinalBoss1.cs" />
-    <Compile Include="FinalBoss1Turret1.cs" />
-    <Compile Include="FinalBoss1Turret2.cs" />
-    <Compile Include="FinalBossHeroe1.cs" />
-    <Compile Include="GameB.cs" />
-    <Compile Include="GameScroll.cs" />
-    <Compile Include="GameStory.cs" />
-    <Compile Include="GRMng.cs" />
-    <Compile Include="IngameHub.cs" />
-    <Compile Include="IngameHubA.cs" />
-    <Compile Include="LevelA.cs" />
-    <Compile Include="LevelB.cs" />
-    <Compile Include="MenuGameOver.cs" />
-    <Compile Include="MenuIngame.cs" />
-    <Compile Include="Player.cs" />
-    <Compile Include="RectangleMap.cs" />
-    <Compile Include="ShipA.cs" />
-    <Compile Include="Enemy.cs" />
-    <Compile Include="GameA.cs" />
-    <Compile Include="Level.cs" />
-    <Compile Include="Menu.cs" />
-    <Compile Include="MenuItem.cs" />
-    <Compile Include="Ship.cs" />
-    <Compile Include="ShipB.cs" />
+    <Compile Include="Animations\Animation.cs" />
+    <Compile Include="Audios\Audio.cs" />
+    <Compile Include="Backgrounds\BackgroundGameA.cs" />
+    <Compile Include="Backgrounds\BackgroundGameB.cs" />
+    <Compile Include="Backgrounds\BackgroundLayer.cs" />
+    <Compile Include="Backgrounds\BackgroundLayerB.cs" />
+    <Compile Include="Enemies\BotFinalBoss.cs" />
+    <Compile Include="Cameras\Camera.cs" />
+    <Compile Include="Colliders\Collider.cs" />
+    <Compile Include="Managers\ControlMng.cs" />
+    <Compile Include="Enemies\EnemyMineShotB.cs" />
+    <Compile Include="Enemies\EnemyWeakShotB.cs" />
+    <Compile Include="Evolutions\Evolution.cs" />
+    <Compile Include="Menus\MenuStart.cs" />
+    <Compile Include="Enemies\EnemyBeamA.cs" />
+    <Compile Include="Enemies\EnemyFinalHeroe2.cs" />
+    <Compile Include="Enemies\EnemyLaserA.cs" />
+    <Compile Include="Enemies\EnemyLaserB.cs" />
+    <Compile Include="Enemies\EnemyMineShotA.cs" />
+    <Compile Include="Enemies\EnemyScaredA.cs" />
+    <Compile Include="Enemies\EnemyWeakA.cs" />
+    <Compile Include="Enemies\EnemyWeakB.cs" />
+    <Compile Include="Enemies\EnemyWeakShotA.cs" />
+    <Compile Include="Explosions\Explosion.cs" />
+    <Compile Include="Enemies\FinalBoss1.cs" />
+    <Compile Include="Enemies\FinalBoss1Turret1.cs" />
+    <Compile Include="Enemies\FinalBoss1Turret2.cs" />
+    <Compile Include="Enemies\FinalBossHeroe1.cs" />
+    <Compile Include="Games\GameB.cs" />
+    <Compile Include="Games\GameScroll.cs" />
+    <Compile Include="Games\GameStory.cs" />
+    <Compile Include="Managers\GRMng.cs" />
+    <Compile Include="Hubs\IngameHub.cs" />
+    <Compile Include="Hubs\IngameHubA.cs" />
+    <Compile Include="Levels\LevelA.cs" />
+    <Compile Include="Levels\LevelB.cs" />
+    <Compile Include="Menus\MenuGameOver.cs" />
+    <Compile Include="Menus\MenuIngame.cs" />
+    <Compile Include="Players\Player.cs" />
+    <Compile Include="RectangleMaps\RectangleMap.cs" />
+    <Compile Include="Ships\ShipA.cs" />
+    <Compile Include="Enemies\Enemy.cs" />
+    <Compile Include="Games\GameA.cs" />
+    <Compile Include="Levels\Level.cs" />
+    <Compile Include="Menus\Menu.cs" />
+    <Compile Include="Menus\MenuItem.cs" />
+    <Compile Include="Ships\Ship.cs" />
+    <Compile Include="Ships\ShipB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="SuperGame.cs" />
-    <Compile Include="Shot.cs" />
-    <Compile Include="Sprite.cs" />
-    <Compile Include="SpriteCamera.cs" />
-    <Compile Include="Game.cs" />
-    <Compile Include="XMLLvlMng.cs" />
+    <Compile Include="Shots\Shot.cs" />
+    <Compile Include="Sprites\Sprite.cs" />
+    <Compile Include="Sprites\SpriteCamera.cs" />
+    <Compile Include="Games\Game.cs" />
+    <Compile Include="Managers\XMLLvlMng.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="GameThumbnail.png" />
@@ -201,6 +202,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--

@@ -10,49 +10,52 @@ namespace IS_XNA_Shooter
     class BackgroundGameB
     { 
         private BackgroundLayerB bgLayer0, bgLayer1, bgLayer2, bgLayer3, bgLayerC;
+        private List<BackgroundLayerB> bgLayerList;
         private int[] rectangleMap;
 
-        public BackgroundGameB(Level level)
+        public BackgroundGameB(LevelB level)
         {
-            rectangleMap = ((LevelB)level).GetLevelMap();
+            rectangleMap = level.GetLevelMap();
 
             Vector2 middleScreenPos = new Vector2(level.width / 4, level.height / 2);
 
+            bgLayerC = level.InitializeBGLayerC();
+            bgLayerList = level.InitializeBGLayers();
+            //level.InitializedBGLayers(bgLayerList, bgLayerC);
+
             // last layer
-            int[] textureIndex = new int[1];
+            /*int[] textureIndex = new int[1];
             textureIndex[0] = 0;
             List<Texture2D> textures0 = new List<Texture2D>();
             textures0.Add(GRMng.textureBgB00);
-            bgLayer0 = new BackgroundLayerB(textureIndex, textures0, 20f, true, 1.4f, false);
+            bgLayer0 = new BackgroundLayerB(textureIndex, textures0, 20f, true, 1.4f, false);*/
 
             //bgLayer1 = new BackgroundLayerB(true, middleScreenPos, 0,  GRMng.textureBg01, -70f, true, 1);
             //bgLayer2 = new BackgroundLayerB(true, middleScreenPos, 0, GRMng.textureBg02, -90f, true, 0.7f, false, null);
             //bgLayer3 = new BackgroundLayerB(true, middleScreenPos, 0, GRMng.textureBg03, -110f, true, 0.7f);
             
             // Layer colisionable
-            List<Texture2D> texturesC = new List<Texture2D>();
+            /*List<Texture2D> texturesC = new List<Texture2D>();
             texturesC.Add(GRMng.textureBgCol1);
             texturesC.Add(GRMng.textureBgCol2);
             texturesC.Add(GRMng.textureBgCol3);
-            bgLayerC = new BackgroundLayerB(rectangleMap, texturesC, 0, false, 1, true);
+            bgLayerC = new BackgroundLayerB(rectangleMap, texturesC, 0, false, 1, true);*/
         }
 
         public void Update(float deltaTime)
         {
-            bgLayer0.Update(deltaTime);
-            //bgLayer1.Update(deltaTime);
-            //bgLayer2.Update(deltaTime);
-            //bgLayer3.Update(deltaTime);
-            bgLayerC.Update(deltaTime);
+            foreach (BackgroundLayerB bgLayer in bgLayerList)
+                bgLayer.Update(deltaTime);
+            if (bgLayerC != null)
+                bgLayerC.Update(deltaTime);
         }
 
         public void Draw(SpriteBatch spriteBatch, float scrollPosition)
         {
-            bgLayer0.Draw(spriteBatch, scrollPosition);
-            //bgLayer1.Draw(spriteBatch);
-            //bgLayer2.Draw(spriteBatch);
-            //bgLayer3.Draw(spriteBatch);
-            bgLayerC.Draw(spriteBatch, scrollPosition);
+            foreach (BackgroundLayerB bgLayer in bgLayerList)
+                bgLayer.Draw(spriteBatch, scrollPosition);
+            if (bgLayerC != null)
+                bgLayerC.Draw(spriteBatch, scrollPosition);
         }
 
     } // class BackgroundGameB

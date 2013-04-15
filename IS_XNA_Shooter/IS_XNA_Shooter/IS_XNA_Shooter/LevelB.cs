@@ -13,8 +13,20 @@ namespace IS_XNA_Shooter
         //-------------------------
         //----    Atributos    ----
         //-------------------------
+        // Atributes for the Rectangles map
         private List<RectangleMap> listRecMap;
         private int[] rectangleMap;
+
+        // Atributes for the Background layers
+        private struct bgLayer
+        {
+            public int level;
+            public int velocity;
+            public int numPng;
+            public String[/*numPng*/] pngList;
+        };
+        private int numLayers;
+        private bgLayer[/*numLayers*/] backgroundList;
 
         private bool testingEnemies;
 
@@ -28,33 +40,40 @@ namespace IS_XNA_Shooter
             testingEnemies = false;
 
             this.listRecMap = listRecMap;
+            this.enemies = enemies;
 
-            if (numLevel == 0)
+            switch (numLevel)
             {
-                // level for testing enemies
-                //TODO: hacer nivel de testeo de enemigos
-                testingEnemies = true;
-            }
-            else
-            {
-                width = SuperGame.screenWidth*2;
-                height = SuperGame.screenHeight;
-                ShipInitPosition = new Vector2(100, SuperGame.screenHeight / 2);
+                case 0: // level for testing enemies
+                    //TODO: hacer nivel de testeo de enemigos
+                    testingEnemies = true;
+                    break;
 
-                ReadRectangles();
-                LeerArchivoXML(1, 0);
+                case 1: // LevelB 1
+                    width = SuperGame.screenWidth * 2;
+                    height = SuperGame.screenHeight;
+                    ShipInitPosition = new Vector2(100, SuperGame.screenHeight / 2);
 
-                this.enemies = enemies;
-                
+                    ReadRectangles();     // load the rectangle map
+                    LeerArchivoXML(1, 0); // load the enemies
+                    break;
 
-                //Enemigo
-               /* Enemy e1 = new EnemyWeakB(camera, this, new Vector2(SuperGame.screenWidth + 100, 
-                    50)/*new Random().Next(SuperGame.screenHeight))*//*, (float)Math.PI, GRMng.frameWidthEW1, 
-                    GRMng.frameHeightEW1, GRMng.numAnimsEW1, GRMng.frameCountEW1, GRMng.loopingEW1, SuperGame.frameTime12, 
-                    GRMng.textureEW1, 1, -200, 100, 1, null);
-                e1.SetActive();
+                case 2: // LevelB 2 DORITO
+                    width = SuperGame.screenWidth * 2;
+                    height = SuperGame.screenHeight;
+                    ShipInitPosition = new Vector2(100, SuperGame.screenHeight / 2);
 
-                enemies.Add(e1);*/
+                    //rectangleMap = new int[0];
+                    ReadRectangles();     // load the rectangle map
+
+                    // DORITO IS GOING TO KILL YOU MOTHER****ER
+                    Vector2 positionFinalBoss = new Vector2(SuperGame.screenWidth - GRMng.frameWidthFinalBoss1/2,
+                        SuperGame.screenHeight / 2);
+                    Enemy finalBoss = new FinalBoss1(camera, this, positionFinalBoss, enemies);
+                    finalBoss.SetActive();
+
+                    enemies.Add(finalBoss);
+                    break;
             }
         }
 
@@ -117,14 +136,59 @@ namespace IS_XNA_Shooter
 
         public void ReadRectangles()
         {
-            int nR, lW, lH; // rectangle list map component
-            int rX, rY, rW, rH; // rectangle components
+            // get the reference of the XML rectangle map:
+            XmlDocument lvl = null;
+            switch (numLevel)
+            {
+                case 1: // levelB 1
+                    lvl = XMLLvlMng.rect1;
+                    break;
 
-            XmlDocument lvl = XMLLvlMng.rect1;
+                case 2: // levelB 2 (DORITO)
+                    lvl = XMLLvlMng.rect2;
+                    break;
+            }
 
             XmlNodeList level = lvl.GetElementsByTagName("level");
 
-            // variables auxiliares para la lectura del XML
+            // variables auxiliares para la lectura de los layers
+            int nivel, vel, numpngs, i=0;
+            XmlAttributeCollection bgLayerList, pngNode;
+
+            XmlNodeList listBgs = ((XmlElement)level[0]).GetElementsByTagName("listaBackgrounds");
+            numLayers = (int)Convert.ToDouble(listBgs.Item(0).Attributes[0].Value);
+            backgroundList = new bgLayer[numLayers];
+
+            XmlNodeList listsBg = ((XmlElement)level[0]).GetElementsByTagName("BGLayer");
+            foreach (XmlElement nodo3 in listsBg)
+            {
+                bgLayerList = nodo3.Attributes;
+
+                nivel = (int)Convert.ToDouble(bgLayerList[0].Value);
+                vel = (int)Convert.ToDouble(bgLayerList[1].Value);
+                numpngs = (int)Convert.ToDouble(bgLayerList[2].Value);
+
+                XmlNodeList listaPngs = nodo3.GetElementsByTagName("png");
+                String[] pngListAux = new String[numpngs];
+                int j = 0;
+                foreach (XmlElement nodo4 in listaPngs)
+                {
+                    pngNode = nodo4.Attributes;
+
+                    pngListAux[j] = pngNode[0].Value;
+                    j++;
+                }
+                backgroundList[i].level = nivel;
+                backgroundList[i].velocity = vel;
+                backgroundList[i].numPng = numpngs;
+                backgroundList[i].pngList = pngListAux;
+
+                i++;
+            }
+
+            // variables auxiliares para la lectura de los rectángulos
+            int nR, lW, lH; // rectangle list map component
+            int rX, rY, rW, rH; // rectangle components
             XmlAttributeCollection rectangleList, rectangleNode;
             Rectangle recAux;
             List<Rectangle> listAux;
@@ -158,40 +222,56 @@ namespace IS_XNA_Shooter
                 recMapAux = new RectangleMap(lW, lH, listAux);
                 listRecMap.Add(recMapAux);
             }
-            
-            /*XmlNodeList listaRectangles =
-                        ((XmlElement)level[0]).GetElementsByTagName("rectangle");
-            foreach (XmlElement nodo in listaRectangles)
-            {
-                RectangleN = nodo.Attributes;
-
-                rX = (int)Convert.ToDouble(RectangleN[0].Value);
-                rY = (int)Convert.ToDouble(RectangleN[1].Value);
-                rW = (int)Convert.ToDouble(RectangleN[2].Value);
-                rH = (int)Convert.ToDouble(RectangleN[3].Value);
-
-                if (rX == 0 && rY == 0)
-                {
-                    // detectamos el primer rectangulo de un nuevo layer
-                    listRectCollider.Add(new List<Rectangle>());
-                }
-                Rectangle rectangulo = new Rectangle(rX, rY, rW, rH);
-
-                // añadimos a la lista actual los rectangulos
-                listRectCollider[listRectCollider.Count-1].Add(rectangulo); 
-            }*/
 
             // lista de mapas de rectángulos
             int ind;
             XmlAttributeCollection mapN;
             XmlNodeList mapList = ((XmlElement)level[0]).GetElementsByTagName("map");
             rectangleMap = new int[mapList.Count];
-            for (int i = 0; i<mapList.Count; i++)
+            for (int k = 0; k<mapList.Count; k++)
             {
-                mapN = mapList.Item(i).Attributes;
+                mapN = mapList.Item(k).Attributes;
                 ind = (int)Convert.ToInt32(mapN[0].Value);
-                rectangleMap[i] = ind;
+                rectangleMap[k] = ind;
             }
+
+        } // ReadRectangles
+
+        public BackgroundLayerB InitializeBGLayerC()
+        {
+            if (backgroundList[0].numPng == 0)
+                return null;
+            else
+            {
+                BackgroundLayerB bgLayerC;
+
+                List<Texture2D> texturesC = new List<Texture2D>();
+                for (int i = 0; i < backgroundList[0].numPng; i++)
+                    texturesC.Add(GRMng.GetTextureById(backgroundList[0].pngList[i]));
+                bgLayerC = new BackgroundLayerB(rectangleMap, texturesC, 0, false, 1, true);
+
+                return bgLayerC;
+            }
+        }
+
+        public List<BackgroundLayerB> InitializeBGLayers()
+        {
+            List<BackgroundLayerB> bgLayerList = new List<BackgroundLayerB>();
+
+            for (int i = 1; i < numLayers; i++)
+            {
+                BackgroundLayerB bgLayer;
+                int[] textureIndex = new int[backgroundList[i].numPng];
+                for (int j = 0; j < backgroundList[i].numPng; j++)
+                    textureIndex[j] = j;
+                List<Texture2D> textures0 = new List<Texture2D>();
+                for (int k = 0; k < backgroundList[i].numPng; k++)
+                    textures0.Add(GRMng.GetTextureById(backgroundList[i].pngList[k]));
+                bgLayer = new BackgroundLayerB(textureIndex, textures0, backgroundList[i].velocity, true, 1.4f, false);
+                bgLayerList.Add(bgLayer);
+            }
+
+            return bgLayerList;
         }
 
         //devuelve la lista de rectangulos de colisión del parallax donde se juega

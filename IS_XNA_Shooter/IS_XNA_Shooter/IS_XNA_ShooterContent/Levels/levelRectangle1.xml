@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="ISO-8859-15"?>
 <level>
     <!-- nivelBackground -->
-    <listaBackgrounds> <!--  numLayers=" "-->
-        <!--numLayers -->
-        <BGLayer nivel="0" velocidad="1" numPNG="2">
-            <PNGList>
-                <png file="LayerColisionable1" />
-				<png file="LayerColisionable2" />
-				<png file="LayerColisionable3" />
-            </PNGList>
+    <listaBackgrounds numLayers="2">
+        <BGLayer nivel="0" velocidad="0" numPNG="3">
+			<png file="textureBgCol1" />
+			<png file="textureBgCol2" />
+			<png file="textureBgCol3" />
         </BGLayer>
-        <BGLayer nivel="1" velocidad="0.5" numPNG="1">
-            <PNGList>
-                <png file="LayerColisionable1" />
-            </PNGList>
+        <BGLayer nivel="1" velocidad="20" numPNG="1">
+			<png file="textureBgB00" />
         </BGLayer>
     </listaBackgrounds>
 	

@@ -36,7 +36,7 @@ namespace IS_XNA_Shooter
             hub = new IngameHubA(GRMng.hubBase, mainGame.player.GetLife());
             level = new LevelB(camera, numLevel, enemies, listRecMap);
             rectangleMap = ((LevelB)level).GetLevelMap();
-            backGround = new BackgroundGameB(level);
+            backGround = new BackgroundGameB((LevelB)level);
 
             camera.setLevel(level);
 

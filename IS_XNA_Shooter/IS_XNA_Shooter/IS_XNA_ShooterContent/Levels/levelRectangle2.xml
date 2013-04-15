@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<level>
+    <!-- nivelBackground -->
+    <listaBackgrounds numLayers="2">
+        <BGLayer nivel="0" velocidad="0" numPNG="0">
+        </BGLayer>
+        <BGLayer nivel="1" velocidad="20" numPNG="1">
+			<png file="textureBgB00" />
+        </BGLayer>
+    </listaBackgrounds>
+	
+    <mapaRectangles>
+	</mapaRectangles>
+</level>

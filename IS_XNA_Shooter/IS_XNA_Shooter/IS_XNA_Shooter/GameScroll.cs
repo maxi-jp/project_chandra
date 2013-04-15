@@ -37,7 +37,7 @@ namespace IS_XNA_Shooter
             enemies = ((LevelB)level).getEnemies();
             camera.setLevel(level);
             // crashList = ((LevelB)level).getRectangles();
-            backGroundB = new BackgroundGameB(level);
+            backGroundB = new BackgroundGameB((LevelB)level);
 
             ship = new ShipB(this, camera, ((LevelB)level), Vector2.Zero, 0, puntosColliderShip(), GRMng.frameWidthPA1,
                 GRMng.frameHeightPA1, GRMng.numAnimsPA1, GRMng.frameCountPA1, GRMng.loopingPA1, SuperGame.frameTime24,

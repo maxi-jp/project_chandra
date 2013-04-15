@@ -89,7 +89,7 @@ namespace IS_XNA_Shooter
             setTimeToResume();
 
             currentLevel = 0;
-            levelList = new String[] { "B1", "A1", "B2", "A2" };
+            levelList = new String[] { "B2", "A1", "B2", "A2" };
             InitGame(levelList[currentLevel]);
             currentState = StoryState.levelDialog;
         }
@@ -195,7 +195,6 @@ namespace IS_XNA_Shooter
                     break;
 
                 case StoryState.beginLevel:
-
                     currentGame.Draw(spriteBatch);
 
                     spriteGetReady.DrawRectangle(spriteBatch);
@@ -223,11 +222,22 @@ namespace IS_XNA_Shooter
                     break;
 
                 case "A1":
+                    grManager.UnloadContent(4);
+
                     grManager.LoadContent(3); // Load the gameA's level 1 resources
                     LvlMng.LoadContent(0); // Load the levelA's enemies
 
                     currentGame = new GameA(mainGame, player, 1, GRMng.textureAim, GRMng.textureCell,
                         shipVelocity, shipLife);
+                    break;
+
+                case "B2": // final boss: DORITO FUCKER
+                    grManager.UnloadContent(3);
+
+                    grManager.LoadContent(6);
+                    LvlMng.LoadContent(3); // Load the level map 2
+
+                    currentGame = new GameB(mainGame, player, 2, GRMng.textureAim, shipVelocity + 150, 100);
                     break;
             }
             

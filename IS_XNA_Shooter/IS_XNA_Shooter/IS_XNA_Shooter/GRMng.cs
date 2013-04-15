@@ -24,7 +24,6 @@ namespace IS_XNA_Shooter
         public static Texture2D greenpixeltrans;// textura pixel verde transparente
         public static Texture2D yellowpixeltrans;  // textura pixel amarillo transparente
 
-
         #region BACKGROUNDS
         /* ------------------- FONDOS ------------------- */
         public static Texture2D textureBgGame1A; // tile fondo para el juego A
@@ -273,6 +272,8 @@ namespace IS_XNA_Shooter
             // 2=Ingame Menu
             // 3=GameA level 1
             // 4=GameB level 1
+            // 5=
+            // 6=GameB level 2 (dorito)
             // 98=characters
             // 99=GameOver Menu
 
@@ -328,7 +329,7 @@ namespace IS_XNA_Shooter
 
                     break;
 
-                case 4: // GameB nivel 1
+                case 4: // GameB level 1
                     LoadIngameMenu();
 
                     hubBase = content.Load<Texture2D>("Graphics/Hub/base256");
@@ -347,19 +348,27 @@ namespace IS_XNA_Shooter
                     textureRed = content.Load<Texture2D>("Graphics/Rojazo");
 
                     textureBgB00 = content.Load<Texture2D>("Graphics/Backgrounds/bgB00");
-                    textureBgGame1A = content.Load<Texture2D>("Graphics/Backgrounds/backgroundTile1");
-                    textureBg00 = content.Load<Texture2D>("Graphics/Backgrounds/bg00");
-                    textureBg01 = content.Load<Texture2D>("Graphics/Backgrounds/bg01");
-                    textureBg02 = content.Load<Texture2D>("Graphics/Backgrounds/bg02");
-                    textureBg03 = content.Load<Texture2D>("Graphics/Backgrounds/bg03");
                     textureBgCol1 = content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable1");
                     textureBgCol2 = content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable2");
                     textureBgCol3 = content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable3");
+
+                    break;
+
+                case 5:
+
+                    break;
+
+                case 6: //GameB level 2 (dorito)
+                    hubBase = content.Load<Texture2D>("Graphics/Hub/base256");
+
+                    texturePA1 = content.Load<Texture2D>("Graphics/Ships/sprites80x80");
+                    textureL1 = content.Load<Texture2D>("Graphics/laserShotAnim");
 
                     textureFinalBoss1 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBoss1");
                     textureShotFinalBoss1 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/shotFinalBoss1");
                     textureBFB = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBossPhase2");
 
+                    textureBgB00 = content.Load<Texture2D>("Graphics/Backgrounds/bgB00");
                     break;
 
                 case 98: // characters:
@@ -393,6 +402,8 @@ namespace IS_XNA_Shooter
             // 2=Ingame Menu
             // 3=GameA level 1
             // 4=GameB level 1
+            // 5=
+            // 6=GameB level 2 (dorito)
             // 98=characters
             // 99=GameOver Menu
 
@@ -459,19 +470,27 @@ namespace IS_XNA_Shooter
 
                     textureRed = null;
                     textureBgB00 = null;
-                    textureBgGame1A = null;
-                    textureBg00 = null;
-                    textureBg01 = null;
-                    textureBg02 = null;
-                    textureBg03 = null;
                     textureBgCol1 = null;
                     textureBgCol2 = null;
                     textureBgCol3 = null;
+
+                    break;
+
+                case 5:
+
+                    break;
+
+                case 6: // GameB level 2 (dorito)
+                    hubBase = null;
+
+                    texturePA1 = null;
+                    textureL1 = null;
 
                     textureFinalBoss1 = null;
                     textureShotFinalBoss1 = null;
                     textureBFB = null;
 
+                    textureBgB00 = null;
                     break;
 
                 case 98: // characters:
@@ -562,6 +581,19 @@ namespace IS_XNA_Shooter
             UnloadContent(2);
             UnloadContent(3);
         }
+
+        public static Texture2D GetTextureById(String id)
+        {
+            switch (id)
+            {
+                case "textureBgB00":    return textureBgB00;
+                case "textureBgCol1":   return textureBgCol1;
+                case "textureBgCol2":   return textureBgCol2;
+                case "textureBgCol3":   return textureBgCol3;
+                default:                return null;
+            }
+
+        } // GetTextureById
 
     } // class GRMng
 }

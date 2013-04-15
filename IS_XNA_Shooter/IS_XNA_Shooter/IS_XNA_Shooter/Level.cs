@@ -51,7 +51,6 @@ namespace IS_XNA_Shooter
  	    protected void LeerArchivoXML(int modoDeJuego, int levelModo)
         {
             // Utilizar nombres de fichero y nodos XML idénticos a los que se guardaron
-
             try
             {
                 //  Leer los datos del archivo

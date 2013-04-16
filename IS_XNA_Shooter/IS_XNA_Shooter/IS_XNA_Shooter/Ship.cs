@@ -272,7 +272,7 @@ namespace IS_XNA_Shooter
 
         public void Damage(int i)
         {
-            if (currentState == shipState.ONNORMAL)
+            if (currentState == shipState.ONNORMAL && !SuperGame.godMode)
             {
                 life -= i;
 

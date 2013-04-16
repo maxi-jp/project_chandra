@@ -79,7 +79,6 @@ namespace IS_XNA_Shooter
                     spriteNum.SetRectangle(new Rectangle(341, 80, 170, 150));
                 else if (timeToResumeAux >= timeToResume / 3)
                     spriteNum.SetRectangle(new Rectangle(171, 80, 170, 150));
-                
                 else
                     spriteNum.SetRectangle(new Rectangle(0, 80, 170, 150));
             }

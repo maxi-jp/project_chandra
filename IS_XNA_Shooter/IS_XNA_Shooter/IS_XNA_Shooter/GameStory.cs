@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Xml;
+using Microsoft.Xna.Framework.Input;
 
 namespace IS_XNA_Shooter
 {
@@ -57,7 +58,7 @@ namespace IS_XNA_Shooter
 
         public Sprite spriteGetReady;
         public Sprite spriteNum;
-        private float timeToResumeAux;
+        private float timeToResume, timeToResumeAux;
 
         // Attributes for the conversations 
         private int currentConver = 0;
@@ -75,8 +76,10 @@ namespace IS_XNA_Shooter
             this.audio = audio;
             this.LvlMng = LvlMng;
 
+            timeToResume = timeToResumeAux = SuperGame.timeToResume;
+
             audio.LoadContent(1);
-            grManager.LoadContent(98); // characters portraits sprites
+            grManager.LoadContent("Portraits"); // characters portraits sprites
 
             spriteGetReady = new Sprite(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight / 2 - 90), 0,
                 GRMng.getready321, new Rectangle(0, 0, 512, 80));
@@ -89,7 +92,7 @@ namespace IS_XNA_Shooter
             setTimeToResume();
 
             currentLevel = 0;
-            levelList = new String[] { "B2", "A1", "B2", "A2" };
+            levelList = new String[] { "LevelB1", "LevelA1", "LevelB2"/*, "LevelA2"*/ };
             InitGame(levelList[currentLevel]);
             currentState = StoryState.levelDialog;
         }
@@ -106,7 +109,7 @@ namespace IS_XNA_Shooter
             {
                 case StoryState.levelDialog:
                     timeToResumeAux -= deltaTime;
-                    if (timeToResumeAux <= 0)
+                    if (timeToResumeAux <= 0 || ControlMng.leftClickPreshed || ControlMng.rightClickPreshed)
                     {
                         currentParagraph++; //update the current conversation 
                         setTimeToResume();
@@ -125,11 +128,11 @@ namespace IS_XNA_Shooter
                     if (timeToResumeAux <= 0)
                     {
                         currentState = StoryState.playing;
-                        timeToResumeAux = 3f;
+                        timeToResumeAux = timeToResume;
                     }
-                    else if (timeToResumeAux >= 5f * 2 / 3)
+                    else if (timeToResumeAux >= timeToResume * 2 / 3)
                         spriteNum.SetRectangle(new Rectangle(341, 80, 170, 150));
-                    else if (timeToResumeAux >= 5f / 3)
+                    else if (timeToResumeAux >= timeToResume / 3)
                         spriteNum.SetRectangle(new Rectangle(171, 80, 170, 150));
                     else
                         spriteNum.SetRectangle(new Rectangle(0, 80, 170, 150));
@@ -150,6 +153,7 @@ namespace IS_XNA_Shooter
                         currentLevel++;
                         if (currentLevel < levelList.Length)
                         {
+                            // start the next level
                             InitGame(levelList[currentLevel]);
                             currentState = StoryState.levelDialog;
                             timeToResumeAux = 5f;
@@ -212,32 +216,34 @@ namespace IS_XNA_Shooter
 
         private void InitGame(String cad)
         {
+            // Load the content for the new level & unload the content of the previous one
+            if (currentLevel > 0)
+                grManager.UnloadContent(levelList[currentLevel-1]);
+            grManager.LoadContent(cad);
+
             switch (cad)
             {
-                case "B1":
-                    grManager.LoadContent(4); // Load the gameB's level 1 resources
+                case "LevelB1":
                     LvlMng.LoadContent(1); // Load the rectangles
-
                     currentGame = new GameB(mainGame, player, 1, GRMng.textureAim, shipVelocity + 150, 100);
                     break;
 
-                case "A1":
-                    grManager.UnloadContent(4);
-
-                    grManager.LoadContent(3); // Load the gameA's level 1 resources
+                case "LevelA1":
                     LvlMng.LoadContent(0); // Load the levelA's enemies
-
                     currentGame = new GameA(mainGame, player, 1, GRMng.textureAim, GRMng.textureCell,
                         shipVelocity, shipLife);
                     break;
 
-                case "B2": // final boss: DORITO FUCKER
-                    grManager.UnloadContent(3);
-
-                    grManager.LoadContent(6);
+                case "LevelB2": // final boss: DORITO FUCKER
                     LvlMng.LoadContent(3); // Load the level map 2
-
                     currentGame = new GameB(mainGame, player, 2, GRMng.textureAim, shipVelocity + 150, 100);
+                    break;
+
+                case "LevelA2":
+                    // TODO: add new GameA here
+                    LvlMng.LoadContent(0); // Load the levelA's enemies
+                    currentGame = new GameA(mainGame, player, 1, GRMng.textureAim, GRMng.textureCell,
+                        shipVelocity, shipLife);
                     break;
             }
             
@@ -308,6 +314,7 @@ namespace IS_XNA_Shooter
                 }*/
             }
         } // readConversationXML
+
 
     } // class GameB
 }

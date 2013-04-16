@@ -62,7 +62,12 @@ namespace IS_XNA_Shooter
         /// Says if it's in debug's mode
         /// </summary>
         public static bool debug = true;
-        
+
+        /// <summary>
+        /// Indicates if the god mode is active
+        /// </summary>
+        public static bool godMode = false;
+
         /// <summary>
         /// Screen's width
         /// </summary>
@@ -267,10 +272,11 @@ namespace IS_XNA_Shooter
 
             // ALL: use this.Content to load your game content here
 
-            grManager.LoadContent(0); // se cargan los recursos del menu start
-            grManager.LoadContent(1); // se cargan los recursos del menu
-            grManager.LoadContent(2); // se cargan los recursos del menu ingame
-            grManager.LoadContent(99);// se cargan los recursos del menu gameover
+            grManager.LoadContent("MenuStart"); // se cargan los recursos del menu start
+            grManager.LoadContent("MenuMain"); // se cargan los recursos del menu
+            grManager.LoadContent("MenuIngame"); // se cargan los recursos del menu ingame
+            grManager.LoadContent("MenuGameOver");// se cargan los recursos del menu gameover
+            grManager.LoadContent("Other"); // all type of "little" resources
             audio.LoadContent(0);
 
             fontDebug = Content.Load<SpriteFont>("FontDebug");
@@ -329,6 +335,12 @@ namespace IS_XNA_Shooter
                 debug = true;
             else if (ControlMng.fPreshed && debug)
                 debug = false;
+
+            // active/deactive the god mode:
+            if (ControlMng.gPreshed && !godMode)
+                godMode = true;
+            else if (ControlMng.gPreshed && godMode)
+                godMode = false;
 
             // actual position of the mouse:
             pointer.X = Mouse.GetState().X;
@@ -457,6 +469,9 @@ namespace IS_XNA_Shooter
                     new Vector2(screenWidth - 150, 3), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
                 spriteBatch.DrawString(SuperGame.fontDebug, "Update FPS=" + updateFramesCounter + ".",
                     new Vector2(screenWidth - 150, 15), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                if (godMode)
+                    spriteBatch.DrawString(SuperGame.fontDebug, "God mode=ON",
+                        new Vector2(screenWidth - 150, 27), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             }
 
             spriteBatch.End();
@@ -472,12 +487,12 @@ namespace IS_XNA_Shooter
         /// </summary>
         private void NewGameATest()
         {
-            grManager.LoadContent(3); // Load the gameA's level 1 resources
+            grManager.LoadContent("LevelA1"); // Load the gameA's level 1 resources
             audio.LoadContent(1);
             game = new GameA(this, player, 0, GRMng.textureAim, GRMng.textureCell,
                 /*ShipVelocity*/200f, /*ShipLife*/100000);
             currentState = gameState.playing; // Change game's state to game mode
-            grManager.UnloadContent(1); // Unload the menu's resources
+            grManager.UnloadContent("LevelA1"); // Unload the menu's resources
         }
 
         /// <summary>
@@ -493,17 +508,12 @@ namespace IS_XNA_Shooter
 
             duration = 0;
 
-            /*game = new GameStory(this, player, 1, GRMng.textureAim,
-                ShipVelocity200f, ShipLife100);*/
             game = new GameStory(this, grManager, audio, LvlMng, player,
                 /*ShipVelocity*/200f, /*ShipLife*/100);
 
             //currentState = gameState.playing; // Change game's state to game mode
-
-            grManager.UnloadContent(1); // Unload the menu's resources
-
             //grManager.UnloadContent(2); 
-            //grManager.UnloadContent(3); // descargamos los recursos del menú
+            grManager.UnloadContent("MenuMain"); /// Unload the main menu's resources
         }
 
         /// <summary>
@@ -512,7 +522,7 @@ namespace IS_XNA_Shooter
         /// <param name="lvl">The number of the level</param>
         public void newSurvival(int lvl)
         {
-            grManager.LoadContent(3);  // Load the gameA's level 1 resources
+            grManager.LoadContent("LevelA1");  // Load the gameA's level 1 resources
             audio.LoadContent(1);
             LvlMng.LoadContent(lvl); // Load XML
 
@@ -522,7 +532,7 @@ namespace IS_XNA_Shooter
             currentState = gameState.playing; // Change game's state to game mode
 
             LvlMng.UnloadContent(lvl);
-            grManager.UnloadContent(1); /// Unload the menu's resources
+            grManager.UnloadContent("MenuMain"); /// Unload the main menu's resources
         }
 
         /// <summary>
@@ -531,7 +541,7 @@ namespace IS_XNA_Shooter
         /// <param name="lvl">The number of the level</param>
         public void newKiller(int lvl)
         {
-            grManager.LoadContent(3); // Load the gameB's level 1 resources
+            grManager.LoadContent("LevelA1"); // Load the gameB's level 1 resources
             audio.LoadContent(1);
             LvlMng.LoadContent(lvl); // Load XML
 
@@ -541,7 +551,7 @@ namespace IS_XNA_Shooter
             currentState = gameState.playing; // Change game's state to game mode
 
             LvlMng.UnloadContent(lvl);
-            grManager.UnloadContent(1); // Unload the menu's resources
+            grManager.UnloadContent("MenuMain"); /// Unload the main menu's resources
         }
 
         /// <summary>
@@ -550,7 +560,7 @@ namespace IS_XNA_Shooter
         /// <param name="lvl">The number of the level</param>
         public void newDefense(int lvl)
         {
-            grManager.LoadContent(3); // Load the gameB's level 1 resources
+            grManager.LoadContent("LevelB1"); // Load the gameB's level 1 resources
             audio.LoadContent(1);
             LvlMng.LoadContent(lvl);
 
@@ -560,7 +570,7 @@ namespace IS_XNA_Shooter
             currentState = gameState.playing; // Change game's state to game mode
 
             LvlMng.UnloadContent(lvl);
-            grManager.UnloadContent(1); // Unload the menu's resources
+            grManager.UnloadContent("MenuMain"); /// Unload the main menu's resources
         }
 
         /// <summary>
@@ -569,8 +579,7 @@ namespace IS_XNA_Shooter
         /// <param name="lvl">The number of the level</param>
         public void newScroll(int lvl)
         {
-            grManager.LoadContent(4); // Load the gameB's level 1 resources
-            grManager.LoadContent(2); // cargamos los recursos del nivel 1 de GameA Pa que funcione
+            grManager.LoadContent("LevelB1"); // Load the gameB's level 1 resources
             audio.LoadContent(1);
             LvlMng.LoadContent(lvl); // Load the rectangles
 
@@ -580,8 +589,7 @@ namespace IS_XNA_Shooter
             currentState = gameState.playing; // Change game's state to game mode
 
             LvlMng.UnloadContent(lvl);
-            grManager.UnloadContent(1); // Unload the menu's resources
-            //grManager.UnloadContent(3); // descargamos los recursos del menú
+            grManager.UnloadContent("MenuMain"); /// Unload the main menu's resources
         }
 
         /// <summary>
@@ -597,7 +605,7 @@ namespace IS_XNA_Shooter
         /// </summary>
         public void EnterToMenu()
         {
-            grManager.UnloadContent(0); // unload the gamestartmenu
+            grManager.UnloadContent("MenuStart"); // unload the gamestartmenu
             currentState = gameState.mainMenu;
             menu.menuState = Menu.MenuState.main;
         }
@@ -607,7 +615,7 @@ namespace IS_XNA_Shooter
         /// </summary>
         public void ExitToMenu()
         {
-            grManager.LoadContent(1);
+            grManager.LoadContent("MenuMain");
             currentState = gameState.mainMenu;
             menu.menuState = Menu.MenuState.main;
             grManager.UnloadContentGame();

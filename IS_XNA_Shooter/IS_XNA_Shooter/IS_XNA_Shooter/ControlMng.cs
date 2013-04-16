@@ -18,26 +18,34 @@ namespace IS_XNA_Shooter
 
         private KeyboardState prevKeyboardState, actKeyboardState;
 
-        public static bool fPreshed, kPreshed, lPreshed;
+        public static bool fPreshed, kPreshed, lPreshed, gPreshed;
         public static bool f1Preshed, f2Preshed, f3Preshed, f4Preshed, f5Preshed;
         public static bool f6Preshed, f7Preshed, f8Preshed, f9Preshed, f10Preshed;
+
+        private MouseState prevMouseState, actMouseState;
+
+        public static bool leftClickPreshed, rightClickPreshed;
 
         public ControlMng ()
         {
             controllerActive = GamePad.GetState(PlayerIndex.One).IsConnected;
 
-            fPreshed = kPreshed = false;
+            fPreshed = kPreshed = gPreshed = false;
             f1Preshed = f2Preshed = f3Preshed = f4Preshed = f5Preshed = false;
             f6Preshed = f7Preshed = f8Preshed = f9Preshed = f10Preshed = false;
+
+            leftClickPreshed = rightClickPreshed = false;
         }
 
         public void Update(float deltaTime)
         {
+            // keyboard:
             actKeyboardState = Keyboard.GetState();
 
             kPreshed = (actKeyboardState.IsKeyDown(Keys.K) && prevKeyboardState.IsKeyUp(Keys.K));
             fPreshed = (actKeyboardState.IsKeyDown(Keys.F) && prevKeyboardState.IsKeyUp(Keys.F));
             lPreshed = (actKeyboardState.IsKeyDown(Keys.L) && prevKeyboardState.IsKeyUp(Keys.L));
+            gPreshed = (actKeyboardState.IsKeyDown(Keys.G) && prevKeyboardState.IsKeyUp(Keys.G));
 
             f1Preshed = (actKeyboardState.IsKeyDown(Keys.F1) && prevKeyboardState.IsKeyUp(Keys.F1));
             f2Preshed = (actKeyboardState.IsKeyDown(Keys.F2) && prevKeyboardState.IsKeyUp(Keys.F2));
@@ -51,6 +59,14 @@ namespace IS_XNA_Shooter
             f10Preshed = (actKeyboardState.IsKeyDown(Keys.F10) && prevKeyboardState.IsKeyUp(Keys.F10));
 
             prevKeyboardState = actKeyboardState;
+
+            // mouse:
+            actMouseState = Mouse.GetState();
+
+            leftClickPreshed = ((actMouseState.LeftButton == ButtonState.Pressed) && (prevMouseState.LeftButton == ButtonState.Released));
+            rightClickPreshed = ((actMouseState.RightButton == ButtonState.Pressed) && (prevMouseState.RightButton == ButtonState.Released));
+
+            prevMouseState = actMouseState;
         }
 
         public static bool isControllerActive ()

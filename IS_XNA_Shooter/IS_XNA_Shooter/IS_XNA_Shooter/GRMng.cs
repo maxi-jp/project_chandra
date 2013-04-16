@@ -264,34 +264,29 @@ namespace IS_XNA_Shooter
             this.content = content;
         }
 
-        public void LoadContent(int i)
+        public void LoadContent(String cad)
         {
-            // i:
-            // 0=Start Menu
-            // 1=Main Menu
-            // 2=Ingame Menu
-            // 3=GameA level 1
-            // 4=GameB level 1
-            // 5=
-            // 6=GameB level 2 (dorito)
-            // 98=characters
-            // 99=GameOver Menu
 
-            switch (i)
+            switch (cad)
             {
-                case 0: // start menu:
+                case "MenuStart":
                     LoadStart();
                     break;
 
-                case 1: // menu:
+                case "MenuMain":
                     LoadMenu();
                     break;
 
-                case 2: // menuIngame:
+                case "MenuIngame":
                     LoadIngameMenu();
                     break;
 
-                case 3: // GameA nivel 1
+                case "MenuGameOver":
+                    menuGameOver = content.Load<Texture2D>("Graphics/Menu/gameover");
+                    gameOverSplash = content.Load<Texture2D>("Graphics/Splash/splash_gameover_2");
+                    break;
+
+                case "LevelA1":
                     LoadIngameMenu();
 
                     hubBase = content.Load<Texture2D>("Graphics/Hub/base256");
@@ -311,7 +306,6 @@ namespace IS_XNA_Shooter
                     textureEMSBullet = content.Load<Texture2D>("Graphics/mineShot");
                     textureEL = content.Load<Texture2D>("Graphics/Ships/enemyLaser");
                     textureELBullet = content.Load<Texture2D>("Graphics/yellowpixel");
-                    textureELBulletHeroe = content.Load<Texture2D>("Graphics/yellowpixel");
                     
                     textureCell = content.Load<Texture2D>("Graphics/celdasuelo");
                     textureBg00 = content.Load<Texture2D>("Graphics/Backgrounds/bg00");
@@ -329,7 +323,7 @@ namespace IS_XNA_Shooter
 
                     break;
 
-                case 4: // GameB level 1
+                case "LevelB1":
                     LoadIngameMenu();
 
                     hubBase = content.Load<Texture2D>("Graphics/Hub/base256");
@@ -354,11 +348,7 @@ namespace IS_XNA_Shooter
 
                     break;
 
-                case 5:
-
-                    break;
-
-                case 6: //GameB level 2 (dorito)
+                case "LevelB2":
                     hubBase = content.Load<Texture2D>("Graphics/Hub/base256");
 
                     texturePA1 = content.Load<Texture2D>("Graphics/Ships/sprites80x80");
@@ -367,61 +357,57 @@ namespace IS_XNA_Shooter
                     textureFinalBoss1 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBoss1");
                     textureShotFinalBoss1 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/shotFinalBoss1");
                     textureBFB = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBossPhase2");
+                    textureELBulletHeroe = content.Load<Texture2D>("Graphics/yellowpixel");
+                    textureFinalBoss1Turret1 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/turret1");
+                    textureFinalBoss1Turret1Shot = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/shotTurret1");
+                    textureShotFinalBossHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/shotHeroe1");
+                    textureHeroe1 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/heroe1");
+                    textureFinalBoss1Turret2 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/turret2");
 
                     textureBgB00 = content.Load<Texture2D>("Graphics/Backgrounds/bgB00");
                     break;
 
-                case 98: // characters:
+                case "Portraits":
                     textureCaptain = content.Load<Texture2D>("Graphics/Images/Captain");
                     texturePilot = content.Load<Texture2D>("Graphics/Images/Pilot");
                     texturePilotCyborg = content.Load<Texture2D>("Graphics/Images/PilotCyborg");
                     break;
 
-                case 99: // menu game over:
-                    menuGameOver = content.Load<Texture2D>("Graphics/Menu/gameover");
-                    gameOverSplash = content.Load<Texture2D>("Graphics/Splash/splash_gameover_2");
+                case "Other":
+                    whitepixel = content.Load<Texture2D>("Graphics/whitepixel");
+                    redpixel = content.Load<Texture2D>("Graphics/redpixel");
+                    blackpixeltrans = content.Load<Texture2D>("Graphics/blackpixeltransparent");
+                    redpixeltrans = content.Load<Texture2D>("Graphics/redpixeltransparent");
+                    bluepixeltrans = content.Load<Texture2D>("Graphics/bluepixeltransparent");
+                    greenpixeltrans = content.Load<Texture2D>("Graphics/greenpixeltransparent");
+                    yellowpixeltrans = content.Load<Texture2D>("Graphics/yellowpixeltransparent");
                     break;
-
             }
-
-            whitepixel = content.Load<Texture2D>("Graphics/whitepixel");
-            redpixel = content.Load<Texture2D>("Graphics/redpixel");
-            blackpixeltrans = content.Load<Texture2D>("Graphics/blackpixeltransparent");
-            redpixeltrans = content.Load<Texture2D>("Graphics/redpixeltransparent");
-            bluepixeltrans = content.Load<Texture2D>("Graphics/bluepixeltransparent");
-            greenpixeltrans = content.Load<Texture2D>("Graphics/greenpixeltransparent");
-            yellowpixeltrans = content.Load<Texture2D>("Graphics/yellowpixeltransparent");
 
         } // LoadContent
 
-        public void UnloadContent(int i)
+        public void UnloadContent(String cad)
         {
-            // i:
-            // 0=Start Menu
-            // 1=Main Menu
-            // 2=Ingame Menu
-            // 3=GameA level 1
-            // 4=GameB level 1
-            // 5=
-            // 6=GameB level 2 (dorito)
-            // 98=characters
-            // 99=GameOver Menu
-
-            switch (i)
+            switch (cad)
             {
-                case 0: // start menu:
+                case "MenuStart":
                     UnloadStart();
                     break;
 
-                case 1: // menu:
+                case "MenuMain":
                     UnloadMenu();
                     break;
 
-                case 2: // menuIngame:
+                case "MenuIngame":
                     UnloadIngameMenu();
                     break;
 
-                case 3: // GameA nivel 1
+                case "MenuGameOver":
+                    menuGameOver = null;
+                    gameOverSplash = null;
+                    break;
+
+                case "LevelA1":
 
                     hubBase = null;
 
@@ -439,7 +425,6 @@ namespace IS_XNA_Shooter
                     textureEMSBullet = null;
                     textureEL = null;
                     textureELBullet = null;
-                    textureELBulletHeroe = null;
 
                     textureCell = null;
                     textureRed = null;
@@ -459,7 +444,7 @@ namespace IS_XNA_Shooter
 
                     break;
 
-                case 4: // GameB nivel 1
+                case "LevelB1":
 
                     hubBase = null;
 
@@ -476,11 +461,7 @@ namespace IS_XNA_Shooter
 
                     break;
 
-                case 5:
-
-                    break;
-
-                case 6: // GameB level 2 (dorito)
+                case "LevelB2":
                     hubBase = null;
 
                     texturePA1 = null;
@@ -489,22 +470,33 @@ namespace IS_XNA_Shooter
                     textureFinalBoss1 = null;
                     textureShotFinalBoss1 = null;
                     textureBFB = null;
+                    textureELBulletHeroe = null;
+                    textureFinalBoss1Turret1 = null;
+                    textureFinalBoss1Turret1Shot = null;
+                    textureShotFinalBossHeroe = null;
+                    textureHeroe1 = null;
+                    textureFinalBoss1Turret2 = null;
 
                     textureBgB00 = null;
                     break;
 
-                case 98: // characters:
+                case "Portraits":
                     textureCaptain = null;
                     texturePilot = null;
                     texturePilotCyborg = null;
                     break;
 
-                case 99:
-                    menuGameOver = null;
-                    gameOverSplash = null;
+                case "Other":
+                    whitepixel = null;
+                    redpixel = null;
+                    blackpixeltrans = null;
+                    redpixeltrans = null;
+                    bluepixeltrans = null;
+                    greenpixeltrans = null;
+                    yellowpixeltrans = null;
                     break;
-
             }
+
         } // UnloadContent
 
         public void LoadVideo(int i)
@@ -578,8 +570,10 @@ namespace IS_XNA_Shooter
 
         public void UnloadContentGame()
         {
-            UnloadContent(2);
-            UnloadContent(3);
+            UnloadContent("LevelA1");
+            UnloadContent("LevelB1");
+            UnloadContent("LevelA2");
+            UnloadContent("LevelB2");
         }
 
         public static Texture2D GetTextureById(String id)

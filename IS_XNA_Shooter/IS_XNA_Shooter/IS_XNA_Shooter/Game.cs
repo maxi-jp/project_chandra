@@ -101,13 +101,16 @@ namespace IS_XNA_Shooter
                 }
             }
 
-            // enemies-player collision:
-            for (int i = 0; i < enemies.Count(); i++)
+            if (!SuperGame.godMode)
             {
-                if (enemies[i].IsColisionable() && (ship.collider.Collision(enemies[i].collider) || enemies[i].collider.Collision(ship.collider)))
+                // enemies-player collision:
+                for (int i = 0; i < enemies.Count(); i++)
                 {
-                    // the player has been hit by an enemy
-                    ship.Kill();
+                    if (enemies[i].IsColisionable() && (ship.collider.Collision(enemies[i].collider) || enemies[i].collider.Collision(ship.collider)))
+                    {
+                        // the player has been hit by an enemy
+                        ship.Kill();
+                    }
                 }
             }
 

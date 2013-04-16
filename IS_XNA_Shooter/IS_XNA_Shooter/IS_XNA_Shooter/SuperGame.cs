@@ -288,7 +288,7 @@ namespace IS_XNA_Shooter
 
             // Create the player and the screen evolution of our ship
             player = new Player(playerLifes);
-            screenEvolution = new Evolution();
+            screenEvolution = new Evolution(Content);
         }
 
         /// <summary>
@@ -408,8 +408,7 @@ namespace IS_XNA_Shooter
                     }
                     break;
             }*/
-
-            screenEvolution.Update();
+            screenEvolution.Update(Mouse.GetState());
 
             base.Update(gameTime);
         }

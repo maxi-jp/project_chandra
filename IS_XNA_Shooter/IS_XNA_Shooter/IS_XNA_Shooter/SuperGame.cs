@@ -191,6 +191,11 @@ namespace IS_XNA_Shooter
         /// Player
         /// </summary>
         public Player       player;
+
+        /// <summary>
+        /// Screen to develop our ship.
+        /// </summary>
+        private Evolution screenEvolution;
        
         /// <summary>
         /// Player lifes
@@ -281,8 +286,9 @@ namespace IS_XNA_Shooter
             menuIngame =    new MenuIngame(this);
             menuGameOver =  new MenuGameOver(this);
 
-            // Create the player
+            // Create the player and the screen evolution of our ship
             player = new Player(playerLifes);
+            screenEvolution = new Evolution();
         }
 
         /// <summary>
@@ -302,7 +308,7 @@ namespace IS_XNA_Shooter
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
+            /*if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
@@ -401,7 +407,9 @@ namespace IS_XNA_Shooter
                         videoPlayer.Stop();
                     }
                     break;
-            }
+            }*/
+
+            screenEvolution.Update();
 
             base.Update(gameTime);
         }
@@ -416,7 +424,7 @@ namespace IS_XNA_Shooter
             GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
 
-            drawFramesCounterAux++;
+           /* drawFramesCounterAux++;
 
             switch (currentState)
             {
@@ -457,7 +465,9 @@ namespace IS_XNA_Shooter
                     new Vector2(screenWidth - 150, 3), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
                 spriteBatch.DrawString(SuperGame.fontDebug, "Update FPS=" + updateFramesCounter + ".",
                     new Vector2(screenWidth - 150, 15), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-            }
+            }*/
+
+            screenEvolution.Draw(spriteBatch);
 
             spriteBatch.End();
 

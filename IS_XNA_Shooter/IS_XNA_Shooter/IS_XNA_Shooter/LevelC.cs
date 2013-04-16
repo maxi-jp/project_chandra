@@ -13,6 +13,7 @@ namespace IS_XNA_Shooter
 
         private Texture2D whitePixel;
         private Texture2D textureCell;
+        private float globalTime;
 
         private bool testingEnemies;
 
@@ -20,6 +21,7 @@ namespace IS_XNA_Shooter
             : base(camera, num, enemies)
         {
             testingEnemies = false;
+            globalTime = 0;
 
             switch (num)
             {
@@ -54,6 +56,9 @@ namespace IS_XNA_Shooter
             int i = 0; // iterator for the list of enemies
             bool stillAlive = false; // is true if there is any enemie alive
             //the next loop searches an enemy alive for controlling the end of level 
+
+            globalTime = globalTime + deltaTime;
+
             if (!levelFinished)
             {
                 while (i < enemies.Count && !stillAlive)
@@ -95,6 +100,14 @@ namespace IS_XNA_Shooter
             // linea de la izquierda:
             spriteBatch.Draw(whitePixel, new Rectangle((int)camera.displacement.X, (int)camera.displacement.Y + height,
                 width, 1), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
+
+            //Pintamos el tiempo transcurrido del juego
+
+            spriteBatch.DrawString(SuperGame.fontMotorwerk, "Time with live: ",
+                new Vector2(800, 15), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+
+            spriteBatch.DrawString(SuperGame.fontMotorwerk, Math.Truncate(10 *globalTime) / 10 + " seconds",
+                new Vector2(980, 35), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
         }
 
         public override void setShip(Ship ship)

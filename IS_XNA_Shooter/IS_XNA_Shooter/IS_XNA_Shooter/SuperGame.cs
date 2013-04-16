@@ -209,7 +209,8 @@ namespace IS_XNA_Shooter
         /// <summary>
         /// courier new 12 regular
         /// </summary>
-        public static SpriteFont fontDebug; 
+        public static SpriteFont fontDebug;
+        public static SpriteFont fontMotorwerk;
 
         /// <summary>
         /// SuperGame's constructor
@@ -274,6 +275,7 @@ namespace IS_XNA_Shooter
             audio.LoadContent(0);
 
             fontDebug = Content.Load<SpriteFont>("FontDebug");
+            fontMotorwerk = Content.Load<SpriteFont>("Motorwerk");
 
             // Create the Menus
             menuStart =     new MenuStart(this);

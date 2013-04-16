@@ -387,7 +387,6 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="Graphics\Ships\enemyLaser.png">
       <Name>enemyLaser</Name>
@@ -484,6 +483,13 @@
       <Name>bgB00</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Motorwerk.spritefont">
+      <Name>Motorwerk</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

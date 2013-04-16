@@ -12,6 +12,7 @@ namespace IS_XNA_Shooter
     {
         private Sprite aimPointSprite;
         private BackgroundGameA backGround;
+      
 
         /* ------------------------------------------------------------- */
         /*                          CONSTRUCTOR                          */
@@ -23,6 +24,7 @@ namespace IS_XNA_Shooter
             hub = new IngameHubA(GRMng.hubBase, mainGame.player.GetLife());
             level = new LevelC(camera, num, enemies);
             backGround = new BackgroundGameA(camera, level);
+            
             
             camera.setLevel(level);
 
@@ -55,6 +57,8 @@ namespace IS_XNA_Shooter
         {
             base.Update(gameTime);
 
+            
+            
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             // actualizamos posicion del puntero:
@@ -81,6 +85,8 @@ namespace IS_XNA_Shooter
                 // number of enemies:
                 spriteBatch.DrawString(SuperGame.fontDebug, "Enemies in game = " + enemies.Count() + ".",
                     new Vector2(5, 27), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+
+   
             }
 
         } // Draw

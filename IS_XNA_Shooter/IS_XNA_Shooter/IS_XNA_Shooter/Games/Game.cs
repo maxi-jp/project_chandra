@@ -29,6 +29,8 @@ namespace IS_XNA_Shooter
         protected List<Shot> shots;
         protected List<Explosion> explosions;
 
+        protected Evolution evolution;
+
         /* ------------------------------------------------------------- */
         /*                          CONSTRUCTOR                          */
         /* ------------------------------------------------------------- */
@@ -45,6 +47,27 @@ namespace IS_XNA_Shooter
             shots = new List<Shot>();
             explosions = new List<Explosion>();
             
+            //Audio.PlayMusic(1);
+        }
+
+        /// <summary>
+        /// new builder including the evolution parameters for the ship
+        /// </summary>
+        /// <param name="mainGame"></param>
+        /// <param name="player"></param>
+        /// <param name="evolution"></param>
+        public Game(SuperGame mainGame, Player player, Evolution evolution)
+        {
+            this.mainGame = mainGame;
+            this.player = player;
+            this.evolution = evolution;
+
+            camera = new Camera();
+            enemies = new List<Enemy>();
+            enemiesBot = new List<Enemy>();
+            shots = new List<Shot>();
+            explosions = new List<Explosion>();
+
             //Audio.PlayMusic(1);
         }
 

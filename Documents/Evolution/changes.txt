@@ -1,0 +1,4 @@
+Class:
+	SuperGame - add screen evolution
+	Game - new builder
+	GameStory - new builder

@@ -43,7 +43,8 @@ namespace IS_XNA_Shooter
             playing,
             pause,
             gameOver,
-            playingVideo
+            playingVideo,
+            evolution
         };
 
         /// <summary>
@@ -288,7 +289,7 @@ namespace IS_XNA_Shooter
 
             // Create the player and the screen evolution of our ship
             player = new Player(playerLifes);
-            screenEvolution = new Evolution(Content);
+            screenEvolution = new Evolution(Content, this);
         }
 
         /// <summary>
@@ -308,7 +309,7 @@ namespace IS_XNA_Shooter
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
-            /*if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
@@ -407,8 +408,12 @@ namespace IS_XNA_Shooter
                         videoPlayer.Stop();
                     }
                     break;
-            }*/
-            screenEvolution.Update(Mouse.GetState());
+
+                case gameState.evolution:
+                    screenEvolution.Update(Mouse.GetState());
+                    break;
+            }
+            //screenEvolution.Update(Mouse.GetState());
 
             base.Update(gameTime);
         }
@@ -423,7 +428,7 @@ namespace IS_XNA_Shooter
             GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
 
-           /* drawFramesCounterAux++;
+            drawFramesCounterAux++;
 
             switch (currentState)
             {
@@ -455,6 +460,10 @@ namespace IS_XNA_Shooter
                 case gameState.playingVideo:
                     spriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0, screenWidth, screenHeight), Color.White);
                     break;
+
+                case gameState.evolution:
+                    screenEvolution.Draw(spriteBatch);
+                    break;
             }
 
             if (debug)
@@ -464,9 +473,9 @@ namespace IS_XNA_Shooter
                     new Vector2(screenWidth - 150, 3), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
                 spriteBatch.DrawString(SuperGame.fontDebug, "Update FPS=" + updateFramesCounter + ".",
                     new Vector2(screenWidth - 150, 15), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-            }*/
+            }
 
-            screenEvolution.Draw(spriteBatch);
+            //screenEvolution.Draw(spriteBatch);
 
             spriteBatch.End();
 
@@ -504,8 +513,9 @@ namespace IS_XNA_Shooter
 
             /*game = new GameStory(this, player, 1, GRMng.textureAim,
                 ShipVelocity200f, ShipLife100);*/
-            game = new GameStory(this, grManager, audio, LvlMng, player,
-                /*ShipVelocity*/200f, /*ShipLife*/100);
+            //game = new GameStory(this, grManager, audio, LvlMng, player,
+            //  /*ShipVelocity*/200f, /*ShipLife*/100);
+            game = new GameStory(this, grManager, audio, LvlMng, player, screenEvolution);
 
             //currentState = gameState.playing; // Change game's state to game mode
 

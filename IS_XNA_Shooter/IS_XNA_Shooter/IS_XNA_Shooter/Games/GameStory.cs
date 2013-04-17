@@ -94,6 +94,41 @@ namespace IS_XNA_Shooter
             currentState = StoryState.levelDialog;
         }
 
+        /// <summary>
+        /// new builder including the evolution
+        /// </summary>
+        /// <param name="mainGame"></param>
+        /// <param name="grManager"></param>
+        /// <param name="audio"></param>
+        /// <param name="LvlMng"></param>
+        /// <param name="player"></param>
+        /// <param name="evolution"></param>
+        public GameStory(SuperGame mainGame, GRMng grManager, Audio audio, XMLLvlMng LvlMng,
+           Player player, Evolution evolution)
+            : base(mainGame, player, evolution)
+        {
+            this.grManager = grManager;
+            this.audio = audio;
+            this.LvlMng = LvlMng;
+
+            audio.LoadContent(1);
+            grManager.LoadContent(98); // characters portraits sprites
+
+            spriteGetReady = new Sprite(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight / 2 - 90), 0,
+                GRMng.getready321, new Rectangle(0, 0, 512, 80));
+            spriteNum = new Sprite(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight / 2 + 80), 0,
+                GRMng.getready321, new Rectangle(0, 80, 170, 150));
+
+            gameDialog = new List<List<Talk>>();
+            LvlMng.LoadContent(2); // Load the dialogs
+            readConversationXML(0);
+            setTimeToResume();
+
+            currentLevel = 0;
+            levelList = new String[] { "B1", "A1", "B2", "A2" };
+            InitGame(levelList[currentLevel]);
+            currentState = StoryState.levelDialog;
+        }
 
         //--------------------------------
         //----    Métodos públicos    ----

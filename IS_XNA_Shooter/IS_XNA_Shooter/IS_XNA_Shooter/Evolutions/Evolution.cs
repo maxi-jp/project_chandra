@@ -50,17 +50,18 @@ namespace IS_XNA_Shooter
                             speedShotRectangleAdd,
                             speedShotRectangleRemove,
                             cadenceRectangleAdd,
-                            cadenceRectangleRemove;
+                            cadenceRectangleRemove,
+                            continueRectangle;
 
-        private Texture2D addTexture, removeTexture;
+        private Texture2D addTexture, removeTexture, continueTexture;
 
         private Boolean isClicked;
 
-
+        private SuperGame mainGame;
         //-------------------------------------------------------------------------------
 
 
-        public Evolution(ContentManager content)
+        public Evolution(ContentManager content, SuperGame mainGame)
         {
             life = 100;
             powerAttack = 200;
@@ -96,16 +97,41 @@ namespace IS_XNA_Shooter
 
             cadenceRectangleAdd = new Rectangle(20, high, 40, 40);
             cadenceRectangleRemove = new Rectangle(70, high, 40, 40);
+            high += 60;
+
+            continueRectangle = new Rectangle(20, high, 100, 40);
 
             addTexture = content.Load<Texture2D>("Graphics/Evolution/add");
             removeTexture = content.Load<Texture2D>("Graphics/Evolution/remove");
+            continueTexture = content.Load<Texture2D>("Graphics/Evolution/continue");
 
             isClicked = false;
+
+            this.mainGame = mainGame;
         }
 
 
         //-------------------------------------------------------------------------------
 
+        public float getLife() {
+            return life + lifeExtra;
+        }
+
+        public float getPowerAttack() {
+            return powerAttack + powerAttackExtra;
+        }
+
+        public float getSpeedShip() {
+            return speedShip + speedShipExtra;
+        }
+
+        public float getSpeedShot() {
+            return speedShot + speedShotExtra;
+        }
+
+        public float getCadence() {
+            return cadence + cadenceExtra;
+        }
 
         public void Update(MouseState mouse)
         {
@@ -161,6 +187,11 @@ namespace IS_XNA_Shooter
                 isClicked = true;
                 removeList(cadenceUpdate);
             }
+            else if (continueRectangle.Contains(mouse.X, mouse.Y) && mouse.LeftButton == ButtonState.Pressed && !isClicked)
+            {
+                isClicked = true;
+                mainGame.NewStory();
+            }
 
             lifeExtra = valueList(lifeUpdate, LIFE);
             powerAttackExtra = valueList(powerAttackUpdate, POWER_ATTACK);
@@ -193,9 +224,11 @@ namespace IS_XNA_Shooter
             spriteBatch.Draw(removeTexture, speedShotRectangleRemove, Color.White);
             pos += new Vector2(0, 40);
             spriteBatch.DrawString(SuperGame.fontDebug, "cadence: " + (cadence - cadenceExtra) + getImprovements(cadenceUpdate), pos, Color.White);
-            pos += new Vector2(0, 20);
+
             spriteBatch.Draw(addTexture, cadenceRectangleAdd, Color.White);
             spriteBatch.Draw(removeTexture, cadenceRectangleRemove, Color.White);
+
+            spriteBatch.Draw(continueTexture, continueRectangle, Color.White);
         }
 
 

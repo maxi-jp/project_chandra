@@ -257,7 +257,8 @@ namespace IS_XNA_Shooter
                     else if (itemStoryNew.Unclick(X, Y))
                     {
                         Audio.PlayEffect("digitalAcent01");
-                        mainGame.NewStory();
+                        mainGame.currentState = SuperGame.gameState.evolution;
+                        //mainGame.NewStory();
                     }
                     break;
 

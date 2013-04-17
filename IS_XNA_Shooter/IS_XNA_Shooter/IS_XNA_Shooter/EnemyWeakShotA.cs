@@ -10,35 +10,10 @@ namespace IS_XNA_Shooter
     /// <summary>
     /// Class for Enemy Weak that shots one shot
     /// </summary>
-    class EnemyWeakShotA : Enemy
+    class EnemyWeakShotA : EnemyShot
     {
         /// <summary>
-        /// Shots' list
-        /// </summary>
-        private List<Shot> shots;
-       
-        /// <summary>
-        /// Time between two different shots
-        /// </summary>
-        private float timeToShot = 2.0f;
-        
-        /// <summary>
-        /// Time between two different shots (aux)
-        /// </summary>
-        private float timeToShotAux;
-        
-        /// <summary>
-        /// Shot velocity
-        /// </summary>
-        private float shotVelocity = 300f;
-        
-        /// <summary>
-        /// Shot power
-        /// </summary>
-        private int shotPower = 200;
-
-        /// <summary>
-        /// EnemyWeakShot's constructor
+        /// EnemyWeakShotA's constructor
         /// </summary>
         /// <param name="camera">The camera of the game</param>
         /// <param name="level">The level of the game</param>
@@ -56,13 +31,18 @@ namespace IS_XNA_Shooter
         /// <param name="life">The life of the enemy</param>
         /// <param name="value">The points you obtain if you kill it</param>
         /// <param name="ship">The player's ship</param>
+        /// <param name="timeToShot">Value representing the firing rate</param>
+        /// <param name="shotVelocity">value representing the velocity of the bullets</param>
+        /// <param name="shotPower">value representing the bullets power</param>
         public EnemyWeakShotA(Camera camera, Level level, Vector2 position, float rotation,
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
             float frametime, Texture2D texture, float timeToSpawn, float velocity, int life,
-            int value, Ship ship)
+            int value, Ship ship,
+            float timeToShot, float shotVelocity, int shotPower)
             : base(camera, level, position, rotation,
                 frameWidth, frameHeight, numAnim, frameCount, looping, frametime,
-                texture, timeToSpawn, velocity, life, value, ship)
+                texture, timeToSpawn, velocity, life, value, ship,
+                timeToShot, shotVelocity, shotPower)
         {
             Vector2[] points = new Vector2[7];
             points[0] = new Vector2(21, 21);
@@ -75,10 +55,6 @@ namespace IS_XNA_Shooter
             collider = new Collider(camera, true, position, rotation, points, 35, frameWidth, frameHeight);
 
             setAnim(1);
-
-            timeToShotAux = timeToShot;
-
-            shots = new List<Shot>();
         }
 
         /// <summary>
@@ -122,41 +98,7 @@ namespace IS_XNA_Shooter
                 }
             } // if life > 0
 
-            // shots:
-            for (int i = 0; i < shots.Count(); i++)
-            {
-                shots[i].Update(deltaTime);
-                if (!shots[i].IsActive())
-                    shots.RemoveAt(i);
-                else  // shots-player colisions
-                {
-                    if (ship.collider.Collision(shots[i].position))
-                    {
-                        // the player is hitted:
-                        ship.Damage(shots[i].GetPower());
-
-                        // the shot must be erased only if it hasn't provoked the
-                        // player ship death, otherwise the shot will had be removed
-                        // before from the game in: Game.PlayerDead() -> Enemy.Kill()
-                        if (ship.GetLife() > 0)
-                            shots.RemoveAt(i);
-                    }
-                }
-            }
-
         } // Update
-
-        /// <summary>
-        /// Draws the enemy 
-        /// </summary>
-        /// <param name="spriteBatch">The screen's canvas</param>
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            foreach (Shot s in shots)
-                s.Draw(spriteBatch);
-
-            base.Draw(spriteBatch);
-        }
 
         /// <summary>
         /// Causes damage to the enemy
@@ -173,27 +115,5 @@ namespace IS_XNA_Shooter
             }
         }
 
-        /// <summary>
-        /// Kills the enemy and its shots
-        /// </summary>
-        public override void Kill()
-        {
-            base.Kill();
-
-            shots.Clear();
-        }
-
-        /// <summary>
-        /// The dead condition of this enemy is when its death animation has ended
-        /// and the shots shoted when it was alive are no longer active
-        /// </summary>
-        /// <returns>dead condition</returns>
-        public override bool DeadCondition()
-        {
-            // the dead condition of this enemy is when its death animation has ended
-            // and the shots shoted when it was alive are no longer active
-            return (!animActive && (shots.Count() == 0));
-        }
-
-    } // class EnemyWeakShot
+    } // class EnemyWeakShotA
 }

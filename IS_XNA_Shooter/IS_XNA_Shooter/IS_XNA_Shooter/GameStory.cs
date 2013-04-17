@@ -92,7 +92,7 @@ namespace IS_XNA_Shooter
             setTimeToResume();
 
             currentLevel = 0;
-            levelList = new String[] { "LevelB1", "LevelA1", "LevelB2"/*, "LevelA2"*/ };
+            levelList = new String[] { "LevelB1", "LevelA1", "LevelB2", "LevelA2" };
             InitGame(levelList[currentLevel]);
             currentState = StoryState.levelDialog;
         }
@@ -242,7 +242,7 @@ namespace IS_XNA_Shooter
                 case "LevelA2":
                     // TODO: add new GameA here
                     LvlMng.LoadContent(0); // Load the levelA's enemies
-                    currentGame = new GameA(mainGame, player, 1, GRMng.textureAim, GRMng.textureCell,
+                    currentGame = new GameA(mainGame, player, 2, GRMng.textureAim, GRMng.textureCell,
                         shipVelocity, shipLife);
                     break;
             }

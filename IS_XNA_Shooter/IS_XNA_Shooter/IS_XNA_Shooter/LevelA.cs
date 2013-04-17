@@ -44,6 +44,19 @@ namespace IS_XNA_Shooter
                     LeerArchivoXML(0,0);
                     
                     break;
+
+                case 2:
+                    levelEndCond = LevelEndCondition.killemall;
+                    width = 1200;
+                    height = 800;
+                    ShipInitPosition = new Vector2(width / 2, height / 2);
+                    this.enemies = enemies;
+
+                    Enemy enemy = EnemyFactory.GetEnemyByName("FinalBossHeroe1", camera, this, ship,
+                        new Vector2(60, 60), 0);
+                    ((FinalBossHeroe1)enemy).SetEnemies(enemies);
+                    enemies.Add(enemy);                    
+                    break;
             }
 
             whitePixel = GRMng.whitepixel;
@@ -110,54 +123,42 @@ namespace IS_XNA_Shooter
             // EnemyWeak:
             if (ControlMng.f1Preshed)
             {
-                enemy = new EnemyWeakA(camera, this, new Vector2(20, 20), 0, GRMng.frameWidthEW1,
-                    GRMng.frameHeightEW1, GRMng.numAnimsEW1, GRMng.frameCountEW1, GRMng.loopingEW1,
-                    SuperGame.frameTime12, GRMng.textureEW1, 0, 100, 100, 1, ship);
+                enemy = EnemyFactory.GetEnemyByName("EnemyWeakA", camera, this, ship, new Vector2(20, 20), 0);
                 enemies.Add(enemy);
             }
 
             // EnemyWeakShot:
             if (ControlMng.f2Preshed)
             {
-                enemy = new EnemyWeakShotA(camera, this, new Vector2(20, 20), 0, GRMng.frameWidthEW2,
-                    GRMng.frameHeightEW2, GRMng.numAnimsEW2, GRMng.frameCountEW2, GRMng.loopingEW2,
-                    SuperGame.frameTime12, GRMng.textureEW2, 0, 100, 100, 1, ship);
+                enemy = EnemyFactory.GetEnemyByName("EnemyWeakShotA", camera, this, ship, new Vector2(20, 20), 0);
                 enemies.Add(enemy);
             }
 
             // EnemyBeamA:
             if (ControlMng.f3Preshed)
             {
-                enemy = new EnemyBeamA(camera, this, new Vector2(60, 60), 0, GRMng.frameWidthEB1,
-                    GRMng.frameHeightEB1, GRMng.numAnimsEB1, GRMng.frameCountEB1, GRMng.loopingEB1,
-                    SuperGame.frameTime12, GRMng.textureEB1, 0, 1000, 100, 1, ship);
+                enemy = EnemyFactory.GetEnemyByName("EnemyBeamA", camera, this, ship, new Vector2(60, 60), 0);
                 enemies.Add(enemy);
             }
 
-            // EnemyMineShot
+            // EnemyMineShotA
             if (ControlMng.f4Preshed)
             {
-                enemy = new EnemyMineShotA(camera, this, new Vector2(60, 60), 0, GRMng.frameWidthEMS,
-                    GRMng.frameHeightEMS, GRMng.numAnimsEMS, GRMng.frameCountEMS, GRMng.loopingEMS,
-                    SuperGame.frameTime12, GRMng.textureEMS, 0, 20, 100, 1, ship);
+                enemy = EnemyFactory.GetEnemyByName("EnemyMineShotA", camera, this, ship, new Vector2(20, 20), 0);
                 enemies.Add(enemy);
             }
 
-            // EnemyLaser
+            // EnemyLaserA
             if (ControlMng.f5Preshed)
             {
-                enemy = new EnemyLaserA(camera, this, new Vector2(60, 60), 0, GRMng.frameWidthEL,
-                    GRMng.frameHeightEL, GRMng.numAnimsEL, GRMng.frameCountEL, GRMng.loopingEL,
-                    SuperGame.frameTime10, GRMng.textureEL, 0, 100, 100, 1, ship);
+                enemy = EnemyFactory.GetEnemyByName("EnemyLaserA", camera, this, ship, new Vector2(60, 60), 0);
                 enemies.Add(enemy);
             }
 
-            // EnemyScared
+            // EnemyScaredA
             if (ControlMng.f6Preshed)
             {
-                enemy = new EnemyScaredA(camera, this, new Vector2(60, 60), 0, GRMng.frameWidthES,
-                    GRMng.frameHeightES, GRMng.numAnimsES, GRMng.frameCountES, GRMng.loopingES,
-                    SuperGame.frameTime12, GRMng.textureES, 0, 200, 100, 1, ship);
+                enemy = EnemyFactory.GetEnemyByName("EnemyMineShotA", camera, this, ship, new Vector2(60, 60), 0);
                 enemies.Add(enemy);
             }
 
@@ -178,7 +179,8 @@ namespace IS_XNA_Shooter
             // Final Boss 1 Phase 4
             if (ControlMng.f9Preshed)
             {
-                enemy = new FinalBossHeroe1(camera, this, new Vector2(60, 60), ship, enemies);
+                enemy = EnemyFactory.GetEnemyByName("FinalBossHeroe1", camera, this, ship, new Vector2(60, 60), 0);
+                ((FinalBossHeroe1)enemy).SetEnemies(enemies);
                 enemies.Add(enemy);
             }
 

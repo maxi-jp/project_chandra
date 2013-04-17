@@ -492,7 +492,7 @@ namespace IS_XNA_Shooter
             game = new GameA(this, player, 0, GRMng.textureAim, GRMng.textureCell,
                 /*ShipVelocity*/200f, /*ShipLife*/100000);
             currentState = gameState.playing; // Change game's state to game mode
-            grManager.UnloadContent("LevelA1"); // Unload the menu's resources
+            grManager.UnloadContent("MenuMain"); // Unload the menu's resources
         }
 
         /// <summary>

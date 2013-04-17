@@ -74,10 +74,13 @@ namespace IS_XNA_Shooter
         /// <param name="life"></param>
         /// <param name="value"></param>
         /// <param name="Ship"></param>
-        public FinalBossHeroe1(Camera camera, Level level, Vector2 position, Ship Ship, List<Enemy> enemies)
-            : base(camera, level, position, 0, GRMng.frameWidthHeroe1, GRMng.frameHeightHeroe1,
-            GRMng.numAnimsHeroe1, GRMng.frameCountHeroe1, GRMng.loopingHeroe1, SuperGame.frameTime12, 
-            GRMng.textureHeroe1, 0, 1000, 1, 10, Ship)
+        public FinalBossHeroe1(Camera camera, Level level, Vector2 position, float rotation,
+            short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
+            float frametime, Texture2D texture, float timeToSpawn, float velocity, int life,
+            int value, Ship ship)
+            : base(camera, level, position, rotation, frameWidth, frameHeight,
+                numAnim, frameCount, looping, frametime,
+                texture, 0, 1000, 1, 10, ship)
         {
             this.position = position;
             destiny = new Vector2();
@@ -85,7 +88,6 @@ namespace IS_XNA_Shooter
             currentState = State.move;
             totalTime = 0;
             this.shots = new List<Shot>();
-            this.enemies = enemies;
             setAnim(1);
 
             //I'm making a copy because collider midifies the points
@@ -205,6 +207,12 @@ namespace IS_XNA_Shooter
                 s.Draw(spriteBatch);
 
             base.Draw(spriteBatch);
+        }
+
+
+        public void SetEnemies(List<Enemy> enemies)
+        {
+            this.enemies = enemies;
         }
 
         //-----------------------------------------------------------------------------------------------------------------
@@ -354,7 +362,8 @@ namespace IS_XNA_Shooter
         private void duplicate()
         {
             duplicates += 1;
-            Enemy enemy = new FinalBossHeroe1(camera, level, position, ship, enemies);
+            Enemy enemy = EnemyFactory.GetEnemyByName("FinalBossHeroe1", camera, level, ship, position, 0);
+            ((FinalBossHeroe1)enemy).SetEnemies(enemies);
             enemies.Add(enemy);
         }
     }

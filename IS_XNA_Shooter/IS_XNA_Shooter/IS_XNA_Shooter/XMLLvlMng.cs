@@ -14,6 +14,7 @@ namespace IS_XNA_Shooter
     {
         public static XmlDocument lvl1A;     // XML level 1 A
         public static XmlDocument lvl1B;     // XML level 1 B
+        public static XmlDocument lvl1C;     //XML level 1 C
         public static XmlDocument rect1;    // rectangles level 1 side scroll mode
         public static XmlDocument dialog1;  // dialog of the first level of mode history
 
@@ -49,6 +50,10 @@ namespace IS_XNA_Shooter
                     lvl1B = new XmlDocument();
                     lvl1B.Load("../../../../IS_XNA_ShooterContent/Levels/level1B.xml");
                     break;
+                case 2: // gameC
+                    lvl1C = new XmlDocument();
+                    lvl1C.Load("../../../../IS_XNA_ShooterContent/Levels/level1C.xml");
+                    break;
             }
 
         } // LoadContent
@@ -71,6 +76,9 @@ namespace IS_XNA_Shooter
                     lvl1B = null;
                     rect1 = null;
                     dialog1 = null;
+                    break;
+                case 2: //gameA
+                    lvl1C = null;
                     break;
             }
         }

@@ -280,7 +280,7 @@ namespace IS_XNA_Shooter
                     else if (itemArcadeSurvival.Unclick(X, Y))
                     {
                         Audio.PlayEffect("digitalAcent01");
-                        mainGame.newSurvival(0);
+                        mainGame.newSurvival(2);
                     }
                     else if (itemArcadeDefense.Unclick(X, Y))
                     {

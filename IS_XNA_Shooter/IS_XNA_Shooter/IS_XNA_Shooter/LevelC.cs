@@ -41,7 +41,7 @@ namespace IS_XNA_Shooter
                     ShipInitPosition = new Vector2(width / 2, height / 2);
                     this.enemies = enemies;
 
-                    LeerArchivoXML(0, 0);
+                    LeerArchivoXML(2, 0);
 
                     break;
             }

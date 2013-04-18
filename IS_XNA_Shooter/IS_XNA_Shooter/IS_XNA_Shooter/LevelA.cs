@@ -34,6 +34,13 @@ namespace IS_XNA_Shooter
 
                     break;
 
+                case 40:
+                    width = 1200;
+                    height = 800;
+                    ShipInitPosition = new Vector2(width / 2, height / 2);
+                    this.enemies = enemies;
+                    break;
+
                 case 1:
                     levelEndCond = LevelEndCondition.killemall;
                     width = 1200;

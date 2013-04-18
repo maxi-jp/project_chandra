@@ -15,7 +15,7 @@ namespace IS_XNA_Shooter
         protected Game game;
 
         public Collider collider;
-        private ParticleSystem particles;
+        public ParticleSystem particles;
         private Vector2 exhaustPipePosition;
         private Vector2 exhaustPipePositionOrig;
         /// <summary>
@@ -74,7 +74,7 @@ namespace IS_XNA_Shooter
             rectangles[1] = new Rectangle(64, 0, 64, 64);
             rectangles[2] = new Rectangle(0, 64, 64, 64);
             rectangles[3] = new Rectangle(64, 64, 64, 64);
-            particles = new ParticleSystem(camera, level, GRMng.textureSmoke01, rectangles, 1, position);
+            particles = new ParticleSystem(camera, level, GRMng.textureSmoke01, rectangles, 20, position);
 
             currentState = shipState.ONNORMAL;
 
@@ -170,7 +170,7 @@ namespace IS_XNA_Shooter
                     exhaustPipePosition += position;
 
                     collider.Update(position, rotation);
-                    particles.Update(deltaTime, exhaustPipePosition);
+                    particles.Update(deltaTime, exhaustPipePosition, rotation);
                     break;
 
                 case shipState.ONDYING:

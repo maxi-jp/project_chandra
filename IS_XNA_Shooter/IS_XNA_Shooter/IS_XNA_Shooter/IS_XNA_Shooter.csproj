@@ -122,6 +122,7 @@
     <Compile Include="EnemyMineShotB.cs" />
     <Compile Include="EnemyShot.cs" />
     <Compile Include="EnemyWeakShotB.cs" />
+    <Compile Include="GameAForTestingParticles.cs" />
     <Compile Include="MenuStart.cs" />
     <Compile Include="EnemyBeamA.cs" />
     <Compile Include="EnemyFinalHeroe2.cs" />

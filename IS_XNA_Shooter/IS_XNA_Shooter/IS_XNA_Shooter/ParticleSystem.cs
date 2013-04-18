@@ -25,6 +25,11 @@ namespace IS_XNA_Shooter
         public Vector2 aceleration;
 
         /// <summary>
+        /// Indicates the velocity of the growth (growth rate)
+        /// </summary>
+        public float growthVelocity;
+
+        /// <summary>
         /// Indicates the transparency of the texture
         /// </summary>
         public byte alpha;
@@ -55,6 +60,7 @@ namespace IS_XNA_Shooter
         public void Move()
         {
             this.position += this.aceleration;
+            this.scale += growthVelocity;
         }
 
     } // class Particle
@@ -92,16 +98,21 @@ namespace IS_XNA_Shooter
         private Particle[] particles;
 
         /// <summary>
-        /// The source position por the particles
+        /// The source position for the particles
         /// </summary>
         private Vector2 sourcePosition;
+
+        /// <summary>
+        /// The source rotation for the particles
+        /// </summary>
+        private float sourceRotation;
 
         /// <summary>
         /// Time that has passed since the creation of the last particle
         /// </summary>
         private float timeSinceLastParticle;
 
-        private const int MAX_ACELERATION_X = 1;
+        /*private const int MAX_ACELERATION_X = 1;
         private const int MAX_ACELERATION_Y = 5;
         private const int MIN_ACELERATION_Y = 1;
         private const int MAX_DEFLECTION_INITIALPOSITION = 0;
@@ -114,7 +125,22 @@ namespace IS_XNA_Shooter
         private const byte FADEOUT_DECREMENT = 12;
         private const float FADEOUT_INCREMENT = 2.22f;
         private const float FADEOUT_DECREMENT_INITIAL_TIME = 0.20f;
-        private const float PARTICLE_CREATION_INTERVAL = 1.0f;
+        private const float PARTICLE_CREATION_INTERVAL = 1.0f;*/
+        public int MAX_ACELERATION = 3;
+        public float MIN_ACELERATION = 1.0f;
+        public int MAX_DEFLECTION_INITIALPOSITION = 0;
+        public float MAX_DEFLECTION_DEAD = 0.4f;
+        public float MAX_DEFLECTION_SCALE = 0.5f;
+        public byte MAX_ALPHA = 255;
+        public byte MAX_DEFLECTION_INITIALALPHA = 64;
+        public float INITIAL_DEAD_AGE = 0.9f;
+        public float FADEOUT_INTERVAL = 0.04f;
+        public byte FADEOUT_DECREMENT = 14;
+        public byte FADEOUT_INCREMENT = 12;
+        public float FADEOUT_DECREMENT_INITIAL_TIME = 0.20f;
+        public float PARTICLE_CREATION_INTERVAL = 0.8f;
+        public float MAX_DEFLECTION_GROWTH = 0.02f;
+        public float INITIAL_GROWTH_INCREMENT = 0.02f;
 
         /// <summary>
         /// A Random object for generate random values
@@ -148,9 +174,10 @@ namespace IS_XNA_Shooter
         /// Update the logic of all the particles
         /// </summary>
         /// <param name="deltaTime">Time since the last Update</param>
-        public void Update(float deltaTime, Vector2 actualPosition)
+        public void Update(float deltaTime, Vector2 actualPosition, float actualRotation)
         {
             sourcePosition = actualPosition;
+            sourceRotation = actualRotation;
 
             // Encourage the particles "alive"
             EncourageParticles(deltaTime);
@@ -169,10 +196,6 @@ namespace IS_XNA_Shooter
             {
                 if (particles[i] != null)
                     particles[i].DrawRectangle(spriteBatch);
-                    /*spriteBatch.Draw(textura,
-                        particulas[i].posicion, null,
-                        new Color(255, 255, 255, (byte)MathHelper.Clamp(particulas[i].alfa, 0, 255)), 0.0f, Vector2.Zero, particulas[i].escala,
-                        SpriteEffects.None, 0);*/
             }
         }
 
@@ -196,15 +219,24 @@ namespace IS_XNA_Shooter
                         if (particles[i].timeSinceTheLastFadeout >= FADEOUT_INTERVAL)
                         {
                             particles[i].timeSinceTheLastFadeout = 0.0f;
-                            particles[i].alpha -= FADEOUT_DECREMENT;
+                            if (particles[i].alpha < FADEOUT_DECREMENT)
+                                particles[i].alpha = 0;
+                            else
+                                particles[i].alpha -= FADEOUT_DECREMENT;
                             particles[i].SetTransparency(particles[i].alpha);
                         }
                     }
-                    /*else
+                    else
                     {
                         if (particles[i].alpha < MAX_ALPHA)
-                            particles[i].alpha += FADEOUT_INCREMENT;
-                    }*/
+                        {      
+                            if (particles[i].alpha + FADEOUT_INCREMENT > MAX_ALPHA)
+                                particles[i].alpha = MAX_ALPHA;
+                            else
+                                particles[i].alpha += FADEOUT_INCREMENT;
+                            particles[i].SetTransparency(particles[i].alpha);
+                        }
+                    }
 
                     particles[i].timeSinceTheLastFadeout += deltaTime;
                 }
@@ -257,18 +289,25 @@ namespace IS_XNA_Shooter
                         //particles[i].aceleration.X = (float)ObtainRandom(MAX_ACELERATION_X);
                         //particles[i].aceleration.Y = -ObtainRandom(MAX_ACELERATION_Y) - MIN_ACELERATION_Y;
                         //particles[i].aceleration.Normalize();
-                        particles[i].aceleration = Vector2.Zero;
-
-                        //if (ObtainRandom(10) <= 5)
-                        //    particles[i].aceleration.X *= -1;
+                        //position.X += (float)Math.Cos(sourceRotation) * velocity * deltaTime;
+                        //position.Y += (float)Math.Sin(sourceRotation) * velocity * deltaTime;
+                        particles[i].aceleration = new Vector2
+                            (
+                                -(float)Math.Cos(sourceRotation) * ObtainRandom(MAX_ACELERATION),
+                                -(float)Math.Sin(sourceRotation) * ObtainRandom(MAX_ACELERATION)
+                            );
 
                         // Establish the dead age
                         particles[i].deadAge = INITIAL_DEAD_AGE;
                         particles[i].deadAge += ObtainRandom(MAX_DEFLECTION_DEAD);
 
                         // Establish the deviation in the scale (we want particles smaller than others)
-                        particles[i].scale = 1.0f;
+                        particles[i].scale = 0.5f;
                         particles[i].scale += ObtainRandom(MAX_DEFLECTION_SCALE);
+                        
+                        // Establish the growth rate
+                        particles[i].growthVelocity = INITIAL_GROWTH_INCREMENT;
+                        particles[i].growthVelocity += ObtainRandom(MAX_DEFLECTION_GROWTH);
 
                         timeSinceLastParticle = 0.0f;
                     }

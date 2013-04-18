@@ -363,6 +363,8 @@ namespace IS_XNA_Shooter
 
                     if (debug && Keyboard.GetState().IsKeyDown(Keys.T))
                         NewGameATest();
+                    if (debug && Keyboard.GetState().IsKeyDown(Keys.Y))
+                        NewGameAForTestingParticles();
 
                     menu.Update(Mouse.GetState().X, Mouse.GetState().Y);
 
@@ -490,6 +492,16 @@ namespace IS_XNA_Shooter
             grManager.LoadContent("LevelA1"); // Load the gameA's level 1 resources
             audio.LoadContent(1);
             game = new GameA(this, player, 0, GRMng.textureAim, GRMng.textureCell,
+                /*ShipVelocity*/200f, /*ShipLife*/100000);
+            currentState = gameState.playing; // Change game's state to game mode
+            grManager.UnloadContent("MenuMain"); // Unload the menu's resources
+        }
+
+        private void NewGameAForTestingParticles()
+        {
+            grManager.LoadContent("LevelA1"); // Load the gameA's level 1 resources
+            audio.LoadContent(1);
+            game = new GameAForTestingParticles(this, player, 40, GRMng.textureAim, GRMng.textureCell,
                 /*ShipVelocity*/200f, /*ShipLife*/100000);
             currentState = gameState.playing; // Change game's state to game mode
             grManager.UnloadContent("MenuMain"); // Unload the menu's resources

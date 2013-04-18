@@ -21,6 +21,7 @@ namespace IS_XNA_Shooter
         public static bool fPreshed, kPreshed, lPreshed, gPreshed;
         public static bool f1Preshed, f2Preshed, f3Preshed, f4Preshed, f5Preshed;
         public static bool f6Preshed, f7Preshed, f8Preshed, f9Preshed, f10Preshed;
+        public static bool f11Preshed, f12Preshed;
 
         private MouseState prevMouseState, actMouseState;
 
@@ -33,6 +34,7 @@ namespace IS_XNA_Shooter
             fPreshed = kPreshed = gPreshed = false;
             f1Preshed = f2Preshed = f3Preshed = f4Preshed = f5Preshed = false;
             f6Preshed = f7Preshed = f8Preshed = f9Preshed = f10Preshed = false;
+            f11Preshed = f12Preshed = false;
 
             leftClickPreshed = rightClickPreshed = false;
         }
@@ -57,6 +59,8 @@ namespace IS_XNA_Shooter
             f8Preshed = (actKeyboardState.IsKeyDown(Keys.F8) && prevKeyboardState.IsKeyUp(Keys.F8));
             f9Preshed = (actKeyboardState.IsKeyDown(Keys.F9) && prevKeyboardState.IsKeyUp(Keys.F9));
             f10Preshed = (actKeyboardState.IsKeyDown(Keys.F10) && prevKeyboardState.IsKeyUp(Keys.F10));
+            f11Preshed = (actKeyboardState.IsKeyDown(Keys.F11) && prevKeyboardState.IsKeyUp(Keys.F11));
+            f12Preshed = (actKeyboardState.IsKeyDown(Keys.F12) && prevKeyboardState.IsKeyUp(Keys.F12));
 
             prevKeyboardState = actKeyboardState;
 

@@ -91,10 +91,10 @@ namespace IS_XNA_Shooter
                 if (!shots[i].IsActive())
                     shots.RemoveAt(i);
                 else  // shots-player colisions
-                {
+                {   
                     if (ship.collider.Collision(shots[i].position))
                     {
-                        // the player is hitted:
+                        // the player is hit:
                         ship.Damage(shots[i].GetPower());
 
                         // the shot must be erased only if it hasn't provoked the
@@ -102,6 +102,22 @@ namespace IS_XNA_Shooter
                         // before from the game in: Game.PlayerDead() -> Enemy.Kill()
                         if (ship.GetLife() > 0)
                             shots.RemoveAt(i);
+                    }
+                    //If we are in Defense mode, check the house also
+                    if (this is EnemyShotADefense)
+                    {
+                        House house = level.GetHouse();
+                        if (house.collider.Collision(shots[i].position))
+                        {
+                            // the player is hit:
+                            house.Damage(shots[i].GetPower());
+
+                            // the shot must be erased only if it hasn't provoked the
+                            // player house death, otherwise the shot will had be removed
+                            // before from the game in: Game.PlayerDead() -> Enemy.Kill()
+                            if (house.GetLife() > 0)
+                                shots.RemoveAt(i);
+                        }
                     }
                 }
             }

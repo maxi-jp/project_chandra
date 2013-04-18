@@ -101,6 +101,20 @@ namespace IS_XNA_Shooter
                 }
             }
 
+            if (this is GameADefense)
+                //If we are in defense mode, check collisions with house
+            {
+                House house = level.GetHouse();
+                for (int i = 0; i < enemies.Count(); i++)
+                {
+                    if (enemies[i].IsColisionable() && (house.collider.Collision(enemies[i].collider) || enemies[i].collider.Collision(house.collider)))
+                    {
+                        // the house has been hit by an enemy
+                        level.DamageHouse(100);
+                    }
+                }
+            }
+
             if (!SuperGame.godMode)
             {
                 // enemies-player collision:
@@ -167,6 +181,12 @@ namespace IS_XNA_Shooter
 
             if (player.GetLife() == 0)
                 mainGame.GameOver();
+        }
+
+        // This methods is called when the house's life is <= 0
+        public virtual void DeadHouse()
+        {
+            mainGame.GameOver();
         }
 
         public bool IsFinished()

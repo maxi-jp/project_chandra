@@ -199,6 +199,16 @@ namespace IS_XNA_Shooter
         public static bool[] loopingPA1 = { true, true, false, false };
         #endregion
 
+        #region HOUSE
+        /* ------------------- HOUSE ------------------- */
+        public static Texture2D textureHouse;
+        public static short frameWidthHouse = 80;
+        public static short frameHeightHouse = 80;
+        public static short numAnimsHouse = 1;
+        public static short[] frameCountHouse = { 1 };
+        public static bool[] loopingHouse = { true };
+        #endregion
+
         #region SHOTS
         /* ------------------- LASER 1 ------------------- */
         public static Texture2D textureL1;
@@ -218,9 +228,6 @@ namespace IS_XNA_Shooter
         #endregion
 
         #region OTHERS
-        /* ------------------- SMOKE ------------------- */
-        public static Texture2D textureSmoke;
-
         /* ------------------- EXPLOSION VERDE ------------------- */
         public static Texture2D textureExplosion1;
         public static short frameWidthEx1 = 100;
@@ -293,8 +300,8 @@ namespace IS_XNA_Shooter
                     LoadIngameMenu();
 
                     hubBase = content.Load<Texture2D>("Graphics/Hub/base256");
+                    
 
-                    textureSmoke = content.Load<Texture2D>("Graphics/smoke");
                     texturePA1 = content.Load<Texture2D>("Graphics/Ships/sprites80x80");
                     textureAim = content.Load<Texture2D>("Graphics/aimpoint");
                     textureL1 = content.Load<Texture2D>("Graphics/laserShotAnim");
@@ -326,12 +333,39 @@ namespace IS_XNA_Shooter
 
                     break;
 
+                case "LevelADefense1":
+                      LoadIngameMenu();
+
+                    hubBase = content.Load<Texture2D>("Graphics/Hub/base256");
+                    
+                    texturePA1 = content.Load<Texture2D>("Graphics/Ships/sprites80x80");
+                    textureAim = content.Load<Texture2D>("Graphics/aimpoint");
+                    textureL1 = content.Load<Texture2D>("Graphics/laserShotAnim");
+                    textureL2 = content.Load<Texture2D>("Graphics/laserShotAnim2");
+                    
+                    textureEW1 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy01_80x80");
+                    textureEW2 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy02_80x80");
+                    textureEB1 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy03_80x80");
+                    textureES = content.Load<Texture2D>("Graphics/Ships/EnemyScared");
+                    textureESBullet = content.Load<Texture2D>("Graphics/scaredBullet");
+                    textureEMS =  content.Load<Texture2D>("Graphics/Ships/mineAnimation");
+                    textureEMSBullet = content.Load<Texture2D>("Graphics/mineShot");
+                    
+                    textureCell = content.Load<Texture2D>("Graphics/celdasuelo");
+                    textureBg00 = content.Load<Texture2D>("Graphics/Backgrounds/bg00");
+                    textureBg01 = content.Load<Texture2D>("Graphics/Backgrounds/bg01");
+                    textureBg02 = content.Load<Texture2D>("Graphics/Backgrounds/bg02");
+                    textureBg03 = content.Load<Texture2D>("Graphics/Backgrounds/bg03");
+
+                    textureHouse = content.Load<Texture2D>("Graphics/house");
+
+                    break;
+
                 case "LevelB1":
                     LoadIngameMenu();
 
                     hubBase = content.Load<Texture2D>("Graphics/Hub/base256");
 
-                    textureSmoke = content.Load<Texture2D>("Graphics/smoke");
                     texturePA1 = content.Load<Texture2D>("Graphics/Ships/sprites80x80");
                     textureL1 = content.Load<Texture2D>("Graphics/laserShotAnim");
                     textureL2 = content.Load<Texture2D>("Graphics/laserShotAnim2");
@@ -355,7 +389,6 @@ namespace IS_XNA_Shooter
                 case "LevelB2":
                     hubBase = content.Load<Texture2D>("Graphics/Hub/base256");
 
-                    textureSmoke = content.Load<Texture2D>("Graphics/smoke");
                     texturePA1 = content.Load<Texture2D>("Graphics/Ships/sprites80x80");
                     textureL1 = content.Load<Texture2D>("Graphics/laserShotAnim");
 
@@ -416,7 +449,6 @@ namespace IS_XNA_Shooter
 
                     hubBase = null;
 
-                    textureSmoke = null;
                     texturePA1 = null;
                     textureAim = null;
                     textureL1 = null;
@@ -450,11 +482,41 @@ namespace IS_XNA_Shooter
 
                     break;
 
+                case "LevelADefense1":
+
+                    hubBase = null;
+
+                    texturePA1 = null;
+                    textureAim = null;
+                    textureL1 = null;
+                    textureL2 = null;
+
+                    textureEW1 = null;
+                    textureEW2 = null;
+                    textureEB1 = null;
+                    textureES = null;
+                    textureESBullet = null;
+                    textureEMS = null;
+                    textureEMSBullet = null;
+                    textureEL = null;
+                    textureELBullet = null;
+
+                    textureCell = null;
+                    textureRed = null;
+
+                    textureBg00 = null;
+                    textureBg01 = null;
+                    textureBg02 = null;
+                    textureBg03 = null;
+
+                    textureHouse = null;
+
+                    break;
+
                 case "LevelB1":
 
                     hubBase = null;
 
-                    textureSmoke = null;
                     texturePA1 = null;
                     textureL1 = null;
 
@@ -471,7 +533,6 @@ namespace IS_XNA_Shooter
                 case "LevelB2":
                     hubBase = null;
 
-                    textureSmoke = null;
                     texturePA1 = null;
                     textureL1 = null;
 

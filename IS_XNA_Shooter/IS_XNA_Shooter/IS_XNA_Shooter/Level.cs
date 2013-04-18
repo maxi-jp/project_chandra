@@ -12,6 +12,7 @@ namespace IS_XNA_Shooter
     {
         protected Camera camera;
         protected Ship ship;
+        protected House house;
         protected Vector2 ShipInitPosition;
         public int width;
         public int height;
@@ -91,6 +92,11 @@ namespace IS_XNA_Shooter
                             GRMng.frameWidthEW1, GRMng.frameHeightEW1, GRMng.numAnimsEW1, GRMng.frameCountEW1,
                             GRMng.loopingEW1, SuperGame.frameTime12, GRMng.textureEW1, time, 100, 100,
                             1, null);
+                    else if (enemyType.Equals("enemyWeakADefense"))
+                        enemy = new EnemyWeakADefense(camera, this, new Vector2(positionX, positionY), 0,
+                                GRMng.frameWidthEW1, GRMng.frameHeightEW1, GRMng.numAnimsEW1, GRMng.frameCountEW1,
+                                GRMng.loopingEW1, SuperGame.frameTime12, GRMng.textureEW1, time, 100, 100,
+                                1, null,null);
                     else if (enemyType.Equals("enemyBeam"))
                         enemy = new EnemyBeamA(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEB1, GRMng.frameHeightEB1, GRMng.numAnimsEB1, GRMng.frameCountEB1,
@@ -101,6 +107,11 @@ namespace IS_XNA_Shooter
                             GRMng.frameWidthEW2, GRMng.frameHeightEW2, GRMng.numAnimsEW2, GRMng.frameCountEW2,
                             GRMng.loopingEW2, SuperGame.frameTime12, GRMng.textureEW2, time, 100, 100,
                             1, null, 2, 300, 200);
+                    else if (enemyType.Equals("enemyWeakShotADefense"))
+                        enemy = new EnemyWeakShotADefense(camera, this, new Vector2(positionX, positionY), 0,
+                            GRMng.frameWidthEW2, GRMng.frameHeightEW2, GRMng.numAnimsEW2, GRMng.frameCountEW2,
+                            GRMng.loopingEW2, SuperGame.frameTime12, GRMng.textureEW2, time, 100, 100,
+                            1, null, 2, 300, 200, null);
                     else if (enemyType.Equals("enemyMineShotA"))
                         enemy = new EnemyMineShotA(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEMS, GRMng.frameHeightEMS, GRMng.numAnimsEMS, GRMng.frameCountEMS,
@@ -116,6 +127,11 @@ namespace IS_XNA_Shooter
                             GRMng.frameWidthES, GRMng.frameHeightES, GRMng.numAnimsES, GRMng.frameCountES,
                             GRMng.loopingES, SuperGame.frameTime12, GRMng.textureES, time, 100, 100,
                             1, null, 4, 300, 200);
+                    else if (enemyType.Equals("enemyScaredADefense"))
+                        enemy = new EnemyScaredADefense(camera, this, new Vector2(positionX, positionY), 0,
+                            GRMng.frameWidthES, GRMng.frameHeightES, GRMng.numAnimsES, GRMng.frameCountES,
+                            GRMng.loopingES, SuperGame.frameTime12, GRMng.textureES, time, 100, 100,
+                            1, null, 4, 300, 200,null);
                     else if (enemyType.Equals("enemyWeakB"))
                         enemy = new EnemyWeakB(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEW1, GRMng.frameHeightEW1, GRMng.numAnimsEW1, GRMng.frameCountEW1,
@@ -162,6 +178,26 @@ namespace IS_XNA_Shooter
              ship.SetPosition(ShipInitPosition);
         }
 
+        public virtual void setHouse(House house)
+        {
+            this.house = house;
+            EnemyADefense ed = null;
+            EnemyShotADefense esd = null;
+
+            foreach (Enemy e in enemies)// enemigos
+                if (e is EnemyADefense)
+                {
+                    ed = (EnemyADefense)e;
+                    ed.SetHouse(house);
+                }
+                else if (e is EnemyShotADefense)
+                {
+                    esd = (EnemyShotADefense)e;
+                    esd.SetHouse(house);
+                }
+            //house.SetPosition(HouseInitPosition);
+        }
+
         // This method returns true when the level is finished.
         public bool IsFinished()
         {
@@ -175,6 +211,23 @@ namespace IS_XNA_Shooter
         }
 
         public XMLLvlMng LvlMng { get; set; }
+
+
+        public House GetHouse()
+        {
+            return this.house;
+        }
+
+        public void DamageHouse(int i)
+        {
+            house.Damage(i);
+        }
+
+        //We tell the ship that the house is dead
+        public void DeadHouse()
+        {
+            ship.DeadHouse();
+        }
 
     } // class Level
 }

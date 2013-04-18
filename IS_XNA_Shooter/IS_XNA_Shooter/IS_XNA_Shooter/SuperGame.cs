@@ -541,7 +541,7 @@ namespace IS_XNA_Shooter
         /// <param name="lvl">The number of the level</param>
         public void newKiller(int lvl)
         {
-            grManager.LoadContent("LevelA1"); // Load the gameB's level 1 resources
+            grManager.LoadContent("LevelA1"); // Load the gameA's level 1 resources
             audio.LoadContent(1);
             LvlMng.LoadContent(lvl); // Load XML
 
@@ -560,17 +560,18 @@ namespace IS_XNA_Shooter
         /// <param name="lvl">The number of the level</param>
         public void newDefense(int lvl)
         {
-            grManager.LoadContent("LevelB1"); // Load the gameB's level 1 resources
+            grManager.LoadContent("LevelADefense1"); // Load the gameA's level 1 resources
             audio.LoadContent(1);
             LvlMng.LoadContent(lvl);
 
-            game = new GameA(this, player, 1, GRMng.textureAim, GRMng.textureCell,
-                /*ShipVelocity*/200f, /*ShipLife*/100);
+            game = new GameADefense(this, player, 1, GRMng.textureAim, GRMng.textureCell,
+                /*ShipVelocity*/200f, /*ShipLife*/100, new Vector2(300, 300), GRMng.frameWidthHouse, GRMng.frameHeightHouse,
+                GRMng.numAnimsHouse, GRMng.frameCountHouse, GRMng.loopingHouse, SuperGame.frameTime12, GRMng.textureHouse, 500);
 
             currentState = gameState.playing; // Change game's state to game mode
 
             LvlMng.UnloadContent(lvl);
-            grManager.UnloadContent("MenuMain"); /// Unload the main menu's resources
+            grManager.UnloadContent("MenuMain"); // Unload the menu's resources
         }
 
         /// <summary>

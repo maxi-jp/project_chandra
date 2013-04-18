@@ -58,6 +58,11 @@ namespace IS_XNA_Shooter
                     rect2 = new XmlDocument();
                     rect2.Load("../../../../IS_XNA_ShooterContent/Levels/levelRectangle2.xml");
                     break;
+
+                case 4:
+                    lvl1A = new XmlDocument();
+                    lvl1A.Load("../../../../IS_XNA_ShooterContent/Levels/level1ADefense.xml");
+                    break;
             }
 
         } // LoadContent

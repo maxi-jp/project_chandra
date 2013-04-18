@@ -8,12 +8,14 @@ using Microsoft.Xna.Framework.Graphics;
 namespace IS_XNA_Shooter
 {
     /// <summary>
-    /// Class for Enemy Weak in GameA
+    /// Class for Enemy Weak in GameA Defense
     /// </summary>
-    class EnemyWeakA : Enemy
+    class EnemyWeakADefense : EnemyADefense
     {
+
+
         /// <summary>
-        /// EnemyWeakA's constructor
+        /// EnemyWeakADefense's constructor
         /// </summary>
         /// <param name="camera">The camera of the game</param>
         /// <param name="level">The level of the game</param>
@@ -31,12 +33,13 @@ namespace IS_XNA_Shooter
         /// <param name="life">The life of the enemy</param>
         /// <param name="value">The points you obtain if you kill it</param>
         /// <param name="ship">The player's ship</param>
-        public EnemyWeakA(Camera camera, Level level, Vector2 position, float rotation,
+        /// <param name="house">The player's house</param>
+        public EnemyWeakADefense(Camera camera, Level level, Vector2 position, float rotation,
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
             float frametime, Texture2D texture, float timeToSpawn, float velocity, int life,
-            int value, Ship ship)
-            : base (camera, level, position, rotation, frameWidth, frameHeight, numAnim, frameCount,
-                looping, frametime, texture, timeToSpawn, velocity, life, value, ship)
+            int value, Ship ship, House house)
+            : base(camera, level, position, rotation, frameWidth, frameHeight, numAnim, frameCount,
+                looping, frametime, texture, timeToSpawn, velocity, life, value, ship,house)
         {
             Vector2[] points = new Vector2[7];
             points[0] = new Vector2(21, 21);
@@ -47,7 +50,6 @@ namespace IS_XNA_Shooter
             points[5] = new Vector2(32, 57);
             points[6] = new Vector2(21, 57);
             collider = new Collider(camera, true, position, rotation, points, 90, frameWidth, frameHeight);
-
             setAnim(1);
         }
 
@@ -58,25 +60,49 @@ namespace IS_XNA_Shooter
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
-
+           
             if (life > 0)
             {
-                float dY = -ship.position.Y + position.Y;
-                float dX = -ship.position.X + position.X;
+                if (base.target <= 0) // If the target is the player (0)
+                { 
+                    float dY = -ship.position.Y + position.Y;
+                    float dX = -ship.position.X + position.X;
 
-                float gyre = (float)Math.Atan(dY / dX);
+                    float gyre = (float)Math.Atan(dY / dX);
 
-                if (dX < 0)
+                    if (dX < 0)
+                    {
+                        rotation = gyre;
+                        position.X += (float)(velocity * Math.Cos(gyre) * deltaTime);
+                        position.Y += (float)(velocity * Math.Sin(gyre) * deltaTime);
+                    }
+                    else
+                    {
+                        rotation = (float)Math.PI + gyre;
+                        position.X -= (float)(velocity * Math.Cos(gyre) * deltaTime);
+                        position.Y -= (float)(velocity * Math.Sin(gyre) * deltaTime);
+                    }
+                }            
+                else //The target is the ship (1)
                 {
-                    rotation = gyre;
-                    position.X += (float)(velocity * Math.Cos(gyre) * deltaTime);
-                    position.Y += (float)(velocity * Math.Sin(gyre) * deltaTime);
-                }
-                else
-                {
-                    rotation = (float)Math.PI + gyre;
-                    position.X -= (float)(velocity * Math.Cos(gyre) * deltaTime);
-                    position.Y -= (float)(velocity * Math.Sin(gyre) * deltaTime);
+                
+                    float dY = -house.position.Y + position.Y;
+                    float dX = -house.position.X + position.X;
+
+                    float gyre = (float)Math.Atan(dY / dX);
+
+                    if (dX < 0)
+                    {
+                        rotation = gyre;
+                        position.X += (float)(velocity * Math.Cos(gyre) * deltaTime);
+                        position.Y += (float)(velocity * Math.Sin(gyre) * deltaTime);
+                    }
+                    else
+                    {
+                        rotation = (float)Math.PI + gyre;
+                        position.X -= (float)(velocity * Math.Cos(gyre) * deltaTime);
+                        position.Y -= (float)(velocity * Math.Sin(gyre) * deltaTime);
+                    }
                 }
             }
 
@@ -97,6 +123,7 @@ namespace IS_XNA_Shooter
                 Audio.PlayEffect("brokenBone01");
             }
         }
+
 
     } // class EnemyWeak
 }

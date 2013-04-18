@@ -285,7 +285,7 @@ namespace IS_XNA_Shooter
                     else if (itemArcadeDefense.Unclick(X, Y))
                     {
                         Audio.PlayEffect("digitalAcent01");
-                        mainGame.newDefense(0);
+                        mainGame.newDefense(4);
                     }
                     break;
 

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<!DOCTYPE juego SYSTEM "level.dtd">
+<level titulo="nivel1" width="1200" height="800">
+    <enemiesList>
+				<!-- OLEADA 1 --> 
+				<enemy type="enemyScaredADefense" positionX="1100" positionY="750" time="1"></enemy>
+
+				
+				
+	</enemiesList>
+</level>

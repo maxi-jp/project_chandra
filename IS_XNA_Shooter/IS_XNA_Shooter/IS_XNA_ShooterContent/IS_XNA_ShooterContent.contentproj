@@ -486,8 +486,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Graphics\smoke.png">
-      <Name>smoke</Name>
+    <Compile Include="Graphics\Smoke\smoke01.png">
+      <Name>smoke01</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

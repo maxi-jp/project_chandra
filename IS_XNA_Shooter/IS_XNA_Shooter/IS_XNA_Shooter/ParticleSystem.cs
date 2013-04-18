@@ -27,7 +27,7 @@ namespace IS_XNA_Shooter
         /// <summary>
         /// Indicates the transparency of the texture
         /// </summary>
-        public float alpha;
+        public byte alpha;
 
         /// <summary>
         /// Time since the last fadeout
@@ -43,11 +43,12 @@ namespace IS_XNA_Shooter
         /// <param name="rotation">Initial rotation for the particle</param>
         /// <param name="texture">Texture to show</param>
         /// <param name="aceleration">Indicates the velocity of movement</param>
-        public Particle(Camera camera, Level level, Vector2 position, float rotation, Texture2D texture)
-            : base(camera, level, true, position, rotation, texture)
+        public Particle(Camera camera, Level level, Vector2 position,
+            Texture2D texture, Rectangle rectangleTexture)
+            : base(camera, level, true, position, 0, texture, rectangleTexture)
         {
             this.aceleration = Vector2.Zero;
-            alpha = 100.0f;
+            alpha = 255;
             timeSinceTheLastFadeout = 0.0f;
         }
 
@@ -76,6 +77,11 @@ namespace IS_XNA_Shooter
         private Texture2D texture;
 
         /// <summary>
+        /// Rectangles which delimites the sprites in the texture
+        /// </summary>
+        private Rectangle[] rectanglesTexture;
+
+        /// <summary>
         /// Maximun number of particles of the system
         /// </summary>
         private int particleCount;
@@ -95,19 +101,20 @@ namespace IS_XNA_Shooter
         /// </summary>
         private float timeSinceLastParticle;
 
-        private const int MAX_ACELERATION_X = 5;
-        private const int MAX_ACELERATION_Y = 15;
+        private const int MAX_ACELERATION_X = 1;
+        private const int MAX_ACELERATION_Y = 5;
         private const int MIN_ACELERATION_Y = 1;
-        private const int MAX_DEFLECTION_INITIALPOSITION = 2;
-        private const int MAX_DEFLECTION_DEAD = 1350;
-        private const int MAX_DEFLECTION_SCALE = 5;
-        private const int MAX_ALPHA = 70;
-        private const int INITIAL_DEAD_AGE = 1500;
-        private const float FADEOUT_INTERVAL = 0.25f;
-        private const float FADEOUT_DECREMENT = 1.32f;
+        private const int MAX_DEFLECTION_INITIALPOSITION = 0;
+        private const float MAX_DEFLECTION_DEAD = 0.4f;
+        private const float MAX_DEFLECTION_SCALE = 0.5f;
+        private const byte MAX_ALPHA = 255;
+        private const byte MAX_DEFLECTION_INITIALALPHA = 64;
+        private const float INITIAL_DEAD_AGE = 0.9f;
+        private const float FADEOUT_INTERVAL = 0.04f;
+        private const byte FADEOUT_DECREMENT = 12;
         private const float FADEOUT_INCREMENT = 2.22f;
-        private const float FADEOUT_DECREMENT_INITIAL_TIME = 0.50f;
-        private const float PARTICLE_CREATION_INTERVAL = 5.5f;
+        private const float FADEOUT_DECREMENT_INITIAL_TIME = 0.20f;
+        private const float PARTICLE_CREATION_INTERVAL = 1.0f;
 
         /// <summary>
         /// A Random object for generate random values
@@ -120,14 +127,16 @@ namespace IS_XNA_Shooter
         /// <param name="camera">Camera of the actual game</param>
         /// <param name="level">The actual Level of the game</param>
         /// <param name="texture">the texture for all the particles</param>
+        /// <param name="rectanglesTexture">Array which contains the rectangles of sprites in the texture</param>
         /// <param name="particleCount">Indicates de maximun number of particles for the system</param>
         /// <param name="sourcePosition">The position of the source of the particles</param>
-        public ParticleSystem(Camera camera, Level level, Texture2D texture,
+        public ParticleSystem(Camera camera, Level level, Texture2D texture, Rectangle[] rectanglesTexture,
             int particleCount, Vector2 sourcePosition)
         {
             this.camera = camera;
             this.level = level;
             this.texture = texture;
+            this.rectanglesTexture = rectanglesTexture;
             this.particleCount = particleCount;
             particles = new Particle[particleCount];
             this.sourcePosition = sourcePosition;
@@ -159,7 +168,7 @@ namespace IS_XNA_Shooter
             for (int i = 0; i < particles.Length; i++)
             {
                 if (particles[i] != null)
-                    particles[i].Draw(spriteBatch);
+                    particles[i].DrawRectangle(spriteBatch);
                     /*spriteBatch.Draw(textura,
                         particulas[i].posicion, null,
                         new Color(255, 255, 255, (byte)MathHelper.Clamp(particulas[i].alfa, 0, 255)), 0.0f, Vector2.Zero, particulas[i].escala,
@@ -188,13 +197,14 @@ namespace IS_XNA_Shooter
                         {
                             particles[i].timeSinceTheLastFadeout = 0.0f;
                             particles[i].alpha -= FADEOUT_DECREMENT;
+                            particles[i].SetTransparency(particles[i].alpha);
                         }
                     }
-                    else
+                    /*else
                     {
                         if (particles[i].alpha < MAX_ALPHA)
                             particles[i].alpha += FADEOUT_INCREMENT;
-                    }
+                    }*/
 
                     particles[i].timeSinceTheLastFadeout += deltaTime;
                 }
@@ -215,7 +225,9 @@ namespace IS_XNA_Shooter
                     // Instantiate a new particle if it is not yet
                     if (particles[i] == null)
                     {
-                        particles[i] = new Particle(camera, level, sourcePosition, /*rotation*/0, texture);
+                        int recIndex = ObtainRandom(rectanglesTexture.Length);
+                        particles[i] = new Particle(camera, level, sourcePosition, texture,
+                            rectanglesTexture[recIndex]);
                     }
 
                     // Only re-parameterize "dead" particles
@@ -225,28 +237,38 @@ namespace IS_XNA_Shooter
                         particles[i].actualAge = 0.0f;
 
                         // Reinitialize the alpha
-                        particles[i].alpha = 0.0f;
+                        particles[i].alpha = MAX_ALPHA;
+                        particles[i].alpha -= (Byte)ObtainRandom(MAX_DEFLECTION_INITIALALPHA);
+                        particles[i].SetTransparency(particles[i].alpha);
                         particles[i].timeSinceTheLastFadeout = 0.0f;
 
                         // Set the initial position
-                        particles[i].position = sourcePosition +
+                        particles[i].position = sourcePosition; /*+
                             new Vector2((float)ObtainRandom(MAX_DEFLECTION_INITIALPOSITION),
-                                (float)ObtainRandom(MAX_DEFLECTION_INITIALPOSITION));
+                                (float)ObtainRandom(MAX_DEFLECTION_INITIALPOSITION));*/
+
+                        // Set the initial rotation
+                        particles[i].rotation = ObtainRandom((float)(Math.PI * 2));
+
+                        // Set a random texture
+                        particles[i].SetRectangle(rectanglesTexture[ObtainRandom(rectanglesTexture.Length)]);
 
                         // Establish acceleration
-                        particles[i].aceleration.X = (float)ObtainRandom(MAX_ACELERATION_X);
-                        particles[i].aceleration.Y = -ObtainRandom(MAX_ACELERATION_Y) - MIN_ACELERATION_Y;
-                        particles[i].aceleration.Normalize();
+                        //particles[i].aceleration.X = (float)ObtainRandom(MAX_ACELERATION_X);
+                        //particles[i].aceleration.Y = -ObtainRandom(MAX_ACELERATION_Y) - MIN_ACELERATION_Y;
+                        //particles[i].aceleration.Normalize();
+                        particles[i].aceleration = Vector2.Zero;
 
-                        if (ObtainRandom(10) <= 5)
-                            particles[i].aceleration.X *= -1;
+                        //if (ObtainRandom(10) <= 5)
+                        //    particles[i].aceleration.X *= -1;
 
                         // Establish the dead age
                         particles[i].deadAge = INITIAL_DEAD_AGE;
                         particles[i].deadAge += ObtainRandom(MAX_DEFLECTION_DEAD);
 
                         // Establish the deviation in the scale (we want particles smaller than others)
-                        particles[i].scale = (float)1.0f / (float)ObtainRandom(MAX_DEFLECTION_SCALE);
+                        particles[i].scale = 1.0f;
+                        particles[i].scale += ObtainRandom(MAX_DEFLECTION_SCALE);
 
                         timeSinceLastParticle = 0.0f;
                     }
@@ -259,13 +281,23 @@ namespace IS_XNA_Shooter
 
 
         /// <summary>
-        /// Returns a new random number
+        /// Returns a new random int number
         /// </summary>
         /// <param name="maxValue">Indicates the maximun value posible</param>
         /// <returns>the random value</returns>
         private int ObtainRandom(int maxValue)
         {
             return rnd.Next(maxValue);
+        }
+
+        /// <summary>
+        /// Returns a new random float number
+        /// </summary>
+        /// <param name="maxValue">Indicates the maximun value posible</param>
+        /// <returns>the random value</returns>
+        private float ObtainRandom(float maxValue)
+        {
+            return (float)(rnd.NextDouble()) * maxValue;
         }
 
     } // class ParticleSystem

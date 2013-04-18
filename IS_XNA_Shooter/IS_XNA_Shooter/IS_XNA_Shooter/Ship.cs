@@ -16,6 +16,12 @@ namespace IS_XNA_Shooter
 
         public Collider collider;
         private ParticleSystem particles;
+        private Vector2 exhaustPipePosition;
+        private Vector2 exhaustPipePositionOrig;
+        /// <summary>
+        /// Rotation matrix for the exhaust pipe
+        /// </summary>
+        private Matrix rotationMatrix;
 
         protected float velocity;
         protected Vector2 movement;
@@ -61,7 +67,14 @@ namespace IS_XNA_Shooter
 
             collider = new Collider(camera, true, position, rotation, colliderPoints, 35, frameWidth, frameHeight);
 
-            particles = new ParticleSystem(camera, level, GRMng.textureSmoke, 100, position);
+            exhaustPipePosition = exhaustPipePositionOrig = new Vector2(-34, 0);
+
+            Rectangle [] rectangles = new Rectangle[4];
+            rectangles[0] = new Rectangle(0, 0, 64, 64);
+            rectangles[1] = new Rectangle(64, 0, 64, 64);
+            rectangles[2] = new Rectangle(0, 64, 64, 64);
+            rectangles[3] = new Rectangle(64, 64, 64, 64);
+            particles = new ParticleSystem(camera, level, GRMng.textureSmoke01, rectangles, 1, position);
 
             currentState = shipState.ONNORMAL;
 
@@ -151,8 +164,13 @@ namespace IS_XNA_Shooter
             {
                 case shipState.ONNORMAL:
                     Move(deltaTime);
+
+                    rotationMatrix = Matrix.CreateRotationZ(rotation);
+                    exhaustPipePosition = Vector2.Transform(exhaustPipePositionOrig, rotationMatrix);
+                    exhaustPipePosition += position;
+
                     collider.Update(position, rotation);
-                    particles.Update(deltaTime, position);
+                    particles.Update(deltaTime, exhaustPipePosition);
                     break;
 
                 case shipState.ONDYING:

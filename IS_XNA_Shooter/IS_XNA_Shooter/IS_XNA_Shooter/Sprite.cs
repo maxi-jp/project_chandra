@@ -18,9 +18,9 @@ namespace IS_XNA_Shooter
 
         // graphic resources
         public Texture2D texture;
-        protected Color color;
+        public Color color;
 
-        private Rectangle rectangle;
+        protected Rectangle rectangle;
 
         /* ------------------- CONSTRUCTORES ------------------- */
         public Sprite(bool middlePosition, Vector2 position, float rotation, Texture2D texture)
@@ -50,8 +50,8 @@ namespace IS_XNA_Shooter
             this.texture = texture;
             this.rectangle = rectangle;
             if (middlePosition)
-                drawPoint = new Vector2(rectangle.Width / 2 + rectangle.X,
-                    rectangle.Height / 2 + rectangle.Y);
+                drawPoint = new Vector2(rectangle.Width / 2/* + rectangle.X*/,
+                    rectangle.Height / 2 /*+ rectangle.Y*/);
             else
                 drawPoint = Vector2.Zero;
 
@@ -76,7 +76,7 @@ namespace IS_XNA_Shooter
             this.rectangle = rectangle;
         }
 
-        protected void SetTransparency(byte i)
+        public void SetTransparency(byte i)
         {
             color = new Color(i, i, i, i);
         }

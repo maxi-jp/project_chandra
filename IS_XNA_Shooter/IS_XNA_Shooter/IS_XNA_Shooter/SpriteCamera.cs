@@ -23,11 +23,25 @@ namespace IS_XNA_Shooter
             this.level = level;
         }
 
+        public SpriteCamera(Camera camera, Level level, bool middlePosition, Vector2 position,
+            float rotation, Texture2D texture, Rectangle rectTexture)
+            : base(middlePosition, position, rotation, texture, rectTexture)
+        {
+            this.camera = camera;
+            this.level = level;
+        }
+
         /* ------------------- MÉTODOS ------------------- */
         public override void Draw (SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position + camera.displacement, null, Color.White, rotation,
-                base.drawPoint, Program.scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, position + camera.displacement, null, color, rotation,
+                base.drawPoint, scale, SpriteEffects.None, 0);
+        }
+
+        public override void DrawRectangle(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(texture, position + camera.displacement, rectangle, color, rotation,
+                base.drawPoint, scale, SpriteEffects.None, 0);
         }
 
     } // SpriteCamera

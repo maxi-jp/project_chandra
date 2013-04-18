@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+  <!-- TODO: replace this Asset with your own XML asset data. -->
+  <Asset Type="MyDataTypes.Dialog">
+    <conversation>
+      <Item>
+        <paragraph>
+         <Item>
+          <who>0</who>
+          <text>
+            Chandra: Captain, what are my orders?,
+            I hope it's fun.
+          </text>
+         </Item>
+         <Item>
+            <who>1</who>
+            <text>
+              Captain: This isn't a game, you know.
+              That ship has disturbed us too long and
+              your team depends on your success.
+            </text>
+          </Item>
+          <Item>
+           <who>0</who>
+           <text>
+              Chandra: Roger that. Search and destroy as usual,
+              sounds good.
+            </text>
+          </Item>
+          <Item>
+            <who>1</who>
+            <text>
+              Captain: Don't understimate the enemy.
+            </text>
+          </Item>
+        <Item>
+           <who>0</who>
+           <text>
+             Chandra: You train me to... Are you there?!
+           </text>
+          </Item>
+        </paragraph>
+      </Item>
+      <Item>
+        <paragraph>
+          <Item>
+            <who>1</who>
+            <text>
+              Captain: Be careful!, Chandra. This is a trap,
+              get out of there now!
+            </text>
+          </Item>
+          <Item>
+            <who>0</who>
+            <text>
+              Chandra: We will see who is the trap for,
+              this will be interesting. Stupid Kreatorians.
+            </text>
+          </Item>
+        </paragraph>
+      </Item>
+      <Item>
+        <paragraph>
+          <Item>
+            <who>0</who>
+            <text>
+              Chandra: Ready captain. I'm approaching the
+              ship.
+            </text>
+          </Item>
+          <Item>
+            <who>1</who>
+            <text>
+              Captain: Destroy it.
+            </text>
+          </Item>
+        </paragraph>
+      </Item>
+    </conversation>
+  </Asset>
+</XnaContent>

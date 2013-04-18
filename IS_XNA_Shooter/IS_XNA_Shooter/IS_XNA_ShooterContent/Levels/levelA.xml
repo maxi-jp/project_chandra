@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XnaContent>
+  <Asset Type="MyDataTypes.LevelXML">
+  <title>nivel1</title>
+  <width>1200</width>
+  <height>800</height>
+  <enemyList>
+    <Item>
+      <type>enemyWeakA</type>
+      <positionX>1200</positionX>
+      <positionY>100</positionY>
+      <time>1</time>
+    </Item>
+  </enemyList>
+  </Asset>
+</XnaContent>

@@ -24,7 +24,6 @@ namespace MyDataTypes
             public float time;
         }
 
-
         public String title;
         public float width;
         public float height;

@@ -15,6 +15,7 @@ namespace IS_XNA_Shooter
         protected Game game;
 
         public Collider collider;
+        private ParticleSystem particles;
 
         protected float velocity;
         protected Vector2 movement;
@@ -59,6 +60,8 @@ namespace IS_XNA_Shooter
             this.shots = shots;
 
             collider = new Collider(camera, true, position, rotation, colliderPoints, 35, frameWidth, frameHeight);
+
+            particles = new ParticleSystem(camera, level, GRMng.textureSmoke, 100, position);
 
             currentState = shipState.ONNORMAL;
 
@@ -149,6 +152,7 @@ namespace IS_XNA_Shooter
                 case shipState.ONNORMAL:
                     Move(deltaTime);
                     collider.Update(position, rotation);
+                    particles.Update(deltaTime, position);
                     break;
 
                 case shipState.ONDYING:
@@ -188,9 +192,11 @@ namespace IS_XNA_Shooter
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            particles.Draw(spriteBatch);
+
             base.Draw(spriteBatch);
             if (SuperGame.debug)
-                collider.Draw(spriteBatch);     
+                collider.Draw(spriteBatch);
         }
 
         private void Move(float deltaTime)

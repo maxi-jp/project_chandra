@@ -13,6 +13,7 @@ namespace IS_XNA_Shooter
         /* ------------------- ATRIBUTOS ------------------- */
         public Vector2 position;
         public float rotation;
+        public float scale;
         protected Vector2 drawPoint;
 
         // graphic resources
@@ -26,6 +27,8 @@ namespace IS_XNA_Shooter
         {
             this.position = position;
             this.rotation = rotation;
+            scale = 1;
+            scale = scale * Program.scale;
             this.texture = texture;
 
             // origin to draw the image
@@ -42,6 +45,8 @@ namespace IS_XNA_Shooter
         {
             this.position = position;
             this.rotation = rotation;
+            scale = 1;
+            scale = scale * Program.scale;
             this.texture = texture;
             this.rectangle = rectangle;
             if (middlePosition)
@@ -57,13 +62,13 @@ namespace IS_XNA_Shooter
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position, null, color, rotation, drawPoint,
-                Program.scale, SpriteEffects.None, 0);
+                scale, SpriteEffects.None, 0);
         }
 
         public virtual void DrawRectangle(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position, rectangle, color, rotation, drawPoint,
-                Program.scale, SpriteEffects.None, 0);
+                scale, SpriteEffects.None, 0);
         }
 
         public void SetRectangle(Rectangle rectangle)

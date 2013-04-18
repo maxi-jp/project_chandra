@@ -147,6 +147,7 @@
     <Compile Include="LevelB.cs" />
     <Compile Include="MenuGameOver.cs" />
     <Compile Include="MenuIngame.cs" />
+    <Compile Include="ParticleSystem.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="RectangleMap.cs" />
     <Compile Include="ShipA.cs" />

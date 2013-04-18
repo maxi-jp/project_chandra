@@ -387,7 +387,6 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="Graphics\Ships\enemyLaser.png">
       <Name>enemyLaser</Name>
@@ -482,6 +481,13 @@
   <ItemGroup>
     <Compile Include="Graphics\Backgrounds\bgB00.jpg">
       <Name>bgB00</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Graphics\smoke.png">
+      <Name>smoke</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

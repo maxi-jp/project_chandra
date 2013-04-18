@@ -218,6 +218,9 @@ namespace IS_XNA_Shooter
         #endregion
 
         #region OTHERS
+        /* ------------------- SMOKE ------------------- */
+        public static Texture2D textureSmoke;
+
         /* ------------------- EXPLOSION VERDE ------------------- */
         public static Texture2D textureExplosion1;
         public static short frameWidthEx1 = 100;
@@ -290,8 +293,8 @@ namespace IS_XNA_Shooter
                     LoadIngameMenu();
 
                     hubBase = content.Load<Texture2D>("Graphics/Hub/base256");
-                    
 
+                    textureSmoke = content.Load<Texture2D>("Graphics/smoke");
                     texturePA1 = content.Load<Texture2D>("Graphics/Ships/sprites80x80");
                     textureAim = content.Load<Texture2D>("Graphics/aimpoint");
                     textureL1 = content.Load<Texture2D>("Graphics/laserShotAnim");
@@ -328,6 +331,7 @@ namespace IS_XNA_Shooter
 
                     hubBase = content.Load<Texture2D>("Graphics/Hub/base256");
 
+                    textureSmoke = content.Load<Texture2D>("Graphics/smoke");
                     texturePA1 = content.Load<Texture2D>("Graphics/Ships/sprites80x80");
                     textureL1 = content.Load<Texture2D>("Graphics/laserShotAnim");
                     textureL2 = content.Load<Texture2D>("Graphics/laserShotAnim2");
@@ -351,6 +355,7 @@ namespace IS_XNA_Shooter
                 case "LevelB2":
                     hubBase = content.Load<Texture2D>("Graphics/Hub/base256");
 
+                    textureSmoke = content.Load<Texture2D>("Graphics/smoke");
                     texturePA1 = content.Load<Texture2D>("Graphics/Ships/sprites80x80");
                     textureL1 = content.Load<Texture2D>("Graphics/laserShotAnim");
 
@@ -411,6 +416,7 @@ namespace IS_XNA_Shooter
 
                     hubBase = null;
 
+                    textureSmoke = null;
                     texturePA1 = null;
                     textureAim = null;
                     textureL1 = null;
@@ -448,6 +454,7 @@ namespace IS_XNA_Shooter
 
                     hubBase = null;
 
+                    textureSmoke = null;
                     texturePA1 = null;
                     textureL1 = null;
 
@@ -464,6 +471,7 @@ namespace IS_XNA_Shooter
                 case "LevelB2":
                     hubBase = null;
 
+                    textureSmoke = null;
                     texturePA1 = null;
                     textureL1 = null;
 

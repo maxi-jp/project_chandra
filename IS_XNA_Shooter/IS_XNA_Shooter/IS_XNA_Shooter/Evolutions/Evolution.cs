@@ -17,7 +17,7 @@ namespace IS_XNA_Shooter
         private const float LIFE = 50,
                             POWER_ATTACK = 50,
                             SPEED_SHIP = 10,
-                            SPEED_SHOT = 10,
+                            SPEED_SHOT = 100,
                             CADENCE = 0.1f;
 
 
@@ -75,7 +75,7 @@ namespace IS_XNA_Shooter
             powerAttackUpdate = initializeList(10);
             speedShipUpdate = initializeList(10);
             speedShotUpdate = initializeList(10);
-            cadenceUpdate = initializeList(7);
+            cadenceUpdate = initializeList(9);
 
             int high = 20;
 
@@ -130,7 +130,7 @@ namespace IS_XNA_Shooter
         }
 
         public float getCadence() {
-            return cadence + cadenceExtra;
+            return cadence - cadenceExtra;
         }
 
         public void Update(MouseState mouse)

@@ -1,4 +1,4 @@
 Class:
 	SuperGame - add screen evolution
-	Game - new builder
-	GameStory - new builder
+	Game / GameStory / GameB - new builder
+	Ship / ShipB - new builder

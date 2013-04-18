@@ -593,8 +593,7 @@ namespace IS_XNA_Shooter
             audio.LoadContent(1);
             LvlMng.LoadContent(lvl); // Load the rectangles
 
-            game = new GameB(this, player, 1, GRMng.textureAim,
-                /*ShipVelocity*/200f + 200, /*ShipLife*/100);
+            game = new GameB(this, player, 1, GRMng.textureAim, screenEvolution);
 
             currentState = gameState.playing; // Change game's state to game mode
 

@@ -24,7 +24,7 @@ namespace IS_XNA_Shooter
         //---------------------------
         //----    Constructor    ----
         //---------------------------
-        public GameB(SuperGame mainGame, Player player, int numLevel, Texture2D textureAim,
+        /*public GameB(SuperGame mainGame, Player player, int numLevel, Texture2D textureAim,
             float shipVelocity, int shipLife)
             : base(mainGame, player, shipVelocity, shipLife)
         {
@@ -53,6 +53,40 @@ namespace IS_XNA_Shooter
                 GRMng.frameWidthPA1, GRMng.frameHeightPA1, GRMng.numAnimsPA1, GRMng.frameCountPA1,
                 GRMng.loopingPA1, SuperGame.frameTime24, GRMng.texturePA1,
                 shipVelocity, shipLife, shots);
+
+            level.setShip(ship);
+
+            camera.setShip(ship);
+        }*/
+
+        public GameB(SuperGame mainGame, Player player, int numLevel, Texture2D textureAim, Evolution evolution)
+            : base(mainGame, player, evolution)
+        {
+            scrollVelocity = 100;
+            scrollPosition = 0;
+
+            listRecMap = new List<RectangleMap>();
+
+            hub = new IngameHubA(GRMng.hubBase, mainGame.player.GetLife());
+            level = new LevelB(camera, numLevel, enemies, listRecMap);
+            rectangleMap = ((LevelB)level).GetLevelMap();
+            backGround = new BackgroundGameB(level);
+
+            camera.setLevel(level);
+
+            Vector2[] points = new Vector2[8];
+            points[0] = new Vector2(15, 35);
+            points[1] = new Vector2(26, 33);
+            points[2] = new Vector2(34, 15);
+            points[3] = new Vector2(65, 30);
+            points[4] = new Vector2(65, 50);
+            points[5] = new Vector2(34, 66);
+            points[6] = new Vector2(26, 47);
+            points[7] = new Vector2(15, 45);
+            ship = new ShipB(this, camera, level, Vector2.Zero, 0, points,
+                GRMng.frameWidthPA1, GRMng.frameHeightPA1, GRMng.numAnimsPA1, GRMng.frameCountPA1,
+                GRMng.loopingPA1, SuperGame.frameTime24, GRMng.texturePA1,
+                evolution, shots);
 
             level.setShip(ship);
 

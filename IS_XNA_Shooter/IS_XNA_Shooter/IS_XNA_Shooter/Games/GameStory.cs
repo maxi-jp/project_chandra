@@ -254,7 +254,7 @@ namespace IS_XNA_Shooter
                     grManager.LoadContent(4); // Load the gameB's level 1 resources
                     LvlMng.LoadContent(1); // Load the rectangles
 
-                    currentGame = new GameB(mainGame, player, 1, GRMng.textureAim, shipVelocity + 150, 100);
+                    currentGame = new GameB(mainGame, player, 1, GRMng.textureAim, evolution);
                     break;
 
                 case "A1":

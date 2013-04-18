@@ -19,11 +19,11 @@ namespace IS_XNA_Shooter
         protected float velocity;
         protected Vector2 movement;
         protected List<Shot> shots;
-        protected float shotVelocity = 500f;
-        protected int shotPower = 200;
+        protected float shotVelocity;
+        protected int shotPower;
         protected int life;
 
-        protected float timeToShot = 0.2f; // tiempo minimo entre disparos en segundos
+        protected float timeToShot; // tiempo minimo entre disparos en segundos
         protected float timeToShotAux;
 
         private float timeVibShot = 0.1f; // tiempo que vibra el mando tras disparo
@@ -56,6 +56,36 @@ namespace IS_XNA_Shooter
             this.game = game;
             this.velocity = velocity;
             this.life = life;
+            this.shots = shots;
+
+            collider = new Collider(camera, true, position, rotation, colliderPoints, 35, frameWidth, frameHeight);
+
+            currentState = shipState.ONNORMAL;
+
+            timeInvencibleAux = timeInvencible;
+            timeDyingAux = timeDying;
+            transparency = 0;
+
+            setAnim(1);
+        }
+
+        public Ship(Game game, Camera camera, Level level, Vector2 position, float rotation,
+            Vector2[] colliderPoints,
+            short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
+            float frametime, Texture2D texture,
+            Evolution evolution, List<Shot> shots)
+            : base(camera, level, true, position, rotation, texture, frameWidth, frameHeight, numAnim,
+                frameCount, looping, frametime)
+        {
+            movement = new Vector2(1, 0);
+
+            this.game = game;
+            this.velocity = evolution.getSpeedShip();
+            this.life = (int) evolution.getLife();
+            this.shotVelocity = evolution.getSpeedShot();
+            this.shotPower = (int) evolution.getPowerAttack();
+            this.timeToShot = evolution.getCadence();
+
             this.shots = shots;
 
             collider = new Collider(camera, true, position, rotation, colliderPoints, 35, frameWidth, frameHeight);

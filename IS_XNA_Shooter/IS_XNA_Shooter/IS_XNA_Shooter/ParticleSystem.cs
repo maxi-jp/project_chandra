@@ -200,6 +200,26 @@ namespace IS_XNA_Shooter
         }
 
         /// <summary>
+        /// Re-set the number of particles
+        /// </summary>
+        /// <param name="particleCount">the new number of particles</param>
+        public void SetParticlesNumber(int particleCount)
+        {
+            this.particleCount = particleCount;
+            particles = null;
+            particles = new Particle[particleCount];
+        }
+
+        /// <summary>
+        /// Indicates the number of particles in the system
+        /// </summary>
+        /// <returns>the number of particles</returns>
+        public int GetParticleCount()
+        {
+            return particleCount;
+        }
+
+        /// <summary>
         /// Moves the particles as its parameters
         /// </summary>
         /// <param name="deltaTime">Time since the last Update</param>

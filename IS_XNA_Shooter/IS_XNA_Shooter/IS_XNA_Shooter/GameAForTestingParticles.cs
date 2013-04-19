@@ -68,80 +68,74 @@ namespace IS_XNA_Shooter
             aimPointSprite.Draw(spriteBatch); // aim point
 
             spriteBatch.DrawString(SuperGame.fontDebug,
-                "F1: PARTICLE_CREATION_INTERVAL="+ship.particles.PARTICLE_CREATION_INTERVAL,
+                "Press FX to increase value, press FX+mouse.rightclick for decrease value \n" +
+                "F1: Number of Particles = " + ship.particles.GetParticleCount() + "\n" +
+                "F2: PARTICLE_CREATION_INTERVAL = " + ship.particles.PARTICLE_CREATION_INTERVAL + "\n" +
+                "F3: INITIAL_DEAD_AGE = " + ship.particles.INITIAL_DEAD_AGE + "\n" +
+                "F4: FADEOUT_DECREMENT_INITIAL_TIME = " + ship.particles.FADEOUT_DECREMENT_INITIAL_TIME + "\n" +
+                "F5: FADEOUT_INCREMENT = " + ship.particles.FADEOUT_INCREMENT + "\n" +
+                "F6: FADEOUT_DECREMENT = " + ship.particles.FADEOUT_DECREMENT + "\n" +
+                "F7: INITIAL_GROWTH_INCREMENT = " + ship.particles.INITIAL_GROWTH_INCREMENT + "\n" +
+                "F8: MAX_DEFLECTION_GROWTH = " + ship.particles.MAX_DEFLECTION_GROWTH + "\n" +
+                "F9: MAX_ACELERATION = " + ship.particles.MAX_ACELERATION,
                 new Vector2(5, 5), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-            spriteBatch.DrawString(SuperGame.fontDebug,
-                "F2: INITIAL_DEAD_AGE=" + ship.particles.INITIAL_DEAD_AGE,
-                new Vector2(5, 20), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-            spriteBatch.DrawString(SuperGame.fontDebug,
-                "F3: FADEOUT_DECREMENT_INITIAL_TIME=" + ship.particles.FADEOUT_DECREMENT_INITIAL_TIME,
-                new Vector2(5, 35), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-            spriteBatch.DrawString(SuperGame.fontDebug,
-                "F4: FADEOUT_INCREMENT=" + ship.particles.FADEOUT_INCREMENT,
-                new Vector2(5, 50), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-            spriteBatch.DrawString(SuperGame.fontDebug,
-                "F5: FADEOUT_DECREMENT=" + ship.particles.FADEOUT_DECREMENT,
-                new Vector2(5, 65), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-            spriteBatch.DrawString(SuperGame.fontDebug,
-                "F6: INITIAL_GROWTH_INCREMENT=" + ship.particles.INITIAL_GROWTH_INCREMENT,
-                new Vector2(5, 80), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-            spriteBatch.DrawString(SuperGame.fontDebug,
-                "F7: MAX_DEFLECTION_GROWTH=" + ship.particles.MAX_DEFLECTION_GROWTH,
-                new Vector2(5, 95), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-            spriteBatch.DrawString(SuperGame.fontDebug,
-                "F8: MAX_ACELERATION=" + ship.particles.MAX_ACELERATION,
-                new Vector2(5, 110), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
 
         } // Draw()
 
         private void TestParticles()
         {
-            // PARTICLE_CREATION_INTERVAL:
+            // Number of Particles:
             if (ControlMng.f1Preshed && Mouse.GetState().RightButton == ButtonState.Released)
-                ship.particles.PARTICLE_CREATION_INTERVAL += 0.10f;
+                ship.particles.SetParticlesNumber(ship.particles.GetParticleCount() + 2);
             else if (ControlMng.f1Preshed && Mouse.GetState().RightButton == ButtonState.Pressed)
+                ship.particles.SetParticlesNumber(ship.particles.GetParticleCount() - 2);
+
+            // PARTICLE_CREATION_INTERVAL:
+            if (ControlMng.f2Preshed && Mouse.GetState().RightButton == ButtonState.Released)
+                ship.particles.PARTICLE_CREATION_INTERVAL += 0.10f;
+            else if (ControlMng.f2Preshed && Mouse.GetState().RightButton == ButtonState.Pressed)
                 ship.particles.PARTICLE_CREATION_INTERVAL -= 0.10f;
 
             // INITIAL_DEAD_AGE:
-            if (ControlMng.f2Preshed && Mouse.GetState().RightButton == ButtonState.Released)
+            if (ControlMng.f3Preshed && Mouse.GetState().RightButton == ButtonState.Released)
                 ship.particles.INITIAL_DEAD_AGE += 0.10f;
-            else if (ControlMng.f2Preshed && Mouse.GetState().RightButton == ButtonState.Pressed)
+            else if (ControlMng.f3Preshed && Mouse.GetState().RightButton == ButtonState.Pressed)
                 ship.particles.INITIAL_DEAD_AGE -= 0.10f;
 
             // FADEOUT_DECREMENT_INITIAL_TIME
-            if (ControlMng.f3Preshed && Mouse.GetState().RightButton == ButtonState.Released)
+            if (ControlMng.f4Preshed && Mouse.GetState().RightButton == ButtonState.Released)
                 ship.particles.FADEOUT_DECREMENT_INITIAL_TIME += 0.05f;
-            else if (ControlMng.f3Preshed && Mouse.GetState().RightButton == ButtonState.Pressed)
+            else if (ControlMng.f4Preshed && Mouse.GetState().RightButton == ButtonState.Pressed)
                 ship.particles.FADEOUT_DECREMENT_INITIAL_TIME -= 0.05f;
 
             // FADEOUT_INCREMENT
-            if (ControlMng.f4Preshed && Mouse.GetState().RightButton == ButtonState.Released)
+            if (ControlMng.f5Preshed && Mouse.GetState().RightButton == ButtonState.Released)
                 ship.particles.FADEOUT_INCREMENT += 1;
-            else if (ControlMng.f4Preshed && Mouse.GetState().RightButton == ButtonState.Pressed)
+            else if (ControlMng.f5Preshed && Mouse.GetState().RightButton == ButtonState.Pressed)
                 ship.particles.FADEOUT_INCREMENT -= 1;
 
             // FADEOUT_DECREMENT
-            if (ControlMng.f5Preshed && Mouse.GetState().RightButton == ButtonState.Released)
+            if (ControlMng.f6Preshed && Mouse.GetState().RightButton == ButtonState.Released)
                 ship.particles.FADEOUT_DECREMENT += 1;
-            else if (ControlMng.f5Preshed && Mouse.GetState().RightButton == ButtonState.Pressed)
+            else if (ControlMng.f6Preshed && Mouse.GetState().RightButton == ButtonState.Pressed)
                 ship.particles.FADEOUT_DECREMENT -= 1;
 
             // INITIAL_GROWTH_INCREMENT
-            if (ControlMng.f6Preshed && Mouse.GetState().RightButton == ButtonState.Released)
+            if (ControlMng.f7Preshed && Mouse.GetState().RightButton == ButtonState.Released)
                 ship.particles.INITIAL_GROWTH_INCREMENT += 0.005f;
-            else if (ControlMng.f6Preshed && Mouse.GetState().RightButton == ButtonState.Pressed)
+            else if (ControlMng.f7Preshed && Mouse.GetState().RightButton == ButtonState.Pressed)
                 ship.particles.INITIAL_GROWTH_INCREMENT -= 0.005f;
 
             // MAX_DEFLECTION_GROWTH
-            if (ControlMng.f7Preshed && Mouse.GetState().RightButton == ButtonState.Released)
+            if (ControlMng.f8Preshed && Mouse.GetState().RightButton == ButtonState.Released)
                 ship.particles.MAX_DEFLECTION_GROWTH += 0.005f;
-            else if (ControlMng.f7Preshed && Mouse.GetState().RightButton == ButtonState.Pressed)
+            else if (ControlMng.f8Preshed && Mouse.GetState().RightButton == ButtonState.Pressed)
                 ship.particles.MAX_DEFLECTION_GROWTH -= 0.005f;
 
             // MAX_ACELERATION
-            if (ControlMng.f8Preshed && Mouse.GetState().RightButton == ButtonState.Released)
+            if (ControlMng.f9Preshed && Mouse.GetState().RightButton == ButtonState.Released)
                 ship.particles.MAX_ACELERATION += 1;
-            else if (ControlMng.f8Preshed && Mouse.GetState().RightButton == ButtonState.Pressed)
+            else if (ControlMng.f9Preshed && Mouse.GetState().RightButton == ButtonState.Pressed)
                 ship.particles.MAX_ACELERATION -= 1;
 
         } // TestParticles

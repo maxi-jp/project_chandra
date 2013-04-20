@@ -38,6 +38,11 @@ namespace IS_XNA_Shooter
         public static Texture2D textureBgB00; // fondo LevelB
         #endregion
 
+        #region POWERUPS
+        /*----------POWER UPS----------*/
+        public static Texture2D powerTexture; //texture blue power
+        #endregion
+
         #region ENEMIES
         /* ------------------- ENEMYWEAK VERDE ------------------- */
         public static Texture2D textureEW1;
@@ -294,6 +299,8 @@ namespace IS_XNA_Shooter
 
                     hubBase = content.Load<Texture2D>("Graphics/Hub/base256");
 
+                    powerTexture = content.Load<Texture2D>("Graphics/PowerUps/spritesPowerUp02_80x80");
+
                     LoadShipA();
                     textureAim = content.Load<Texture2D>("Graphics/aimpoint");
                     textureL2 = content.Load<Texture2D>("Graphics/laserShotAnim2");
@@ -409,6 +416,8 @@ namespace IS_XNA_Shooter
                 case "LevelA1":
 
                     hubBase = null;
+
+                    powerTexture = null;
 
                     UnloadShipA();
                     textureAim = null;

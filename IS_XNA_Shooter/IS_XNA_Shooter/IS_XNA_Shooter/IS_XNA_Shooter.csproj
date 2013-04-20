@@ -150,6 +150,7 @@
     <Compile Include="MenuIngame.cs" />
     <Compile Include="ParticleSystem.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="PowerUp.cs" />
     <Compile Include="RectangleMap.cs" />
     <Compile Include="ShipA.cs" />
     <Compile Include="Enemy.cs" />

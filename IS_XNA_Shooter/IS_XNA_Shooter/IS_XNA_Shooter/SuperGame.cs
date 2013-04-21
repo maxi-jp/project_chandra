@@ -410,7 +410,7 @@ namespace IS_XNA_Shooter
                     break;
 
                 case gameState.evolution:
-                    screenEvolution.Update(Mouse.GetState());
+                    screenEvolution.Update(deltaTime, Mouse.GetState());
                     break;
             }
             //screenEvolution.Update(Mouse.GetState());

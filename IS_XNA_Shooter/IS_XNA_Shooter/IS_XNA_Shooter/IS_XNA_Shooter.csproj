@@ -117,6 +117,8 @@
     <Compile Include="Enemies\BotFinalBoss.cs" />
     <Compile Include="Cameras\Camera.cs" />
     <Compile Include="Colliders\Collider.cs" />
+    <Compile Include="Evolutions\ShipPreview.cs" />
+    <Compile Include="Evolutions\ShotPreview.cs" />
     <Compile Include="Managers\ControlMng.cs" />
     <Compile Include="Enemies\EnemyMineShotB.cs" />
     <Compile Include="Enemies\EnemyWeakShotB.cs" />

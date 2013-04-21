@@ -16,7 +16,7 @@ namespace IS_XNA_Shooter
     {
         private const float LIFE = 50,
                             POWER_ATTACK = 50,
-                            SPEED_SHIP = 10,
+                            SPEED_SHIP = 50,
                             SPEED_SHOT = 100,
                             CADENCE = 0.1f;
 
@@ -53,7 +53,8 @@ namespace IS_XNA_Shooter
                             cadenceRectangleRemove,
                             continueRectangle;
 
-        private Texture2D addTexture, removeTexture, continueTexture;
+        private Texture2D addTexture, removeTexture, continueTexture, greenPixel;
+        private Sprite backgroundSprite, background1, measures;
 
         private Boolean isClicked;
 
@@ -104,6 +105,14 @@ namespace IS_XNA_Shooter
             addTexture = content.Load<Texture2D>("Graphics/Evolution/add");
             removeTexture = content.Load<Texture2D>("Graphics/Evolution/remove");
             continueTexture = content.Load<Texture2D>("Graphics/Evolution/continue");
+            greenPixel = content.Load<Texture2D>("Graphics/Evolution/greenPixel");
+
+            Vector2 position = new Vector2(SuperGame.screenWidth/2, SuperGame.screenHeight/2);
+            backgroundSprite = new Sprite(true, position, 0, content.Load<Texture2D>("Graphics/Splash/splash_mainmenu_2"));
+            background1 = new Sprite(true, position, 0, content.Load<Texture2D>("Graphics/Evolution/background_1"));
+
+            position = new Vector2(SuperGame.screenWidth / 2, 17 * SuperGame.screenHeight / 32);
+            measures = new Sprite(true, position, 0, content.Load<Texture2D>("Graphics/Evolution/measures"));
 
             isClicked = false;
 
@@ -202,7 +211,17 @@ namespace IS_XNA_Shooter
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            Vector2 pos = new Vector2(0, 0);
+            backgroundSprite.Draw(spriteBatch);
+            background1.Draw(spriteBatch);
+            measures.Draw(spriteBatch);
+
+            drawLife();
+            drawPowerAttack();
+            drawSpeedShip();
+            drawSpeedShot();
+            drawCadence();
+
+            /*Vector2 pos = new Vector2(0, 0);
             spriteBatch.DrawString(SuperGame.fontDebug, "life: " + (life + lifeExtra) + getImprovements(lifeUpdate), pos, Color.White);
             pos += new Vector2(0, 20);
             spriteBatch.Draw(addTexture, lifeRectangleAdd, Color.White);
@@ -228,7 +247,7 @@ namespace IS_XNA_Shooter
             spriteBatch.Draw(addTexture, cadenceRectangleAdd, Color.White);
             spriteBatch.Draw(removeTexture, cadenceRectangleRemove, Color.White);
 
-            spriteBatch.Draw(continueTexture, continueRectangle, Color.White);
+            spriteBatch.Draw(continueTexture, continueRectangle, Color.White);*/
         }
 
 
@@ -284,6 +303,26 @@ namespace IS_XNA_Shooter
             }
 
             return improve;
+        }
+
+        private void drawLife()
+        {
+        }
+
+        private void drawPowerAttack()
+        {
+        }
+
+        private void drawSpeedShip()
+        {
+        }
+
+        private void drawSpeedShot()
+        {
+        }
+
+        private void drawCadence()
+        {
         }
 
     }//class Evolution

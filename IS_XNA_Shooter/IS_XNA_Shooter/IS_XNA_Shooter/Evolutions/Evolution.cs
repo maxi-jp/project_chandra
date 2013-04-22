@@ -13,9 +13,10 @@ namespace IS_XNA_Shooter
     /// <summary>
     /// Update our ship at the begin of each game.
     /// </summary>
-    class Evolution
+    public class Evolution
     {
         private enum MouseClickState { nothing, clicked, unClicked };
+        public enum GameState { story, scroll, killer, survival, defense }
 
 
         //-------------------------------------------------------------------------------
@@ -99,6 +100,8 @@ namespace IS_XNA_Shooter
         private ShipPreview ship;
 
         private ContentManager contentMng;
+
+        private GameState gameState;
 
 
         //-------------------------------------------------------------------------------
@@ -187,7 +190,7 @@ namespace IS_XNA_Shooter
             // state that tell us if a button has been click, unclick or you didn't do nothing.
             mouseState = MouseClickState.nothing;
 
-            // assign superGame and content
+            // assigns
             this.mainGame = mainGame;
             contentMng = content;
         }
@@ -213,6 +216,11 @@ namespace IS_XNA_Shooter
 
         public float getCadence() {
             return cadence - cadenceExtra;
+        }
+
+        public void setGameState(GameState gameState)
+        {
+            this.gameState = gameState;
         }
 
         public void Update(float deltaTime, MouseState mouse)
@@ -320,7 +328,25 @@ namespace IS_XNA_Shooter
 
                 if (mouseState == MouseClickState.clicked) continueState = 2;
 
-                if (mouseState == MouseClickState.unClicked) mainGame.NewStory();
+                if (mouseState == MouseClickState.unClicked)
+                    switch (gameState)
+                    {
+                        case GameState.story :
+                            mainGame.NewStory();
+                            break;
+                        case GameState.defense :
+                            mainGame.newDefense(0);
+                            break;
+                        case GameState.killer:
+                            mainGame.newKiller(0);
+                            break;
+                        case GameState.scroll:
+                            mainGame.newScroll(1);
+                            break;
+                        case GameState.survival:
+                            mainGame.newSurvival(0);
+                            break;
+                    }
             }
             else
             {

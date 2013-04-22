@@ -290,6 +290,7 @@ namespace IS_XNA_Shooter
             // Create the player and the screen evolution of our ship
             player = new Player(playerLifes);
             screenEvolution = new Evolution(Content, this);
+            menu.setEvolution(screenEvolution);
         }
 
         /// <summary>
@@ -492,8 +493,7 @@ namespace IS_XNA_Shooter
         {
             grManager.LoadContent(3); // Load the gameA's level 1 resources
             audio.LoadContent(1);
-            game = new GameA(this, player, 0, GRMng.textureAim, GRMng.textureCell,
-                /*ShipVelocity*/200f, /*ShipLife*/100000);
+            game = new GameA(this, player, 0, GRMng.textureAim, GRMng.textureCell, screenEvolution);
             currentState = gameState.playing; // Change game's state to game mode
             grManager.UnloadContent(1); // Unload the menu's resources
         }
@@ -535,8 +535,7 @@ namespace IS_XNA_Shooter
             audio.LoadContent(1);
             LvlMng.LoadContent(lvl); // Load XML
 
-            game = new GameA(this, player, 1, GRMng.textureAim, GRMng.textureCell,
-                /*ShipVelocity*/200f, /*ShipLife*/100);
+            game = new GameA(this, player, 1, GRMng.textureAim, GRMng.textureCell, screenEvolution);
 
             currentState = gameState.playing; // Change game's state to game mode
 
@@ -554,8 +553,7 @@ namespace IS_XNA_Shooter
             audio.LoadContent(1);
             LvlMng.LoadContent(lvl); // Load XML
 
-            game = new GameA(this, player, 1, GRMng.textureAim, GRMng.textureCell,
-                /*ShipVelocity*/200f, /*ShipLife*/100);
+            game = new GameA(this, player, 1, GRMng.textureAim, GRMng.textureCell, screenEvolution);
 
             currentState = gameState.playing; // Change game's state to game mode
 
@@ -573,8 +571,7 @@ namespace IS_XNA_Shooter
             audio.LoadContent(1);
             LvlMng.LoadContent(lvl);
 
-            game = new GameA(this, player, 1, GRMng.textureAim, GRMng.textureCell,
-                /*ShipVelocity*/200f, /*ShipLife*/100);
+            game = new GameA(this, player, 1, GRMng.textureAim, GRMng.textureCell, screenEvolution);
 
             currentState = gameState.playing; // Change game's state to game mode
 

@@ -41,6 +41,8 @@ namespace IS_XNA_Shooter
         private MenuItem itemArcadeScroll, itemArcadeSurvival, itemArcadeDefense, itemArcadeKiller;
         private MenuItem itemConfigControlls, itemConfigGraphics, itemConfigAudio, itemConfigProfile;
 
+        private Evolution evolution;
+
 
         /* ------------------- CONSTRUCTORES ------------------- */
         public Menu(SuperGame mainGame)
@@ -258,6 +260,7 @@ namespace IS_XNA_Shooter
                     {
                         Audio.PlayEffect("digitalAcent01");
                         mainGame.currentState = SuperGame.gameState.evolution;
+                        evolution.setGameState(Evolution.GameState.story);
                         //mainGame.NewStory();
                     }
                     break;
@@ -271,22 +274,30 @@ namespace IS_XNA_Shooter
                     else if (itemArcadeScroll.Unclick(X, Y))
                     {
                         Audio.PlayEffect("digitalAcent01");
-                        mainGame.newScroll(1);
+                        mainGame.currentState = SuperGame.gameState.evolution;
+                        evolution.setGameState(Evolution.GameState.scroll);
+                        //mainGame.newScroll(1);
                     }
                     else if (itemArcadeKiller.Unclick(X, Y))
                     {
                         Audio.PlayEffect("digitalAcent01");
-                        mainGame.newKiller(0);
+                        mainGame.currentState = SuperGame.gameState.evolution;
+                        evolution.setGameState(Evolution.GameState.killer);
+                        //mainGame.newKiller(0);
                     }
                     else if (itemArcadeSurvival.Unclick(X, Y))
                     {
                         Audio.PlayEffect("digitalAcent01");
-                        mainGame.newSurvival(0);
+                        mainGame.currentState = SuperGame.gameState.evolution;
+                        evolution.setGameState(Evolution.GameState.survival);
+                        //mainGame.newSurvival(0);
                     }
                     else if (itemArcadeDefense.Unclick(X, Y))
                     {
                         Audio.PlayEffect("digitalAcent01");
-                        mainGame.newDefense(0);
+                        mainGame.currentState = SuperGame.gameState.evolution;
+                        evolution.setGameState(Evolution.GameState.defense);
+                        //mainGame.newDefense(0);
                     }
                     break;
 
@@ -298,6 +309,11 @@ namespace IS_XNA_Shooter
                     }
                     break;
             }
+        }
+
+        public void setEvolution(Evolution evolution)
+        {
+            this.evolution = evolution;
         }
 
     } // class Menu

@@ -43,7 +43,7 @@ namespace IS_XNA_Shooter
         private byte transparency;
 
         /* ------------------- CONSTRUCTORES ------------------- */
-        public Ship(Game game, Camera camera, Level level, Vector2 position, float rotation,
+        /*public Ship(Game game, Camera camera, Level level, Vector2 position, float rotation,
             Vector2[] colliderPoints,
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
             float frametime, Texture2D texture,
@@ -67,7 +67,7 @@ namespace IS_XNA_Shooter
             transparency = 0;
 
             setAnim(1);
-        }
+        }*/
 
         public Ship(Game game, Camera camera, Level level, Vector2 position, float rotation,
             Vector2[] colliderPoints,

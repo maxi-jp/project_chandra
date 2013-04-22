@@ -34,7 +34,7 @@ namespace IS_XNA_Shooter
         /* ------------------------------------------------------------- */
         /*                          CONSTRUCTOR                          */
         /* ------------------------------------------------------------- */
-        public Game (SuperGame mainGame, Player player, float shipVelocity, int shipLife)
+        /*public Game (SuperGame mainGame, Player player, float shipVelocity, int shipLife)
         {
             this.mainGame = mainGame;
             this.player = player;
@@ -48,7 +48,7 @@ namespace IS_XNA_Shooter
             explosions = new List<Explosion>();
             
             //Audio.PlayMusic(1);
-        }
+        }*/
 
         /// <summary>
         /// new builder including the evolution parameters for the ship

@@ -16,13 +16,25 @@ namespace IS_XNA_Shooter
         private float prevRotation;
 
         /* ------------------- CONSTRUCTORES ------------------- */
-        public ShipA(Game game, Camera camera, Level level, Vector2 position, float rotation,
+        /*public ShipA(Game game, Camera camera, Level level, Vector2 position, float rotation,
             Vector2[] colliderPoints,
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
             float frametime, Texture2D texture,
             float velocity, int life, List<Shot> shots)
             : base(game, camera, level, position, rotation, colliderPoints, frameWidth, frameHeight,
                 numAnim, frameCount, looping, frametime, texture, velocity, life, shots)
+        {
+            pointer = new Vector2();
+            prevRotation = 0;
+        }*/
+
+        public ShipA(Game game, Camera camera, Level level, Vector2 position, float rotation,
+            Vector2[] colliderPoints,
+            short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
+            float frametime, Texture2D texture,
+            Evolution evolution, List<Shot> shots)
+            : base(game, camera, level, position, rotation, colliderPoints, frameWidth, frameHeight,
+                numAnim, frameCount, looping, frametime, texture, evolution, shots)
         {
             pointer = new Vector2();
             prevRotation = 0;

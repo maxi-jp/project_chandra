@@ -20,12 +20,21 @@ namespace IS_XNA_Shooter
         //---------------------------
         //----    Constructor    ----
         //---------------------------
-        public GameScroll(SuperGame mainGame, int numLevel, Texture2D textureAim, float ShipVelocity, int ShipLife, Player player)
+        /*public GameScroll(SuperGame mainGame, int numLevel, Texture2D textureAim, float ShipVelocity, int ShipLife, Player player)
             : base(mainGame, player, ShipVelocity,ShipLife)
         {
             camera = new Camera();
             shots = new List<Shot>();
             this.shipVelocity = ShipVelocity;
+            initLevelB(1);
+        }*/
+
+        public GameScroll(SuperGame mainGame, int numLevel, Texture2D textureAim, Evolution evolution, Player player)
+            : base(mainGame, player, evolution)
+        {
+            camera = new Camera();
+            shots = new List<Shot>();
+            this.shipVelocity = evolution.getSpeedShip();
             initLevelB(1);
         }
 

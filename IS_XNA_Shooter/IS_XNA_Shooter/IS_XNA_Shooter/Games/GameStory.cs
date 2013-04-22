@@ -68,8 +68,8 @@ namespace IS_XNA_Shooter
         private int currentLevel;
 
         public GameStory(SuperGame mainGame, GRMng grManager, Audio audio, XMLLvlMng LvlMng,
-            Player player, float shipVelocity, int shipLife)
-            : base(mainGame, player, shipVelocity, shipLife)
+            Player player, Evolution evolution)
+            : base(mainGame, player, evolution)
         {
             this.grManager = grManager;
             this.audio = audio;
@@ -103,7 +103,7 @@ namespace IS_XNA_Shooter
         /// <param name="LvlMng"></param>
         /// <param name="player"></param>
         /// <param name="evolution"></param>
-        public GameStory(SuperGame mainGame, GRMng grManager, Audio audio, XMLLvlMng LvlMng,
+        /*public GameStory(SuperGame mainGame, GRMng grManager, Audio audio, XMLLvlMng LvlMng,
            Player player, Evolution evolution)
             : base(mainGame, player, evolution)
         {
@@ -128,7 +128,7 @@ namespace IS_XNA_Shooter
             levelList = new String[] { "B1", "A1", "B2", "A2" };
             InitGame(levelList[currentLevel]);
             currentState = StoryState.levelDialog;
-        }
+        }*/
 
         //--------------------------------
         //----    Métodos públicos    ----
@@ -261,8 +261,7 @@ namespace IS_XNA_Shooter
                     grManager.LoadContent(3); // Load the gameA's level 1 resources
                     LvlMng.LoadContent(0); // Load the levelA's enemies
 
-                    currentGame = new GameA(mainGame, player, 1, GRMng.textureAim, GRMng.textureCell,
-                        shipVelocity, shipLife);
+                    currentGame = new GameA(mainGame, player, 1, GRMng.textureAim, GRMng.textureCell, evolution);
                     break;
             }
             

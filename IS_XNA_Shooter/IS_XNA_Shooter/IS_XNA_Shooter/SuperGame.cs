@@ -43,7 +43,8 @@ namespace IS_XNA_Shooter
             playing,
             pause,
             gameOver,
-            playingVideo
+            playingVideo,
+            evolution
         };
 
         /// <summary>
@@ -196,6 +197,8 @@ namespace IS_XNA_Shooter
         /// Player
         /// </summary>
         public Player       player;
+
+        private Evolution screenEvolution;
        
         /// <summary>
         /// Player lifes
@@ -287,8 +290,10 @@ namespace IS_XNA_Shooter
             menuIngame =    new MenuIngame(this);
             menuGameOver =  new MenuGameOver(this);
 
-            // Create the player
+            // Create the player and the screenEvolution
             player = new Player(playerLifes);
+            screenEvolution = new Evolution(Content, this);
+            menu.setEvolution(screenEvolution);
         }
 
         /// <summary>
@@ -415,6 +420,10 @@ namespace IS_XNA_Shooter
                         videoPlayer.Stop();
                     }
                     break;
+
+                case gameState.evolution:
+                    screenEvolution.Update(deltaTime, Mouse.GetState());
+                    break;
             }
 
             base.Update(gameTime);
@@ -462,6 +471,10 @@ namespace IS_XNA_Shooter
                 case gameState.playingVideo:
                     spriteBatch.Draw(videoPlayer.GetTexture(), new Rectangle(0, 0, screenWidth, screenHeight), Color.White);
                     break;
+
+                case gameState.evolution:
+                    screenEvolution.Draw(spriteBatch);
+                    break;
             }
 
             if (debug)
@@ -491,8 +504,7 @@ namespace IS_XNA_Shooter
         {
             grManager.LoadContent("LevelA1"); // Load the gameA's level 1 resources
             audio.LoadContent(1);
-            game = new GameA(this, player, 0, GRMng.textureAim, GRMng.textureCell,
-                /*ShipVelocity*/200f, /*ShipLife*/100000);
+            game = new GameA(this, player, 0, GRMng.textureAim, GRMng.textureCell, screenEvolution);
             currentState = gameState.playing; // Change game's state to game mode
             grManager.UnloadContent("MenuMain"); // Unload the menu's resources
         }
@@ -501,8 +513,7 @@ namespace IS_XNA_Shooter
         {
             grManager.LoadContent("LevelA1"); // Load the gameA's level 1 resources
             audio.LoadContent(1);
-            game = new GameAForTestingParticles(this, player, 40, GRMng.textureAim, GRMng.textureCell,
-                /*ShipVelocity*/200f, /*ShipLife*/100000);
+            game = new GameAForTestingParticles(this, player, 40, GRMng.textureAim, GRMng.textureCell, screenEvolution);
             currentState = gameState.playing; // Change game's state to game mode
             grManager.UnloadContent("MenuMain"); // Unload the menu's resources
         }
@@ -520,8 +531,7 @@ namespace IS_XNA_Shooter
 
             duration = 0;
 
-            game = new GameStory(this, grManager, audio, LvlMng, player,
-                /*ShipVelocity*/200f, /*ShipLife*/100);
+            game = new GameStory(this, grManager, audio, LvlMng, player, screenEvolution);
 
             //currentState = gameState.playing; // Change game's state to game mode
             //grManager.UnloadContent(2); 
@@ -538,8 +548,7 @@ namespace IS_XNA_Shooter
             audio.LoadContent(1);
             LvlMng.LoadContent(lvl); // Load XML
 
-            game = new GameA(this, player, 1, GRMng.textureAim, GRMng.textureCell,
-                /*ShipVelocity*/200f, /*ShipLife*/100);
+            game = new GameA(this, player, 1, GRMng.textureAim, GRMng.textureCell, screenEvolution);
 
             currentState = gameState.playing; // Change game's state to game mode
 
@@ -557,8 +566,7 @@ namespace IS_XNA_Shooter
             audio.LoadContent(1);
             LvlMng.LoadContent(lvl); // Load XML
 
-            game = new GameA(this, player, 1, GRMng.textureAim, GRMng.textureCell,
-                /*ShipVelocity*/200f, /*ShipLife*/100);
+            game = new GameA(this, player, 1, GRMng.textureAim, GRMng.textureCell, screenEvolution);
 
             currentState = gameState.playing; // Change game's state to game mode
 
@@ -576,8 +584,7 @@ namespace IS_XNA_Shooter
             audio.LoadContent(1);
             LvlMng.LoadContent(lvl);
 
-            game = new GameA(this, player, 1, GRMng.textureAim, GRMng.textureCell,
-                /*ShipVelocity*/200f, /*ShipLife*/100);
+            game = new GameA(this, player, 1, GRMng.textureAim, GRMng.textureCell, screenEvolution);
 
             currentState = gameState.playing; // Change game's state to game mode
 
@@ -595,8 +602,7 @@ namespace IS_XNA_Shooter
             audio.LoadContent(1);
             LvlMng.LoadContent(lvl); // Load the rectangles
 
-            game = new GameB(this, player, 1, GRMng.textureAim,
-                /*ShipVelocity*/200f + 200, /*ShipLife*/100);
+            game = new GameB(this, player, 1, GRMng.textureAim, screenEvolution);
 
             currentState = gameState.playing; // Change game's state to game mode
 

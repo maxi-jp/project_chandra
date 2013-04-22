@@ -300,6 +300,7 @@ namespace IS_XNA_Shooter
                     hubBase = content.Load<Texture2D>("Graphics/Hub/base256");
 
                     powerTexture = content.Load<Texture2D>("Graphics/PowerUps/spritesPowerUp02_80x80");
+                    textureShotFinalBossHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/shotHeroe1");
 
                     LoadShipA();
                     textureAim = content.Load<Texture2D>("Graphics/aimpoint");
@@ -336,6 +337,9 @@ namespace IS_XNA_Shooter
 
                     hubBase = content.Load<Texture2D>("Graphics/Hub/base256");
 
+                    powerTexture = content.Load<Texture2D>("Graphics/PowerUps/spritesPowerUp02_80x80");
+                    textureShotFinalBossHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/shotHeroe1");
+
                     LoadShipA();
                     textureL2 = content.Load<Texture2D>("Graphics/laserShotAnim2");
                     
@@ -357,6 +361,8 @@ namespace IS_XNA_Shooter
 
                 case "LevelB2":
                     hubBase = content.Load<Texture2D>("Graphics/Hub/base256");
+
+                    powerTexture = content.Load<Texture2D>("Graphics/PowerUps/spritesPowerUp02_80x80");
 
                     LoadShipA();
 
@@ -417,6 +423,7 @@ namespace IS_XNA_Shooter
 
                     hubBase = null;
 
+                    textureShotFinalBossHeroe = null;
                     powerTexture = null;
 
                     UnloadShipA();
@@ -454,6 +461,8 @@ namespace IS_XNA_Shooter
                 case "LevelB1":
 
                     hubBase = null;
+                    powerTexture = null;
+                    textureShotFinalBossHeroe = null;
 
                     UnloadShipA();
 
@@ -469,6 +478,7 @@ namespace IS_XNA_Shooter
 
                 case "LevelB2":
                     hubBase = null;
+                    powerTexture = null;
 
                     UnloadShipA();
 

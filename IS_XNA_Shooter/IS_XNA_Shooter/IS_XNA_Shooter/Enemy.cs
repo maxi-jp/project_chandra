@@ -63,7 +63,12 @@ namespace IS_XNA_Shooter
         /// indicates if the Enemy is no longer necesary in the Game
         /// </summary>
         protected bool erasable;
-        
+
+        /// <summary>
+        /// Power Up left by the enemy (which could fall or not)
+        /// </summary>
+        protected PowerUp powerUp=null;
+
        
         /// <summary>
         /// Enemy's constructor
@@ -175,7 +180,16 @@ namespace IS_XNA_Shooter
                 life -= i;
 
             if (life <= 0)
+            {
                 colisionable = false;
+                Random random = new Random();
+                short type = (short)random.Next(3);
+                if (random.Next(0,100) < 100)
+                {
+                    powerUp = new PowerUp(camera, level, position,0,GRMng.powerTexture,GRMng.frameWidthEW1,GRMng.frameHeightEW1,
+                        type,new short[]{6,6,6},new bool[]{true,true,true},SuperGame.frameTime12,type);
+                }
+            }
         }
 
          
@@ -274,5 +288,10 @@ namespace IS_XNA_Shooter
             return (!animActive);
         }
 
+
+        internal PowerUp getPowerUp()
+        {
+            return powerUp;
+        }
     } // class Enemy
 }

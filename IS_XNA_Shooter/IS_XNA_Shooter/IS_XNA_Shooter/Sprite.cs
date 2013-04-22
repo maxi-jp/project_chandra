@@ -81,5 +81,17 @@ namespace IS_XNA_Shooter
             color = new Color(i, i, i, i);
         }
 
+        /// <summary>
+        /// Changes the color of the sprite
+        /// </summary>
+        /// <param name="r">red</param>
+        /// <param name="g">green</param>
+        /// <param name="b">blue</param>
+        /// <param name="a">alpha chanel</param>
+        public void SetColor(byte r, byte g, byte b,byte a)
+        {
+            color = new Color( r, g, b, a);
+        }
+
     } // class Sprite
 }

@@ -36,6 +36,10 @@ namespace IS_XNA_Shooter
         private float timeVibShot = 0.1f; // tiempo que vibra el mando tras disparo
         private float timeVibShotAux;
 
+        private float timePowerUpRed = 0;
+        public float timePowerUpBlue = 0; //    public de momento
+
+
         // state of the ship
         protected enum shipState
         {
@@ -211,8 +215,14 @@ namespace IS_XNA_Shooter
         public override void Draw(SpriteBatch spriteBatch)
         {
             particles.Draw(spriteBatch);
-
             base.Draw(spriteBatch);
+
+            if (timePowerUpRed > 0)
+                SetColor(255,0,0,255);
+            else if (timePowerUpBlue > 0)
+                SetColor(0,0,255,255);
+            else SetColor(255, 255, 255, 255);
+
             if (SuperGame.debug)
                 collider.Draw(spriteBatch);
         }
@@ -260,6 +270,10 @@ namespace IS_XNA_Shooter
             // shots:
             if ((disp > 0) && (timeToShotAux <= 0))
                 ShipShot(disp);
+            if (timePowerUpRed > 0)
+                timePowerUpRed -= deltaTime;
+            if (timePowerUpBlue > 0)
+                timePowerUpBlue -= deltaTime;
 
             timeToShotAux -= deltaTime;
         }
@@ -275,11 +289,19 @@ namespace IS_XNA_Shooter
             Audio.PlayEffect("laserShot01");
 
             setAnim(2);
-
-            Shot nuevo = new Shot(camera, level, position, rotation, GRMng.frameWidthL1, GRMng.frameHeightL1,
-                GRMng.numAnimsL1, GRMng.frameCountL1, GRMng.loopingL1, SuperGame.frameTime8,
-                GRMng.textureL1, SuperGame.shootType.normal, shotVelocity, shotPower);
-
+            Shot nuevo;
+            if (timePowerUpRed > 0)
+            {
+                nuevo = new Shot(camera, level, position, rotation, GRMng.frameWidthShotFinalBossHeroe, GRMng.frameHeightShotFinalBossHeroe,
+                    GRMng.numAnimsShotFinalBossHeroe, GRMng.frameCountShotFinalBossHeroe, GRMng.loopingShotFinalBossHeroe, SuperGame.frameTime8, GRMng.textureShotFinalBossHeroe,
+                    SuperGame.shootType.red, 500, 100);
+            }
+            else
+            {
+                nuevo = new Shot(camera, level, position, rotation, GRMng.frameWidthL1, GRMng.frameHeightL1,
+                    GRMng.numAnimsL1, GRMng.frameCountL1, GRMng.loopingL1, SuperGame.frameTime8,
+                    GRMng.textureL1, SuperGame.shootType.normal, shotVelocity, shotPower);
+            }
             shots.Add(nuevo);
             timeToShotAux = timeToShot;
         }
@@ -296,7 +318,7 @@ namespace IS_XNA_Shooter
 
         public void Damage(int i)
         {
-            if (currentState == shipState.ONNORMAL && !SuperGame.godMode)
+            if (currentState == shipState.ONNORMAL && !SuperGame.godMode && timePowerUpBlue <= 0)
             {
                 life -= i;
 
@@ -330,6 +352,19 @@ namespace IS_XNA_Shooter
         public void EraseShots()
         {
             shots.Clear();
+        }
+
+        public void CatchPowerUp(short type)
+        {
+            switch (type)
+            {
+                case 0:     // blue
+                    timePowerUpBlue = 8f;
+                    break;
+                case 1:     // red
+                    timePowerUpRed = 12f;
+                    break;
+            }
         }
 
     } // class Ship

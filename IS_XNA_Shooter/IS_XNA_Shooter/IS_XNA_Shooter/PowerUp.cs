@@ -20,9 +20,24 @@ namespace IS_XNA_Shooter
         protected Ship ship;
 
         /// <summary>
-        /// Type of the power
+        /// Type of the power.
         /// </summary>
         protected short type;
+
+        /// <summary>
+        /// Indicates if the power up is colisionable or not.
+        /// </summary>
+        protected bool active;
+
+        /// <summary>
+        /// Time to catch the power up.
+        /// </summary>
+        protected float catchable;
+
+        /// <summary>
+        /// Indicates when the power ups is going to turn off.
+        /// </summary>
+        private byte setOff;
 
         /// <summary>
         /// PowerUps constructor
@@ -45,6 +60,9 @@ namespace IS_XNA_Shooter
             : base(camera, level, true, position, rotation, texture, frameWidth, frameHeight, numAnim,
                 frameCount, looping, frametime)
         {
+            active = true;
+            catchable=8f;
+
             this.type =type;
             Vector2[] points = new Vector2[8];
             points[0] = new Vector2(10, 40);
@@ -65,14 +83,50 @@ namespace IS_XNA_Shooter
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            base.Draw(spriteBatch);
-            if (SuperGame.debug)
-                collider.Draw(spriteBatch);
+            if (active)
+            {
+                base.Draw(spriteBatch);
+                if (SuperGame.debug)
+                    collider.Draw(spriteBatch);
+            }
         }
 
         public override void Update(float deltaTime)
         {
-            base.Update(deltaTime);
+            if (active)
+            {
+                base.Update(deltaTime);
+                catchable -= deltaTime;
+                if (catchable <= 0f)
+                    active = false;
+                else if (catchable <= 3f)
+                {
+                        setOff += (byte)(deltaTime * 360);
+                        SetColor(setOff, 0, setOff,0); //Purpleeee!!!  <3
+                }
+                collider.Update(position, 0);
+            }
+        }
+
+        public void UpdatePosition(Vector2 position)
+        {
+            this.position = position;
+        }
+
+
+        public bool IsActive()
+        {
+            return active;
+        }
+
+        public void SetActive(bool b)
+        {
+            active = b;
+        }
+
+        public short GetType()
+        {
+            return type;
         }
     }
 }

@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace IS_XNA_Shooter
 {
-    class IngameHubA : IngameHub
+    class IngameHudA : IngameHud
     {
         /* ------------------- ATTRIBUTES ------------------- */
         private Texture2D textureBase;
@@ -16,7 +16,7 @@ namespace IS_XNA_Shooter
         private List<Sprite> center;
 
         /* ------------------- CONSTRUCTORS ------------------- */
-        public IngameHubA(Texture2D textureBase, int playerLifes)
+        public IngameHudA(Texture2D textureBase, int playerLifes)
             : base(playerLifes)
         {
             this.textureBase = textureBase;

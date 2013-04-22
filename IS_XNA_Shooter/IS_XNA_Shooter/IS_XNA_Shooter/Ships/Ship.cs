@@ -16,6 +16,7 @@ namespace IS_XNA_Shooter
 
         public Collider collider;
         public ParticleSystem particles;
+        private int particlesCount = 20;
         private Vector2 exhaustPipePosition;
         private Vector2 exhaustPipePositionOrig;
         /// <summary>
@@ -46,7 +47,7 @@ namespace IS_XNA_Shooter
         protected shipState currentState; // current state of the enemy
 
         private float timeDying = 2, timeDyingAux;
-        private float timeInvencible=3, timeInvencibleAux;
+        private float timeInvencible = 3, timeInvencibleAux;
         private byte transparency;
 
         /* ------------------- CONSTRUCTORES ------------------- */
@@ -114,7 +115,7 @@ namespace IS_XNA_Shooter
             rectangles[1] = new Rectangle(64, 0, 64, 64);
             rectangles[2] = new Rectangle(0, 64, 64, 64);
             rectangles[3] = new Rectangle(64, 64, 64, 64);
-            particles = new ParticleSystem(camera, level, GRMng.textureSmoke01, rectangles, 20, position);
+            particles = new ParticleSystem(camera, level, GRMng.textureSmoke01, rectangles, particlesCount, position);
 
             currentState = shipState.ONNORMAL;
 
@@ -230,9 +231,10 @@ namespace IS_XNA_Shooter
                         timeInvencibleAux = timeInvencible;
                         transparency = 255;
                         SetTransparency(transparency);
-                        frameTime = SuperGame.frameTime24;
 
+                        frameTime = SuperGame.frameTime24;
                         currentState = shipState.ONNORMAL;
+                        particles.SetParticlesNumber(particlesCount);
                     }
                     else
                     {
@@ -352,6 +354,8 @@ namespace IS_XNA_Shooter
                 game.PlayerDead();
 
                 currentState = shipState.ONDYING;
+
+                particles.SetParticlesNumber(0);
 
                 Audio.PlayEffect("tackled1");
                 frameTime = timeDying / frameCount[3];

@@ -67,7 +67,7 @@ namespace IS_XNA_Shooter
                     ReadRectangles();     // load the rectangle map
 
                     // DORITO IS GOING TO KILL YOU MOTHER****ER
-                    Vector2 positionFinalBoss = new Vector2(SuperGame.screenWidth - GRMng.frameWidthFinalBoss1/2,
+                    Vector2 positionFinalBoss = new Vector2(SuperGame.screenWidth - GRMng.frameWidthFinalBoss1 / 2,
                         SuperGame.screenHeight / 2);
                     Enemy finalBoss = new FinalBoss1(camera, this, positionFinalBoss, enemies);
                     finalBoss.SetActive();

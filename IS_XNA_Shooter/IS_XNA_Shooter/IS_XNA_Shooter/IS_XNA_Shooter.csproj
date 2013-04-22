@@ -145,8 +145,8 @@
     <Compile Include="Games\GameScroll.cs" />
     <Compile Include="Games\GameStory.cs" />
     <Compile Include="Managers\GRMng.cs" />
-    <Compile Include="Hubs\IngameHub.cs" />
-    <Compile Include="Hubs\IngameHubA.cs" />
+    <Compile Include="Huds\IngameHud.cs" />
+    <Compile Include="Huds\IngameHudA.cs" />
     <Compile Include="Levels\LevelA.cs" />
     <Compile Include="Levels\LevelB.cs" />
     <Compile Include="Menus\MenuGameOver.cs" />

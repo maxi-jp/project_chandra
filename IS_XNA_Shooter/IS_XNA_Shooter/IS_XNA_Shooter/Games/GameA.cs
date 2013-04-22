@@ -23,7 +23,7 @@ namespace IS_XNA_Shooter
             Texture2D textureBg, float shipVelocity, int shipLife)
             : base(mainGame, player, shipVelocity, shipLife)
         {
-            hub = new IngameHubA(GRMng.hubBase, mainGame.player.GetLife());
+            hud = new IngameHubA(GRMng.hudBase, mainGame.player.GetLife());
             level = new LevelA(camera, num, enemies);
             backGround = new BackgroundGameA(camera, level);
             this.num = num;
@@ -54,7 +54,7 @@ namespace IS_XNA_Shooter
             Texture2D textureBg, Evolution evolution)
             : base(mainGame, player, evolution)
         {
-            hub = new IngameHubA(GRMng.hubBase, mainGame.player.GetLife());
+            hud = new IngameHudA(GRMng.hudBase, mainGame.player.GetLife());
             level = new LevelA(camera, num, enemies);
             backGround = new BackgroundGameA(camera, level);
             this.num = num;

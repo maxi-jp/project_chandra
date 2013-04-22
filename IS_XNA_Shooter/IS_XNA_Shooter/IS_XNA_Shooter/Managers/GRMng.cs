@@ -226,16 +226,19 @@ namespace IS_XNA_Shooter
         public static short frameWidthEx1 = 100;
         public static short frameHeightEx1 = 100;
         public static short frameCountEx1 = 8;
+        #endregion
 
-        /* ------------------- CHARACTERS ------------------- */
+        #region PORTRAITS
+        /* ------------------- PORTRAITS ------------------- */
         public static Texture2D textureCaptain;
         public static Texture2D texturePilot;
         public static Texture2D texturePilotCyborg;
+        public static Texture2D portrait_allyourbase;
         #endregion
 
-        #region HUBS
+        #region HUDS
         /* ------------------- HUB A ------------------- */
-        public static Texture2D hubBase;
+        public static Texture2D hudBase;
         #endregion
 
         #region MENUS
@@ -290,10 +293,6 @@ namespace IS_XNA_Shooter
                     break;
 
                 case "LevelA1":
-                    LoadIngameMenu();
-
-                    hubBase = content.Load<Texture2D>("Graphics/Hub/base256");
-
                     LoadShipA();
                     textureAim = content.Load<Texture2D>("Graphics/aimpoint");
                     textureL2 = content.Load<Texture2D>("Graphics/laserShotAnim2");
@@ -321,14 +320,29 @@ namespace IS_XNA_Shooter
 
                     textureHeroe1 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/heroe1");
                     textureShotFinalBossHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/shotHeroe1");
+                    break;
+
+                case "LevelA2":
+                    LoadShipA();
+                    textureAim = content.Load<Texture2D>("Graphics/aimpoint");
+
+                    textureCell = content.Load<Texture2D>("Graphics/celdasuelo");
+                    textureBg00 = content.Load<Texture2D>("Graphics/Backgrounds/bg00");
+                    textureBg01 = content.Load<Texture2D>("Graphics/Backgrounds/bg01");
+                    textureBg02 = content.Load<Texture2D>("Graphics/Backgrounds/bg02");
+                    textureBg03 = content.Load<Texture2D>("Graphics/Backgrounds/bg03");
+
+                    textureFinalBoss1Turret1 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/turret1");
+                    textureFinalBoss1Turret2 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/turret2");
+
+                    textureFinalBoss1Turret1Shot = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/shotTurret1");
+
+                    textureHeroe1 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/heroe1");
+                    textureShotFinalBossHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/shotHeroe1");
 
                     break;
 
                 case "LevelB1":
-                    LoadIngameMenu();
-
-                    hubBase = content.Load<Texture2D>("Graphics/Hub/base256");
-
                     LoadShipA();
                     textureL2 = content.Load<Texture2D>("Graphics/laserShotAnim2");
                     
@@ -349,8 +363,6 @@ namespace IS_XNA_Shooter
                     break;
 
                 case "LevelB2":
-                    hubBase = content.Load<Texture2D>("Graphics/Hub/base256");
-
                     LoadShipA();
 
                     textureFinalBoss1 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBoss1");
@@ -367,9 +379,10 @@ namespace IS_XNA_Shooter
                     break;
 
                 case "Portraits":
-                    textureCaptain = content.Load<Texture2D>("Graphics/Images/Captain");
-                    texturePilot = content.Load<Texture2D>("Graphics/Images/Pilot");
-                    texturePilotCyborg = content.Load<Texture2D>("Graphics/Images/PilotCyborg");
+                    textureCaptain = content.Load<Texture2D>("Graphics/Portraits/Captain");
+                    texturePilot = content.Load<Texture2D>("Graphics/Portraits/Pilot");
+                    texturePilotCyborg = content.Load<Texture2D>("Graphics/Portraits/PilotCyborg");
+                    portrait_allyourbase = content.Load<Texture2D>("Graphics/Portraits/allyourbase");
                     break;
 
                 case "Other":
@@ -407,9 +420,6 @@ namespace IS_XNA_Shooter
                     break;
 
                 case "LevelA1":
-
-                    hubBase = null;
-
                     UnloadShipA();
                     textureAim = null;
                     textureL2 = null;
@@ -439,13 +449,26 @@ namespace IS_XNA_Shooter
 
                     textureHeroe1 = null;
                     textureShotFinalBossHeroe = null;
+                    break;
 
+                case "LevelA2":
+                    UnloadShipA();
+                    textureAim = null;
+
+                    textureCell = null;
+                    textureBg00 = null;
+                    textureBg01 = null;
+                    textureBg02 = null;
+                    textureBg03 = null;
+
+                    textureFinalBoss1Turret1 = null;
+                    textureFinalBoss1Turret2 = null;
+                    textureFinalBoss1Turret1Shot = null;
+                    textureHeroe1 = null;
+                    textureShotFinalBossHeroe = null;
                     break;
 
                 case "LevelB1":
-
-                    hubBase = null;
-
                     UnloadShipA();
 
                     textureEW1 = null;
@@ -455,12 +478,9 @@ namespace IS_XNA_Shooter
                     textureBgCol1 = null;
                     textureBgCol2 = null;
                     textureBgCol3 = null;
-
                     break;
 
                 case "LevelB2":
-                    hubBase = null;
-
                     UnloadShipA();
 
                     textureFinalBoss1 = null;
@@ -480,6 +500,7 @@ namespace IS_XNA_Shooter
                     textureCaptain = null;
                     texturePilot = null;
                     texturePilotCyborg = null;
+                    portrait_allyourbase = null;
                     break;
 
                 case "Other":
@@ -559,7 +580,6 @@ namespace IS_XNA_Shooter
 
         private void UnloadIngameMenu()
         {
-            //menuIngame.Dispose();
             menuIngame = null;
             getready321 = null;
         }
@@ -578,8 +598,23 @@ namespace IS_XNA_Shooter
             textureL1 = null;
         }
 
+        /// <summary>
+        /// Load the graphic resources for the ingame hud
+        /// </summary>
+        public void LoadHud()
+        {
+            hudBase = content.Load<Texture2D>("Graphics/Hud/base256");
+        }
+
+        public void UnloadHud()
+        {
+            hudBase = null;
+        }
+
         public void UnloadContentGame()
         {
+            UnloadHud();
+
             UnloadContent("LevelA1");
             UnloadContent("LevelB1");
             UnloadContent("LevelA2");

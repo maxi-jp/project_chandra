@@ -16,7 +16,7 @@ namespace IS_XNA_Shooter
         /* ------------------------------------------------------------- */
         protected SuperGame mainGame;
         protected Player player;
-        protected IngameHub hub;
+        protected IngameHud hud;
 
         protected Camera camera;
         protected Level level;
@@ -143,7 +143,7 @@ namespace IS_XNA_Shooter
                 {
                     // add one life to the player
                     player.EarnLife();
-                    hub.PlayerEarnsLife();
+                    hud.PlayerEarnsLife();
                 }
             }
         }
@@ -165,7 +165,7 @@ namespace IS_XNA_Shooter
 
             ship.Draw(spriteBatch);
 
-            hub.Draw(spriteBatch);
+            hud.Draw(spriteBatch);
         }
 
         // This methods is called when the ship of the player has been
@@ -174,7 +174,7 @@ namespace IS_XNA_Shooter
         {
             //mainGame.TargetElapsedTime = TimeSpan.FromTicks(2000000);
             player.LoseLife();
-            hub.PlayerLosesLive();
+            hud.PlayerLosesLive();
 
             // All the enemies and the shots must be erased:
             for (int i = 0; i < enemies.Count(); i++)

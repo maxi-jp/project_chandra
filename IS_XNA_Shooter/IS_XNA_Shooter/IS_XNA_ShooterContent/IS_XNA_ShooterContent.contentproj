@@ -314,7 +314,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Graphics\Hub\base256.png">
+    <Compile Include="Graphics\Hud\base256.png">
       <Name>base256</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -371,17 +371,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Graphics\Images\Captain.png">
+    <Compile Include="Graphics\Portraits\Captain.png">
       <Name>Captain</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Graphics\Images\Pilot.png">
+    <Compile Include="Graphics\Portraits\Pilot.png">
       <Name>Pilot</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Graphics\Images\PilotCyborg.png">
+    <Compile Include="Graphics\Portraits\PilotCyborg.png">
       <Name>PilotCyborg</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -520,6 +520,13 @@
     </Compile>
     <Compile Include="Graphics\Evolution\measures.png">
       <Name>measures</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Graphics\Portraits\allyourbase.png">
+      <Name>allyourbase</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

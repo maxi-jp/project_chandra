@@ -126,7 +126,7 @@ namespace IS_XNA_Shooter
             powerAttack = 200;
             speedShip = 200;
             speedShot = 250;
-            cadence = 1;
+            cadence = 0.3f;
             
             // evolution of base parameters
             lifeExtra = powerAttackExtra = speedShipExtra = speedShotExtra = cadenceExtra = 0;
@@ -335,16 +335,16 @@ namespace IS_XNA_Shooter
                             mainGame.NewStory();
                             break;
                         case GameState.defense :
-                            mainGame.newDefense(0);
+                            mainGame.NewDefense(0);
                             break;
                         case GameState.killer:
-                            mainGame.newKiller(0);
+                            mainGame.NewKiller(0);
                             break;
                         case GameState.scroll:
-                            mainGame.newScroll(1);
+                            mainGame.NewScroll(1);
                             break;
                         case GameState.survival:
-                            mainGame.newSurvival(0);
+                            mainGame.NewSurvival(0);
                             break;
                     }
             }

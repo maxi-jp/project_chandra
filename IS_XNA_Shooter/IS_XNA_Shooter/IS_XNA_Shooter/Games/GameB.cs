@@ -33,7 +33,7 @@ namespace IS_XNA_Shooter
 
             listRecMap = new List<RectangleMap>();
 
-            hub = new IngameHubA(GRMng.hubBase, mainGame.player.GetLife());
+            hud = new IngameHubA(GRMng.hudBase, mainGame.player.GetLife());
             level = new LevelB(camera, numLevel, enemies, listRecMap);
             rectangleMap = ((LevelB)level).GetLevelMap();
             backGround = new BackgroundGameB((LevelB)level);
@@ -68,7 +68,7 @@ namespace IS_XNA_Shooter
 
             listRecMap = new List<RectangleMap>();
 
-            hub = new IngameHubA(GRMng.hubBase, mainGame.player.GetLife());
+            hud = new IngameHudA(GRMng.hudBase, mainGame.player.GetLife());
             level = new LevelB(camera, numLevel, enemies, listRecMap);
             rectangleMap = ((LevelB)level).GetLevelMap();
             backGround = new BackgroundGameB((LevelB)level);

@@ -60,6 +60,12 @@ namespace IS_XNA_Shooter
         private bool shooting;
         Shot shot;
 
+        // red dye
+        private bool isDyeingRed;
+        private float timeDyeingRed = 0.12f;
+        private float timeDyeingRedAux;
+        private Color dyeingColor = new Color(255, 63, 63);
+
         // ---------------------------
         // -----     BUILDER     -----
         // ---------------------------
@@ -67,21 +73,21 @@ namespace IS_XNA_Shooter
         /// <summary>
         /// This is the builder for the class FinalBoss1
         /// </summary>
-        /// <param name="camera"></param>
-        /// <param name="level"></param>
-        /// <param name="position"></param>
-        /// <param name="rotation"></param>
-        /// <param name="frameWidth"></param>
-        /// <param name="frameHeight"></param>
-        /// <param name="numAnim"></param>
-        /// <param name="frameCount"></param>
-        /// <param name="looping"></param>
-        /// <param name="frametime"></param>
-        /// <param name="texture"></param>
-        /// <param name="velocity"></param>
-        /// <param name="life"></param>
-        /// <param name="value"></param>
-        /// <param name="ship"></param>
+        /// <param name="camera">The camera of the game</param>
+        /// <param name="level">The level of the game</param>
+        /// <param name="position">The position of the enemy</param>
+        /// <param name="rotation">The rotation of the enemy</param>
+        /// <param name="frameWidth">The width of each frame of the enemy's animation</param>
+        /// <param name="frameHeight">The height of each frame of the enemy's animation </param>
+        /// <param name="numAnim">The number of the enemy's animations</param>
+        /// <param name="frameCount">The number of the frames in each animation's fil</param>
+        /// <param name="looping">Indicates if the animation has to loop</param>
+        /// <param name="frametime">Indicates how long the frame lasts</param>
+        /// <param name="texture">The texture of the enemy</param>
+        /// <param name="velocity">The velocity of the enemy</param>
+        /// <param name="life">The life of the enemy</param>
+        /// <param name="value">The points you obtain if you kill it</param>
+        /// <param name="ship">The player's ship</param>
         public FinalBoss1(Camera camera, Level level,Vector2 position, List <Enemy> enemies)
             : base (camera, level, position, (float)Math.PI, GRMng.frameWidthFinalBoss1, GRMng.frameHeightFinalBoss1, 
                 GRMng.numAnimsFinalBoss1, GRMng.frameCountFinalBoss1, GRMng.loopingFinalBoss1, SuperGame.frameTime12,
@@ -114,13 +120,13 @@ namespace IS_XNA_Shooter
 
             this.enemies = enemies;
 
-
-
         /*    //LASER Phase 3
             shot = new Shot(camera, level, position, rotation, GRMng.frameWidthLaserBoss, GRMng.frameHeightLaserBoss,
     GRMng.numAnimsLaserBoss, GRMng.frameCountLaserBoss, GRMng.loopingLaserBoss, SuperGame.frameTime8,
     GRMng.textureLaserBoss, SuperGame.shootType.normal, 1, 1);*/
-            
+
+            isDyeingRed = false;
+            timeDyeingRedAux = timeDyeingRed;
         }
 
         // ------------------------------------
@@ -129,35 +135,45 @@ namespace IS_XNA_Shooter
         
         public override void Update(float deltaTime)
         {
-                base.Update(deltaTime);
+            base.Update(deltaTime);
 
-                if (phase == 1 && !isDead()) phase1(deltaTime);
-                if (phase == 2 && !isDead()) phase2(deltaTime);
-                if (phase == 3 && !isDead()) phase3(deltaTime);
+            if (phase == 1 && !isDead()) phase1(deltaTime);
+            if (phase == 2 && !isDead()) phase2(deltaTime);
+            if (phase == 3 && !isDead()) phase3(deltaTime);
 
-                // shots:
-                for (int i = 0; i < shots.Count(); i++)
+            // shots:
+            for (int i = 0; i < shots.Count(); i++)
+            {
+                shots[i].Update(deltaTime);
+                if (!shots[i].IsActive())
+                    shots.RemoveAt(i);
+                else  // shots-player colisions
                 {
-                    shots[i].Update(deltaTime);
-                    if (!shots[i].IsActive())
-                        shots.RemoveAt(i);
-                    else  // shots-player colisions
+                    if (ship.collider.Collision(shots[i].position))
                     {
-                        if (ship.collider.Collision(shots[i].position))
-                        {
-                            // the player is hitted:
-                            ship.Damage(shots[i].GetPower());
+                        // the player is hitted:
+                        ship.Damage(shots[i].GetPower());
 
-                            // the shot must be erased only if it hasn't provoked the
-                            // player ship death, otherwise the shot will had be removed
-                            // before from the game in: Game.PlayerDead() -> Enemy.Kill()
-                            if (ship.GetLife() > 0)
-                                shots.RemoveAt(i);
-                        
+                        // the shot must be erased only if it hasn't provoked the
+                        // player ship death, otherwise the shot will had be removed
+                        // before from the game in: Game.PlayerDead() -> Enemy.Kill()
+                        if (ship.GetLife() > 0)
+                            shots.RemoveAt(i);
                     }
                 }
             }
-        }
+
+            if (isDyeingRed)
+            {
+                timeDyeingRedAux -= deltaTime;
+                if (timeDyeingRedAux <= 0)
+                {
+                    color = Color.White;
+                    isDyeingRed = false;
+                }
+            }
+
+        } // Update
 
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -170,6 +186,14 @@ namespace IS_XNA_Shooter
         public override void Damage(int i)
         {
             base.Damage(i);
+
+            if (!isDyeingRed)
+            {
+                isDyeingRed = true;
+                timeDyeingRedAux = timeDyeingRed;
+                SetTransparency(128);
+                color = dyeingColor;
+            }
 
             // if the enemy is dead, play the new animation and the death sound
             if (life <= 0)
@@ -389,6 +413,7 @@ namespace IS_XNA_Shooter
                 }
             }
         }
+
         /// <summary>
         /// change the direction of the enemy when it achieve the limit of the screen
         /// </summary>
@@ -442,15 +467,15 @@ namespace IS_XNA_Shooter
             {
                 angleDown =(float)(Math.PI + Math.PI / 5 );
                 angleUp = angle;
-                    }
-             else if (angle < Math.PI - Math.PI / 5)
-                {
-                    angleUp = (float) (Math.PI - Math.PI /5);
-                    angleDown = angle; 
-                }
-           
+            }
+            else if (angle < Math.PI - Math.PI / 5)
+            {
+                angleUp = (float) (Math.PI - Math.PI /5);
+                angleDown = angle; 
+            }
 
-                Audio.PlayEffect("laserShot01");
+            Audio.PlayEffect("laserShot01");
+
             //position.X - 10, position.Y + collider.Height / 2
             Shot nuevo = new Shot(camera, level, new Vector2(position.X , position.Y  + this.frameHeight / 2), angleDown, GRMng.frameWidthShotFinalBoss1, 
                 GRMng.frameHeightShotFinalBoss1, GRMng.numAnimsShotFinalBoss1, GRMng.frameCountShotFinalBoss1, GRMng.loopingShotFinalBoss1, SuperGame.frameTime8, 
@@ -533,5 +558,6 @@ namespace IS_XNA_Shooter
             //   shot.rotation = rotation;
 
         }
-    }
+
+    } // Class FinalBoss1
 }

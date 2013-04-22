@@ -11,28 +11,9 @@ namespace IS_XNA_Shooter
 {
     class GameStory : Game
     {
-        //-------------------------
-        //----    Atributos    ----
-        //-------------------------
-
-        /*// private List<List<Rectangle>> crashList;  //objetos de colisión en el parallax donde se juega
-        private playState currentState;
-        // for levelB
-        private List<RectangleMap> listRecMap; //lista de colliders para crashlist
-        private int[] rectangleMap;
-        private float scrollVelocity;
-        private float scrollPosition;
-        //for levelB
-        private BackgroundGameB backGroundB; //Fondo con los parallax
-        private BackgroundGameA backGroundA;
-        private Texture2D textureAim;
-        private List<int> levelList;
-        private int currentLevel=0;
-        public Sprite spriteGetReady;
-        public Sprite spriteNum;
-        private float timeToResumeAux;*/
-
-        
+        /// <summary>
+        /// Enum to indicate the state of the Story mode
+        /// </summary>
         public enum StoryState
         {
             levelDialog,
@@ -42,13 +23,19 @@ namespace IS_XNA_Shooter
             levelComplete
         };
 
+        /// <summary>
+        /// Struct that represents one line of dialoge
+        /// </summary>
         private struct Talk
         {
-            // 0=Chandra, 1=Captain, 2=Robot
+            // 0=Chandra, 1=Captain, 2=Robot, 3=Base
             public int whoTalk;
             public String whatSaid;
         };
 
+        /// <summary>
+        /// The current state of the Story mode
+        /// </summary>
         private StoryState currentState;
 
         private Game currentGame;
@@ -218,6 +205,12 @@ namespace IS_XNA_Shooter
                             break;
                         case 1:
                             spriteBatch.Draw(GRMng.textureCaptain, new Rectangle(110, 510, 280, 180), Color.White);
+                            break;
+                        case 2:
+                            spriteBatch.Draw(GRMng.texturePilotCyborg, new Rectangle(110, 510, 280, 180), Color.White);
+                            break;
+                        case 3:
+                            spriteBatch.Draw(GRMng.portrait_allyourbase, new Rectangle(110, 510, 280, 180), Color.White);
                             break;
                     }
 

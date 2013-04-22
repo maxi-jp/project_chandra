@@ -6,14 +6,14 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace IS_XNA_Shooter
 {
-    class IngameHub
+    class IngameHud
     {
         /* ------------------- ATRIBUTOS ------------------- */
         protected int lifesBase; // number of lifes of the Ship
         protected int lifesActual;
 
         /* ------------------- CONSTRUCTORES ------------------- */
-        public IngameHub(int playerLifes)
+        public IngameHud(int playerLifes)
         {
             this.lifesBase = playerLifes;
             this.lifesActual = playerLifes;

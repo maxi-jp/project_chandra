@@ -39,7 +39,7 @@ namespace IS_XNA_Shooter
 
         private void initLevelB(int numLevel)
         {
-            hub = new IngameHubA(GRMng.hubBase, mainGame.player.GetLife());
+            hud = new IngameHudA(GRMng.hudBase, mainGame.player.GetLife());
             colliderList = new List<Collider>();
             level = new LevelB(camera, numLevel, enemies, null);
             enemies = ((LevelB)level).getEnemies();

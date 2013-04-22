@@ -502,6 +502,7 @@ namespace IS_XNA_Shooter
         /// </summary>
         private void NewGameATest()
         {
+            grManager.LoadHud();
             grManager.LoadContent("LevelA1"); // Load the gameA's level 1 resources
             audio.LoadContent(1);
             game = new GameA(this, player, 0, GRMng.textureAim, GRMng.textureCell, screenEvolution);
@@ -511,6 +512,7 @@ namespace IS_XNA_Shooter
 
         private void NewGameAForTestingParticles()
         {
+            grManager.LoadHud();
             grManager.LoadContent("LevelA1"); // Load the gameA's level 1 resources
             audio.LoadContent(1);
             game = new GameAForTestingParticles(this, player, 40, GRMng.textureAim, GRMng.textureCell, screenEvolution);
@@ -523,6 +525,7 @@ namespace IS_XNA_Shooter
         /// </summary>
         public void NewStory()
         {
+            grManager.LoadHud();
             grManager.LoadVideo(1);
             // introduction video
             videoPlayer = new VideoPlayer();
@@ -542,8 +545,9 @@ namespace IS_XNA_Shooter
         /// Create a new Survival
         /// </summary>
         /// <param name="lvl">The number of the level</param>
-        public void newSurvival(int lvl)
+        public void NewSurvival(int lvl)
         {
+            grManager.LoadHud();
             grManager.LoadContent("LevelA1");  // Load the gameA's level 1 resources
             audio.LoadContent(1);
             LvlMng.LoadContent(lvl); // Load XML
@@ -560,8 +564,9 @@ namespace IS_XNA_Shooter
         /// Create a new Killer
         /// </summary>
         /// <param name="lvl">The number of the level</param>
-        public void newKiller(int lvl)
+        public void NewKiller(int lvl)
         {
+            grManager.LoadHud();
             grManager.LoadContent("LevelA1"); // Load the gameB's level 1 resources
             audio.LoadContent(1);
             LvlMng.LoadContent(lvl); // Load XML
@@ -578,8 +583,9 @@ namespace IS_XNA_Shooter
         /// Create a new Defense
         /// </summary>
         /// <param name="lvl">The number of the level</param>
-        public void newDefense(int lvl)
+        public void NewDefense(int lvl)
         {
+            grManager.LoadHud();
             grManager.LoadContent("LevelB1"); // Load the gameB's level 1 resources
             audio.LoadContent(1);
             LvlMng.LoadContent(lvl);
@@ -596,8 +602,9 @@ namespace IS_XNA_Shooter
         /// Create a new Scroll
         /// </summary>
         /// <param name="lvl">The number of the level</param>
-        public void newScroll(int lvl)
+        public void NewScroll(int lvl)
         {
+            grManager.LoadHud();
             grManager.LoadContent("LevelB1"); // Load the gameB's level 1 resources
             audio.LoadContent(1);
             LvlMng.LoadContent(lvl); // Load the rectangles

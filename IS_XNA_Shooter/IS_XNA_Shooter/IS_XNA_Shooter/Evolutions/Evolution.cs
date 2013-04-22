@@ -37,6 +37,7 @@ namespace IS_XNA_Shooter
                             LENGTH_BUTTON_CONTINUE = 30,
                             SPACE_BUTTON_CONTINUE_BOTTOM = 10,
                             SPACE_BUTTON_CONTINUE_RIGHT = 10;
+        public const int LENGTH_FRAME = 500;
 
 
         //-------------------------------------------------------------------------------

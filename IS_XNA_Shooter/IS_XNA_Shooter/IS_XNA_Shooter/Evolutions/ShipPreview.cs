@@ -13,19 +13,27 @@ namespace IS_XNA_Shooter.Evolutions
     {
         private const int SIZE = 80,
             NUM_ANIMATION_MOVE = 4,
-            LENGTH_FRAME = 500;
+            NUM_ANIMATION_SHOT = 5;
         private const float TIME_ANIMATION = 0.05f;
+
+
+        //---------------------------------------------------------------------
+
+
+        private enum TypeAnimation { move, shot };
 
         
         //---------------------------------------------------------------------
 
 
         private float timeAnimation, life, speed, power, speedShot, cadence, timeToShot;
-        private int posAnimation;
+        private int posAnimation, animation;
+        private TypeAnimation typeAnimation;
         private Texture2D texture;
         private Rectangle animationRectangle;
         private Vector2 position;
-        private List<Shot> shots;
+        private List<ShotPreview> shots;
+        private ContentManager content;
 
 
         //---------------------------------------------------------------------
@@ -33,6 +41,9 @@ namespace IS_XNA_Shooter.Evolutions
 
         public ShipPreview(ContentManager content, Evolution evolution)
         {
+            // initialize the content
+            this.content = content;
+
             // texture
             texture = content.Load<Texture2D>("Graphics/Ships/sprites80x80");
             position = new Vector2(SuperGame.screenWidth / 2 - SIZE / 2, SuperGame.screenHeight / 2 - SIZE / 2);
@@ -41,6 +52,8 @@ namespace IS_XNA_Shooter.Evolutions
             animationRectangle = new Rectangle(0, SIZE, SIZE, SIZE);
             timeAnimation = 0;
             posAnimation = 0;
+            animation = 0;
+            typeAnimation = TypeAnimation.move;
 
             //life, power, speed, speedShot
             life = evolution.getLife();
@@ -53,7 +66,7 @@ namespace IS_XNA_Shooter.Evolutions
             timeToShot = 0;
 
             //shots
-            shots = new List<Shot>();
+            shots = new List<ShotPreview>();
         }
         
 
@@ -63,24 +76,52 @@ namespace IS_XNA_Shooter.Evolutions
         public void Update(float deltaTime)
         {
             timeAnimation += deltaTime;
-            timeToShot += deltaTime;
+            timeToShot -= deltaTime;
 
             //animation
             if (timeAnimation >= TIME_ANIMATION)
             {
-                if (posAnimation < NUM_ANIMATION_MOVE - 1) posAnimation++;
-                else posAnimation = 0;
+                //move
+                if (typeAnimation == TypeAnimation.move)
+                {
+                    if (posAnimation < NUM_ANIMATION_MOVE - 1) posAnimation++;
+                    else posAnimation = 0;
+                    animation = 1;
+                }
+                //shot
+                else if (typeAnimation == TypeAnimation.shot)
+                {
+                    if (posAnimation < NUM_ANIMATION_SHOT - 1) posAnimation++;
+                    else
+                    {
+                        posAnimation = 0;
+                        typeAnimation = TypeAnimation.move;
+                    }
+                    animation = 2;
+                }
+
                 animationRectangle.X = posAnimation * SIZE;
+                animationRectangle.Y = animation * SIZE;
                 timeAnimation = 0;
             }
 
             //control ship
             controlShip(deltaTime);
+
+            // update shots
+            updateShots(deltaTime);
+
+            // delete shots
+            deleleteShots();
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            // draw ship
             spriteBatch.Draw(texture, new Rectangle((int)position.X, (int)position.Y, SIZE, SIZE), animationRectangle, Color.White);
+
+            // draw shots
+            drawShots(spriteBatch);
         }
 
 
@@ -107,21 +148,50 @@ namespace IS_XNA_Shooter.Evolutions
             position.Y += movement.Y * speed * deltaTime;
 
             //limit the frame
-            if (position.X > SuperGame.screenWidth / 2 + LENGTH_FRAME / 2 - SIZE)
-                position.X = SuperGame.screenWidth / 2 + LENGTH_FRAME / 2 - SIZE;
-            if (position.X < SuperGame.screenWidth / 2 - LENGTH_FRAME / 2)
-                position.X = SuperGame.screenWidth / 2 - LENGTH_FRAME / 2;
-            if (position.Y > SuperGame.screenHeight / 2 + LENGTH_FRAME / 2 - SIZE)
-                position.Y = SuperGame.screenHeight / 2 + LENGTH_FRAME / 2 - SIZE;
-            if (position.Y < SuperGame.screenHeight / 2 - LENGTH_FRAME / 2)
-                position.Y = SuperGame.screenHeight / 2 - LENGTH_FRAME / 2;
+            if (position.X > SuperGame.screenWidth / 2 + Evolution.LENGTH_FRAME / 2 - SIZE)
+                position.X = SuperGame.screenWidth / 2 + Evolution.LENGTH_FRAME / 2 - SIZE;
+            if (position.X < SuperGame.screenWidth / 2 - Evolution.LENGTH_FRAME / 2)
+                position.X = SuperGame.screenWidth / 2 - Evolution.LENGTH_FRAME / 2;
+            if (position.Y > SuperGame.screenHeight / 2 + Evolution.LENGTH_FRAME / 2 - SIZE)
+                position.Y = SuperGame.screenHeight / 2 + Evolution.LENGTH_FRAME / 2 - SIZE;
+            if (position.Y < SuperGame.screenHeight / 2 - Evolution.LENGTH_FRAME / 2)
+                position.Y = SuperGame.screenHeight / 2 - Evolution.LENGTH_FRAME / 2;
 
             //shots
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed && timeToShot > cadence)
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed && timeToShot <= 0)
             {
-                timeToShot = 0;
-                Shot shot = new Shot
+                typeAnimation = TypeAnimation.shot;
+                timeToShot = cadence;
+                ShotPreview shot = new ShotPreview(content);
+                shot.setPosition(position + new Vector2(SIZE , SIZE / 2));
+                shot.setSpeed(speedShot);
+                shots.Add(shot);
             }                
+        }
+
+        private void drawShots(SpriteBatch spriteBatch)
+        {
+            for (int i = 0; i < shots.Count; i++)
+            {
+                shots[i].Draw(spriteBatch);
+            }
+        }
+
+        private void updateShots(float deltaTime)
+        {
+            for (int i = 0; i < shots.Count; i++)
+            {
+                shots[i].Update(deltaTime);
+            }
+        }
+
+        private void deleleteShots()
+        {
+            for (int i = 0; i < shots.Count; i++)
+            {
+                if (shots[i].getPosition().X > SuperGame.screenWidth / 2 + Evolution.LENGTH_FRAME / 2 - ShotPreview.WIDTH_SHOT) 
+                    shots.RemoveAt(i) ;
+            }
         }
 
     }//class ShipPreview

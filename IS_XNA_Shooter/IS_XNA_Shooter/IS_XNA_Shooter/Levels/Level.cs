@@ -65,8 +65,9 @@ namespace IS_XNA_Shooter
                         lvl = XMLLvlMng.lvl1A;
                         break;
                     case 1: // game mode B
-                        lvl = XMLLvlMng.lvl1B;
+                        lvl = XMLLvlMng.lvl1C;
                         break;
+
                 
                 }
                 XmlNodeList level = lvl.GetElementsByTagName("level");

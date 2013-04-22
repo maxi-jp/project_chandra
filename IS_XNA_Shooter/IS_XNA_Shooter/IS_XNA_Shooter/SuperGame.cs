@@ -217,7 +217,8 @@ namespace IS_XNA_Shooter
         /// <summary>
         /// courier new 12 regular
         /// </summary>
-        public static SpriteFont fontDebug; 
+        public static SpriteFont fontDebug;
+        public static SpriteFont fontMotorwerk;
 
         /// <summary>
         /// SuperGame's constructor
@@ -283,6 +284,7 @@ namespace IS_XNA_Shooter
             audio.LoadContent(0);
 
             fontDebug = Content.Load<SpriteFont>("FontDebug");
+            fontMotorwerk = Content.Load<SpriteFont>("Motorwerk");
 
             // Create the Menus
             menuStart =     new MenuStart(this);
@@ -552,12 +554,14 @@ namespace IS_XNA_Shooter
             audio.LoadContent(1);
             LvlMng.LoadContent(lvl); // Load XML
 
-            game = new GameA(this, player, 1, GRMng.textureAim, GRMng.textureCell, screenEvolution);
+            game = new GameC(this, player, 1, GRMng.textureAim, GRMng.textureCell, screenEvolution);
 
             currentState = gameState.playing; // Change game's state to game mode
 
             LvlMng.UnloadContent(lvl);
             grManager.UnloadContent("MenuMain"); /// Unload the main menu's resources
+                                                 /// 
+
         }
 
         /// <summary>

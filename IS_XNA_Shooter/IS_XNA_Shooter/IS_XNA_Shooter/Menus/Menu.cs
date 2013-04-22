@@ -290,7 +290,7 @@ namespace IS_XNA_Shooter
                         Audio.PlayEffect("digitalAcent01");
                         mainGame.currentState = SuperGame.gameState.evolution;
                         evolution.setGameState(Evolution.GameState.survival);
-                        //mainGame.newSurvival(0);
+                        //mainGame.NewSurvival(2);
                     }
                     else if (itemArcadeDefense.Unclick(X, Y))
                     {

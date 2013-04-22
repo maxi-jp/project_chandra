@@ -14,6 +14,7 @@ namespace IS_XNA_Shooter
     {
         public static XmlDocument lvl1A;     // XML level 1 A
         public static XmlDocument lvl1B;     // XML level 1 B
+        public static XmlDocument lvl1C;     // XML level 1 C
         public static XmlDocument rect1;    // rectangles level 1 side scroll mode
         public static XmlDocument rect2;    // rectangles level 2 side scroll mode (DORITO)
         public static XmlDocument dialog1;  // dialog of the first level of mode history
@@ -45,8 +46,8 @@ namespace IS_XNA_Shooter
                 case 1: // GameB Level 1
                     rect1 = new XmlDocument();
                     rect1.Load("../../../../IS_XNA_ShooterContent/Levels/levelRectangle1.xml");
-                    lvl1B = new XmlDocument();
-                    lvl1B.Load("../../../../IS_XNA_ShooterContent/Levels/level1B.xml");
+                    lvl1C = new XmlDocument();
+                    lvl1C.Load("../../../../IS_XNA_ShooterContent/Levels/level1B.xml");
                     break;
 
                 case 2: // dialogs
@@ -77,7 +78,7 @@ namespace IS_XNA_Shooter
                     lvl1A = null;
                     break;
                 case 1: //gameB
-                    lvl1B = null;
+                    lvl1C = null;
                     rect1 = null;
                     dialog1 = null;
                     break;

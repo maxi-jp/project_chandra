@@ -88,7 +88,7 @@ namespace IS_XNA_Shooter
             else  if (numLevelAux == 0) {
                              numLevel++;
                              numLevelAux = numLevel;
-                             globalTimeAux = 0;
+                             globalTimeAux = 310;
                              timeLapse = 2;
                          } 
                                         
@@ -272,52 +272,52 @@ namespace IS_XNA_Shooter
                         enemy = new EnemyWeakA(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEW1, GRMng.frameHeightEW1, GRMng.numAnimsEW1, GRMng.frameCountEW1,
                             GRMng.loopingEW1, SuperGame.frameTime12, GRMng.textureEW1, time, 100, 100,
-                            1, null);
+                            1, ship);
                     else if (enemyType.Equals("enemyBeam"))
                         enemy = new EnemyBeamA(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEB1, GRMng.frameHeightEB1, GRMng.numAnimsEB1, GRMng.frameCountEB1,
                             GRMng.loopingEB1, SuperGame.frameTime12, GRMng.textureEB1, time, 1000, 100,
-                            4, null);
+                            4, ship);
                     else if (enemyType.Equals("enemyWeakShotA"))
                         enemy = new EnemyWeakShotA(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEW2, GRMng.frameHeightEW2, GRMng.numAnimsEW2, GRMng.frameCountEW2,
                             GRMng.loopingEW2, SuperGame.frameTime12, GRMng.textureEW2, time, 100, 100,
-                            1, null, 2, 300, 200);
+                            1, ship, 2, 300, 200);
                     else if (enemyType.Equals("enemyMineShotA"))
                         enemy = new EnemyMineShotA(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEMS, GRMng.frameHeightEMS, GRMng.numAnimsEMS, GRMng.frameCountEMS,
                             GRMng.loopingEMS, SuperGame.frameTime12, GRMng.textureEMS, time, 100, 100,
-                            1, null, 4, 140, 200);
+                            1, ship, 4, 140, 200);
                     else if (enemyType.Equals("enemyLaserA"))
                         enemy = new EnemyLaserA(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEL, GRMng.frameHeightEL, GRMng.numAnimsEL, GRMng.frameCountEL,
                             GRMng.loopingEL, SuperGame.frameTime12, GRMng.textureEL, time, 100, 100,
-                            1, null);
+                            1, ship);
                     else if (enemyType.Equals("enemyScaredA"))
                         enemy = new EnemyScaredA(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthES, GRMng.frameHeightES, GRMng.numAnimsES, GRMng.frameCountES,
                             GRMng.loopingES, SuperGame.frameTime12, GRMng.textureES, time, 100, 100,
-                            1, null, 4, 300, 200);
+                            1, ship, 4, 300, 200);
                     else if (enemyType.Equals("enemyWeakB"))
                         enemy = new EnemyWeakB(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEW1, GRMng.frameHeightEW1, GRMng.numAnimsEW1, GRMng.frameCountEW1,
                             GRMng.loopingEW1, SuperGame.frameTime12, GRMng.textureEW1, time, 100, 100,
-                            1, null);
+                            1, ship);
                     else if (enemyType.Equals("enemyWeakShotB"))
                         enemy = new EnemyWeakShotB(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEW2, GRMng.frameHeightEW2, GRMng.numAnimsEW2, GRMng.frameCountEW2,
                             GRMng.loopingEW2, SuperGame.frameTime12, GRMng.textureEW2, time, 100, 100,
-                            1, null, 2, 300, 200);
+                            1, ship, 2, 300, 200);
                     else if (enemyType.Equals("enemyMineShotB"))
                         enemy = new EnemyMineShotB(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEMS, GRMng.frameHeightEMS, GRMng.numAnimsEMS, GRMng.frameCountEMS,
                             GRMng.loopingEMS, SuperGame.frameTime12, GRMng.textureEMS, time, 100, 100,
-                            1, null, 4, 140, 200);
+                            1, ship, 4, 140, 200);
                     else if (enemyType.Equals("enemyLaserB"))
                         enemy = new EnemyLaserB(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEL, GRMng.frameHeightEL, GRMng.numAnimsEL, GRMng.frameCountEL,
                             GRMng.loopingEL, SuperGame.frameTime12, GRMng.textureEL, time, 100, 100,
-                            1, null);
+                            1, ship);
                     /*  else if (enemyType.Equals("FinalBossHeroe1")) 
                        //   enemy = new FinalBossHeroe1(camera, this, new Vector2(positionX, positionY), ship, enemies);
                     

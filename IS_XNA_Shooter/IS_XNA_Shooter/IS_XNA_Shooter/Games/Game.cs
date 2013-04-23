@@ -28,6 +28,7 @@ namespace IS_XNA_Shooter
         protected List<Enemy> enemies, enemiesBot;
         protected List<Shot> shots;
         protected List<Explosion> explosions;
+        protected List<PowerUp> powerUpList;
 
         protected Evolution evolution;
         protected float timeToGameOver = 1.5f;
@@ -47,6 +48,7 @@ namespace IS_XNA_Shooter
             enemiesBot = new List<Enemy>();
             shots = new List<Shot>();
             explosions = new List<Explosion>();
+            powerUpList = new List<PowerUp>();
             
             //Audio.PlayMusic(1);
         }*/
@@ -99,6 +101,15 @@ namespace IS_XNA_Shooter
                     enemiesBot[i].UpdateTimeToSpawn(deltaTime);
             }
 
+            for (int i = 0; i < powerUpList.Count; i++)    // power ups
+            {
+                powerUpList[i].Update(deltaTime);
+                if (!powerUpList[i].IsActive())
+                {
+                    powerUpList.RemoveAt(i);
+                }
+            }
+
             for (int i = 0; i < shots.Count(); i++)     // shots
             {
                 shots[i].Update(deltaTime);
@@ -116,23 +127,51 @@ namespace IS_XNA_Shooter
                     //if (enemies[i].isActive() && shots[j].isActive() && enemies[i].collider.collision(shots[j].collider))
                     {                       
                         enemies[i].Damage(shots[j].GetPower());
-                        shots.RemoveAt(j);
+                        PowerUp powerUp = enemies[i].getPowerUp();
+                        if (powerUp != null)
+                        {
+                            powerUpList.Add(powerUp);
+                        }
+                        if (shots[j].type == SuperGame.shootType.normal)
+                            shots.RemoveAt(j);
                     }
                 }
             }
 
-            if (!SuperGame.godMode)
+            for (int i = 0; i < powerUpList.Count; i++)     //powerUps for the ship
             {
-                // enemies-player collision:
-                for (int i = 0; i < enemies.Count(); i++)
+                if (ship.collider.Collision(powerUpList[i].collider) || powerUpList[i].collider.Collision(ship.collider))
                 {
-                    if (enemies[i].IsColisionable() && (ship.collider.Collision(enemies[i].collider) || enemies[i].collider.Collision(ship.collider)))
+                    ship.CatchPowerUp(powerUpList[i].GetType());
+                    if (powerUpList[i].GetType() == 2) //green power
                     {
-                        // the player has been hit by an enemy
-                        ship.Kill();
+                        for (int j = 0; j < enemies.Count(); j++)
+                            if (enemies[j].IsActive() && !(enemies[j].GetType() == typeof(FinalBoss1) || enemies[j].GetType() == typeof(EnemyFinalHeroe2) ||
+                                 enemies[j].GetType() == typeof(BotFinalBoss) || enemies[j].GetType() == typeof(FinalBossHeroe1) ||
+                                 enemies[j].GetType() == typeof(FinalBoss1Turret2) || enemies[j].GetType() == typeof(FinalBoss1Turret1)))
+                                enemies[j].Damage(200);
                     }
+                    powerUpList[i].SetActive(false); 
                 }
             }
+
+                if (!SuperGame.godMode)
+                {
+                    // enemies-player collision:
+                    for (int i = 0; i < enemies.Count(); i++)
+                    {
+                        if (enemies[i].IsColisionable() && (ship.collider.Collision(enemies[i].collider) || enemies[i].collider.Collision(ship.collider)))
+                        {
+                            // the player has been hit by an enemy
+                            if (ship.timePowerUpBlue > 0)
+                            {
+                                enemies[i].Damage(200);
+                            }
+                            else
+                            ship.Kill();
+                        }
+                    }
+                }
 
             camera.Update(deltaTime);   // cámara
 
@@ -171,6 +210,9 @@ namespace IS_XNA_Shooter
 
             foreach (Shot shot in shots)    // player shots
                 shot.Draw(spriteBatch);
+
+            foreach (PowerUp pow in powerUpList)
+                pow.Draw(spriteBatch);
 
             ship.Draw(spriteBatch);
 

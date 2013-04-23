@@ -22,6 +22,10 @@ namespace IS_XNA_Shooter
         public static SoundEffect laserShot01;
         public static SoundEffect brokenBone01, brokenBone02;
         public static SoundEffect tackled1;
+        public static SoundEffect laserShotRed;
+        public static SoundEffect SoundPowerUpRed;
+        public static SoundEffect SoundPowerUpGreen;
+        public static SoundEffect SoundPowerUpBlue;
 
         // canciones:
         public static Song music01;
@@ -50,7 +54,7 @@ namespace IS_XNA_Shooter
                     brokenBone01 = content.Load<SoundEffect>("Audio/FXEffects/broken_bone_01");
                     brokenBone02 = content.Load<SoundEffect>("Audio/FXEffects/broken_bone_02");
                     tackled1 = content.Load<SoundEffect>("Audio/FXEffects/tackled_1");
-
+                    LoadSoundPowerUps();
                     music01 = content.Load<Song>("Audio/Music/music_01");
                     break;
             }
@@ -73,6 +77,10 @@ namespace IS_XNA_Shooter
                     brokenBone01 = null;
                     brokenBone02 = null;
                     tackled1 = null;
+                    laserShotRed = null;
+                    SoundPowerUpRed = null;
+                    SoundPowerUpGreen = null;
+                    SoundPowerUpBlue = null;
 
                     break;
             }
@@ -92,6 +100,10 @@ namespace IS_XNA_Shooter
                 case "brokenBone01":    brokenBone01.Play(effectsVolume, pitch, pan);   break;
                 case "brokenBone02":    brokenBone02.Play(effectsVolume, pitch, pan);   break;
                 case "tackled1":        tackled1.Play(effectsVolume, pitch, pan);       break;
+                case "laser_shot_red":  laserShotRed.Play(effectsVolume, pitch, pan); break;
+                case "PowerUpRed":       SoundPowerUpRed.Play(effectsVolume, pitch, pan); break;
+                case "PowerUpBlue":      SoundPowerUpBlue.Play(effectsVolume, pitch, pan); break;
+                case "PowerUpGreen":     SoundPowerUpGreen.Play(effectsVolume, pitch, pan); break;
             }
         } // PlayEffect
 
@@ -111,6 +123,16 @@ namespace IS_XNA_Shooter
             musicVolume = volume;
             MediaPlayer.Volume = musicVolume;
         }
+
+
+        private void LoadSoundPowerUps()
+        {
+            laserShotRed = content.Load<SoundEffect>("Audio/FXEffects/laser_shot_red");
+            SoundPowerUpRed = content.Load<SoundEffect>("Audio/FXEffects/PowerUpRed");
+            SoundPowerUpGreen = content.Load<SoundEffect>("Audio/FXEffects/PowerUpGreen");
+            SoundPowerUpBlue = content.Load<SoundEffect>("Audio/FXEffects/PowerUpBlue");
+        }
+
 
     } // class Audio
 }

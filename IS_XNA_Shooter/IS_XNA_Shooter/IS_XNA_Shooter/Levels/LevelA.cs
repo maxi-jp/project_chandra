@@ -15,6 +15,9 @@ namespace IS_XNA_Shooter
         private Texture2D textureCell;
 
         private bool testingEnemies;
+        private PowerUp pow1;
+        private PowerUp pow2;
+        private PowerUp pow3;
 
         // attributes for the Defense mode
         private Vector2 baseInitPosition;
@@ -106,6 +109,12 @@ namespace IS_XNA_Shooter
                 TestEnemies();
             }
 
+            if (pow1 != null && pow2 != null && pow3 != null)
+            {
+                pow1.Update(deltaTime);
+                pow2.Update(deltaTime);
+                pow3.Update(deltaTime);
+            }
         } // Update
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -128,6 +137,13 @@ namespace IS_XNA_Shooter
             // linea de la izquierda:
             spriteBatch.Draw(whitePixel, new Rectangle((int)camera.displacement.X, (int)camera.displacement.Y + height,
                 width, 1), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
+            //power up
+            if (pow1 != null && pow2 != null && pow3 != null)
+            {
+                pow1.Draw(spriteBatch);
+                pow2.Draw(spriteBatch);
+                pow3.Draw(spriteBatch);
+            }
         }
 
         public override void setShip(Ship ship)
@@ -138,6 +154,7 @@ namespace IS_XNA_Shooter
         private void TestEnemies()
         {
             Enemy enemy = null;
+            
 
             // EnemyWeak:
             if (ControlMng.f1Preshed)
@@ -201,6 +218,14 @@ namespace IS_XNA_Shooter
                 enemy = EnemyFactory.GetEnemyByName("FinalBossHeroe1", camera, this, ship, new Vector2(60, 60), 0);
                 ((FinalBossHeroe1)enemy).SetEnemies(enemies);
                 enemies.Add(enemy);
+            }
+
+            if (ControlMng.f10Preshed)
+            {
+                pow1 = new PowerUp(camera,this,new Vector2(40,40),0,GRMng.powerTexture,80,80,3,new short[]{6,6,6},new bool[]{true,true,true},SuperGame.frameTime12,0);
+                pow2 = new PowerUp(camera, this, new Vector2(40, 120), 0, GRMng.powerTexture, 80, 80, 3, new short[] { 6, 6, 6 }, new bool[] { true, true, true }, SuperGame.frameTime12, 1);
+                pow3 = new PowerUp(camera, this, new Vector2(40, 200), 0, GRMng.powerTexture, 80, 80, 3, new short[] { 6, 6, 6 }, new bool[] { true, true, true }, SuperGame.frameTime12, 2);
+
             }
 
             if (house != null && enemy != null)

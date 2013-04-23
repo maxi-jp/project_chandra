@@ -211,6 +211,7 @@ namespace IS_XNA_Shooter
         public enum shootType
         {
             normal,
+            red
         };
 
         // fuentes:

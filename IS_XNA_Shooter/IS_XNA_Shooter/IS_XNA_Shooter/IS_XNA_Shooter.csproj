@@ -151,6 +151,7 @@
     <Compile Include="Enemies\FinalBoss1.cs" />
     <Compile Include="Enemies\FinalBoss1Turret1.cs" />
     <Compile Include="Enemies\FinalBoss1Turret2.cs" />
+    <Compile Include="PowerUp.cs" />
     <Compile Include="Enemies\FinalBossHeroe1.cs" />
     <Compile Include="Games\GameB.cs" />
     <Compile Include="Games\GameScroll.cs" />

@@ -87,7 +87,8 @@ namespace IS_XNA_Shooter
 
 
             // shots:
-            if (this is EnemyShotADefense)
+            Base basee = level.GetBase();
+            if (basee != null)
             {
                 for (int i = 0; i < shots.Count(); i++)
                 {
@@ -98,7 +99,7 @@ namespace IS_XNA_Shooter
                     {
                         //If we are in Defense mode, check the house also
 
-                        Base basee = level.GetBase();
+                       
                         if (basee.collider.Collision(shots[i].position))
                         {
                             int damage = 0;

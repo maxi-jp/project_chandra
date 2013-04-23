@@ -334,9 +334,6 @@ namespace IS_XNA_Shooter
                         case GameState.story :
                             mainGame.NewStory();
                             break;
-                        case GameState.defense :
-                            mainGame.NewDefense(0);
-                            break;
                         case GameState.killer:
                             mainGame.NewKiller(0);
                             break;
@@ -345,6 +342,9 @@ namespace IS_XNA_Shooter
                             break;
                         case GameState.survival:
                             mainGame.NewSurvival(2);
+                            break;
+                        case GameState.defense:
+                            mainGame.NewDefense(4);
                             break;
                     }
             }

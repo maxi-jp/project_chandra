@@ -3,7 +3,9 @@
 <level titulo="nivel1" width="1200" height="800">
     <enemiesList>
 				<!-- OLEADA 1 --> 
-				<enemy type="enemyScaredADefense" positionX="1100" positionY="750" time="1"></enemy>
+				
+				<enemy type="enemyWeakShotA" positionX="1100" positionY="750" time="1"></enemy>
+				<enemy type="enemyMineShotA" positionX="1100" positionY="750" time="1"></enemy>
 
 				
 				

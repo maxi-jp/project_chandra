@@ -539,15 +539,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Graphics\house.png">
-      <Name>house</Name>
+    <Compile Include="Graphics\base.png">
+      <Name>base</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Graphics\LifeBars\houseLifeBar.png">
-      <Name>houseLifeBar</Name>
+    <Compile Include="Graphics\LifeBars\baseLifeBar.png">
+      <Name>baseLifeBar</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

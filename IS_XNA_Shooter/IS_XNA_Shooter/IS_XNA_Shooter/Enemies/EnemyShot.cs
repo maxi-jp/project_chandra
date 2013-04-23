@@ -84,9 +84,9 @@ namespace IS_XNA_Shooter
         {
             base.Update(deltaTime);
 
-      
 
-             // shots:
+
+            // shots:
             if (this is EnemyShotADefense)
             {
                 for (int i = 0; i < shots.Count(); i++)
@@ -97,19 +97,19 @@ namespace IS_XNA_Shooter
                     else  // shots-house colisions
                     {
                         //If we are in Defense mode, check the house also
-                    
-                            Base house = level.GetBase();
-                            if (house.collider.Collision(shots[i].position))
-                            {
-                                int damage = 0;
-                                
-                                damage = shots[i].GetPower();
-                                shots.RemoveAt(i);
 
-                                // the house is hit:
-                                house.Damage(damage);
-                            }
-                     }
+                        Base basee = level.GetBase();
+                        if (basee.collider.Collision(shots[i].position))
+                        {
+                            int damage = 0;
+
+                            damage = shots[i].GetPower();
+                            shots.RemoveAt(i);
+
+                            // the house is hit:
+                            basee.Damage(damage);
+                        }
+                    }
                 }
             }
 

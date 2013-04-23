@@ -200,10 +200,10 @@ namespace IS_XNA_Shooter
         #endregion
 
         #region BASE
-        /* ------------------- HOUSE ------------------- */
+        /* ------------------- BASE ------------------- */
         public static Texture2D textureBase;
-        public static short frameWidthBase = 122;
-        public static short frameHeightBase = 128;
+        public static short frameWidthBase = 128;
+        public static short frameHeightBase = 122;
         public static short numAnimsBase = 1;
         public static short[] frameCountBase = { 1 };
         public static bool[] loopingBase = { true };
@@ -342,6 +342,7 @@ namespace IS_XNA_Shooter
 
                 case "LevelADefense1":
                     LoadIngameMenu();
+                    LoadShipA();
 
                     hudBase = content.Load<Texture2D>("Graphics/Hud/base256");
 
@@ -364,8 +365,8 @@ namespace IS_XNA_Shooter
                     textureBg02 = content.Load<Texture2D>("Graphics/Backgrounds/bg02");
                     textureBg03 = content.Load<Texture2D>("Graphics/Backgrounds/bg03");
 
-                    textureBaseLifeBar = content.Load<Texture2D>("Graphics/LifeBars/houseLifeBar");
-                    textureBase = content.Load<Texture2D>("Graphics/house");
+                    textureBaseLifeBar = content.Load<Texture2D>("Graphics/LifeBars/baseLifeBar");
+                    textureBase = content.Load<Texture2D>("Graphics/base");
 
                     break;
 
@@ -499,7 +500,7 @@ namespace IS_XNA_Shooter
                     break;
 
                 case "LevelADefense1":
-
+                    UnloadShipA();
                     hudBase = null;
 
                     texturePA1 = null;

@@ -40,7 +40,7 @@ namespace IS_XNA_Shooter
 
         #region POWERUPS
         /*----------POWER UPS----------*/
-        public static Texture2D powerTexture; //texture power
+        public static Texture2D powerTexture; //texture blue power
         #endregion
 
         #region ENEMIES
@@ -317,6 +317,7 @@ namespace IS_XNA_Shooter
 
                 case "LevelA1":
                     powerTexture = content.Load<Texture2D>("Graphics/PowerUps/spritesPowerUp02_80x80");
+                    textureShotFinalBossHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/shotHeroe1");
 
                     LoadShipA();
                     textureAim = content.Load<Texture2D>("Graphics/aimpoint");
@@ -349,8 +350,6 @@ namespace IS_XNA_Shooter
 
                 case "LevelADefense1":
                     LoadShipA();
-                    powerTexture = content.Load<Texture2D>("Graphics/PowerUps/spritesPowerUp02_80x80");
-                    textureShotFinalBossHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/shotHeroe1");
                     textureAim = content.Load<Texture2D>("Graphics/aimpoint");
                     textureL2 = content.Load<Texture2D>("Graphics/laserShotAnim2");
 
@@ -391,13 +390,10 @@ namespace IS_XNA_Shooter
                     powerTexture = content.Load<Texture2D>("Graphics/PowerUps/spritesPowerUp02_80x80");
                     textureShotFinalBossHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/shotHeroe1");
 
-
                     break;
 
                 case "LevelB1":
                     LoadShipA();
-                    powerTexture = content.Load<Texture2D>("Graphics/PowerUps/spritesPowerUp02_80x80");
-                    textureShotFinalBossHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/shotHeroe1");
                     textureL2 = content.Load<Texture2D>("Graphics/laserShotAnim2");
                     
                     textureEW1 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy01_80x80");

@@ -72,7 +72,7 @@ namespace IS_XNA_Shooter
             this.life = life;
             this.lifeBar = new LifeBar(camera, level, new Vector2(position.X, position.Y -90), 0, frameLifeBarWidth, frameLifeBarHeight, numAnimLifeBar, frameCountLifeBar,
                  loopingLifeBar, frametimeLifeBar, textureLifeBar);
-            setAnim(0);
+            setAnim(1);
             active = true;
             colisionable = true;
             erasable = false;
@@ -98,7 +98,7 @@ namespace IS_XNA_Shooter
 
         public void Kill()
         {
-            setAnim(0);
+            setAnim(2);
         }
 
         public int GetLife()
@@ -127,6 +127,7 @@ namespace IS_XNA_Shooter
             else if (percentage > 15) lifeBar.setAnimAux(7);
             else if (percentage > 0) lifeBar.setAnimAux(8);
             else lifeBar.setAnimAux(9);
+                
         }
 
         /// <summary>

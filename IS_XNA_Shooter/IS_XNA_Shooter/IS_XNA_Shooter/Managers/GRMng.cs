@@ -202,11 +202,11 @@ namespace IS_XNA_Shooter
         #region BASE
         /* ------------------- BASE ------------------- */
         public static Texture2D textureBase;
-        public static short frameWidthBase = 128;
-        public static short frameHeightBase = 122;
-        public static short numAnimsBase = 1;
-        public static short[] frameCountBase = { 1 };
-        public static bool[] loopingBase = { true };
+        public static short frameWidthBase = 126;
+        public static short frameHeightBase = 120;
+        public static short numAnimsBase = 3;
+        public static short[] frameCountBase = { 1, 6, 6 };
+        public static bool[] loopingBase = { true, true, true };
         #endregion
 
         #region BASELIFEBAR

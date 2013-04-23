@@ -494,6 +494,20 @@ namespace IS_XNA_Shooter
             spriteBatch.End();
 
             base.Draw(gameTime);
+        } // Draw
+
+        /// <summary>
+        /// Method that cotrols when the Focus fron the Game is lost
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        protected override void OnDeactivated(object sender, EventArgs args)
+        {
+            base.OnDeactivated(sender, args);
+
+            // when the focus is lost the game is paused
+            if (currentState == gameState.playing)
+                currentState = gameState.pause;
         }
 
 

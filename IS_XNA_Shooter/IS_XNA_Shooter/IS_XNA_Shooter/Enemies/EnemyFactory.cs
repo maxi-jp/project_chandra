@@ -8,6 +8,16 @@ namespace IS_XNA_Shooter
 {
     static class EnemyFactory
     {
+        /// <summary>
+        /// Static method that returns and Enemy in function on the String parameter
+        /// </summary>
+        /// <param name="name">The string that represents the name of the enemy</param>
+        /// <param name="camera">The camera of the game</param>
+        /// <param name="level">The actual level of the game</param>
+        /// <param name="ship">The player's ship</param>
+        /// <param name="position">Initial position of the enemy</param>
+        /// <param name="time">respawn time of the enemy</param>
+        /// <returns>The new Enemy</returns>
         public static Enemy GetEnemyByName(String name, Camera camera, Level level, Ship ship,
             Vector2 position, float time)
         {
@@ -78,7 +88,7 @@ namespace IS_XNA_Shooter
                         100,    /* velocity */
                         100,    /* life */
                         1,      /* value */
-                        ship
+                        ship    /* player's ship */
                     );
                     break;
 
@@ -101,6 +111,29 @@ namespace IS_XNA_Shooter
                         100,    /* life */
                         4,      /* value */
                         ship    /* player's ship */
+                    );
+                    break;
+
+                case "EnemyBeamADefense":
+                    enemy = new EnemyBeamADefense
+                    (
+                        camera,
+                        level,
+                        position,   /* initial position in the level */
+                        0,          /* initial rotation */
+                        GRMng.frameWidthEB1,
+                        GRMng.frameHeightEB1,
+                        GRMng.numAnimsEB1,
+                        GRMng.frameCountEB1,
+                        GRMng.loopingEB1,
+                        SuperGame.frameTime12,
+                        GRMng.textureEB1,
+                        time,   /* timeToSpawn */
+                        1000,   /* velocity */
+                        100,    /* life */
+                        4,      /* value */
+                        ship,   /* player's ship */
+                        null
                     );
                     break;
 

@@ -213,7 +213,8 @@ namespace IS_XNA_Shooter
             this.house = house;
 
             foreach (Enemy e in enemies)// enemigos
-                ((EnemyADefense)e).SetBase(house);
+                if (e is EnemyADefense)
+                    ((EnemyADefense)e).SetBase(house);
             //house.SetPosition(BaseInitPosition);
         }
 

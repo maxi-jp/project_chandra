@@ -3,690 +3,684 @@
 <level titulo="nivel1" width="1200" height="800">
     <enemiesList>
 
-				<!-- OLEADA 1 --> 
-                <enemy type="enemyWeakA" positionX="1100" positionY="100" time="1"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="200" time="2"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="350" time="3"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="500" time="4"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="600" time="5"></enemy>
-				<!-- OLEADA 2 --> 
-				<enemy type="enemyWeakA" positionX="100" positionY="100" time="7"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="200" time="8"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="350" time="9"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="500" time="10"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="600" time="11"></enemy>
-				<!-- OLEADA 3 --> 
-				<enemy type="enemyWeakA" positionX="200" positionY="100" time="14"></enemy>
-				<enemy type="enemyWeakA" positionX="300" positionY="100" time="14"></enemy>
-				<enemy type="enemyWeakA" positionX="400" positionY="100" time="14"></enemy>
-				<enemy type="enemyWeakA" positionX="500" positionY="100" time="14"></enemy>
-				<enemy type="enemyWeakA" positionX="600" positionY="100" time="14"></enemy>
-				<enemy type="enemyWeakA" positionX="700" positionY="100" time="14"></enemy>
-				<enemy type="enemyWeakA" positionX="800" positionY="100" time="14"></enemy>
-				
-				<!-- OLEADA 4 --> 
-				<enemy type="enemyWeakA" positionX="200" positionY="600" time="20"></enemy>
-				<enemy type="enemyWeakA" positionX="300" positionY="600" time="20"></enemy>
-				<enemy type="enemyWeakA" positionX="400" positionY="600" time="20"></enemy>
-				<enemy type="enemyWeakA" positionX="500" positionY="600" time="20"></enemy>
-				<enemy type="enemyWeakA" positionX="600" positionY="600" time="20"></enemy>
-				<enemy type="enemyWeakA" positionX="700" positionY="600" time="20"></enemy>
-				<enemy type="enemyWeakA" positionX="800" positionY="600" time="20"></enemy>
-				
-				<!-- OLEADA 3 --> 
-				<enemy type="enemyBeam" positionX="1100" positionY="200" time="25"></enemy>
-				<enemy type="enemyBeam" positionX="100" positionY="500" time="25"></enemy>
-				<!-- OLEADA 3.5 --> 
-				<enemy type="enemyBeam" positionX="100" positionY="200" time="25"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="500" time="25"></enemy>
-				<!-- OLEADA 4 --> 
-				<enemy type="enemyWeakA" positionX="350" positionY="700" time="30"></enemy>
-				<enemy type="enemyWeakA" positionX="500" positionY="700" time="30"></enemy>
-				<enemy type="enemyBeam" positionX="100" positionY="500" time="30"></enemy>
-				<enemy type="enemyWeakA" positionX="350" positionY="770" time="30"></enemy>
-				<enemy type="enemyWeakA" positionX="500" positionY="770" time="30"></enemy>
-				<enemy type="enemyWeakA" positionX="650" positionY="770" time="30"></enemy>
-				<!-- OLEADA 4.5 --> 
-				<enemy type="enemyWeakShotA" positionX="1100" positionY="200" time="35"></enemy>
-				<enemy type="enemyWeakShotA" positionX="100" positionY="500" time="35"></enemy>
-				<!-- OLEADA 5 --> 
-				<enemy type="enemyWeakA" positionX="1100" positionY="50" time="40"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="500" time="40"></enemy>
-				<enemy type="enemyWeakShotA" positionX="1100" positionY="750" time="40"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="750" time="40"></enemy>
-				<enemy type="enemyWeakShotA" positionX="100" positionY="50" time="40"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="50" time="40"></enemy>
-				<enemy type="enemyBeam" positionX="100" positionY="500" time="40"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="750" time="40"></enemy>
-				<enemy type="enemyWeakA" positionX="350" positionY="770" time="40"></enemy>
-				<enemy type="enemyWeakA" positionX="500" positionY="770" time="40"></enemy>
-				<enemy type="enemyWeakA" positionX="650" positionY="770" time="40"></enemy>
-				<!-- OLEADA 6 --> 
-				<enemy type="enemyWeakShotA" positionX="1000" positionY="50" time="46"></enemy>
-				<enemy type="enemyWeakA" positionX="973" positionY="699" time="46"></enemy>
-				<enemy type="enemyWeakShotA" positionX="134" positionY="733" time="46"></enemy>
-				<enemy type="enemyWeakA" positionX="140" positionY="89" time="46"></enemy>
-				
-				<enemy type="enemyWeakShotA" positionX="1011" positionY="121" time="50"></enemy>
-				<enemy type="enemyWeakA" positionX="122" positionY="64" time="50"></enemy>
-				<enemy type="enemyWeakShotA" positionX="50" positionY="750" time="50"></enemy>
-				<enemy type="enemyWeakA" positionX="1108" positionY="608" time="50"></enemy>	
-				
-				<enemy type="enemyBeam" positionX="1095" positionY="13" time="55"></enemy>
-				<enemy type="enemyWeakA" positionX="67" positionY="736" time="55"></enemy>
-				<enemy type="enemyBeam" positionX="100" positionY="50" time="55"></enemy>
-				<enemy type="enemyWeakA" positionX="970" positionY="771" time="55"></enemy>
-				
-				<enemy type="enemyWeakA" positionX="1100" positionY="50" time="60"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="750" time="60"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="50" time="60"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="750" time="60"></enemy>
-				
-				<enemy type="enemyWeakA" positionX="100" positionY="100" time="68"></enemy>
-				<enemy type="enemyWeakA" positionX="200" positionY="100" time="68"></enemy>
-				<enemy type="enemyWeakA" positionX="300" positionY="100" time="68"></enemy>
-				<enemy type="enemyWeakA" positionX="400" positionY="100" time="68"></enemy>
-				<enemy type="enemyWeakA" positionX="500" positionY="100" time="68"></enemy>
-				<enemy type="enemyWeakA" positionX="600" positionY="100" time="68"></enemy>
-				<enemy type="enemyWeakA" positionX="700" positionY="100" time="68"></enemy>
-				<enemy type="enemyWeakA" positionX="800" positionY="100" time="68"></enemy>		
-				<enemy type="enemyWeakA" positionX="900" positionY="100" time="68"></enemy>	
-				<enemy type="enemyWeakA" positionX="1000" positionY="100" time="68"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="200" time="68"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="300" time="68"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="400" time="68"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="500" time="68"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="600" time="68"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="700" time="68"></enemy>		
-				<enemy type="enemyWeakA" positionX="1000" positionY="700" time="68"></enemy>
-				<enemy type="enemyWeakA" positionX="900" positionY="700" time="68"></enemy>
-				<enemy type="enemyWeakA" positionX="800" positionY="700" time="68"></enemy>
-				<enemy type="enemyWeakA" positionX="700" positionY="700" time="68"></enemy>
-				<enemy type="enemyWeakA" positionX="600" positionY="700" time="68"></enemy>
-				<enemy type="enemyWeakA" positionX="500" positionY="700" time="68"></enemy>
-				<enemy type="enemyWeakA" positionX="400" positionY="700" time="68"></enemy>
-				<enemy type="enemyWeakA" positionX="300" positionY="700" time="68"></enemy>
-				<enemy type="enemyWeakA" positionX="200" positionY="700" time="68"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="700" time="68"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="200" time="68"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="300" time="68"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="400" time="68"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="500" time="68"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="600" time="68"></enemy>
-			
-		        <!-- OLEADA 8 -->
-				<enemy type="enemyLaserA" positionX="1100" positionY="50" time="75"></enemy>
-				<enemy type="enemyLaserA" positionX="100" positionY="50" time="75"></enemy>
-				
-								
-				<!-- OLEADA 9 -->
-				<enemy type="enemyLaserA" positionX="100" positionY="50" time="78"></enemy>
-				<enemy type="enemyWeakShotA" positionX="450" positionY="50" time="78"></enemy>
-				<enemy type="enemyMineShotA" positionX="750" positionY="50" time="78"></enemy>
-				<enemy type="enemyWeakShotA" positionX="1100" positionY="50" time="78"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="750" time="78"></enemy>
-				<enemy type="enemyWeakShotA" positionX="450" positionY="750" time="79"></enemy>
-				<enemy type="enemyWeakA" positionX="750" positionY="750" time="79"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="750" time="78"></enemy>
-				<enemy type="enemyLaserA" positionX="100" positionY="300" time="79"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="500" time="79"></enemy>
-				<enemy type="enemyWeakShotA" positionX="1100" positionY="300" time="79"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="500" time="82"></enemy>
-				<enemy type="enemyLaserA" positionX="1100" positionY="50" time="80"></enemy>
-				<enemy type="enemyLaserA" positionX="100" positionY="50" time="81"></enemy>
-				<enemy type="enemyLaserA" positionX="100" positionY="50" time="79"></enemy>
-				<enemy type="enemyWeakShotA" positionX="450" positionY="50" time="80"></enemy>
-				<enemy type="enemyWeakA" positionX="750" positionY="50" time="82"></enemy>
-				<enemy type="enemyWeakShotA" positionX="1100" positionY="50" time="83"></enemy>
-				<enemy type="enemyMineShotA" positionX="100" positionY="750" time="84"></enemy>
-				<enemy type="enemyLaserA" positionX="450" positionY="750" time="82"></enemy>
-				<enemy type="enemyWeakA" positionX="750" positionY="750" time="84"></enemy>
-				<enemy type="enemyLaserA" positionX="1100" positionY="750" time="85"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="300" time="83"></enemy>
-				<enemy type="enemyWeakShotA" positionX="100" positionY="500" time="84"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="300" time="81"></enemy>
-				<enemy type="enemyWeakShotA" positionX="1100" positionY="500" time="80"></enemy>
-				
-				<!-- OLEADA 9 -->
-				<enemy type="enemyScaredA" positionX="100" positionY="50" time="88"></enemy>
-				<enemy type="enemyScaredA" positionX="100" positionY="750" time="88"></enemy>
-				<enemy type="enemyScaredA" positionX="1100" positionY="50" time="88"></enemy>
-				<enemy type="enemyScaredA" positionX="1100" positionY="750" time="88"></enemy>
-				
-				<!-- OLEADA 10 -->
-				
-				<enemy type="enemyScaredA" positionX="100" positionY="50" time="92"></enemy>
-				<enemy type="enemyMineShotA" positionX="450" positionY="50" time="92"></enemy>
-				<enemy type="enemyScaredA" positionX="750" positionY="50" time="92"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="50" time="92"></enemy>
-				<enemy type="enemyScaredA" positionX="100" positionY="750" time="92"></enemy>
-				<enemy type="enemyMineShotA" positionX="450" positionY="750" time="92"></enemy>
-				<enemy type="enemyScaredA" positionX="750" positionY="750" time="92"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="750" time="92"></enemy>
-				
-				<!-- OLEADA 11 -->
-				
-				<enemy type="enemyScaredA" positionX="100" positionY="300" time="96"></enemy>
-				<enemy type="enemyLaserA" positionX="100" positionY="500" time="96"></enemy>
-				<enemy type="enemyScaredA" positionX="1100" positionY="300" time="97"></enemy>
-				<enemy type="enemyLaserA" positionX="1100" positionY="500" time="98"></enemy>
-				<enemy type="enemyScaredA" positionX="1100" positionY="50" time="96"></enemy>
-				<enemy type="enemyLaserA" positionX="100" positionY="50" time="96"></enemy>
-				<enemy type="enemyScaredA" positionX="100" positionY="50" time="99"></enemy>
-				<enemy type="enemyLaserA" positionX="450" positionY="50" time="98"></enemy>
-				<enemy type="enemyScaredA" positionX="750" positionY="50" time="96"></enemy>
-				<enemy type="enemyLaserA" positionX="1100" positionY="50" time="98"></enemy>
-				
-				<!-- OLEADA 11 -->
-				
-				<enemy type="enemyScaredA" positionX="100" positionY="300" time="103"></enemy>
-				<enemy type="enemyLaserA" positionX="100" positionY="500" time="103"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="300" time="103"></enemy>
-				<enemy type="enemyWeakShotA" positionX="1100" positionY="500" time="103"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="50" time="103"></enemy>
-				<enemy type="enemyScaredA" positionX="100" positionY="300" time="103"></enemy>
-				<enemy type="enemyLaserA" positionX="100" positionY="500" time="103"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="300" time="103"></enemy>
-				<enemy type="enemyWeakShotA" positionX="1100" positionY="500" time="103"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="50" time="103"></enemy> 
-			
-				<enemy type="enemyMineShotA" positionX="100" positionY="100" time="110"></enemy>
-				<enemy type="enemyMineShotA" positionX="200" positionY="100" time="110"></enemy>
-				<enemy type="enemyMineShotA" positionX="300" positionY="100" time="110"></enemy>
-				<enemy type="enemyMineShotA" positionX="400" positionY="100" time="110"></enemy>
-				<enemy type="enemyMineShotA" positionX="500" positionY="100" time="110"></enemy>
-				<enemy type="enemyMineShotA" positionX="600" positionY="100" time="110"></enemy>
-				<enemy type="enemyMineShotA" positionX="700" positionY="100" time="110"></enemy>
-				<enemy type="enemyMineShotA" positionX="800" positionY="100" time="110"></enemy>		
-				<enemy type="enemyMineShotA" positionX="900" positionY="100" time="110"></enemy>	
-				<enemy type="enemyMineShotA" positionX="1000" positionY="100" time="110"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="200" time="110"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="300" time="110"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="400" time="110"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="500" time="110"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="600" time="110"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="700" time="110"></enemy>		
-				<enemy type="enemyMineShotA" positionX="1000" positionY="700" time="110"></enemy>
-				<enemy type="enemyMineShotA" positionX="900" positionY="700" time="110"></enemy>
-				<enemy type="enemyMineShotA" positionX="800" positionY="700" time="110"></enemy>
-				<enemy type="enemyMineShotA" positionX="700" positionY="700" time="110"></enemy>
-				<enemy type="enemyMineShotA" positionX="600" positionY="700" time="110"></enemy>
-				<enemy type="enemyMineShotA" positionX="500" positionY="700" time="110"></enemy>
-				<enemy type="enemyMineShotA" positionX="400" positionY="700" time="110"></enemy>
-				<enemy type="enemyMineShotA" positionX="300" positionY="700" time="110"></enemy>
-				<enemy type="enemyMineShotA" positionX="200" positionY="700" time="110"></enemy>
-				<enemy type="enemyMineShotA" positionX="100" positionY="700" time="110"></enemy>
-				<enemy type="enemyMineShotA" positionX="100" positionY="200" time="110"></enemy>
-				<enemy type="enemyMineShotA" positionX="100" positionY="300" time="110"></enemy>
-				<enemy type="enemyMineShotA" positionX="100" positionY="400" time="110"></enemy>
-				<enemy type="enemyMineShotA" positionX="100" positionY="500" time="110"></enemy>
-				<enemy type="enemyMineShotA" positionX="100" positionY="600" time="110"></enemy>
-				
-				
-				
-				<!-- OLEADA 9 -->
-				<enemy type="enemyLaserA" positionX="100" positionY="50" time="117"></enemy>
-				<enemy type="enemyWeakShotA" positionX="450" positionY="50" time="117"></enemy>
-				<enemy type="enemyMineShotA" positionX="750" positionY="50" time="117"></enemy>
-				<enemy type="enemyWeakShotA" positionX="1100" positionY="50" time="117"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="750" time="117"></enemy>
-				<enemy type="enemyWeakShotA" positionX="450" positionY="750" time="120"></enemy>
-				<enemy type="enemyWeakA" positionX="750" positionY="750" time="120"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="750" time="120"></enemy>
-				<enemy type="enemyLaserA" positionX="100" positionY="300" time="120"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="200" time="120"></enemy>
-				<enemy type="enemyBeam" positionX="100" positionY="500" time="120"></enemy>
-       			<enemy type="enemyBeam" positionX="100" positionY="200" time="120"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="500" time="120"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="500" time="120"></enemy>
-				<enemy type="enemyWeakShotA" positionX="1100" positionY="300" time="121"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="500" time="122"></enemy>
-				<enemy type="enemyLaserA" positionX="1100" positionY="50" time="123"></enemy>
-				<enemy type="enemyLaserA" positionX="100" positionY="50" time="124"></enemy>
-				<enemy type="enemyLaserA" positionX="100" positionY="50" time="125"></enemy>
-				<enemy type="enemyWeakShotA" positionX="450" positionY="50" time="126"></enemy>
-				<enemy type="enemyWeakA" positionX="750" positionY="50" time="127"></enemy>
-				<enemy type="enemyWeakShotA" positionX="1100" positionY="50" time="128"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="200" time="128"></enemy>
-				<enemy type="enemyBeam" positionX="100" positionY="500" time="128"></enemy>
-       			<enemy type="enemyBeam" positionX="100" positionY="200" time="128"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="500" time="128"></enemy>
-				<enemy type="enemyMineShotA" positionX="100" positionY="750" time="129"></enemy>
-				<enemy type="enemyLaserA" positionX="450" positionY="750" time="130"></enemy>
-				<enemy type="enemyWeakA" positionX="750" positionY="750" time="131"></enemy>
-				<enemy type="enemyLaserA" positionX="1100" positionY="750" time="132"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="300" time="133"></enemy>
-				<enemy type="enemyWeakShotA" positionX="100" positionY="500" time="134"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="300" time="135"></enemy>
-				<enemy type="enemyWeakShotA" positionX="1100" positionY="500" time="136"></enemy>
-				<enemy type="enemyScaredA" positionX="100" positionY="50" time="137"></enemy>
-				<enemy type="enemyScaredA" positionX="100" positionY="750" time="138"></enemy>
-				<enemy type="enemyScaredA" positionX="1100" positionY="50" time="139"></enemy>
-				<enemy type="enemyScaredA" positionX="1100" positionY="750" time="140"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="200" time="140"></enemy>
-				<enemy type="enemyBeam" positionX="100" positionY="500" time="140"></enemy>
-       			<enemy type="enemyBeam" positionX="100" positionY="200" time="140"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="500" time="140"></enemy>
-				<enemy type="enemyScaredA" positionX="100" positionY="50" time="141"></enemy>
-				<enemy type="enemyMineShotA" positionX="450" positionY="50" time="142"></enemy>
-				<enemy type="enemyScaredA" positionX="750" positionY="50" time="143"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="50" time="144"></enemy>
-				<enemy type="enemyScaredA" positionX="100" positionY="750" time="145"></enemy>
-				<enemy type="enemyMineShotA" positionX="450" positionY="750" time="146"></enemy>
-				<enemy type="enemyScaredA" positionX="750" positionY="750" time="147"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="750" time="148"></enemy>
-				<enemy type="enemyScaredA" positionX="100" positionY="300" time="149"></enemy>
-				<enemy type="enemyLaserA" positionX="100" positionY="500" time="150"></enemy>
-				<enemy type="enemyScaredA" positionX="1100" positionY="300" time="151"></enemy>
-				<enemy type="enemyLaserA" positionX="1100" positionY="500" time="152"></enemy>
-				<enemy type="enemyScaredA" positionX="1100" positionY="50" time="153"></enemy>
-				<enemy type="enemyLaserA" positionX="100" positionY="50" time="154"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="200" time="154"></enemy>
-				<enemy type="enemyBeam" positionX="100" positionY="500" time="154"></enemy>
-       			<enemy type="enemyBeam" positionX="100" positionY="200" time="154"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="500" time="154"></enemy>
-				<enemy type="enemyScaredA" positionX="100" positionY="50" time="155"></enemy>
-				<enemy type="enemyLaserA" positionX="450" positionY="50" time="156"></enemy>
-				<enemy type="enemyScaredA" positionX="750" positionY="50" time="157"></enemy>
-				<enemy type="enemyLaserA" positionX="1100" positionY="50" time="158"></enemy>
-				<enemy type="enemyScaredA" positionX="100" positionY="300" time="159"></enemy>
-				<enemy type="enemyLaserA" positionX="100" positionY="500" time="160"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="300" time="161"></enemy>
-				<enemy type="enemyWeakShotA" positionX="1100" positionY="500" time="162"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="50" time="163"></enemy>
-				<enemy type="enemyScaredA" positionX="100" positionY="300" time="164"></enemy>
-				<enemy type="enemyLaserA" positionX="100" positionY="500" time="165"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="300" time="166"></enemy>
-				<enemy type="enemyWeakShotA" positionX="1100" positionY="500" time="167"></enemy>
-				<enemy type="enemyBeam" positionX="100" positionY="100" time="172"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="100" time="172"></enemy>
-				<enemy type="enemyBeam" positionX="100" positionY="700" time="172"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="700" time="172"></enemy>
-				<enemy type="enemyBeam" positionX="600" positionY="100" time="172"></enemy>
-				<enemy type="enemyBeam" positionX="600" positionY="700" time="172"></enemy>
-       			<enemy type="enemyBeam" positionX="100" positionY="400" time="172"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="400" time="172"></enemy>
-				
-				<enemy type="enemyWeakA" positionX="40" positionY="40" time="180"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="40" time="180"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="760" time="180"></enemy>
-				<enemy type="enemyWeakA" positionX="40" positionY="760" time="180"></enemy>
-				
-				<enemy type="enemyWeakA" positionX="40" positionY="40" time="181"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="40" time="181"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="760" time="181"></enemy>
-				<enemy type="enemyWeakA" positionX="40" positionY="760" time="181"></enemy>
-				
-				<enemy type="enemyWeakA" positionX="40" positionY="40" time="182"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="40" time="182"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="760" time="182"></enemy>
-				<enemy type="enemyWeakA" positionX="40" positionY="760" time="182"></enemy>
-				
-				<enemy type="enemyWeakA" positionX="40" positionY="40" time="183"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="40" time="183"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="760" time="183"></enemy>
-				<enemy type="enemyWeakA" positionX="40" positionY="760" time="183"></enemy>
-				
-				<enemy type="enemyWeakA" positionX="40" positionY="40" time="184"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="40" time="184"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="760" time="184"></enemy>
-				<enemy type="enemyWeakA" positionX="40" positionY="760" time="184"></enemy>
-				
-				<enemy type="enemyWeakA" positionX="40" positionY="40" time="185"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="40" time="185"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="760" time="185"></enemy>
-				<enemy type="enemyWeakA" positionX="40" positionY="760" time="185"></enemy>
-				
-				<enemy type="enemyWeakA" positionX="40" positionY="40" time="186"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="40" time="186"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="760" time="186"></enemy>
-				<enemy type="enemyWeakA" positionX="40" positionY="760" time="186"></enemy>
-				
-				<enemy type="enemyWeakA" positionX="40" positionY="40" time="187"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="40" time="187"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="760" time="187"></enemy>
-				<enemy type="enemyWeakA" positionX="40" positionY="760" time="187"></enemy>
-				
-				<enemy type="enemyWeakA" positionX="40" positionY="40" time="188"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="40" time="188"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="760" time="188"></enemy>
-				<enemy type="enemyWeakA" positionX="40" positionY="760" time="188"></enemy>
-				
-				<enemy type="enemyWeakA" positionX="40" positionY="40" time="189"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="40" time="189"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="760" time="189"></enemy>
-				<enemy type="enemyWeakA" positionX="40" positionY="760" time="189"></enemy>
-				
-				<enemy type="enemyWeakA" positionX="40" positionY="40" time="190"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="40" time="190"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="760" time="190"></enemy>
-				<enemy type="enemyWeakA" positionX="40" positionY="760" time="190"></enemy>
-				
-				<enemy type="enemyWeakA" positionX="40" positionY="40" time="191"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="40" time="191"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="760" time="191"></enemy>
-				<enemy type="enemyWeakA" positionX="40" positionY="760" time="191"></enemy>
-				
-				<enemy type="enemyWeakA" positionX="40" positionY="40" time="192"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="40" time="192"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="760" time="192"></enemy>
-				<enemy type="enemyWeakA" positionX="40" positionY="760" time="192"></enemy>
-				
-				<enemy type="enemyWeakA" positionX="40" positionY="40" time="193"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="40" time="193"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="760" time="193"></enemy>
-				<enemy type="enemyWeakA" positionX="40" positionY="760" time="193"></enemy>
-				
-				<enemy type="enemyWeakA" positionX="40" positionY="40" time="194"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="40" time="194"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="760" time="194"></enemy>
-				<enemy type="enemyWeakA" positionX="40" positionY="760" time="194"></enemy>
-				
-				<enemy type="enemyWeakA" positionX="40" positionY="40" time="195"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="40" time="195"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="760" time="195"></enemy>
-				<enemy type="enemyWeakA" positionX="40" positionY="760" time="195"></enemy>
-				
-				<enemy type="enemyWeakA" positionX="40" positionY="40" time="196"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="40" time="196"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="760" time="196"></enemy>
-				<enemy type="enemyWeakA" positionX="40" positionY="760" time="196"></enemy>
-				
-				<enemy type="enemyWeakA" positionX="40" positionY="40" time="197"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="40" time="197"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="760" time="197"></enemy>
-				<enemy type="enemyWeakA" positionX="40" positionY="760" time="197"></enemy>
-				
-				<enemy type="enemyWeakA" positionX="40" positionY="40" time="198"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="40" time="198"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="760" time="198"></enemy>
-				<enemy type="enemyWeakA" positionX="40" positionY="760" time="198"></enemy>
-				
-				<enemy type="enemyWeakA" positionX="40" positionY="40" time="199"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="40" time="199"></enemy>
-				<enemy type="enemyWeakA" positionX="1160" positionY="760" time="199"></enemy>
-				<enemy type="enemyWeakA" positionX="40" positionY="760" time="199"></enemy>
-				
-				<enemy type="enemyBeam" positionX="1100" positionY="200" time="200"></enemy>
-				<enemy type="enemyBeam" positionX="100" positionY="500" time="200"></enemy>
-				<enemy type="enemyBeam" positionX="100" positionY="200" time="200"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="500" time="200"></enemy>
-				
-				<enemy type="enemyLaserA" positionX="100" positionY="50" time="205"></enemy>
-				<enemy type="enemyWeakShotA" positionX="450" positionY="50" time="205"></enemy>
-				<enemy type="enemyMineShotA" positionX="750" positionY="50" time="205"></enemy>
-				<enemy type="enemyWeakShotA" positionX="1100" positionY="50" time="205"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="750" time="205"></enemy>
-				<enemy type="enemyWeakShotA" positionX="450" positionY="750" time="208"></enemy>
-				<enemy type="enemyWeakA" positionX="750" positionY="750" time="208"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="750" time="208"></enemy>
-				<enemy type="enemyLaserA" positionX="100" positionY="300" time="208"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="200" time="208"></enemy>
-				<enemy type="enemyBeam" positionX="100" positionY="500" time="208"></enemy>
-       			<enemy type="enemyBeam" positionX="100" positionY="200" time="208"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="500" time="208"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="500" time="208"></enemy>
-				<enemy type="enemyWeakShotA" positionX="1100" positionY="300" time="209"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="500" time="210"></enemy>
-				<enemy type="enemyLaserA" positionX="1100" positionY="50" time="211"></enemy>
-				<enemy type="enemyLaserA" positionX="100" positionY="50" time="213"></enemy>
-				<enemy type="enemyLaserA" positionX="100" positionY="50" time="213"></enemy>
-				<enemy type="enemyWeakShotA" positionX="450" positionY="50" time="214"></enemy>
-				<enemy type="enemyWeakA" positionX="750" positionY="50" time="215"></enemy>
-				<enemy type="enemyWeakShotA" positionX="1100" positionY="50" time="216"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="200" time="216"></enemy>
-				<enemy type="enemyBeam" positionX="100" positionY="500" time="216"></enemy>
-       			<enemy type="enemyBeam" positionX="100" positionY="200" time="216"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="500" time="216"></enemy>
-				<enemy type="enemyMineShotA" positionX="100" positionY="750" time="217"></enemy>
-				<enemy type="enemyLaserA" positionX="450" positionY="750" time="219"></enemy>
-				<enemy type="enemyWeakA" positionX="750" positionY="750" time="220"></enemy>
-				<enemy type="enemyLaserA" positionX="1100" positionY="750" time="221"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="300" time="222"></enemy>
-				<enemy type="enemyWeakShotA" positionX="100" positionY="500" time="223"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="300" time="224"></enemy>
-				<enemy type="enemyWeakShotA" positionX="1100" positionY="500" time="225"></enemy>
-				<enemy type="enemyScaredA" positionX="100" positionY="50" time="226"></enemy>
-				<enemy type="enemyScaredA" positionX="100" positionY="750" time="227"></enemy>
-				<enemy type="enemyScaredA" positionX="1100" positionY="50" time="228"></enemy>
-				<enemy type="enemyScaredA" positionX="1100" positionY="750" time="229"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="200" time="230"></enemy>
-				<enemy type="enemyBeam" positionX="100" positionY="500" time="230"></enemy>
-       			<enemy type="enemyBeam" positionX="100" positionY="200" time="230"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="500" time="230"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="200" time="233"></enemy>
-				<enemy type="enemyBeam" positionX="100" positionY="500" time="233"></enemy>
-       			<enemy type="enemyBeam" positionX="100" positionY="200" time="233"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="500" time="233"></enemy>
-				<enemy type="enemyScaredA" positionX="100" positionY="50" time="234"></enemy>
-				<enemy type="enemyMineShotA" positionX="450" positionY="50" time="235"></enemy>
-				<enemy type="enemyScaredA" positionX="750" positionY="50" time="236"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="50" time="237"></enemy>
-				<enemy type="enemyScaredA" positionX="100" positionY="750" time="238"></enemy>
-				<enemy type="enemyMineShotA" positionX="450" positionY="750" time="239"></enemy>
-				<enemy type="enemyScaredA" positionX="750" positionY="750" time="240"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="750" time="241"></enemy>
-				<enemy type="enemyScaredA" positionX="100" positionY="300" time="242"></enemy>
-				<enemy type="enemyLaserA" positionX="100" positionY="500" time="243"></enemy>
-				<enemy type="enemyScaredA" positionX="1100" positionY="300" time="244"></enemy>
-				<enemy type="enemyLaserA" positionX="1100" positionY="500" time="245"></enemy>
-				<enemy type="enemyScaredA" positionX="1100" positionY="50" time="246"></enemy>
-				<enemy type="enemyLaserA" positionX="100" positionY="50" time="247"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="200" time="248"></enemy>
-				<enemy type="enemyBeam" positionX="100" positionY="500" time="248"></enemy>
-       			<enemy type="enemyBeam" positionX="100" positionY="200" time="248"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="500" time="248"></enemy>
-				<enemy type="enemyScaredA" positionX="100" positionY="50" time="250"></enemy>
-				<enemy type="enemyScaredA" positionX="100" positionY="100" time="250"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="300" time="252"></enemy>
-				<enemy type="enemyWeakShotA" positionX="100" positionY="500" time="251"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="300" time="252"></enemy>
-				<enemy type="enemyScaredA" positionX="100" positionY="50" time="252"></enemy>
-				<enemy type="enemyScaredA" positionX="100" positionY="50" time="252"></enemy>
-				<enemy type="enemyLaserA" positionX="450" positionY="50" time="253"></enemy>
-				<enemy type="enemyScaredA" positionX="750" positionY="50" time="254"></enemy>
-				<enemy type="enemyLaserA" positionX="1100" positionY="50" time="255"></enemy>
-				<enemy type="enemyScaredA" positionX="100" positionY="300" time="256"></enemy>
-				<enemy type="enemyLaserA" positionX="100" positionY="500" time="257"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="300" time="258"></enemy>
-				<enemy type="enemyWeakShotA" positionX="1100" positionY="500" time="259"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="50" time="260"></enemy>
-				<enemy type="enemyScaredA" positionX="100" positionY="300" time="261"></enemy>
-				<enemy type="enemyLaserA" positionX="100" positionY="500" time="262"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="300" time="263"></enemy>
-				<enemy type="enemyWeakShotA" positionX="1100" positionY="500" time="264"></enemy>				
-				
-				<enemy type="enemyWeakA" positionX="100" positionY="100" time="268"></enemy>
-				<enemy type="enemyWeakA" positionX="200" positionY="100" time="268"></enemy>
-				<enemy type="enemyWeakA" positionX="300" positionY="100" time="268"></enemy>
-				<enemy type="enemyWeakA" positionX="400" positionY="100" time="268"></enemy>
-				<enemy type="enemyWeakA" positionX="500" positionY="100" time="268"></enemy>
-				<enemy type="enemyWeakA" positionX="600" positionY="100" time="268"></enemy>
-				<enemy type="enemyWeakA" positionX="700" positionY="100" time="268"></enemy>
-				<enemy type="enemyWeakA" positionX="800" positionY="100" time="268"></enemy>		
-				<enemy type="enemyWeakA" positionX="900" positionY="100" time="268"></enemy>	
-				<enemy type="enemyWeakA" positionX="1000" positionY="100" time="268"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="200" time="268"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="300" time="268"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="400" time="268"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="500" time="268"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="600" time="268"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="700" time="268"></enemy>		
-				<enemy type="enemyWeakA" positionX="1000" positionY="700" time="268"></enemy>
-				<enemy type="enemyWeakA" positionX="900" positionY="700" time="268"></enemy>
-				<enemy type="enemyWeakA" positionX="800" positionY="700" time="268"></enemy>
-				<enemy type="enemyWeakA" positionX="700" positionY="700" time="268"></enemy>
-				<enemy type="enemyWeakA" positionX="600" positionY="700" time="268"></enemy>
-				<enemy type="enemyWeakA" positionX="500" positionY="700" time="268"></enemy>
-				<enemy type="enemyWeakA" positionX="400" positionY="700" time="268"></enemy>
-				<enemy type="enemyWeakA" positionX="300" positionY="700" time="268"></enemy>
-				<enemy type="enemyWeakA" positionX="200" positionY="700" time="268"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="700" time="268"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="200" time="268"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="300" time="268"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="400" time="268"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="500" time="268"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="600" time="268"></enemy>
-				
-				<enemy type="enemyWeakA" positionX="100" positionY="100" time="272"></enemy>
-				<enemy type="enemyWeakA" positionX="200" positionY="100" time="272"></enemy>
-				<enemy type="enemyWeakA" positionX="300" positionY="100" time="272"></enemy>
-				<enemy type="enemyWeakA" positionX="400" positionY="100" time="272"></enemy>
-				<enemy type="enemyWeakA" positionX="500" positionY="100" time="272"></enemy>
-				<enemy type="enemyWeakA" positionX="600" positionY="100" time="272"></enemy>
-				<enemy type="enemyWeakA" positionX="700" positionY="100" time="272"></enemy>
-				<enemy type="enemyWeakA" positionX="800" positionY="100" time="272"></enemy>		
-				<enemy type="enemyWeakA" positionX="900" positionY="100" time="272"></enemy>	
-				<enemy type="enemyWeakA" positionX="1000" positionY="100" time="272"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="200" time="272"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="300" time="272"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="400" time="272"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="500" time="272"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="600" time="272"></enemy>
-				<enemy type="enemyWeakA" positionX="1100" positionY="700" time="272"></enemy>		
-				<enemy type="enemyWeakA" positionX="1000" positionY="700" time="272"></enemy>
-				<enemy type="enemyWeakA" positionX="900" positionY="700" time="272"></enemy>
-				<enemy type="enemyWeakA" positionX="800" positionY="700" time="272"></enemy>
-				<enemy type="enemyWeakA" positionX="700" positionY="700" time="272"></enemy>
-				<enemy type="enemyWeakA" positionX="600" positionY="700" time="272"></enemy>
-				<enemy type="enemyWeakA" positionX="500" positionY="700" time="272"></enemy>
-				<enemy type="enemyWeakA" positionX="400" positionY="700" time="272"></enemy>
-				<enemy type="enemyWeakA" positionX="300" positionY="700" time="272"></enemy>
-				<enemy type="enemyWeakA" positionX="200" positionY="700" time="272"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="700" time="272"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="200" time="272"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="300" time="272"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="400" time="272"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="500" time="272"></enemy>
-				<enemy type="enemyWeakA" positionX="100" positionY="600" time="272"></enemy>
-				
-				
-				<enemy type="enemyMineShotA" positionX="100" positionY="100" time="278"></enemy>
-				<enemy type="enemyMineShotA" positionX="200" positionY="100" time="278"></enemy>
-				<enemy type="enemyMineShotA" positionX="300" positionY="100" time="278"></enemy>
-				<enemy type="enemyMineShotA" positionX="400" positionY="100" time="278"></enemy>
-				<enemy type="enemyMineShotA" positionX="500" positionY="100" time="278"></enemy>
-				<enemy type="enemyMineShotA" positionX="600" positionY="100" time="278"></enemy>
-				<enemy type="enemyMineShotA" positionX="700" positionY="100" time="278"></enemy>
-				<enemy type="enemyMineShotA" positionX="800" positionY="100" time="278"></enemy>		
-				<enemy type="enemyMineShotA" positionX="900" positionY="100" time="278"></enemy>	
-				<enemy type="enemyMineShotA" positionX="1000" positionY="100" time="278"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="200" time="278"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="300" time="278"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="400" time="278"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="500" time="278"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="600" time="278"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="700" time="278"></enemy>		
-				<enemy type="enemyMineShotA" positionX="1000" positionY="700" time="278"></enemy>
-				<enemy type="enemyMineShotA" positionX="900" positionY="700" time="278"></enemy>
-				<enemy type="enemyMineShotA" positionX="800" positionY="700" time="278"></enemy>
-				<enemy type="enemyMineShotA" positionX="700" positionY="700" time="278"></enemy>
-				<enemy type="enemyMineShotA" positionX="600" positionY="700" time="278"></enemy>
-				<enemy type="enemyMineShotA" positionX="500" positionY="700" time="278"></enemy>
-				<enemy type="enemyMineShotA" positionX="400" positionY="700" time="278"></enemy>
-				<enemy type="enemyMineShotA" positionX="300" positionY="700" time="278"></enemy>
-				<enemy type="enemyMineShotA" positionX="200" positionY="700" time="278"></enemy>
-				<enemy type="enemyMineShotA" positionX="100" positionY="700" time="278"></enemy>
-				<enemy type="enemyMineShotA" positionX="100" positionY="200" time="278"></enemy>
-				<enemy type="enemyMineShotA" positionX="100" positionY="300" time="278"></enemy>
-				<enemy type="enemyMineShotA" positionX="100" positionY="400" time="278"></enemy>
-				<enemy type="enemyMineShotA" positionX="100" positionY="500" time="278"></enemy>
-				<enemy type="enemyMineShotA" positionX="100" positionY="600" time="278"></enemy>
-				
-				<enemy type="enemyMineShotA" positionX="100" positionY="100" time="280"></enemy>
-				<enemy type="enemyMineShotA" positionX="200" positionY="100" time="280"></enemy>
-				<enemy type="enemyMineShotA" positionX="300" positionY="100" time="280"></enemy>
-				<enemy type="enemyMineShotA" positionX="400" positionY="100" time="280"></enemy>
-				<enemy type="enemyMineShotA" positionX="500" positionY="100" time="280"></enemy>
-				<enemy type="enemyMineShotA" positionX="600" positionY="100" time="280"></enemy>
-				<enemy type="enemyMineShotA" positionX="700" positionY="100" time="280"></enemy>
-				<enemy type="enemyMineShotA" positionX="800" positionY="100" time="280"></enemy>		
-				<enemy type="enemyMineShotA" positionX="900" positionY="100" time="280"></enemy>	
-				<enemy type="enemyMineShotA" positionX="1000" positionY="100" time="280"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="200" time="280"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="300" time="280"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="400" time="280"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="500" time="280"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="600" time="280"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="700" time="280"></enemy>		
-				<enemy type="enemyMineShotA" positionX="1000" positionY="700" time="280"></enemy>
-				<enemy type="enemyMineShotA" positionX="900" positionY="700" time="280"></enemy>
-				<enemy type="enemyMineShotA" positionX="800" positionY="700" time="280"></enemy>
-				<enemy type="enemyMineShotA" positionX="700" positionY="700" time="280"></enemy>
-				<enemy type="enemyMineShotA" positionX="600" positionY="700" time="280"></enemy>
-				<enemy type="enemyMineShotA" positionX="500" positionY="700" time="280"></enemy>
-				<enemy type="enemyMineShotA" positionX="400" positionY="700" time="280"></enemy>
-				<enemy type="enemyMineShotA" positionX="300" positionY="700" time="280"></enemy>
-				<enemy type="enemyMineShotA" positionX="200" positionY="700" time="280"></enemy>
-				<enemy type="enemyMineShotA" positionX="100" positionY="700" time="280"></enemy>
-				<enemy type="enemyMineShotA" positionX="100" positionY="200" time="280"></enemy>
-				<enemy type="enemyMineShotA" positionX="100" positionY="300" time="280"></enemy>
-				<enemy type="enemyMineShotA" positionX="100" positionY="400" time="280"></enemy>
-				<enemy type="enemyMineShotA" positionX="100" positionY="500" time="280"></enemy>
-				<enemy type="enemyMineShotA" positionX="100" positionY="600" time="280"></enemy>
-				
-								<enemy type="enemyMineShotA" positionX="100" positionY="100" time="280"></enemy>
-				<enemy type="enemyMineShotA" positionX="200" positionY="100" time="282"></enemy>
-				<enemy type="enemyMineShotA" positionX="300" positionY="100" time="282"></enemy>
-				<enemy type="enemyMineShotA" positionX="400" positionY="100" time="282"></enemy>
-				<enemy type="enemyMineShotA" positionX="500" positionY="100" time="282"></enemy>
-				<enemy type="enemyMineShotA" positionX="600" positionY="100" time="282"></enemy>
-				<enemy type="enemyMineShotA" positionX="700" positionY="100" time="282"></enemy>
-				<enemy type="enemyMineShotA" positionX="800" positionY="100" time="282"></enemy>		
-				<enemy type="enemyMineShotA" positionX="900" positionY="100" time="282"></enemy>	
-				<enemy type="enemyMineShotA" positionX="1000" positionY="100" time="282"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="200" time="282"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="300" time="282"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="400" time="282"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="500" time="282"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="600" time="282"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="700" time="282"></enemy>		
-				<enemy type="enemyMineShotA" positionX="1000" positionY="700" time="282"></enemy>
-				<enemy type="enemyMineShotA" positionX="900" positionY="700" time="282"></enemy>
-				<enemy type="enemyMineShotA" positionX="800" positionY="700" time="282"></enemy>
-				<enemy type="enemyMineShotA" positionX="700" positionY="700" time="282"></enemy>
-				<enemy type="enemyMineShotA" positionX="600" positionY="700" time="282"></enemy>
-				<enemy type="enemyMineShotA" positionX="500" positionY="700" time="282"></enemy>
-				<enemy type="enemyMineShotA" positionX="400" positionY="700" time="282"></enemy>
-				<enemy type="enemyMineShotA" positionX="300" positionY="700" time="282"></enemy>
-				<enemy type="enemyMineShotA" positionX="200" positionY="700" time="282"></enemy>
-				<enemy type="enemyMineShotA" positionX="100" positionY="700" time="282"></enemy>
-				<enemy type="enemyMineShotA" positionX="100" positionY="200" time="282"></enemy>
-				<enemy type="enemyMineShotA" positionX="100" positionY="300" time="282"></enemy>
-				<enemy type="enemyMineShotA" positionX="100" positionY="400" time="282"></enemy>
-				<enemy type="enemyMineShotA" positionX="100" positionY="500" time="282"></enemy>
-				<enemy type="enemyMineShotA" positionX="100" positionY="600" time="282"></enemy>
-				
-				<enemy type="enemyBeam" positionX="100" positionY="100" time="295"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="100" time="295"></enemy>
-				<enemy type="enemyBeam" positionX="100" positionY="700" time="295"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="700" time="295"></enemy>
-				<enemy type="enemyBeam" positionX="600" positionY="100" time="295"></enemy>
-				<enemy type="enemyBeam" positionX="600" positionY="700" time="295"></enemy>
-       			<enemy type="enemyBeam" positionX="100" positionY="400" time="295"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="400" time="295"></enemy>
-				
-				<enemy type="enemyBeam" positionX="100" positionY="100" time="298"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="100" time="298"></enemy>
-				<enemy type="enemyBeam" positionX="100" positionY="700" time="298"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="700" time="298"></enemy>
-				<enemy type="enemyBeam" positionX="600" positionY="100" time="298"></enemy>
-				<enemy type="enemyBeam" positionX="600" positionY="700" time="298"></enemy>
-       			<enemy type="enemyBeam" positionX="100" positionY="400" time="298"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="400" time="298"></enemy>
-				
-				<enemy type="enemyBeam" positionX="100" positionY="100" time="301"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="100" time="301"></enemy>
-				<enemy type="enemyBeam" positionX="100" positionY="700" time="301"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="700" time="301"></enemy>
-				<enemy type="enemyBeam" positionX="600" positionY="100" time="301"></enemy>
-				<enemy type="enemyBeam" positionX="600" positionY="700" time="301"></enemy>
-       			<enemy type="enemyBeam" positionX="100" positionY="400" time="301"></enemy>
-				<enemy type="enemyBeam" positionX="1100" positionY="400" time="301"></enemy>
-				
+		<!-- OLEADA 1 --> 
+		<enemy type="EnemyWeakA" positionX="1100" positionY="100" time="1"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="200" time="2"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="350" time="3"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="500" time="4"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="600" time="5"></enemy>
 		
+		<!-- OLEADA 2 --> 
+		<enemy type="EnemyWeakA" positionX="100" positionY="100" time="7"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="200" time="8"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="350" time="9"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="500" time="10"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="600" time="11"></enemy>
+		
+		<!-- OLEADA 3 --> 
+		<enemy type="EnemyWeakA" positionX="200" positionY="100" time="14"></enemy>
+		<enemy type="EnemyWeakA" positionX="300" positionY="100" time="14"></enemy>
+		<enemy type="EnemyWeakA" positionX="400" positionY="100" time="14"></enemy>
+		<enemy type="EnemyWeakA" positionX="500" positionY="100" time="14"></enemy>
+		<enemy type="EnemyWeakA" positionX="600" positionY="100" time="14"></enemy>
+		<enemy type="EnemyWeakA" positionX="700" positionY="100" time="14"></enemy>
+		<enemy type="EnemyWeakA" positionX="800" positionY="100" time="14"></enemy>
+		
+		<!-- OLEADA 4 --> 
+		<enemy type="EnemyWeakA" positionX="200" positionY="600" time="20"></enemy>
+		<enemy type="EnemyWeakA" positionX="300" positionY="600" time="20"></enemy>
+		<enemy type="EnemyWeakA" positionX="400" positionY="600" time="20"></enemy>
+		<enemy type="EnemyWeakA" positionX="500" positionY="600" time="20"></enemy>
+		<enemy type="EnemyWeakA" positionX="600" positionY="600" time="20"></enemy>
+		<enemy type="EnemyWeakA" positionX="700" positionY="600" time="20"></enemy>
+		<enemy type="EnemyWeakA" positionX="800" positionY="600" time="20"></enemy>
+		
+		<!-- OLEADA 3 --> 
+		<enemy type="EnemyBeam" positionX="1100" positionY="200" time="25"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="500" time="25"></enemy>
+		<!-- OLEADA 3.5 --> 
+		<enemy type="EnemyBeam" positionX="100" positionY="200" time="25"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="500" time="25"></enemy>
+		
+		<!-- OLEADA 4 --> 
+		<enemy type="EnemyWeakA" positionX="350" positionY="700" time="30"></enemy>
+		<enemy type="EnemyWeakA" positionX="500" positionY="700" time="30"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="500" time="30"></enemy>
+		<enemy type="EnemyWeakA" positionX="350" positionY="770" time="30"></enemy>
+		<enemy type="EnemyWeakA" positionX="500" positionY="770" time="30"></enemy>
+		<enemy type="EnemyWeakA" positionX="650" positionY="770" time="30"></enemy>
+		<!-- OLEADA 4.5 --> 
+		<enemy type="EnemyWeakShotA" positionX="1100" positionY="200" time="35"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="100" positionY="500" time="35"></enemy>
+		
+		<!-- OLEADA 5 --> 
+		<enemy type="EnemyWeakA" positionX="1100" positionY="50" time="40"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="500" time="40"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="1100" positionY="750" time="40"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="750" time="40"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="100" positionY="50" time="40"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="50" time="40"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="500" time="40"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="750" time="40"></enemy>
+		<enemy type="EnemyWeakA" positionX="350" positionY="770" time="40"></enemy>
+		<enemy type="EnemyWeakA" positionX="500" positionY="770" time="40"></enemy>
+		<enemy type="EnemyWeakA" positionX="650" positionY="770" time="40"></enemy>
+		
+		<!-- OLEADA 6 --> 
+		<enemy type="EnemyWeakShotA" positionX="1000" positionY="50" time="46"></enemy>
+		<enemy type="EnemyWeakA" positionX="973" positionY="699" time="46"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="134" positionY="733" time="46"></enemy>
+		<enemy type="EnemyWeakA" positionX="140" positionY="89" time="46"></enemy>
+		
+		<enemy type="EnemyWeakShotA" positionX="1011" positionY="121" time="50"></enemy>
+		<enemy type="EnemyWeakA" positionX="122" positionY="64" time="50"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="50" positionY="750" time="50"></enemy>
+		<enemy type="EnemyWeakA" positionX="1108" positionY="608" time="50"></enemy>	
+		
+		<enemy type="EnemyBeam" positionX="1095" positionY="13" time="55"></enemy>
+		<enemy type="EnemyWeakA" positionX="67" positionY="736" time="55"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="50" time="55"></enemy>
+		<enemy type="EnemyWeakA" positionX="970" positionY="771" time="55"></enemy>
+		
+		<enemy type="EnemyWeakA" positionX="1100" positionY="50" time="60"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="750" time="60"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="50" time="60"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="750" time="60"></enemy>
+		
+		<enemy type="EnemyWeakA" positionX="100" positionY="100" time="68"></enemy>
+		<enemy type="EnemyWeakA" positionX="200" positionY="100" time="68"></enemy>
+		<enemy type="EnemyWeakA" positionX="300" positionY="100" time="68"></enemy>
+		<enemy type="EnemyWeakA" positionX="400" positionY="100" time="68"></enemy>
+		<enemy type="EnemyWeakA" positionX="500" positionY="100" time="68"></enemy>
+		<enemy type="EnemyWeakA" positionX="600" positionY="100" time="68"></enemy>
+		<enemy type="EnemyWeakA" positionX="700" positionY="100" time="68"></enemy>
+		<enemy type="EnemyWeakA" positionX="800" positionY="100" time="68"></enemy>		
+		<enemy type="EnemyWeakA" positionX="900" positionY="100" time="68"></enemy>	
+		<enemy type="EnemyWeakA" positionX="1000" positionY="100" time="68"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="200" time="68"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="300" time="68"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="400" time="68"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="500" time="68"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="600" time="68"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="700" time="68"></enemy>		
+		<enemy type="EnemyWeakA" positionX="1000" positionY="700" time="68"></enemy>
+		<enemy type="EnemyWeakA" positionX="900" positionY="700" time="68"></enemy>
+		<enemy type="EnemyWeakA" positionX="800" positionY="700" time="68"></enemy>
+		<enemy type="EnemyWeakA" positionX="700" positionY="700" time="68"></enemy>
+		<enemy type="EnemyWeakA" positionX="600" positionY="700" time="68"></enemy>
+		<enemy type="EnemyWeakA" positionX="500" positionY="700" time="68"></enemy>
+		<enemy type="EnemyWeakA" positionX="400" positionY="700" time="68"></enemy>
+		<enemy type="EnemyWeakA" positionX="300" positionY="700" time="68"></enemy>
+		<enemy type="EnemyWeakA" positionX="200" positionY="700" time="68"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="700" time="68"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="200" time="68"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="300" time="68"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="400" time="68"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="500" time="68"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="600" time="68"></enemy>
+
+		<!-- OLEADA 8 -->
+		<enemy type="EnemyLaserA" positionX="1100" positionY="50" time="75"></enemy>
+		<enemy type="EnemyLaserA" positionX="100" positionY="50" time="75"></enemy>
 				
-				
-				
+		<!-- OLEADA 9 -->
+		<enemy type="EnemyLaserA" positionX="100" positionY="50" time="78"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="450" positionY="50" time="78"></enemy>
+		<enemy type="EnemyMineShotA" positionX="750" positionY="50" time="78"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="1100" positionY="50" time="78"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="750" time="78"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="450" positionY="750" time="79"></enemy>
+		<enemy type="EnemyWeakA" positionX="750" positionY="750" time="79"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="750" time="78"></enemy>
+		<enemy type="EnemyLaserA" positionX="100" positionY="300" time="79"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="500" time="79"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="1100" positionY="300" time="79"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="500" time="82"></enemy>
+		<enemy type="EnemyLaserA" positionX="1100" positionY="50" time="80"></enemy>
+		<enemy type="EnemyLaserA" positionX="100" positionY="50" time="81"></enemy>
+		<enemy type="EnemyLaserA" positionX="100" positionY="50" time="79"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="450" positionY="50" time="80"></enemy>
+		<enemy type="EnemyWeakA" positionX="750" positionY="50" time="82"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="1100" positionY="50" time="83"></enemy>
+		<enemy type="EnemyMineShotA" positionX="100" positionY="750" time="84"></enemy>
+		<enemy type="EnemyLaserA" positionX="450" positionY="750" time="82"></enemy>
+		<enemy type="EnemyWeakA" positionX="750" positionY="750" time="84"></enemy>
+		<enemy type="EnemyLaserA" positionX="1100" positionY="750" time="85"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="300" time="83"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="100" positionY="500" time="84"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="300" time="81"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="1100" positionY="500" time="80"></enemy>
+		
+		<!-- OLEADA 9 -->
+		<enemy type="EnemyScaredA" positionX="100" positionY="50" time="88"></enemy>
+		<enemy type="EnemyScaredA" positionX="100" positionY="750" time="88"></enemy>
+		<enemy type="EnemyScaredA" positionX="1100" positionY="50" time="88"></enemy>
+		<enemy type="EnemyScaredA" positionX="1100" positionY="750" time="88"></enemy>
+		
+		<!-- OLEADA 10 -->
+		<enemy type="EnemyScaredA" positionX="100" positionY="50" time="92"></enemy>
+		<enemy type="EnemyMineShotA" positionX="450" positionY="50" time="92"></enemy>
+		<enemy type="EnemyScaredA" positionX="750" positionY="50" time="92"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="50" time="92"></enemy>
+		<enemy type="EnemyScaredA" positionX="100" positionY="750" time="92"></enemy>
+		<enemy type="EnemyMineShotA" positionX="450" positionY="750" time="92"></enemy>
+		<enemy type="EnemyScaredA" positionX="750" positionY="750" time="92"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="750" time="92"></enemy>
+		
+		<!-- OLEADA 11 -->
+		<enemy type="EnemyScaredA" positionX="100" positionY="300" time="96"></enemy>
+		<enemy type="EnemyLaserA" positionX="100" positionY="500" time="96"></enemy>
+		<enemy type="EnemyScaredA" positionX="1100" positionY="300" time="97"></enemy>
+		<enemy type="EnemyLaserA" positionX="1100" positionY="500" time="98"></enemy>
+		<enemy type="EnemyScaredA" positionX="1100" positionY="50" time="96"></enemy>
+		<enemy type="EnemyLaserA" positionX="100" positionY="50" time="96"></enemy>
+		<enemy type="EnemyScaredA" positionX="100" positionY="50" time="99"></enemy>
+		<enemy type="EnemyLaserA" positionX="450" positionY="50" time="98"></enemy>
+		<enemy type="EnemyScaredA" positionX="750" positionY="50" time="96"></enemy>
+		<enemy type="EnemyLaserA" positionX="1100" positionY="50" time="98"></enemy>
+		
+		<!-- OLEADA 11 -->
+		<enemy type="EnemyScaredA" positionX="100" positionY="300" time="103"></enemy>
+		<enemy type="EnemyLaserA" positionX="100" positionY="500" time="103"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="300" time="103"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="1100" positionY="500" time="103"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="50" time="103"></enemy>
+		<enemy type="EnemyScaredA" positionX="100" positionY="300" time="103"></enemy>
+		<enemy type="EnemyLaserA" positionX="100" positionY="500" time="103"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="300" time="103"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="1100" positionY="500" time="103"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="50" time="103"></enemy> 
+
+		<enemy type="EnemyMineShotA" positionX="100" positionY="100" time="110"></enemy>
+		<enemy type="EnemyMineShotA" positionX="200" positionY="100" time="110"></enemy>
+		<enemy type="EnemyMineShotA" positionX="300" positionY="100" time="110"></enemy>
+		<enemy type="EnemyMineShotA" positionX="400" positionY="100" time="110"></enemy>
+		<enemy type="EnemyMineShotA" positionX="500" positionY="100" time="110"></enemy>
+		<enemy type="EnemyMineShotA" positionX="600" positionY="100" time="110"></enemy>
+		<enemy type="EnemyMineShotA" positionX="700" positionY="100" time="110"></enemy>
+		<enemy type="EnemyMineShotA" positionX="800" positionY="100" time="110"></enemy>		
+		<enemy type="EnemyMineShotA" positionX="900" positionY="100" time="110"></enemy>	
+		<enemy type="EnemyMineShotA" positionX="1000" positionY="100" time="110"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="200" time="110"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="300" time="110"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="400" time="110"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="500" time="110"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="600" time="110"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="700" time="110"></enemy>		
+		<enemy type="EnemyMineShotA" positionX="1000" positionY="700" time="110"></enemy>
+		<enemy type="EnemyMineShotA" positionX="900" positionY="700" time="110"></enemy>
+		<enemy type="EnemyMineShotA" positionX="800" positionY="700" time="110"></enemy>
+		<enemy type="EnemyMineShotA" positionX="700" positionY="700" time="110"></enemy>
+		<enemy type="EnemyMineShotA" positionX="600" positionY="700" time="110"></enemy>
+		<enemy type="EnemyMineShotA" positionX="500" positionY="700" time="110"></enemy>
+		<enemy type="EnemyMineShotA" positionX="400" positionY="700" time="110"></enemy>
+		<enemy type="EnemyMineShotA" positionX="300" positionY="700" time="110"></enemy>
+		<enemy type="EnemyMineShotA" positionX="200" positionY="700" time="110"></enemy>
+		<enemy type="EnemyMineShotA" positionX="100" positionY="700" time="110"></enemy>
+		<enemy type="EnemyMineShotA" positionX="100" positionY="200" time="110"></enemy>
+		<enemy type="EnemyMineShotA" positionX="100" positionY="300" time="110"></enemy>
+		<enemy type="EnemyMineShotA" positionX="100" positionY="400" time="110"></enemy>
+		<enemy type="EnemyMineShotA" positionX="100" positionY="500" time="110"></enemy>
+		<enemy type="EnemyMineShotA" positionX="100" positionY="600" time="110"></enemy>
+		
+		<!-- OLEADA 9 -->
+		<enemy type="EnemyLaserA" positionX="100" positionY="50" time="117"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="450" positionY="50" time="117"></enemy>
+		<enemy type="EnemyMineShotA" positionX="750" positionY="50" time="117"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="1100" positionY="50" time="117"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="750" time="117"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="450" positionY="750" time="120"></enemy>
+		<enemy type="EnemyWeakA" positionX="750" positionY="750" time="120"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="750" time="120"></enemy>
+		<enemy type="EnemyLaserA" positionX="100" positionY="300" time="120"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="200" time="120"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="500" time="120"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="200" time="120"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="500" time="120"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="500" time="120"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="1100" positionY="300" time="121"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="500" time="122"></enemy>
+		<enemy type="EnemyLaserA" positionX="1100" positionY="50" time="123"></enemy>
+		<enemy type="EnemyLaserA" positionX="100" positionY="50" time="124"></enemy>
+		<enemy type="EnemyLaserA" positionX="100" positionY="50" time="125"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="450" positionY="50" time="126"></enemy>
+		<enemy type="EnemyWeakA" positionX="750" positionY="50" time="127"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="1100" positionY="50" time="128"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="200" time="128"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="500" time="128"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="200" time="128"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="500" time="128"></enemy>
+		<enemy type="EnemyMineShotA" positionX="100" positionY="750" time="129"></enemy>
+		<enemy type="EnemyLaserA" positionX="450" positionY="750" time="130"></enemy>
+		<enemy type="EnemyWeakA" positionX="750" positionY="750" time="131"></enemy>
+		<enemy type="EnemyLaserA" positionX="1100" positionY="750" time="132"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="300" time="133"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="100" positionY="500" time="134"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="300" time="135"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="1100" positionY="500" time="136"></enemy>
+		<enemy type="EnemyScaredA" positionX="100" positionY="50" time="137"></enemy>
+		<enemy type="EnemyScaredA" positionX="100" positionY="750" time="138"></enemy>
+		<enemy type="EnemyScaredA" positionX="1100" positionY="50" time="139"></enemy>
+		<enemy type="EnemyScaredA" positionX="1100" positionY="750" time="140"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="200" time="140"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="500" time="140"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="200" time="140"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="500" time="140"></enemy>
+		<enemy type="EnemyScaredA" positionX="100" positionY="50" time="141"></enemy>
+		<enemy type="EnemyMineShotA" positionX="450" positionY="50" time="142"></enemy>
+		<enemy type="EnemyScaredA" positionX="750" positionY="50" time="143"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="50" time="144"></enemy>
+		<enemy type="EnemyScaredA" positionX="100" positionY="750" time="145"></enemy>
+		<enemy type="EnemyMineShotA" positionX="450" positionY="750" time="146"></enemy>
+		<enemy type="EnemyScaredA" positionX="750" positionY="750" time="147"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="750" time="148"></enemy>
+		<enemy type="EnemyScaredA" positionX="100" positionY="300" time="149"></enemy>
+		<enemy type="EnemyLaserA" positionX="100" positionY="500" time="150"></enemy>
+		<enemy type="EnemyScaredA" positionX="1100" positionY="300" time="151"></enemy>
+		<enemy type="EnemyLaserA" positionX="1100" positionY="500" time="152"></enemy>
+		<enemy type="EnemyScaredA" positionX="1100" positionY="50" time="153"></enemy>
+		<enemy type="EnemyLaserA" positionX="100" positionY="50" time="154"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="200" time="154"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="500" time="154"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="200" time="154"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="500" time="154"></enemy>
+		<enemy type="EnemyScaredA" positionX="100" positionY="50" time="155"></enemy>
+		<enemy type="EnemyLaserA" positionX="450" positionY="50" time="156"></enemy>
+		<enemy type="EnemyScaredA" positionX="750" positionY="50" time="157"></enemy>
+		<enemy type="EnemyLaserA" positionX="1100" positionY="50" time="158"></enemy>
+		<enemy type="EnemyScaredA" positionX="100" positionY="300" time="159"></enemy>
+		<enemy type="EnemyLaserA" positionX="100" positionY="500" time="160"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="300" time="161"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="1100" positionY="500" time="162"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="50" time="163"></enemy>
+		<enemy type="EnemyScaredA" positionX="100" positionY="300" time="164"></enemy>
+		<enemy type="EnemyLaserA" positionX="100" positionY="500" time="165"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="300" time="166"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="1100" positionY="500" time="167"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="100" time="172"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="100" time="172"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="700" time="172"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="700" time="172"></enemy>
+		<enemy type="EnemyBeam" positionX="600" positionY="100" time="172"></enemy>
+		<enemy type="EnemyBeam" positionX="600" positionY="700" time="172"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="400" time="172"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="400" time="172"></enemy>
+		
+		<enemy type="EnemyWeakA" positionX="40" positionY="40" time="180"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="40" time="180"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="760" time="180"></enemy>
+		<enemy type="EnemyWeakA" positionX="40" positionY="760" time="180"></enemy>
+		
+		<enemy type="EnemyWeakA" positionX="40" positionY="40" time="181"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="40" time="181"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="760" time="181"></enemy>
+		<enemy type="EnemyWeakA" positionX="40" positionY="760" time="181"></enemy>
+		
+		<enemy type="EnemyWeakA" positionX="40" positionY="40" time="182"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="40" time="182"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="760" time="182"></enemy>
+		<enemy type="EnemyWeakA" positionX="40" positionY="760" time="182"></enemy>
+		
+		<enemy type="EnemyWeakA" positionX="40" positionY="40" time="183"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="40" time="183"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="760" time="183"></enemy>
+		<enemy type="EnemyWeakA" positionX="40" positionY="760" time="183"></enemy>
+		
+		<enemy type="EnemyWeakA" positionX="40" positionY="40" time="184"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="40" time="184"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="760" time="184"></enemy>
+		<enemy type="EnemyWeakA" positionX="40" positionY="760" time="184"></enemy>
+		
+		<enemy type="EnemyWeakA" positionX="40" positionY="40" time="185"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="40" time="185"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="760" time="185"></enemy>
+		<enemy type="EnemyWeakA" positionX="40" positionY="760" time="185"></enemy>
+		
+		<enemy type="EnemyWeakA" positionX="40" positionY="40" time="186"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="40" time="186"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="760" time="186"></enemy>
+		<enemy type="EnemyWeakA" positionX="40" positionY="760" time="186"></enemy>
+		
+		<enemy type="EnemyWeakA" positionX="40" positionY="40" time="187"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="40" time="187"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="760" time="187"></enemy>
+		<enemy type="EnemyWeakA" positionX="40" positionY="760" time="187"></enemy>
+		
+		<enemy type="EnemyWeakA" positionX="40" positionY="40" time="188"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="40" time="188"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="760" time="188"></enemy>
+		<enemy type="EnemyWeakA" positionX="40" positionY="760" time="188"></enemy>
+		
+		<enemy type="EnemyWeakA" positionX="40" positionY="40" time="189"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="40" time="189"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="760" time="189"></enemy>
+		<enemy type="EnemyWeakA" positionX="40" positionY="760" time="189"></enemy>
+		
+		<enemy type="EnemyWeakA" positionX="40" positionY="40" time="190"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="40" time="190"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="760" time="190"></enemy>
+		<enemy type="EnemyWeakA" positionX="40" positionY="760" time="190"></enemy>
+		
+		<enemy type="EnemyWeakA" positionX="40" positionY="40" time="191"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="40" time="191"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="760" time="191"></enemy>
+		<enemy type="EnemyWeakA" positionX="40" positionY="760" time="191"></enemy>
+		
+		<enemy type="EnemyWeakA" positionX="40" positionY="40" time="192"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="40" time="192"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="760" time="192"></enemy>
+		<enemy type="EnemyWeakA" positionX="40" positionY="760" time="192"></enemy>
+		
+		<enemy type="EnemyWeakA" positionX="40" positionY="40" time="193"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="40" time="193"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="760" time="193"></enemy>
+		<enemy type="EnemyWeakA" positionX="40" positionY="760" time="193"></enemy>
+		
+		<enemy type="EnemyWeakA" positionX="40" positionY="40" time="194"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="40" time="194"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="760" time="194"></enemy>
+		<enemy type="EnemyWeakA" positionX="40" positionY="760" time="194"></enemy>
+		
+		<enemy type="EnemyWeakA" positionX="40" positionY="40" time="195"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="40" time="195"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="760" time="195"></enemy>
+		<enemy type="EnemyWeakA" positionX="40" positionY="760" time="195"></enemy>
+		
+		<enemy type="EnemyWeakA" positionX="40" positionY="40" time="196"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="40" time="196"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="760" time="196"></enemy>
+		<enemy type="EnemyWeakA" positionX="40" positionY="760" time="196"></enemy>
+		
+		<enemy type="EnemyWeakA" positionX="40" positionY="40" time="197"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="40" time="197"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="760" time="197"></enemy>
+		<enemy type="EnemyWeakA" positionX="40" positionY="760" time="197"></enemy>
+		
+		<enemy type="EnemyWeakA" positionX="40" positionY="40" time="198"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="40" time="198"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="760" time="198"></enemy>
+		<enemy type="EnemyWeakA" positionX="40" positionY="760" time="198"></enemy>
+		
+		<enemy type="EnemyWeakA" positionX="40" positionY="40" time="199"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="40" time="199"></enemy>
+		<enemy type="EnemyWeakA" positionX="1160" positionY="760" time="199"></enemy>
+		<enemy type="EnemyWeakA" positionX="40" positionY="760" time="199"></enemy>
+		
+		<enemy type="EnemyBeam" positionX="1100" positionY="200" time="200"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="500" time="200"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="200" time="200"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="500" time="200"></enemy>
+		
+		<enemy type="EnemyLaserA" positionX="100" positionY="50" time="205"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="450" positionY="50" time="205"></enemy>
+		<enemy type="EnemyMineShotA" positionX="750" positionY="50" time="205"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="1100" positionY="50" time="205"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="750" time="205"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="450" positionY="750" time="208"></enemy>
+		<enemy type="EnemyWeakA" positionX="750" positionY="750" time="208"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="750" time="208"></enemy>
+		<enemy type="EnemyLaserA" positionX="100" positionY="300" time="208"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="200" time="208"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="500" time="208"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="200" time="208"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="500" time="208"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="500" time="208"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="1100" positionY="300" time="209"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="500" time="210"></enemy>
+		<enemy type="EnemyLaserA" positionX="1100" positionY="50" time="211"></enemy>
+		<enemy type="EnemyLaserA" positionX="100" positionY="50" time="213"></enemy>
+		<enemy type="EnemyLaserA" positionX="100" positionY="50" time="213"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="450" positionY="50" time="214"></enemy>
+		<enemy type="EnemyWeakA" positionX="750" positionY="50" time="215"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="1100" positionY="50" time="216"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="200" time="216"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="500" time="216"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="200" time="216"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="500" time="216"></enemy>
+		<enemy type="EnemyMineShotA" positionX="100" positionY="750" time="217"></enemy>
+		<enemy type="EnemyLaserA" positionX="450" positionY="750" time="219"></enemy>
+		<enemy type="EnemyWeakA" positionX="750" positionY="750" time="220"></enemy>
+		<enemy type="EnemyLaserA" positionX="1100" positionY="750" time="221"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="300" time="222"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="100" positionY="500" time="223"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="300" time="224"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="1100" positionY="500" time="225"></enemy>
+		<enemy type="EnemyScaredA" positionX="100" positionY="50" time="226"></enemy>
+		<enemy type="EnemyScaredA" positionX="100" positionY="750" time="227"></enemy>
+		<enemy type="EnemyScaredA" positionX="1100" positionY="50" time="228"></enemy>
+		<enemy type="EnemyScaredA" positionX="1100" positionY="750" time="229"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="200" time="230"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="500" time="230"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="200" time="230"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="500" time="230"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="200" time="233"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="500" time="233"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="200" time="233"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="500" time="233"></enemy>
+		<enemy type="EnemyScaredA" positionX="100" positionY="50" time="234"></enemy>
+		<enemy type="EnemyMineShotA" positionX="450" positionY="50" time="235"></enemy>
+		<enemy type="EnemyScaredA" positionX="750" positionY="50" time="236"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="50" time="237"></enemy>
+		<enemy type="EnemyScaredA" positionX="100" positionY="750" time="238"></enemy>
+		<enemy type="EnemyMineShotA" positionX="450" positionY="750" time="239"></enemy>
+		<enemy type="EnemyScaredA" positionX="750" positionY="750" time="240"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="750" time="241"></enemy>
+		<enemy type="EnemyScaredA" positionX="100" positionY="300" time="242"></enemy>
+		<enemy type="EnemyLaserA" positionX="100" positionY="500" time="243"></enemy>
+		<enemy type="EnemyScaredA" positionX="1100" positionY="300" time="244"></enemy>
+		<enemy type="EnemyLaserA" positionX="1100" positionY="500" time="245"></enemy>
+		<enemy type="EnemyScaredA" positionX="1100" positionY="50" time="246"></enemy>
+		<enemy type="EnemyLaserA" positionX="100" positionY="50" time="247"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="200" time="248"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="500" time="248"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="200" time="248"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="500" time="248"></enemy>
+		<enemy type="EnemyScaredA" positionX="100" positionY="50" time="250"></enemy>
+		<enemy type="EnemyScaredA" positionX="100" positionY="100" time="250"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="300" time="252"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="100" positionY="500" time="251"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="300" time="252"></enemy>
+		<enemy type="EnemyScaredA" positionX="100" positionY="50" time="252"></enemy>
+		<enemy type="EnemyScaredA" positionX="100" positionY="50" time="252"></enemy>
+		<enemy type="EnemyLaserA" positionX="450" positionY="50" time="253"></enemy>
+		<enemy type="EnemyScaredA" positionX="750" positionY="50" time="254"></enemy>
+		<enemy type="EnemyLaserA" positionX="1100" positionY="50" time="255"></enemy>
+		<enemy type="EnemyScaredA" positionX="100" positionY="300" time="256"></enemy>
+		<enemy type="EnemyLaserA" positionX="100" positionY="500" time="257"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="300" time="258"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="1100" positionY="500" time="259"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="50" time="260"></enemy>
+		<enemy type="EnemyScaredA" positionX="100" positionY="300" time="261"></enemy>
+		<enemy type="EnemyLaserA" positionX="100" positionY="500" time="262"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="300" time="263"></enemy>
+		<enemy type="EnemyWeakShotA" positionX="1100" positionY="500" time="264"></enemy>				
+		
+		<enemy type="EnemyWeakA" positionX="100" positionY="100" time="268"></enemy>
+		<enemy type="EnemyWeakA" positionX="200" positionY="100" time="268"></enemy>
+		<enemy type="EnemyWeakA" positionX="300" positionY="100" time="268"></enemy>
+		<enemy type="EnemyWeakA" positionX="400" positionY="100" time="268"></enemy>
+		<enemy type="EnemyWeakA" positionX="500" positionY="100" time="268"></enemy>
+		<enemy type="EnemyWeakA" positionX="600" positionY="100" time="268"></enemy>
+		<enemy type="EnemyWeakA" positionX="700" positionY="100" time="268"></enemy>
+		<enemy type="EnemyWeakA" positionX="800" positionY="100" time="268"></enemy>		
+		<enemy type="EnemyWeakA" positionX="900" positionY="100" time="268"></enemy>	
+		<enemy type="EnemyWeakA" positionX="1000" positionY="100" time="268"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="200" time="268"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="300" time="268"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="400" time="268"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="500" time="268"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="600" time="268"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="700" time="268"></enemy>		
+		<enemy type="EnemyWeakA" positionX="1000" positionY="700" time="268"></enemy>
+		<enemy type="EnemyWeakA" positionX="900" positionY="700" time="268"></enemy>
+		<enemy type="EnemyWeakA" positionX="800" positionY="700" time="268"></enemy>
+		<enemy type="EnemyWeakA" positionX="700" positionY="700" time="268"></enemy>
+		<enemy type="EnemyWeakA" positionX="600" positionY="700" time="268"></enemy>
+		<enemy type="EnemyWeakA" positionX="500" positionY="700" time="268"></enemy>
+		<enemy type="EnemyWeakA" positionX="400" positionY="700" time="268"></enemy>
+		<enemy type="EnemyWeakA" positionX="300" positionY="700" time="268"></enemy>
+		<enemy type="EnemyWeakA" positionX="200" positionY="700" time="268"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="700" time="268"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="200" time="268"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="300" time="268"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="400" time="268"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="500" time="268"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="600" time="268"></enemy>
+		
+		<enemy type="EnemyWeakA" positionX="100" positionY="100" time="272"></enemy>
+		<enemy type="EnemyWeakA" positionX="200" positionY="100" time="272"></enemy>
+		<enemy type="EnemyWeakA" positionX="300" positionY="100" time="272"></enemy>
+		<enemy type="EnemyWeakA" positionX="400" positionY="100" time="272"></enemy>
+		<enemy type="EnemyWeakA" positionX="500" positionY="100" time="272"></enemy>
+		<enemy type="EnemyWeakA" positionX="600" positionY="100" time="272"></enemy>
+		<enemy type="EnemyWeakA" positionX="700" positionY="100" time="272"></enemy>
+		<enemy type="EnemyWeakA" positionX="800" positionY="100" time="272"></enemy>		
+		<enemy type="EnemyWeakA" positionX="900" positionY="100" time="272"></enemy>	
+		<enemy type="EnemyWeakA" positionX="1000" positionY="100" time="272"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="200" time="272"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="300" time="272"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="400" time="272"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="500" time="272"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="600" time="272"></enemy>
+		<enemy type="EnemyWeakA" positionX="1100" positionY="700" time="272"></enemy>		
+		<enemy type="EnemyWeakA" positionX="1000" positionY="700" time="272"></enemy>
+		<enemy type="EnemyWeakA" positionX="900" positionY="700" time="272"></enemy>
+		<enemy type="EnemyWeakA" positionX="800" positionY="700" time="272"></enemy>
+		<enemy type="EnemyWeakA" positionX="700" positionY="700" time="272"></enemy>
+		<enemy type="EnemyWeakA" positionX="600" positionY="700" time="272"></enemy>
+		<enemy type="EnemyWeakA" positionX="500" positionY="700" time="272"></enemy>
+		<enemy type="EnemyWeakA" positionX="400" positionY="700" time="272"></enemy>
+		<enemy type="EnemyWeakA" positionX="300" positionY="700" time="272"></enemy>
+		<enemy type="EnemyWeakA" positionX="200" positionY="700" time="272"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="700" time="272"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="200" time="272"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="300" time="272"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="400" time="272"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="500" time="272"></enemy>
+		<enemy type="EnemyWeakA" positionX="100" positionY="600" time="272"></enemy>
+
+		<enemy type="EnemyMineShotA" positionX="100" positionY="100" time="278"></enemy>
+		<enemy type="EnemyMineShotA" positionX="200" positionY="100" time="278"></enemy>
+		<enemy type="EnemyMineShotA" positionX="300" positionY="100" time="278"></enemy>
+		<enemy type="EnemyMineShotA" positionX="400" positionY="100" time="278"></enemy>
+		<enemy type="EnemyMineShotA" positionX="500" positionY="100" time="278"></enemy>
+		<enemy type="EnemyMineShotA" positionX="600" positionY="100" time="278"></enemy>
+		<enemy type="EnemyMineShotA" positionX="700" positionY="100" time="278"></enemy>
+		<enemy type="EnemyMineShotA" positionX="800" positionY="100" time="278"></enemy>		
+		<enemy type="EnemyMineShotA" positionX="900" positionY="100" time="278"></enemy>	
+		<enemy type="EnemyMineShotA" positionX="1000" positionY="100" time="278"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="200" time="278"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="300" time="278"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="400" time="278"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="500" time="278"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="600" time="278"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="700" time="278"></enemy>		
+		<enemy type="EnemyMineShotA" positionX="1000" positionY="700" time="278"></enemy>
+		<enemy type="EnemyMineShotA" positionX="900" positionY="700" time="278"></enemy>
+		<enemy type="EnemyMineShotA" positionX="800" positionY="700" time="278"></enemy>
+		<enemy type="EnemyMineShotA" positionX="700" positionY="700" time="278"></enemy>
+		<enemy type="EnemyMineShotA" positionX="600" positionY="700" time="278"></enemy>
+		<enemy type="EnemyMineShotA" positionX="500" positionY="700" time="278"></enemy>
+		<enemy type="EnemyMineShotA" positionX="400" positionY="700" time="278"></enemy>
+		<enemy type="EnemyMineShotA" positionX="300" positionY="700" time="278"></enemy>
+		<enemy type="EnemyMineShotA" positionX="200" positionY="700" time="278"></enemy>
+		<enemy type="EnemyMineShotA" positionX="100" positionY="700" time="278"></enemy>
+		<enemy type="EnemyMineShotA" positionX="100" positionY="200" time="278"></enemy>
+		<enemy type="EnemyMineShotA" positionX="100" positionY="300" time="278"></enemy>
+		<enemy type="EnemyMineShotA" positionX="100" positionY="400" time="278"></enemy>
+		<enemy type="EnemyMineShotA" positionX="100" positionY="500" time="278"></enemy>
+		<enemy type="EnemyMineShotA" positionX="100" positionY="600" time="278"></enemy>
+		
+		<enemy type="EnemyMineShotA" positionX="100" positionY="100" time="280"></enemy>
+		<enemy type="EnemyMineShotA" positionX="200" positionY="100" time="280"></enemy>
+		<enemy type="EnemyMineShotA" positionX="300" positionY="100" time="280"></enemy>
+		<enemy type="EnemyMineShotA" positionX="400" positionY="100" time="280"></enemy>
+		<enemy type="EnemyMineShotA" positionX="500" positionY="100" time="280"></enemy>
+		<enemy type="EnemyMineShotA" positionX="600" positionY="100" time="280"></enemy>
+		<enemy type="EnemyMineShotA" positionX="700" positionY="100" time="280"></enemy>
+		<enemy type="EnemyMineShotA" positionX="800" positionY="100" time="280"></enemy>		
+		<enemy type="EnemyMineShotA" positionX="900" positionY="100" time="280"></enemy>	
+		<enemy type="EnemyMineShotA" positionX="1000" positionY="100" time="280"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="200" time="280"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="300" time="280"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="400" time="280"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="500" time="280"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="600" time="280"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="700" time="280"></enemy>		
+		<enemy type="EnemyMineShotA" positionX="1000" positionY="700" time="280"></enemy>
+		<enemy type="EnemyMineShotA" positionX="900" positionY="700" time="280"></enemy>
+		<enemy type="EnemyMineShotA" positionX="800" positionY="700" time="280"></enemy>
+		<enemy type="EnemyMineShotA" positionX="700" positionY="700" time="280"></enemy>
+		<enemy type="EnemyMineShotA" positionX="600" positionY="700" time="280"></enemy>
+		<enemy type="EnemyMineShotA" positionX="500" positionY="700" time="280"></enemy>
+		<enemy type="EnemyMineShotA" positionX="400" positionY="700" time="280"></enemy>
+		<enemy type="EnemyMineShotA" positionX="300" positionY="700" time="280"></enemy>
+		<enemy type="EnemyMineShotA" positionX="200" positionY="700" time="280"></enemy>
+		<enemy type="EnemyMineShotA" positionX="100" positionY="700" time="280"></enemy>
+		<enemy type="EnemyMineShotA" positionX="100" positionY="200" time="280"></enemy>
+		<enemy type="EnemyMineShotA" positionX="100" positionY="300" time="280"></enemy>
+		<enemy type="EnemyMineShotA" positionX="100" positionY="400" time="280"></enemy>
+		<enemy type="EnemyMineShotA" positionX="100" positionY="500" time="280"></enemy>
+		<enemy type="EnemyMineShotA" positionX="100" positionY="600" time="280"></enemy>
+		
+		<enemy type="EnemyMineShotA" positionX="100" positionY="100" time="280"></enemy>
+		<enemy type="EnemyMineShotA" positionX="200" positionY="100" time="282"></enemy>
+		<enemy type="EnemyMineShotA" positionX="300" positionY="100" time="282"></enemy>
+		<enemy type="EnemyMineShotA" positionX="400" positionY="100" time="282"></enemy>
+		<enemy type="EnemyMineShotA" positionX="500" positionY="100" time="282"></enemy>
+		<enemy type="EnemyMineShotA" positionX="600" positionY="100" time="282"></enemy>
+		<enemy type="EnemyMineShotA" positionX="700" positionY="100" time="282"></enemy>
+		<enemy type="EnemyMineShotA" positionX="800" positionY="100" time="282"></enemy>		
+		<enemy type="EnemyMineShotA" positionX="900" positionY="100" time="282"></enemy>	
+		<enemy type="EnemyMineShotA" positionX="1000" positionY="100" time="282"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="200" time="282"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="300" time="282"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="400" time="282"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="500" time="282"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="600" time="282"></enemy>
+		<enemy type="EnemyMineShotA" positionX="1100" positionY="700" time="282"></enemy>		
+		<enemy type="EnemyMineShotA" positionX="1000" positionY="700" time="282"></enemy>
+		<enemy type="EnemyMineShotA" positionX="900" positionY="700" time="282"></enemy>
+		<enemy type="EnemyMineShotA" positionX="800" positionY="700" time="282"></enemy>
+		<enemy type="EnemyMineShotA" positionX="700" positionY="700" time="282"></enemy>
+		<enemy type="EnemyMineShotA" positionX="600" positionY="700" time="282"></enemy>
+		<enemy type="EnemyMineShotA" positionX="500" positionY="700" time="282"></enemy>
+		<enemy type="EnemyMineShotA" positionX="400" positionY="700" time="282"></enemy>
+		<enemy type="EnemyMineShotA" positionX="300" positionY="700" time="282"></enemy>
+		<enemy type="EnemyMineShotA" positionX="200" positionY="700" time="282"></enemy>
+		<enemy type="EnemyMineShotA" positionX="100" positionY="700" time="282"></enemy>
+		<enemy type="EnemyMineShotA" positionX="100" positionY="200" time="282"></enemy>
+		<enemy type="EnemyMineShotA" positionX="100" positionY="300" time="282"></enemy>
+		<enemy type="EnemyMineShotA" positionX="100" positionY="400" time="282"></enemy>
+		<enemy type="EnemyMineShotA" positionX="100" positionY="500" time="282"></enemy>
+		<enemy type="EnemyMineShotA" positionX="100" positionY="600" time="282"></enemy>
+		
+		<enemy type="EnemyBeam" positionX="100" positionY="100" time="295"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="100" time="295"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="700" time="295"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="700" time="295"></enemy>
+		<enemy type="EnemyBeam" positionX="600" positionY="100" time="295"></enemy>
+		<enemy type="EnemyBeam" positionX="600" positionY="700" time="295"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="400" time="295"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="400" time="295"></enemy>
+		
+		<enemy type="EnemyBeam" positionX="100" positionY="100" time="298"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="100" time="298"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="700" time="298"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="700" time="298"></enemy>
+		<enemy type="EnemyBeam" positionX="600" positionY="100" time="298"></enemy>
+		<enemy type="EnemyBeam" positionX="600" positionY="700" time="298"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="400" time="298"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="400" time="298"></enemy>
+		
+		<enemy type="EnemyBeam" positionX="100" positionY="100" time="301"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="100" time="301"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="700" time="301"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="700" time="301"></enemy>
+		<enemy type="EnemyBeam" positionX="600" positionY="100" time="301"></enemy>
+		<enemy type="EnemyBeam" positionX="600" positionY="700" time="301"></enemy>
+		<enemy type="EnemyBeam" positionX="100" positionY="400" time="301"></enemy>
+		<enemy type="EnemyBeam" positionX="1100" positionY="400" time="301"></enemy>
+		
 	</enemiesList>
 </level>

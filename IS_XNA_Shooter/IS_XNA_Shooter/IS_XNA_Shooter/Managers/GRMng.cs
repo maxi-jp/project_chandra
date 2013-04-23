@@ -341,14 +341,8 @@ namespace IS_XNA_Shooter
                     break;
 
                 case "LevelADefense1":
-                    LoadIngameMenu();
                     LoadShipA();
-
-                    hudBase = content.Load<Texture2D>("Graphics/Hud/base256");
-
-                    texturePA1 = content.Load<Texture2D>("Graphics/Ships/sprites80x80");
                     textureAim = content.Load<Texture2D>("Graphics/aimpoint");
-                    textureL1 = content.Load<Texture2D>("Graphics/laserShotAnim");
                     textureL2 = content.Load<Texture2D>("Graphics/laserShotAnim2");
 
                     textureEW1 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy01_80x80");
@@ -367,7 +361,6 @@ namespace IS_XNA_Shooter
 
                     textureBaseLifeBar = content.Load<Texture2D>("Graphics/LifeBars/baseLifeBar");
                     textureBase = content.Load<Texture2D>("Graphics/base");
-
                     break;
 
                 case "LevelA2":
@@ -500,12 +493,7 @@ namespace IS_XNA_Shooter
                     break;
 
                 case "LevelADefense1":
-                    UnloadShipA();
-                    hudBase = null;
-
-                    texturePA1 = null;
                     textureAim = null;
-                    textureL1 = null;
                     textureL2 = null;
 
                     textureEW1 = null;
@@ -528,7 +516,6 @@ namespace IS_XNA_Shooter
 
                     textureBaseLifeBar = null;
                     textureBase = null;
-
                     break;
 
                 case "LevelA2":
@@ -550,10 +537,17 @@ namespace IS_XNA_Shooter
 
                 case "LevelB1":
                     UnloadShipA();
+                    textureL2 = null;
 
                     textureEW1 = null;
-
+                    textureEW2 = null;
+                    textureEB1 = null;
+                    textureEMS = null;
+                    textureEMSBullet = null;
+                    textureEL = null;
+                    textureELBullet = null;
                     textureRed = null;
+
                     textureBgB00 = null;
                     textureBgCol1 = null;
                     textureBgCol2 = null;
@@ -686,6 +680,9 @@ namespace IS_XNA_Shooter
             hudBase = content.Load<Texture2D>("Graphics/Hud/base256");
         }
 
+        /// <summary>
+        /// Unload the graphic resources for the ingame hud
+        /// </summary>
         public void UnloadHud()
         {
             hudBase = null;

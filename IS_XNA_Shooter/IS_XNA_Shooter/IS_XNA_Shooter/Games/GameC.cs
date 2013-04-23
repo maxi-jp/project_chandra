@@ -12,20 +12,19 @@ namespace IS_XNA_Shooter
     {
         private Sprite aimPointSprite;
         private BackgroundGameA backGround;
-        private int num;
-      
+        private String levelName;
 
         /* ------------------------------------------------------------- */
         /*                          CONSTRUCTOR                          */
         /* ------------------------------------------------------------- */
-        public GameC(SuperGame mainGame, Player player, int num, Texture2D textureAim,
+        public GameC(SuperGame mainGame, Player player, String levelName, Texture2D textureAim,
             Texture2D textureBg, Evolution evolution)
             : base(mainGame, player, evolution)
         {
             hud = new IngameHudA(GRMng.hudBase, mainGame.player.GetLife());
-            level = new LevelC(camera, num, enemies);
+            level = new LevelC(camera, levelName, enemies);
             backGround = new BackgroundGameA(camera, level);
-            this.num = num;
+            this.levelName = levelName;
             
             camera.setLevel(level);
 
@@ -49,7 +48,6 @@ namespace IS_XNA_Shooter
 
             camera.setShip(ship);
 
-        
             camera.setShip(ship);
         }
 
@@ -60,8 +58,6 @@ namespace IS_XNA_Shooter
         {
             base.Update(gameTime);
 
-            
-            
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             // actualizamos posicion del puntero:
@@ -88,13 +84,11 @@ namespace IS_XNA_Shooter
                 // number of enemies:
                 spriteBatch.DrawString(SuperGame.fontDebug, "Enemies in game = " + enemies.Count() + ".",
                     new Vector2(5, 27), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-
-   
             }
 
         } // Draw
 
-    } // class GameA
+    } // class GameC
 
-    }
+}
 

@@ -103,7 +103,7 @@ namespace IS_XNA_Shooter
                 GRMng.getready321, new Rectangle(0, 80, 170, 150));
 
             gameDialog = new List<List<Talk>>();
-            LvlMng.LoadContent(2); // Load the dialogs
+            LvlMng.LoadContent("Dialogs"); // Load the dialogs
             readConversationXML(0);
             setTimeToResume();
 
@@ -245,24 +245,23 @@ namespace IS_XNA_Shooter
             switch (cad)
             {
                 case "LevelB1":
-                    LvlMng.LoadContent(1); // Load the rectangles
-                    currentGame = new GameB(mainGame, player, 1, GRMng.textureAim, evolution);
+                    LvlMng.LoadContent(cad); // Load the rectangles
+                    currentGame = new GameB(mainGame, player, cad, GRMng.textureAim, evolution);
                     break;
 
                 case "LevelA1":
-                    LvlMng.LoadContent(0); // Load the levelA's enemies
-                    currentGame = new GameA(mainGame, player, 1, GRMng.textureAim, GRMng.textureCell, evolution);
+                    LvlMng.LoadContent(cad); // Load the levelA's enemies
+                    currentGame = new GameA(mainGame, player, cad, GRMng.textureAim, GRMng.textureCell, evolution);
                     break;
 
                 case "LevelB2": // final boss: DORITO FUCKER
-                    LvlMng.LoadContent(3); // Load the level map 2
-                    currentGame = new GameB(mainGame, player, 2, GRMng.textureAim, evolution);
+                    LvlMng.LoadContent(cad); // Load the level map 2
+                    currentGame = new GameB(mainGame, player, cad, GRMng.textureAim, evolution);
                     break;
 
                 case "LevelA2":
-                    // TODO: add new GameA here
-                    LvlMng.LoadContent(0); // Load the levelA's enemies
-                    currentGame = new GameA(mainGame, player, 2, GRMng.textureAim, GRMng.textureCell, evolution);
+                    LvlMng.LoadContent(cad); // Load the levelA's enemies
+                    currentGame = new GameA(mainGame, player, cad, GRMng.textureAim, GRMng.textureCell, evolution);
                     break;
             }
             
@@ -294,7 +293,7 @@ namespace IS_XNA_Shooter
                     case 0:
                         Talk talk;
                         int i = 1;
-                        XmlDocument dialog = XMLLvlMng.dialog1;
+                        XmlDocument dialog = XMLLvlMng.xmlDialogs;
 
                         XmlNodeList conversation = dialog.GetElementsByTagName("conversation" + i);
 

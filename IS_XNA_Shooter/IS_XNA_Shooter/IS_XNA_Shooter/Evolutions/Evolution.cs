@@ -335,16 +335,16 @@ namespace IS_XNA_Shooter
                             mainGame.NewStory();
                             break;
                         case GameState.killer:
-                            mainGame.NewKiller(0);
+                            mainGame.NewKiller("LevelA1");
                             break;
                         case GameState.scroll:
-                            mainGame.NewScroll(1);
+                            mainGame.NewScroll("LevelB1");
                             break;
                         case GameState.survival:
-                            mainGame.NewSurvival(2);
+                            mainGame.NewSurvival("LevelA1");
                             break;
                         case GameState.defense:
-                            mainGame.NewDefense(4);
+                            mainGame.NewDefense("LevelADefense1");
                             break;
                     }
             }

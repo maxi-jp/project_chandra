@@ -2,231 +2,229 @@
 <!DOCTYPE juego SYSTEM "level.dtd">
 <level titulo="nivel1" width="1200" height="800">
     <enemiesList>
-				<!-- OLEADA 1 --> 
-				<enemy type="enemyWeakB" positionX="1500" positionY="200" time="1"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="350" time="1"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="500" time="1"></enemy>
-								
-				<!-- OLEADA 2 --> 
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="100" time="6"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="200" time="6"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="300" time="7"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="500" time="7"></enemy>
-				
-				<!-- OLEADA 3 --> 
-				<enemy type="enemyWeakB" positionX="1500" positionY="150" time="11"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="250" time="10"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="350" time="10"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="450" time="11"></enemy>
-				
-				<!-- OLEADA 4 --> 
-                <enemy type="enemyWeakB" positionX="1500" positionY="100" time="14"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="200" time="14"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="300" time="14"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="500" time="14"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="600" time="14"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="150" time="15"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="250" time="15"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="350" time="15"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="550" time="15"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="480" time="15"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="120" time="16"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="220" time="16"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="320" time="16"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="570" time="16"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="470" time="16"></enemy>
-				
-				<!-- OLEADA 5 --> 
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="150" time="20"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="250" time="21"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="350" time="21"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="550" time="20"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="150" time="21"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="250" time="20"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="350" time="20"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="550" time="21"></enemy>
-				
-				<!-- OLEADA 6 --> 
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="150" time="23"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="250" time="23"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="350" time="23"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="550" time="23"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="150" time="24"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="250" time="24"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="350" time="24"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="550" time="24"></enemy>
-				
-				<!-- OLEADA 7 --> 
-				<enemy type="enemyMineShotB" positionX="1350" positionY="200" time="25"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="350" time="25"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="500" time="25"></enemy>
-				
-				<!-- OLEADA 8 --> 
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="150" time="28"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="250" time="28"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="350" time="28"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="550" time="28"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="150" time="29"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="250" time="29"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="350" time="29"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="550" time="29"></enemy>
-				
-				<!-- OLEADA 9 --> 
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="100" time="31"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="200" time="31"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="300" time="31"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="500" time="31"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="100" time="32"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="200" time="32"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="300" time="32"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="500" time="32"></enemy>
-				
-				<!-- OLEADA 10 --> 
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="600" time="34"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="225" time="34"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="325" time="34"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="525" time="34"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="350" time="35"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="450" time="35"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="500" time="35"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="575" time="35"></enemy>
-				
-				<!-- OLEADA 11 --> 
-				<enemy type="enemyLaserB" positionX="1250" positionY="150" time="39"></enemy>
-				<enemy type="enemyLaserB" positionX="1250" positionY="650" time="39"></enemy>
-				
-				<!-- OLEADA 12 --> 
-				<enemy type="enemyLaserB" positionX="1250" positionY="600" time="42"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="225" time="42"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="325" time="42"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="525" time="42"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="350" time="43"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="450" time="43"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="500" time="43"></enemy>
-				<enemy type="enemyLaserB" positionX="1250" positionY="575" time="43"></enemy>
-				
-				<!-- OLEADA 13 --> 
-				<enemy type="enemyLaserB" positionX="1250" positionY="100" time="44"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="225" time="44"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="325" time="44"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="525" time="44"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="350" time="45"></enemy>
-				<enemy type="enemyWeakB" positionX="1500" positionY="450" time="45"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="500" time="45"></enemy>
-				<enemy type="enemyLaserB" positionX="1250" positionY="575" time="45"></enemy>
-				<enemy type="enemyLaserB" positionX="1250" positionY="600" time="45"></enemy>
-				
-				<!-- OLEADA 14 --> 
-				<enemy type="enemyLaserB" positionX="1250" positionY="100" time="48"></enemy>
-				<enemy type="enemyLaserB" positionX="1250" positionY="150" time="48"></enemy>
-				<enemy type="enemyLaserB" positionX="1250" positionY="200" time="48"></enemy>
-				
-				<!-- OLEADA 15 --> 
-				<enemy type="enemyLaserB" positionX="1250" positionY="100" time="52"></enemy>
-				<enemy type="enemyLaserB" positionX="1250" positionY="150" time="52"></enemy>
-				<enemy type="enemyLaserB" positionX="1250" positionY="550" time="52"></enemy>
-				<enemy type="enemyLaserB" positionX="1250" positionY="600" time="52"></enemy>
-				
-				<!-- OLEADA 15 --> 
-				<enemy type="enemyLaserB" positionX="1250" positionY="150" time="60"></enemy>
-				<enemy type="enemyLaserB" positionX="1250" positionY="250" time="60"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="500" time="60"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="500" time="60"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="225" time="61"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="325" time="61"></enemy>
-				<enemy type="enemyLaserB" positionX="1250" positionY="500" time="61"></enemy>
-				<enemy type="enemyLaserB" positionX="1250" positionY="600" time="62"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="225" time="62"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="325" time="62"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="500" time="62"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="500" time="62"></enemy>
-				<enemy type="enemyLaserB" positionX="1250" positionY="550" time="63"></enemy>
-				<enemy type="enemyLaserB" positionX="1250" positionY="300" time="63"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="105" time="64"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="225" time="64"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="300" time="65"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="200" time="65"></enemy>
-				
-				
-				<!-- OLEADA 16 --> 
-				<enemy type="enemyLaserB" positionX="1250" positionY="150" time="66"></enemy>
-				<enemy type="enemyLaserB" positionX="1250" positionY="250" time="66"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="500" time="66"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="500" time="66"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="225" time="67"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="325" time="67"></enemy>
-				<enemy type="enemyLaserB" positionX="1250" positionY="500" time="68"></enemy>
-				<enemy type="enemyLaserB" positionX="1250" positionY="600" time="68"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="525" time="68"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="425" time="69"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="500" time="69"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="500" time="70"></enemy>
-				<enemy type="enemyLaserB" positionX="1250" positionY="550" time="70"></enemy>
-				<enemy type="enemyLaserB" positionX="1250" positionY="300" time="71"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="505" time="71"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="425" time="72"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="500" time="72"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="550" time="72"></enemy>
-				
-				<!-- OLEADA 17 --> 
-				<enemy type="enemyWeakShotB" positionX="1250" positionY="450" time="73"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1250" positionY="550" time="73"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="500" time="74"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="500" time="74"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="225" time="75"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="325" time="75"></enemy>
-				<enemy type="enemyLaserB" positionX="1250" positionY="500" time="76"></enemy>
-				<enemy type="enemyLaserB" positionX="1250" positionY="600" time="76"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="225" time="76"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="325" time="76"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="500" time="76"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="500" time="76"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1250" positionY="550" time="76"></enemy>
-				<enemy type="enemyLaserB" positionX="1250" positionY="300" time="76"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="505" time="77"></enemy>
-				<enemy type="enemyWeakShotB" positionX="1500" positionY="600" time="77"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="300" time="78"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="200" time="78"></enemy>
-				
-				<!-- OLEADA 18 --> 
-				<enemy type="enemyMineShotB" positionX="1350" positionY="150" time="80"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="350" time="80"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="600" time="80"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="150" time="81"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="350" time="81"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="600" time="81"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="150" time="82"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="350" time="82"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="600" time="82"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="150" time="83"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="350" time="83"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="600" time="83"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="150" time="84"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="350" time="84"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="600" time="84"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="150" time="85"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="350" time="85"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="600" time="85"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="150" time="86"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="350" time="86"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="600" time="86"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="150" time="87"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="350" time="87"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="600" time="87"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="350" time="90"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="350" time="90"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="350" time="90"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="350" time="90"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="350" time="90"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="350" time="90"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="350" time="90"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="350" time="90"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="350" time="90"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="350" time="90"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="350" time="90"></enemy>
-				<enemy type="enemyMineShotB" positionX="1350" positionY="350" time="90"></enemy>
-				
-				
-				
+		<!-- OLEADA 1 --> 
+		<enemy type="EnemyWeakB" positionX="1500" positionY="200" time="1"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="350" time="1"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="500" time="1"></enemy>
+						
+		<!-- OLEADA 2 --> 
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="100" time="6"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="200" time="6"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="300" time="7"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="500" time="7"></enemy>
+		
+		<!-- OLEADA 3 --> 
+		<enemy type="EnemyWeakB" positionX="1500" positionY="150" time="11"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="250" time="10"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="350" time="10"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="450" time="11"></enemy>
+		
+		<!-- OLEADA 4 --> 
+		<enemy type="EnemyWeakB" positionX="1500" positionY="100" time="14"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="200" time="14"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="300" time="14"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="500" time="14"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="600" time="14"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="150" time="15"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="250" time="15"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="350" time="15"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="550" time="15"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="480" time="15"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="120" time="16"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="220" time="16"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="320" time="16"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="570" time="16"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="470" time="16"></enemy>
+		
+		<!-- OLEADA 5 --> 
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="150" time="20"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="250" time="21"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="350" time="21"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="550" time="20"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="150" time="21"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="250" time="20"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="350" time="20"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="550" time="21"></enemy>
+		
+		<!-- OLEADA 6 --> 
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="150" time="23"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="250" time="23"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="350" time="23"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="550" time="23"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="150" time="24"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="250" time="24"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="350" time="24"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="550" time="24"></enemy>
+		
+		<!-- OLEADA 7 --> 
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="200" time="25"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="350" time="25"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="500" time="25"></enemy>
+		
+		<!-- OLEADA 8 --> 
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="150" time="28"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="250" time="28"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="350" time="28"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="550" time="28"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="150" time="29"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="250" time="29"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="350" time="29"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="550" time="29"></enemy>
+		
+		<!-- OLEADA 9 --> 
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="100" time="31"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="200" time="31"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="300" time="31"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="500" time="31"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="100" time="32"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="200" time="32"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="300" time="32"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="500" time="32"></enemy>
+		
+		<!-- OLEADA 10 --> 
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="600" time="34"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="225" time="34"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="325" time="34"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="525" time="34"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="350" time="35"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="450" time="35"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="500" time="35"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="575" time="35"></enemy>
+		
+		<!-- OLEADA 11 --> 
+		<enemy type="EnemyLaserB" positionX="1250" positionY="150" time="39"></enemy>
+		<enemy type="EnemyLaserB" positionX="1250" positionY="650" time="39"></enemy>
+		
+		<!-- OLEADA 12 --> 
+		<enemy type="EnemyLaserB" positionX="1250" positionY="600" time="42"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="225" time="42"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="325" time="42"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="525" time="42"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="350" time="43"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="450" time="43"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="500" time="43"></enemy>
+		<enemy type="EnemyLaserB" positionX="1250" positionY="575" time="43"></enemy>
+		
+		<!-- OLEADA 13 --> 
+		<enemy type="EnemyLaserB" positionX="1250" positionY="100" time="44"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="225" time="44"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="325" time="44"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="525" time="44"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="350" time="45"></enemy>
+		<enemy type="EnemyWeakB" positionX="1500" positionY="450" time="45"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="500" time="45"></enemy>
+		<enemy type="EnemyLaserB" positionX="1250" positionY="575" time="45"></enemy>
+		<enemy type="EnemyLaserB" positionX="1250" positionY="600" time="45"></enemy>
+		
+		<!-- OLEADA 14 --> 
+		<enemy type="EnemyLaserB" positionX="1250" positionY="100" time="48"></enemy>
+		<enemy type="EnemyLaserB" positionX="1250" positionY="150" time="48"></enemy>
+		<enemy type="EnemyLaserB" positionX="1250" positionY="200" time="48"></enemy>
+		
+		<!-- OLEADA 15 --> 
+		<enemy type="EnemyLaserB" positionX="1250" positionY="100" time="52"></enemy>
+		<enemy type="EnemyLaserB" positionX="1250" positionY="150" time="52"></enemy>
+		<enemy type="EnemyLaserB" positionX="1250" positionY="550" time="52"></enemy>
+		<enemy type="EnemyLaserB" positionX="1250" positionY="600" time="52"></enemy>
+		
+		<!-- OLEADA 15 --> 
+		<enemy type="EnemyLaserB" positionX="1250" positionY="150" time="60"></enemy>
+		<enemy type="EnemyLaserB" positionX="1250" positionY="250" time="60"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="500" time="60"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="500" time="60"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="225" time="61"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="325" time="61"></enemy>
+		<enemy type="EnemyLaserB" positionX="1250" positionY="500" time="61"></enemy>
+		<enemy type="EnemyLaserB" positionX="1250" positionY="600" time="62"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="225" time="62"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="325" time="62"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="500" time="62"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="500" time="62"></enemy>
+		<enemy type="EnemyLaserB" positionX="1250" positionY="550" time="63"></enemy>
+		<enemy type="EnemyLaserB" positionX="1250" positionY="300" time="63"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="105" time="64"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="225" time="64"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="300" time="65"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="200" time="65"></enemy>
+		
+		
+		<!-- OLEADA 16 --> 
+		<enemy type="EnemyLaserB" positionX="1250" positionY="150" time="66"></enemy>
+		<enemy type="EnemyLaserB" positionX="1250" positionY="250" time="66"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="500" time="66"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="500" time="66"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="225" time="67"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="325" time="67"></enemy>
+		<enemy type="EnemyLaserB" positionX="1250" positionY="500" time="68"></enemy>
+		<enemy type="EnemyLaserB" positionX="1250" positionY="600" time="68"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="525" time="68"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="425" time="69"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="500" time="69"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="500" time="70"></enemy>
+		<enemy type="EnemyLaserB" positionX="1250" positionY="550" time="70"></enemy>
+		<enemy type="EnemyLaserB" positionX="1250" positionY="300" time="71"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="505" time="71"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="425" time="72"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="500" time="72"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="550" time="72"></enemy>
+		
+		<!-- OLEADA 17 --> 
+		<enemy type="EnemyWeakShotB" positionX="1250" positionY="450" time="73"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1250" positionY="550" time="73"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="500" time="74"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="500" time="74"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="225" time="75"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="325" time="75"></enemy>
+		<enemy type="EnemyLaserB" positionX="1250" positionY="500" time="76"></enemy>
+		<enemy type="EnemyLaserB" positionX="1250" positionY="600" time="76"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="225" time="76"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="325" time="76"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="500" time="76"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="500" time="76"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1250" positionY="550" time="76"></enemy>
+		<enemy type="EnemyLaserB" positionX="1250" positionY="300" time="76"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="505" time="77"></enemy>
+		<enemy type="EnemyWeakShotB" positionX="1500" positionY="600" time="77"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="300" time="78"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="200" time="78"></enemy>
+		
+		<!-- OLEADA 18 --> 
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="150" time="80"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="350" time="80"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="600" time="80"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="150" time="81"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="350" time="81"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="600" time="81"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="150" time="82"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="350" time="82"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="600" time="82"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="150" time="83"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="350" time="83"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="600" time="83"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="150" time="84"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="350" time="84"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="600" time="84"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="150" time="85"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="350" time="85"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="600" time="85"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="150" time="86"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="350" time="86"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="600" time="86"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="150" time="87"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="350" time="87"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="600" time="87"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="350" time="90"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="350" time="90"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="350" time="90"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="350" time="90"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="350" time="90"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="350" time="90"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="350" time="90"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="350" time="90"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="350" time="90"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="350" time="90"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="350" time="90"></enemy>
+		<enemy type="EnemyMineShotB" positionX="1350" positionY="350" time="90"></enemy>
+			
 	</enemiesList>
 </level>

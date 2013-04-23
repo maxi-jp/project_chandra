@@ -16,14 +16,18 @@ namespace IS_XNA_Shooter
 
         private bool testingEnemies;
 
-        public LevelA(Camera camera, int num, List<Enemy> enemies)
-            : base(camera, num, enemies)
+        // attributes for the Defense mode
+        private Vector2 baseInitPosition;
+        private Base house;
+
+        public LevelA(Camera camera, String levelName, List<Enemy> enemies)
+            : base(camera, levelName, enemies)
         {
             testingEnemies = false;
 
-            switch (num)
+            switch (levelName)
             {
-                case 0: // Level for testing enemies
+                case "TestEnemies": // Level for testing enemies
                     levelEndCond = LevelEndCondition.infinite;
                     width = 1200;
                     height = 800;
@@ -31,28 +35,19 @@ namespace IS_XNA_Shooter
                     this.enemies = enemies;
 
                     testingEnemies = true;
-
                     break;
 
-                case 40:
-                    width = 1200;
-                    height = 800;
-                    ShipInitPosition = new Vector2(width / 2, height / 2);
-                    this.enemies = enemies;
-                    break;
-
-                case 1:
+                case "LevelA1": // Level 1 for the Defense mode
                     levelEndCond = LevelEndCondition.killemall;
                     width = 1200;
                     height = 800;
                     ShipInitPosition = new Vector2(width / 2, height / 2);
                     this.enemies = enemies;
 
-                    LeerArchivoXML(0,0);
-                    
+                    LeerArchivoXML(0, 0);
                     break;
 
-                case 2:
+                case "LevelA2":
                     levelEndCond = LevelEndCondition.killemall;
                     width = 1200;
                     height = 800;
@@ -60,9 +55,26 @@ namespace IS_XNA_Shooter
                     this.enemies = enemies;
 
                     Enemy enemy = EnemyFactory.GetEnemyByName("FinalBossHeroe1", camera, this, ship,
-                        new Vector2(60, 60), 0,house);
+                        new Vector2(60, 60), 0);
                     ((FinalBossHeroe1)enemy).SetEnemies(enemies);
-                    enemies.Add(enemy);                    
+                    enemies.Add(enemy);
+                    break;
+
+                case "LevelADefense1":
+                    levelEndCond = LevelEndCondition.killemall;
+                    width = 1200;
+                    height = 800;
+                    ShipInitPosition = new Vector2(width / 2, height / 2);
+                    this.enemies = enemies;
+
+                    LeerArchivoXML(0, 0);
+                    break;
+
+                case "TestParticles": // level for testing the particle system
+                    width = 1200;
+                    height = 800;
+                    ShipInitPosition = new Vector2(width / 2, height / 2);
+                    this.enemies = enemies;
                     break;
             }
 
@@ -125,47 +137,47 @@ namespace IS_XNA_Shooter
 
         private void TestEnemies()
         {
-            Enemy enemy;
+            Enemy enemy = null;
 
             // EnemyWeak:
             if (ControlMng.f1Preshed)
             {
-                enemy = EnemyFactory.GetEnemyByName("EnemyWeakA", camera, this, ship, new Vector2(20, 20), 0, house);
+                enemy = EnemyFactory.GetEnemyByName("EnemyWeakA", camera, this, ship, new Vector2(20, 20), 0);
                 enemies.Add(enemy);
             }
 
             // EnemyWeakShot:
             if (ControlMng.f2Preshed)
             {
-                enemy = EnemyFactory.GetEnemyByName("EnemyWeakShotA", camera, this, ship, new Vector2(20, 20), 0, house);
+                enemy = EnemyFactory.GetEnemyByName("EnemyWeakShotA", camera, this, ship, new Vector2(20, 20), 0);
                 enemies.Add(enemy);
             }
 
             // EnemyBeamA:
             if (ControlMng.f3Preshed)
             {
-                enemy = EnemyFactory.GetEnemyByName("EnemyBeamA", camera, this, ship, new Vector2(60, 60), 0, house);
+                enemy = EnemyFactory.GetEnemyByName("EnemyBeamA", camera, this, ship, new Vector2(60, 60), 0);
                 enemies.Add(enemy);
             }
 
             // EnemyMineShotA
             if (ControlMng.f4Preshed)
             {
-                enemy = EnemyFactory.GetEnemyByName("EnemyMineShotA", camera, this, ship, new Vector2(20, 20), 0, house);
+                enemy = EnemyFactory.GetEnemyByName("EnemyMineShotA", camera, this, ship, new Vector2(20, 20), 0);
                 enemies.Add(enemy);
             }
 
             // EnemyLaserA
             if (ControlMng.f5Preshed)
             {
-                enemy = EnemyFactory.GetEnemyByName("EnemyLaserA", camera, this, ship, new Vector2(60, 60), 0, house);
+                enemy = EnemyFactory.GetEnemyByName("EnemyLaserA", camera, this, ship, new Vector2(60, 60), 0);
                 enemies.Add(enemy);
             }
 
             // EnemyScaredA
             if (ControlMng.f6Preshed)
             {
-                enemy = EnemyFactory.GetEnemyByName("EnemyMineShotA", camera, this, ship, new Vector2(60, 60), 0, house);
+                enemy = EnemyFactory.GetEnemyByName("EnemyMineShotA", camera, this, ship, new Vector2(60, 60), 0);
                 enemies.Add(enemy);
             }
 
@@ -186,13 +198,34 @@ namespace IS_XNA_Shooter
             // Final Boss 1 Phase 4
             if (ControlMng.f9Preshed)
             {
-                enemy = EnemyFactory.GetEnemyByName("FinalBossHeroe1", camera, this, ship, new Vector2(60, 60), 0, house);
+                enemy = EnemyFactory.GetEnemyByName("FinalBossHeroe1", camera, this, ship, new Vector2(60, 60), 0);
                 ((FinalBossHeroe1)enemy).SetEnemies(enemies);
                 enemies.Add(enemy);
             }
 
+            if (house != null && enemy != null)
+                ((EnemyADefense)(enemy)).SetBase(house);
+
         } // TestEnemies
 
+        public virtual void SetBase(Base house)
+        {
+            this.house = house;
+
+            foreach (Enemy e in enemies)// enemigos
+                ((EnemyADefense)e).SetBase(house);
+            //house.SetPosition(BaseInitPosition);
+        }
+
+        public Base GetBase()
+        {
+            return this.house;
+        }
+
+        public void DamageBase(int i)
+        {
+            house.Damage(i);
+        }
 
     } // class LevelA
 }

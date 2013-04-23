@@ -84,36 +84,6 @@ namespace IS_XNA_Shooter
         {
             base.Update(deltaTime);
 
-
-
-            // shots:
-            Base basee = level.GetBase();
-            if (basee != null)
-            {
-                for (int i = 0; i < shots.Count(); i++)
-                {
-                    shots[i].Update(deltaTime);
-                    if (!shots[i].IsActive())
-                        shots.RemoveAt(i);
-                    else  // shots-house colisions
-                    {
-                        //If we are in Defense mode, check the house also
-
-                       
-                        if (basee.collider.Collision(shots[i].position))
-                        {
-                            int damage = 0;
-
-                            damage = shots[i].GetPower();
-                            shots.RemoveAt(i);
-
-                            // the house is hit:
-                            basee.Damage(damage);
-                        }
-                    }
-                }
-            }
-
             // shots:
             for (int i = 0; i < shots.Count(); i++)
             {

@@ -199,7 +199,7 @@ namespace IS_XNA_Shooter
                     }
                 }
             }
-        }
+        } // Update
 
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -362,7 +362,7 @@ namespace IS_XNA_Shooter
         private void duplicate()
         {
             duplicates += 1;
-            Enemy enemy = EnemyFactory.GetEnemyByName("FinalBossHeroe1", camera, level, ship, position, 0, null);
+            Enemy enemy = EnemyFactory.GetEnemyByName("FinalBossHeroe1", camera, level, ship, position, 0);
             ((FinalBossHeroe1)enemy).SetEnemies(enemies);
             enemies.Add(enemy);
         }

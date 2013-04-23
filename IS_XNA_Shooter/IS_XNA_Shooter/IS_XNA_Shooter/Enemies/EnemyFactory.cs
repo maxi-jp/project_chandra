@@ -9,7 +9,7 @@ namespace IS_XNA_Shooter
     static class EnemyFactory
     {
         public static Enemy GetEnemyByName(String name, Camera camera, Level level, Ship ship,
-            Vector2 position, float time, Base house)
+            Vector2 position, float time)
         {
             Enemy enemy = null;
 
@@ -56,7 +56,7 @@ namespace IS_XNA_Shooter
                         100,    /* life */
                         1,      /* value */
                         ship,
-                        house
+                        null    /* house */
                     );
                     break;
 
@@ -99,7 +99,7 @@ namespace IS_XNA_Shooter
                         time,   /* timeToSpawn */
                         1000,   /* velocity */
                         100,    /* life */
-                        1,      /* value */
+                        4,      /* value */
                         ship    /* player's ship */
                     );
                     break;
@@ -150,8 +150,8 @@ namespace IS_XNA_Shooter
                         ship,   /* player's ship */
                         2,      /* timeToShot */
                         300,    /* shotVelocity */
-                        200,     /* shotPower */
-                        house
+                        200,    /* shotPower */
+                        null    /* house */
                     );
                     break;
 
@@ -276,8 +276,8 @@ namespace IS_XNA_Shooter
                         ship,   /* player's ship */
                         4,      /* timeToShot */
                         300,    /* shotVelocity */
-                        200,     /* shotPower */
-                        house
+                        200,    /* shotPower */
+                        null    /* base */
                     );
                     break;
 
@@ -293,7 +293,29 @@ namespace IS_XNA_Shooter
                         GRMng.numAnimsEL,
                         GRMng.frameCountEL,
                         GRMng.loopingEL,
-                        SuperGame.frameTime10,
+                        SuperGame.frameTime12,
+                        GRMng.textureEL,
+                        time,
+                        100,    /* velocity */
+                        100,    /* life */
+                        1,      /* value */
+                        ship    /* player's ship */
+                    );
+                    break;
+
+                case "EnemyLaserB":
+                    enemy = new EnemyLaserB
+                    (
+                        camera,
+                        level,
+                        position,   /* initial position in the level */
+                        0,          /* initial rotation */
+                        GRMng.frameWidthEL,
+                        GRMng.frameHeightEL,
+                        GRMng.numAnimsEL,
+                        GRMng.frameCountEL,
+                        GRMng.loopingEL,
+                        SuperGame.frameTime12,
                         GRMng.textureEL,
                         time,
                         100,    /* velocity */

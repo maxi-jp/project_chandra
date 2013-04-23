@@ -507,7 +507,8 @@ namespace IS_XNA_Shooter
             grManager.LoadHud();
             grManager.LoadContent("LevelA1"); // Load the gameA's level 1 resources
             audio.LoadContent(1);
-            game = new GameA(this, player, 0, GRMng.textureAim, GRMng.textureCell, screenEvolution);
+            game = new GameA(this, player, "TestEnemies", GRMng.textureAim, GRMng.textureCell,
+                screenEvolution);
             currentState = gameState.playing; // Change game's state to game mode
             grManager.UnloadContent("MenuMain"); // Unload the menu's resources
         }
@@ -517,7 +518,8 @@ namespace IS_XNA_Shooter
             grManager.LoadHud();
             grManager.LoadContent("LevelA1"); // Load the gameA's level 1 resources
             audio.LoadContent(1);
-            game = new GameAForTestingParticles(this, player, 40, GRMng.textureAim, GRMng.textureCell, screenEvolution);
+            game = new GameAForTestingParticles(this, player, GRMng.textureAim, GRMng.textureCell,
+                screenEvolution);
             currentState = gameState.playing; // Change game's state to game mode
             grManager.UnloadContent("MenuMain"); // Unload the menu's resources
         }
@@ -546,55 +548,53 @@ namespace IS_XNA_Shooter
         /// <summary>
         /// Create a new Survival
         /// </summary>
-        /// <param name="lvl">The number of the level</param>
-        public void NewSurvival(int lvl)
+        /// <param name="cad">The number of the level</param>
+        public void NewSurvival(String cad)
         {
             grManager.LoadHud();
             grManager.LoadContent("LevelA1");  // Load the gameA's level 1 resources
             audio.LoadContent(1);
-            LvlMng.LoadContent(lvl); // Load XML
+            LvlMng.LoadContent(cad); // Load XML
 
-            game = new GameC(this, player, 1, GRMng.textureAim, GRMng.textureCell, screenEvolution);
+            game = new GameC(this, player, cad, GRMng.textureAim, GRMng.textureCell, screenEvolution);
 
             currentState = gameState.playing; // Change game's state to game mode
 
-            LvlMng.UnloadContent(lvl);
+            LvlMng.UnloadContent(cad);
             grManager.UnloadContent("MenuMain"); /// Unload the main menu's resources
-                                                 /// 
-
         }
 
         /// <summary>
         /// Create a new Killer
         /// </summary>
-        /// <param name="lvl">The number of the level</param>
-        public void NewKiller(int lvl)
+        /// <param name="cad">The number of the level</param>
+        public void NewKiller(String cad)
         {
             grManager.LoadHud();
             grManager.LoadContent("LevelA1"); // Load the gameB's level 1 resources
             audio.LoadContent(1);
-            LvlMng.LoadContent(lvl); // Load XML
+            LvlMng.LoadContent(cad); // Load XML
 
-            game = new GameA(this, player, 1, GRMng.textureAim, GRMng.textureCell, screenEvolution);
+            game = new GameA(this, player, cad, GRMng.textureAim, GRMng.textureCell, screenEvolution);
 
             currentState = gameState.playing; // Change game's state to game mode
 
-            LvlMng.UnloadContent(lvl);
+            LvlMng.UnloadContent(cad);
             grManager.UnloadContent("MenuMain"); /// Unload the main menu's resources
         }
 
         /// <summary>
         /// Create a new Defense
         /// </summary>
-        /// <param name="lvl">The number of the level</param>
-        public void NewDefense(int lvl)
+        /// <param name="cad">The number of the level</param>
+        public void NewDefense(String cad)
         {
-            grManager.LoadContent("LevelADefense1"); // Load the gameA's level 1 resources
             grManager.LoadHud();
+            grManager.LoadContent(cad); // Load the gameA's level 1 resources
             audio.LoadContent(1);
-            LvlMng.LoadContent(lvl);
+            LvlMng.LoadContent(cad);
 
-            game = new GameADefense(this, player, 1, GRMng.textureAim, GRMng.textureCell,
+            game = new GameADefense(this, player, cad, GRMng.textureAim, GRMng.textureCell,
                 /*ShipVelocity*/200f, /*ShipLife*/100, new Vector2(300, 300), GRMng.frameWidthBase, GRMng.frameHeightBase,
                 GRMng.numAnimsBase, GRMng.frameCountBase, GRMng.loopingBase, SuperGame.frameTime12, GRMng.textureBase,
                 GRMng.frameWidthBaseLifeBar, GRMng.frameHeightBaseLifeBar, GRMng.numAnimsBaseLifeBar, GRMng.frameCountBaseLifeBar,
@@ -602,26 +602,26 @@ namespace IS_XNA_Shooter
 
             currentState = gameState.playing; // Change game's state to game mode
 
-            LvlMng.UnloadContent(lvl);
+            LvlMng.UnloadContent(cad);
             grManager.UnloadContent("MenuMain"); /// Unload the main menu's resources
         }
 
         /// <summary>
         /// Create a new Scroll
         /// </summary>
-        /// <param name="lvl">The number of the level</param>
-        public void NewScroll(int lvl)
+        /// <param name="cad">The number of the level</param>
+        public void NewScroll(String cad)
         {
             grManager.LoadHud();
-            grManager.LoadContent("LevelB1"); // Load the gameB's level 1 resources
+            grManager.LoadContent(cad); // Load the gameB's level 1 resources
             audio.LoadContent(1);
-            LvlMng.LoadContent(lvl); // Load the rectangles
+            LvlMng.LoadContent(cad); // Load the rectangles
 
-            game = new GameB(this, player, 1, GRMng.textureAim, screenEvolution);
+            game = new GameB(this, player, cad, GRMng.textureAim, screenEvolution);
 
             currentState = gameState.playing; // Change game's state to game mode
 
-            LvlMng.UnloadContent(lvl);
+            LvlMng.UnloadContent(cad);
             grManager.UnloadContent("MenuMain"); /// Unload the main menu's resources
         }
 

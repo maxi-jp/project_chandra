@@ -12,12 +12,15 @@ namespace IS_XNA_Shooter
 {
     class XMLLvlMng // XML Level Manager
     {
-        public static XmlDocument lvl1A;     // XML level 1 A
-        public static XmlDocument lvl1B;     // XML level 1 B
-        public static XmlDocument lvl1C;     // XML level 1 C
-        public static XmlDocument rect1;    // rectangles level 1 side scroll mode
-        public static XmlDocument rect2;    // rectangles level 2 side scroll mode (DORITO)
-        public static XmlDocument dialog1;  // dialog of the first level of mode history
+        //public static XmlDocument lvl1A;     // XML level 1 A
+        //public static XmlDocument lvl1B;     // XML level 1 B
+        //public static XmlDocument lvl1C;     // XML level 1 C
+        //public static XmlDocument rect1;    // rectangles level 1 side scroll mode
+        //public static XmlDocument rect2;    // rectangles level 2 side scroll mode (DORITO)
+        //public static XmlDocument dialog1;  // dialog of the first level of mode history
+        public static XmlDocument xmlEnemies;
+        public static XmlDocument xmlRectangles;
+        public static XmlDocument xmlDialogs;
 
         /// <summary>
         /// Constructor for XMLLvl manager
@@ -30,39 +33,36 @@ namespace IS_XNA_Shooter
         /// <summary>
         /// Load the content of the game indicated by the param i
         /// </summary>
-        /// <param name="i">indicator for the content loaded</param>
-        public void LoadContent(int i)
+        /// <param name="cad">indicator for the content loaded</param>
+        public void LoadContent(String cad)
         {
-            // i:
-            // 0=GameA
-            // 1=GameB
-
-            switch (i)
+            switch (cad)
             {
-                case 0: // GameA
-                    lvl1A = new XmlDocument();
-                    lvl1A.Load("../../../../IS_XNA_ShooterContent/Levels/level1A.xml");
-                    break;
-                case 1: // GameB Level 1
-                    rect1 = new XmlDocument();
-                    rect1.Load("../../../../IS_XNA_ShooterContent/Levels/levelRectangle1.xml");
-                    lvl1C = new XmlDocument();
-                    lvl1C.Load("../../../../IS_XNA_ShooterContent/Levels/level1B.xml");
+                case "LevelA1": // GameA Level 1
+                    xmlEnemies = new XmlDocument();
+                    xmlEnemies.Load("../../../../IS_XNA_ShooterContent/Levels/level1A.xml");
                     break;
 
-                case 2: // dialogs
-                    dialog1 = new XmlDocument();
-                    dialog1.Load("../../../../IS_XNA_ShooterContent/Levels/dialog1.xml");
+                case "LevelB1": // GameB Level 1
+                    xmlRectangles = new XmlDocument();
+                    xmlRectangles.Load("../../../../IS_XNA_ShooterContent/Levels/levelRectangle1.xml");
+                    xmlEnemies = new XmlDocument();
+                    xmlEnemies.Load("../../../../IS_XNA_ShooterContent/Levels/level1B.xml");
                     break;
 
-                case 3: // GameB Level 2 DORITO
-                    rect2 = new XmlDocument();
-                    rect2.Load("../../../../IS_XNA_ShooterContent/Levels/levelRectangle2.xml");
+                case "Dialogs": // dialogs
+                    xmlDialogs = new XmlDocument();
+                    xmlDialogs.Load("../../../../IS_XNA_ShooterContent/Levels/dialog1.xml");
                     break;
 
-                case 4:
-                    lvl1A = new XmlDocument();
-                    lvl1A.Load("../../../../IS_XNA_ShooterContent/Levels/level1ADefense.xml");
+                case "LevelB2": // GameB Level 2 DORITO
+                    xmlRectangles = new XmlDocument();
+                    xmlRectangles.Load("../../../../IS_XNA_ShooterContent/Levels/levelRectangle2.xml");
+                    break;
+
+                case "LevelADefense1": // GameA Defense 1
+                    xmlEnemies = new XmlDocument();
+                    xmlEnemies.Load("../../../../IS_XNA_ShooterContent/Levels/level1ADefense.xml");
                     break;
             }
 
@@ -71,25 +71,33 @@ namespace IS_XNA_Shooter
        /// <summary>
        /// Unload the content of the XML level manager
        /// </summary>
-       /// <param name="i">indicates the resources to unload</param>
-        public void UnloadContent(int i)
+       /// <param name="cad">indicates the resources to unload</param>
+        public void UnloadContent(String cad)
         {
-            //i:
-            // 0=GameA
-            // 1=GameB
-            switch (i)
+            switch (cad)
             {
-                case 0: //gameA
-                    lvl1A = null;
+                case "LevelA1": // GameA Level 1
+                    xmlEnemies = null;
                     break;
-                case 1: //gameB
-                    lvl1C = null;
-                    rect1 = null;
-                    dialog1 = null;
+
+                case "LevelB1": // GameB Level 1
+                    xmlRectangles = null;
+                    xmlEnemies = null;
+                    break;
+
+                case "Dialogs": // dialogs
+                    xmlDialogs = null;
+                    break;
+
+                case "LevelB2": // GameB Level 2 DORITO
+                    xmlRectangles = null;
+                    break;
+
+                case "LevelADefense1": // GameA Defense 1
+                    xmlEnemies = null;
                     break;
             }
-        }
-       
+        } // UnloadContent
 
     } // class XMLLvlMng
 }

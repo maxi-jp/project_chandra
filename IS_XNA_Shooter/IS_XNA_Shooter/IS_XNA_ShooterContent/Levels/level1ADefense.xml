@@ -2,12 +2,10 @@
 <!DOCTYPE juego SYSTEM "level.dtd">
 <level titulo="nivel1" width="1200" height="800">
     <enemiesList>
-				<!-- OLEADA 1 --> 
-				
-				<enemy type="enemyWeakShotA" positionX="1100" positionY="750" time="1"></enemy>
-				<enemy type="enemyMineShotA" positionX="1100" positionY="750" time="1"></enemy>
+		<!-- OLEADA 1 --> 
+		<enemy type="EnemyWeakADefense" positionX="600" positionY="750" time="1"></enemy>
+		<enemy type="EnemyWeakADefense" positionX="800" positionY="750" time="1"></enemy>
+		<enemy type="EnemyWeakADefense" positionX="1000" positionY="750" time="1"></enemy>
 
-				
-				
 	</enemiesList>
 </level>

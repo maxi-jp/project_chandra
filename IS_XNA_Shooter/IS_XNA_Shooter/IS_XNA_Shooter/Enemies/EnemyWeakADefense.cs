@@ -13,7 +13,6 @@ namespace IS_XNA_Shooter
     class EnemyWeakADefense : EnemyADefense
     {
 
-
         /// <summary>
         /// EnemyWeakADefense's constructor
         /// </summary>
@@ -39,7 +38,7 @@ namespace IS_XNA_Shooter
             float frametime, Texture2D texture, float timeToSpawn, float velocity, int life,
             int value, Ship ship, Base house)
             : base(camera, level, position, rotation, frameWidth, frameHeight, numAnim, frameCount,
-                looping, frametime, texture, timeToSpawn, velocity, life, value, ship,house)
+                looping, frametime, texture, timeToSpawn, velocity, life, value, ship, house)
         {
             Vector2[] points = new Vector2[7];
             points[0] = new Vector2(21, 21);

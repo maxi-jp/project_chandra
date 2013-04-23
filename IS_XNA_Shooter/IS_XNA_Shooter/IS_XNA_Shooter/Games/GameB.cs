@@ -59,7 +59,7 @@ namespace IS_XNA_Shooter
             camera.setShip(ship);
         }*/
 
-        public GameB(SuperGame mainGame, Player player, int numLevel, Texture2D textureAim,
+        public GameB(SuperGame mainGame, Player player, String levelName, Texture2D textureAim,
             Evolution evolution)
             : base(mainGame, player, evolution)
         {
@@ -69,7 +69,7 @@ namespace IS_XNA_Shooter
             listRecMap = new List<RectangleMap>();
 
             hud = new IngameHudA(GRMng.hudBase, mainGame.player.GetLife());
-            level = new LevelB(camera, numLevel, enemies, listRecMap);
+            level = new LevelB(camera, levelName, enemies, listRecMap);
             rectangleMap = ((LevelB)level).GetLevelMap();
             backGround = new BackgroundGameB((LevelB)level);
 

@@ -273,6 +273,11 @@ namespace IS_XNA_Shooter
         {
             return (!animActive);
         }
+
+        /// <summary>
+        /// Returns the Enemy's life
+        /// </summary>
+        /// <returns>The life of the enemy</returns>
         public int GetLife()
         {
             return this.life;

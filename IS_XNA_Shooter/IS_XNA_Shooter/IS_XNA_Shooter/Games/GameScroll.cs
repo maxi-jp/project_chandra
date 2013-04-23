@@ -10,6 +10,8 @@ namespace IS_XNA_Shooter
     //Clase que gestiona el GameScroll 
     class GameScroll : Game
     {
+        // TODO: borrar esta clase dentro de 20 días (23 abril 2013)
+
         //-------------------------
         //----    Atributos    ----
         //-------------------------
@@ -39,7 +41,7 @@ namespace IS_XNA_Shooter
 
         private void initLevelB(int numLevel)
         {
-            hud = new IngameHudA(GRMng.hudBase, mainGame.player.GetLife());
+            /*hud = new IngameHudA(GRMng.hudBase, mainGame.player.GetLife());
             colliderList = new List<Collider>();
             level = new LevelB(camera, numLevel, enemies, null);
             enemies = ((LevelB)level).getEnemies();
@@ -51,7 +53,7 @@ namespace IS_XNA_Shooter
                 GRMng.frameHeightPA1, GRMng.numAnimsPA1, GRMng.frameCountPA1, GRMng.loopingPA1, SuperGame.frameTime24,
                 GRMng.texturePA1, evolution, shots);
             level.setShip(ship);
-            camera.setShip(ship);
+            camera.setShip(ship);*/
         }
 
 

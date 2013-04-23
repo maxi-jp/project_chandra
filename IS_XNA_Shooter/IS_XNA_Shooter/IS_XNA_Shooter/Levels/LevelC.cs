@@ -19,30 +19,28 @@ namespace IS_XNA_Shooter
         private float timeLapse;
 
         XmlNodeList level;
-        private int numLevel;
-        private int numLevelAux;
+        private String levelName;
+        private String levelNameAux;
 
         private bool testingEnemies;
         bool havePassed;
 
-  
-
-        public LevelC(Camera camera, int num, List<Enemy> enemies)
-            : base(camera, num, enemies)
+        public LevelC(Camera camera, String levelName, List<Enemy> enemies)
+            : base(camera, levelName, enemies)
         {
             testingEnemies = false;
             globalTime = 0;
             globalTimeAux = 0;
             timeLapse = 2;
 
-            numLevel = 2;
-            numLevelAux = 2;
+            levelName = "LevelC1";
+            levelNameAux = "LevelC1";
            
             havePassed = false;
 
-            switch (num)
+            switch (levelName)
             {
-                case 0: // Level for testing enemies
+                /*case 0: // Level for testing enemies
                     width = 1200;
                     height = 800;
                     ShipInitPosition = new Vector2(width / 2, height / 2);
@@ -50,9 +48,9 @@ namespace IS_XNA_Shooter
 
                     testingEnemies = true;
 
-                    break;
+                    break;*/
 
-                case 1:
+                case "LevelC1":
                     width = 1200;
                     height = 800;
                     ShipInitPosition = new Vector2(width / 2, height / 2);
@@ -75,26 +73,21 @@ namespace IS_XNA_Shooter
             bool stillAlive = false; // is true if there is any enemie alive
             //the next loop searches an enemy alive for controlling the end of level 
 
+            /* TODO: arreglar esto
             if (globalTimeAux > 310 && numLevelAux != 0 && timeLapse <= 0)
             {
-                
                 LeerArchivoXML();
                 timeLapse = 2;
-                numLevelAux--;
-                
-
-                
+                numLevelAux--;                
             }
-            else  if (numLevelAux == 0) {
-                             numLevel++;
-                             numLevelAux = numLevel;
-                             globalTimeAux = 310;
-                             timeLapse = 2;
-                         } 
+            else  if (numLevelAux == 0)
+            {
+                numLevel++;
+                numLevelAux = numLevel;
+                globalTimeAux = 310;
+                timeLapse = 2;
+            } */
                                         
-           
-
-
             globalTime = globalTime + deltaTime;
             globalTimeAux = globalTimeAux + deltaTime;
             timeLapse = timeLapse - deltaTime;
@@ -162,42 +155,42 @@ namespace IS_XNA_Shooter
             // EnemyWeak:
             if (ControlMng.f1Preshed)
             {
-                enemy = EnemyFactory.GetEnemyByName("EnemyWeakA", camera, this, ship, new Vector2(20, 20), 0,null);
+                enemy = EnemyFactory.GetEnemyByName("EnemyWeakA", camera, this, ship, new Vector2(20, 20), 0);
                 enemies.Add(enemy);
             }
 
             // EnemyWeakShot:
             if (ControlMng.f2Preshed)
             {
-                enemy = EnemyFactory.GetEnemyByName("EnemyWeakShotA", camera, this, ship, new Vector2(20, 20), 0, null);
+                enemy = EnemyFactory.GetEnemyByName("EnemyWeakShotA", camera, this, ship, new Vector2(20, 20), 0);
                 enemies.Add(enemy);
             }
 
             // EnemyBeamA:
             if (ControlMng.f3Preshed)
             {
-                enemy = EnemyFactory.GetEnemyByName("EnemyBeamA", camera, this, ship, new Vector2(60, 60), 0, null);
+                enemy = EnemyFactory.GetEnemyByName("EnemyBeamA", camera, this, ship, new Vector2(60, 60), 0);
                 enemies.Add(enemy);
             }
 
             // EnemyMineShotA
             if (ControlMng.f4Preshed)
             {
-                enemy = EnemyFactory.GetEnemyByName("EnemyMineShotA", camera, this, ship, new Vector2(20, 20), 0, null);
+                enemy = EnemyFactory.GetEnemyByName("EnemyMineShotA", camera, this, ship, new Vector2(20, 20), 0);
                 enemies.Add(enemy);
             }
 
             // EnemyLaserA
             if (ControlMng.f5Preshed)
             {
-                enemy = EnemyFactory.GetEnemyByName("EnemyLaserA", camera, this, ship, new Vector2(60, 60), 0, null);
+                enemy = EnemyFactory.GetEnemyByName("EnemyLaserA", camera, this, ship, new Vector2(60, 60), 0);
                 enemies.Add(enemy);
             }
 
             // EnemyScaredA
             if (ControlMng.f6Preshed)
             {
-                enemy = EnemyFactory.GetEnemyByName("EnemyMineShotA", camera, this, ship, new Vector2(60, 60), 0, null);
+                enemy = EnemyFactory.GetEnemyByName("EnemyMineShotA", camera, this, ship, new Vector2(60, 60), 0);
                 enemies.Add(enemy);
             }
 
@@ -218,7 +211,7 @@ namespace IS_XNA_Shooter
             // Final Boss 1 Phase 4
             if (ControlMng.f9Preshed)
             {
-                enemy = EnemyFactory.GetEnemyByName("FinalBossHeroe1", camera, this, ship, new Vector2(60, 60), 0, null);
+                enemy = EnemyFactory.GetEnemyByName("FinalBossHeroe1", camera, this, ship, new Vector2(60, 60), 0);
                 ((FinalBossHeroe1)enemy).SetEnemies(enemies);
                 enemies.Add(enemy);
             }
@@ -228,21 +221,18 @@ namespace IS_XNA_Shooter
         protected void LeerArchivoXML()
         {
             // Utilizar nombres de fichero y nodos XML idénticos a los que se guardaron
-
             try
             {
-
-               //  Leer los datos del archivo
+                //  Leer los datos del archivo
                 String enemyType;
                 float positionX;
                 float positionY;
                 float time;
                 XmlDocument lvl = null;
-                
 
-                XMLLvlMng.lvl1C = new XmlDocument();
-                XMLLvlMng.lvl1C.Load("../../../../IS_XNA_ShooterContent/Levels/level1C.xml");
-                lvl = XMLLvlMng.lvl1C;
+                XMLLvlMng.xmlEnemies = new XmlDocument();
+                XMLLvlMng.xmlEnemies.Load("../../../../IS_XNA_ShooterContent/Levels/level1C.xml");
+                lvl = XMLLvlMng.xmlEnemies;
                   if (!havePassed)
                   {
                 level = lvl.GetElementsByTagName("level");
@@ -250,9 +240,6 @@ namespace IS_XNA_Shooter
                 }
                 XmlNodeList lista = null;
                 lista = ((XmlElement)level[0]).GetElementsByTagName("enemy");
-
-             
-                
 
                 foreach (XmlElement nodo in lista)
                 {
@@ -266,7 +253,6 @@ namespace IS_XNA_Shooter
                     //timeLeftEnemy.Add(time);
 
                     Enemy enemy = null;
-
 
                     if (enemyType.Equals("enemyWeakA"))
                         enemy = new EnemyWeakA(camera, this, new Vector2(positionX, positionY), 0,
@@ -324,7 +310,6 @@ namespace IS_XNA_Shooter
                     
                       */
 
-
                     enemies.Add(enemy);
 
                 }
@@ -335,5 +320,5 @@ namespace IS_XNA_Shooter
             }
         }   //  end LeerArchivoXML()
 
-    } // class LevelA
+    } // class LevelC
 }

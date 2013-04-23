@@ -33,23 +33,23 @@ namespace IS_XNA_Shooter
         //---------------------------
         //----    Constructor    ----
         //---------------------------
-        public LevelB(Camera camera, int numLevel, List<Enemy> enemies,
+        public LevelB(Camera camera, String levelName, List<Enemy> enemies,
             List<RectangleMap> listRecMap)
-            : base(camera, numLevel, enemies)
+            : base(camera, levelName, enemies)
         {
             testingEnemies = false;
 
             this.listRecMap = listRecMap;
             this.enemies = enemies;
 
-            switch (numLevel)
+            switch (levelName)
             {
-                case 0: // level for testing enemies
+                case "TestEnemies": // level for testing enemies
                     //TODO: hacer nivel de testeo de enemigos
                     testingEnemies = true;
                     break;
 
-                case 1: // LevelB 1
+                case "LevelB1": // LevelB 1
                     width = SuperGame.screenWidth * 2;
                     height = SuperGame.screenHeight;
                     ShipInitPosition = new Vector2(100, SuperGame.screenHeight / 2);
@@ -58,7 +58,7 @@ namespace IS_XNA_Shooter
                     LeerArchivoXML(1, 0); // load the enemies
                     break;
 
-                case 2: // LevelB 2 DORITO
+                case "LevelB2": // LevelB 2 DORITO
                     width = SuperGame.screenWidth * 2;
                     height = SuperGame.screenHeight;
                     ShipInitPosition = new Vector2(100, SuperGame.screenHeight / 2);
@@ -77,8 +77,8 @@ namespace IS_XNA_Shooter
             }
         }
 
-        public LevelB(Camera camera, int numLevel, List<Enemy> enemies)
-            : base(camera, numLevel, enemies)
+        /*public LevelB(Camera camera, String levelName, List<Enemy> enemies)
+            : base(camera, levelName, enemies)
         {
             width = SuperGame.screenWidth*2;
             height = SuperGame.screenHeight;
@@ -87,14 +87,14 @@ namespace IS_XNA_Shooter
             //ReadRectangles();
 
             //Enemigo
-            /*Enemy e1 = new EnemyLaserB(camera, this, new Vector2(SuperGame.screenWidth - 100, 
-                50)/*new Random().Next(SuperGame.screenHeight))*//*, (float)Math.PI, GRMng.frameWidthEL, 
+            Enemy e1 = new EnemyLaserB(camera, this, new Vector2(SuperGame.screenWidth - 100, 
+                50)new Random().Next(SuperGame.screenHeight))*//*, (float)Math.PI, GRMng.frameWidthEL, 
                 GRMng.frameHeightEL, GRMng.numAnimsEL, GRMng.frameCountEL, GRMng.loopingEL, SuperGame.frameTime10, 
                 GRMng.textureEL, 1, -200, 100, 1, null);
             e1 = new FinalBoss1(camera, this, new Vector2(SuperGame.screenWidth - GRMng.frameWidthFinalBoss1, SuperGame.screenHeight / 2), enemies);
             e1.SetActive();
             enemies.Add(e1);
-            */
+            
             Vector2 positionFinalBoss = new Vector2(SuperGame.screenWidth - GRMng.frameWidthFinalBoss1/2,
                                                     SuperGame.screenHeight / 2);
             Enemy finalBoss = new FinalBoss1(camera, this, positionFinalBoss, enemies);
@@ -102,7 +102,8 @@ namespace IS_XNA_Shooter
 
             enemies.Add(finalBoss);
 
-        }
+        }*/
+        // TODO: borrar esto de arriba dentro de un tiempo...
 
 
         //--------------------------------
@@ -138,7 +139,7 @@ namespace IS_XNA_Shooter
         {
             // get the reference of the XML rectangle map:
             XmlDocument lvl = null;
-            switch (numLevel)
+            /*switch (numLevel)
             {
                 case 1: // levelB 1
                     lvl = XMLLvlMng.rect1;
@@ -147,7 +148,8 @@ namespace IS_XNA_Shooter
                 case 2: // levelB 2 (DORITO)
                     lvl = XMLLvlMng.rect2;
                     break;
-            }
+            }*/
+            lvl = XMLLvlMng.xmlRectangles;
 
             XmlNodeList level = lvl.GetElementsByTagName("level");
 

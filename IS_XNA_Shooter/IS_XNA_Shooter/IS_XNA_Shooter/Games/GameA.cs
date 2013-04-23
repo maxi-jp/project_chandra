@@ -15,7 +15,8 @@ namespace IS_XNA_Shooter
         /* ------------------------------------------------------------- */
         private Sprite aimPointSprite;
         private BackgroundGameA backGround;
-        private int num;
+        private String levelName;
+
         /* ------------------------------------------------------------- */
         /*                          CONSTRUCTOR                          */
         /* ------------------------------------------------------------- */
@@ -50,14 +51,14 @@ namespace IS_XNA_Shooter
             camera.setShip(ship);
         }*/
 
-        public GameA(SuperGame mainGame, Player player, int num, Texture2D textureAim,
+        public GameA(SuperGame mainGame, Player player, String levelName, Texture2D textureAim,
             Texture2D textureBg, Evolution evolution)
             : base(mainGame, player, evolution)
         {
             hud = new IngameHudA(GRMng.hudBase, mainGame.player.GetLife());
-            level = new LevelA(camera, num, enemies);
+            level = new LevelA(camera, levelName, enemies);
             backGround = new BackgroundGameA(camera, level);
-            this.num = num;
+            this.levelName = levelName;
             camera.setLevel(level);
 
             Vector2[] points = new Vector2[8];

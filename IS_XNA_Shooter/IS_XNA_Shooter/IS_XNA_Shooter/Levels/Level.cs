@@ -12,12 +12,12 @@ namespace IS_XNA_Shooter
     {
         protected Camera camera;
         protected Ship ship;
-        protected Base house;
+        //protected Base house;
         protected Vector2 ShipInitPosition;
         public int width;
         public int height;
         protected List<Enemy> enemies;
-        protected int numLevel;
+        protected String levelName;
 
         protected enum LevelEndCondition
         {
@@ -30,10 +30,10 @@ namespace IS_XNA_Shooter
         protected bool levelFinished;
 
         /* ------------------- CONSTRUCTORES ------------------- */
-        public Level(Camera camera, int num, List<Enemy> enemies)
+        public Level(Camera camera, String levelName, List<Enemy> enemies)
         {
             this.camera = camera;
-            this.numLevel = num;
+            this.levelName = levelName;
             this.enemies = enemies;
 
             levelFinished = false;
@@ -60,7 +60,7 @@ namespace IS_XNA_Shooter
                 float positionY;
                 float time;
                 XmlDocument lvl=null;
-                switch (modoDeJuego)
+                /*switch (modoDeJuego)
                 {
                     case 0: // game mode A
                         lvl = XMLLvlMng.lvl1A;
@@ -71,16 +71,14 @@ namespace IS_XNA_Shooter
                     case 2: // game mode C
                     	lvl = XMLLvlMng.lvl1C;
                     	break;
-
-                
-                }
+                }*/
+                lvl = XMLLvlMng.xmlEnemies;
                 XmlNodeList level = lvl.GetElementsByTagName("level");
 
                 XmlNodeList lista =
                         ((XmlElement)level[0]).GetElementsByTagName("enemy");
                 foreach (XmlElement nodo in lista)
                 {
-
                     XmlAttributeCollection enemyN = nodo.Attributes;
                     //XmlAttribute a = enemyN[1];
                     enemyType = Convert.ToString(enemyN[0].Value);
@@ -91,6 +89,10 @@ namespace IS_XNA_Shooter
 
                     Enemy enemy = null;
 
+                    enemy = EnemyFactory.GetEnemyByName(enemyType, camera, this, ship,
+                        new Vector2(positionX, positionY), time);
+
+                    /*
                     if (enemyType.Equals("enemyWeakA"))
                         enemy = new EnemyWeakA(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEW1, GRMng.frameHeightEW1, GRMng.numAnimsEW1, GRMng.frameCountEW1,
@@ -155,7 +157,7 @@ namespace IS_XNA_Shooter
                         enemy = new EnemyLaserB(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEL, GRMng.frameHeightEL, GRMng.numAnimsEL, GRMng.frameCountEL,
                             GRMng.loopingEL, SuperGame.frameTime12, GRMng.textureEL, time, 100, 100,
-                            1, null);
+                            1, null);*/
 
                     enemies.Add(enemy); 
                     
@@ -163,8 +165,9 @@ namespace IS_XNA_Shooter
             
             }
             catch (Exception e)
-            {/*
-                System.Diagnostics.Debug.WriteLine("Excepción al leer fichero XML: " + e.Message);
+            {
+                String wat = "wat!";
+                /*System.Diagnostics.Debug.WriteLine("Excepción al leer fichero XML: " + e.Message);
                 if (e.Data != null)
                 {
                     System.Diagnostics.Debug.WriteLine("    Detalles extras:");
@@ -172,34 +175,15 @@ namespace IS_XNA_Shooter
                         Console.WriteLine("        La clave es '{0}' y el valor es: {1}", entrada.Key, entrada.Value);
                 }*/
             }
-        }   //  end LeerArchivoXML()
+
+        }   //  LeerArchivoXML()
 
         public virtual void setShip(Ship ship)
         {
             this.ship = ship;
             foreach (Enemy e in enemies)// enemigos
                 e.SetShip(ship);
-             ship.SetPosition(ShipInitPosition);
-        }
-
-        public virtual void setBase(Base house)
-        {
-            this.house = house;
-            EnemyADefense ed = null;
-            EnemyShotADefense esd = null;
-
-            foreach (Enemy e in enemies)// enemigos
-                if (e is EnemyADefense)
-                {
-                    ed = (EnemyADefense)e;
-                    ed.SetBase(house);
-                }
-                else if (e is EnemyShotADefense)
-                {
-                    esd = (EnemyShotADefense)e;
-                    esd.SetBase(house);
-                }
-            //house.SetPosition(BaseInitPosition);
+            ship.SetPosition(ShipInitPosition);
         }
 
         // This method returns true when the level is finished.
@@ -215,17 +199,6 @@ namespace IS_XNA_Shooter
         }
 
         public XMLLvlMng LvlMng { get; set; }
-
-
-        public Base GetBase()
-        {
-            return this.house;
-        }
-
-        public void DamageBase(int i)
-        {
-            house.Damage(i);
-        }
 
     } // class Level
 }

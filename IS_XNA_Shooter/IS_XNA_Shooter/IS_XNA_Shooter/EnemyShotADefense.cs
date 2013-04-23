@@ -12,7 +12,7 @@ namespace IS_XNA_Shooter
          /// <summary>
         /// The house of the game
         /// </summary>
-        protected House house;
+        protected Base house;
 
         /// <summary>
         /// Global Random
@@ -22,7 +22,7 @@ namespace IS_XNA_Shooter
         /// <summary>
         /// Random target of the enemy 
         /// Lower or equal to 0 -> Player
-        /// Greater than 0 -> House
+        /// Greater than 0 -> Base
         /// </summary>
         protected float target = -1.0f;
 
@@ -52,7 +52,7 @@ namespace IS_XNA_Shooter
         public EnemyShotADefense(Camera camera, Level level, Vector2 position, float rotation,
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
             float frametime, Texture2D texture, float timeToSpawn, float velocity, int life,
-            int value, Ship ship,float timeToShot, float shotVelocity, int shotPower, House house)
+            int value, Ship ship,float timeToShot, float shotVelocity, int shotPower, Base house)
             : base(camera, level, position, rotation,
                 frameWidth, frameHeight, numAnim, frameCount, looping, frametime,
                 texture, timeToSpawn, velocity, life, value, ship,
@@ -70,7 +70,7 @@ namespace IS_XNA_Shooter
         /// Sets the player´s house to one specific
         /// </summary>
         /// <param name="ship">The specific house</param>
-        public void SetHouse(House house)
+        public void SetBase(Base house)
         {
             this.house = house;
         }

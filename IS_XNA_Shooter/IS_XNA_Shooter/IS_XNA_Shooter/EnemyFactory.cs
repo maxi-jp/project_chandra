@@ -9,7 +9,7 @@ namespace IS_XNA_Shooter
     static class EnemyFactory
     {
         public static Enemy GetEnemyByName(String name, Camera camera, Level level, Ship ship,
-            Vector2 position, float time, House house)
+            Vector2 position, float time, Base house)
         {
             Enemy enemy = null;
 

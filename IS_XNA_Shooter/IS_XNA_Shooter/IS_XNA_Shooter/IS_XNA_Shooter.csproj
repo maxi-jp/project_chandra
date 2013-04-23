@@ -116,6 +116,7 @@
     <Compile Include="BackgroundLayerB.cs" />
     <Compile Include="BotFinalBoss.cs" />
     <Compile Include="Camera.cs" />
+    <Compile Include="LifeBar.cs" />
     <Compile Include="EnemyBeamADefense.cs" />
     <Compile Include="EnemyScaredADefense.cs" />
     <Compile Include="EnemyADefense.cs" />
@@ -129,7 +130,7 @@
     <Compile Include="EnemyWeakShotADefense.cs" />
     <Compile Include="EnemyWeakShotB.cs" />
     <Compile Include="GameADefense.cs" />
-    <Compile Include="House.cs" />
+    <Compile Include="Base.cs" />
     <Compile Include="MenuStart.cs" />
     <Compile Include="EnemyBeamA.cs" />
     <Compile Include="EnemyFinalHeroe2.cs" />

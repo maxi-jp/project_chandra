@@ -12,7 +12,7 @@ namespace IS_XNA_Shooter
     {
         protected Camera camera;
         protected Ship ship;
-        protected House house;
+        protected Base house;
         protected Vector2 ShipInitPosition;
         public int width;
         public int height;
@@ -178,7 +178,7 @@ namespace IS_XNA_Shooter
              ship.SetPosition(ShipInitPosition);
         }
 
-        public virtual void setHouse(House house)
+        public virtual void setBase(Base house)
         {
             this.house = house;
             EnemyADefense ed = null;
@@ -188,14 +188,14 @@ namespace IS_XNA_Shooter
                 if (e is EnemyADefense)
                 {
                     ed = (EnemyADefense)e;
-                    ed.SetHouse(house);
+                    ed.SetBase(house);
                 }
                 else if (e is EnemyShotADefense)
                 {
                     esd = (EnemyShotADefense)e;
-                    esd.SetHouse(house);
+                    esd.SetBase(house);
                 }
-            //house.SetPosition(HouseInitPosition);
+            //house.SetPosition(BaseInitPosition);
         }
 
         // This method returns true when the level is finished.
@@ -213,20 +213,14 @@ namespace IS_XNA_Shooter
         public XMLLvlMng LvlMng { get; set; }
 
 
-        public House GetHouse()
+        public Base GetBase()
         {
             return this.house;
         }
 
-        public void DamageHouse(int i)
+        public void DamageBase(int i)
         {
             house.Damage(i);
-        }
-
-        //We tell the ship that the house is dead
-        public void DeadHouse()
-        {
-            ship.DeadHouse();
         }
 
     } // class Level

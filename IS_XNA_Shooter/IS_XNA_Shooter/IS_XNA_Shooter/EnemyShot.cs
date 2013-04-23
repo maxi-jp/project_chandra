@@ -84,6 +84,35 @@ namespace IS_XNA_Shooter
         {
             base.Update(deltaTime);
 
+      
+
+             // shots:
+            if (this is EnemyShotADefense)
+            {
+                for (int i = 0; i < shots.Count(); i++)
+                {
+                    shots[i].Update(deltaTime);
+                    if (!shots[i].IsActive())
+                        shots.RemoveAt(i);
+                    else  // shots-house colisions
+                    {
+                        //If we are in Defense mode, check the house also
+                    
+                            Base house = level.GetBase();
+                            if (house.collider.Collision(shots[i].position))
+                            {
+                                int damage = 0;
+                                
+                                damage = shots[i].GetPower();
+                                shots.RemoveAt(i);
+
+                                // the house is hit:
+                                house.Damage(damage);
+                            }
+                     }
+                }
+            }
+
             // shots:
             for (int i = 0; i < shots.Count(); i++)
             {
@@ -91,7 +120,7 @@ namespace IS_XNA_Shooter
                 if (!shots[i].IsActive())
                     shots.RemoveAt(i);
                 else  // shots-player colisions
-                {   
+                {
                     if (ship.collider.Collision(shots[i].position))
                     {
                         // the player is hit:
@@ -103,22 +132,7 @@ namespace IS_XNA_Shooter
                         if (ship.GetLife() > 0)
                             shots.RemoveAt(i);
                     }
-                    //If we are in Defense mode, check the house also
-                    if (this is EnemyShotADefense)
-                    {
-                        House house = level.GetHouse();
-                        if (house.collider.Collision(shots[i].position))
-                        {
-                            // the player is hit:
-                            house.Damage(shots[i].GetPower());
 
-                            // the shot must be erased only if it hasn't provoked the
-                            // player house death, otherwise the shot will had be removed
-                            // before from the game in: Game.PlayerDead() -> Enemy.Kill()
-                            if (house.GetLife() > 0)
-                                shots.RemoveAt(i);
-                        }
-                    }
                 }
             }
 

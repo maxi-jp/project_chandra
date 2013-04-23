@@ -199,14 +199,24 @@ namespace IS_XNA_Shooter
         public static bool[] loopingPA1 = { true, true, false, false };
         #endregion
 
-        #region HOUSE
+        #region BASE
         /* ------------------- HOUSE ------------------- */
-        public static Texture2D textureHouse;
-        public static short frameWidthHouse = 80;
-        public static short frameHeightHouse = 80;
-        public static short numAnimsHouse = 1;
-        public static short[] frameCountHouse = { 1 };
-        public static bool[] loopingHouse = { true };
+        public static Texture2D textureBase;
+        public static short frameWidthBase = 122;
+        public static short frameHeightBase = 128;
+        public static short numAnimsBase = 1;
+        public static short[] frameCountBase = { 1 };
+        public static bool[] loopingBase = { true };
+        #endregion
+
+        #region BASELIFEBAR
+        /* ------------------- HOUSELIFEBAR ------------------- */
+        public static Texture2D textureBaseLifeBar;
+        public static short frameWidthBaseLifeBar = 86;
+        public static short frameHeightBaseLifeBar = 14;
+        public static short numAnimsBaseLifeBar = 10;
+        public static short[] frameCountBaseLifeBar = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+        public static bool[] loopingBaseLifeBar = { true, true, true, true, true, true, true, true, true, true };
         #endregion
 
         #region SHOTS
@@ -357,7 +367,8 @@ namespace IS_XNA_Shooter
                     textureBg02 = content.Load<Texture2D>("Graphics/Backgrounds/bg02");
                     textureBg03 = content.Load<Texture2D>("Graphics/Backgrounds/bg03");
 
-                    textureHouse = content.Load<Texture2D>("Graphics/house");
+                    textureBaseLifeBar = content.Load<Texture2D>("Graphics/LifeBars/houseLifeBar");
+                    textureBase = content.Load<Texture2D>("Graphics/house");
 
                     break;
 
@@ -509,7 +520,8 @@ namespace IS_XNA_Shooter
                     textureBg02 = null;
                     textureBg03 = null;
 
-                    textureHouse = null;
+                    textureBaseLifeBar = null;
+                    textureBase = null;
 
                     break;
 

@@ -308,12 +308,5 @@ namespace IS_XNA_Shooter
             shots.Clear();
         }
 
-
-        //House tells us that is dead
-        public void DeadHouse()
-        {
-            game.DeadHouse();
-        }
-
     } // class Ship
 }

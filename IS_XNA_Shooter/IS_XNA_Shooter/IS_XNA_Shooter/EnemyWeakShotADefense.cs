@@ -39,7 +39,7 @@ namespace IS_XNA_Shooter
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
             float frametime, Texture2D texture, float timeToSpawn, float velocity, int life,
             int value, Ship ship,
-            float timeToShot, float shotVelocity, int shotPower, House house)
+            float timeToShot, float shotVelocity, int shotPower, Base house)
             : base(camera, level, position, rotation,
                 frameWidth, frameHeight, numAnim, frameCount, looping, frametime,
                 texture, timeToSpawn, velocity, life, value, ship,

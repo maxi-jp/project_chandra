@@ -273,6 +273,10 @@ namespace IS_XNA_Shooter
         {
             return (!animActive);
         }
+        public int GetLife()
+        {
+            return this.life;
+        }
 
     } // class Enemy
 }

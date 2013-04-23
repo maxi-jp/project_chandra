@@ -30,6 +30,7 @@ namespace IS_XNA_Shooter
         protected List<Explosion> explosions;
 
         protected Evolution evolution;
+        protected float timeToGameOver = 1.5f;
 
         /* ------------------------------------------------------------- */
         /*                          CONSTRUCTOR                          */
@@ -130,6 +131,18 @@ namespace IS_XNA_Shooter
                         // the player has been hit by an enemy
                         ship.Kill();
                     }
+
+                    if (this is GameADefense)
+                    //If we are in defense mode, check collisions with house
+                    {
+                        Base house = level.GetBase();
+                        if (enemies[i].IsColisionable() && (house.collider.Collision(enemies[i].collider) || enemies[i].collider.Collision(house.collider)))
+                        {
+                            // the house has been hit by an enemy
+                            level.DamageBase(enemies[i].GetLife());
+                            enemies[i].Kill();
+                        }
+                    }
                 }
             }
 
@@ -145,6 +158,13 @@ namespace IS_XNA_Shooter
                     player.EarnLife();
                     hud.PlayerEarnsLife();
                 }
+            }
+
+            if (player.GetLife() == 0 ||(level.GetBase() != null && level.GetBase().GetLife() <= 0))
+            {
+                timeToGameOver -= deltaTime;
+                if (timeToGameOver <= 0)
+                    mainGame.GameOver();
             }
         }
 
@@ -184,8 +204,7 @@ namespace IS_XNA_Shooter
                     enemies[i].Kill();
             shots.Clear();
 
-            if (player.GetLife() == 0)
-                mainGame.GameOver();
+           
         }
 
         public bool IsFinished()

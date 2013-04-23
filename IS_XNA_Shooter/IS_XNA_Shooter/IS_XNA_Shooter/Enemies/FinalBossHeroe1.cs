@@ -362,7 +362,7 @@ namespace IS_XNA_Shooter
         private void duplicate()
         {
             duplicates += 1;
-            Enemy enemy = EnemyFactory.GetEnemyByName("FinalBossHeroe1", camera, level, ship, position, 0);
+            Enemy enemy = EnemyFactory.GetEnemyByName("FinalBossHeroe1", camera, level, ship, position, 0, null);
             ((FinalBossHeroe1)enemy).SetEnemies(enemies);
             enemies.Add(enemy);
         }

@@ -84,6 +84,35 @@ namespace IS_XNA_Shooter
         {
             base.Update(deltaTime);
 
+      
+
+             // shots:
+            if (this is EnemyShotADefense)
+            {
+                for (int i = 0; i < shots.Count(); i++)
+                {
+                    shots[i].Update(deltaTime);
+                    if (!shots[i].IsActive())
+                        shots.RemoveAt(i);
+                    else  // shots-house colisions
+                    {
+                        //If we are in Defense mode, check the house also
+                    
+                            Base house = level.GetBase();
+                            if (house.collider.Collision(shots[i].position))
+                            {
+                                int damage = 0;
+                                
+                                damage = shots[i].GetPower();
+                                shots.RemoveAt(i);
+
+                                // the house is hit:
+                                house.Damage(damage);
+                            }
+                     }
+                }
+            }
+
             // shots:
             for (int i = 0; i < shots.Count(); i++)
             {
@@ -94,7 +123,7 @@ namespace IS_XNA_Shooter
                 {
                     if (ship.collider.Collision(shots[i].position))
                     {
-                        // the player is hitted:
+                        // the player is hit:
                         ship.Damage(shots[i].GetPower());
 
                         // the shot must be erased only if it hasn't provoked the
@@ -103,6 +132,7 @@ namespace IS_XNA_Shooter
                         if (ship.GetLife() > 0)
                             shots.RemoveAt(i);
                     }
+
                 }
             }
 

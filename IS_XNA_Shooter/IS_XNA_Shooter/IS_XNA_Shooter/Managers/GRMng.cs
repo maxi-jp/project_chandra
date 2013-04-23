@@ -199,6 +199,26 @@ namespace IS_XNA_Shooter
         public static bool[] loopingPA1 = { true, true, false, false };
         #endregion
 
+        #region BASE
+        /* ------------------- HOUSE ------------------- */
+        public static Texture2D textureBase;
+        public static short frameWidthBase = 122;
+        public static short frameHeightBase = 128;
+        public static short numAnimsBase = 1;
+        public static short[] frameCountBase = { 1 };
+        public static bool[] loopingBase = { true };
+        #endregion
+
+        #region BASELIFEBAR
+        /* ------------------- HOUSELIFEBAR ------------------- */
+        public static Texture2D textureBaseLifeBar;
+        public static short frameWidthBaseLifeBar = 86;
+        public static short frameHeightBaseLifeBar = 14;
+        public static short numAnimsBaseLifeBar = 10;
+        public static short[] frameCountBaseLifeBar = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+        public static bool[] loopingBaseLifeBar = { true, true, true, true, true, true, true, true, true, true };
+        #endregion
+
         #region SHOTS
         /* ------------------- LASER 1 ------------------- */
         public static Texture2D textureL1;
@@ -218,9 +238,7 @@ namespace IS_XNA_Shooter
         #endregion
 
         #region OTHERS
-        /* ------------------- SMOKE ------------------- */
         public static Texture2D textureSmoke01;
-
         /* ------------------- EXPLOSION VERDE ------------------- */
         public static Texture2D textureExplosion1;
         public static short frameWidthEx1 = 100;

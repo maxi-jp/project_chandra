@@ -589,12 +589,16 @@ namespace IS_XNA_Shooter
         /// <param name="lvl">The number of the level</param>
         public void NewDefense(int lvl)
         {
+            grManager.LoadContent("LevelADefense1"); // Load the gameA's level 1 resources
             grManager.LoadHud();
-            grManager.LoadContent("LevelB1"); // Load the gameB's level 1 resources
             audio.LoadContent(1);
             LvlMng.LoadContent(lvl);
 
-            game = new GameA(this, player, 1, GRMng.textureAim, GRMng.textureCell, screenEvolution);
+            game = new GameADefense(this, player, 1, GRMng.textureAim, GRMng.textureCell,
+                /*ShipVelocity*/200f, /*ShipLife*/100, new Vector2(300, 300), GRMng.frameWidthBase, GRMng.frameHeightBase,
+                GRMng.numAnimsBase, GRMng.frameCountBase, GRMng.loopingBase, SuperGame.frameTime12, GRMng.textureBase,
+                GRMng.frameWidthBaseLifeBar, GRMng.frameHeightBaseLifeBar, GRMng.numAnimsBaseLifeBar, GRMng.frameCountBaseLifeBar,
+                GRMng.loopingBaseLifeBar, SuperGame.frameTime12, GRMng.textureBaseLifeBar, 2000/*Base life*/);
 
             currentState = gameState.playing; // Change game's state to game mode
 

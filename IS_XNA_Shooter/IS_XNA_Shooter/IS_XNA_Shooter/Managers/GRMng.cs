@@ -340,6 +340,35 @@ namespace IS_XNA_Shooter
                     textureShotFinalBossHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/shotHeroe1");
                     break;
 
+                case "LevelADefense1":
+                    LoadIngameMenu();
+
+                    hudBase = content.Load<Texture2D>("Graphics/Hud/base256");
+
+                    texturePA1 = content.Load<Texture2D>("Graphics/Ships/sprites80x80");
+                    textureAim = content.Load<Texture2D>("Graphics/aimpoint");
+                    textureL1 = content.Load<Texture2D>("Graphics/laserShotAnim");
+                    textureL2 = content.Load<Texture2D>("Graphics/laserShotAnim2");
+
+                    textureEW1 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy01_80x80");
+                    textureEW2 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy02_80x80");
+                    textureEB1 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy03_80x80");
+                    textureES = content.Load<Texture2D>("Graphics/Ships/EnemyScared");
+                    textureESBullet = content.Load<Texture2D>("Graphics/scaredBullet");
+                    textureEMS = content.Load<Texture2D>("Graphics/Ships/mineAnimation");
+                    textureEMSBullet = content.Load<Texture2D>("Graphics/mineShot");
+
+                    textureCell = content.Load<Texture2D>("Graphics/celdasuelo");
+                    textureBg00 = content.Load<Texture2D>("Graphics/Backgrounds/bg00");
+                    textureBg01 = content.Load<Texture2D>("Graphics/Backgrounds/bg01");
+                    textureBg02 = content.Load<Texture2D>("Graphics/Backgrounds/bg02");
+                    textureBg03 = content.Load<Texture2D>("Graphics/Backgrounds/bg03");
+
+                    textureBaseLifeBar = content.Load<Texture2D>("Graphics/LifeBars/houseLifeBar");
+                    textureBase = content.Load<Texture2D>("Graphics/house");
+
+                    break;
+
                 case "LevelA2":
                     LoadShipA();
                     textureAim = content.Load<Texture2D>("Graphics/aimpoint");
@@ -467,6 +496,38 @@ namespace IS_XNA_Shooter
 
                     textureHeroe1 = null;
                     textureShotFinalBossHeroe = null;
+                    break;
+
+                case "LevelADefense1":
+
+                    hudBase = null;
+
+                    texturePA1 = null;
+                    textureAim = null;
+                    textureL1 = null;
+                    textureL2 = null;
+
+                    textureEW1 = null;
+                    textureEW2 = null;
+                    textureEB1 = null;
+                    textureES = null;
+                    textureESBullet = null;
+                    textureEMS = null;
+                    textureEMSBullet = null;
+                    textureEL = null;
+                    textureELBullet = null;
+
+                    textureCell = null;
+                    textureRed = null;
+
+                    textureBg00 = null;
+                    textureBg01 = null;
+                    textureBg02 = null;
+                    textureBg03 = null;
+
+                    textureBaseLifeBar = null;
+                    textureBase = null;
+
                     break;
 
                 case "LevelA2":

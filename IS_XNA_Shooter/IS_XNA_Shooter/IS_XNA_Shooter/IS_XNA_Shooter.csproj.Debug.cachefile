@@ -61,15 +61,16 @@ Content\Graphics\yellowpixeltransparent.xnb
 Content\Graphics\Backgrounds\bgB00.xnb
 Content\Graphics\Smoke\smoke01.xnb
 Content\Graphics\Evolution\background_1.xnb
-Content\Graphics\house.xnb
-Content\Graphics\LifeBars\houseLifeBar.xnb
 Content\Graphics\Evolution\ButtonContinue.xnb
 Content\Graphics\Evolution\ButtonPreview.xnb
 Content\Graphics\Evolution\Buttons.xnb
 Content\Graphics\Evolution\frame.xnb
 Content\Graphics\Evolution\measures.xnb
 Content\Graphics\Portraits\allyourbase.xnb
+Content\Graphics\house.xnb
+Content\Graphics\LifeBars\houseLifeBar.xnb
 Content\FontDebug.xnb
+Content\Motorwerk.xnb
 Content\Audio\FXEffects\laser_shot_01.xnb
 Content\Audio\FXEffects\digital_acent_01.xnb
 Content\Audio\FXEffects\broken_bone_01.xnb
@@ -77,6 +78,5 @@ Content\Audio\FXEffects\broken_bone_02.xnb
 Content\Audio\FXEffects\tackled_1.xnb
 Content\Audio\Music\music_01.xnb
 Content\Video\VideoIntroProjectChandra.xnb
-Content\Motorwerk.xnb
 Content\Audio\Music\music_01.wma
 Content\Video\VideoIntroProjectChandra.wmv

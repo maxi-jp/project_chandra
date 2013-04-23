@@ -598,7 +598,7 @@ namespace IS_XNA_Shooter
                 /*ShipVelocity*/200f, /*ShipLife*/100, new Vector2(300, 300), GRMng.frameWidthBase, GRMng.frameHeightBase,
                 GRMng.numAnimsBase, GRMng.frameCountBase, GRMng.loopingBase, SuperGame.frameTime12, GRMng.textureBase,
                 GRMng.frameWidthBaseLifeBar, GRMng.frameHeightBaseLifeBar, GRMng.numAnimsBaseLifeBar, GRMng.frameCountBaseLifeBar,
-                GRMng.loopingBaseLifeBar, SuperGame.frameTime12, GRMng.textureBaseLifeBar, 2000/*Base life*/);
+                GRMng.loopingBaseLifeBar, SuperGame.frameTime12, GRMng.textureBaseLifeBar, 2000/*Base life*/, screenEvolution);
 
             currentState = gameState.playing; // Change game's state to game mode
 

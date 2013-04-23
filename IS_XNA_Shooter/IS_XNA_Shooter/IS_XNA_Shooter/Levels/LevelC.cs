@@ -162,42 +162,42 @@ namespace IS_XNA_Shooter
             // EnemyWeak:
             if (ControlMng.f1Preshed)
             {
-                enemy = EnemyFactory.GetEnemyByName("EnemyWeakA", camera, this, ship, new Vector2(20, 20), 0);
+                enemy = EnemyFactory.GetEnemyByName("EnemyWeakA", camera, this, ship, new Vector2(20, 20), 0,null);
                 enemies.Add(enemy);
             }
 
             // EnemyWeakShot:
             if (ControlMng.f2Preshed)
             {
-                enemy = EnemyFactory.GetEnemyByName("EnemyWeakShotA", camera, this, ship, new Vector2(20, 20), 0);
+                enemy = EnemyFactory.GetEnemyByName("EnemyWeakShotA", camera, this, ship, new Vector2(20, 20), 0, null);
                 enemies.Add(enemy);
             }
 
             // EnemyBeamA:
             if (ControlMng.f3Preshed)
             {
-                enemy = EnemyFactory.GetEnemyByName("EnemyBeamA", camera, this, ship, new Vector2(60, 60), 0);
+                enemy = EnemyFactory.GetEnemyByName("EnemyBeamA", camera, this, ship, new Vector2(60, 60), 0, null);
                 enemies.Add(enemy);
             }
 
             // EnemyMineShotA
             if (ControlMng.f4Preshed)
             {
-                enemy = EnemyFactory.GetEnemyByName("EnemyMineShotA", camera, this, ship, new Vector2(20, 20), 0);
+                enemy = EnemyFactory.GetEnemyByName("EnemyMineShotA", camera, this, ship, new Vector2(20, 20), 0, null);
                 enemies.Add(enemy);
             }
 
             // EnemyLaserA
             if (ControlMng.f5Preshed)
             {
-                enemy = EnemyFactory.GetEnemyByName("EnemyLaserA", camera, this, ship, new Vector2(60, 60), 0);
+                enemy = EnemyFactory.GetEnemyByName("EnemyLaserA", camera, this, ship, new Vector2(60, 60), 0, null);
                 enemies.Add(enemy);
             }
 
             // EnemyScaredA
             if (ControlMng.f6Preshed)
             {
-                enemy = EnemyFactory.GetEnemyByName("EnemyMineShotA", camera, this, ship, new Vector2(60, 60), 0);
+                enemy = EnemyFactory.GetEnemyByName("EnemyMineShotA", camera, this, ship, new Vector2(60, 60), 0, null);
                 enemies.Add(enemy);
             }
 
@@ -218,7 +218,7 @@ namespace IS_XNA_Shooter
             // Final Boss 1 Phase 4
             if (ControlMng.f9Preshed)
             {
-                enemy = EnemyFactory.GetEnemyByName("FinalBossHeroe1", camera, this, ship, new Vector2(60, 60), 0);
+                enemy = EnemyFactory.GetEnemyByName("FinalBossHeroe1", camera, this, ship, new Vector2(60, 60), 0, null);
                 ((FinalBossHeroe1)enemy).SetEnemies(enemies);
                 enemies.Add(enemy);
             }

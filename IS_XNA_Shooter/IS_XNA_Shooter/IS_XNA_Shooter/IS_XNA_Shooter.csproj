@@ -114,26 +114,28 @@
     <Compile Include="Backgrounds\BackgroundGameB.cs" />
     <Compile Include="Backgrounds\BackgroundLayer.cs" />
     <Compile Include="Backgrounds\BackgroundLayerB.cs" />
+    <Compile Include="Base.cs" />
     <Compile Include="Enemies\BotFinalBoss.cs" />
     <Compile Include="Cameras\Camera.cs" />
     <Compile Include="Colliders\Collider.cs" />
+    <Compile Include="Enemies\EnemyWeakShotADefense.cs" />
+    <Compile Include="Games\GameADefense.cs" />
     <Compile Include="Games\GameC.cs" />
     <Compile Include="Levels\LevelC.cs" />
     <Compile Include="Managers\ControlMng.cs" />
     <Compile Include="Enemies\EnemyFactory.cs" />
     <Compile Include="Enemies\EnemyMineShotB.cs" />
     <Compile Include="LifeBar.cs" />
-    <Compile Include="EnemyBeamADefense.cs" />
-    <Compile Include="EnemyScaredADefense.cs" />
-    <Compile Include="EnemyADefense.cs" />
-    <Compile Include="EnemyShotADefense.cs" />
-    <Compile Include="EnemyWeakADefense.cs" />
+    <Compile Include="Enemies\EnemyBeamADefense.cs" />
+    <Compile Include="Enemies\EnemyScaredADefense.cs" />
+    <Compile Include="Enemies\EnemyADefense.cs" />
+    <Compile Include="Enemies\EnemyShotADefense.cs" />
+    <Compile Include="Enemies\EnemyWeakADefense.cs" />
     <Compile Include="Enemies\EnemyShot.cs" />
     <Compile Include="Enemies\EnemyWeakShotB.cs" />
     <Compile Include="Evolutions\Evolution.cs" />
     <Compile Include="Evolutions\ShipPreview.cs" />
     <Compile Include="Evolutions\ShotPreview.cs" />
-    <Compile Include="ControlMng.cs" />
     <Compile Include="Games\GameAForTestingParticles.cs" />
     <Compile Include="Menus\MenuStart.cs" />
     <Compile Include="Enemies\EnemyBeamA.cs" />
@@ -217,7 +219,6 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--

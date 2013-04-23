@@ -66,6 +66,7 @@ namespace IS_XNA_Shooter
             enemiesBot = new List<Enemy>();
             shots = new List<Shot>();
             explosions = new List<Explosion>();
+            powerUpList = new List<PowerUp>();
 
             //Audio.PlayMusic(1);
         }

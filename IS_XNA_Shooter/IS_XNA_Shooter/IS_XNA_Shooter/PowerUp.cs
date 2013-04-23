@@ -61,7 +61,7 @@ namespace IS_XNA_Shooter
                 frameCount, looping, frametime)
         {
             active = true;
-            catchable=8f;
+            catchable=7.5f;
 
             this.type =type;
             Vector2[] points = new Vector2[8];
@@ -99,10 +99,10 @@ namespace IS_XNA_Shooter
                 catchable -= deltaTime;
                 if (catchable <= 0f)
                     active = false;
-                else if (catchable <= 3f)
+                else if (catchable <= 2.5f)
                 {
-                        setOff += (byte)(deltaTime * 360);
-                        SetColor(setOff, 0, setOff,0); //Purpleeee!!!  <3
+                        setOff += (byte)(deltaTime * 480);
+                        SetColor(setOff, setOff, setOff,setOff);
                 }
                 collider.Update(position, 0);
             }
@@ -127,6 +127,11 @@ namespace IS_XNA_Shooter
         public short GetType()
         {
             return type;
+        }
+
+        internal Vector2 getPosition()
+        {
+            return position;
         }
     }
 }

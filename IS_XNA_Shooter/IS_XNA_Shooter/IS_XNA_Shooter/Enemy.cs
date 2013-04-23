@@ -184,7 +184,7 @@ namespace IS_XNA_Shooter
                 colisionable = false;
                 Random random = new Random();
                 short type = (short)random.Next(3);
-                if (random.Next(0,100) < 100)
+                if (random.Next(0,100) < 20) //percentage for the power up
                 {
                     powerUp = new PowerUp(camera, level, position,0,GRMng.powerTexture,GRMng.frameWidthEW1,GRMng.frameHeightEW1,
                         type,new short[]{6,6,6},new bool[]{true,true,true},SuperGame.frameTime12,type);

@@ -217,7 +217,9 @@ namespace IS_XNA_Shooter
             particles.Draw(spriteBatch);
             base.Draw(spriteBatch);
 
-            if (timePowerUpRed > 0)
+            if (timePowerUpBlue > 0 & timePowerUpRed > 0)
+                SetColor(255, 0, 255, 255);
+            else if (timePowerUpRed > 0)
                 SetColor(255,0,0,255);
             else if (timePowerUpBlue > 0)
                 SetColor(0,0,255,255);
@@ -286,18 +288,19 @@ namespace IS_XNA_Shooter
                 timeVibShotAux = timeVibShot;
             }*/
 
-            Audio.PlayEffect("laserShot01");
 
             setAnim(2);
             Shot nuevo;
             if (timePowerUpRed > 0)
             {
+                Audio.PlayEffect("laser_shot_red");
                 nuevo = new Shot(camera, level, position, rotation, GRMng.frameWidthShotFinalBossHeroe, GRMng.frameHeightShotFinalBossHeroe,
                     GRMng.numAnimsShotFinalBossHeroe, GRMng.frameCountShotFinalBossHeroe, GRMng.loopingShotFinalBossHeroe, SuperGame.frameTime8, GRMng.textureShotFinalBossHeroe,
                     SuperGame.shootType.red, 500, 100);
             }
             else
             {
+                Audio.PlayEffect("laserShot01");
                 nuevo = new Shot(camera, level, position, rotation, GRMng.frameWidthL1, GRMng.frameHeightL1,
                     GRMng.numAnimsL1, GRMng.frameCountL1, GRMng.loopingL1, SuperGame.frameTime8,
                     GRMng.textureL1, SuperGame.shootType.normal, shotVelocity, shotPower);
@@ -358,11 +361,16 @@ namespace IS_XNA_Shooter
         {
             switch (type)
             {
-                case 0:     // blue
-                    timePowerUpBlue = 8f;
+                case 0:     // blue invencivility
+                    Audio.PlayEffect("PowerUpBlue");
+                    timePowerUpBlue = 6f;
                     break;
-                case 1:     // red
-                    timePowerUpRed = 12f;
+                case 1:     // red red shoot
+                    Audio.PlayEffect("PowerUpRed");
+                    timePowerUpRed = 8f;
+                    break;
+                case 2:
+                    Audio.PlayEffect("PowerUpGreen");
                     break;
             }
         }

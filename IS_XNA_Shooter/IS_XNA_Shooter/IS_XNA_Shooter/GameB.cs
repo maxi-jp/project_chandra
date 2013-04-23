@@ -70,7 +70,13 @@ namespace IS_XNA_Shooter
 
             scrollPosition += scrollVelocity * deltaTime;
 
-            backGround.Update(deltaTime);
+            for (int i = 0; i < powerUpList.Count; i++)
+            {
+                powerUpList[i].UpdatePosition(powerUpList[i].getPosition() + new Vector2(-deltaTime*200, 0));
+                //+  new Vector2(scrollPosition,0)
+            }
+
+                backGround.Update(deltaTime);
 
             // player-walls(rectangles) collision:
             int cont = 0;

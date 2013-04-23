@@ -129,7 +129,7 @@ namespace IS_XNA_Shooter
                             if (enemies[j].IsActive() && !(enemies[j].GetType() == typeof(FinalBoss1) || enemies[j].GetType() == typeof(EnemyFinalHeroe2) ||
                                  enemies[j].GetType() == typeof(BotFinalBoss) || enemies[j].GetType() == typeof(FinalBossHeroe1) ||
                                  enemies[j].GetType() == typeof(FinalBoss1Turret2) || enemies[j].GetType() == typeof(FinalBoss1Turret1)))
-                                enemies[j].Kill();
+                                enemies[j].Damage(200);
                     }
                     powerUpList[i].SetActive(false); 
                 }
@@ -145,8 +145,7 @@ namespace IS_XNA_Shooter
                             // the player has been hit by an enemy
                             if (ship.timePowerUpBlue > 0)
                             {
-                                enemies[i].Damage(5);
-                                enemies.RemoveAt(i);
+                                enemies[i].Damage(200);
                             }
                             else
                             ship.Kill();

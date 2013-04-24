@@ -119,6 +119,7 @@
     <Compile Include="Cameras\Camera.cs" />
     <Compile Include="Colliders\Collider.cs" />
     <Compile Include="Enemies\EnemyWeakShotADefense.cs" />
+    <Compile Include="Explosions\Asteroid.cs" />
     <Compile Include="Games\GameADefense.cs" />
     <Compile Include="Games\GameC.cs" />
     <Compile Include="Levels\LevelC.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="Enemies\FinalBoss1.cs" />
     <Compile Include="Enemies\FinalBoss1Turret1.cs" />
     <Compile Include="Enemies\FinalBoss1Turret2.cs" />
+    <Compile Include="Particles\ParticleSystemCamera.cs" />
     <Compile Include="PowerUp.cs" />
     <Compile Include="Enemies\FinalBossHeroe1.cs" />
     <Compile Include="Games\GameB.cs" />

@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace IS_XNA_Shooter
 {
-    class Particle : Sprite
+    class ParticleCamera : SpriteCamera
     {
         /// <summary>
         /// The actual age of the particle
@@ -48,8 +48,9 @@ namespace IS_XNA_Shooter
         /// <param name="rotation">Initial rotation for the particle</param>
         /// <param name="texture">Texture to show</param>
         /// <param name="aceleration">Indicates the velocity of movement</param>
-        public Particle(Vector2 position, Texture2D texture, Rectangle rectangleTexture)
-            : base(true, position, 0, texture, rectangleTexture)
+        public ParticleCamera(Camera camera, Level level, Vector2 position,
+            Texture2D texture, Rectangle rectangleTexture)
+            : base(camera, level, true, position, 0, texture, rectangleTexture)
         {
             this.aceleration = Vector2.Zero;
             alpha = 255;
@@ -62,10 +63,20 @@ namespace IS_XNA_Shooter
             this.scale += growthVelocity;
         }
 
-    } // class Particle
+    } // class ParticleCamera
 
-    class ParticleSystem
+    class ParticleSystemCamera
     {
+        /// <summary>
+        /// The actual Camera of the game
+        /// </summary>
+        private Camera camera;
+
+        /// <summary>
+        /// The actual Level of the game
+        /// </summary>
+        private Level level;
+
         /// <summary>
         /// Texture for all the particles
         /// </summary>
@@ -84,7 +95,7 @@ namespace IS_XNA_Shooter
         /// <summary>
         /// Array which contains all the particles in the manager
         /// </summary>
-        private Particle[] particles;
+        private ParticleCamera[] particles;
 
         /// <summary>
         /// The source position for the particles
@@ -140,18 +151,22 @@ namespace IS_XNA_Shooter
         /// <summary>
         /// Constructor for the Particle System in a Game with Camera
         /// </summary>
+        /// <param name="camera">Camera of the actual game</param>
+        /// <param name="level">The actual Level of the game</param>
         /// <param name="texture">the texture for all the particles</param>
         /// <param name="rectanglesTexture">Array which contains the rectangles of sprites in the texture</param>
         /// <param name="particleCount">Indicates de maximun number of particles for the system</param>
         /// <param name="sourcePosition">The position of the source of the particles</param>
-        public ParticleSystem(Texture2D texture, Rectangle[] rectanglesTexture,
+        public ParticleSystemCamera(Camera camera, Level level, Texture2D texture, Rectangle[] rectanglesTexture,
             int particleCount, Vector2 sourcePosition)
         {
+            this.camera = camera;
+            this.level = level;
             this.texture = texture;
             this.rectanglesTexture = rectanglesTexture;
             this.particleCount = particleCount;
 
-            particles = new Particle[particleCount];
+            particles = new ParticleCamera[particleCount];
 
             this.sourcePosition = sourcePosition;
             timeSinceLastParticle = 0.0f;
@@ -195,7 +210,7 @@ namespace IS_XNA_Shooter
         {
             this.particleCount = particleCount;
             particles = null;
-            particles = new Particle[particleCount];
+            particles = new ParticleCamera[particleCount];
         }
 
         /// <summary>
@@ -237,7 +252,7 @@ namespace IS_XNA_Shooter
                     else
                     {
                         if (particles[i].alpha < MAX_ALPHA)
-                        {      
+                        {
                             if (particles[i].alpha + FADEOUT_INCREMENT > MAX_ALPHA)
                                 particles[i].alpha = MAX_ALPHA;
                             else
@@ -266,7 +281,9 @@ namespace IS_XNA_Shooter
                     if (particles[i] == null)
                     {
                         int recIndex = ObtainRandom(rectanglesTexture.Length);
-                        particles[i] = new Particle(sourcePosition, texture, rectanglesTexture[recIndex]);
+                        if (camera != null)
+                            particles[i] = new ParticleCamera(camera, level, sourcePosition, texture,
+                                rectanglesTexture[recIndex]);
                     }
 
                     // Only re-parameterize "dead" particles
@@ -311,7 +328,7 @@ namespace IS_XNA_Shooter
                         // Establish the deviation in the scale (we want particles smaller than others)
                         particles[i].scale = 0.5f;
                         particles[i].scale += ObtainRandom(MAX_DEFLECTION_SCALE);
-                        
+
                         // Establish the growth rate
                         particles[i].growthVelocity = INITIAL_GROWTH_INCREMENT;
                         particles[i].growthVelocity += ObtainRandom(MAX_DEFLECTION_GROWTH);
@@ -346,5 +363,5 @@ namespace IS_XNA_Shooter
             return (float)(rnd.NextDouble()) * maxValue;
         }
 
-    } // class ParticleSystem
+    } // class ParticleSystemCamera
 }

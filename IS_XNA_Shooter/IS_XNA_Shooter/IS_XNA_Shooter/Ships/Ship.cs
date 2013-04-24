@@ -15,7 +15,7 @@ namespace IS_XNA_Shooter
         protected Game game;
 
         public Collider collider;
-        public ParticleSystem particles;
+        public ParticleSystemCamera particles;
         private int particlesCount = 20;
         private Vector2 exhaustPipePosition;
         private Vector2 exhaustPipePositionOrig;
@@ -118,7 +118,7 @@ namespace IS_XNA_Shooter
             rectangles[1] = new Rectangle(64, 0, 64, 64);
             rectangles[2] = new Rectangle(0, 64, 64, 64);
             rectangles[3] = new Rectangle(64, 64, 64, 64);
-            particles = new ParticleSystem(camera, level, GRMng.textureSmoke01, rectangles, particlesCount, position);
+            particles = new ParticleSystemCamera(camera, level, GRMng.textureSmoke01, rectangles, particlesCount, position);
 
             currentState = shipState.ONNORMAL;
 
@@ -307,7 +307,7 @@ namespace IS_XNA_Shooter
             }
 
             // final movement:
-            if ((movement.X + movement.Y) > 1)
+            if ((Math.Abs(movement.X) + Math.Abs(movement.Y)) > 1)
                 movement.Normalize();
             position.X += movement.X * velocity * deltaTime;
             position.Y += movement.Y * velocity * deltaTime;

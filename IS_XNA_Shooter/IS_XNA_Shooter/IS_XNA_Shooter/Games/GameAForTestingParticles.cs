@@ -108,7 +108,8 @@ namespace IS_XNA_Shooter
                 "F6: FADEOUT_DECREMENT = " + ship.particles.FADEOUT_DECREMENT + "\n" +
                 "F7: INITIAL_GROWTH_INCREMENT = " + ship.particles.INITIAL_GROWTH_INCREMENT + "\n" +
                 "F8: MAX_DEFLECTION_GROWTH = " + ship.particles.MAX_DEFLECTION_GROWTH + "\n" +
-                "F9: MAX_ACELERATION = " + ship.particles.MAX_ACELERATION,
+                "F9: MAX_ACELERATION_X = " + ship.particles.MAX_ACELERATION_X + "\n" +
+                "F10: MAX_ACELERATION_Y = " + ship.particles.MAX_ACELERATION_Y,
                 new Vector2(5, 5), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
 
         } // Draw()
@@ -163,11 +164,17 @@ namespace IS_XNA_Shooter
             else if (ControlMng.f8Preshed && Mouse.GetState().RightButton == ButtonState.Pressed)
                 ship.particles.MAX_DEFLECTION_GROWTH -= 0.005f;
 
-            // MAX_ACELERATION
+            // MAX_ACELERATION_X
             if (ControlMng.f9Preshed && Mouse.GetState().RightButton == ButtonState.Released)
-                ship.particles.MAX_ACELERATION += 1;
+                ship.particles.MAX_ACELERATION_X += 1;
             else if (ControlMng.f9Preshed && Mouse.GetState().RightButton == ButtonState.Pressed)
-                ship.particles.MAX_ACELERATION -= 1;
+                ship.particles.MAX_ACELERATION_Y -= 1;
+
+            // MAX_ACELERATION_Y
+            if (ControlMng.f10Preshed && Mouse.GetState().RightButton == ButtonState.Released)
+                ship.particles.MAX_ACELERATION_Y += 1;
+            else if (ControlMng.f10Preshed && Mouse.GetState().RightButton == ButtonState.Pressed)
+                ship.particles.MAX_ACELERATION_Y -= 1;
 
         } // TestParticles
 

@@ -195,6 +195,10 @@ namespace IS_XNA_Shooter
                 case LevelEndCondition.killemall:
                     levelFinished = (enemies.Count() == 0);
                     break;
+
+                case LevelEndCondition.infinite:
+                    levelFinished = false;
+                    break;
             }
             return levelFinished;
         }

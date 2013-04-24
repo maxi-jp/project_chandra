@@ -31,7 +31,10 @@ namespace IS_XNA_Shooter
         private int horizontalSep; // separación horizontal de las opciones
         private Vector2 backButtonPosition; // posicion de la opcion "back"
 
-        private Texture2D splash;
+        private Texture2D splash01;
+        private Sprite splash02;
+        private float splash02RotationVelocity = -0.02f;
+        private Asteroid asteroid;
 
         private Sprite spriteHistTitle, spriteArcadeTitle, spriteConfigTitle;
         private MenuItem itemBack;
@@ -43,7 +46,6 @@ namespace IS_XNA_Shooter
 
         private Evolution evolution;
 
-
         /* ------------------- CONSTRUCTORES ------------------- */
         public Menu(SuperGame mainGame)
         {
@@ -53,7 +55,12 @@ namespace IS_XNA_Shooter
             horizontalSep = 46;
             backButtonPosition = new Vector2(5, SuperGame.screenHeight - 45);
 
-            splash = GRMng.menuSplash;
+            splash01 = GRMng.menuSplash01; // the main background
+            splash02 = new Sprite(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight + 10),
+                1, GRMng.menuSplash02); // the planet
+
+            asteroid = new Asteroid(true, new Vector2(SuperGame.screenWidth+100, -100),
+                1, GRMng.menuSplash03);
 
             itemBack = new MenuItem(false, backButtonPosition, GRMng.menuMain,
                 new Rectangle(120, 360, 120, 40), new Rectangle(240, 360, 120, 40), new Rectangle(360, 360, 120, 40));
@@ -105,8 +112,11 @@ namespace IS_XNA_Shooter
         }
 
         /* ------------------- MÉTODOS ------------------- */
-        public void Update(int X, int Y)
+        public void Update(int X, int Y, float deltaTime)
         {
+            splash02.rotation += splash02RotationVelocity * deltaTime;
+            asteroid.Update(deltaTime);
+
             switch (menuState)
             {
                 case MenuState.main:
@@ -145,7 +155,10 @@ namespace IS_XNA_Shooter
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(splash, Vector2.Zero, Color.White);
+            spriteBatch.Draw(splash01, Vector2.Zero, Color.White);
+            splash02.Draw(spriteBatch);
+
+            asteroid.Draw(spriteBatch);
 
             switch (menuState)
             {
@@ -184,7 +197,7 @@ namespace IS_XNA_Shooter
                     itemBack.Draw(spriteBatch);
                     break;
             }
-        }
+        } // Draw
 
         // comprueba si se ha seleccionas alguna opcion
         public void Click(int X, int Y)

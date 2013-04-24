@@ -36,8 +36,6 @@ Content\Graphics\yellowpixel.xnb
 Content\Graphics\Hud\base256.xnb
 Content\Graphics\Splash\splash_gameover_1.xnb
 Content\Graphics\Splash\splash_gameover_2.xnb
-Content\Graphics\Splash\splash_mainmenu_1.xnb
-Content\Graphics\Splash\splash_mainmenu_2.xnb
 Content\Graphics\laserShotAnim2.xnb
 Content\Graphics\Ships\sprites_enemy03_80x80.xnb
 Content\Graphics\Menu\gameover.xnb
@@ -83,5 +81,10 @@ Content\Audio\FXEffects\PowerUpGreen.xnb
 Content\Audio\FXEffects\PowerUpRed.xnb
 Content\Audio\Music\music_01.xnb
 Content\Video\VideoIntroProjectChandra.xnb
+Content\Graphics\Splash\splash_mainmenu_asset01_1.xnb
+Content\Graphics\Splash\splash_mainmenu_asset01_2.xnb
+Content\Graphics\Splash\splash_mainmenu_asset02_1.xnb
+Content\Graphics\Splash\splash_mainmenu_asset02_2.xnb
+Content\Graphics\Splash\splash_mainmenu_asset03.xnb
 Content\Audio\Music\music_01.wma
 Content\Video\VideoIntroProjectChandra.wmv

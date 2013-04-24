@@ -333,6 +333,11 @@ namespace IS_XNA_Shooter
             }
         } // readConversationXML
 
+        public override bool IsFinished()
+        {
+            // TODO: ñapa de cojones
+            return false;
+        }
 
     } // class GameB
 }

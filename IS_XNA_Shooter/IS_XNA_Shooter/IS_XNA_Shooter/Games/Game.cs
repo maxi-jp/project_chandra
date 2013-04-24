@@ -234,7 +234,7 @@ namespace IS_XNA_Shooter
             shots.Clear();
         }
 
-        public bool IsFinished()
+        public virtual bool IsFinished()
         {
             return level.IsFinished();
         }

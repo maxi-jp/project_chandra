@@ -74,6 +74,7 @@ namespace IS_XNA_Shooter
                     break;
 
                 case "TestParticles": // level for testing the particle system
+                    levelEndCond = LevelEndCondition.infinite;
                     width = 1200;
                     height = 800;
                     ShipInitPosition = new Vector2(width / 2, height / 2);
@@ -90,7 +91,7 @@ namespace IS_XNA_Shooter
             int i = 0; // iterator for the list of enemies
             bool stillAlive = false; // is true if there is any enemie alive
             //the next loop searches an enemy alive for controlling the end of level 
-            if (!levelFinished)
+            /*if (!levelFinished)
             {
                 while (i < enemies.Count && !stillAlive)
                 {
@@ -102,7 +103,8 @@ namespace IS_XNA_Shooter
                 }
                 if (!stillAlive)
                     levelFinished = true;
-            }
+            }*/
+            // NOTE: this is no longer neded (check Level.IsFinished())
 
             if (testingEnemies)
             {

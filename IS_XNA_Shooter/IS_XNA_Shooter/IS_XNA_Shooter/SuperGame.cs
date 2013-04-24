@@ -374,7 +374,7 @@ namespace IS_XNA_Shooter
                     if (debug && Keyboard.GetState().IsKeyDown(Keys.Y))
                         NewGameAForTestingParticles();
 
-                    menu.Update(Mouse.GetState().X, Mouse.GetState().Y);
+                    menu.Update(Mouse.GetState().X, Mouse.GetState().Y, deltaTime);
 
                     if (Mouse.GetState().LeftButton == ButtonState.Pressed)
                         menu.Click(Mouse.GetState().X, Mouse.GetState().Y);
@@ -384,9 +384,11 @@ namespace IS_XNA_Shooter
                     break;
 
                 case gameState.playing:
+                    totalTime += deltaTime;
 
                     game.Update(gameTime);
-                    totalTime += deltaTime;
+                    if (game.IsFinished())
+                        currentState = gameState.mainMenu;
 
                     if (Keyboard.GetState().IsKeyDown(Keys.P) ||
                         GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed)

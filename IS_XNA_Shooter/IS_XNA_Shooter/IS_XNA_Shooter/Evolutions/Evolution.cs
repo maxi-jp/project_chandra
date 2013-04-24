@@ -148,7 +148,7 @@ namespace IS_XNA_Shooter
 
 
             Vector2 position = new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight / 2);
-            backgroundSprite = new Sprite(true, position, 0, content.Load<Texture2D>("Graphics/Splash/splash_mainmenu_2"));
+            backgroundSprite = new Sprite(true, position, 0, content.Load<Texture2D>("Graphics/Splash/splash_mainmenu_asset01_2"));
             background1 = new Sprite(true, position, 0, content.Load<Texture2D>("Graphics/Evolution/background_1"));
 
             position = new Vector2(SuperGame.screenWidth / 2, 17 * SuperGame.screenHeight / 32);

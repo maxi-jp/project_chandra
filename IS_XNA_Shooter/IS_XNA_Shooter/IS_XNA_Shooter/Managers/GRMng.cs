@@ -273,7 +273,9 @@ namespace IS_XNA_Shooter
         public static Texture2D menuStory;
         public static Texture2D menuArcade;
         public static Texture2D menuConfig;
-        public static Texture2D menuSplash;
+        public static Texture2D menuSplash01;
+        public static Texture2D menuSplash02;
+        public static Texture2D menuSplash03;
 
         /* ------------------- INGAME MENU ------------------- */
         public static Texture2D menuIngame;
@@ -650,7 +652,10 @@ namespace IS_XNA_Shooter
             menuStory = content.Load<Texture2D>("Graphics/Menu/story");
             menuArcade = content.Load<Texture2D>("Graphics/Menu/arcade");
             menuConfig = content.Load<Texture2D>("Graphics/Menu/configuration");
-            menuSplash = content.Load<Texture2D>("Graphics/Splash/splash_mainmenu_2");
+            menuSplash01 = content.Load<Texture2D>("Graphics/Splash/splash_mainmenu_asset01_2");
+            menuSplash02 = content.Load<Texture2D>("Graphics/Splash/splash_mainmenu_asset02_2");
+            menuSplash03 = content.Load<Texture2D>("Graphics/Splash/splash_mainmenu_asset03");
+            textureSmoke01 = content.Load<Texture2D>("Graphics/Smoke/smoke01");
         }
 
         private void UnloadMenu()
@@ -659,7 +664,10 @@ namespace IS_XNA_Shooter
             menuStory = null;
             menuArcade = null;
             menuConfig = null;
-            menuSplash = null;
+            menuSplash01 = null;
+            menuSplash02 = null;
+            menuSplash03 = null;
+            textureSmoke01 = null;
         }
 
         private void LoadIngameMenu()

@@ -185,10 +185,11 @@ namespace IS_XNA_Shooter
 
         public override void Damage(int i)
         {
-            base.Damage(i);
-
+            // mientras esta rojo no sufre más daño
             if (!isDyeingRed)
             {
+                base.Damage(i);
+
                 isDyeingRed = true;
                 timeDyeingRedAux = timeDyeingRed;
                 SetTransparency(128);
@@ -296,12 +297,8 @@ namespace IS_XNA_Shooter
         private void phase3(float deltaTime)
         {
 
-            
             if (movingToBack)
             {
-
-               
-
                 if (position.X + this.frameWidth/2 < SuperGame.screenWidth) { position.X += deltaTime * velocity*1.2f; }
                 else if (position.X + this.frameWidth/2 > SuperGame.screenWidth) { position.X -= deltaTime * velocity*1.2f; }
 

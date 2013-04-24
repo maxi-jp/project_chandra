@@ -19,7 +19,7 @@ namespace IS_XNA_Shooter
         /// <summary>
         /// String that indicates the current version of the project
         /// </summary>
-        public String currentVersion = "0.5";
+        public String currentVersion = "0.6";
 
         /// <summary>
         /// XNA's atribute for graphics

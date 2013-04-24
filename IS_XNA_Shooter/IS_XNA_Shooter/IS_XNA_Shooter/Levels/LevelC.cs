@@ -73,20 +73,21 @@ namespace IS_XNA_Shooter
             bool stillAlive = false; // is true if there is any enemie alive
             //the next loop searches an enemy alive for controlling the end of level 
 
-            /* TODO: arreglar esto
-            if (globalTimeAux > 310 && numLevelAux != 0 && timeLapse <= 0)
+            if (globalTimeAux > 310 && timeLapse <= 0)
+            //if (globalTimeAux > 310 && numLevelAux != 0 && timeLapse <= 0)
             {
                 LeerArchivoXML();
                 timeLapse = 2;
-                numLevelAux--;                
+                globalTimeAux = 0;
+                //numLevelAux--;                
             }
-            else  if (numLevelAux == 0)
+            /*else if (numLevelAux == 0)
             {
-                numLevel++;
-                numLevelAux = numLevel;
+                //numLevel++;
+                //numLevelAux = numLevel;
                 globalTimeAux = 310;
                 timeLapse = 2;
-            } */
+            }*/
                                         
             globalTime = globalTime + deltaTime;
             globalTimeAux = globalTimeAux + deltaTime;
@@ -253,53 +254,53 @@ namespace IS_XNA_Shooter
                     //timeLeftEnemy.Add(time);
 
                     Enemy enemy = null;
-
-                    if (enemyType.Equals("enemyWeakA"))
+                    // TODO: los enemigos deberían de crearse desde la EnemyFactory
+                    if (enemyType.Equals("EnemyWeakA"))
                         enemy = new EnemyWeakA(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEW1, GRMng.frameHeightEW1, GRMng.numAnimsEW1, GRMng.frameCountEW1,
                             GRMng.loopingEW1, SuperGame.frameTime12, GRMng.textureEW1, time, 100, 100,
                             1, ship);
-                    else if (enemyType.Equals("enemyBeam"))
+                    else if (enemyType.Equals("EnemyBeam"))
                         enemy = new EnemyBeamA(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEB1, GRMng.frameHeightEB1, GRMng.numAnimsEB1, GRMng.frameCountEB1,
                             GRMng.loopingEB1, SuperGame.frameTime12, GRMng.textureEB1, time, 1000, 100,
                             4, ship);
-                    else if (enemyType.Equals("enemyWeakShotA"))
+                    else if (enemyType.Equals("EnemyWeakShotA"))
                         enemy = new EnemyWeakShotA(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEW2, GRMng.frameHeightEW2, GRMng.numAnimsEW2, GRMng.frameCountEW2,
                             GRMng.loopingEW2, SuperGame.frameTime12, GRMng.textureEW2, time, 100, 100,
                             1, ship, 2, 300, 200);
-                    else if (enemyType.Equals("enemyMineShotA"))
+                    else if (enemyType.Equals("EnemyMineShotA"))
                         enemy = new EnemyMineShotA(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEMS, GRMng.frameHeightEMS, GRMng.numAnimsEMS, GRMng.frameCountEMS,
                             GRMng.loopingEMS, SuperGame.frameTime12, GRMng.textureEMS, time, 100, 100,
                             1, ship, 4, 140, 200);
-                    else if (enemyType.Equals("enemyLaserA"))
+                    else if (enemyType.Equals("EnemyLaserA"))
                         enemy = new EnemyLaserA(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEL, GRMng.frameHeightEL, GRMng.numAnimsEL, GRMng.frameCountEL,
                             GRMng.loopingEL, SuperGame.frameTime12, GRMng.textureEL, time, 100, 100,
                             1, ship);
-                    else if (enemyType.Equals("enemyScaredA"))
+                    else if (enemyType.Equals("EnemyScaredA"))
                         enemy = new EnemyScaredA(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthES, GRMng.frameHeightES, GRMng.numAnimsES, GRMng.frameCountES,
                             GRMng.loopingES, SuperGame.frameTime12, GRMng.textureES, time, 100, 100,
                             1, ship, 4, 300, 200);
-                    else if (enemyType.Equals("enemyWeakB"))
+                    else if (enemyType.Equals("EnemyWeakB"))
                         enemy = new EnemyWeakB(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEW1, GRMng.frameHeightEW1, GRMng.numAnimsEW1, GRMng.frameCountEW1,
                             GRMng.loopingEW1, SuperGame.frameTime12, GRMng.textureEW1, time, 100, 100,
                             1, ship);
-                    else if (enemyType.Equals("enemyWeakShotB"))
+                    else if (enemyType.Equals("EnemyWeakShotB"))
                         enemy = new EnemyWeakShotB(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEW2, GRMng.frameHeightEW2, GRMng.numAnimsEW2, GRMng.frameCountEW2,
                             GRMng.loopingEW2, SuperGame.frameTime12, GRMng.textureEW2, time, 100, 100,
                             1, ship, 2, 300, 200);
-                    else if (enemyType.Equals("enemyMineShotB"))
+                    else if (enemyType.Equals("EnemyMineShotB"))
                         enemy = new EnemyMineShotB(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEMS, GRMng.frameHeightEMS, GRMng.numAnimsEMS, GRMng.frameCountEMS,
                             GRMng.loopingEMS, SuperGame.frameTime12, GRMng.textureEMS, time, 100, 100,
                             1, ship, 4, 140, 200);
-                    else if (enemyType.Equals("enemyLaserB"))
+                    else if (enemyType.Equals("EnemyLaserB"))
                         enemy = new EnemyLaserB(camera, this, new Vector2(positionX, positionY), 0,
                             GRMng.frameWidthEL, GRMng.frameHeightEL, GRMng.numAnimsEL, GRMng.frameCountEL,
                             GRMng.loopingEL, SuperGame.frameTime12, GRMng.textureEL, time, 100, 100,

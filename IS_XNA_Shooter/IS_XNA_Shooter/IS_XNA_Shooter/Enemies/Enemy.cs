@@ -67,7 +67,7 @@ namespace IS_XNA_Shooter
         /// <summary>
         /// Power Up left by the enemy (which could fall or not)
         /// </summary>
-        protected PowerUp powerUp=null;
+        protected PowerUp powerUp = null;
 
        
         /// <summary>
@@ -182,17 +182,19 @@ namespace IS_XNA_Shooter
             if (life <= 0)
             {
                 colisionable = false;
+
+                // It is decide if a new power up falls or not
                 Random random = new Random();
                 short type = (short)random.Next(3);
                 if (random.Next(0,100) < 20) //percentage for the power up
                 {
-                    powerUp = new PowerUp(camera, level, position,0,GRMng.powerTexture,GRMng.frameWidthEW1,GRMng.frameHeightEW1,
-                        type,new short[]{6,6,6},new bool[]{true,true,true},SuperGame.frameTime12,type);
+                    powerUp = new PowerUp(camera, level, position, 0,
+                        GRMng.powerTexture, GRMng.frameWidthEW1, GRMng.frameHeightEW1,
+                        type, new short[]{6,6,6}, new bool[]{true,true,true}, SuperGame.frameTime12, type);
                 }
             }
-        }
+        } // Damage
 
-         
         /// <summary>
         /// This method is called when the enemy its destroyed
         /// it has to play its death animation and its shots must
@@ -288,11 +290,6 @@ namespace IS_XNA_Shooter
             return (!animActive);
         }
 
-
-        internal PowerUp getPowerUp()
-        {
-            return powerUp;
-        }
         /// <summary>
         /// Returns the Enemy's life
         /// </summary>
@@ -300,6 +297,15 @@ namespace IS_XNA_Shooter
         public int GetLife()
         {
             return this.life;
+        }
+
+        /// <summary>
+        /// Returns the power up of the Enemy (or null if it hasn't been generated)
+        /// </summary>
+        /// <returns>one power up</returns>
+        public PowerUp GetPowerUp()
+        {
+            return powerUp;
         }
 
     } // class Enemy

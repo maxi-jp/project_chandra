@@ -40,7 +40,6 @@ namespace IS_XNA_Shooter
         private float timePowerUpRed = 0;
         public float timePowerUpBlue = 0; //    public de momento
 
-
         // state of the ship
         protected enum shipState
         {
@@ -252,7 +251,7 @@ namespace IS_XNA_Shooter
                     break;
             }
             
-        }
+        } // Update
 
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -266,10 +265,12 @@ namespace IS_XNA_Shooter
             else if (timePowerUpBlue > 0)
                 SetColor(0,0,255,255);
             else SetColor(255, 255, 255, 255);
+            // TODO: must fix! así se está estableciendo el color en cada Draw
+            //     cuando solo debería de hacerse una vez: cuando se coje el power up
 
             if (SuperGame.debug)
                 collider.Draw(spriteBatch);
-        }
+        } // Draw
 
         private void Move(float deltaTime)
         {
@@ -314,6 +315,8 @@ namespace IS_XNA_Shooter
             // shots:
             if ((disp > 0) && (timeToShotAux <= 0))
                 ShipShot(disp);
+
+            // power ups:
             if (timePowerUpRed > 0)
                 timePowerUpRed -= deltaTime;
             if (timePowerUpBlue > 0)
@@ -330,7 +333,6 @@ namespace IS_XNA_Shooter
                 timeVibShotAux = timeVibShot;
             }*/
 
-
             setAnim(2);
             Shot nuevo;
             if (timePowerUpRed > 0)
@@ -338,7 +340,7 @@ namespace IS_XNA_Shooter
                 Audio.PlayEffect("laser_shot_red");
                 nuevo = new Shot(camera, level, position, rotation, GRMng.frameWidthShotFinalBossHeroe, GRMng.frameHeightShotFinalBossHeroe,
                     GRMng.numAnimsShotFinalBossHeroe, GRMng.frameCountShotFinalBossHeroe, GRMng.loopingShotFinalBossHeroe, SuperGame.frameTime8, GRMng.textureShotFinalBossHeroe,
-                    SuperGame.shootType.red, 500, 100);
+                    SuperGame.shootType.red, shotVelocity, (int)(shotPower * 1.5f));
             }
             else
             {

@@ -158,9 +158,10 @@ namespace IS_XNA_Shooter
                             GRMng.frameWidthEL, GRMng.frameHeightEL, GRMng.numAnimsEL, GRMng.frameCountEL,
                             GRMng.loopingEL, SuperGame.frameTime12, GRMng.textureEL, time, 100, 100,
                             1, null);*/
-
-                    enemies.Add(enemy); 
-                    
+                    if (enemy != null)
+                        enemies.Add(enemy);
+                    else
+                        throw new Exception("Fail at creating Enemy");
                 }
             
             }

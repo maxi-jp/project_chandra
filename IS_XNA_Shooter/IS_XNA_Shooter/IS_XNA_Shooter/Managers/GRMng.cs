@@ -316,9 +316,8 @@ namespace IS_XNA_Shooter
                     break;
 
                 case "LevelA1":
-                    powerTexture = content.Load<Texture2D>("Graphics/PowerUps/spritesPowerUp02_80x80");
-
                     LoadShipA();
+                    powerTexture = content.Load<Texture2D>("Graphics/PowerUps/spritesPowerUp02_80x80");
                     textureAim = content.Load<Texture2D>("Graphics/aimpoint");
                     textureL2 = content.Load<Texture2D>("Graphics/laserShotAnim2");
                     
@@ -374,6 +373,7 @@ namespace IS_XNA_Shooter
 
                 case "LevelA2":
                     LoadShipA();
+                    powerTexture = content.Load<Texture2D>("Graphics/PowerUps/spritesPowerUp02_80x80");
                     textureAim = content.Load<Texture2D>("Graphics/aimpoint");
 
                     textureCell = content.Load<Texture2D>("Graphics/celdasuelo");
@@ -388,15 +388,13 @@ namespace IS_XNA_Shooter
                     textureFinalBoss1Turret1Shot = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/shotTurret1");
 
                     textureHeroe1 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/heroe1");
-                    powerTexture = content.Load<Texture2D>("Graphics/PowerUps/spritesPowerUp02_80x80");
                     textureShotFinalBossHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/shotHeroe1");
-
-
                     break;
 
                 case "LevelB1":
                     LoadShipA();
                     powerTexture = content.Load<Texture2D>("Graphics/PowerUps/spritesPowerUp02_80x80");
+
                     textureShotFinalBossHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/shotHeroe1");
                     textureL2 = content.Load<Texture2D>("Graphics/laserShotAnim2");
                     
@@ -413,13 +411,11 @@ namespace IS_XNA_Shooter
                     textureBgCol1 = content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable1");
                     textureBgCol2 = content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable2");
                     textureBgCol3 = content.Load<Texture2D>("Graphics/Backgrounds/LayerColisionable3");
-
                     break;
 
                 case "LevelB2":
-                    powerTexture = content.Load<Texture2D>("Graphics/PowerUps/spritesPowerUp02_80x80");
-
                     LoadShipA();
+                    powerTexture = content.Load<Texture2D>("Graphics/PowerUps/spritesPowerUp02_80x80");
 
                     textureFinalBoss1 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBoss1");
                     textureShotFinalBoss1 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/shotFinalBoss1");
@@ -476,10 +472,8 @@ namespace IS_XNA_Shooter
                     break;
 
                 case "LevelA1":
-                    textureShotFinalBossHeroe = null;
-                    powerTexture = null;
-
                     UnloadShipA();
+                    powerTexture = null;
                     textureAim = null;
                     textureL2 = null;
 
@@ -511,6 +505,7 @@ namespace IS_XNA_Shooter
                     break;
 
                 case "LevelADefense1":
+                    UnloadShipA();
                     textureAim = null;
                     textureL2 = null;
 

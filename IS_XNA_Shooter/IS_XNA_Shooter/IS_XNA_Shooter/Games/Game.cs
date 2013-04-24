@@ -106,9 +106,7 @@ namespace IS_XNA_Shooter
             {
                 powerUpList[i].Update(deltaTime);
                 if (!powerUpList[i].IsActive())
-                {
                     powerUpList.RemoveAt(i);
-                }
             }
 
             for (int i = 0; i < shots.Count(); i++)     // shots
@@ -128,20 +126,19 @@ namespace IS_XNA_Shooter
                     //if (enemies[i].isActive() && shots[j].isActive() && enemies[i].collider.collision(shots[j].collider))
                     {                       
                         enemies[i].Damage(shots[j].GetPower());
-                        PowerUp powerUp = enemies[i].getPowerUp();
+                        PowerUp powerUp = enemies[i].GetPowerUp();
                         if (powerUp != null)
-                        {
                             powerUpList.Add(powerUp);
-                        }
                         if (shots[j].type == SuperGame.shootType.normal)
                             shots.RemoveAt(j);
                     }
                 }
             }
 
-            for (int i = 0; i < powerUpList.Count; i++)     //powerUps for the ship
+            for (int i = 0; i < powerUpList.Count; i++) // powerUps for the ship
             {
-                if (ship.collider.Collision(powerUpList[i].collider) || powerUpList[i].collider.Collision(ship.collider))
+                if (ship.collider.Collision(powerUpList[i].collider)
+                    /*|| powerUpList[i].collider.Collision(ship.collider)*/)
                 {
                     ship.CatchPowerUp(powerUpList[i].GetType());
                     if (powerUpList[i].GetType() == 2) //green power
@@ -156,23 +153,22 @@ namespace IS_XNA_Shooter
                 }
             }
 
-                if (!SuperGame.godMode)
+            if (!SuperGame.godMode)
+            {
+                // enemies-player collision:
+                for (int i = 0; i < enemies.Count(); i++)
                 {
-                    // enemies-player collision:
-                    for (int i = 0; i < enemies.Count(); i++)
+                    if (enemies[i].IsColisionable() && (ship.collider.Collision(enemies[i].collider)
+                        /*|| enemies[i].collider.Collision(ship.collider)*/))
                     {
-                        if (enemies[i].IsColisionable() && (ship.collider.Collision(enemies[i].collider) || enemies[i].collider.Collision(ship.collider)))
-                        {
-                            // the player has been hit by an enemy
-                            if (ship.timePowerUpBlue > 0)
-                            {
-                                enemies[i].Damage(200);
-                            }
-                            else
+                        // the player has been hit by an enemy
+                        if (ship.timePowerUpBlue > 0)
+                            enemies[i].Damage(200);
+                        else
                             ship.Kill();
-                        }
                     }
                 }
+            }
 
             camera.Update(deltaTime);   // cámara
 
@@ -194,12 +190,16 @@ namespace IS_XNA_Shooter
                 timeToGameOver -= deltaTime;
                 if (timeToGameOver <= 0)
                     mainGame.GameOver();
+
             }
-        }
+        } // Update
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             level.Draw(spriteBatch);
+
+            foreach (PowerUp pow in powerUpList)
+                pow.Draw(spriteBatch);
 
             foreach (Enemy e in enemies)
                 if (e.IsActive())
@@ -212,13 +212,10 @@ namespace IS_XNA_Shooter
             foreach (Shot shot in shots)    // player shots
                 shot.Draw(spriteBatch);
 
-            foreach (PowerUp pow in powerUpList)
-                pow.Draw(spriteBatch);
-
             ship.Draw(spriteBatch);
 
             hud.Draw(spriteBatch);
-        }
+        } // Draw
 
         // This methods is called when the ship of the player has been
         // hitted by an enemy shot and its life is < 0

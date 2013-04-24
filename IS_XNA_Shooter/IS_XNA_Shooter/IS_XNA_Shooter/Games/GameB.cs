@@ -105,13 +105,14 @@ namespace IS_XNA_Shooter
 
             scrollPosition += scrollVelocity * deltaTime;
 
+            // power ups movement
             for (int i = 0; i < powerUpList.Count; i++)
             {
-                powerUpList[i].UpdatePosition(powerUpList[i].getPosition() + new Vector2(-deltaTime*200, 0));
-                //+  new Vector2(scrollPosition,0)
+                powerUpList[i].UpdatePosition(powerUpList[i].getPosition() +
+                    new Vector2(-deltaTime * scrollVelocity, 0));
             }
 
-                backGround.Update(deltaTime);
+            backGround.Update(deltaTime);
 
             // player-walls(rectangles) collision:
             int cont = 0;
@@ -125,11 +126,11 @@ namespace IS_XNA_Shooter
                         listRecMap[i].rectangleList[j].Y,
                         listRecMap[i].rectangleList[j].Width,
                         listRecMap[i].rectangleList[j].Height);
-                    for (int k = 0; k < ship.collider.points.Length; k++)
-                    { 
-                        if (recAux.Contains((int)ship.collider.points[k].X, (int)ship.collider.points[k].Y))
-                            ship.Kill();
-                    }
+                    // some cases are descarted:
+                    //if ((recAux.X > ship.position.X - 100) && (recAux.X < ship.position.X + 100))
+                        for (int k = 0; k < ship.collider.points.Length; k++)
+                            if (recAux.Contains((int)ship.collider.points[k].X, (int)ship.collider.points[k].Y))
+                                ship.Kill();
                 }
                 cont += listRecMap[rectangleMap[i]].width;
             }

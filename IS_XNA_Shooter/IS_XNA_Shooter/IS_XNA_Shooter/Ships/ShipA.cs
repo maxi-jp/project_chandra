@@ -31,10 +31,10 @@ namespace IS_XNA_Shooter
         public ShipA(Game game, Camera camera, Level level, Vector2 position, float rotation,
             Vector2[] colliderPoints,
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
-            float frametime, Texture2D texture,
+            float frametime, Texture2D texture, Texture2D textureShield,
             Evolution evolution, List<Shot> shots)
             : base(game, camera, level, position, rotation, colliderPoints, frameWidth, frameHeight,
-                numAnim, frameCount, looping, frametime, texture, evolution, shots)
+                numAnim, frameCount, looping, frametime, texture, textureShield, evolution, shots)
         {
             pointer = new Vector2();
             prevRotation = 0;

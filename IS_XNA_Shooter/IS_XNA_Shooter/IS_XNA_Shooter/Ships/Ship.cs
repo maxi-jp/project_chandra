@@ -14,6 +14,9 @@ namespace IS_XNA_Shooter
         /* ------------------- ATRIBUTOS ------------------- */
         protected Game game;
 
+        protected Texture2D textureOrig;
+        protected Texture2D textureShield;
+
         public Collider collider;
         public ParticleSystemCamera particles;
         private int particlesCount = 20;
@@ -92,7 +95,7 @@ namespace IS_XNA_Shooter
         public Ship(Game game, Camera camera, Level level, Vector2 position, float rotation,
             Vector2[] colliderPoints,
             short frameWidth, short frameHeight, short numAnim, short[] frameCount, bool[] looping,
-            float frametime, Texture2D texture,
+            float frametime, Texture2D texture, Texture2D textureShield,
             Evolution evolution, List<Shot> shots)
             : base(camera, level, true, position, rotation, texture, frameWidth, frameHeight, numAnim,
                 frameCount, looping, frametime)
@@ -100,6 +103,9 @@ namespace IS_XNA_Shooter
             movement = new Vector2(1, 0);
 
             this.game = game;
+
+            this.textureOrig = texture;
+            this.textureShield = textureShield;
 
             this.velocity = evolution.getSpeedShip() ;
             this.life = (int)evolution.getLife();
@@ -262,8 +268,8 @@ namespace IS_XNA_Shooter
                 SetColor(255, 0, 255, 255);
             else if (timePowerUpRed > 0)
                 SetColor(255,0,0,255);
-            else if (timePowerUpBlue > 0)
-                SetColor(0,0,255,255);
+            /*else if (timePowerUpBlue > 0)
+                SetColor(0,0,255,255);*/
             else SetColor(255, 255, 255, 255);
             // TODO: must fix! así se está estableciendo el color en cada Draw
             //     cuando solo debería de hacerse una vez: cuando se coje el power up
@@ -319,8 +325,11 @@ namespace IS_XNA_Shooter
             // power ups:
             if (timePowerUpRed > 0)
                 timePowerUpRed -= deltaTime;
-            if (timePowerUpBlue > 0)
-                timePowerUpBlue -= deltaTime;
+            /*if (timePowerUpBlue > 0)
+                timePowerUpBlue -= deltaTime;*/
+            timePowerUpBlue -= deltaTime;
+            if (timePowerUpBlue <= 0)
+                texture = textureOrig;
 
             timeToShotAux -= deltaTime;
         }
@@ -409,6 +418,7 @@ namespace IS_XNA_Shooter
             {
                 case 0:     // blue invencivility
                     Audio.PlayEffect("PowerUpBlue");
+                    texture = textureShield;
                     timePowerUpBlue = 6f;
                     break;
                 case 1:     // red red shoot

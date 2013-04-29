@@ -40,7 +40,8 @@ namespace IS_XNA_Shooter
 
             ship = new ShipA(this, camera, level, Vector2.Zero, 0, points,
                 GRMng.frameWidthPA1, GRMng.frameHeightPA1, GRMng.numAnimsPA1, GRMng.frameCountPA1,
-                GRMng.loopingPA1, SuperGame.frameTime24, GRMng.texturePA1, evolution, shots);
+                GRMng.loopingPA1, SuperGame.frameTime24, GRMng.texturePA1, GRMng.texturePA1_shield,
+                evolution, shots);
 
             level.setShip(ship);
 

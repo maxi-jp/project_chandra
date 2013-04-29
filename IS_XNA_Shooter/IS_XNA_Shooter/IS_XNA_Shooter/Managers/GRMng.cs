@@ -197,6 +197,7 @@ namespace IS_XNA_Shooter
         #region PLAYER
         /* ------------------- PLAYERA1 ------------------- */
         public static Texture2D texturePA1;
+        public static Texture2D texturePA1_shield;
         public static short frameWidthPA1 = 80;
         public static short frameHeightPA1 = 80;
         public static short numAnimsPA1 = 4;
@@ -686,6 +687,7 @@ namespace IS_XNA_Shooter
         {
             textureSmoke01 = content.Load<Texture2D>("Graphics/Smoke/smoke01");
             texturePA1 = content.Load<Texture2D>("Graphics/Ships/sprites80x80");
+            texturePA1_shield = content.Load<Texture2D>("Graphics/Ships/sprites_shield80x80");
             textureL1 = content.Load<Texture2D>("Graphics/laserShotAnim");
         }
 
@@ -693,6 +695,7 @@ namespace IS_XNA_Shooter
         {
             textureSmoke01 = null;
             texturePA1 = null;
+            texturePA1_shield = null;
             textureL1 = null;
         }
 

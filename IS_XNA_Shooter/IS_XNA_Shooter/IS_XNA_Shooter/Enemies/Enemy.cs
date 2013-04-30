@@ -185,12 +185,12 @@ namespace IS_XNA_Shooter
 
                 // It is decide if a new power up falls or not
                 Random random = new Random();
-                short type = (short)random.Next(3);
+                short type = (short)random.Next(4);
                 if (random.Next(0,100) < 20) //percentage for the power up
                 {
                     powerUp = new PowerUp(camera, level, position, 0,
                         GRMng.powerTexture, GRMng.frameWidthEW1, GRMng.frameHeightEW1,
-                        type, new short[]{6,6,6}, new bool[]{true,true,true}, SuperGame.frameTime12, type);
+                        type, new short[]{6,6,6,6}, new bool[]{true,true,true,true}, SuperGame.frameTime12, type);
                 }
             }
         } // Damage

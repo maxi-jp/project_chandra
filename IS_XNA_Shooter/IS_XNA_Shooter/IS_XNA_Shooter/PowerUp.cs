@@ -74,8 +74,8 @@ namespace IS_XNA_Shooter
             points[6] = new Vector2(40,10);
             points[7] = new Vector2(20,20);
             collider = new Collider(camera, true, position, rotation, points, 40, frameWidth, frameHeight);
-            //type must be 0,1 or 2
-            if (type < 3 && type >= 0)
+            //type must be 0,1,2 or 3
+            if (type < 4 && type >= 0)
                 setAnim(type);
             else 
                 setAnim(0);

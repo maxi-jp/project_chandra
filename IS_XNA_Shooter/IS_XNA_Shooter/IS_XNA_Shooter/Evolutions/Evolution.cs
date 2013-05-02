@@ -31,11 +31,11 @@ namespace IS_XNA_Shooter
         /// <summary>
         /// Extra values that you improved
         /// </summary>
-        private const float LIFE = 50,
+        private const float LIFE = 100,
                             POWER_ATTACK = 50,
-                            SPEED_SHIP = 50,
+                            SPEED_SHIP = 25,
                             SPEED_SHOT = 100,
-                            CADENCE = 0.1f;
+                            CADENCE = 0.01f;
         /// <summary>
         /// Parameters for the graphic components
         /// </summary>
@@ -181,21 +181,21 @@ namespace IS_XNA_Shooter
             continueState = 0;
 
             // base parameters
-            life = 100;
-            powerAttack = 200;
-            speedShip = 200;
-            speedShot = 250;
-            cadence = 1f;
+            life = 600;
+            powerAttack = 400;
+            speedShip = 300;
+            speedShot = 350;
+            cadence = 0.2f;
             
             // evolution of base parameters
             lifeExtra = powerAttackExtra = speedShipExtra = speedShotExtra = cadenceExtra = 0;
 
             // number of evolutions of base parameters
-            lifeUpdate = initializeList(10);
-            powerAttackUpdate = initializeList(10);
+            lifeUpdate = initializeList(14);
+            powerAttackUpdate = initializeList(14);
             speedShipUpdate = initializeList(10);
             speedShotUpdate = initializeList(10);
-            cadenceUpdate = initializeList(9);
+            cadenceUpdate = initializeList(15);
 
             // textures
             greenPixel = GRMng.greenpixeltrans;

@@ -15,19 +15,31 @@ namespace IS_XNA_Shooter
     /// </summary>
     public class Evolution
     {
+        /// <summary>
+        /// State of the mouse in the evolution screen
+        /// </summary>
         private enum MouseClickState { nothing, clicked, unClicked };
+
+        /// <summary>
+        /// State of the game when it calls this class
+        /// </summary>
         public enum GameState { story, scroll, killer, survival, defense }
 
 
         //-------------------------------------------------------------------------------
 
-
+        /// <summary>
+        /// Extra values that you improved
+        /// </summary>
         private const float LIFE = 50,
                             POWER_ATTACK = 50,
                             SPEED_SHIP = 50,
                             SPEED_SHOT = 100,
-                            CADENCE = 0.1f,
-                            INITIAL_SPACE_BAR = 30,
+                            CADENCE = 0.1f;
+        /// <summary>
+        /// Parameters for the graphic components
+        /// </summary>
+        private const float INITIAL_SPACE_BAR = 30,
                             HIGH_BAR = 30,
                             SPACE_BAR = 40,
                             SPACE_BUTTON = 10,
@@ -38,12 +50,18 @@ namespace IS_XNA_Shooter
                             LENGTH_BUTTON_CONTINUE = 30,
                             SPACE_BUTTON_CONTINUE_BOTTOM = 10,
                             SPACE_BUTTON_CONTINUE_RIGHT = 10;
+
+        /// <summary>
+        /// Length of the frame that is showed in the preview button
+        /// </summary>
         public const int LENGTH_FRAME = 500;
 
 
         //-------------------------------------------------------------------------------
 
-        
+        /// <summary>
+        /// Current and extra values
+        /// </summary>
         private float life,
                     lifeExtra,
                     powerAttack,
@@ -55,12 +73,18 @@ namespace IS_XNA_Shooter
                     cadence,
                     cadenceExtra;
 
+        /// <summary>
+        /// List of how many updates are activated in every parameter.
+        /// </summary>
         private List<Boolean> lifeUpdate, 
                             powerAttackUpdate, 
                             speedShipUpdate, 
                             speedShotUpdate, 
                             cadenceUpdate;
 
+        /// <summary>
+        /// Rectangles of every button
+        /// </summary>
         private Rectangle lifeRectangleAdd,
                             lifeRectangleRemove,
                             powerAttackRectangleAdd,
@@ -75,13 +99,32 @@ namespace IS_XNA_Shooter
                             previewRectangle,
                             previewFrameRectangle;
 
+        /// <summary>
+        /// Textures
+        /// </summary>
         private Texture2D greenPixel, bluePixel, buttons, buttonPreview, buttonContinue, previewFrame;
+
+        /// <summary>
+        /// Sprites
+        /// </summary>
         private Sprite backgroundSprite, background1, measures;
 
+        /// <summary>
+        /// Current state of the mouse
+        /// </summary>
         private MouseClickState mouseState;
 
+        /// <summary>
+        /// Class that manages all games
+        /// </summary>
         private SuperGame mainGame;
 
+        /// <summary>
+        /// State of the buttons (to draw the correct image, because in the images we have the button in a normal state, click state and in a over state)
+        /// 0 - normal state
+        /// 1 - over state
+        /// 2 - click state
+        /// </summary>
         private int lifeStateAdd,
             lifeStateRemove,
             powerAttackStateAdd,
@@ -95,18 +138,34 @@ namespace IS_XNA_Shooter
             previewState,
             continueState;
 
+        /// <summary>
+        /// Tell us if the button preview is clicked
+        /// </summary>
         private bool isClickedPreview;
 
+        /// <summary>
+        /// The ship we show in the preview frame
+        /// </summary>
         private ShipPreview ship;
 
+        /// <summary>
+        /// The content manager
+        /// </summary>
         private ContentManager contentMng;
 
+        /// <summary>
+        /// Current state of the game
+        /// </summary>
         private GameState gameState;
 
 
         //-------------------------------------------------------------------------------
 
-
+        /// <summary>
+        /// Builder
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="mainGame"></param>
         public Evolution(ContentManager content, SuperGame mainGame)
         {                
             // initial value from the botton preview
@@ -187,10 +246,10 @@ namespace IS_XNA_Shooter
             position = new Vector2(SuperGame.screenWidth / 2 - previewFrame.Width / 2, SuperGame.screenHeight / 2 - previewFrame.Height / 2);
             previewFrameRectangle = new Rectangle((int)position.X, (int)position.Y, previewFrame.Width, previewFrame.Height);
 
-            // state that tell us if a button has been click, unclick or you didn't do nothing.
+            // state that tell us if a button has been click, unclick or you didn't do anything.
             mouseState = MouseClickState.nothing;
 
-            // assigns
+            // main game and content manager
             this.mainGame = mainGame;
             contentMng = content;
         }
@@ -198,38 +257,69 @@ namespace IS_XNA_Shooter
 
         //-------------------------------------------------------------------------------
 
+        /// <summary>
+        /// Return us the real life
+        /// </summary>
+        /// <returns></returns>
         public float getLife() {
             return life + lifeExtra;
         }
 
+        /// <summary>
+        /// Return us the real power attack
+        /// </summary>
+        /// <returns></returns>
         public float getPowerAttack() {
             return powerAttack + powerAttackExtra;
         }
 
+        /// <summary>
+        /// Return us the real speed of our ship
+        /// </summary>
+        /// <returns></returns>
         public float getSpeedShip() {
             return speedShip + speedShipExtra;
         }
 
+        /// <summary>
+        /// Return us the real speed of the ship's shot
+        /// </summary>
+        /// <returns></returns>
         public float getSpeedShot() {
             return speedShot + speedShotExtra;
         }
 
+        /// <summary>
+        /// Return us the real cadence of the ship's shot
+        /// </summary>
+        /// <returns></returns>
         public float getCadence() {
             return cadence - cadenceExtra;
         }
 
+        /// <summary>
+        /// Updates the current state of the game
+        /// </summary>
+        /// <param name="gameState"></param>
         public void setGameState(GameState gameState)
         {
             this.gameState = gameState;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="deltaTime"></param>
+        /// <param name="mouse"></param>
         public void Update(float deltaTime, MouseState mouse)
         {
+            // if we aren't doing anything with the mouse, our mouse state is unclicked or nothing, else is clicked.
             if (mouse.LeftButton != ButtonState.Pressed)
                 if (mouseState == MouseClickState.clicked) mouseState = MouseClickState.unClicked;
                 else mouseState = MouseClickState.nothing;
             else mouseState = MouseClickState.clicked;
 
+            // We look if we have the mouse in any button and if we don't activate the preview, and, after that, we look when we click and when we unclick the mouse
             if (lifeRectangleAdd.Contains(mouse.X, mouse.Y) && !isClickedPreview)
             {
                 lifeStateAdd = 1;
@@ -310,6 +400,7 @@ namespace IS_XNA_Shooter
 
                 if (mouseState == MouseClickState.unClicked) removeList(cadenceUpdate);
             }
+            // We look the preview button, but in this case, we can press it even if we activate the preview
             else if (previewRectangle.Contains(mouse.X, mouse.Y))
             {
                 previewState = 1;
@@ -322,6 +413,7 @@ namespace IS_XNA_Shooter
                     gamePreview();
                 }
             }
+            // We loof the continue button, but in this case, we can press it even if we activate the preview
             else if (continueRectangle.Contains(mouse.X, mouse.Y))
             {
                 continueState = 1;
@@ -348,6 +440,7 @@ namespace IS_XNA_Shooter
                             break;
                     }
             }
+            // If we haven't the mouse in any button
             else
             {
                 lifeStateAdd = lifeStateRemove = 0;
@@ -359,9 +452,11 @@ namespace IS_XNA_Shooter
                 continueState = 0;
             }
 
+            // If we activate de preview
             if (isClickedPreview && ship != null)
                 ship.Update(deltaTime);
 
+            // We calculate the extra value of all parameters
             lifeExtra = valueList(lifeUpdate, LIFE);
             powerAttackExtra = valueList(powerAttackUpdate, POWER_ATTACK);
             speedShipExtra = valueList(speedShipUpdate, SPEED_SHIP);
@@ -369,6 +464,10 @@ namespace IS_XNA_Shooter
             cadenceExtra = valueList(cadenceUpdate, CADENCE);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public void Draw(SpriteBatch spriteBatch)
         {
             //draw backgrounds
@@ -394,7 +493,11 @@ namespace IS_XNA_Shooter
 
         //-------------------------------------------------------------------------------
 
-
+        /// <summary>
+        /// Return a list of booleans initialized
+        /// </summary>
+        /// <param name="size"></param>
+        /// <returns></returns>
         private List<Boolean> initializeList(int size)
         {
             List<Boolean> list = new List<Boolean>(size);
@@ -405,6 +508,11 @@ namespace IS_XNA_Shooter
             return list;
         }
 
+        /// <summary>
+        /// Return a string in which we can see the currrent state of the boooleans' list
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
         private String getImprovements(List<Boolean> list)
         {
             String aux = "";
@@ -413,6 +521,10 @@ namespace IS_XNA_Shooter
             return aux;
         }
 
+        /// <summary>
+        /// We add a true value in a boolean's list
+        /// </summary>
+        /// <param name="list"></param>
         private void addList(List<Boolean> list)
         {
             int i = 0;
@@ -423,6 +535,10 @@ namespace IS_XNA_Shooter
                 list[i] = true;
         }
 
+        /// <summary>
+        /// We remove a true value from a boolean's list
+        /// </summary>
+        /// <param name="list"></param>
         private void removeList(List<Boolean> list)
         {
             int i = list.Count - 1;
@@ -433,6 +549,12 @@ namespace IS_XNA_Shooter
                 list[i] = false;
         }
 
+        /// <summary>
+        /// We return the value we have in the boolean's list
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="improvement"></param>
+        /// <returns></returns>
         private float valueList(List<Boolean> list, float improvement)
         {
             float improve = 0;
@@ -446,6 +568,10 @@ namespace IS_XNA_Shooter
             return improve;
         }
 
+        /// <summary>
+        /// We draw the life bar
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         private void drawLife(SpriteBatch spriteBatch)
         {
             Vector2 position = new Vector2(measures.position.X - measures.texture.Width / 2, measures.position.Y + INITIAL_SPACE_BAR - measures.texture.Height / 2);
@@ -472,6 +598,10 @@ namespace IS_XNA_Shooter
             spriteBatch.Draw(buttons, lifeRectangleRemove, new Rectangle(lifeStateRemove * (int)LENGTH_BUTTON, 0, (int)LENGTH_BUTTON, (int)LENGTH_BUTTON), Color.White);
         }
 
+        /// <summary>
+        /// We draw the power attack bar
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         private void drawPowerAttack(SpriteBatch spriteBatch)
         {
             Vector2 position = new Vector2(measures.position.X - measures.texture.Width / 2, measures.position.Y + INITIAL_SPACE_BAR + HIGH_BAR + SPACE_BAR - measures.texture.Height / 2);
@@ -498,6 +628,10 @@ namespace IS_XNA_Shooter
             spriteBatch.Draw(buttons, powerAttackRectangleRemove, new Rectangle(powerAttackStateRemove * (int)LENGTH_BUTTON, 0, (int)LENGTH_BUTTON, (int)LENGTH_BUTTON), Color.White);
         }
 
+        /// <summary>
+        /// We draw the speed ship bar
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         private void drawSpeedShip(SpriteBatch spriteBatch)
         {
             Vector2 position = new Vector2(measures.position.X - measures.texture.Width / 2, measures.position.Y + INITIAL_SPACE_BAR + 2 * SPACE_BAR + 2 * HIGH_BAR - measures.texture.Height / 2);
@@ -524,6 +658,10 @@ namespace IS_XNA_Shooter
             spriteBatch.Draw(buttons, speedShipRectangleRemove, new Rectangle(speedShipStateRemove * (int)LENGTH_BUTTON, 0, (int)LENGTH_BUTTON, (int)LENGTH_BUTTON), Color.White);
         }
 
+        /// <summary>
+        /// We draw the speed shot bar
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         private void drawSpeedShot(SpriteBatch spriteBatch)
         {
             Vector2 position = new Vector2(measures.position.X - measures.texture.Width / 2, measures.position.Y + INITIAL_SPACE_BAR + 3 * SPACE_BAR + 3 * HIGH_BAR - measures.texture.Height / 2);
@@ -550,6 +688,10 @@ namespace IS_XNA_Shooter
             spriteBatch.Draw(buttons, speedShotRectangleRemove, new Rectangle(speedShotStateRemove * (int)LENGTH_BUTTON, 0, (int)LENGTH_BUTTON, (int)LENGTH_BUTTON), Color.White);
         }
 
+        /// <summary>
+        /// We draw the cadence bar
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         private void drawCadence(SpriteBatch spriteBatch)
         {
             Vector2 position = new Vector2(measures.position.X - measures.texture.Width / 2, measures.position.Y + INITIAL_SPACE_BAR + 4 * SPACE_BAR + 4 * HIGH_BAR - measures.texture.Height / 2);
@@ -576,11 +718,18 @@ namespace IS_XNA_Shooter
             spriteBatch.Draw(buttons, cadenceRectangleRemove, new Rectangle(cadenceStateRemove * (int)LENGTH_BUTTON, 0, (int)LENGTH_BUTTON, (int)LENGTH_BUTTON), Color.White);
         }
 
+        /// <summary>
+        /// We create a simple preview game
+        /// </summary>
         private void gamePreview()
         {
             ship = new ShipPreview(contentMng, this);
         }
 
+        /// <summary>
+        /// We draw the simple preview game
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         private void drawGamePreview(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(previewFrame, previewFrameRectangle, Color.White);

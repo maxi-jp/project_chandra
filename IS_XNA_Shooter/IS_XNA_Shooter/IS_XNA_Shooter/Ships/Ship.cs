@@ -354,13 +354,11 @@ namespace IS_XNA_Shooter
                     GRMng.numAnimsL1, GRMng.frameCountL1, GRMng.loopingL1, SuperGame.frameTime8,
                     GRMng.textureL1, SuperGame.shootType.normal, shotVelocity, shotPower);
 
-                Audio.PlayEffect("laserShot01");
                 nuevo1 = new Shot(camera, level, position, rotation + 0.3f, GRMng.frameWidthL1, GRMng.frameHeightL1,
                     GRMng.numAnimsL1, GRMng.frameCountL1, GRMng.loopingL1, SuperGame.frameTime8,
                     GRMng.textureL1, SuperGame.shootType.normal, shotVelocity, shotPower);
                 shots.Add(nuevo1);
 
-                Audio.PlayEffect("laserShot01");
                 nuevo2 = new Shot(camera, level, position, rotation - 0.3f, GRMng.frameWidthL1, GRMng.frameHeightL1,
                     GRMng.numAnimsL1, GRMng.frameCountL1, GRMng.loopingL1, SuperGame.frameTime8,
                     GRMng.textureL1, SuperGame.shootType.normal, shotVelocity, shotPower);

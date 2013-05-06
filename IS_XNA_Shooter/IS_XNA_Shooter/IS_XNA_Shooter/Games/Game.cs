@@ -105,7 +105,7 @@ namespace IS_XNA_Shooter
             for (int i = 0; i < powerUpList.Count; i++)    // power ups
             {
                 powerUpList[i].Update(deltaTime);
-                if (!powerUpList[i].IsActive())
+                if (powerUpList[i].IsErasable())
                     powerUpList.RemoveAt(i);
             }
 
@@ -149,7 +149,7 @@ namespace IS_XNA_Shooter
                                  enemies[j].GetType() == typeof(FinalBoss1Turret2) || enemies[j].GetType() == typeof(FinalBoss1Turret1)))
                                 enemies[j].Damage(200);
                     }
-                    powerUpList[i].SetActive(false); 
+                    powerUpList[i].ShowBanner(); 
                 }
             }
 

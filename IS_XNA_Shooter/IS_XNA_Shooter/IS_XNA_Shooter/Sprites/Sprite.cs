@@ -93,5 +93,10 @@ namespace IS_XNA_Shooter
             color = new Color( r, g, b, a);
         }
 
+        public Vector2 getPosition()
+        {
+            return position;
+        }
+
     } // class Sprite
 }

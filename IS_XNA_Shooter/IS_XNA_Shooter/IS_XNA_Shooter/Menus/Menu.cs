@@ -32,7 +32,7 @@ namespace IS_XNA_Shooter
         private int horizontalSep; // separación horizontal de las opciones
         private Vector2 backButtonPosition; // posicion de la opcion "back"
 
-        private Texture2D backgroundMapEditor;
+        private MenuMapEditor menuMapEditor; //Menu MapEditor
 
         private Texture2D splash01;
         private Sprite splash02;
@@ -62,7 +62,7 @@ namespace IS_XNA_Shooter
             splash02 = new Sprite(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight + 10),
                 1, GRMng.menuSplash02); // the planet
 
-            backgroundMapEditor = GRMng.menuMapEditor1;
+            menuMapEditor = new MenuMapEditor(mainGame);
 
             
             asteroid = new Asteroid(true, new Vector2(SuperGame.screenWidth+100, -100),
@@ -151,16 +151,12 @@ namespace IS_XNA_Shooter
                     break;
 
                 case MenuState.config:
-                    itemArcadeScroll.Update(X, Y);
-                    itemArcadeSurvival.Update(X, Y);
-                    itemArcadeDefense.Update(X, Y);
-                    itemArcadeKiller.Update(X, Y);
-                    itemBack.Update(X, Y);
+                    menuMapEditor.Update(X, Y);
                  /*   itemConfigControlls.Update(X, Y);
                     itemConfigGraphics.Update(X, Y);
                     itemConfigAudio.Update(X, Y);
-                    itemConfigProfile.Update(X, Y);
-                    itemBack.Update(X, Y);*/
+                    itemConfigProfile.Update(X, Y);*/
+                    itemBack.Update(X, Y);
                     break;
             }
         }
@@ -202,11 +198,7 @@ namespace IS_XNA_Shooter
 
                 case MenuState.config:
 
-                    spriteBatch.Draw(backgroundMapEditor, Vector2.Zero, Color.White);
-                    itemArcadeScroll.Draw(spriteBatch);
-                    itemArcadeSurvival.Draw(spriteBatch);
-                    itemArcadeDefense.Draw(spriteBatch);
-                    itemArcadeKiller.Draw(spriteBatch);
+                    menuMapEditor.Draw(spriteBatch);
                     itemBack.Draw(spriteBatch);
 
           /*          spriteConfigTitle.DrawRectangle(spriteBatch);
@@ -247,10 +239,7 @@ namespace IS_XNA_Shooter
                     break;
 
                 case MenuState.config:
-                    itemArcadeScroll.Click(X, Y);
-                    itemArcadeKiller.Click(X, Y);
-                    itemArcadeSurvival.Click(X, Y);
-                    itemArcadeDefense.Click(X, Y);
+                    menuMapEditor.Click(X,Y);
                     itemBack.Click(X, Y);
                     break;
             }
@@ -346,6 +335,7 @@ namespace IS_XNA_Shooter
                     break;
 
                 case MenuState.config:
+                    menuMapEditor.Unclick(X, Y);
                     if (itemBack.Unclick(X, Y))
                     {
                         Audio.PlayEffect("digitalAcent01");
@@ -353,26 +343,7 @@ namespace IS_XNA_Shooter
 
                         //Escribe aqui
                     }
-                    else if (itemArcadeScroll.Unclick(X, Y))
-                    {
-                        Audio.PlayEffect("digitalAcent01");
-                        //Escribe aqui
-                    }
-                    else if (itemArcadeKiller.Unclick(X, Y))
-                    {
-                        Audio.PlayEffect("digitalAcent01");
-                        //Escribe aqui
-                    }
-                    else if (itemArcadeSurvival.Unclick(X, Y))
-                    {
-                        Audio.PlayEffect("digitalAcent01");
-                        //Escribe aqui
-                    }
-                    else if (itemArcadeDefense.Unclick(X, Y))
-                    {
-                        Audio.PlayEffect("digitalAcent01");
-                        //Escribe aqui
-                    }
+                   
                     break;
                     /*if (itemBack.Unclick(X, Y))
                     {

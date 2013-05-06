@@ -282,6 +282,7 @@ namespace IS_XNA_Shooter
             grManager.LoadContent("MenuIngame"); // se cargan los recursos del menu ingame
             grManager.LoadContent("MenuGameOver");// se cargan los recursos del menu gameover
             grManager.LoadContent("Other"); // all type of "little" resources
+            grManager.LoadContent("MapEditor");
             audio.LoadContent(0);
 
             fontDebug = Content.Load<SpriteFont>("FontDebug");

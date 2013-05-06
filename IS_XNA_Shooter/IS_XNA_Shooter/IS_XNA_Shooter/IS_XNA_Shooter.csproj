@@ -140,7 +140,6 @@
     <Compile Include="Games\GameAForTestingParticles.cs" />
     <Compile Include="MapEditor\ItemChanger.cs" />
     <Compile Include="MapEditor\MenuMapEditor.cs" />
-    <Compile Include="MapEditor\SelectDimensions.cs" />
     <Compile Include="Menus\MenuStart.cs" />
     <Compile Include="Enemies\EnemyBeamA.cs" />
     <Compile Include="Enemies\EnemyFinalHeroe2.cs" />

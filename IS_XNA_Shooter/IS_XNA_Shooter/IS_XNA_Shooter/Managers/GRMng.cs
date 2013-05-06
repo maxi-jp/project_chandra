@@ -279,8 +279,18 @@ namespace IS_XNA_Shooter
         public static Texture2D menuSplash03;
 
         //MapEditor
+        #region MapEditor
         public static Texture2D menuMapEditor1;
         public static Texture2D menuMapEditor2;
+        public static Texture2D screenSizesMapEditor2;
+        public static Texture2D sizesMapEditor2;
+        public static int numberItemsSizeMapEditor2 = 4;
+        public static int numberStatesSizeMapEditor2 = 2;
+        public static float relationHeightScreenSizesMapEditor2 = 0.625f;
+        public static float relationWidthSizesMapEditor2 = 0.6f;
+        public static float relationHeightWidthMapEditor2 = 0.58f;
+        public static float relationHeightHeightMapEditor2 = 0.67f;
+        #endregion
 
 
         /* ------------------- INGAME MENU ------------------- */
@@ -445,6 +455,13 @@ namespace IS_XNA_Shooter
                     portrait_allyourbase = content.Load<Texture2D>("Graphics/Portraits/allyourbase");
                     break;
 
+                case "MapEditor" :
+                    menuMapEditor1 = content.Load<Texture2D>("Graphics/MapEditor/Screen1/backgroundMapEditor_2Screen1");
+                    menuMapEditor2 = content.Load<Texture2D>("Graphics/MapEditor/Screen2/Background/backgroundMapEditor_2");
+                    screenSizesMapEditor2 = content.Load<Texture2D>("Graphics/MapEditor/Screen2/Objects/widthHeightMapEditor_2");
+                    sizesMapEditor2 = content.Load<Texture2D>("Graphics/MapEditor/Screen2/Objects/differentSizeMapEditor_2");
+                    break;
+
                 case "Other":
                     whitepixel = content.Load<Texture2D>("Graphics/whitepixel");
                     redpixel = content.Load<Texture2D>("Graphics/redpixel");
@@ -601,6 +618,13 @@ namespace IS_XNA_Shooter
                     portrait_allyourbase = null;
                     break;
 
+                case "MapEditor":
+                    menuMapEditor1 = null;
+                    menuMapEditor2 = null;
+                    screenSizesMapEditor2 = null;
+                    sizesMapEditor2 = null;
+                    break;
+
                 case "Other":
                     whitepixel = null;
                     redpixel = null;
@@ -661,7 +685,6 @@ namespace IS_XNA_Shooter
             menuSplash01 = content.Load<Texture2D>("Graphics/Splash/splash_mainmenu_asset01_2");
             menuSplash02 = content.Load<Texture2D>("Graphics/Splash/splash_mainmenu_asset02_2");
             menuSplash03 = content.Load<Texture2D>("Graphics/Splash/splash_mainmenu_asset03");
-            menuMapEditor1 = content.Load<Texture2D>("Graphics/MapEditor/Screen1/backgroundMapEditor_2Screen1");
             textureSmoke01 = content.Load<Texture2D>("Graphics/Smoke/smoke01");
         }
 

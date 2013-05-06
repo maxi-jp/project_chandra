@@ -17,6 +17,7 @@ namespace IS_XNA_Shooter
             main,
             story,
             arcade,
+            mapEditor,
             config,
             controlls,
             graphics,
@@ -31,6 +32,8 @@ namespace IS_XNA_Shooter
         private int horizontalSep; // separación horizontal de las opciones
         private Vector2 backButtonPosition; // posicion de la opcion "back"
 
+        private Texture2D backgroundMapEditor;
+
         private Texture2D splash01;
         private Sprite splash02;
         private float splash02RotationVelocity = -0.02f;
@@ -38,7 +41,7 @@ namespace IS_XNA_Shooter
 
         private Sprite spriteHistTitle, spriteArcadeTitle, spriteConfigTitle;
         private MenuItem itemBack;
-        private MenuItem itemMainStory, itemMainArcade, itemMainScores;
+        private MenuItem itemMainStory, itemMainArcade, itemMainScores; //itemMainMapEditor
         private MenuItem itemMainChangeProfile, itemMainConfig, itemMainQuit;
         private MenuItem itemStoryContinue, itemStoryLoad, itemStoryNew;
         private MenuItem itemArcadeScroll, itemArcadeSurvival, itemArcadeDefense, itemArcadeKiller;
@@ -59,6 +62,9 @@ namespace IS_XNA_Shooter
             splash02 = new Sprite(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight + 10),
                 1, GRMng.menuSplash02); // the planet
 
+            backgroundMapEditor = GRMng.menuMapEditor1;
+
+            
             asteroid = new Asteroid(true, new Vector2(SuperGame.screenWidth+100, -100),
                 1, GRMng.menuSplash03);
 
@@ -122,6 +128,7 @@ namespace IS_XNA_Shooter
                 case MenuState.main:
                     itemMainStory.Update(X, Y);
                     itemMainArcade.Update(X, Y);
+                    //itemMainMapEditor.Update(X, Y);
                     itemMainScores.Update(X, Y);
                     itemMainChangeProfile.Update(X, Y);
                     itemMainConfig.Update(X, Y);
@@ -144,11 +151,16 @@ namespace IS_XNA_Shooter
                     break;
 
                 case MenuState.config:
-                    itemConfigControlls.Update(X, Y);
+                    itemArcadeScroll.Update(X, Y);
+                    itemArcadeSurvival.Update(X, Y);
+                    itemArcadeDefense.Update(X, Y);
+                    itemArcadeKiller.Update(X, Y);
+                    itemBack.Update(X, Y);
+                 /*   itemConfigControlls.Update(X, Y);
                     itemConfigGraphics.Update(X, Y);
                     itemConfigAudio.Update(X, Y);
                     itemConfigProfile.Update(X, Y);
-                    itemBack.Update(X, Y);
+                    itemBack.Update(X, Y);*/
                     break;
             }
         }
@@ -189,12 +201,20 @@ namespace IS_XNA_Shooter
                     break;
 
                 case MenuState.config:
-                    spriteConfigTitle.DrawRectangle(spriteBatch);
+
+                    spriteBatch.Draw(backgroundMapEditor, Vector2.Zero, Color.White);
+                    itemArcadeScroll.Draw(spriteBatch);
+                    itemArcadeSurvival.Draw(spriteBatch);
+                    itemArcadeDefense.Draw(spriteBatch);
+                    itemArcadeKiller.Draw(spriteBatch);
+                    itemBack.Draw(spriteBatch);
+
+          /*          spriteConfigTitle.DrawRectangle(spriteBatch);
                     itemConfigControlls.Draw(spriteBatch);
                     itemConfigGraphics.Draw(spriteBatch);
                     itemConfigAudio.Draw(spriteBatch);
                     itemConfigProfile.Draw(spriteBatch);
-                    itemBack.Draw(spriteBatch);
+                    itemBack.Draw(spriteBatch);*/
                     break;
             }
         } // Draw
@@ -207,6 +227,7 @@ namespace IS_XNA_Shooter
                 case MenuState.main:
                     itemMainStory.Click(X, Y);
                     itemMainArcade.Click(X, Y);
+                    //itemMainMapEditor.Click(X, Y);
                     itemMainScores.Click(X, Y);
                     itemMainConfig.Click(X, Y);
                     itemMainQuit.Click(X, Y);
@@ -226,6 +247,10 @@ namespace IS_XNA_Shooter
                     break;
 
                 case MenuState.config:
+                    itemArcadeScroll.Click(X, Y);
+                    itemArcadeKiller.Click(X, Y);
+                    itemArcadeSurvival.Click(X, Y);
+                    itemArcadeDefense.Click(X, Y);
                     itemBack.Click(X, Y);
                     break;
             }
@@ -247,6 +272,12 @@ namespace IS_XNA_Shooter
                         Audio.PlayEffect("digitalAcent01");
                         menuState = MenuState.arcade;
                     }
+                /*    else if (itemMainMapEditor.Unclick(X, Y))
+                    {
+                        Audio.PlayEffect("digitalAcent01");
+                        menuState = MenuState.mapEditor;
+                    
+                    }*/
                     else if (itemMainScores.Unclick(X, Y))
                     {
                         Audio.PlayEffect("digitalAcent01");
@@ -319,8 +350,36 @@ namespace IS_XNA_Shooter
                     {
                         Audio.PlayEffect("digitalAcent01");
                         menuState = MenuState.main;
+
+                        //Escribe aqui
+                    }
+                    else if (itemArcadeScroll.Unclick(X, Y))
+                    {
+                        Audio.PlayEffect("digitalAcent01");
+                        //Escribe aqui
+                    }
+                    else if (itemArcadeKiller.Unclick(X, Y))
+                    {
+                        Audio.PlayEffect("digitalAcent01");
+                        //Escribe aqui
+                    }
+                    else if (itemArcadeSurvival.Unclick(X, Y))
+                    {
+                        Audio.PlayEffect("digitalAcent01");
+                        //Escribe aqui
+                    }
+                    else if (itemArcadeDefense.Unclick(X, Y))
+                    {
+                        Audio.PlayEffect("digitalAcent01");
+                        //Escribe aqui
                     }
                     break;
+                    /*if (itemBack.Unclick(X, Y))
+                    {
+                        Audio.PlayEffect("digitalAcent01");
+                        menuState = MenuState.main;
+                    }
+                    break;*/
             }
         }
 

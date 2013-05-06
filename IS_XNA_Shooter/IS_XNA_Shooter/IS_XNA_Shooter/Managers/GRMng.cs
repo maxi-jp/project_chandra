@@ -278,6 +278,11 @@ namespace IS_XNA_Shooter
         public static Texture2D menuSplash02;
         public static Texture2D menuSplash03;
 
+        //MapEditor
+        public static Texture2D menuMapEditor1;
+        public static Texture2D menuMapEditor2;
+
+
         /* ------------------- INGAME MENU ------------------- */
         public static Texture2D menuIngame;
         public static Texture2D getready321;    // textura cuenta atrás menú
@@ -656,6 +661,7 @@ namespace IS_XNA_Shooter
             menuSplash01 = content.Load<Texture2D>("Graphics/Splash/splash_mainmenu_asset01_2");
             menuSplash02 = content.Load<Texture2D>("Graphics/Splash/splash_mainmenu_asset02_2");
             menuSplash03 = content.Load<Texture2D>("Graphics/Splash/splash_mainmenu_asset03");
+            menuMapEditor1 = content.Load<Texture2D>("Graphics/MapEditor/Screen1/backgroundMapEditor_2Screen1");
             textureSmoke01 = content.Load<Texture2D>("Graphics/Smoke/smoke01");
         }
 

@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using IS_XNA_Shooter.MapEditor;
+using IS_XNA_Shooter.Input;
 
 namespace IS_XNA_Shooter
 {
@@ -13,9 +14,7 @@ namespace IS_XNA_Shooter
     /// </summary>
     public class MenuMapEditor
     {
-        /// <summary>
-        /// States of the map editor
-        /// </summary>
+        // States of the map editor.
         private enum State
         {
             SelectTypeGame,
@@ -26,46 +25,40 @@ namespace IS_XNA_Shooter
         //---------------------------------------------------------------
 
 
-        /// <summary>
-        /// The current state of the menu of map editor.
-        /// </summary>
+        // The current state of the menu of map editor.
         private State currentState;
-        /// <summary>
-        /// The SuperGame to return to the SuperGame.
-        /// </summary>
+        // The SuperGame to return to the SuperGame.
         private SuperGame mainGame;
 
         #region MapEditor1
-        /// <summary>
-        /// Separator horizontal for options.
-        /// </summary>
+        // Separator horizontal for options.
         private int horizontalSep;
-        /// <summary>
-        /// Background of the map editor.
-        /// </summary>
+        // Background of the map editor.
         private Texture2D backgroundMapEditor;
-        /// <summary>
-        /// Items
-        /// </summary>
+        // Items
         private MenuItem itemArcadeScroll,
                          itemArcadeSurvival,
                          itemArcadeDefense,
-                         itemArcadeKiller;
-                         
+                         itemArcadeKiller;                         
         #endregion;
 
         #region MapEditor2
-        //sprite of background
+        //sprite of background.
         private Sprite spriteBackground;
-        //sprite of the screen with we show the size of the map (width and height)
+        //sprite of the screen with we show the size of the map (width and height).
         private Sprite spriteWidthHeight;
-        //item to set the width of the map
-        private ItemChanger itemWidth;
-        //item to set the height of the map
-        private ItemChanger itemHeight;
+        //item to set the width of the map.
+        private ItemInput itemWidth;
+        //item to set the height of the map.
+        private ItemInput itemHeight;
+        //sprite of font.
+        private SpriteFont fontInput;
         #endregion;
 
+        // Button to go back.
         private MenuItem itemBack;
+        // Button to go to next screen.
+        private MenuItem itemContinue;
 
 
         //---------------------------------------------------------------
@@ -87,18 +80,25 @@ namespace IS_XNA_Shooter
             //Button "Back"
             itemBack = new MenuItem(false, new Vector2(5, SuperGame.screenHeight - 45), GRMng.menuMain, 
                 new Rectangle(120, 360, 120, 40), new Rectangle(240, 360, 120, 40), new Rectangle(360, 360, 120, 40));
+            //Button "Continue"
+            itemContinue = new MenuItem(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight - 45), 
+                GRMng.menuStory, new Rectangle(0, 0, 512, 40), new Rectangle(0, 40, 512, 40), new Rectangle(0, 80, 512, 40));
             //Button "Scroll"
-            itemArcadeScroll = new MenuItem(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight / 2 - horizontalSep / 2 - horizontalSep),
-                GRMng.menuArcade, new Rectangle(0, 0, 512, 40), new Rectangle(0, 40, 512, 40), new Rectangle(0, 80, 512, 40));
+            itemArcadeScroll = new MenuItem(true, new Vector2(SuperGame.screenWidth / 2, 
+                SuperGame.screenHeight / 2 - horizontalSep / 2 - horizontalSep), GRMng.menuArcade, 
+                new Rectangle(0, 0, 512, 40), new Rectangle(0, 40, 512, 40), new Rectangle(0, 80, 512, 40));
             //Button "Survival"
-            itemArcadeSurvival = new MenuItem(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight / 2 - horizontalSep / 2),
-                GRMng.menuArcade, new Rectangle(0, 120, 512, 40), new Rectangle(0, 160, 512, 40), new Rectangle(0, 200, 512, 40));
+            itemArcadeSurvival = new MenuItem(true, new Vector2(SuperGame.screenWidth / 2, 
+                SuperGame.screenHeight / 2 - horizontalSep / 2), GRMng.menuArcade, 
+                new Rectangle(0, 120, 512, 40), new Rectangle(0, 160, 512, 40), new Rectangle(0, 200, 512, 40));
             //Button "Defense"
-            itemArcadeDefense = new MenuItem(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight / 2 + horizontalSep / 2),
-                GRMng.menuArcade, new Rectangle(0, 240, 512, 40), new Rectangle(0, 280, 512, 40), new Rectangle(0, 320, 512, 40));
+            itemArcadeDefense = new MenuItem(true, new Vector2(SuperGame.screenWidth / 2, 
+                SuperGame.screenHeight / 2 + horizontalSep / 2), GRMng.menuArcade, new Rectangle(0, 240, 512, 40), 
+                new Rectangle(0, 280, 512, 40), new Rectangle(0, 320, 512, 40));
             //Button "Killer"
-            itemArcadeKiller = new MenuItem(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight / 2 + horizontalSep / 2 + horizontalSep),
-                GRMng.menuArcade, new Rectangle(0, 360, 512, 40), new Rectangle(0, 400, 512, 40), new Rectangle(0, 440, 512, 40));
+            itemArcadeKiller = new MenuItem(true, new Vector2(SuperGame.screenWidth / 2, 
+                SuperGame.screenHeight / 2 + horizontalSep / 2 + horizontalSep), GRMng.menuArcade, 
+                new Rectangle(0, 360, 512, 40), new Rectangle(0, 400, 512, 40), new Rectangle(0, 440, 512, 40));
         }
 
 
@@ -114,11 +114,11 @@ namespace IS_XNA_Shooter
                 new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight * GRMng.relationHeightScreenSizesMapEditor2), 0f, 
                 GRMng.screenSizesMapEditor2);
             //itemWidth
-            itemWidth = new ItemChanger(GRMng.numberItemsSizeMapEditor2, GRMng.numberStatesSizeMapEditor2, GRMng.sizesMapEditor2, 
-                new Vector2(SuperGame.screenWidth * GRMng.relationWidthSizesMapEditor2, SuperGame.screenHeight * GRMng.relationHeightWidthMapEditor2));
+            itemWidth = new ItemInput(new Vector2(SuperGame.screenWidth * GRMng.relationWidthSizesMapEditor2, 
+                SuperGame.screenHeight * GRMng.relationHeightWidthMapEditor2));
             //itemHeight
-            itemHeight = new ItemChanger(GRMng.numberItemsSizeMapEditor2, GRMng.numberStatesSizeMapEditor2, GRMng.sizesMapEditor2,
-                new Vector2(SuperGame.screenWidth * GRMng.relationWidthSizesMapEditor2, SuperGame.screenHeight * GRMng.relationHeightHeightMapEditor2));
+            itemHeight = new ItemInput(new Vector2(SuperGame.screenWidth * GRMng.relationWidthSizesMapEditor2, 
+                SuperGame.screenHeight * GRMng.relationHeightHeightMapEditor2));
         }
 
 
@@ -143,6 +143,7 @@ namespace IS_XNA_Shooter
                     break;
 
                 case State.SelectSizeGame :
+                    itemContinue.Click(X, Y);
                     break;
             }
             
@@ -185,6 +186,12 @@ namespace IS_XNA_Shooter
                     break;
 
                 case State.SelectSizeGame :
+                    if (itemContinue.Unclick(X, Y))
+                    {
+                        Audio.PlayEffect("digitalAcent01");
+
+                        //TODO: sigue aqui Oscar!!!
+                    }
                     break;
             }
         }
@@ -213,6 +220,7 @@ namespace IS_XNA_Shooter
                 case State.SelectSizeGame :
                     itemWidth.Update();
                     itemHeight.Update();
+                    itemContinue.Update(X, Y);
                     break;
             }
         }
@@ -239,6 +247,7 @@ namespace IS_XNA_Shooter
                     spriteWidthHeight.Draw(spriteBatch);
                     itemWidth.Draw(spriteBatch);
                     itemHeight.Draw(spriteBatch);
+                    itemContinue.Draw(spriteBatch);
                     break;
             }
         }

@@ -122,6 +122,7 @@
     <Compile Include="Explosions\Asteroid.cs" />
     <Compile Include="Games\GameADefense.cs" />
     <Compile Include="Games\GameC.cs" />
+    <Compile Include="Input\KeyboardHandler.cs" />
     <Compile Include="Levels\LevelC.cs" />
     <Compile Include="Managers\ControlMng.cs" />
     <Compile Include="Enemies\EnemyFactory.cs" />
@@ -138,7 +139,7 @@
     <Compile Include="Evolutions\ShipPreview.cs" />
     <Compile Include="Evolutions\ShotPreview.cs" />
     <Compile Include="Games\GameAForTestingParticles.cs" />
-    <Compile Include="MapEditor\ItemChanger.cs" />
+    <Compile Include="MapEditor\ItemInput.cs" />
     <Compile Include="MapEditor\MenuMapEditor.cs" />
     <Compile Include="Menus\MenuStart.cs" />
     <Compile Include="Enemies\EnemyBeamA.cs" />
@@ -224,6 +225,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--

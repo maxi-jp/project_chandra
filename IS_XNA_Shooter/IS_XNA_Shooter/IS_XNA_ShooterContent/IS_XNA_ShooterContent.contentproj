@@ -630,16 +630,6 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Graphics\MapEditor\Screen2\Objects\differentSizeMapEditor_1.png">
-      <Name>differentSizeMapEditor_1</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Graphics\MapEditor\Screen2\Objects\differentSizeMapEditor_2.png">
-      <Name>differentSizeMapEditor_2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="Graphics\MapEditor\Screen2\Objects\widthHeightMapEditor_1.png">
       <Name>widthHeightMapEditor_1</Name>
       <Importer>TextureImporter</Importer>
@@ -647,6 +637,13 @@
     </Compile>
     <Compile Include="Graphics\MapEditor\Screen2\Objects\widthHeightMapEditor_2.png">
       <Name>widthHeightMapEditor_2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Graphics\MapEditor\Screen2\Objects\boxSizesMapEditor_2.png">
+      <Name>boxSizesMapEditor_2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

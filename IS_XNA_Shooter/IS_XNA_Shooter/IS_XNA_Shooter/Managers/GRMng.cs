@@ -278,21 +278,6 @@ namespace IS_XNA_Shooter
         public static Texture2D menuSplash02;
         public static Texture2D menuSplash03;
 
-        //MapEditor
-        #region MapEditor
-        public static Texture2D menuMapEditor1;
-        public static Texture2D menuMapEditor2;
-        public static Texture2D screenSizesMapEditor2;
-        public static Texture2D sizesMapEditor2;
-        public static int numberItemsSizeMapEditor2 = 4;
-        public static int numberStatesSizeMapEditor2 = 2;
-        public static float relationHeightScreenSizesMapEditor2 = 0.625f;
-        public static float relationWidthSizesMapEditor2 = 0.6f;
-        public static float relationHeightWidthMapEditor2 = 0.58f;
-        public static float relationHeightHeightMapEditor2 = 0.67f;
-        #endregion
-
-
         /* ------------------- INGAME MENU ------------------- */
         public static Texture2D menuIngame;
         public static Texture2D getready321;    // textura cuenta atrás menú
@@ -300,6 +285,21 @@ namespace IS_XNA_Shooter
         /* ------------------- GAMEOVER MENU ------------------- */
         public static Texture2D menuGameOver;
         public static Texture2D gameOverSplash;
+        #endregion
+
+        #region MAP EDITOR
+        /* ------------- TEXTURES -------------*/
+        public static Texture2D menuMapEditor1;
+        public static Texture2D menuMapEditor2;
+        public static Texture2D screenSizesMapEditor2;
+        public static Texture2D boxSizesMapEditor2;
+        /* ------------- SPRITES_FONT -------------*/
+        public static SpriteFont fontText;
+        /* ------------- VALUES -------------*/
+        public static float relationHeightScreenSizesMapEditor2 = 0.625f;
+        public static float relationWidthSizesMapEditor2 = 0.52f;
+        public static float relationHeightWidthMapEditor2 = 0.553f;
+        public static float relationHeightHeightMapEditor2 = 0.64f;
         #endregion
 
         #region VIDEO
@@ -459,7 +459,8 @@ namespace IS_XNA_Shooter
                     menuMapEditor1 = content.Load<Texture2D>("Graphics/MapEditor/Screen1/backgroundMapEditor_2Screen1");
                     menuMapEditor2 = content.Load<Texture2D>("Graphics/MapEditor/Screen2/Background/backgroundMapEditor_2");
                     screenSizesMapEditor2 = content.Load<Texture2D>("Graphics/MapEditor/Screen2/Objects/widthHeightMapEditor_2");
-                    sizesMapEditor2 = content.Load<Texture2D>("Graphics/MapEditor/Screen2/Objects/differentSizeMapEditor_2");
+                    boxSizesMapEditor2 = content.Load<Texture2D>("Graphics/MapEditor/Screen2/Objects/boxSizesMapEditor_2");
+                    fontText = content.Load<SpriteFont>("Motorwerk");
                     break;
 
                 case "Other":
@@ -622,7 +623,8 @@ namespace IS_XNA_Shooter
                     menuMapEditor1 = null;
                     menuMapEditor2 = null;
                     screenSizesMapEditor2 = null;
-                    sizesMapEditor2 = null;
+                    boxSizesMapEditor2 = null;
+                    fontText = null;
                     break;
 
                 case "Other":

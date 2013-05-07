@@ -41,6 +41,8 @@ namespace IS_XNA_Shooter
         #region POWERUPS
         /*----------POWER UPS----------*/
         public static Texture2D powerTexture; //texture power
+        public static Texture2D banPowerUps; //banners 
+
         #endregion
 
         #region ENEMIES
@@ -321,6 +323,7 @@ namespace IS_XNA_Shooter
                 case "LevelA1":
                     LoadShipA();
                     powerTexture = content.Load<Texture2D>("Graphics/PowerUps/spritesPowerUp02_80x80");
+                    banPowerUps = content.Load<Texture2D>("Graphics/PowerUps/banPowerUp320x320");
                     textureAim = content.Load<Texture2D>("Graphics/aimpoint");
                     textureL2 = content.Load<Texture2D>("Graphics/laserShotAnim2");
                     
@@ -352,6 +355,7 @@ namespace IS_XNA_Shooter
                 case "LevelADefense1":
                     LoadShipA();
                     powerTexture = content.Load<Texture2D>("Graphics/PowerUps/spritesPowerUp02_80x80");
+                    banPowerUps = content.Load<Texture2D>("Graphics/PowerUps/banPowerUp320x320");
                     textureShotFinalBossHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/shotHeroe1");
                     textureAim = content.Load<Texture2D>("Graphics/aimpoint");
                     textureL2 = content.Load<Texture2D>("Graphics/laserShotAnim2");
@@ -377,6 +381,7 @@ namespace IS_XNA_Shooter
                 case "LevelA2":
                     LoadShipA();
                     powerTexture = content.Load<Texture2D>("Graphics/PowerUps/spritesPowerUp02_80x80");
+                    banPowerUps = content.Load<Texture2D>("Graphics/PowerUps/banPowerUp320x320");
                     textureAim = content.Load<Texture2D>("Graphics/aimpoint");
 
                     textureCell = content.Load<Texture2D>("Graphics/celdasuelo");
@@ -397,6 +402,7 @@ namespace IS_XNA_Shooter
                 case "LevelB1":
                     LoadShipA();
                     powerTexture = content.Load<Texture2D>("Graphics/PowerUps/spritesPowerUp02_80x80");
+                    banPowerUps = content.Load<Texture2D>("Graphics/PowerUps/banPowerUp320x320");
 
                     textureShotFinalBossHeroe = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/shotHeroe1");
                     textureL2 = content.Load<Texture2D>("Graphics/laserShotAnim2");
@@ -419,6 +425,7 @@ namespace IS_XNA_Shooter
                 case "LevelB2":
                     LoadShipA();
                     powerTexture = content.Load<Texture2D>("Graphics/PowerUps/spritesPowerUp02_80x80");
+                    banPowerUps = content.Load<Texture2D>("Graphics/PowerUps/banPowerUp320x320");
 
                     textureFinalBoss1 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/finalBoss1");
                     textureShotFinalBoss1 = content.Load<Texture2D>("Graphics/Ships/Final Boss 1/shotFinalBoss1");
@@ -477,6 +484,7 @@ namespace IS_XNA_Shooter
                 case "LevelA1":
                     UnloadShipA();
                     powerTexture = null;
+                    banPowerUps = null;
                     textureAim = null;
                     textureL2 = null;
 
@@ -510,6 +518,7 @@ namespace IS_XNA_Shooter
                 case "LevelADefense1":
                     UnloadShipA();
                     textureAim = null;
+                    banPowerUps = null;
                     textureL2 = null;
 
                     textureEW1 = null;
@@ -542,6 +551,7 @@ namespace IS_XNA_Shooter
                     textureBg00 = null;
                     textureBg01 = null;
                     powerTexture = null;
+                    banPowerUps = null;
                     textureShotFinalBossHeroe = null;
                     textureBg02 = null;
                     textureBg03 = null;
@@ -555,6 +565,8 @@ namespace IS_XNA_Shooter
 
                 case "LevelB1":
                     UnloadShipA();
+                    powerTexture = null;
+                    banPowerUps = null;
                     textureL2 = null;
 
                     textureEW1 = null;
@@ -574,6 +586,7 @@ namespace IS_XNA_Shooter
 
                 case "LevelB2":
                     powerTexture = null;
+                    banPowerUps = null;
                     UnloadShipA();
 
                     textureFinalBoss1 = null;

@@ -41,6 +41,7 @@ namespace IS_XNA_Shooter
         private float timeVibShotAux;
 
         private float timePowerUpRed = 0;
+        private float timePowerUpOrange = 0;
         public float timePowerUpBlue = 0; //    public de momento
 
         // state of the ship
@@ -264,16 +265,6 @@ namespace IS_XNA_Shooter
             particles.Draw(spriteBatch);
             base.Draw(spriteBatch);
 
-            if (timePowerUpBlue > 0 & timePowerUpRed > 0)
-                SetColor(255, 0, 255, 255);
-            else if (timePowerUpRed > 0)
-                SetColor(255,0,0,255);
-            /*else if (timePowerUpBlue > 0)
-                SetColor(0,0,255,255);*/
-            else SetColor(255, 255, 255, 255);
-            // TODO: must fix! así se está estableciendo el color en cada Draw
-            //     cuando solo debería de hacerse una vez: cuando se coje el power up
-
             if (SuperGame.debug)
                 collider.Draw(spriteBatch);
         } // Draw
@@ -325,11 +316,15 @@ namespace IS_XNA_Shooter
             // power ups:
             if (timePowerUpRed > 0)
                 timePowerUpRed -= deltaTime;
-            /*if (timePowerUpBlue > 0)
-                timePowerUpBlue -= deltaTime;*/
+            if (timePowerUpOrange > 0)
+                timePowerUpOrange -= deltaTime;
             timePowerUpBlue -= deltaTime;
             if (timePowerUpBlue <= 0)
                 texture = textureOrig;
+
+            if (timePowerUpOrange <= 0 && timePowerUpRed <= 0)
+                SetColor(255,255,255,255);
+
 
             timeToShotAux -= deltaTime;
         }
@@ -343,13 +338,31 @@ namespace IS_XNA_Shooter
             }*/
 
             setAnim(2);
-            Shot nuevo;
+            Shot nuevo, nuevo1, nuevo2;
             if (timePowerUpRed > 0)
             {
                 Audio.PlayEffect("laser_shot_red");
                 nuevo = new Shot(camera, level, position, rotation, GRMng.frameWidthShotFinalBossHeroe, GRMng.frameHeightShotFinalBossHeroe,
                     GRMng.numAnimsShotFinalBossHeroe, GRMng.frameCountShotFinalBossHeroe, GRMng.loopingShotFinalBossHeroe, SuperGame.frameTime8, GRMng.textureShotFinalBossHeroe,
                     SuperGame.shootType.red, shotVelocity, (int)(shotPower * 1.5f));
+            }
+            else 
+            if (timePowerUpOrange > 0)
+            {
+                Audio.PlayEffect("laserShot01");
+                nuevo = new Shot(camera, level, position, rotation, GRMng.frameWidthL1, GRMng.frameHeightL1,
+                    GRMng.numAnimsL1, GRMng.frameCountL1, GRMng.loopingL1, SuperGame.frameTime8,
+                    GRMng.textureL1, SuperGame.shootType.normal, shotVelocity, shotPower);
+
+                nuevo1 = new Shot(camera, level, position, rotation + 0.3f, GRMng.frameWidthL1, GRMng.frameHeightL1,
+                    GRMng.numAnimsL1, GRMng.frameCountL1, GRMng.loopingL1, SuperGame.frameTime8,
+                    GRMng.textureL1, SuperGame.shootType.normal, shotVelocity, shotPower);
+                shots.Add(nuevo1);
+
+                nuevo2 = new Shot(camera, level, position, rotation - 0.3f, GRMng.frameWidthL1, GRMng.frameHeightL1,
+                    GRMng.numAnimsL1, GRMng.frameCountL1, GRMng.loopingL1, SuperGame.frameTime8,
+                    GRMng.textureL1, SuperGame.shootType.normal, shotVelocity, shotPower);
+                shots.Add(nuevo2);
             }
             else
             {
@@ -423,10 +436,15 @@ namespace IS_XNA_Shooter
                     break;
                 case 1:     // red red shoot
                     Audio.PlayEffect("PowerUpRed");
+                    SetColor(255, 0, 0, 255);
                     timePowerUpRed = 8f;
                     break;
                 case 2:
                     Audio.PlayEffect("PowerUpGreen");
+                    break;
+                case 3:     // triple shot
+                    SetColor(255, 165, 0, 255);
+                    timePowerUpOrange = 8f;
                     break;
             }
         }

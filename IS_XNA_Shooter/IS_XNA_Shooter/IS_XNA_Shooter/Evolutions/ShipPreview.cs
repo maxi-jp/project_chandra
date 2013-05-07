@@ -9,36 +9,99 @@ using Microsoft.Xna.Framework.Input;
 
 namespace IS_XNA_Shooter.Evolutions
 {
+    /// <summary>
+    /// Ship class fot he preview frame in the evolution screen
+    /// </summary>
     class ShipPreview
     {
+        /// <summary>
+        /// Parameters for the animation of the ship
+        /// </summary>
         private const int SIZE = 80,
             NUM_ANIMATION_MOVE = 4,
             NUM_ANIMATION_SHOT = 5;
+
+        /// <summary>
+        /// Parameter for the animation of the ship
+        /// </summary>
         private const float TIME_ANIMATION = 0.05f;
 
 
         //---------------------------------------------------------------------
 
-
+        /// <summary>
+        /// States of the ship (move or shot)
+        /// </summary>
         private enum TypeAnimation { move, shot };
 
         
         //---------------------------------------------------------------------
 
+        /// <summary>
+        /// How many time have the curent animation
+        /// </summary>
+        private float timeAnimation;
 
-        private float timeAnimation, life, speed, power, speedShot, cadence, timeToShot;
-        private int posAnimation, animation;
+        /// <summary>
+        /// Parameter for the ship
+        /// </summary>
+        private float life, speed, power, speedShot, cadence;
+
+        /// <summary>
+        /// Countdown until next shot
+        /// </summary>
+        private float timeToShot;
+
+        /// <summary>
+        /// Position of the current animation
+        /// </summary>
+        private int posAnimation;
+
+        /// <summary>
+        /// What animation we have
+        /// 1 - move
+        /// 2 - shot
+        /// </summary>
+        private int animation;
+
+        /// <summary>
+        /// Current animation (move or shot)
+        /// </summary>
         private TypeAnimation typeAnimation;
+
+        /// <summary>
+        /// Thexture of the ship
+        /// </summary>
         private Texture2D texture;
+
+        /// <summary>
+        /// Rectangle that select the animation
+        /// </summary>
         private Rectangle animationRectangle;
+
+        /// <summary>
+        /// Position of the ship in the preview frame
+        /// </summary>
         private Vector2 position;
+
+        /// <summary>
+        /// List of ship's shot
+        /// </summary>
         private List<ShotPreview> shots;
+
+        /// <summary>
+        /// The content manager
+        /// </summary>
         private ContentManager content;
 
 
         //---------------------------------------------------------------------
 
-
+        /// <summary>
+        /// Builder
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="evolution"></param>
         public ShipPreview(ContentManager content, Evolution evolution)
         {
             // initialize the content
@@ -72,7 +135,10 @@ namespace IS_XNA_Shooter.Evolutions
 
         //---------------------------------------------------------------------
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="deltaTime"></param>
         public void Update(float deltaTime)
         {
             timeAnimation += deltaTime;
@@ -115,6 +181,10 @@ namespace IS_XNA_Shooter.Evolutions
             deleleteShots();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         public void Draw(SpriteBatch spriteBatch)
         {
             // draw ship
@@ -127,7 +197,10 @@ namespace IS_XNA_Shooter.Evolutions
 
         //---------------------------------------------------------------------------------------------
 
-
+        /// <summary>
+        /// Manage the control for the ship
+        /// </summary>
+        /// <param name="deltaTime"></param>
         private void controlShip(float deltaTime)
         {
             Vector2 movement = Vector2.Zero;
@@ -142,7 +215,7 @@ namespace IS_XNA_Shooter.Evolutions
             if (Keyboard.GetState().IsKeyDown(ControlMng.controlRight))
                 movement.X = 1;
 
-            if ((movement.X + movement.Y) > 1)
+            if ((Math.Abs(movement.X) + Math.Abs(movement.Y)) > 1)
                 movement.Normalize();
             position.X += movement.X * speed * deltaTime;
             position.Y += movement.Y * speed * deltaTime;
@@ -169,6 +242,10 @@ namespace IS_XNA_Shooter.Evolutions
             }                
         }
 
+        /// <summary>
+        /// Draw the ship's shots
+        /// </summary>
+        /// <param name="spriteBatch"></param>
         private void drawShots(SpriteBatch spriteBatch)
         {
             for (int i = 0; i < shots.Count; i++)
@@ -177,6 +254,10 @@ namespace IS_XNA_Shooter.Evolutions
             }
         }
 
+        /// <summary>
+        /// Update the ship's shots
+        /// </summary>
+        /// <param name="deltaTime"></param>
         private void updateShots(float deltaTime)
         {
             for (int i = 0; i < shots.Count; i++)
@@ -185,6 +266,9 @@ namespace IS_XNA_Shooter.Evolutions
             }
         }
 
+        /// <summary>
+        /// Delete the ship's shots
+        /// </summary>
         private void deleleteShots()
         {
             for (int i = 0; i < shots.Count; i++)

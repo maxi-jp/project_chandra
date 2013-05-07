@@ -40,6 +40,26 @@ namespace IS_XNA_Shooter
         private byte setOff;
 
         /// <summary>
+        /// Indicate if the power up is colisionable.
+        /// </summary>
+        private Boolean collisionable;
+
+        /// <summary>
+        /// Time the banner stays visible
+        /// </summary>
+        private float timeForBanner;
+
+        /// <summary>
+        /// movement for the banner
+        /// </summary>
+        private double movement;
+
+        /// <summary>
+        /// fade out of the banner
+        /// </summary>
+        private float fOut;
+
+        /// <summary>
         /// PowerUps constructor
         /// </summary>
         /// <param name="camera">The camera of the game</param>
@@ -62,6 +82,10 @@ namespace IS_XNA_Shooter
         {
             active = true;
             catchable=7.5f;
+            timeForBanner = 1.0f;
+            collisionable = true;
+            movement = -40;
+            fOut = 0;
 
             this.type =type;
             Vector2[] points = new Vector2[8];
@@ -74,8 +98,9 @@ namespace IS_XNA_Shooter
             points[6] = new Vector2(40,10);
             points[7] = new Vector2(20,20);
             collider = new Collider(camera, true, position, rotation, points, 40, frameWidth, frameHeight);
-            //type must be 0,1 or 2
-            if (type < 3 && type >= 0)
+
+            //type must be 0 = blue,1 = red,2 = green or 3 = orange
+            if (type < 4 && type >= 0)
                 setAnim(type);
             else 
                 setAnim(0);
@@ -85,9 +110,23 @@ namespace IS_XNA_Shooter
         {
             if (active)
             {
-                base.Draw(spriteBatch);
-                if (SuperGame.debug)
+                
+                if (!collisionable && timeForBanner > 0)
+                {
+                    // Ask for Javi and Gallu for more information =D
+                    movement += 50;
+                    fOut += 5f;
+                    spriteBatch.Draw(GRMng.banPowerUps, new Rectangle((int)position.X + (int)camera.displacement.X - 160,
+                        (int)position.Y + (int)camera.displacement.Y - 50 - (int)(Math.Log(movement)*8), 320, 80),
+                        new Rectangle(0, type * 80, 320, 80), new Color(255 - (int)fOut, 255 - (int)fOut, 255 - (int)fOut, 255 - (int)fOut));
+            
+                }
+                else 
+                {
+                    base.Draw(spriteBatch);
+                    if (SuperGame.debug)
                     collider.Draw(spriteBatch);
+                }
             }
         }
 
@@ -104,7 +143,14 @@ namespace IS_XNA_Shooter
                         setOff += (byte)(deltaTime * 480);
                         SetColor(setOff, setOff, setOff,setOff);
                 }
-                collider.Update(position, 0);
+
+                if (collisionable)
+                    collider.Update(position, 0);
+                else 
+                    if (timeForBanner > 0)
+                {
+                    timeForBanner -= deltaTime;
+                }
             }
         }
 
@@ -119,9 +165,20 @@ namespace IS_XNA_Shooter
             return active;
         }
 
+        public bool IsErasable()
+        {
+            return (timeForBanner <= 0);
+        }
+
         public void SetActive(bool b)
         {
             active = b;
+        }
+
+        public void ShowBanner()
+        {
+            catchable = 7.5f; // for the right painting of the banners
+            collisionable = false;
         }
 
         public short GetType()

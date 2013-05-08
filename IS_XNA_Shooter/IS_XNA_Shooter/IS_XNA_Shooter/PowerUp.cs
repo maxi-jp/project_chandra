@@ -57,7 +57,7 @@ namespace IS_XNA_Shooter
         /// <summary>
         /// fade out of the banner
         /// </summary>
-        private float fOut;
+        private int fOut;
 
         /// <summary>
         /// PowerUps constructor
@@ -115,10 +115,10 @@ namespace IS_XNA_Shooter
                 {
                     // Ask for Javi and Gallu for more information =D
                     movement += 50;
-                    fOut += 5f;
+                    fOut += 5;
                     spriteBatch.Draw(GRMng.banPowerUps, new Rectangle((int)position.X + (int)camera.displacement.X - 160,
                         (int)position.Y + (int)camera.displacement.Y - 50 - (int)(Math.Log(movement)*8), 320, 80),
-                        new Rectangle(0, type * 80, 320, 80), new Color(255 - (int)fOut, 255 - (int)fOut, 255 - (int)fOut, 255 - (int)fOut));
+                        new Rectangle(0, type * 80, 320, 80), new Color(255 - fOut, 255 - fOut, 255 -fOut, 255 - fOut));
             
                 }
                 else 

@@ -443,6 +443,7 @@ namespace IS_XNA_Shooter
                     Audio.PlayEffect("PowerUpGreen");
                     break;
                 case 3:     // triple shot
+                    Audio.PlayEffect("PowerUpOrange");
                     SetColor(255, 165, 0, 255);
                     timePowerUpOrange = 8f;
                     break;

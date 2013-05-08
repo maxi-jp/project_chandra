@@ -339,6 +339,24 @@ namespace IS_XNA_Shooter
 
             setAnim(2);
             Shot nuevo, nuevo1, nuevo2;
+            if ((timePowerUpOrange) > 0 && (timePowerUpRed > 0))
+            {
+                Audio.PlayEffect("laser_shot_red");
+                nuevo = new Shot(camera, level, position, rotation, GRMng.frameWidthShotFinalBossHeroe, GRMng.frameHeightShotFinalBossHeroe,
+                    GRMng.numAnimsShotFinalBossHeroe, GRMng.frameCountShotFinalBossHeroe, GRMng.loopingShotFinalBossHeroe, SuperGame.frameTime8, GRMng.textureShotFinalBossHeroe,
+                    SuperGame.shootType.red, shotVelocity, (int)(shotPower * 1.5f));
+
+                nuevo1 = new Shot(camera, level, position, rotation + 0.3f, GRMng.frameWidthShotFinalBossHeroe, GRMng.frameHeightShotFinalBossHeroe,
+                    GRMng.numAnimsShotFinalBossHeroe, GRMng.frameCountShotFinalBossHeroe, GRMng.loopingShotFinalBossHeroe, SuperGame.frameTime8, GRMng.textureShotFinalBossHeroe,
+                    SuperGame.shootType.red, shotVelocity, (int)(shotPower * 1.5f));
+                shots.Add(nuevo1);
+
+                nuevo2 = new Shot(camera, level, position, rotation - 0.3f, GRMng.frameWidthShotFinalBossHeroe, GRMng.frameHeightShotFinalBossHeroe,
+                    GRMng.numAnimsShotFinalBossHeroe, GRMng.frameCountShotFinalBossHeroe, GRMng.loopingShotFinalBossHeroe, SuperGame.frameTime8, GRMng.textureShotFinalBossHeroe,
+                    SuperGame.shootType.red, shotVelocity, (int)(shotPower * 1.5f));
+                shots.Add(nuevo2);
+            }
+            else
             if (timePowerUpRed > 0)
             {
                 Audio.PlayEffect("laser_shot_red");

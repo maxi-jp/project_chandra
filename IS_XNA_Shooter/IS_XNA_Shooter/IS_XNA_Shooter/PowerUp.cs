@@ -40,11 +40,6 @@ namespace IS_XNA_Shooter
         private byte setOff;
 
         /// <summary>
-        /// Indicate if the power up is colisionable.
-        /// </summary>
-        private Boolean collisionable;
-
-        /// <summary>
         /// Time the banner stays visible
         /// </summary>
         private float timeForBanner;
@@ -83,7 +78,6 @@ namespace IS_XNA_Shooter
             active = true;
             catchable=7.5f;
             timeForBanner = 1.0f;
-            collisionable = true;
             movement = -40;
             fOut = 0;
 
@@ -110,8 +104,13 @@ namespace IS_XNA_Shooter
         {
             if (active)
             {
+                base.Draw(spriteBatch);
+                if (SuperGame.debug)
+                collider.Draw(spriteBatch);
                 
-                if (!collisionable && timeForBanner > 0)
+            }
+            else
+            if (timeForBanner > 0)
                 {
                     // Ask for Javi and Gallu for more information =D
                     movement += 50;
@@ -121,13 +120,6 @@ namespace IS_XNA_Shooter
                         new Rectangle(0, type * 80, 320, 80), new Color(255 - fOut, 255 - fOut, 255 -fOut, 255 - fOut));
             
                 }
-                else 
-                {
-                    base.Draw(spriteBatch);
-                    if (SuperGame.debug)
-                    collider.Draw(spriteBatch);
-                }
-            }
         }
 
         public override void Update(float deltaTime)
@@ -140,18 +132,17 @@ namespace IS_XNA_Shooter
                     active = false;
                 else if (catchable <= 2.5f)
                 {
-                        setOff += (byte)(deltaTime * 480);
-                        SetColor(setOff, setOff, setOff,setOff);
+                    setOff += (byte)(deltaTime * 480);
+                    SetColor(setOff, setOff, setOff, setOff);
                 }
-
-                if (collisionable)
-                    collider.Update(position, 0);
-                else 
-                    if (timeForBanner > 0)
+                collider.Update(position, 0);
+            }
+            else
+                if (timeForBanner > 0)
                 {
                     timeForBanner -= deltaTime;
                 }
-            }
+            
         }
 
         public void UpdatePosition(Vector2 position)
@@ -178,7 +169,7 @@ namespace IS_XNA_Shooter
         public void ShowBanner()
         {
             catchable = 7.5f; // for the right painting of the banners
-            collisionable = false;
+            active = false;
         }
 
         public short GetType()

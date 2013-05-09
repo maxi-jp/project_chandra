@@ -62,7 +62,7 @@ namespace IS_XNA_Shooter
             splash02 = new Sprite(true, new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight + 10),
                 1, GRMng.menuSplash02); // the planet
 
-            menuMapEditor = new MenuMapEditor(mainGame);
+            menuMapEditor = new MenuMapEditor(mainGame, this);
 
             
             asteroid = new Asteroid(true, new Vector2(SuperGame.screenWidth+100, -100),
@@ -155,8 +155,8 @@ namespace IS_XNA_Shooter
                  /*   itemConfigControlls.Update(X, Y);
                     itemConfigGraphics.Update(X, Y);
                     itemConfigAudio.Update(X, Y);
-                    itemConfigProfile.Update(X, Y);*/
-                    itemBack.Update(X, Y);
+                    itemConfigProfile.Update(X, Y);
+                    itemBack.Update(X, Y);*/
                     break;
             }
         }
@@ -199,7 +199,7 @@ namespace IS_XNA_Shooter
                 case MenuState.config:
 
                     menuMapEditor.Draw(spriteBatch);
-                    itemBack.Draw(spriteBatch);
+                    //itemBack.Draw(spriteBatch);
 
           /*          spriteConfigTitle.DrawRectangle(spriteBatch);
                     itemConfigControlls.Draw(spriteBatch);
@@ -240,7 +240,7 @@ namespace IS_XNA_Shooter
 
                 case MenuState.config:
                     menuMapEditor.Click(X,Y);
-                    itemBack.Click(X, Y);
+                    //itemBack.Click(X, Y);
                     break;
             }
         }
@@ -336,13 +336,13 @@ namespace IS_XNA_Shooter
 
                 case MenuState.config:
                     menuMapEditor.Unclick(X, Y);
-                    if (itemBack.Unclick(X, Y))
+                    /*if (itemBack.Unclick(X, Y))
                     {
                         Audio.PlayEffect("digitalAcent01");
                         menuState = MenuState.main;
 
                         //Escribe aqui
-                    }
+                    }*/
                    
                     break;
                     /*if (itemBack.Unclick(X, Y))

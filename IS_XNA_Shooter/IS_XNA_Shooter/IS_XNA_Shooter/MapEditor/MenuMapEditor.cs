@@ -29,6 +29,8 @@ namespace IS_XNA_Shooter
         private State currentState;
         // The SuperGame to return to the SuperGame.
         private SuperGame mainGame;
+        // The menu to return there.
+        private Menu mainMenu;
 
         #region MapEditor1
         // Separator horizontal for options.
@@ -68,11 +70,13 @@ namespace IS_XNA_Shooter
         /// Builder
         /// </summary>
         /// <param name="mainGame">SuperGame</param>
-        public MenuMapEditor(SuperGame mainGame)
+        /// <param name="mainMenu">The main menu</param>
+        public MenuMapEditor(SuperGame mainGame, Menu mainMenu)
         {
             currentState = State.SelectTypeGame;
 
             this.mainGame = mainGame;
+            this.mainMenu = mainMenu;
 
             horizontalSep = 46;
 
@@ -139,13 +143,14 @@ namespace IS_XNA_Shooter
                     itemArcadeKiller.Click(X, Y);
                     itemArcadeSurvival.Click(X, Y);
                     itemArcadeDefense.Click(X, Y);
-                    itemBack.Click(X, Y);
                     break;
 
                 case State.SelectSizeGame :
                     itemContinue.Click(X, Y);
                     break;
             }
+
+            itemBack.Click(X, Y);
             
         }
 
@@ -186,13 +191,23 @@ namespace IS_XNA_Shooter
                     break;
 
                 case State.SelectSizeGame :
+                    //button "continue" goes to the screen number 3 of map editor.
                     if (itemContinue.Unclick(X, Y))
                     {
                         Audio.PlayEffect("digitalAcent01");
-
                         //TODO: sigue aqui Oscar!!!
                     }
                     break;
+            }
+
+            //button "back" return to other state or main screen.
+            if (itemBack.Unclick(X, Y))
+            {
+                Audio.PlayEffect("digitalAcent01");
+                if (currentState == State.SelectSizeGame)
+                    currentState = State.SelectTypeGame;
+                else
+                    mainMenu.menuState = Menu.MenuState.main;
             }
         }
 
@@ -214,7 +229,6 @@ namespace IS_XNA_Shooter
                     itemArcadeSurvival.Update(X, Y);
                     itemArcadeDefense.Update(X, Y);
                     itemArcadeKiller.Update(X, Y);
-                    itemBack.Update(X, Y);
                     break;
 
                 case State.SelectSizeGame :
@@ -223,6 +237,8 @@ namespace IS_XNA_Shooter
                     itemContinue.Update(X, Y);
                     break;
             }
+
+            itemBack.Update(X, Y);
         }
 
         /// <summary>
@@ -239,7 +255,6 @@ namespace IS_XNA_Shooter
                     itemArcadeSurvival.Draw(spriteBatch);
                     itemArcadeDefense.Draw(spriteBatch);
                     itemArcadeKiller.Draw(spriteBatch);
-                    itemBack.Draw(spriteBatch);
                     break;
 
                 case State.SelectSizeGame:
@@ -250,6 +265,8 @@ namespace IS_XNA_Shooter
                     itemContinue.Draw(spriteBatch);
                     break;
             }
+
+            itemBack.Draw(spriteBatch);
         }
 
     }//class MenuMapEditor

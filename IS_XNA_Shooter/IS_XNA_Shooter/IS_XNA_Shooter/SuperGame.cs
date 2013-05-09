@@ -47,6 +47,17 @@ namespace IS_XNA_Shooter
             evolution
         };
 
+        public enum levelName
+        {
+            TestEnemies,
+            LevelA1,
+            LevelA2,
+            LevelADefense1,
+            TestParticles
+        };
+
+        public levelName currentNameLevel;
+
         /// <summary>
         /// Video introduction mode story
         /// </summary>
@@ -679,6 +690,8 @@ namespace IS_XNA_Shooter
         /// </summary>
         public void GameOver()
         {
+            //New score added
+            //menuScore.addNewScore(currentNameLevel, player.GetTotalScore()); 
             currentState = gameState.gameOver;
         }
 

@@ -308,5 +308,10 @@ namespace IS_XNA_Shooter
             return powerUp;
         }
 
+
+        internal int GetValue()
+        {
+            return this.value;
+        }
     } // class Enemy
 }

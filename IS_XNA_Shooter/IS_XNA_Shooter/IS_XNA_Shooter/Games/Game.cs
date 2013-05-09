@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace IS_XNA_Shooter
 {
     // clase abstracta de la que heredan todos los juegos
-    abstract class Game
+    abstract class Game 
     {
         /* ------------------------------------------------------------- */
         /*                           ATTRIBUTES                          */
@@ -67,7 +68,6 @@ namespace IS_XNA_Shooter
             shots = new List<Shot>();
             explosions = new List<Explosion>();
             powerUpList = new List<PowerUp>();
-
             //Audio.PlayMusic(1);
         }
 
@@ -126,6 +126,10 @@ namespace IS_XNA_Shooter
                     //if (enemies[i].isActive() && shots[j].isActive() && enemies[i].collider.collision(shots[j].collider))
                     {                       
                         enemies[i].Damage(shots[j].GetPower());
+                        if (enemies[i].isDead())
+                        {
+                            player.EarnPoints(enemies[i].GetValue());
+                        }
                         PowerUp powerUp = enemies[i].GetPowerUp();
                         if (powerUp != null)
                             powerUpList.Add(powerUp);
@@ -216,6 +220,10 @@ namespace IS_XNA_Shooter
                 shot.Draw(spriteBatch);
 
             ship.Draw(spriteBatch);
+
+            String score= "Score = " + player.GetActualScore(); 
+            spriteBatch.DrawString(SuperGame.fontMotorwerk, score,
+                    new Vector2(SuperGame.screenWidth/2-(score.ToString().Length)-(SuperGame.fontMotorwerk.ToString().Length), 69), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
 
             hud.Draw(spriteBatch);
         } // Draw

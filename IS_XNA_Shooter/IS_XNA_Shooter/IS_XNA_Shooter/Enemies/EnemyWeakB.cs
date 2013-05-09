@@ -36,7 +36,7 @@ namespace IS_XNA_Shooter
             float frametime, Texture2D texture, float timeToSpawn, float velocity, int life,
             int value, Ship Ship)
             : base(camera, level, position, (float)Math.PI, frameWidth, frameHeight, numAnim, frameCount,
-                looping, frametime, texture, timeToSpawn, 300, life, value, Ship)
+                looping, frametime, texture, timeToSpawn, velocity, life, value, Ship)
         {
             Vector2[] points = new Vector2[7];
             points[0] = new Vector2(21, 21);

@@ -187,7 +187,12 @@ namespace IS_XNA_Shooter
         /// Menu of game over
         /// </summary>
         private MenuGameOver menuGameOver;
-        
+
+        /// <summary>
+        /// Menu of the scores
+        /// </summary>
+        private MenuScores menuScores;
+
         /// <summary>
         /// Game
         /// </summary>
@@ -292,6 +297,8 @@ namespace IS_XNA_Shooter
             menu =          new Menu(this);
             menuIngame =    new MenuIngame(this);
             menuGameOver =  new MenuGameOver(this);
+            menuScores =    new MenuScores(this);
+            menuScores.Load();
 
             // Create the player and the screenEvolution
             player = new Player(playerLifes);
@@ -308,6 +315,7 @@ namespace IS_XNA_Shooter
             // TODO: Unload any non ContentManager content here
         }
 
+        #region UPDATE
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -433,7 +441,9 @@ namespace IS_XNA_Shooter
 
             base.Update(gameTime);
         }
+        #endregion
 
+        #region DRAW
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>fe
@@ -454,6 +464,9 @@ namespace IS_XNA_Shooter
                         new Vector2((screenWidth / 2) - fontDebug.MeasureString("build version: " + currentVersion).X/2, 6),
                         Color.White, 0, Vector2.Zero, 1,
                         SpriteEffects.None, 0);
+
+                    // TODO: this is for testing the scores, must be erased after
+                    menuScores.Draw(spriteBatch);
                     break;
 
                 case gameState.mainMenu:
@@ -498,6 +511,7 @@ namespace IS_XNA_Shooter
 
             base.Draw(gameTime);
         } // Draw
+        #endregion
 
         /// <summary>
         /// Method that cotrols when the Focus fron the Game is lost
@@ -569,7 +583,7 @@ namespace IS_XNA_Shooter
         public void NewSurvival(String cad)
         {
             grManager.LoadHud();
-            grManager.LoadContent("LevelA1");  // Load the gameA's level 1 resources
+            grManager.LoadContent(cad);  // Load the gameA's level 1 resources
             audio.LoadContent(1);
             LvlMng.LoadContent(cad); // Load XML
 
@@ -588,7 +602,7 @@ namespace IS_XNA_Shooter
         public void NewKiller(String cad)
         {
             grManager.LoadHud();
-            grManager.LoadContent("LevelA1"); // Load the gameB's level 1 resources
+            grManager.LoadContent(cad); // Load the gameB's level 1 resources
             audio.LoadContent(1);
             LvlMng.LoadContent(cad); // Load XML
 

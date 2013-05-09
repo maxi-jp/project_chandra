@@ -433,7 +433,7 @@ namespace IS_XNA_Shooter
                             mainGame.NewScroll("LevelB1");
                             break;
                         case GameState.survival:
-                            mainGame.NewSurvival("LevelA1");
+                            mainGame.NewSurvival("LevelC1");
                             break;
                         case GameState.defense:
                             mainGame.NewDefense("LevelADefense1");

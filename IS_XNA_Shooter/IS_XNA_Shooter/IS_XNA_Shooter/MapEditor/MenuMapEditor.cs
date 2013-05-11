@@ -53,14 +53,16 @@ namespace IS_XNA_Shooter
         private ItemInput itemWidth;
         //item to set the height of the map.
         private ItemInput itemHeight;
-        //sprite of font.
-        private SpriteFont fontInput;
         #endregion;
 
         // Button to go back.
         private MenuItem itemBack;
         // Button to go to next screen.
         private MenuItem itemContinue;
+
+        //Attributes for the information message
+        private String informationText;
+        private Vector2 informationPosition;
 
 
         //---------------------------------------------------------------
@@ -108,7 +110,7 @@ namespace IS_XNA_Shooter
 
         //---------------------------------------------------------------
 
-
+        // It's like the builder of the size screen
         private void buildScreenSize()
         {
             //background
@@ -123,6 +125,8 @@ namespace IS_XNA_Shooter
             //itemHeight
             itemHeight = new ItemInput(new Vector2(SuperGame.screenWidth * GRMng.relationWidthSizesMapEditor2, 
                 SuperGame.screenHeight * GRMng.relationHeightHeightMapEditor2));
+            informationText = "Dimensions between 1000x1000 and 10000x10000";
+            informationPosition = new Vector2(3*SuperGame.screenWidth/10, 2*SuperGame.screenHeight/5);
         }
 
 
@@ -263,6 +267,7 @@ namespace IS_XNA_Shooter
                     itemWidth.Draw(spriteBatch);
                     itemHeight.Draw(spriteBatch);
                     itemContinue.Draw(spriteBatch);
+                    spriteBatch.DrawString(GRMng.fontText, informationText, informationPosition, Color.White);
                     break;
             }
 

@@ -46,6 +46,23 @@ namespace IS_XNA_Shooter.MapEditor
 
 
         /// <summary>
+        /// Tell us the input value
+        /// </summary>
+        /// <returns></returns>
+        public int getValue()
+        {
+            String aux = keyboardInput.getText();
+            if (aux != "")
+                return Convert.ToInt32(aux);
+            else
+                return 0;
+        }
+
+
+        //-------------------------------------------------------------------------
+
+
+        /// <summary>
         /// Method Update
         /// </summary>
         public void Update()
@@ -68,10 +85,14 @@ namespace IS_XNA_Shooter.MapEditor
         /// <param name="spriteBatch"></param>
         public void Draw(SpriteBatch spriteBatch)
         {
+            String aux = keyboardInput.getText();
             spriteBox.DrawRectangle(spriteBatch);
             spriteBatch.DrawString(spriteFont, keyboardInput.getText(), 
                 new Vector2(currentRectangle.X + 10, currentRectangle.Y), Color.Black, 0f, Vector2.Zero,
                 1.2f, SpriteEffects.None, 0f);
+            if (aux == "") spriteBox.SetColor(0, 0, 255, 0);
+            else if (getValue() < 1000 || getValue() > 10000) spriteBox.SetColor(255, 0, 0, 0);
+            else spriteBox.SetColor(0, 255, 0, 0);
         }
     }//ItemChanger
 }

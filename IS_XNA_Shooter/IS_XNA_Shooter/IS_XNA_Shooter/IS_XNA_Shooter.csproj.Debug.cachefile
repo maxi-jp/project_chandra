@@ -89,5 +89,10 @@ Content\Audio\FXEffects\PowerUpGreen.xnb
 Content\Audio\FXEffects\PowerUpRed.xnb
 Content\Graphics\MapEditor\Screen1\backgroundMapEditor_1Screen1.xnb
 Content\Graphics\MapEditor\Screen1\backgroundMapEditor_2Screen1.xnb
+Content\Graphics\MapEditor\Screen2\Background\backgroundMapEditor_1.xnb
+Content\Graphics\MapEditor\Screen2\Background\backgroundMapEditor_2.xnb
+Content\Graphics\MapEditor\Screen2\Objects\widthHeightMapEditor_1.xnb
+Content\Graphics\MapEditor\Screen2\Objects\widthHeightMapEditor_2.xnb
+Content\Graphics\MapEditor\Screen2\Objects\boxSizesMapEditor_2.xnb
 Content\Audio\Music\music_01.wma
 Content\Video\VideoIntroProjectChandra.wmv

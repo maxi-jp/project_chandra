@@ -461,6 +461,8 @@ namespace IS_XNA_Shooter
                     screenSizesMapEditor2 = content.Load<Texture2D>("Graphics/MapEditor/Screen2/Objects/widthHeightMapEditor_2");
                     boxSizesMapEditor2 = content.Load<Texture2D>("Graphics/MapEditor/Screen2/Objects/boxSizesMapEditor_2");
                     fontText = content.Load<SpriteFont>("Motorwerk");
+                    textureBg00 = content.Load<Texture2D>("Graphics/Backgrounds/bg00");
+                    textureCell = content.Load<Texture2D>("Graphics/celdasuelo");
                     break;
 
                 case "Other":
@@ -625,6 +627,7 @@ namespace IS_XNA_Shooter
                     screenSizesMapEditor2 = null;
                     boxSizesMapEditor2 = null;
                     fontText = null;
+                    textureBg00 = null;
                     break;
 
                 case "Other":

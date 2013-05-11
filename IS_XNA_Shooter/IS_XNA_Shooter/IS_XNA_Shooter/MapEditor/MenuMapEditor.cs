@@ -18,7 +18,8 @@ namespace IS_XNA_Shooter
         private enum State
         {
             SelectTypeGame,
-            SelectSizeGame
+            SelectSizeGame,
+            MainMapEditor
         }
 
 
@@ -63,6 +64,11 @@ namespace IS_XNA_Shooter
         //Attributes for the information message
         private String informationText;
         private Vector2 informationPosition;
+
+        //Third screen
+        MainMapEditor mainMapEditor;
+
+        
 
 
         //---------------------------------------------------------------
@@ -152,6 +158,7 @@ namespace IS_XNA_Shooter
                 case State.SelectSizeGame :
                     itemContinue.Click(X, Y);
                     break;
+                
             }
 
             itemBack.Click(X, Y);
@@ -199,6 +206,8 @@ namespace IS_XNA_Shooter
                     if (itemContinue.Unclick(X, Y))
                     {
                         Audio.PlayEffect("digitalAcent01");
+                        mainMapEditor = new MainMapEditor("Arcade", itemWidth.getValue(), itemHeight.getValue());
+                        currentState = State.MainMapEditor;
                         //TODO: sigue aqui Oscar!!!
                     }
                     break;
@@ -233,16 +242,20 @@ namespace IS_XNA_Shooter
                     itemArcadeSurvival.Update(X, Y);
                     itemArcadeDefense.Update(X, Y);
                     itemArcadeKiller.Update(X, Y);
+                    itemBack.Update(X, Y);
                     break;
 
                 case State.SelectSizeGame :
                     itemWidth.Update();
                     itemHeight.Update();
                     itemContinue.Update(X, Y);
+                    itemBack.Update(X, Y);
+                    break;
+
+                case State.MainMapEditor:
+                    mainMapEditor.Update();
                     break;
             }
-
-            itemBack.Update(X, Y);
         }
 
         /// <summary>
@@ -259,6 +272,7 @@ namespace IS_XNA_Shooter
                     itemArcadeSurvival.Draw(spriteBatch);
                     itemArcadeDefense.Draw(spriteBatch);
                     itemArcadeKiller.Draw(spriteBatch);
+                    itemBack.Draw(spriteBatch);
                     break;
 
                 case State.SelectSizeGame:
@@ -268,10 +282,12 @@ namespace IS_XNA_Shooter
                     itemHeight.Draw(spriteBatch);
                     itemContinue.Draw(spriteBatch);
                     spriteBatch.DrawString(GRMng.fontText, informationText, informationPosition, Color.White);
+                    itemBack.Draw(spriteBatch);
+                    break;
+                case State.MainMapEditor:
+                    mainMapEditor.Draw(spriteBatch);
                     break;
             }
-
-            itemBack.Draw(spriteBatch);
         }
 
     }//class MenuMapEditor

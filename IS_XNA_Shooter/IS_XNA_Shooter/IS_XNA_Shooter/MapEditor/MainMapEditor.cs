@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace IS_XNA_Shooter.MapEditor
 {
@@ -21,6 +22,7 @@ namespace IS_XNA_Shooter.MapEditor
         Sprite background;
 
         private Vector2 displacementLevel;
+        private Vector2 lastPositionMouse;
 
         
         
@@ -38,7 +40,8 @@ namespace IS_XNA_Shooter.MapEditor
 
             background = new Sprite(true, new Vector2(SuperGame.screenWidth/2, SuperGame.screenHeight/2), 0f, GRMng.textureBg00);
 
-            displacementLevel = new Vector2(0,-500);
+            displacementLevel = new Vector2(0, 0);
+            lastPositionMouse = new Vector2();
         }
 
 
@@ -48,11 +51,13 @@ namespace IS_XNA_Shooter.MapEditor
 
         public void Update()
         {
- 
-
-
-
-
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                displacementLevel.X += Mouse.GetState().X - lastPositionMouse.X;
+                displacementLevel.Y += Mouse.GetState().Y - lastPositionMouse.Y;
+            }
+            lastPositionMouse.X = Mouse.GetState().X;
+            lastPositionMouse.Y = Mouse.GetState().Y;
         } // Update
 
         public void Draw(SpriteBatch spriteBatch)

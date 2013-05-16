@@ -10,47 +10,25 @@ namespace IS_XNA_Shooter.MapEditor
 {
     class MainMapEditor
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        Level level;
-        /// <summary>
-        /// 
-        /// </summary>
-        String levelType;
-        /// <summary>
-        /// 
-        /// </summary>
-        int width;
-        /// <summary>
-        /// 
-        /// </summary>
-        int height;
-        /// <summary>
-        /// 
-        /// </summary>
-        Texture2D whitePixel;
-        /// <summary>
-        /// 
-        /// </summary>
-        Texture2D textureCell;
-        /// <summary>
-        /// 
-        /// </summary>
-        Texture2D backgroundLevel;
-        /// <summary>
-        /// 
-        /// </summary>
-        Sprite background;
-
+        //******************************
+        //*****     ATTRIBUTES     *****
+        //****************************** 
+        private String levelType;
+        private Sprite background;
+        private Level level;
         private SuperGame mainGame;
-        private Vector2 displacementLevel;
         private Vector2 lastPositionMouse;
-        /// <summary>
-        /// 
-        /// </summary>
-        SpriteFont spriteDebug;
+        private SpriteFont spriteDebug;
 
+        #region Frame Level
+        private int width;
+        private int height;
+        private Texture2D whitePixel;
+        private Texture2D textureCell;
+        private Vector2 displacementLevel;
+        #endregion;  
+        
+        #region Frame Right Ships
         //Frame (player and enemies)
         private Rectangle rectFrameEnemies;
 
@@ -108,7 +86,14 @@ namespace IS_XNA_Shooter.MapEditor
         private Vector2 positionELTransition;
         private Rectangle animELTransition;
         private bool isClickEL;
-        
+        #endregion;        
+
+
+
+
+        //***************************
+        //*****     BUILDER     *****
+        //***************************        
         public MainMapEditor(String levelType, int width, int height, SuperGame mainGame) {
             spriteDebug = GRMng.fontText;
 
@@ -144,35 +129,78 @@ namespace IS_XNA_Shooter.MapEditor
             initTransition();
         }
 
+
+
+
+        //************************************
+        //*****     PUBLIC FUNCTIONS     *****
+        //************************************ 
         public void Update()
         {
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
-            {
-                displacementLevel.X += Mouse.GetState().X - lastPositionMouse.X;
-                displacementLevel.Y += Mouse.GetState().Y - lastPositionMouse.Y;
-                if (displacementLevel.X > 0) displacementLevel.X = 0;
-                if (displacementLevel.X < 1000 - width - 20) displacementLevel.X = 1000 - width - 20;
-
-                if (displacementLevel.Y > 0) displacementLevel.Y = 0;
-                if (displacementLevel.Y < 500 - height - 20) displacementLevel.Y = 500 - height - 20;
-            }
-            lastPositionMouse.X = Mouse.GetState().X;
-            lastPositionMouse.Y = Mouse.GetState().Y;
-
+            //update the frame of level
+            updateFrameLevel();
+            //frame right to select enemies
             updateFrameEnemiesTransition();
-        } // Update
+        }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            int origXNatLeft = SuperGame.screenWidth / 20 + 10 + (int)displacementLevel.X;
-            int origXNatRight = origXNatLeft + width;
-            int origYNatUp = SuperGame.screenHeight / 15 + 10 + (int)displacementLevel.Y;
-            int origYNatDown = origYNatUp + height;
+            //background
+            background.Draw(spriteBatch);
+            // frame level
+            drawFrameLevel(spriteBatch);
+            // frame rigth to select ships
+            drawFrameEnemies(spriteBatch);
+            drawFrameProperties(spriteBatch);
+            drawEnemiesTransition(spriteBatch);
+
+            //debug
+            spriteBatch.DrawString(spriteDebug, "(" + displacementLevel.X + ", " + displacementLevel.Y + ")", Vector2.Zero, Color.White);
+        }
+
+
+
+
+        //*************************************
+        //*****     PRIVATE FUNCTIONS     *****
+        //************************************* 
+        private void updateFrameLevel()
+        {
+            int widthFrame = 1000;
+            int heightFrame = 500;
+
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                //move the level.
+                displacementLevel.X += Mouse.GetState().X - lastPositionMouse.X;
+                displacementLevel.Y += Mouse.GetState().Y - lastPositionMouse.Y;
+                //limit the position "x" of the displacement level.
+                if (displacementLevel.X > 0) displacementLevel.X = 0;
+                if (displacementLevel.X < 1000 - width - 20) displacementLevel.X = widthFrame - width - 20;
+                //limit the position "y" of the displacement level.
+                if (displacementLevel.Y > 0) displacementLevel.Y = 0;
+                if (displacementLevel.Y < 500 - height - 20) displacementLevel.Y = heightFrame - height - 20;
+            }
+            lastPositionMouse.X = Mouse.GetState().X;
+            lastPositionMouse.Y = Mouse.GetState().Y;
+        }
+
+        private void drawFrameLevel(SpriteBatch spriteBatch)
+        {
+            int widthFrame = 1000;
+            int heightFrame = 500;
+
+            int separator = 10;
 
             int origXScreen = SuperGame.screenWidth / 20;
             int origYScreen = SuperGame.screenHeight / 15;
-            int endXScreen = SuperGame.screenWidth / 20 + 1000;
-            int endYScreen = SuperGame.screenHeight / 15 + 500;
+            int endXScreen = origXScreen + widthFrame;
+            int endYScreen = origYScreen + heightFrame;
+
+            int origXNatLeft = origXScreen + separator + (int)displacementLevel.X;
+            int origXNatRight = origXNatLeft + width;
+            int origYNatUp = origYScreen + separator + (int)displacementLevel.Y;
+            int origYNatDown = origYNatUp + height;            
 
             int origenXRealLeft = Math.Max(origXNatLeft, origXScreen);
             int origenXRealRight = Math.Max(origXNatRight, origXScreen);
@@ -184,8 +212,9 @@ namespace IS_XNA_Shooter.MapEditor
             int tamHeightExtra = origYScreen - origYNatUp;
             if (tamHeightExtra < 0) tamHeightExtra = 0;
 
-            background.Draw(spriteBatch);
-            spriteBatch.Draw(GRMng.blackpixeltrans, new Rectangle(origXScreen, origYScreen, 1000, 500), Color.Black);
+
+            spriteBatch.Draw(GRMng.blackpixeltrans, new Rectangle(origXScreen, origYScreen, widthFrame, heightFrame), Color.Black);
+
             // grid del suelo
             for (int i = origXNatLeft; i < width + origXNatLeft; i += textureCell.Width)
                 for (int j = origYNatUp; j < height + origYNatUp; j += textureCell.Height)
@@ -222,39 +251,33 @@ namespace IS_XNA_Shooter.MapEditor
                     {
                         spriteBatch.Draw(textureCell, new Vector2(i, j), new Rectangle(0, 0, widthSourceRectangle, heightSourceRectangle), Color.White);
                     }
-                } 
-
-            drawFrameEnemies(spriteBatch);
-            drawFrameProperties(spriteBatch);
-            drawEnemiesTransition(spriteBatch);
+                }
 
             // linea de arriba:
-            if ( -origYScreen + origYNatUp >= 0)
+            if (-origYScreen + origYNatUp >= 0)
                 spriteBatch.Draw(whitePixel, new Rectangle(origenXRealLeft, origenYRealUp,
-                    Math.Min(endXScreen - origXNatLeft - tamWidthExtra, width - tamWidthExtra), 1), 
+                    Math.Min(endXScreen - origXNatLeft - tamWidthExtra, width - tamWidthExtra), 1),
                     null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
 
 
             // linea de la derecha:
             if (-endXScreen + origXNatRight <= 0)
-            spriteBatch.Draw(whitePixel, new Rectangle(origenXRealRight, origenYRealUp,
-                1, Math.Min(endYScreen - origYNatUp - tamHeightExtra, height - tamHeightExtra)), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
+                spriteBatch.Draw(whitePixel, new Rectangle(origenXRealRight, origenYRealUp,
+                    1, Math.Min(endYScreen - origYNatUp - tamHeightExtra, height - tamHeightExtra)), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
 
 
             // linea de abajo:
             if (-endYScreen + origYNatDown <= 0)
                 spriteBatch.Draw(whitePixel, new Rectangle(origenXRealLeft, origenYRealDown,
-                    Math.Min(endXScreen - origXNatLeft - tamWidthExtra, width - tamWidthExtra), 1), 
+                    Math.Min(endXScreen - origXNatLeft - tamWidthExtra, width - tamWidthExtra), 1),
                     null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
 
 
             // linea de la izquierda:
-                if ( -origXScreen + origXNatLeft >= 0)
+            if (-origXScreen + origXNatLeft >= 0)
                 spriteBatch.Draw(whitePixel, new Rectangle(origenXRealLeft, origenYRealUp,
-                    1, Math.Min(endYScreen - origYNatUp - tamHeightExtra, height - tamHeightExtra)), 
+                    1, Math.Min(endYScreen - origYNatUp - tamHeightExtra, height - tamHeightExtra)),
                     null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
-
-            spriteBatch.DrawString(spriteDebug, "(" + displacementLevel.X + ", " + displacementLevel.Y + ")", Vector2.Zero, Color.White);
         }
 
         private void initFrame(float xOrig, float yOrig)

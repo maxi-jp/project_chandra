@@ -21,18 +21,21 @@ namespace IS_XNA_Shooter.MapEditor
         Texture2D backgroundLevel;
         Sprite background;
 
+        private SuperGame mainGame;
         private Vector2 displacementLevel;
         private Vector2 lastPositionMouse;
 
         
         
-        public MainMapEditor(String levelType, int width, int height) {
+        public MainMapEditor(String levelType, int width, int height, SuperGame mainGame) {
 
             this.levelType = levelType;
           /*  this.height = width;
             this.width = height;*/
             this.height = 1040;
             this.width = 1040;
+
+            this.mainGame = mainGame;
 
             //Malla de Texturas
             whitePixel = GRMng.whitepixel;
@@ -74,7 +77,11 @@ namespace IS_XNA_Shooter.MapEditor
                     if (widthSourceRectangle < 0) widthSourceRectangle = 0;
                     if (heightSourceRectangle < 0) heightSourceRectangle = 0;
                     spriteBatch.Draw(textureCell, new Vector2(i, j), new Rectangle(0, 0, widthSourceRectangle, heightSourceRectangle), Color.White);
-                } 
+                }
+
+            drawFrameEnemies(spriteBatch);
+
+            drawFrameProperties(spriteBatch);
                 
             
 
@@ -125,6 +132,32 @@ namespace IS_XNA_Shooter.MapEditor
                     null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
         }
 
+        private void drawFrameEnemies(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(GRMng.blackpixeltrans, new Rectangle(SuperGame.screenWidth - SuperGame.screenWidth / 10, 10, GRMng.frameWidthEW1, SuperGame.screenHeight - 10), Color.Black);
+            mainGame.loadGRManager("LevelA1");
+
+            int acum = 0;
+            spriteBatch.Draw(GRMng.textureEW1, new Rectangle(SuperGame.screenWidth - SuperGame.screenWidth / 10, 10, GRMng.frameWidthEW1 +acum, GRMng.frameHeightEW1), new Rectangle(0, 0, GRMng.frameWidthEW1, GRMng.frameHeightEW1), Color.White);
+            acum = acum + GRMng.frameHeightEW1;
+            spriteBatch.Draw(GRMng.textureEW2, new Rectangle(SuperGame.screenWidth - SuperGame.screenWidth / 10, 10 + acum, GRMng.frameWidthEW2, GRMng.frameHeightEW2), new Rectangle(0, 0, GRMng.frameWidthEW2, GRMng.frameHeightEW2), Color.White);
+            acum = acum + GRMng.frameHeightEW2;
+            spriteBatch.Draw(GRMng.textureEB1, new Rectangle(SuperGame.screenWidth - SuperGame.screenWidth / 10, 10 + acum, GRMng.frameWidthEB1, GRMng.frameHeightEB1), new Rectangle(0, 0, GRMng.frameWidthEB1, GRMng.frameHeightEB1), Color.White);
+            acum = acum + GRMng.frameHeightEB1;
+            spriteBatch.Draw(GRMng.textureES, new Rectangle(SuperGame.screenWidth - SuperGame.screenWidth / 10, 10 + acum, GRMng.frameWidthES, GRMng.frameHeightES), new Rectangle(0, 0, GRMng.frameWidthES, GRMng.frameHeightES), Color.White);
+            acum = acum + GRMng.frameHeightES;
+            spriteBatch.Draw(GRMng.textureEMS, new Rectangle(SuperGame.screenWidth - SuperGame.screenWidth / 10, 10 + acum, GRMng.frameWidthEMS, GRMng.frameHeightEMS), new Rectangle(0, 0, GRMng.frameWidthEMS, GRMng.frameHeightEMS), Color.White);
+            acum = acum + GRMng.frameHeightEMS;
+            spriteBatch.Draw(GRMng.textureEL, new Rectangle(SuperGame.screenWidth - SuperGame.screenWidth / 10, 10 + acum, GRMng.frameWidthEL, GRMng.frameHeightEL), new Rectangle(0, 0, GRMng.frameWidthEL, GRMng.frameHeightEL), Color.White);
+            acum = acum + GRMng.frameHeightEL;
+            
+
+        }
+
+        private void drawFrameProperties(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(GRMng.blackpixeltrans, new Rectangle(SuperGame.screenWidth / 20, SuperGame.screenHeight - SuperGame.screenHeight / 6, 1000, 100), Color.Black);
+        }
 
         private void addEnemies(Enemy enemy)
         {

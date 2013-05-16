@@ -206,7 +206,7 @@ namespace IS_XNA_Shooter
                     if (itemContinue.Unclick(X, Y))
                     {
                         Audio.PlayEffect("digitalAcent01");
-                        mainMapEditor = new MainMapEditor("Arcade", itemWidth.getValue(), itemHeight.getValue());
+                        mainMapEditor = new MainMapEditor("Arcade", itemWidth.getValue(), itemHeight.getValue(), mainGame);
                         currentState = State.MainMapEditor;
                         //TODO: sigue aqui Oscar!!!
                     }

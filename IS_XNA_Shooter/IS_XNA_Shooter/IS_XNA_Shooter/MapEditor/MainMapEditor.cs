@@ -10,24 +10,104 @@ namespace IS_XNA_Shooter.MapEditor
 {
     class MainMapEditor
     {
+        /// <summary>
+        /// 
+        /// </summary>
         Level level;
+        /// <summary>
+        /// 
+        /// </summary>
         String levelType;
+        /// <summary>
+        /// 
+        /// </summary>
         int width;
+        /// <summary>
+        /// 
+        /// </summary>
         int height;
-
+        /// <summary>
+        /// 
+        /// </summary>
         Texture2D whitePixel;
+        /// <summary>
+        /// 
+        /// </summary>
         Texture2D textureCell;
-
+        /// <summary>
+        /// 
+        /// </summary>
         Texture2D backgroundLevel;
+        /// <summary>
+        /// 
+        /// </summary>
         Sprite background;
 
         private SuperGame mainGame;
         private Vector2 displacementLevel;
         private Vector2 lastPositionMouse;
-
+        /// <summary>
+        /// 
+        /// </summary>
         SpriteFont spriteDebug;
 
-        
+        //Frame (player and enemies)
+        private Rectangle rectFrameEnemies;
+
+        //Attribute for frame (player and anemies)
+        //player
+        private Rectangle positionPA1Frame;
+        private Rectangle animPA1Frame;
+
+        //enemies
+        private Rectangle positionEW1Frame;
+        private Rectangle animEW1Frame;
+
+        private Rectangle positionEW2Frame;
+        private Rectangle animEW2Frame;
+
+        private Rectangle positionEB1Frame;
+        private Rectangle animEB1Frame;
+
+        private Rectangle positionESFrame;
+        private Rectangle animESFrame;
+
+        private Rectangle positionEMSFrame;
+        private Rectangle animEMSFrame;
+
+        private Rectangle positionELFrame;
+        private Rectangle animELFrame;
+
+        //Attributes for transition (from frame to map)
+        //player
+        private Vector2 positionPA1Transition;
+        private Rectangle animPA1Transition;
+        private bool isClickPA1;
+
+        //enemies
+        private Vector2 positionEW1Transition;
+        private Rectangle animEW1Transition;
+        private bool isClickEW1;
+
+        private Vector2 positionEW2Transition;
+        private Rectangle animEW2Transition;
+        private bool isClickEW2;
+
+        private Vector2 positionEB1Transition;
+        private Rectangle animEB1Transition;
+        private bool isClickEB1;
+
+        private Vector2 positionESTransition;
+        private Rectangle animESTransition;
+        private bool isClickES;
+
+        private Vector2 positionEMSTransition;
+        private Rectangle animEMSTransition;
+        private bool isClickEMS;
+
+        private Vector2 positionELTransition;
+        private Rectangle animELTransition;
+        private bool isClickEL;
         
         public MainMapEditor(String levelType, int width, int height, SuperGame mainGame) {
             spriteDebug = GRMng.fontText;
@@ -48,12 +128,21 @@ namespace IS_XNA_Shooter.MapEditor
 
             displacementLevel = new Vector2(0, 0);
             lastPositionMouse = new Vector2();
+
+            //local attributes
+            float xOrig = SuperGame.screenWidth - SuperGame.screenWidth / 10;
+            float yOrig = SuperGame.screenHeight / 20;
+            float yFinal = SuperGame.screenHeight - SuperGame.screenHeight / 10;
+
+            //rectangle for frame (player and enemies)
+            rectFrameEnemies = new Rectangle((int) xOrig, (int) yOrig, (int) GRMng.frameWidthEW1, (int) yFinal);
+
+            //initialize positions and anims (frame player and enemies)
+            initFrame(xOrig, yOrig);
+
+            //initialize positions and anims (transition from frame to map)
+            initTransition();
         }
-
-
-
-    
-
 
         public void Update()
         {
@@ -69,6 +158,8 @@ namespace IS_XNA_Shooter.MapEditor
             }
             lastPositionMouse.X = Mouse.GetState().X;
             lastPositionMouse.Y = Mouse.GetState().Y;
+
+            updateFrameEnemiesTransition();
         } // Update
 
         public void Draw(SpriteBatch spriteBatch)
@@ -122,8 +213,8 @@ namespace IS_XNA_Shooter.MapEditor
                 } 
 
             drawFrameEnemies(spriteBatch);
-
             drawFrameProperties(spriteBatch);
+            drawEnemiesTransition(spriteBatch);
 
             // linea de arriba:
             if ( -origYScreen + origYNatUp >= 0)
@@ -154,26 +245,107 @@ namespace IS_XNA_Shooter.MapEditor
             spriteBatch.DrawString(spriteDebug, "(" + displacementLevel.X + ", " + displacementLevel.Y + ")", Vector2.Zero, Color.White);
         }
 
+        private void initFrame(float xOrig, float yOrig)
+        {
+            int acum = 0;
+            //player
+            positionPA1Frame = new Rectangle((int)xOrig, (int)yOrig + acum, GRMng.frameWidthPA1, GRMng.frameHeightPA1);
+            animPA1Frame = new Rectangle(0, 0, GRMng.frameWidthPA1, GRMng.frameHeightPA1);
+            acum = acum + GRMng.frameHeightPA1;
+
+            //enemies
+            positionEW1Frame = new Rectangle((int)xOrig, (int)yOrig + acum, GRMng.frameWidthEW1, GRMng.frameHeightEW1);
+            animEW1Frame = new Rectangle(0, 0, GRMng.frameWidthEW1, GRMng.frameHeightEW1);
+            acum = acum + GRMng.frameHeightEW1;
+
+            positionEW2Frame = new Rectangle((int)xOrig, (int)yOrig + acum, GRMng.frameWidthEW2, GRMng.frameHeightEW2);
+            animEW2Frame = new Rectangle(0, 0, GRMng.frameWidthEW2, GRMng.frameHeightEW2);
+            acum = acum + GRMng.frameHeightEW2;
+
+            positionEB1Frame = new Rectangle((int)xOrig, (int)yOrig + acum, GRMng.frameWidthEB1, GRMng.frameHeightEB1);
+            animEB1Frame = new Rectangle(0, 0, GRMng.frameWidthEB1, GRMng.frameHeightEB1);
+            acum = acum + GRMng.frameHeightEB1;
+
+            positionESFrame = new Rectangle((int)xOrig, (int)yOrig + acum, GRMng.frameWidthES, GRMng.frameHeightES);
+            animESFrame = new Rectangle(0, 0, GRMng.frameWidthES, GRMng.frameHeightES);
+            acum = acum + GRMng.frameHeightES;
+
+            positionEMSFrame = new Rectangle((int)xOrig, (int)yOrig + acum, GRMng.frameWidthEMS, GRMng.frameHeightEMS);
+            animEMSFrame = new Rectangle(0, 0, GRMng.frameWidthEMS, GRMng.frameHeightEMS);
+            acum = acum + GRMng.frameHeightEMS;
+
+            positionELFrame = new Rectangle((int)xOrig, (int)yOrig + acum, GRMng.frameWidthEL, GRMng.frameHeightEL);
+            animELFrame = new Rectangle(0, 0, GRMng.frameWidthEL, GRMng.frameHeightEL);
+            acum = acum + GRMng.frameHeightEL;
+        }
+
+        private void initTransition()
+        {
+            //player
+            positionPA1Transition = new Vector2();
+            animPA1Transition = new Rectangle(0, 0, GRMng.frameWidthPA1, GRMng.frameHeightPA1);
+            isClickPA1 = false;
+
+            //enemies
+            positionEW1Transition = new Vector2();
+            animEW1Transition = new Rectangle(0, 0, GRMng.frameWidthEW1, GRMng.frameHeightEW1);
+            isClickEW1 = false;
+
+            positionEW2Transition = new Vector2();
+            animEW2Transition = new Rectangle(0, 0, GRMng.frameWidthEW2, GRMng.frameHeightEW2);
+            isClickEW2 = false;
+
+            positionEB1Transition = new Vector2();
+            animEB1Transition = new Rectangle(0, 0, GRMng.frameWidthEB1, GRMng.frameHeightEB1);
+            isClickEB1 = false;
+
+            positionESTransition = new Vector2();
+            animESTransition = new Rectangle(0, 0, GRMng.frameWidthES, GRMng.frameHeightES);
+            isClickES = false;
+
+            positionEMSTransition = new Vector2();
+            animEMSTransition = new Rectangle(0, 0, GRMng.frameWidthEMS, GRMng.frameHeightEMS);
+            isClickEMS = false;
+
+            positionELTransition = new Vector2();
+            animELTransition = new Rectangle(0, 0, GRMng.frameWidthEL, GRMng.frameHeightEL);
+            isClickEL = false;
+        }
+
         private void drawFrameEnemies(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(GRMng.blackpixeltrans, new Rectangle(SuperGame.screenWidth - SuperGame.screenWidth / 10, 10, GRMng.frameWidthEW1, SuperGame.screenHeight - 10), Color.Black);
-            mainGame.loadGRManager("LevelA1");
-
-            int acum = 0;
-            spriteBatch.Draw(GRMng.textureEW1, new Rectangle(SuperGame.screenWidth - SuperGame.screenWidth / 10, 10, GRMng.frameWidthEW1 +acum, GRMng.frameHeightEW1), new Rectangle(0, 0, GRMng.frameWidthEW1, GRMng.frameHeightEW1), Color.White);
-            acum = acum + GRMng.frameHeightEW1;
-            spriteBatch.Draw(GRMng.textureEW2, new Rectangle(SuperGame.screenWidth - SuperGame.screenWidth / 10, 10 + acum, GRMng.frameWidthEW2, GRMng.frameHeightEW2), new Rectangle(0, 0, GRMng.frameWidthEW2, GRMng.frameHeightEW2), Color.White);
-            acum = acum + GRMng.frameHeightEW2;
-            spriteBatch.Draw(GRMng.textureEB1, new Rectangle(SuperGame.screenWidth - SuperGame.screenWidth / 10, 10 + acum, GRMng.frameWidthEB1, GRMng.frameHeightEB1), new Rectangle(0, 0, GRMng.frameWidthEB1, GRMng.frameHeightEB1), Color.White);
-            acum = acum + GRMng.frameHeightEB1;
-            spriteBatch.Draw(GRMng.textureES, new Rectangle(SuperGame.screenWidth - SuperGame.screenWidth / 10, 10 + acum, GRMng.frameWidthES, GRMng.frameHeightES), new Rectangle(0, 0, GRMng.frameWidthES, GRMng.frameHeightES), Color.White);
-            acum = acum + GRMng.frameHeightES;
-            spriteBatch.Draw(GRMng.textureEMS, new Rectangle(SuperGame.screenWidth - SuperGame.screenWidth / 10, 10 + acum, GRMng.frameWidthEMS, GRMng.frameHeightEMS), new Rectangle(0, 0, GRMng.frameWidthEMS, GRMng.frameHeightEMS), Color.White);
-            acum = acum + GRMng.frameHeightEMS;
-            spriteBatch.Draw(GRMng.textureEL, new Rectangle(SuperGame.screenWidth - SuperGame.screenWidth / 10, 10 + acum, GRMng.frameWidthEL, GRMng.frameHeightEL), new Rectangle(0, 0, GRMng.frameWidthEL, GRMng.frameHeightEL), Color.White);
-            acum = acum + GRMng.frameHeightEL;
-            
-
+            //draw frame
+            spriteBatch.Draw(GRMng.blackpixeltrans, rectFrameEnemies, Color.Black);
+            //draw player and enemies over the frame
+            //player
+            spriteBatch.Draw(GRMng.texturePA1, positionPA1Frame, animPA1Frame, Color.White);
+            //enemies
+            spriteBatch.Draw(GRMng.textureEW1, positionEW1Frame, animEW1Frame, Color.White);
+            spriteBatch.Draw(GRMng.textureEW2, positionEW2Frame, animEW2Frame, Color.White);
+            spriteBatch.Draw(GRMng.textureEB1, positionEB1Frame, animEB1Frame, Color.White);
+            spriteBatch.Draw(GRMng.textureES, positionESFrame, animESFrame, Color.White);
+            spriteBatch.Draw(GRMng.textureEMS, positionEMSFrame, animEMSFrame, Color.White);
+            spriteBatch.Draw(GRMng.textureEL, positionELFrame, animELFrame, Color.White);
+        }
+        
+        private void drawEnemiesTransition(SpriteBatch spriteBatch)
+        {
+            //player
+            if (isClickPA1)
+                spriteBatch.Draw(GRMng.texturePA1, positionPA1Transition, animPA1Transition, Color.White);
+            //enemies
+            if (isClickEW1)
+                spriteBatch.Draw(GRMng.textureEW1, positionEW1Transition, animEW1Transition, Color.White);
+            if (isClickEW2)
+                spriteBatch.Draw(GRMng.textureEW2, positionEW2Transition, animEW2Transition, Color.White);
+            if (isClickEB1)
+                spriteBatch.Draw(GRMng.textureEB1, positionEB1Transition, animEB1Transition, Color.White);
+            if (isClickES)
+                spriteBatch.Draw(GRMng.textureES, positionESTransition, animESTransition, Color.White);
+            if (isClickEMS)
+                spriteBatch.Draw(GRMng.textureEMS, positionEMSTransition, animEMSTransition, Color.White);
+            if (isClickEL)
+                spriteBatch.Draw(GRMng.textureEL, positionELTransition, animELTransition, Color.White);
         }
 
         private void drawFrameProperties(SpriteBatch spriteBatch)
@@ -259,12 +431,100 @@ namespace IS_XNA_Shooter.MapEditor
                 ((EnemyADefense)(enemy)).SetBase(house);
 
         } // TestEnemies*/
+        }
 
- 
+        private void updateFrameEnemiesTransition()
+        {
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                int xMouse = Mouse.GetState().X;
+                int yMouse = Mouse.GetState().Y;
 
-  
+                if (isClickPA1)
+                {
+                    positionPA1Transition.X = xMouse - GRMng.frameWidthPA1 / 2;
+                    positionPA1Transition.Y = yMouse - GRMng.frameHeightPA1 / 2;
+                }
+                else if (isClickEW1)
+                {
+                    positionEW1Transition.X = xMouse - GRMng.frameWidthEW1 / 2;
+                    positionEW1Transition.Y = yMouse - GRMng.frameHeightEW1 / 2;
+                }
+                else if (isClickEW2)
+                {
+                    positionEW2Transition.X = xMouse - GRMng.frameWidthEW2 / 2;
+                    positionEW2Transition.Y = yMouse - GRMng.frameHeightEW2 / 2;
+                }
+                else if (isClickEB1)
+                {
+                    positionEB1Transition.X = xMouse - GRMng.frameWidthEB1 / 2;
+                    positionEB1Transition.Y = yMouse - GRMng.frameHeightEB1 / 2;
+                }
+                else if (isClickES)
+                {
+                    positionESTransition.X = xMouse - GRMng.frameWidthES / 2;
+                    positionESTransition.Y = yMouse - GRMng.frameHeightES / 2;
+                }
+                else if (isClickEMS)
+                {
+                    positionEMSTransition.X = xMouse - GRMng.frameWidthEMS / 2;
+                    positionEMSTransition.Y = yMouse - GRMng.frameHeightEMS / 2;
+                }
+                else if (isClickEL)
+                {
+                    positionELTransition.X = xMouse - GRMng.frameWidthEL / 2;
+                    positionELTransition.Y = yMouse - GRMng.frameHeightEL / 2;
+                }
+                else
+                {
+                    if (positionPA1Frame.Contains(xMouse, yMouse))
+                    {
+                        positionPA1Transition.X = xMouse - GRMng.frameWidthPA1 / 2;
+                        positionPA1Transition.Y = yMouse - GRMng.frameHeightPA1 / 2;
+                        isClickPA1 = true;
+                    }
+                    else if (positionEW1Frame.Contains(xMouse, yMouse))
+                    {
+                        positionEW1Transition.X = xMouse - GRMng.frameWidthEW1 / 2;
+                        positionEW1Transition.Y = yMouse - GRMng.frameHeightEW1 / 2;
+                        isClickEW1 = true;
+                    }
+                    else if (positionEW2Frame.Contains(xMouse, yMouse))
+                    {
+                        positionEW2Transition.X = xMouse - GRMng.frameWidthEW2 / 2;
+                        positionEW2Transition.Y = yMouse - GRMng.frameHeightEW2 / 2;
+                        isClickEW2 = true;
+                    }
+                    else if (positionEB1Frame.Contains(xMouse, yMouse))
+                    {
+                        positionEB1Transition.X = xMouse - GRMng.frameWidthEB1 / 2;
+                        positionEB1Transition.Y = yMouse - GRMng.frameHeightEB1 / 2;
+                        isClickEB1 = true;
+                    }
+                    else if (positionEMSFrame.Contains(xMouse, yMouse))
+                    {
+                        positionEMSTransition.X = xMouse - GRMng.frameWidthEMS / 2;
+                        positionEMSTransition.Y = yMouse - GRMng.frameHeightEMS / 2;
+                        isClickEMS = true;
+                    }
+                    else if (positionELFrame.Contains(xMouse, yMouse))
+                    {
+                        positionELTransition.X = xMouse - GRMng.frameWidthEL / 2;
+                        positionELTransition.Y = yMouse - GRMng.frameHeightEL / 2;
+                        isClickEL = true;
+                    }
+                    else if (positionESFrame.Contains(xMouse, yMouse))
+                    {
+                        positionESTransition.X = xMouse - GRMng.frameWidthES / 2;
+                        positionESTransition.Y = yMouse - GRMng.frameHeightES / 2;
+                        isClickES = true;
+                    }
+                }
+            }
+            else
+            {
+                initTransition();
+            }
+        }
     }
-
-
-}
 }

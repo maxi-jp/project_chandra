@@ -682,11 +682,6 @@ namespace IS_XNA_Shooter
         {
             currentState = gameState.gameOver;
         }
-
-        public void loadGRManager(String aux)
-        {
-            grManager.LoadContent(aux) ;
-        }
     } // class SuperGame
 
 } // namespace IS_XNA_Shooter

@@ -463,6 +463,18 @@ namespace IS_XNA_Shooter
                     fontText = content.Load<SpriteFont>("Motorwerk");
                     textureBg00 = content.Load<Texture2D>("Graphics/Backgrounds/bg00");
                     textureCell = content.Load<Texture2D>("Graphics/celdasuelo");
+
+                    //Enemies
+                    textureEW1 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy01_80x80");
+                    textureEW2 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy02_80x80");
+                    textureEB1 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy03_80x80");
+                    textureES = content.Load<Texture2D>("Graphics/Ships/EnemyScared");
+                    textureEMS =  content.Load<Texture2D>("Graphics/Ships/mineAnimation");
+                    textureEL = content.Load<Texture2D>("Graphics/Ships/enemyLaser");
+
+                    //Player
+                    texturePA1 = content.Load<Texture2D>("Graphics/Ships/sprites80x80");
+
                     break;
 
                 case "Other":
@@ -628,6 +640,18 @@ namespace IS_XNA_Shooter
                     boxSizesMapEditor2 = null;
                     fontText = null;
                     textureBg00 = null;
+
+                    //Enemies
+                    textureEW1 = null;
+                    textureEW2 = null;
+                    textureEB1 = null;
+                    textureES = null;
+                    textureEMS =  null;
+                    textureEL = null;
+
+                    //Player
+                    texturePA1 = null;
+
                     break;
 
                 case "Other":

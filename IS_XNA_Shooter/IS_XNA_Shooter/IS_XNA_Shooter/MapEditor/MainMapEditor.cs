@@ -75,13 +75,13 @@ namespace IS_XNA_Shooter.MapEditor
         {
             int origXNatLeft = SuperGame.screenWidth / 20 + 10 + (int)displacementLevel.X;
             int origXNatRight = origXNatLeft + width;
-            int origYNatUp = SuperGame.screenHeight / 6 + 10 + (int)displacementLevel.Y;
+            int origYNatUp = SuperGame.screenHeight / 15 + 10 + (int)displacementLevel.Y;
             int origYNatDown = origYNatUp + height;
 
             int origXScreen = SuperGame.screenWidth / 20;
-            int origYScreen = SuperGame.screenHeight / 6;
+            int origYScreen = SuperGame.screenHeight / 15;
             int endXScreen = SuperGame.screenWidth / 20 + 1000;
-            int endYScreen = SuperGame.screenHeight / 6 + 500;
+            int endYScreen = SuperGame.screenHeight / 15 + 500;
 
             int origenXRealLeft = Math.Max(origXNatLeft, origXScreen);
             int origenXRealRight = Math.Max(origXNatRight, origXScreen);
@@ -94,29 +94,41 @@ namespace IS_XNA_Shooter.MapEditor
             if (tamHeightExtra < 0) tamHeightExtra = 0;
 
             background.Draw(spriteBatch);
-            spriteBatch.Draw(GRMng.blackpixeltrans, new Rectangle(SuperGame.screenWidth / 20, SuperGame.screenHeight / 6, 1000, 500), Color.Black);
+            spriteBatch.Draw(GRMng.blackpixeltrans, new Rectangle(origXScreen, origYScreen, 1000, 500), Color.Black);
             // grid del suelo
             for (int i = origXNatLeft; i < width + origXNatLeft; i += textureCell.Width)
                 for (int j = origYNatUp; j < height + origYNatUp; j += textureCell.Height)
                 {
                     int widthSourceRectangle = endXScreen - i;
                     int heightSourceRectangle = endYScreen - j;
+                    if (widthSourceRectangle > 80) widthSourceRectangle = 80;
+                    if (heightSourceRectangle > 80) heightSourceRectangle = 80;
+                    if (widthSourceRectangle < 0) widthSourceRectangle = 0;
+                    if (heightSourceRectangle < 0) heightSourceRectangle = 0;
 
-                    if (i < origXScreen && i + 80 > origXScreen || j < origYScreen && j + 80 > origYScreen)
+                    // if the rectangle isn't visible.
+                    if (i <= origXScreen && i + 80 <= origXScreen || j <= origYScreen && j + 80 <= origYScreen) { }
+                    //if the rectangle is some move up and some move left.
+                    else if (i <= origXScreen && i + 80 >= origXScreen && j <= origYScreen && j + 80 >= origYScreen)
                     {
-                        int a = (int)(i - displacementLevel.X) % 80;
-                        int b = (int)(j - displacementLevel.Y) % 80;
-                        spriteBatch.Draw(textureCell, new Vector2(i - displacementLevel.X, j - displacementLevel.Y), new Rectangle(a, b, widthSourceRectangle, heightSourceRectangle), Color.White);
+                        spriteBatch.Draw(textureCell, new Vector2(origXScreen, origYScreen),
+                            new Rectangle(origXScreen - i, origYScreen - j, 80 - (origXScreen - i), 80 - (origYScreen - j)), Color.White);
                     }
-                    else if (i <= origXScreen && i + 80 <= origXScreen || j <= origYScreen && j + 80 <= origYScreen) { }
+                    //if the rectangle is some move left.
+                    else if (i <= origXScreen && i + 80 >= origXScreen)
+                    {
+                        spriteBatch.Draw(textureCell, new Vector2(origXScreen, j),
+                            new Rectangle(origXScreen - i, 0, 80 - (origXScreen - i), heightSourceRectangle), Color.White);
+                    }
+                    //if the rectangle is some move up.
+                    else if (j <= origYScreen && j + 80 >= origYScreen)
+                    {
+                        spriteBatch.Draw(textureCell, new Vector2(i, origYScreen),
+                            new Rectangle(0, origYScreen - j, widthSourceRectangle, 80 - (origYScreen - j)), Color.White);
+                    }
+                    //if the rectangle is visible.
                     else
                     {
-
-
-                        if (widthSourceRectangle > 80) widthSourceRectangle = 80;
-                        if (heightSourceRectangle > 80) heightSourceRectangle = 80;
-                        if (widthSourceRectangle < 0) widthSourceRectangle = 0;
-                        if (heightSourceRectangle < 0) heightSourceRectangle = 0;
                         spriteBatch.Draw(textureCell, new Vector2(i, j), new Rectangle(0, 0, widthSourceRectangle, heightSourceRectangle), Color.White);
                     }
                 } 

@@ -40,6 +40,7 @@ namespace IS_XNA_Shooter
         {
             starting,
             mainMenu,
+            scoresMenu,
             playing,
             pause,
             gameOver,
@@ -261,7 +262,7 @@ namespace IS_XNA_Shooter
             updateFramesCounter = updateFramesCounterAux = 0;
             timeCounterSecond = timeCounterSecondAux = 1;
 
-            currentState = gameState.starting; // puts game's state to starting
+            currentState = gameState.scoresMenu; // puts game's state to starting
             pointer = new Vector2();
 
             base.Initialize();
@@ -284,6 +285,7 @@ namespace IS_XNA_Shooter
 
             grManager.LoadContent("MenuStart"); // se cargan los recursos del menu start
             grManager.LoadContent("MenuMain"); // se cargan los recursos del menu
+            grManager.LoadContent("MenuScores"); // se cargan los recursos del menu de scores
             grManager.LoadContent("MenuIngame"); // se cargan los recursos del menu ingame
             grManager.LoadContent("MenuGameOver");// se cargan los recursos del menu gameover
             grManager.LoadContent("Other"); // all type of "little" resources
@@ -391,6 +393,17 @@ namespace IS_XNA_Shooter
 
                     break;
 
+                case gameState.scoresMenu:
+
+                    menuScores.Update(Mouse.GetState().X, Mouse.GetState().Y, deltaTime);
+
+                    if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                        menuScores.Click(Mouse.GetState().X, Mouse.GetState().Y);
+                    else if (Mouse.GetState().LeftButton == ButtonState.Released)
+                        menuScores.Unclick(Mouse.GetState().X, Mouse.GetState().Y);
+
+                    break;
+
                 case gameState.playing:
                     totalTime += deltaTime;
 
@@ -464,13 +477,14 @@ namespace IS_XNA_Shooter
                         new Vector2((screenWidth / 2) - fontDebug.MeasureString("build version: " + currentVersion).X/2, 6),
                         Color.White, 0, Vector2.Zero, 1,
                         SpriteEffects.None, 0);
-
-                    // TODO: this is for testing the scores, must be erased after
-                    menuScores.Draw(spriteBatch);
                     break;
 
                 case gameState.mainMenu:
                     menu.Draw(spriteBatch);
+                    break;
+
+                case gameState.scoresMenu:
+                    menuScores.Draw(spriteBatch);
                     break;
 
                 case gameState.playing:
@@ -694,6 +708,22 @@ namespace IS_XNA_Shooter
         public void GameOver()
         {
             currentState = gameState.gameOver;
+        }
+
+        /// <summary>
+        /// This method is called from the MenuScores
+        /// </summary>
+        public void ReturnFromScores()
+        {
+            currentState = gameState.mainMenu;
+        }
+
+        /// <summary>
+        /// Puts gameState = scoresMenu
+        /// </summary>
+        public void ShowScores()
+        {
+            currentState = gameState.scoresMenu;
         }
 
     } // class SuperGame

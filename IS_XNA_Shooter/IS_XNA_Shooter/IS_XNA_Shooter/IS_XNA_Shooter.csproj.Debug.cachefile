@@ -68,6 +68,13 @@ Content\Graphics\Portraits\allyourbase.xnb
 Content\Graphics\base.xnb
 Content\Graphics\LifeBars\baseLifeBar.xnb
 Content\Graphics\PowerUps\spritesPowerUp02_80x80.xnb
+Content\Graphics\Splash\splash_mainmenu_asset01_1.xnb
+Content\Graphics\Splash\splash_mainmenu_asset01_2.xnb
+Content\Graphics\Splash\splash_mainmenu_asset02_1.xnb
+Content\Graphics\Splash\splash_mainmenu_asset02_2.xnb
+Content\Graphics\Splash\splash_mainmenu_asset03.xnb
+Content\Graphics\Ships\sprites_shield80x80.xnb
+Content\Graphics\PowerUps\banPowerUp320x320.xnb
 Content\FontDebug.xnb
 Content\Motorwerk.xnb
 Content\Audio\FXEffects\laser_shot_01.xnb
@@ -81,12 +88,6 @@ Content\Audio\FXEffects\PowerUpGreen.xnb
 Content\Audio\FXEffects\PowerUpRed.xnb
 Content\Audio\Music\music_01.xnb
 Content\Video\VideoIntroProjectChandra.xnb
-Content\Graphics\Splash\splash_mainmenu_asset01_1.xnb
-Content\Graphics\Splash\splash_mainmenu_asset01_2.xnb
-Content\Graphics\Splash\splash_mainmenu_asset02_1.xnb
-Content\Graphics\Splash\splash_mainmenu_asset02_2.xnb
-Content\Graphics\Splash\splash_mainmenu_asset03.xnb
-Content\Graphics\Ships\sprites_shield80x80.xnb
-Content\Graphics\PowerUps\banPowerUp320x320.xnb
+Content\Graphics\Menu\scores_2.xnb
 Content\Audio\Music\music_01.wma
 Content\Video\VideoIntroProjectChandra.wmv

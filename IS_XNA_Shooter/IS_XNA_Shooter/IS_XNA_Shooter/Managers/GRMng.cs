@@ -280,6 +280,9 @@ namespace IS_XNA_Shooter
         public static Texture2D menuSplash02;
         public static Texture2D menuSplash03;
 
+        /* ------------------- SCORES MENU ------------------- */
+        public static Texture2D menuScores;
+
         /* ------------------- INGAME MENU ------------------- */
         public static Texture2D menuIngame;
         public static Texture2D getready321;    // textura cuenta atrás menú
@@ -318,6 +321,10 @@ namespace IS_XNA_Shooter
                 case "MenuGameOver":
                     menuGameOver = content.Load<Texture2D>("Graphics/Menu/gameover");
                     gameOverSplash = content.Load<Texture2D>("Graphics/Splash/splash_gameover_2");
+                    break;
+
+                case "MenuScores":
+                    menuScores = content.Load<Texture2D>("Graphics/Menu/scores_2");
                     break;
 
                 case "LevelA1":
@@ -511,6 +518,10 @@ namespace IS_XNA_Shooter
                 case "MenuGameOver":
                     menuGameOver = null;
                     gameOverSplash = null;
+                    break;
+
+                case "MenuScores":
+                    menuScores = null;
                     break;
 
                 case "LevelA1":

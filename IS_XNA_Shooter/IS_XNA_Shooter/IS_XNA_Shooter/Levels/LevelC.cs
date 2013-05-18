@@ -230,7 +230,6 @@ namespace IS_XNA_Shooter
                 float positionY;
                 float time;
                 XmlDocument lvl = null;
-
                 XMLLvlMng.xmlEnemies = new XmlDocument();
                 XMLLvlMng.xmlEnemies.Load("../../../../IS_XNA_ShooterContent/Levels/level1C.xml");
                 lvl = XMLLvlMng.xmlEnemies;

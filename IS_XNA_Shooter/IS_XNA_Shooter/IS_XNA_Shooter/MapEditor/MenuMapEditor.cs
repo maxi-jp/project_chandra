@@ -203,12 +203,11 @@ namespace IS_XNA_Shooter
 
                 case State.SelectSizeGame :
                     //button "continue" goes to the screen number 3 of map editor.
-                    if (itemContinue.Unclick(X, Y))
+                    if (itemContinue.Unclick(X, Y) && itemWidth.isInRange() && itemHeight.isInRange())
                     {
                         Audio.PlayEffect("digitalAcent01");
                         mainMapEditor = new MainMapEditor("Arcade", itemWidth.getValue(), itemHeight.getValue(), mainGame);
                         currentState = State.MainMapEditor;
-                        //TODO: sigue aqui Oscar!!!
                     }
                     break;
             }

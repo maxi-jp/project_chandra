@@ -159,8 +159,8 @@ namespace IS_XNA_Shooter.MapEditor
             this.levelType = levelType;
           /*  this.height = width;
             this.width = height;*/
-            this.height = 1040;
-            this.width = 1040;
+            this.height = height;
+            this.width = width;
 
             this.mainGame = mainGame;
 

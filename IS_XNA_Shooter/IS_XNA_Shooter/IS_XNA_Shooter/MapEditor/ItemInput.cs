@@ -21,6 +21,12 @@ namespace IS_XNA_Shooter.MapEditor
             mapScreen
         }
 
+        //******************************
+        //********    CONSTS    ********
+        //******************************
+
+        private const int SIZE_MIN_VALUE = 1000, SIZE_MAX_VALUE = 10000;
+
         //**********************************
         //********    ATTRIBUTES    ********
         //**********************************
@@ -105,8 +111,8 @@ namespace IS_XNA_Shooter.MapEditor
                 new Vector2(currentRectangle.X + 10, currentRectangle.Y), Color.Black, 0f, Vector2.Zero,
                 1.2f, SpriteEffects.None, 0f);
             if (currentState == State.sizeScreen)
-                if (aux == "") spriteBox.SetColor(0, 0, 255, 0);            
-                else if (getValue() < 1000 || getValue() > 10000) spriteBox.SetColor(255, 0, 0, 0);
+                if (aux == "") spriteBox.SetColor(0, 0, 255, 0);
+                else if (getValue() < SIZE_MIN_VALUE || getValue() > SIZE_MAX_VALUE) spriteBox.SetColor(255, 0, 0, 0);
                 else spriteBox.SetColor(0, 255, 0, 0);
             else if (currentState == State.mapScreen)
                 if (aux == "") spriteBox.SetColor(0, 0, 255, 0);            
@@ -116,9 +122,21 @@ namespace IS_XNA_Shooter.MapEditor
 
         //-----------------------------------------------------------
 
+        /// <summary>
+        /// Return the value
+        /// </summary>
+        /// <returns></returns>
         public Vector2 getPosition() 
         {
             return spriteBox.getPosition();
+        }
+
+        public bool isInRange()
+        {
+            if (currentState == State.sizeScreen)
+                return getValue() >= SIZE_MIN_VALUE && getValue() <= SIZE_MAX_VALUE;
+            else
+                return getValue() > 0;
         }
     }//ItemChanger
 }

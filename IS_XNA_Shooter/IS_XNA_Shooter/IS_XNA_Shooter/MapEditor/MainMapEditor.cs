@@ -793,7 +793,7 @@ namespace IS_XNA_Shooter.MapEditor
                 float positionY;
                 float time;
                 XmlDocument lvl = new XmlDocument();
-                lvl.Load("C:\\Users\\Casa\\Desktop\\IS\\project_chandra\\project_chandra\\IS_XNA_Shooter\\IS_XNA_Shooter\\IS_XNA_Shooter\\bin\\x86\\Debug\\KILLO.xml");
+                lvl.Load("KILLO.xml");
                        
                  XmlNodeList lista = null;
                 lista = lvl.GetElementsByTagName("enemy");

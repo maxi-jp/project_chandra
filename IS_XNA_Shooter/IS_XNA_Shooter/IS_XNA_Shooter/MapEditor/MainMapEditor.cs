@@ -795,16 +795,23 @@ namespace IS_XNA_Shooter.MapEditor
                 {
                     enemiesInfo = new List<InfoEnemy>();
                     //  Leer los datos del archivo
-                    String enemyType;
-                    float positionX;
-                    float positionY;
-                    float time;
                     XmlDocument lvl = new XmlDocument();
                     lvl.Load(openFileDialog1.FileName);
 
                     XmlNodeList lista = null;
-                    lista = lvl.GetElementsByTagName("enemy");
 
+                    //get the widht and the height of level
+                    lista = lvl.GetElementsByTagName("level");
+                    XmlAttributeCollection level = lista[0].Attributes;
+                    width = Convert.ToInt32(level[1].Value);
+                    height = Convert.ToInt32(level[2].Value);
+
+                    //get the enemies
+                    lista = lvl.GetElementsByTagName("enemy");
+                    String enemyType;
+                    float positionX;
+                    float positionY;
+                    float time;
                     foreach (XmlElement nodo in lista)
                     {
 

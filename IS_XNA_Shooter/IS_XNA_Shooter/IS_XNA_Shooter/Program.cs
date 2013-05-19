@@ -11,6 +11,7 @@ namespace IS_XNA_Shooter
 
         static public float scale = 1;
 
+        [STAThread]
         static void Main(string[] args)
         {
             using (SuperGame game = new SuperGame())

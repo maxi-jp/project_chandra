@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System.Xml.Linq;
 using System.Xml;
+using System.Windows.Forms;
 
 
 namespace IS_XNA_Shooter.MapEditor
@@ -29,8 +30,8 @@ namespace IS_XNA_Shooter.MapEditor
         private SuperGame mainGame;
         private Vector2 lastPositionMouse;
         private SpriteFont spriteDebug;
-	private stateMouse currentStateMouse;
-	private bool isClickedFrameLevel;
+	    private stateMouse currentStateMouse;
+	    private bool isClickedFrameLevel;
         private bool isClickedFrameShips;
         private List<InfoEnemy> enemiesInfo;
 
@@ -201,14 +202,10 @@ namespace IS_XNA_Shooter.MapEditor
         //************************************ 
         public void Update()
         {
-	    //update mouse
+	        //update mouse
             updateMouse();
-            
-	    if (Mouse.GetState().MiddleButton == ButtonState.Pressed) load();
-            if (Mouse.GetState().RightButton == ButtonState.Pressed)
-                save();
 
-            if (Mouse.GetState().LeftButton != ButtonState.Pressed)
+            if (Mouse.GetState().LeftButton != Microsoft.Xna.Framework.Input.ButtonState.Pressed)
             {
                 //Save the ships in the frame of maps level if the enemy ships is uncliked over the frame level
                 if (isClickedFrameShips) //&& rectangleFrameLevel.Contains(Mouse.GetState().X, Mouse.GetState().Y))
@@ -218,11 +215,11 @@ namespace IS_XNA_Shooter.MapEditor
                 isClickedFrameLevel = isClickedFrameShips = false;
             }
 
-            if (!isClickedFrameLevel && !isClickedFrameShips && Mouse.GetState().LeftButton == ButtonState.Pressed && 
+            if (!isClickedFrameLevel && !isClickedFrameShips && Mouse.GetState().LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed && 
                 rectangleFrameLevel.Contains(Mouse.GetState().X, Mouse.GetState().Y))
                 isClickedFrameLevel = true;
 
-            if(!isClickedFrameLevel && !isClickedFrameShips && Mouse.GetState().LeftButton == ButtonState.Pressed && 
+            if(!isClickedFrameLevel && !isClickedFrameShips && Mouse.GetState().LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed && 
                 rectFrameEnemies.Contains(Mouse.GetState().X, Mouse.GetState().Y))
                           isClickedFrameShips = true;
            
@@ -287,17 +284,17 @@ namespace IS_XNA_Shooter.MapEditor
         {
             if (currentStateMouse == stateMouse.normal)
             {
-                if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                if (Mouse.GetState().LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed)
                     currentStateMouse = stateMouse.click;
             }
             else if (currentStateMouse == stateMouse.click)
             {
-                if (Mouse.GetState().LeftButton != ButtonState.Pressed)
+                if (Mouse.GetState().LeftButton != Microsoft.Xna.Framework.Input.ButtonState.Pressed)
                     currentStateMouse = stateMouse.unclick;
             }
             else
             {
-                if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                if (Mouse.GetState().LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed)
                     currentStateMouse = stateMouse.click;
                 else
                     currentStateMouse = stateMouse.normal;
@@ -673,7 +670,7 @@ namespace IS_XNA_Shooter.MapEditor
                     rectAnimSave = new Rectangle(0, (int)GRMng.heightButtonsSaveLoadPreview, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
                 else
                 {
-                    //TODO: when you unclick the button
+                    save();
                 }
             else
                 rectAnimSave = new Rectangle(0, 0, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
@@ -685,7 +682,7 @@ namespace IS_XNA_Shooter.MapEditor
                     rectAnimLoad = new Rectangle(0, (int)GRMng.heightButtonsSaveLoadPreview * GRMng.numAnimsButtonsSaveLoadPreview + (int)GRMng.heightButtonsSaveLoadPreview, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
                 else
                 {
-                    //TODO: when you unclick the button
+                    load();
                 }
             else
                 rectAnimLoad = new Rectangle(0, (int)GRMng.heightButtonsSaveLoadPreview * GRMng.numAnimsButtonsSaveLoadPreview, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
@@ -749,88 +746,98 @@ namespace IS_XNA_Shooter.MapEditor
 
         private void save()
         {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "XML level|*.xml";
+            saveFileDialog1.Title = "Save an xml file";
+            saveFileDialog1.ShowDialog();
 
-            XDocument miXML = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), new XComment("Level Edited"));
-            /*miXML.Add(new XElement("level",
-                         new XAttribute("titulo", "nivel1"),
-                         new XAttribute("width", width),
-                     new XAttribute("height", height)));*/
-
-            XElement level = new XElement("level");
-            level.Add(new XAttribute("titulo", "nivel1"),
-                        new XAttribute("width", width),
-                        new XAttribute("height", height));
-
-            XElement enemieList = new XElement("enemiesList");
-           
-            for (int i = 0; i < enemiesInfo.Count; i++)
+            if (saveFileDialog1.FileName != "")
             {
-                enemieList.Add(new XElement("enemy",
-                                    new XAttribute("type", enemiesInfo[i].type),
-                                    new XAttribute("positionX", enemiesInfo[i].positionX),
-                                    new XAttribute("positionY", enemiesInfo[i].positionY),
-                                    new XAttribute("time", enemiesInfo[i].time)));          
+                XDocument miXML = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), new XComment("Level Edited"));
+                /*miXML.Add(new XElement("level",
+                             new XAttribute("titulo", "nivel1"),
+                             new XAttribute("width", width),
+                         new XAttribute("height", height)));*/
+
+                XElement level = new XElement("level");
+                level.Add(new XAttribute("titulo", "nivel1"),
+                            new XAttribute("width", width),
+                            new XAttribute("height", height));
+
+                XElement enemieList = new XElement("enemiesList");
+
+                for (int i = 0; i < enemiesInfo.Count; i++)
+                {
+                    enemieList.Add(new XElement("enemy",
+                                        new XAttribute("type", enemiesInfo[i].type),
+                                        new XAttribute("positionX", enemiesInfo[i].positionX),
+                                        new XAttribute("positionY", enemiesInfo[i].positionY),
+                                        new XAttribute("time", enemiesInfo[i].time)));
+                }
+
+                level.Add(enemieList);
+
+                miXML.Add(level);
+
+
+                miXML.Save(saveFileDialog1.FileName);
             }
-
-            level.Add(enemieList);
-
-            miXML.Add(level);
-
-            
-            miXML.Save("KILLO.xml");
         }
 
 
         protected void load()
         {
-            // Utilizar nombres de fichero y nodos XML idénticos a los que se guardaron
-            try
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                 enemiesInfo = new List<InfoEnemy>();
-                //  Leer los datos del archivo
-                String enemyType;
-                float positionX;
-                float positionY;
-                float time;
-                XmlDocument lvl = new XmlDocument();
-                lvl.Load("KILLO.xml");
-                       
-                 XmlNodeList lista = null;
-                lista = lvl.GetElementsByTagName("enemy");
-
-                foreach (XmlElement nodo in lista)
+                // Utilizar nombres de fichero y nodos XML idénticos a los que se guardaron
+                try
                 {
+                    enemiesInfo = new List<InfoEnemy>();
+                    //  Leer los datos del archivo
+                    String enemyType;
+                    float positionX;
+                    float positionY;
+                    float time;
+                    XmlDocument lvl = new XmlDocument();
+                    lvl.Load(openFileDialog1.FileName);
 
-                    XmlAttributeCollection enemyN = nodo.Attributes;
-                    //XmlAttribute a = enemyN[1];
-                    enemyType = Convert.ToString(enemyN[0].Value);
-                    positionX = (float)Convert.ToDouble(enemyN[1].Value);
-                    positionY = (float)Convert.ToDouble(enemyN[2].Value);
-                    time = (float)Convert.ToDouble(enemyN[3].Value);
-                    //timeLeftEnemy.Add(time);
+                    XmlNodeList lista = null;
+                    lista = lvl.GetElementsByTagName("enemy");
 
-                    InfoEnemy enemy = null; 
-                    // TODO: los enemigos deberían de crearse desde la EnemyFactory
+                    foreach (XmlElement nodo in lista)
+                    {
 
-                    if (enemyType.Equals("EnemyWeakA"))
-                        enemy = new InfoEnemy(enemyType, (int)positionX, (int)positionY, (int)time, GRMng.frameWidthEW1, GRMng.frameHeightEW1);
-                    else if (enemyType.Equals("EnemyBeamA"))
-                      enemy = new InfoEnemy(enemyType, (int)positionX, (int)positionY, (int)time, GRMng.frameWidthEB1, GRMng.frameHeightEB1);
-                    else if (enemyType.Equals("EnemyWeakShotA"))
-                      enemy = new InfoEnemy(enemyType, (int)positionX, (int)positionY, (int)time, GRMng.frameWidthEW2, GRMng.frameHeightEW2);
-                    else if (enemyType.Equals("EnemyMineShotA"))
-                       enemy = new InfoEnemy(enemyType, (int)positionX, (int)positionY, (int)time, GRMng.frameWidthEMS, GRMng.frameHeightEMS);
-                    else if (enemyType.Equals("EnemyLaserA"))
-                       enemy = new InfoEnemy(enemyType, (int)positionX, (int)positionY, (int)time, GRMng.frameWidthEL, GRMng.frameHeightEL);
-                    else if (enemyType.Equals("EnemyScaredA"))
-                        enemy = new InfoEnemy(enemyType, (int)positionX, (int)positionY, (int)time, GRMng.frameWidthES, GRMng.frameHeightES);
-                    enemiesInfo.Add(enemy);
-                    
-              }
+                        XmlAttributeCollection enemyN = nodo.Attributes;
+                        //XmlAttribute a = enemyN[1];
+                        enemyType = Convert.ToString(enemyN[0].Value);
+                        positionX = (float)Convert.ToDouble(enemyN[1].Value);
+                        positionY = (float)Convert.ToDouble(enemyN[2].Value);
+                        time = (float)Convert.ToDouble(enemyN[3].Value);
+                        //timeLeftEnemy.Add(time);
 
-            }
-            catch (Exception e)
-            {
+                        InfoEnemy enemy = null;
+                        // TODO: los enemigos deberían de crearse desde la EnemyFactory
+
+                        if (enemyType.Equals("EnemyWeakA"))
+                            enemy = new InfoEnemy(enemyType, (int)positionX, (int)positionY, (int)time, GRMng.frameWidthEW1, GRMng.frameHeightEW1);
+                        else if (enemyType.Equals("EnemyBeamA"))
+                            enemy = new InfoEnemy(enemyType, (int)positionX, (int)positionY, (int)time, GRMng.frameWidthEB1, GRMng.frameHeightEB1);
+                        else if (enemyType.Equals("EnemyWeakShotA"))
+                            enemy = new InfoEnemy(enemyType, (int)positionX, (int)positionY, (int)time, GRMng.frameWidthEW2, GRMng.frameHeightEW2);
+                        else if (enemyType.Equals("EnemyMineShotA"))
+                            enemy = new InfoEnemy(enemyType, (int)positionX, (int)positionY, (int)time, GRMng.frameWidthEMS, GRMng.frameHeightEMS);
+                        else if (enemyType.Equals("EnemyLaserA"))
+                            enemy = new InfoEnemy(enemyType, (int)positionX, (int)positionY, (int)time, GRMng.frameWidthEL, GRMng.frameHeightEL);
+                        else if (enemyType.Equals("EnemyScaredA"))
+                            enemy = new InfoEnemy(enemyType, (int)positionX, (int)positionY, (int)time, GRMng.frameWidthES, GRMng.frameHeightES);
+                        enemiesInfo.Add(enemy);
+
+                    }
+                }
+                catch (Exception e)
+                {
+                }
             }
         }   //  end LeerArchivoXML()
     }//Class MainMapEditor

@@ -10,6 +10,13 @@ namespace IS_XNA_Shooter.MapEditor
 {
     class MainMapEditor
     {
+        private enum stateMouse
+        {
+            normal,
+            click,
+            unclick
+        }
+
         //******************************
         //*****     ATTRIBUTES     *****
         //****************************** 
@@ -19,6 +26,7 @@ namespace IS_XNA_Shooter.MapEditor
         private SuperGame mainGame;
         private Vector2 lastPositionMouse;
         private SpriteFont spriteDebug;
+        private stateMouse currentStateMouse;
 
         #region Frame Level
         private int width;
@@ -88,13 +96,19 @@ namespace IS_XNA_Shooter.MapEditor
         private bool isClickEL;
         #endregion;        
 
-
+        #region Frame properties
+        private int xOrigProp, yOrigProp, xEndProp, yEndProp;
+        private ItemInput inputProp;
+        private Rectangle rectSave, rectLoad, rectPreview, rectAnimSave, rectAnimLoad, rectAnimPreview; 
+        #endregion
 
 
         //***************************
         //*****     BUILDER     *****
         //***************************        
         public MainMapEditor(String levelType, int width, int height, SuperGame mainGame) {
+            currentStateMouse = stateMouse.normal;
+
             spriteDebug = GRMng.fontText;
 
             this.levelType = levelType;
@@ -127,6 +141,12 @@ namespace IS_XNA_Shooter.MapEditor
 
             //initialize positions and anims (transition from frame to map)
             initTransition();
+
+            //frame properties
+            initProperties();
+
+            //buttons save, load and preview
+            initButtonsSaveLoadPreview();
         }
 
 
@@ -137,10 +157,14 @@ namespace IS_XNA_Shooter.MapEditor
         //************************************ 
         public void Update()
         {
+            //update mouse
+            updateMouse();
             //update the frame of level
             updateFrameLevel();
             //frame right to select enemies
             updateFrameEnemiesTransition();
+            //buttons for save, load and preview a level
+            updateButtonsSaveLoadPreview();
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -153,6 +177,10 @@ namespace IS_XNA_Shooter.MapEditor
             drawFrameEnemies(spriteBatch);
             drawFrameProperties(spriteBatch);
             drawEnemiesTransition(spriteBatch);
+            //properties of the enemies (time to spawn)
+            drawPropertiesEnemies(spriteBatch);
+            //buttons for save, load and preview a level
+            drawButtonsSaveLoadPreview(spriteBatch);
 
             //debug
             spriteBatch.DrawString(spriteDebug, "(" + displacementLevel.X + ", " + displacementLevel.Y + ")", Vector2.Zero, Color.White);
@@ -164,6 +192,50 @@ namespace IS_XNA_Shooter.MapEditor
         //*************************************
         //*****     PRIVATE FUNCTIONS     *****
         //************************************* 
+        private void initProperties()
+        {
+            xOrigProp = SuperGame.screenWidth / 20;
+            yOrigProp = SuperGame.screenHeight - SuperGame.screenHeight / 6;
+            xEndProp = SuperGame.screenWidth - SuperGame.screenWidth / 5;
+            yEndProp = SuperGame.screenHeight - SuperGame.screenHeight / 20;
+            inputProp = new ItemInput(new Vector2(xOrigProp + (xEndProp - xOrigProp) / 50, yEndProp - (yEndProp - yOrigProp) / 2), ItemInput.State.mapScreen);
+        }
+
+        private void initButtonsSaveLoadPreview()
+        {
+            int acum = SuperGame.screenWidth / 20;
+            rectSave = new Rectangle(acum, 0, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
+            acum += GRMng.buttonsSaveLoadPreview.Width + SuperGame.screenWidth / 30;
+            rectLoad = new Rectangle(acum, 0, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
+            acum += GRMng.buttonsSaveLoadPreview.Width + SuperGame.screenWidth / 30;
+            rectPreview = new Rectangle(acum, 0, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
+
+            rectAnimSave = new Rectangle(0, 0, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
+            rectAnimLoad = new Rectangle(0, (int)GRMng.heightButtonsSaveLoadPreview * GRMng.numAnimsButtonsSaveLoadPreview, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
+            rectAnimPreview = new Rectangle(0, (int)GRMng.heightButtonsSaveLoadPreview * GRMng.numAnimsButtonsSaveLoadPreview * 2, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
+        }
+
+        private void updateMouse()
+        {
+            if (currentStateMouse == stateMouse.normal)
+            {
+                if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    currentStateMouse = stateMouse.click;
+            }
+            else if (currentStateMouse == stateMouse.click)
+            {
+                if (Mouse.GetState().LeftButton != ButtonState.Pressed)
+                    currentStateMouse = stateMouse.unclick;
+            }
+            else
+            {
+                if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    currentStateMouse = stateMouse.click;
+                else
+                    currentStateMouse = stateMouse.normal;
+            }
+        }
+
         private void updateFrameLevel()
         {
             int widthFrame = 1000;
@@ -383,11 +455,6 @@ namespace IS_XNA_Shooter.MapEditor
                 spriteBatch.Draw(GRMng.textureEL, positionELTransition, animELTransition, Color.White);
         }
 
-        private void drawFrameProperties(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(GRMng.blackpixeltrans, new Rectangle(SuperGame.screenWidth / 20, SuperGame.screenHeight - SuperGame.screenHeight / 6, 1000, 100), Color.Black);
-        }
-
         private void addEnemies(Enemy enemy)
         {
            /*   // EnemyWeak:
@@ -560,6 +627,65 @@ namespace IS_XNA_Shooter.MapEditor
             {
                 initTransition();
             }
+        }
+
+        private void drawFrameProperties(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(GRMng.blackpixeltrans, new Rectangle(xOrigProp, yOrigProp, xEndProp - xOrigProp, yEndProp - yOrigProp), Color.Black);
+            inputProp.Update();
+        }
+        
+        private void drawPropertiesEnemies(SpriteBatch spriteBatch)
+        {
+            spriteBatch.DrawString(GRMng.fontText, "Time to spawn (in seconds)", new Vector2(inputProp.getPosition().X, yOrigProp), Color.White);
+            inputProp.Draw(spriteBatch);
+        }
+
+        private void updateButtonsSaveLoadPreview() 
+        {
+            if (rectSave.Contains(Mouse.GetState().X, Mouse.GetState().Y))
+                if (currentStateMouse == stateMouse.click)
+                    rectAnimSave = new Rectangle(0, 2 * (int)GRMng.heightButtonsSaveLoadPreview, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
+                else if (currentStateMouse == stateMouse.normal)
+                    rectAnimSave = new Rectangle(0, (int)GRMng.heightButtonsSaveLoadPreview, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
+                else
+                {
+                    //TODO: when you unclick the button
+                }
+            else
+                rectAnimSave = new Rectangle(0, 0, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
+
+            if (rectLoad.Contains(Mouse.GetState().X, Mouse.GetState().Y))
+                if (currentStateMouse == stateMouse.click)
+                    rectAnimLoad = new Rectangle(0, (int)GRMng.heightButtonsSaveLoadPreview * GRMng.numAnimsButtonsSaveLoadPreview + 2 * (int)GRMng.heightButtonsSaveLoadPreview, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
+                else if (currentStateMouse == stateMouse.normal)
+                    rectAnimLoad = new Rectangle(0, (int)GRMng.heightButtonsSaveLoadPreview * GRMng.numAnimsButtonsSaveLoadPreview + (int)GRMng.heightButtonsSaveLoadPreview, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
+                else
+                {
+                    //TODO: when you unclick the button
+                }
+            else
+                rectAnimLoad = new Rectangle(0, (int)GRMng.heightButtonsSaveLoadPreview * GRMng.numAnimsButtonsSaveLoadPreview, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
+
+            if (rectPreview.Contains(Mouse.GetState().X, Mouse.GetState().Y))
+                if (currentStateMouse == stateMouse.click)
+                    rectAnimPreview = new Rectangle(0, (int)GRMng.heightButtonsSaveLoadPreview * GRMng.numAnimsButtonsSaveLoadPreview * 2 + 2 * (int)GRMng.heightButtonsSaveLoadPreview, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
+                else if (currentStateMouse == stateMouse.normal)
+                    rectAnimPreview = new Rectangle(0, (int)GRMng.heightButtonsSaveLoadPreview * GRMng.numAnimsButtonsSaveLoadPreview * 2 + (int)GRMng.heightButtonsSaveLoadPreview, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
+                else
+                {
+                    //TODO: when you unclick the button
+                }
+            else
+                rectAnimPreview = new Rectangle(0, (int)GRMng.heightButtonsSaveLoadPreview * GRMng.numAnimsButtonsSaveLoadPreview * 2, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
+            
+        }
+
+        private void drawButtonsSaveLoadPreview(SpriteBatch spriteBatch) 
+        {
+            spriteBatch.Draw(GRMng.buttonsSaveLoadPreview, rectSave, rectAnimSave, Color.White);
+            spriteBatch.Draw(GRMng.buttonsSaveLoadPreview, rectLoad, rectAnimLoad, Color.White);
+            spriteBatch.Draw(GRMng.buttonsSaveLoadPreview, rectPreview, rectAnimPreview, Color.White);
         }
     }
 }

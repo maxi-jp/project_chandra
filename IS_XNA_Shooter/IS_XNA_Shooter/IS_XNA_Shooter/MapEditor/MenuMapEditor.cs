@@ -127,10 +127,10 @@ namespace IS_XNA_Shooter
                 GRMng.screenSizesMapEditor2);
             //itemWidth
             itemWidth = new ItemInput(new Vector2(SuperGame.screenWidth * GRMng.relationWidthSizesMapEditor2, 
-                SuperGame.screenHeight * GRMng.relationHeightWidthMapEditor2));
+                SuperGame.screenHeight * GRMng.relationHeightWidthMapEditor2), ItemInput.State.sizeScreen);
             //itemHeight
             itemHeight = new ItemInput(new Vector2(SuperGame.screenWidth * GRMng.relationWidthSizesMapEditor2, 
-                SuperGame.screenHeight * GRMng.relationHeightHeightMapEditor2));
+                SuperGame.screenHeight * GRMng.relationHeightHeightMapEditor2), ItemInput.State.sizeScreen);
             informationText = "Dimensions between 1000x1000 and 10000x10000";
             informationPosition = new Vector2(3*SuperGame.screenWidth/10, 2*SuperGame.screenHeight/5);
         }

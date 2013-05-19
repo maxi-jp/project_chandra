@@ -14,6 +14,17 @@ namespace IS_XNA_Shooter.MapEditor
     /// </summary>
     public class ItemInput
     {
+
+        public enum State
+        {
+            sizeScreen,
+            mapScreen
+        }
+
+        //**********************************
+        //********    ATTRIBUTES    ********
+        //**********************************
+        
         // The box to write.
         private Sprite spriteBox;
         // The Sprite of the text.
@@ -24,12 +35,14 @@ namespace IS_XNA_Shooter.MapEditor
         private KeyboardHandler keyboardInput;
         // Contorl if we can write here.
         private bool isClicked;
+        // The state
+        private State currentState;
 
 
         //-------------------------------------------------------------------------
 
 
-        public ItemInput(Vector2 position)
+        public ItemInput(Vector2 position, State currentState)
         {
             isClicked = false;
             spriteBox = new Sprite(false, position, 0f, GRMng.boxSizesMapEditor2,
@@ -39,6 +52,7 @@ namespace IS_XNA_Shooter.MapEditor
             currentRectangle = new Rectangle((int)position.X, (int)position.Y, GRMng.boxSizesMapEditor2.Width,
                     GRMng.boxSizesMapEditor2.Height / 2);
             keyboardInput = new KeyboardHandler(10);
+            this.currentState = currentState;
         }
 
 
@@ -90,9 +104,21 @@ namespace IS_XNA_Shooter.MapEditor
             spriteBatch.DrawString(spriteFont, keyboardInput.getText(), 
                 new Vector2(currentRectangle.X + 10, currentRectangle.Y), Color.Black, 0f, Vector2.Zero,
                 1.2f, SpriteEffects.None, 0f);
-            if (aux == "") spriteBox.SetColor(0, 0, 255, 0);
-            else if (getValue() < 1000 || getValue() > 10000) spriteBox.SetColor(255, 0, 0, 0);
-            else spriteBox.SetColor(0, 255, 0, 0);
+            if (currentState == State.sizeScreen)
+                if (aux == "") spriteBox.SetColor(0, 0, 255, 0);            
+                else if (getValue() < 1000 || getValue() > 10000) spriteBox.SetColor(255, 0, 0, 0);
+                else spriteBox.SetColor(0, 255, 0, 0);
+            else if (currentState == State.mapScreen)
+                if (aux == "") spriteBox.SetColor(0, 0, 255, 0);            
+                else if (getValue() < 0) spriteBox.SetColor(255, 0, 0, 0);
+                else spriteBox.SetColor(0, 255, 0, 0);
+        }
+
+        //-----------------------------------------------------------
+
+        public Vector2 getPosition() 
+        {
+            return spriteBox.getPosition();
         }
     }//ItemChanger
 }

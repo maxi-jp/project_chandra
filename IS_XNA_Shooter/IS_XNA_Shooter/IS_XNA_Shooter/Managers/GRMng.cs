@@ -300,6 +300,14 @@ namespace IS_XNA_Shooter
         public static float relationWidthSizesMapEditor2 = 0.52f;
         public static float relationHeightWidthMapEditor2 = 0.553f;
         public static float relationHeightHeightMapEditor2 = 0.64f;
+
+        #region screen 3 buttons
+        public static Texture2D buttonsSaveLoadPreview;
+        public static float widthButtonsSaveLoadPreview = 200;
+        public static float heightButtonsSaveLoadPreview = 39;
+        public static int numAnimsButtonsSaveLoadPreview = 3;
+        #endregion
+
         #endregion
 
         #region VIDEO
@@ -474,6 +482,9 @@ namespace IS_XNA_Shooter
 
                     //Player
                     texturePA1 = content.Load<Texture2D>("Graphics/Ships/sprites80x80");
+
+                    //Screen 3 buttons
+                    buttonsSaveLoadPreview = content.Load<Texture2D>("Graphics/MapEditor/Screen3/buttonsSaveLoadPreview");
 
                     break;
 
@@ -651,6 +662,9 @@ namespace IS_XNA_Shooter
 
                     //Player
                     texturePA1 = null;
+
+                    //screen 3 buttons
+                    buttonsSaveLoadPreview = null;
 
                     break;
 

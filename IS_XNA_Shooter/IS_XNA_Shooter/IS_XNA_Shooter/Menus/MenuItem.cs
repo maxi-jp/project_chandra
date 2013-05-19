@@ -11,13 +11,13 @@ namespace IS_XNA_Shooter
     class MenuItem
     {
         /* ------------------- ATRIBUTOS ------------------- */
-        private Rectangle rectangle; // rectángulo "contenedor" del botón
-        private Vector2 position;
-        private float rotation;
-        private bool middlePosition, preshed;
-        private Vector2 drawPoint;
-        private Texture2D texture;
-        private Rectangle rectIddle, rectSelected, rectPushed, rectActual;
+        protected Rectangle rectangle; // rectángulo "contenedor" del botón
+        protected Vector2 position;
+        protected float rotation;
+        protected bool middlePosition, preshed;
+        protected Vector2 drawPoint;
+        protected Texture2D texture;
+        protected Rectangle rectIddle, rectSelected, rectPushed, rectActual;
 
         /* ------------------- CONSTRUCTORES ------------------- */
         public MenuItem(bool middlePosition, Vector2 position, Texture2D texture,
@@ -47,8 +47,15 @@ namespace IS_XNA_Shooter
             rectActual = rectIddle;
         }
 
+        public MenuItem(bool middlePosition, Vector2 position, float rotation, Texture2D texture,
+            Rectangle rectIddle, Rectangle rectSelected, Rectangle rectPushed)
+            : this(middlePosition, position, texture, rectIddle, rectSelected, rectPushed)
+        {
+            this.rotation = rotation;
+        }
+
         /* ------------------- MÉTODOS ------------------- */
-        public void Update(int X, int Y)
+        public virtual void Update(int X, int Y)
         {
             /*if (rectangle.Contains(X, Y) && !preshed)
                 rectActual = rectSelected;*/
@@ -70,7 +77,7 @@ namespace IS_XNA_Shooter
                 Program.scale, SpriteEffects.None, 0);
         }
 
-        public bool Click(int X, int Y)
+        public virtual bool Click(int X, int Y)
         {
             if (rectangle.Contains(X, Y))
             {
@@ -82,7 +89,7 @@ namespace IS_XNA_Shooter
                 return false;
         }
 
-        public bool Unclick(int X, int Y)
+        public virtual bool Unclick(int X, int Y)
         {
             if (rectangle.Contains(X, Y) && preshed)
             {

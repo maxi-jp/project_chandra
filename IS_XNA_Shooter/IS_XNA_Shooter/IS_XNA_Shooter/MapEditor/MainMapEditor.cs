@@ -5,6 +5,9 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System.Xml.Linq;
+using System.Xml;
+
 
 namespace IS_XNA_Shooter.MapEditor
 {
@@ -26,14 +29,39 @@ namespace IS_XNA_Shooter.MapEditor
         private SuperGame mainGame;
         private Vector2 lastPositionMouse;
         private SpriteFont spriteDebug;
-        private stateMouse currentStateMouse;
+	private stateMouse currentStateMouse;
+	private bool isClickedFrameLevel;
+        private bool isClickedFrameShips;
+        private List<InfoEnemy> enemiesInfo;
 
+    
         #region Frame Level
         private int width;
         private int height;
         private Texture2D whitePixel;
         private Texture2D textureCell;
         private Vector2 displacementLevel;
+        private int widthFrameLevel;
+        private int heightFrameLevel;
+
+        private int separator;
+
+        private int origXScreen;
+        private int origYScreen;
+        private int endXScreen;
+        private int endYScreen;
+
+        private int origXNatLeft; 
+        private int origXNatRight; 
+        private int origYNatUp;
+        private int origYNatDown; 
+
+        private int origenXRealLeft;
+        private int origenXRealRight;
+        private int origenYRealUp;
+        private int origenYRealDown;
+
+        private Rectangle rectangleFrameLevel;
         #endregion;  
         
         #region Frame Right Ships
@@ -94,6 +122,7 @@ namespace IS_XNA_Shooter.MapEditor
         private Vector2 positionELTransition;
         private Rectangle animELTransition;
         private bool isClickEL;
+
         #endregion;        
 
         #region Frame properties
@@ -107,10 +136,25 @@ namespace IS_XNA_Shooter.MapEditor
         //*****     BUILDER     *****
         //***************************        
         public MainMapEditor(String levelType, int width, int height, SuperGame mainGame) {
-            currentStateMouse = stateMouse.normal;
+	    currentStateMouse = stateMouse.normal;
+	    //variables frameLevel
+            widthFrameLevel = 1000;
+            heightFrameLevel = 500;
+
+            enemiesInfo = new List<InfoEnemy>();
+
+            separator = 10;
+
+            origXScreen = SuperGame.screenWidth / 20;
+            origYScreen = SuperGame.screenHeight / 15;
+            endXScreen = origXScreen + widthFrameLevel;
+            endYScreen = origYScreen + heightFrameLevel;
+
+            rectangleFrameLevel = new Rectangle(origXScreen, origYScreen, widthFrameLevel, heightFrameLevel);
 
             spriteDebug = GRMng.fontText;
 
+            isClickedFrameLevel = isClickedFrameShips = false;
             this.levelType = levelType;
           /*  this.height = width;
             this.width = height;*/
@@ -157,8 +201,32 @@ namespace IS_XNA_Shooter.MapEditor
         //************************************ 
         public void Update()
         {
-            //update mouse
+	    //update mouse
             updateMouse();
+            
+	    if (Mouse.GetState().MiddleButton == ButtonState.Pressed) load();
+            if (Mouse.GetState().RightButton == ButtonState.Pressed)
+                save();
+
+            if (Mouse.GetState().LeftButton != ButtonState.Pressed)
+            {
+                //Save the ships in the frame of maps level if the enemy ships is uncliked over the frame level
+                if (isClickedFrameShips) //&& rectangleFrameLevel.Contains(Mouse.GetState().X, Mouse.GetState().Y))
+                {
+                    saveShip();
+                }
+                isClickedFrameLevel = isClickedFrameShips = false;
+            }
+
+            if (!isClickedFrameLevel && !isClickedFrameShips && Mouse.GetState().LeftButton == ButtonState.Pressed && 
+                rectangleFrameLevel.Contains(Mouse.GetState().X, Mouse.GetState().Y))
+                isClickedFrameLevel = true;
+
+            if(!isClickedFrameLevel && !isClickedFrameShips && Mouse.GetState().LeftButton == ButtonState.Pressed && 
+                rectFrameEnemies.Contains(Mouse.GetState().X, Mouse.GetState().Y))
+                          isClickedFrameShips = true;
+           
+
             //update the frame of level
             updateFrameLevel();
             //frame right to select enemies
@@ -238,54 +306,48 @@ namespace IS_XNA_Shooter.MapEditor
 
         private void updateFrameLevel()
         {
-            int widthFrame = 1000;
-            int heightFrame = 500;
+            int origXScreen = SuperGame.screenWidth / 20;
+            int origYScreen = SuperGame.screenHeight / 15;
+            int widthFrameLevel = 1000;
+            int heightFrameLevel = 500;
 
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            if (isClickedFrameLevel)
             {
                 //move the level.
                 displacementLevel.X += Mouse.GetState().X - lastPositionMouse.X;
                 displacementLevel.Y += Mouse.GetState().Y - lastPositionMouse.Y;
                 //limit the position "x" of the displacement level.
                 if (displacementLevel.X > 0) displacementLevel.X = 0;
-                if (displacementLevel.X < 1000 - width - 20) displacementLevel.X = widthFrame - width - 20;
+                if (displacementLevel.X < 1000 - width - 20) displacementLevel.X = widthFrameLevel - width - 20;
                 //limit the position "y" of the displacement level.
                 if (displacementLevel.Y > 0) displacementLevel.Y = 0;
-                if (displacementLevel.Y < 500 - height - 20) displacementLevel.Y = heightFrame - height - 20;
+                if (displacementLevel.Y < 500 - height - 20) displacementLevel.Y = heightFrameLevel - height - 20;
             }
             lastPositionMouse.X = Mouse.GetState().X;
             lastPositionMouse.Y = Mouse.GetState().Y;
+        
         }
 
         private void drawFrameLevel(SpriteBatch spriteBatch)
         {
-            int widthFrame = 1000;
-            int heightFrame = 500;
+            origXNatLeft = origXScreen + separator + (int)displacementLevel.X;
+            origXNatRight = origXNatLeft + width;
+            origYNatUp = origYScreen + separator + (int)displacementLevel.Y;
+            origYNatDown = origYNatUp + height;
 
-            int separator = 10;
-
-            int origXScreen = SuperGame.screenWidth / 20;
-            int origYScreen = SuperGame.screenHeight / 15;
-            int endXScreen = origXScreen + widthFrame;
-            int endYScreen = origYScreen + heightFrame;
-
-            int origXNatLeft = origXScreen + separator + (int)displacementLevel.X;
-            int origXNatRight = origXNatLeft + width;
-            int origYNatUp = origYScreen + separator + (int)displacementLevel.Y;
-            int origYNatDown = origYNatUp + height;            
-
-            int origenXRealLeft = Math.Max(origXNatLeft, origXScreen);
-            int origenXRealRight = Math.Max(origXNatRight, origXScreen);
-            int origenYRealUp = Math.Max(origYNatUp, origYScreen);
-            int origenYRealDown = Math.Max(origYNatDown, origYScreen);
-
+            origenXRealLeft = Math.Max(origXNatLeft, origXScreen);
+            origenXRealRight = Math.Max(origXNatRight, origXScreen);
+            origenYRealUp = Math.Max(origYNatUp, origYScreen);
+            origenYRealDown = Math.Max(origYNatDown, origYScreen);
+            
             int tamWidthExtra = origXScreen - origXNatLeft;
             if (tamWidthExtra < 0) tamWidthExtra = 0;
             int tamHeightExtra = origYScreen - origYNatUp;
             if (tamHeightExtra < 0) tamHeightExtra = 0;
 
 
-            spriteBatch.Draw(GRMng.blackpixeltrans, new Rectangle(origXScreen, origYScreen, widthFrame, heightFrame), Color.Black);
+            spriteBatch.Draw(GRMng.blackpixeltrans, new Rectangle(origXScreen, origYScreen, widthFrameLevel, heightFrameLevel), Color.Black);
+
 
             // grid del suelo
             for (int i = origXNatLeft; i < width + origXNatLeft; i += textureCell.Width)
@@ -350,6 +412,45 @@ namespace IS_XNA_Shooter.MapEditor
                 spriteBatch.Draw(whitePixel, new Rectangle(origenXRealLeft, origenYRealUp,
                     1, Math.Min(endYScreen - origYNatUp - tamHeightExtra, height - tamHeightExtra)),
                     null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
+
+
+            InfoEnemy infoEnemy = null;
+            String typeShip = "";
+            Vector2 position = Vector2.Zero,
+                positionCenter = Vector2.Zero;
+            int frameWidth, frameHeight;
+            for (int i = 0; i < enemiesInfo.Count; i++) {
+
+                infoEnemy = enemiesInfo[i];
+                typeShip = infoEnemy.type;
+                frameWidth = infoEnemy.frameWidth;
+                frameHeight = infoEnemy.frameHeight;
+                positionCenter.X = infoEnemy.positionX + displacementLevel.X;
+                positionCenter.Y = infoEnemy.positionY + displacementLevel.Y;
+                position.X = positionCenter.X - frameWidth / 2;
+                position.Y = positionCenter.Y - frameHeight / 2;
+
+               if (rectangleFrameLevel.Contains((int) positionCenter.X, (int) positionCenter.Y))
+                {
+                
+                if (typeShip.Equals("EnemyWeakA"))
+                    spriteBatch.Draw(GRMng.textureEW1, position, animEW1Transition, Color.Gray);
+                if (typeShip.Equals("EnemyWeakShotA"))
+                    spriteBatch.Draw(GRMng.textureEW2, position, animEW2Transition, Color.Gray);
+                if (typeShip.Equals("EnemyBeamA"))
+                    spriteBatch.Draw(GRMng.textureEB1, position, animEB1Transition, Color.Gray);
+                if (typeShip.Equals("EnemyScaredA"))
+                    spriteBatch.Draw(GRMng.textureES, position, animESTransition, Color.Gray);
+                if (typeShip.Equals("EnemyMineShotA"))
+                    spriteBatch.Draw(GRMng.textureEMS, position, animEMSTransition, Color.Gray);
+                if (typeShip.Equals("EnemyLaserA"))
+                    spriteBatch.Draw(GRMng.textureEL, position, animELTransition, Color.Gray);
+
+              }
+            }
+
+
+
         }
 
         private void initFrame(float xOrig, float yOrig)
@@ -433,6 +534,8 @@ namespace IS_XNA_Shooter.MapEditor
             spriteBatch.Draw(GRMng.textureES, positionESFrame, animESFrame, Color.White);
             spriteBatch.Draw(GRMng.textureEMS, positionEMSFrame, animEMSFrame, Color.White);
             spriteBatch.Draw(GRMng.textureEL, positionELFrame, animELFrame, Color.White);
+
+            
         }
         
         private void drawEnemiesTransition(SpriteBatch spriteBatch)
@@ -455,94 +558,14 @@ namespace IS_XNA_Shooter.MapEditor
                 spriteBatch.Draw(GRMng.textureEL, positionELTransition, animELTransition, Color.White);
         }
 
-        private void addEnemies(Enemy enemy)
-        {
-           /*   // EnemyWeak:
-            if (ControlMng.f1Preshed)
-            {
-                enemy = EnemyFactory.GetEnemyByName("EnemyWeakA", camera, this, ship, new Vector2(20, 20), 0);
-                enemies.Add(enemy);
-            }
-
-            // EnemyWeakShot:
-            if (ControlMng.f2Preshed)
-            {
-                enemy = EnemyFactory.GetEnemyByName("EnemyWeakShotA", camera, this, ship, new Vector2(20, 20), 0);
-                enemies.Add(enemy);
-            }
-
-            // EnemyBeamA:
-            if (ControlMng.f3Preshed)
-            {
-                enemy = EnemyFactory.GetEnemyByName("EnemyBeamA", camera, this, ship, new Vector2(60, 60), 0);
-                enemies.Add(enemy);
-            }
-
-            // EnemyMineShotA
-            if (ControlMng.f4Preshed)
-            {
-                enemy = EnemyFactory.GetEnemyByName("EnemyMineShotA", camera, this, ship, new Vector2(20, 20), 0);
-                enemies.Add(enemy);
-            }
-
-            // EnemyLaserA
-            if (ControlMng.f5Preshed)
-            {
-                enemy = EnemyFactory.GetEnemyByName("EnemyLaserA", camera, this, ship, new Vector2(60, 60), 0);
-                enemies.Add(enemy);
-            }
-
-            // EnemyScaredA
-            if (ControlMng.f6Preshed)
-            {
-                enemy = EnemyFactory.GetEnemyByName("EnemyMineShotA", camera, this, ship, new Vector2(60, 60), 0);
-                enemies.Add(enemy);
-            }
-
-            // Final Boss 1 Phase 4
-            if (ControlMng.f7Preshed)
-            {
-                enemy = new FinalBoss1Turret1(camera, this, new Vector2(60, 60), ship);
-                enemies.Add(enemy);
-            }
-
-            // Final Boss 1 Phase 4
-            if (ControlMng.f8Preshed)
-            {
-                enemy = new FinalBoss1Turret2(camera, this, new Vector2(60, 60), ship);
-                enemies.Add(enemy);
-            }
-
-            // Final Boss 1 Phase 4
-            if (ControlMng.f9Preshed)
-            {
-                enemy = EnemyFactory.GetEnemyByName("FinalBossHeroe1", camera, this, ship, new Vector2(60, 60), 0);
-                ((FinalBossHeroe1)enemy).SetEnemies(enemies);
-                enemies.Add(enemy);
-            }
-
-            if (ControlMng.f10Preshed)
-            {
-                pow1 = new PowerUp(camera,this,new Vector2(40,40),0,GRMng.powerTexture,80,80,3,new short[]{6,6,6},new bool[]{true,true,true},SuperGame.frameTime12,0);
-                pow2 = new PowerUp(camera, this, new Vector2(40, 120), 0, GRMng.powerTexture, 80, 80, 3, new short[] { 6, 6, 6 }, new bool[] { true, true, true }, SuperGame.frameTime12, 1);
-                pow3 = new PowerUp(camera, this, new Vector2(40, 200), 0, GRMng.powerTexture, 80, 80, 3, new short[] { 6, 6, 6 }, new bool[] { true, true, true }, SuperGame.frameTime12, 2);
-
-            }
-
-            if (house != null && enemy != null)
-                ((EnemyADefense)(enemy)).SetBase(house);
-
-        } // TestEnemies*/
-        }
-
         private void updateFrameEnemiesTransition()
         {
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            if (isClickedFrameShips)
             {
                 int xMouse = Mouse.GetState().X;
                 int yMouse = Mouse.GetState().Y;
-
-                if (isClickPA1)
+            
+               if (isClickPA1)
                 {
                     positionPA1Transition.X = xMouse - GRMng.frameWidthPA1 / 2;
                     positionPA1Transition.Y = yMouse - GRMng.frameHeightPA1 / 2;
@@ -621,7 +644,7 @@ namespace IS_XNA_Shooter.MapEditor
                         positionESTransition.Y = yMouse - GRMng.frameHeightES / 2;
                         isClickES = true;
                     }
-                }
+             }
             }
             else
             {
@@ -687,5 +710,128 @@ namespace IS_XNA_Shooter.MapEditor
             spriteBatch.Draw(GRMng.buttonsSaveLoadPreview, rectLoad, rectAnimLoad, Color.White);
             spriteBatch.Draw(GRMng.buttonsSaveLoadPreview, rectPreview, rectAnimPreview, Color.White);
         }
-    }
+
+        private void saveShip(){
+
+            if (isClickEW1 && rectangleFrameLevel.Contains((int)positionEW1Transition.X + GRMng.frameWidthEW1 / 2, (int)positionEW1Transition.Y + GRMng.frameHeightEW1 / 2))
+            {
+
+                InfoEnemy e = new InfoEnemy("EnemyWeakA", (int)positionEW1Transition.X + GRMng.frameWidthEW1 / 2 - (int)displacementLevel.X, (int)positionEW1Transition.Y + GRMng.frameHeightEW1 / 2 - (int)displacementLevel.Y, 1, GRMng.frameWidthEW1, GRMng.frameHeightEW1);
+                enemiesInfo.Add(e);
+            }
+            else if (isClickEW2 && rectangleFrameLevel.Contains((int)positionEW2Transition.X + GRMng.frameWidthEW2 / 2, (int)positionEW2Transition.Y + GRMng.frameHeightEW2 / 2))
+            {
+                InfoEnemy e = new InfoEnemy("EnemyWeakShotA", (int)positionEW2Transition.X + GRMng.frameWidthEW2 / 2 - (int)displacementLevel.X, (int)positionEW2Transition.Y + GRMng.frameHeightEW2 / 2 - (int)displacementLevel.Y, 1, GRMng.frameWidthEW2, GRMng.frameHeightEW2);
+                enemiesInfo.Add(e);
+            }
+            else if (isClickEB1 && rectangleFrameLevel.Contains((int)positionEB1Transition.X + GRMng.frameWidthEB1 / 2, (int)positionEB1Transition.Y + GRMng.frameHeightEB1 / 2))
+            {
+                InfoEnemy e = new InfoEnemy("EnemyBeamA", (int)positionEB1Transition.X + GRMng.frameWidthEB1 / 2 - (int)displacementLevel.X, (int)positionEB1Transition.Y + GRMng.frameHeightEB1 / 2 - (int)displacementLevel.Y, 1, GRMng.frameWidthEB1, GRMng.frameHeightEB1);
+                enemiesInfo.Add(e);
+            }
+            else if (isClickES && rectangleFrameLevel.Contains((int)positionESTransition.X + GRMng.frameWidthES / 2, (int)positionESTransition.Y + GRMng.frameHeightES / 2))
+            {
+                InfoEnemy e = new InfoEnemy("EnemyScaredA", (int)positionESTransition.X + GRMng.frameWidthES / 2 - (int)displacementLevel.X, (int)positionESTransition.Y + GRMng.frameHeightES / 2 - (int)displacementLevel.Y, 1, GRMng.frameWidthES, GRMng.frameHeightES);
+                enemiesInfo.Add(e);
+            }
+            else if (isClickEMS && rectangleFrameLevel.Contains((int)positionEMSTransition.X + GRMng.frameWidthEMS / 2, (int)positionEMSTransition.Y + GRMng.frameHeightEMS/2))
+            {
+                InfoEnemy e = new InfoEnemy("EnemyMineShotA", (int)positionEMSTransition.X + GRMng.frameWidthEMS / 2 - (int)displacementLevel.X, (int)positionEMSTransition.Y + GRMng.frameHeightEMS / 2 - (int)displacementLevel.Y, 1, GRMng.frameWidthEMS, GRMng.frameHeightEMS);
+                enemiesInfo.Add(e);
+            }
+            else if (isClickEL && rectangleFrameLevel.Contains((int)positionELTransition.X + GRMng.frameWidthEL / 2, (int)positionELTransition.Y + GRMng.frameHeightEL / 2))
+            {
+                InfoEnemy e = new InfoEnemy("EnemyLaserA", (int)positionELTransition.X + GRMng.frameWidthEL / 2 - (int)displacementLevel.X, (int)positionELTransition.Y + GRMng.frameHeightEL / 2 - (int)displacementLevel.Y, 1, GRMng.frameWidthEL, GRMng.frameHeightEL);
+                enemiesInfo.Add(e);
+            }
+        
+        }
+
+        private void save()
+        {
+
+            XDocument miXML = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), new XComment("Level Edited"));
+            /*miXML.Add(new XElement("level",
+                         new XAttribute("titulo", "nivel1"),
+                         new XAttribute("width", width),
+                     new XAttribute("height", height)));*/
+
+            XElement level = new XElement("level");
+            level.Add(new XAttribute("titulo", "nivel1"),
+                        new XAttribute("width", width),
+                        new XAttribute("height", height));
+
+            XElement enemieList = new XElement("enemiesList");
+           
+            for (int i = 0; i < enemiesInfo.Count; i++)
+            {
+                enemieList.Add(new XElement("enemy",
+                                    new XAttribute("type", enemiesInfo[i].type),
+                                    new XAttribute("positionX", enemiesInfo[i].positionX),
+                                    new XAttribute("positionY", enemiesInfo[i].positionY),
+                                    new XAttribute("time", enemiesInfo[i].time)));          
+            }
+
+            level.Add(enemieList);
+
+            miXML.Add(level);
+
+            
+            miXML.Save("KILLO.xml");
+        }
+
+
+        protected void load()
+        {
+            // Utilizar nombres de fichero y nodos XML idénticos a los que se guardaron
+            try
+            {
+                 enemiesInfo = new List<InfoEnemy>();
+                //  Leer los datos del archivo
+                String enemyType;
+                float positionX;
+                float positionY;
+                float time;
+                XmlDocument lvl = new XmlDocument();
+                lvl.Load("C:\\Users\\Casa\\Desktop\\IS\\project_chandra\\project_chandra\\IS_XNA_Shooter\\IS_XNA_Shooter\\IS_XNA_Shooter\\bin\\x86\\Debug\\KILLO.xml");
+                       
+                 XmlNodeList lista = null;
+                lista = lvl.GetElementsByTagName("enemy");
+
+                foreach (XmlElement nodo in lista)
+                {
+
+                    XmlAttributeCollection enemyN = nodo.Attributes;
+                    //XmlAttribute a = enemyN[1];
+                    enemyType = Convert.ToString(enemyN[0].Value);
+                    positionX = (float)Convert.ToDouble(enemyN[1].Value);
+                    positionY = (float)Convert.ToDouble(enemyN[2].Value);
+                    time = (float)Convert.ToDouble(enemyN[3].Value);
+                    //timeLeftEnemy.Add(time);
+
+                    InfoEnemy enemy = null; 
+                    // TODO: los enemigos deberían de crearse desde la EnemyFactory
+
+                    if (enemyType.Equals("EnemyWeakA"))
+                        enemy = new InfoEnemy(enemyType, (int)positionX, (int)positionY, (int)time, GRMng.frameWidthEW1, GRMng.frameHeightEW1);
+                    else if (enemyType.Equals("EnemyBeamA"))
+                      enemy = new InfoEnemy(enemyType, (int)positionX, (int)positionY, (int)time, GRMng.frameWidthEB1, GRMng.frameHeightEB1);
+                    else if (enemyType.Equals("EnemyWeakShotA"))
+                      enemy = new InfoEnemy(enemyType, (int)positionX, (int)positionY, (int)time, GRMng.frameWidthEW2, GRMng.frameHeightEW2);
+                    else if (enemyType.Equals("EnemyMineShotA"))
+                       enemy = new InfoEnemy(enemyType, (int)positionX, (int)positionY, (int)time, GRMng.frameWidthEMS, GRMng.frameHeightEMS);
+                    else if (enemyType.Equals("EnemyLaserA"))
+                       enemy = new InfoEnemy(enemyType, (int)positionX, (int)positionY, (int)time, GRMng.frameWidthEL, GRMng.frameHeightEL);
+                    else if (enemyType.Equals("EnemyScaredA"))
+                        enemy = new InfoEnemy(enemyType, (int)positionX, (int)positionY, (int)time, GRMng.frameWidthES, GRMng.frameHeightES);
+                    enemiesInfo.Add(enemy);
+                    
+              }
+
+            }
+            catch (Exception e)
+            {
+            }
+        }   //  end LeerArchivoXML()
+    }//Class MainMapEditor
 }

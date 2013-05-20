@@ -615,6 +615,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Graphics\Menu\scores_2.png">
+      <Name>scores_2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+    <ItemGroup>
     <Compile Include="Audio\FXEffects\PowerUpOrange.wav">
       <Name>PowerUpOrange</Name>
       <Importer>WavImporter</Importer>

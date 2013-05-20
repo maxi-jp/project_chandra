@@ -138,6 +138,8 @@
     <Compile Include="Evolutions\ShipPreview.cs" />
     <Compile Include="Evolutions\ShotPreview.cs" />
     <Compile Include="Games\GameAForTestingParticles.cs" />
+    <Compile Include="Menus\MenuItemSelectionButton.cs" />
+    <Compile Include="Menus\MenuScores.cs" />
     <Compile Include="Menus\MenuStart.cs" />
     <Compile Include="Enemies\EnemyBeamA.cs" />
     <Compile Include="Enemies\EnemyFinalHeroe2.cs" />

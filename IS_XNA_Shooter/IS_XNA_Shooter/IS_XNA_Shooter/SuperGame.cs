@@ -40,6 +40,7 @@ namespace IS_XNA_Shooter
         {
             starting,
             mainMenu,
+            scoresMenu,
             playing,
             pause,
             gameOver,
@@ -198,7 +199,12 @@ namespace IS_XNA_Shooter
         /// Menu of game over
         /// </summary>
         private MenuGameOver menuGameOver;
-        
+
+        /// <summary>
+        /// Menu of the scores
+        /// </summary>
+        private MenuScores menuScores;
+
         /// <summary>
         /// Game
         /// </summary>
@@ -267,7 +273,7 @@ namespace IS_XNA_Shooter
             updateFramesCounter = updateFramesCounterAux = 0;
             timeCounterSecond = timeCounterSecondAux = 1;
 
-            currentState = gameState.starting; // puts game's state to starting
+            currentState = gameState.scoresMenu; // puts game's state to starting
             pointer = new Vector2();
 
             base.Initialize();
@@ -290,6 +296,7 @@ namespace IS_XNA_Shooter
 
             grManager.LoadContent("MenuStart"); // se cargan los recursos del menu start
             grManager.LoadContent("MenuMain"); // se cargan los recursos del menu
+            grManager.LoadContent("MenuScores"); // se cargan los recursos del menu de scores
             grManager.LoadContent("MenuIngame"); // se cargan los recursos del menu ingame
             grManager.LoadContent("MenuGameOver");// se cargan los recursos del menu gameover
             grManager.LoadContent("Other"); // all type of "little" resources
@@ -303,6 +310,8 @@ namespace IS_XNA_Shooter
             menu =          new Menu(this);
             menuIngame =    new MenuIngame(this);
             menuGameOver =  new MenuGameOver(this);
+            menuScores =    new MenuScores(this);
+            menuScores.Load();
 
             // Create the player and the screenEvolution
             player = new Player(playerLifes);
@@ -319,6 +328,7 @@ namespace IS_XNA_Shooter
             // TODO: Unload any non ContentManager content here
         }
 
+        #region UPDATE
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -394,6 +404,17 @@ namespace IS_XNA_Shooter
 
                     break;
 
+                case gameState.scoresMenu:
+
+                    menuScores.Update(Mouse.GetState().X, Mouse.GetState().Y, deltaTime);
+
+                    if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                        menuScores.Click(Mouse.GetState().X, Mouse.GetState().Y);
+                    else if (Mouse.GetState().LeftButton == ButtonState.Released)
+                        menuScores.Unclick(Mouse.GetState().X, Mouse.GetState().Y);
+
+                    break;
+
                 case gameState.playing:
                     totalTime += deltaTime;
 
@@ -444,7 +465,9 @@ namespace IS_XNA_Shooter
 
             base.Update(gameTime);
         }
+        #endregion
 
+        #region DRAW
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>fe
@@ -469,6 +492,10 @@ namespace IS_XNA_Shooter
 
                 case gameState.mainMenu:
                     menu.Draw(spriteBatch);
+                    break;
+
+                case gameState.scoresMenu:
+                    menuScores.Draw(spriteBatch);
                     break;
 
                 case gameState.playing:
@@ -509,6 +536,7 @@ namespace IS_XNA_Shooter
 
             base.Draw(gameTime);
         } // Draw
+        #endregion
 
         /// <summary>
         /// Method that cotrols when the Focus fron the Game is lost
@@ -580,7 +608,7 @@ namespace IS_XNA_Shooter
         public void NewSurvival(String cad)
         {
             grManager.LoadHud();
-            grManager.LoadContent("LevelA1");  // Load the gameA's level 1 resources
+            grManager.LoadContent(cad);  // Load the gameA's level 1 resources
             audio.LoadContent(1);
             LvlMng.LoadContent(cad); // Load XML
 
@@ -599,7 +627,7 @@ namespace IS_XNA_Shooter
         public void NewKiller(String cad)
         {
             grManager.LoadHud();
-            grManager.LoadContent("LevelA1"); // Load the gameB's level 1 resources
+            grManager.LoadContent(cad); // Load the gameB's level 1 resources
             audio.LoadContent(1);
             LvlMng.LoadContent(cad); // Load XML
 
@@ -693,6 +721,22 @@ namespace IS_XNA_Shooter
             //New score added
             //menuScore.addNewScore(currentNameLevel, player.GetTotalScore()); 
             currentState = gameState.gameOver;
+        }
+
+        /// <summary>
+        /// This method is called from the MenuScores
+        /// </summary>
+        public void ReturnFromScores()
+        {
+            currentState = gameState.mainMenu;
+        }
+
+        /// <summary>
+        /// Puts gameState = scoresMenu
+        /// </summary>
+        public void ShowScores()
+        {
+            currentState = gameState.scoresMenu;
         }
 
     } // class SuperGame

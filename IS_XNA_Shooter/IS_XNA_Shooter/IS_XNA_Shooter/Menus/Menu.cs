@@ -250,6 +250,7 @@ namespace IS_XNA_Shooter
                     else if (itemMainScores.Unclick(X, Y))
                     {
                         Audio.PlayEffect("digitalAcent01");
+                        mainGame.ShowScores();
                     }
                     else if (itemMainConfig.Unclick(X, Y))
                     {

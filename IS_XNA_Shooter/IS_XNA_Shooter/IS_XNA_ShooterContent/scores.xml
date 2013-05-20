@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<scores>
+	<level name="LevelA1">
+		<entry player="CB1" score="200" />
+		<entry player="CB2" score="180" />
+		<entry player="FER" score="100" />
+		<entry player="DIE" score="80" />
+		<entry player="YAM" score="2" />
+		<entry player="XXX" score="0" />
+		<entry player="XXX" score="0" />
+		<entry player="XXX" score="0" />
+		<entry player="XXX" score="0" />
+		<entry player="XXX" score="0" />
+	</level>
+	
+	<level name="LevelB1">
+		<entry player="FED" score="200" />
+		<entry player="AAA" score="0" />
+		<entry player="AAA" score="0" />
+		<entry player="AAA" score="0" />
+		<entry player="AAA" score="0" />
+		<entry player="AAA" score="0" />
+		<entry player="AAA" score="0" />
+		<entry player="AAA" score="0" />
+		<entry player="AAA" score="0" />
+		<entry player="AAA" score="0" />
+	</level>
+	
+	<level name="LevelC1">
+		<entry player="LOL" score="700" />
+		<entry player="AAA" score="0" />
+		<entry player="AAA" score="0" />
+		<entry player="AAA" score="0" />
+		<entry player="AAA" score="0" />
+		<entry player="AAA" score="0" />
+		<entry player="AAA" score="0" />
+		<entry player="AAA" score="0" />
+		<entry player="AAA" score="0" />
+		<entry player="AAA" score="0" />
+	</level>
+	
+	<level name="LevelADefense1">
+		<entry player="G--" score="5" />
+		<entry player="A--" score="4" />
+		<entry player="L--" score="3" />
+		<entry player="L--" score="2" />
+		<entry player="U--" score="1" />
+		<entry player="AAA" score="0" />
+		<entry player="AAA" score="0" />
+		<entry player="AAA" score="0" />
+		<entry player="AAA" score="0" />
+		<entry player="AAA" score="0" />
+	</level>
+</scores>

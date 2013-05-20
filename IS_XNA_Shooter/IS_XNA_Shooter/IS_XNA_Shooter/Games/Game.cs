@@ -126,7 +126,7 @@ namespace IS_XNA_Shooter
                     //if (enemies[i].isActive() && shots[j].isActive() && enemies[i].collider.collision(shots[j].collider))
                     {                       
                         enemies[i].Damage(shots[j].GetPower());
-                        if (enemies[i].isDead())
+                        if (enemies[i].IsDead())
                         {
                             player.EarnPoints(enemies[i].GetValue());
                         }
@@ -209,11 +209,13 @@ namespace IS_XNA_Shooter
                 pow.Draw(spriteBatch);
 
             foreach (Enemy e in enemies)
-                if (e.IsActive())
+                // TODO
+                if (e.IsDrawable())
                     e.Draw(spriteBatch);
 
             foreach (Enemy e in enemiesBot)
-                if (e.IsActive())
+                // TODO
+                if (e.IsDrawable())
                     e.Draw(spriteBatch);
 
             foreach (Shot shot in shots)    // player shots

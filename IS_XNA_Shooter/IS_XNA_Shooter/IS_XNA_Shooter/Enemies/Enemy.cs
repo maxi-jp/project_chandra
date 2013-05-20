@@ -65,10 +65,20 @@ namespace IS_XNA_Shooter
         protected bool erasable;
 
         /// <summary>
-        /// Power Up left by the enemy (which could fall or not)
+        /// Power Up left by the enemy (which could fall or not).
         /// </summary>
-        protected PowerUp powerUp = null;
+        protected PowerUp powerUp;
+       
+        /// <summary>
+        /// Used to advice when the enemy is coming.
+        /// </summary>
+        protected byte transparency;
 
+        /// <summary>
+        /// indicates when you should start to be drawn.
+        /// </summary>
+        /// // TODO
+        protected bool drawable;
        
         /// <summary>
         /// Enemy's constructor
@@ -101,6 +111,9 @@ namespace IS_XNA_Shooter
             this.life = life;
             this.value = value;
             this.ship = ship;
+            this.powerUp = null;
+            this.transparency = 0;
+            this.drawable = false;
 
             active = false;
             colisionable = false;
@@ -114,16 +127,14 @@ namespace IS_XNA_Shooter
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
-
             if (DeadCondition())
                 erasable = true;
             
             if (colisionable && collider != null)
                 collider.Update(position, rotation);
 
-            if (outOfScreen())
+            if (OutOfScreen())
                 ForceKill();
-
         } // Update
 
         /// <summary>
@@ -133,6 +144,13 @@ namespace IS_XNA_Shooter
         public void UpdateTimeToSpawn(float deltaTime)
         {
             timeToSpawn -= deltaTime;
+
+            // TODO
+            if (timeToSpawn <= 8 && !drawable)
+            {
+                drawable = true;
+            }
+
             if (timeToSpawn <= 0)
                 SetActive();
         }
@@ -149,21 +167,26 @@ namespace IS_XNA_Shooter
                 collider.Draw(spriteBatch);
         }
 
+        // TODO
+        public bool IsDrawable()
+        {
+            return drawable;
+        }
+
         /// <summary>
         /// Controlls if the enemy is out of the screen.
         /// </summary>
         /// <returns> True if it is out of the screen and False if it isn't </returns>
-        private bool outOfScreen()
+        private bool OutOfScreen()
         {   
             return (position.X > level.width || position.X < 0 || position.Y > level.height || position.Y < 0);
-               
         }
 
         /// <summary>
         /// Controlls if the enemy is dead
         /// </summary>
         /// <returns>True if it's dead and False if it isn't</returns>
-        public bool isDead()
+        public bool IsDead()
         {
             return (life <= 0);
         }

@@ -118,7 +118,6 @@ namespace IS_XNA_Shooter
                     spriteBatch.Draw(GRMng.banPowerUps, new Rectangle((int)position.X + (int)camera.displacement.X - 160,
                         (int)position.Y + (int)camera.displacement.Y - 50 - (int)(Math.Log(movement)*8), 320, 80),
                         new Rectangle(0, type * 80, 320, 80), new Color(255 - fOut, 255 - fOut, 255 -fOut, 255 - fOut));
-            
                 }
         }
 
@@ -129,7 +128,10 @@ namespace IS_XNA_Shooter
                 base.Update(deltaTime);
                 catchable -= deltaTime;
                 if (catchable <= 0f)
+                {
+                    timeForBanner = 0;
                     active = false;
+                }
                 else if (catchable <= 2.5f)
                 {
                     setOff += (byte)(deltaTime * 480);

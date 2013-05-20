@@ -137,9 +137,9 @@ namespace IS_XNA_Shooter
         {
             base.Update(deltaTime);
 
-            if (phase == 1 && !isDead()) phase1(deltaTime);
-            if (phase == 2 && !isDead()) phase2(deltaTime);
-            if (phase == 3 && !isDead()) phase3(deltaTime);
+            if (phase == 1 && !IsDead()) phase1(deltaTime);
+            if (phase == 2 && !IsDead()) phase2(deltaTime);
+            if (phase == 3 && !IsDead()) phase3(deltaTime);
 
             // shots:
             for (int i = 0; i < shots.Count(); i++)

@@ -293,7 +293,7 @@ namespace IS_XNA_Shooter
                 pY -= distance * (float)Math.Sin(gyre);
             }
 
-            if (shotLastTime >= 0.2f && !isDead())
+            if (shotLastTime >= 0.2f && !IsDead())
             {
                 setAnim(0);
 

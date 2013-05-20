@@ -42,7 +42,7 @@ namespace IS_XNA_Shooter
                         time,
                         100,    /* velocity */
                         100,    /* life */
-                        1,      /* value */
+                        10,      /* value */
                         ship
                     );
                     break;
@@ -64,7 +64,7 @@ namespace IS_XNA_Shooter
                         time,
                         100,    /* velocity */
                         100,    /* life */
-                        1,      /* value */
+                        10,      /* value */
                         ship,
                         null    /* house */
                     );
@@ -85,9 +85,9 @@ namespace IS_XNA_Shooter
                         SuperGame.frameTime12,
                         GRMng.textureEW1,
                         time,
-                        100,    /* velocity */
+                        300,    /* velocity */
                         100,    /* life */
-                        1,      /* value */
+                        10,      /* value */
                         ship    /* player's ship */
                     );
                     break;
@@ -109,7 +109,7 @@ namespace IS_XNA_Shooter
                         time,   /* timeToSpawn */
                         1000,   /* velocity */
                         100,    /* life */
-                        4,      /* value */
+                        40,      /* value */
                         ship    /* player's ship */
                     );
                     break;
@@ -131,7 +131,7 @@ namespace IS_XNA_Shooter
                         time,   /* timeToSpawn */
                         1000,   /* velocity */
                         100,    /* life */
-                        4,      /* value */
+                        40,      /* value */
                         ship,   /* player's ship */
                         null
                     );
@@ -154,7 +154,7 @@ namespace IS_XNA_Shooter
                         time,   /* timeToSpawn */
                         100,    /* velocity */
                         100,    /* life */
-                        1,      /* value */
+                        20,      /* value */
                         ship,   /* player's ship */
                         2,      /* timeToShot */
                         300,    /* shotVelocity */
@@ -179,7 +179,7 @@ namespace IS_XNA_Shooter
                         time,   /* timeToSpawn */
                         100,    /* velocity */
                         100,    /* life */
-                        1,      /* value */
+                        20,      /* value */
                         ship,   /* player's ship */
                         2,      /* timeToShot */
                         300,    /* shotVelocity */
@@ -203,12 +203,12 @@ namespace IS_XNA_Shooter
                         SuperGame.frameTime12,
                         GRMng.textureEW2,
                         time,
-                        100,    /* velocity */
+                        300,    /* velocity */
                         100,    /* life */
-                        1,      /* value */
+                        20,      /* value */
                         ship,   /* player's ship */
                         2,      /* timeToShot */
-                        300,    /* shotVelocity */
+                        450,    /* shotVelocity */
                         200     /* shotPower */
                     );
                     break;
@@ -230,7 +230,7 @@ namespace IS_XNA_Shooter
                         time,
                         20,     /* velocity */
                         100,    /* life */
-                        1,      /* value */
+                        30,      /* value */
                         ship,   /* player's ship */
                         4,      /* timeToShot */
                         140,    /* shotVelocity */
@@ -255,9 +255,9 @@ namespace IS_XNA_Shooter
                         time,
                         20,     /* velocity */
                         100,    /* life */
-                        1,      /* value */
+                        30,      /* value */
                         ship,   /* player's ship */
-                        4,      /* timeToShot */
+                        3,      /* timeToShot */
                         140,    /* shotVelocity */
                         200     /* shotPower */
                     );
@@ -280,7 +280,7 @@ namespace IS_XNA_Shooter
                         time,
                         200,    /* velocity */
                         100,    /* life */
-                        1,      /* value */
+                        50,      /* value */
                         ship,   /* player's ship */
                         4,      /* timeToShot */
                         300,    /* shotVelocity */
@@ -305,7 +305,7 @@ namespace IS_XNA_Shooter
                         time,
                         200,    /* velocity */
                         100,    /* life */
-                        1,      /* value */
+                        50,      /* value */
                         ship,   /* player's ship */
                         4,      /* timeToShot */
                         300,    /* shotVelocity */
@@ -331,7 +331,7 @@ namespace IS_XNA_Shooter
                         time,
                         100,    /* velocity */
                         100,    /* life */
-                        1,      /* value */
+                        70,      /* value */
                         ship    /* player's ship */
                     );
                     break;
@@ -353,7 +353,7 @@ namespace IS_XNA_Shooter
                         time,
                         100,    /* velocity */
                         100,    /* life */
-                        1,      /* value */
+                        70,      /* value */
                         ship    /* player's ship */
                     );
                     break;
@@ -374,8 +374,8 @@ namespace IS_XNA_Shooter
                         GRMng.textureHeroe1,
                         time,
                         1000,   /* velocity */
-                        1,      /* life */
-                        2,      /* value */
+                        10,      /* life */
+                        200,      /* value */
                         ship    /* player's ship */
                     );
                     break;

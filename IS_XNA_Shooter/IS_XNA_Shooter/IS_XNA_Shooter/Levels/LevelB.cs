@@ -119,7 +119,7 @@ namespace IS_XNA_Shooter
             {
                 while (i < enemies.Count && !stillAlive)
                 {
-                    if (enemies[i] != null && !enemies[i].isDead())
+                    if (enemies[i] != null && !enemies[i].IsDead())
                     {
                         stillAlive = true;
                     }

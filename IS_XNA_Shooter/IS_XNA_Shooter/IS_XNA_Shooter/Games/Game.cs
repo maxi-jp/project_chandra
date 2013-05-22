@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace IS_XNA_Shooter
 {
     // clase abstracta de la que heredan todos los juegos
-    abstract class Game
+    abstract class Game 
     {
         /* ------------------------------------------------------------- */
         /*                           ATTRIBUTES                          */
@@ -67,7 +68,6 @@ namespace IS_XNA_Shooter
             shots = new List<Shot>();
             explosions = new List<Explosion>();
             powerUpList = new List<PowerUp>();
-
             //Audio.PlayMusic(1);
         }
 
@@ -126,6 +126,10 @@ namespace IS_XNA_Shooter
                     //if (enemies[i].isActive() && shots[j].isActive() && enemies[i].collider.collision(shots[j].collider))
                     {                       
                         enemies[i].Damage(shots[j].GetPower());
+                        if (enemies[i].IsDead())
+                        {
+                            player.EarnPoints(enemies[i].GetValue());
+                        }
                         PowerUp powerUp = enemies[i].GetPowerUp();
                         if (powerUp != null)
                             powerUpList.Add(powerUp);
@@ -137,19 +141,22 @@ namespace IS_XNA_Shooter
 
             for (int i = 0; i < powerUpList.Count; i++) // powerUps for the ship
             {
-                if (ship.collider.Collision(powerUpList[i].collider)
-                    /*|| powerUpList[i].collider.Collision(ship.collider)*/)
+                if (powerUpList[i].IsActive())
                 {
-                    ship.CatchPowerUp(powerUpList[i].GetType());
-                    if (powerUpList[i].GetType() == 2) //green power
+                    if (ship.collider.Collision(powerUpList[i].collider)
+                        /*|| powerUpList[i].collider.Collision(ship.collider)*/)
                     {
-                        for (int j = 0; j < enemies.Count(); j++)
-                            if (enemies[j].IsActive() && !(enemies[j].GetType() == typeof(FinalBoss1) || enemies[j].GetType() == typeof(EnemyFinalHeroe2) ||
-                                 enemies[j].GetType() == typeof(BotFinalBoss) || enemies[j].GetType() == typeof(FinalBossHeroe1) ||
-                                 enemies[j].GetType() == typeof(FinalBoss1Turret2) || enemies[j].GetType() == typeof(FinalBoss1Turret1)))
-                                enemies[j].Damage(200);
+                        ship.CatchPowerUp(powerUpList[i].GetType());
+                        if (powerUpList[i].GetType() == 2) //green power
+                        {
+                            for (int j = 0; j < enemies.Count(); j++)
+                                if (enemies[j].IsActive() && !(enemies[j].GetType() == typeof(FinalBoss1) || enemies[j].GetType() == typeof(EnemyFinalHeroe2) ||
+                                     enemies[j].GetType() == typeof(BotFinalBoss) || enemies[j].GetType() == typeof(FinalBossHeroe1) ||
+                                     enemies[j].GetType() == typeof(FinalBoss1Turret2) || enemies[j].GetType() == typeof(FinalBoss1Turret1)))
+                                    enemies[j].Damage(200);
+                        }
+                        powerUpList[i].ShowBanner();
                     }
-                    powerUpList[i].ShowBanner(); 
                 }
             }
 
@@ -202,17 +209,23 @@ namespace IS_XNA_Shooter
                 pow.Draw(spriteBatch);
 
             foreach (Enemy e in enemies)
-                if (e.IsActive())
+                // TODO
+                if (e.IsDrawable())
                     e.Draw(spriteBatch);
 
             foreach (Enemy e in enemiesBot)
-                if (e.IsActive())
+                // TODO
+                if (e.IsDrawable())
                     e.Draw(spriteBatch);
 
             foreach (Shot shot in shots)    // player shots
                 shot.Draw(spriteBatch);
 
             ship.Draw(spriteBatch);
+
+            String score= "Score = " + player.GetActualScore(); 
+            spriteBatch.DrawString(SuperGame.fontMotorwerk, score,
+                    new Vector2(SuperGame.screenWidth/2-(score.ToString().Length)-(SuperGame.fontMotorwerk.ToString().Length), 69), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
 
             hud.Draw(spriteBatch);
         } // Draw

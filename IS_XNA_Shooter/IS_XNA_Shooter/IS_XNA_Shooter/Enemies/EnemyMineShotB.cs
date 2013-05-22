@@ -14,7 +14,7 @@ namespace IS_XNA_Shooter
         /// <summary>
         /// Time between one direction and other
         /// </summary>
-        private float timeToMove = 3.0f;
+        private float timeToMove = 1.5f;
 
         /// <summary>
         /// Random displacement in the X axis
@@ -65,7 +65,7 @@ namespace IS_XNA_Shooter
             setAnim(0);
 
             despX = -5;
-            despY = -5;
+            despY = 0;
 
             Vector2[] points = new Vector2[6];
             points[0] = new Vector2(20, 20);
@@ -98,7 +98,7 @@ namespace IS_XNA_Shooter
                     position.X += (float)(velocity * despX * deltaTime);
                     position.Y += (float)(velocity * despY * deltaTime);
 
-                    timeToMove = 3.0f;
+                    timeToMove = 2.0f;
 
                 }
                 else
@@ -112,7 +112,7 @@ namespace IS_XNA_Shooter
                 if (timeToShot <= 0)
                 {
                     SixShots();
-                    timeToShot = 4.0f;
+                    timeToShot = 3.0f;
                 }
 
             } // if (life > 0)

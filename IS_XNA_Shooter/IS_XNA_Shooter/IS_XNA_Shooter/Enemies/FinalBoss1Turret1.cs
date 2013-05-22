@@ -107,13 +107,13 @@ namespace IS_XNA_Shooter
                 pY -= distance * (float)Math.Sin(gyre);
             }
 
-            if (lastTimeShot >= 1f && !isDead())
+            if (lastTimeShot >= 1f && !IsDead())
             {
                 lastTimeShot = 0;
                 buildShot(pX, pY);
             }
 
-            if (lastTimeShot >= 0.8f && !isDead())
+            if (lastTimeShot >= 0.8f && !IsDead())
                 setAnim(1);
 
             // shots:

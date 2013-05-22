@@ -66,7 +66,7 @@ namespace IS_XNA_Shooter
             else if (velocity <= 0)
                 velocity = 200;
 
-            if (!isDead())
+            if (!IsDead())
             {
                 rotation += rotationVelocity * deltaTime;
 

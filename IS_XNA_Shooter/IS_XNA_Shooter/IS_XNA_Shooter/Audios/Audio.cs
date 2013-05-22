@@ -26,6 +26,7 @@ namespace IS_XNA_Shooter
         public static SoundEffect SoundPowerUpRed;
         public static SoundEffect SoundPowerUpGreen;
         public static SoundEffect SoundPowerUpBlue;
+        public static SoundEffect SoundPowerUpOrange;
 
         // canciones:
         public static Song music01;
@@ -81,6 +82,7 @@ namespace IS_XNA_Shooter
                     SoundPowerUpRed = null;
                     SoundPowerUpGreen = null;
                     SoundPowerUpBlue = null;
+                    SoundPowerUpOrange = null;
 
                     break;
             }
@@ -101,9 +103,10 @@ namespace IS_XNA_Shooter
                 case "brokenBone02":    brokenBone02.Play(effectsVolume, pitch, pan);   break;
                 case "tackled1":        tackled1.Play(effectsVolume, pitch, pan);       break;
                 case "laser_shot_red":  laserShotRed.Play(effectsVolume, pitch, pan); break;
-                case "PowerUpRed":       SoundPowerUpRed.Play(effectsVolume, pitch, pan); break;
-                case "PowerUpBlue":      SoundPowerUpBlue.Play(effectsVolume, pitch, pan); break;
-                case "PowerUpGreen":     SoundPowerUpGreen.Play(effectsVolume, pitch, pan); break;
+                case "PowerUpRed":      SoundPowerUpRed.Play(effectsVolume, pitch, pan); break;
+                case "PowerUpBlue":     SoundPowerUpBlue.Play(effectsVolume, pitch, pan); break;
+                case "PowerUpGreen":    SoundPowerUpGreen.Play(effectsVolume, pitch, pan); break;
+                case "PowerUpOrange":   SoundPowerUpOrange.Play(effectsVolume, pitch, pan); break;
             }
         } // PlayEffect
 
@@ -131,6 +134,7 @@ namespace IS_XNA_Shooter
             SoundPowerUpRed = content.Load<SoundEffect>("Audio/FXEffects/PowerUpRed");
             SoundPowerUpGreen = content.Load<SoundEffect>("Audio/FXEffects/PowerUpGreen");
             SoundPowerUpBlue = content.Load<SoundEffect>("Audio/FXEffects/PowerUpBlue");
+            SoundPowerUpOrange = content.Load<SoundEffect>("Audio/FXEffects/PowerUpOrange");
         }
 
 

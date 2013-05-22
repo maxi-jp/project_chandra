@@ -31,9 +31,10 @@ namespace IS_XNA_Shooter.MapEditor
         private Vector2 lastPositionMouse;
         private SpriteFont spriteDebug;
 	    private stateMouse currentStateMouse;
-	    private bool isClickedFrameLevel;
-        private bool isClickedFrameShips;
-        private bool isClickedEnemyShip;
+	    private bool isSelectedFrameLevel;
+        private bool isSelectedFrameShips;
+        private bool isSelectedEnemyShip;
+        private bool isMovingShip;
         private List<InfoEnemy> enemiesInfo;
         private InfoEnemy enemySelected;
 
@@ -157,7 +158,7 @@ namespace IS_XNA_Shooter.MapEditor
 
             spriteDebug = GRMng.fontText;
 
-            isClickedFrameLevel = isClickedFrameShips = isClickedEnemyShip = false;
+            isSelectedFrameLevel = isSelectedFrameShips = isSelectedEnemyShip = isMovingShip = false;
             this.levelType = levelType;
           /*  this.height = width;
             this.width = height;*/
@@ -206,72 +207,84 @@ namespace IS_XNA_Shooter.MapEditor
         {
 	        //update mouse
             updateMouse();
-
             
-            //dont click
-            if (Mouse.GetState().LeftButton != Microsoft.Xna.Framework.Input.ButtonState.Pressed)
+            //mouse normal state
+            if (currentStateMouse == stateMouse.normal)
+            {
+                isSelectedFrameLevel = isSelectedFrameShips = isMovingShip = false;
+            }
+
+            //unclick mouse
+            if (currentStateMouse == stateMouse.unclick)
             {
                 //Save the ships in the frame of maps level if the enemy ships is uncliked over the frame level
-                if (isClickedFrameShips) //&& rectangleFrameLevel.Contains(Mouse.GetState().X, Mouse.GetState().Y))
+                if (isSelectedFrameShips)
                 {
                     saveShip();
-                }
-                isClickedFrameLevel = isClickedFrameShips = false;
-            }
-
-            //click frame level
-            if (!isClickedFrameLevel && !isClickedFrameShips && Mouse.GetState().LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed &&
-                rectangleFrameLevel.Contains(Mouse.GetState().X, Mouse.GetState().Y))
-            {
-                isClickedFrameLevel = true;
-                unselectEnemy();
-
-            }
-
-            //click frame right
-            if (!isClickedFrameLevel && !isClickedFrameShips &&  Mouse.GetState().LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed &&
-                rectFrameEnemies.Contains(Mouse.GetState().X, Mouse.GetState().Y))
-            {
-                isClickedFrameShips = true;
-                unselectEnemy();
-
-            }
-
-            //click one enemy in the frame level
-            if (isClickedFrameLevel){
-                int numberEnemies = 0;
-                isClickedEnemyShip = false;
-                while (numberEnemies < enemiesInfo.Count && !isClickedEnemyShip){
-                      Rectangle rectEnemyShip = new Rectangle( enemiesInfo[numberEnemies].positionX - enemiesInfo[numberEnemies].frameWidth / 2, 
-                       enemiesInfo[numberEnemies].positionY - enemiesInfo[numberEnemies].frameHeight / 2,
-                       enemiesInfo[numberEnemies].frameWidth, enemiesInfo[numberEnemies].frameHeight);
-                            if(rectEnemyShip.Contains(Mouse.GetState().X - (int)displacementLevel.X, Mouse.GetState().Y - (int)displacementLevel.Y)){
-                                isClickedEnemyShip = true;
-                                enemySelected = enemiesInfo[numberEnemies];
-                                inputProp.setText(Convert.ToString(enemySelected.time));
-                            }
-                       numberEnemies++;
-                   
-                  }
+                    isSelectedFrameLevel = false;
                 }
 
-            if (isClickedEnemyShip && Mouse.GetState().LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed)
-            { 
-            Rectangle rectEnemyShip = new Rectangle( enemySelected.positionX - enemySelected.frameWidth / 2, 
-                      enemySelected.positionY - enemySelected.frameHeight / 2,
-                      enemySelected.frameWidth,enemySelected.frameHeight);
-                if (rectEnemyShip.Contains(Mouse.GetState().X - (int)displacementLevel.X, Mouse.GetState().Y - (int)displacementLevel.Y))
+                isMovingShip = false;
+            }
+
+            //click
+            if (currentStateMouse == stateMouse.click)
+            {
+                //frame level
+                if (!isSelectedFrameLevel && !isSelectedFrameShips && rectangleFrameLevel.Contains(Mouse.GetState().X, Mouse.GetState().Y))
+                {
+                    isSelectedFrameLevel = true;
+                    unselectEnemy();
+                }
+
+                //click frame right
+                if (!isSelectedFrameLevel && !isSelectedFrameShips && rectFrameEnemies.Contains(Mouse.GetState().X, Mouse.GetState().Y))
+                {
+                    isSelectedFrameShips = true;
+                    unselectEnemy();
+                }
+
+                //click one enemy in the frame level
+                if (isSelectedFrameLevel && !isMovingShip)
+                {
+                    int numberEnemies = 0;
+                    isSelectedEnemyShip = false;
+                    while (numberEnemies < enemiesInfo.Count && !isSelectedEnemyShip)
+                    {
+                        Rectangle rectEnemyShip = new Rectangle(enemiesInfo[numberEnemies].positionX - enemiesInfo[numberEnemies].frameWidth / 2,
+                         enemiesInfo[numberEnemies].positionY - enemiesInfo[numberEnemies].frameHeight / 2,
+                         enemiesInfo[numberEnemies].frameWidth, enemiesInfo[numberEnemies].frameHeight);
+
+                        if (rectEnemyShip.Contains(Mouse.GetState().X - (int)displacementLevel.X, Mouse.GetState().Y - (int)displacementLevel.Y))
+                        {
+                            isSelectedEnemyShip = true;
+                            isMovingShip = true;
+                            enemySelected = enemiesInfo[numberEnemies];
+                            inputProp.setText(Convert.ToString(enemySelected.time));
+                        }
+                        numberEnemies++;
+                    }
+                }
+
+                //move ship selected in the frame level
+                if (isMovingShip)
                 {
                     enemySelected.positionX = Mouse.GetState().X - (int)displacementLevel.X;
                     enemySelected.positionY = Mouse.GetState().Y - (int)displacementLevel.Y;
+
+                    if (enemySelected.positionX < 10 + origXScreen + enemySelected.frameWidth / 2) enemySelected.positionX = 10 + origXScreen + enemySelected.frameWidth / 2;
+                    if (enemySelected.positionX > 10 + origXScreen + width - enemySelected.frameWidth / 2) enemySelected.positionX = 10 + origXScreen + width - enemySelected.frameWidth / 2;
+                    if (enemySelected.positionY < 10 + origYScreen + enemySelected.frameHeight / 2) enemySelected.positionY = 10 + origYScreen + enemySelected.frameHeight / 2;
+                    if (enemySelected.positionY > 10 + origYScreen + height - enemySelected.frameHeight / 2) enemySelected.positionY = 10 + origYScreen + height - enemySelected.frameHeight / 2;
                 }
-            
             }
 
             //update the frame of level
             updateFrameLevel();
+
             //frame right to select enemies
             updateFrameEnemiesTransition();
+
             //buttons for save, load and preview a level
             updateButtonsSaveLoadPreview();
         }
@@ -352,7 +365,7 @@ namespace IS_XNA_Shooter.MapEditor
             int widthFrameLevel = 1000;
             int heightFrameLevel = 500;
 
-            if (isClickedFrameLevel && !isClickedEnemyShip)
+            if (isSelectedFrameLevel && !isSelectedEnemyShip)
             {
                 //move the level.
                 displacementLevel.X += Mouse.GetState().X - lastPositionMouse.X;
@@ -604,7 +617,7 @@ namespace IS_XNA_Shooter.MapEditor
 
         private void updateFrameEnemiesTransition()
         {
-            if (isClickedFrameShips)
+            if (isSelectedFrameShips)
             {
                 int xMouse = Mouse.GetState().X;
                 int yMouse = Mouse.GetState().Y;
@@ -897,7 +910,7 @@ namespace IS_XNA_Shooter.MapEditor
 
         private void unselectEnemy() {
 
-            isClickedEnemyShip = false;
+            isSelectedEnemyShip = false;
             if (enemySelected != null)
             enemySelected.time = inputProp.getValue();
             enemySelected = null;

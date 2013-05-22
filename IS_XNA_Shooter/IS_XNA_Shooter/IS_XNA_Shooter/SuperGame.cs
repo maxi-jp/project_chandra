@@ -262,7 +262,7 @@ namespace IS_XNA_Shooter
             updateFramesCounter = updateFramesCounterAux = 0;
             timeCounterSecond = timeCounterSecondAux = 1;
 
-            currentState = gameState.scoresMenu; // puts game's state to starting
+            currentState = gameState.starting;//scoresMenu; // puts game's state to starting
             pointer = new Vector2();
 
             base.Initialize();

@@ -15,10 +15,11 @@ namespace IS_XNA_Shooter
         private SuperGame mainGame;
         private int horizontalSep; // separación horizontal de las opciones
         private Vector2 mainMenuPosition; // posicion de la opcion "main menu"
+        private Vector2 mapEditorPosition; // posición de la opción "map editor"
 
         private Texture2D splash;
 
-        private MenuItem itemMainMenu, itemQuit;
+        private MenuItem itemMainMenu, itemMapEditor, itemQuit;
 
         /* ------------------- CONSTRUCTORS ------------------- */
         public MenuStart(SuperGame mainGame)
@@ -26,13 +27,17 @@ namespace IS_XNA_Shooter
             this.mainGame = mainGame;
 
             horizontalSep = 48;
-            mainMenuPosition = new Vector2(SuperGame.screenWidth / 2, (SuperGame.screenHeight / 4) * 3);
+            mainMenuPosition = new Vector2(SuperGame.screenWidth / 2, (SuperGame.screenHeight / 3) * 2);
+            mapEditorPosition = new Vector2(mainMenuPosition.X, mainMenuPosition.Y + horizontalSep);
 
             splash = GRMng.startSplash;
 
             itemMainMenu = new MenuItem(true, mainMenuPosition, GRMng.menuGameOver,
                 new Rectangle(0, 0, 512, 40), new Rectangle(0, 40, 512, 40),
                 new Rectangle(0, 80, 512, 40));
+            itemMapEditor = new MenuItem(true, mapEditorPosition, GRMng.menuGameOver,
+                new Rectangle(0, 160, 512, 40), new Rectangle(0, 200, 512, 40),
+                new Rectangle(0, 240, 512, 40));
             itemQuit = new MenuItem(false, new Vector2(SuperGame.screenWidth - 45, 5), GRMng.menuGameOver,
                 new Rectangle(0, 120, 40, 40), new Rectangle(40, 120, 40, 40),
                 new Rectangle(80, 120, 40, 40));
@@ -42,6 +47,7 @@ namespace IS_XNA_Shooter
         public void Update(int X, int Y)
         {
             itemMainMenu.Update(X, Y);
+            itemMapEditor.Update(X, Y);
             itemQuit.Update(X, Y);
         }
 
@@ -49,6 +55,7 @@ namespace IS_XNA_Shooter
         {
             spriteBatch.Draw(splash, Vector2.Zero, Color.White);
             itemMainMenu.Draw(spriteBatch);
+            itemMapEditor.Draw(spriteBatch);
             itemQuit.Draw(spriteBatch);
         }
 
@@ -56,6 +63,7 @@ namespace IS_XNA_Shooter
         public void Click(int X, int Y)
         {
             itemMainMenu.Click(X, Y);
+            itemMapEditor.Click(X, Y);
             itemQuit.Click(X, Y);
         }
 
@@ -66,6 +74,11 @@ namespace IS_XNA_Shooter
             {
                 Audio.PlayEffect("digitalAcent01");
                 mainGame.EnterToMenu();
+            }
+            else if (itemMapEditor.Unclick(X, Y))
+            {
+                Audio.PlayEffect("digitalAcent01");
+                // TODO! CUESTA & TROYAN BRO! aquí se llama al menu editor
             }
             else if (itemQuit.Unclick(X, Y))
             {

@@ -273,7 +273,7 @@ namespace IS_XNA_Shooter
             updateFramesCounter = updateFramesCounterAux = 0;
             timeCounterSecond = timeCounterSecondAux = 1;
 
-            currentState = gameState.starting;//scoresMenu; // puts game's state to starting
+            currentState = gameState.scoresMenu;//starting // puts game's state to starting
             pointer = new Vector2();
 
             base.Initialize();
@@ -408,9 +408,14 @@ namespace IS_XNA_Shooter
 
                     menuScores.Update(Mouse.GetState().X, Mouse.GetState().Y, deltaTime);
 
-                    if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    /*if (Mouse.GetState().LeftButton == ButtonState.Pressed)
                         menuScores.Click(Mouse.GetState().X, Mouse.GetState().Y);
                     else if (Mouse.GetState().LeftButton == ButtonState.Released)
+                        menuScores.Unclick(Mouse.GetState().X, Mouse.GetState().Y);*/
+
+                    if (ControlMng.leftClickPreshed)
+                        menuScores.Click(ControlMng.lastClickX, ControlMng.lastClickY);
+                    else if (ControlMng.leftClickReleased)
                         menuScores.Unclick(Mouse.GetState().X, Mouse.GetState().Y);
 
                     break;

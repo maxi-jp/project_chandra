@@ -28,16 +28,21 @@ namespace IS_XNA_Shooter
 
         public override void Update(int X, int Y)
         {
-            if (rectangle.Contains(X, Y))
+            /*if (!selected)
             {
-                if (!preshed)
+                if (rectangle.Contains(X, Y))
                     rectActual = rectSelected;
+                else
+                    rectActual = rectIddle;
+
+                if (preshed && !rectangle.Contains(X, Y))
+                {
+                    rectActual = rectIddle;
+                    preshed = selected = false;
+                }
             }
-            else if (!selected)
-            {
-                rectActual = rectIddle;
-                preshed = false;
-            }
+            */
+
         }
 
         public override bool Click(int X, int Y)
@@ -45,18 +50,28 @@ namespace IS_XNA_Shooter
             if (rectangle.Contains(X, Y))
             {
                 preshed = true;
+                //selected = true;
                 rectActual = rectPushed;
                 return true;
             }
             else
                 return false;
+            /*
+            if (rectangle.Contains(X, Y))
+            {
+                preshed = true;
+                rectActual = rectPushed;
+                return true;
+            }
+            else
+                return false;*/
         }
 
         public override bool Unclick(int X, int Y)
         {
             if (rectangle.Contains(X, Y) && preshed)
             {
-                preshed = false;
+                //preshed = false;
                 selected = true;
                 return true;
             }
@@ -67,11 +82,16 @@ namespace IS_XNA_Shooter
         public void SetSelected()
         {
             selected = true;
+            rectActual = rectPushed;
         }
 
         public void SetSelected(bool aux)
         {
             selected = aux;
+            if (selected)
+                rectActual = rectPushed;
+            else
+                rectActual = rectIddle;
         }
 
     } // class MenuItemSelectionButton

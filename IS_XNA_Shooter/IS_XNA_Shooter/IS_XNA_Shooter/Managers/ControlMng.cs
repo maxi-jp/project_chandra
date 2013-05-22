@@ -26,6 +26,8 @@ namespace IS_XNA_Shooter
         private MouseState prevMouseState, actMouseState;
 
         public static bool leftClickPreshed, rightClickPreshed;
+        public static bool leftClickReleased, rightClickReleased;
+        public static int lastClickX, lastClickY;
 
         public ControlMng ()
         {
@@ -37,6 +39,8 @@ namespace IS_XNA_Shooter
             f11Preshed = f12Preshed = false;
 
             leftClickPreshed = rightClickPreshed = false;
+            leftClickReleased = rightClickReleased = false;
+            lastClickX = lastClickY = 0;
         }
 
         public void Update(float deltaTime)
@@ -68,7 +72,15 @@ namespace IS_XNA_Shooter
             actMouseState = Mouse.GetState();
 
             leftClickPreshed = ((actMouseState.LeftButton == ButtonState.Pressed) && (prevMouseState.LeftButton == ButtonState.Released));
+            if (leftClickPreshed)
+            {
+                lastClickX = actMouseState.X;
+                lastClickY = actMouseState.Y;
+            }
             rightClickPreshed = ((actMouseState.RightButton == ButtonState.Pressed) && (prevMouseState.RightButton == ButtonState.Released));
+
+            leftClickReleased = ((actMouseState.LeftButton == ButtonState.Released) && (prevMouseState.LeftButton == ButtonState.Pressed));
+            rightClickReleased = ((actMouseState.RightButton == ButtonState.Released) && (prevMouseState.RightButton == ButtonState.Pressed));
 
             prevMouseState = actMouseState;
         }

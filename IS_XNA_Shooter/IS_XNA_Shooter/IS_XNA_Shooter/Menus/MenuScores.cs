@@ -181,7 +181,6 @@ namespace IS_XNA_Shooter
                     itemSurvival.Click(X, Y);
                     itemDefense.Click(X, Y);
                     itemKiller.Click(X, Y);
-                    itemBack.Click(X, Y);
 
                     itemBack.Click(X, Y);
                     break;
@@ -194,6 +193,38 @@ namespace IS_XNA_Shooter
             switch (currentState)
             {
                 case MenuScoresState.Showing:
+                    if (itemScroll.Unclick(X, Y))
+                    {
+                        itemSurvival.SetSelected(false);
+                        itemDefense.SetSelected(false);
+                        itemKiller.SetSelected(false);
+
+                        currentTypeSelected = GameTypes.Scroll;
+                    }
+                    if (itemSurvival.Unclick(X, Y))
+                    {
+                        itemScroll.SetSelected(false);
+                        itemDefense.SetSelected(false);
+                        itemKiller.SetSelected(false);
+
+                        currentTypeSelected = GameTypes.Survival;
+                    }
+                    if (itemDefense.Unclick(X, Y))
+                    {
+                        itemScroll.SetSelected(false);
+                        itemSurvival.SetSelected(false);
+                        itemKiller.SetSelected(false);
+
+                        currentTypeSelected = GameTypes.Defense;
+                    }
+                    if (itemKiller.Unclick(X, Y))
+                    {
+                        itemScroll.SetSelected(false);
+                        itemSurvival.SetSelected(false);
+                        itemDefense.SetSelected(false);
+
+                        currentTypeSelected = GameTypes.Killer;
+                    }
                     if (itemBack.Unclick(X, Y))
                     {
                         Audio.PlayEffect("digitalAcent01");

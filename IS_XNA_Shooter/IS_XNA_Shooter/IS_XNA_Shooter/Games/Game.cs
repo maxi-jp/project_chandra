@@ -210,12 +210,12 @@ namespace IS_XNA_Shooter
 
             foreach (Enemy e in enemies)
                 // TODO
-                if (e.IsDrawable())
+                if (e.IsActive())
                     e.Draw(spriteBatch);
 
             foreach (Enemy e in enemiesBot)
                 // TODO
-                if (e.IsDrawable())
+                if (e.IsActive())
                     e.Draw(spriteBatch);
 
             foreach (Shot shot in shots)    // player shots

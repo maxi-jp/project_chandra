@@ -74,11 +74,16 @@ namespace IS_XNA_Shooter
         /// </summary>
         protected byte transparency;
 
+        private enum mystate
+        {
+            ONSPAWNIN,
+            ONNORMAL
+        }
+
         /// <summary>
-        /// indicates when you should start to be drawn.
+        /// State of the enemy.
         /// </summary>
-        /// // TODO
-        protected bool drawable;
+        private mystate enemiesState;
        
         /// <summary>
         /// Enemy's constructor
@@ -113,7 +118,7 @@ namespace IS_XNA_Shooter
             this.ship = ship;
             this.powerUp = null;
             this.transparency = 0;
-            this.drawable = false;
+            this.enemiesState = mystate.ONSPAWNIN;
 
             active = false;
             colisionable = false;
@@ -127,14 +132,37 @@ namespace IS_XNA_Shooter
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
-            if (DeadCondition())
-                erasable = true;
-            
-            if (colisionable && collider != null)
-                collider.Update(position, rotation);
+            switch (enemiesState)
+            {
+                case mystate.ONSPAWNIN:
+                    {
+                        if (timeToSpawn > 0)
+                        {
+                            timeToSpawn -= deltaTime;
+                            transparency += (byte)(deltaTime * 720);
+                            SetTransparency(transparency);
+                        }
+                        else
+                        {
+                            enemiesState = mystate.ONNORMAL;
+                            colisionable = true;
+                            SetTransparency(255);
+                        }
+                        break;
+                    }
+                case mystate.ONNORMAL:
+                    {
+                        if (DeadCondition())
+                            erasable = true;
 
-            if (OutOfScreen())
-                ForceKill();
+                        if (colisionable && collider != null)
+                            collider.Update(position, rotation);
+
+                        if (OutOfScreen())
+                            ForceKill();
+                        break;
+                    }
+            }
         } // Update
 
         /// <summary>
@@ -144,12 +172,6 @@ namespace IS_XNA_Shooter
         public void UpdateTimeToSpawn(float deltaTime)
         {
             timeToSpawn -= deltaTime;
-
-            // TODO
-            if (timeToSpawn <= 8 && !drawable)
-            {
-                drawable = true;
-            }
 
             if (timeToSpawn <= 0)
                 SetActive();
@@ -165,12 +187,6 @@ namespace IS_XNA_Shooter
 
             if (SuperGame.debug && colisionable)
                 collider.Draw(spriteBatch);
-        }
-
-        // TODO
-        public bool IsDrawable()
-        {
-            return drawable;
         }
 
         /// <summary>
@@ -254,7 +270,7 @@ namespace IS_XNA_Shooter
         public void SetActive()
         {
             active = true;
-            colisionable = true;
+            this.timeToSpawn = 1.2f;
         }
 
         /// <summary>

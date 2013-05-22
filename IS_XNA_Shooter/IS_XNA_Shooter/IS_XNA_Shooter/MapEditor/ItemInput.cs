@@ -59,6 +59,8 @@ namespace IS_XNA_Shooter.MapEditor
                     GRMng.boxSizesMapEditor2.Height / 2);
             keyboardInput = new KeyboardHandler(10);
             this.currentState = currentState;
+            if (currentState == State.mapScreen)
+                keyboardInput.setText("1");
         }
 
 
@@ -76,6 +78,11 @@ namespace IS_XNA_Shooter.MapEditor
                 return Convert.ToInt32(aux);
             else
                 return 0;
+        }
+
+        public void setText(String valor)
+        {
+            keyboardInput.setText(valor);
         }
 
 

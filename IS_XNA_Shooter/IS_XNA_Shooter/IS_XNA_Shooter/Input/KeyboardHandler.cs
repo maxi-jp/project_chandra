@@ -70,6 +70,11 @@ namespace IS_XNA_Shooter.Input
             return text;
         }
 
+        public void setText(String text)
+        {
+            this.text = text;
+        }
+
 
         //---------------------------------------------------------------------------
 

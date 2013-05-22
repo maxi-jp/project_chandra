@@ -33,7 +33,9 @@ namespace IS_XNA_Shooter.MapEditor
 	    private stateMouse currentStateMouse;
 	    private bool isClickedFrameLevel;
         private bool isClickedFrameShips;
+        private bool isClickedEnemyShip;
         private List<InfoEnemy> enemiesInfo;
+        private InfoEnemy enemySelected;
 
     
         #region Frame Level
@@ -155,7 +157,7 @@ namespace IS_XNA_Shooter.MapEditor
 
             spriteDebug = GRMng.fontText;
 
-            isClickedFrameLevel = isClickedFrameShips = false;
+            isClickedFrameLevel = isClickedFrameShips = isClickedEnemyShip = false;
             this.levelType = levelType;
           /*  this.height = width;
             this.width = height;*/
@@ -205,6 +207,8 @@ namespace IS_XNA_Shooter.MapEditor
 	        //update mouse
             updateMouse();
 
+            
+            //dont click
             if (Mouse.GetState().LeftButton != Microsoft.Xna.Framework.Input.ButtonState.Pressed)
             {
                 //Save the ships in the frame of maps level if the enemy ships is uncliked over the frame level
@@ -215,14 +219,54 @@ namespace IS_XNA_Shooter.MapEditor
                 isClickedFrameLevel = isClickedFrameShips = false;
             }
 
-            if (!isClickedFrameLevel && !isClickedFrameShips && Mouse.GetState().LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed && 
+            //click frame level
+            if (!isClickedFrameLevel && !isClickedFrameShips && Mouse.GetState().LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed &&
                 rectangleFrameLevel.Contains(Mouse.GetState().X, Mouse.GetState().Y))
+            {
                 isClickedFrameLevel = true;
+                unselectEnemy();
 
-            if(!isClickedFrameLevel && !isClickedFrameShips && Mouse.GetState().LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed && 
+            }
+
+            //click frame right
+            if (!isClickedFrameLevel && !isClickedFrameShips &&  Mouse.GetState().LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed &&
                 rectFrameEnemies.Contains(Mouse.GetState().X, Mouse.GetState().Y))
-                          isClickedFrameShips = true;
-           
+            {
+                isClickedFrameShips = true;
+                unselectEnemy();
+
+            }
+
+            //click one enemy in the frame level
+            if (isClickedFrameLevel){
+                int numberEnemies = 0;
+                isClickedEnemyShip = false;
+                while (numberEnemies < enemiesInfo.Count && !isClickedEnemyShip){
+                      Rectangle rectEnemyShip = new Rectangle( enemiesInfo[numberEnemies].positionX - enemiesInfo[numberEnemies].frameWidth / 2, 
+                       enemiesInfo[numberEnemies].positionY - enemiesInfo[numberEnemies].frameHeight / 2,
+                       enemiesInfo[numberEnemies].frameWidth, enemiesInfo[numberEnemies].frameHeight);
+                            if(rectEnemyShip.Contains(Mouse.GetState().X - (int)displacementLevel.X, Mouse.GetState().Y - (int)displacementLevel.Y)){
+                                isClickedEnemyShip = true;
+                                enemySelected = enemiesInfo[numberEnemies];
+                                inputProp.setText(Convert.ToString(enemySelected.time));
+                            }
+                       numberEnemies++;
+                   
+                  }
+                }
+
+            if (isClickedEnemyShip && Mouse.GetState().LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed)
+            { 
+            Rectangle rectEnemyShip = new Rectangle( enemySelected.positionX - enemySelected.frameWidth / 2, 
+                      enemySelected.positionY - enemySelected.frameHeight / 2,
+                      enemySelected.frameWidth,enemySelected.frameHeight);
+                if (rectEnemyShip.Contains(Mouse.GetState().X - (int)displacementLevel.X, Mouse.GetState().Y - (int)displacementLevel.Y))
+                {
+                    enemySelected.positionX = Mouse.GetState().X - (int)displacementLevel.X;
+                    enemySelected.positionY = Mouse.GetState().Y - (int)displacementLevel.Y;
+                }
+            
+            }
 
             //update the frame of level
             updateFrameLevel();
@@ -308,7 +352,7 @@ namespace IS_XNA_Shooter.MapEditor
             int widthFrameLevel = 1000;
             int heightFrameLevel = 500;
 
-            if (isClickedFrameLevel)
+            if (isClickedFrameLevel && !isClickedEnemyShip)
             {
                 //move the level.
                 displacementLevel.X += Mouse.GetState().X - lastPositionMouse.X;
@@ -417,6 +461,9 @@ namespace IS_XNA_Shooter.MapEditor
                 positionCenter = Vector2.Zero;
             int frameWidth, frameHeight;
             for (int i = 0; i < enemiesInfo.Count; i++) {
+                Color color = Color.Gray;
+                if (enemySelected == enemiesInfo[i])
+                    color = Color.White;
 
                 infoEnemy = enemiesInfo[i];
                 typeShip = infoEnemy.type;
@@ -431,17 +478,17 @@ namespace IS_XNA_Shooter.MapEditor
                 {
                 
                 if (typeShip.Equals("EnemyWeakA"))
-                    spriteBatch.Draw(GRMng.textureEW1, position, animEW1Transition, Color.Gray);
+                    spriteBatch.Draw(GRMng.textureEW1, position, animEW1Transition, color);
                 if (typeShip.Equals("EnemyWeakShotA"))
-                    spriteBatch.Draw(GRMng.textureEW2, position, animEW2Transition, Color.Gray);
+                    spriteBatch.Draw(GRMng.textureEW2, position, animEW2Transition, color);
                 if (typeShip.Equals("EnemyBeamA"))
-                    spriteBatch.Draw(GRMng.textureEB1, position, animEB1Transition, Color.Gray);
+                    spriteBatch.Draw(GRMng.textureEB1, position, animEB1Transition, color);
                 if (typeShip.Equals("EnemyScaredA"))
-                    spriteBatch.Draw(GRMng.textureES, position, animESTransition, Color.Gray);
+                    spriteBatch.Draw(GRMng.textureES, position, animESTransition, color);
                 if (typeShip.Equals("EnemyMineShotA"))
-                    spriteBatch.Draw(GRMng.textureEMS, position, animEMSTransition, Color.Gray);
+                    spriteBatch.Draw(GRMng.textureEMS, position, animEMSTransition, color);
                 if (typeShip.Equals("EnemyLaserA"))
-                    spriteBatch.Draw(GRMng.textureEL, position, animELTransition, Color.Gray);
+                    spriteBatch.Draw(GRMng.textureEL, position, animELTransition, color);
 
               }
             }
@@ -710,35 +757,35 @@ namespace IS_XNA_Shooter.MapEditor
 
         private void saveShip(){
 
+            
             if (isClickEW1 && rectangleFrameLevel.Contains((int)positionEW1Transition.X + GRMng.frameWidthEW1 / 2, (int)positionEW1Transition.Y + GRMng.frameHeightEW1 / 2))
             {
-
-                InfoEnemy e = new InfoEnemy("EnemyWeakA", (int)positionEW1Transition.X + GRMng.frameWidthEW1 / 2 - (int)displacementLevel.X, (int)positionEW1Transition.Y + GRMng.frameHeightEW1 / 2 - (int)displacementLevel.Y, 1, GRMng.frameWidthEW1, GRMng.frameHeightEW1);
+                InfoEnemy e = new InfoEnemy("EnemyWeakA", (int)positionEW1Transition.X + GRMng.frameWidthEW1 / 2 - (int)displacementLevel.X, (int)positionEW1Transition.Y + GRMng.frameHeightEW1 / 2 - (int)displacementLevel.Y, this.inputProp.getValue(), GRMng.frameWidthEW1, GRMng.frameHeightEW1);
                 enemiesInfo.Add(e);
             }
             else if (isClickEW2 && rectangleFrameLevel.Contains((int)positionEW2Transition.X + GRMng.frameWidthEW2 / 2, (int)positionEW2Transition.Y + GRMng.frameHeightEW2 / 2))
             {
-                InfoEnemy e = new InfoEnemy("EnemyWeakShotA", (int)positionEW2Transition.X + GRMng.frameWidthEW2 / 2 - (int)displacementLevel.X, (int)positionEW2Transition.Y + GRMng.frameHeightEW2 / 2 - (int)displacementLevel.Y, 1, GRMng.frameWidthEW2, GRMng.frameHeightEW2);
+                InfoEnemy e = new InfoEnemy("EnemyWeakShotA", (int)positionEW2Transition.X + GRMng.frameWidthEW2 / 2 - (int)displacementLevel.X, (int)positionEW2Transition.Y + GRMng.frameHeightEW2 / 2 - (int)displacementLevel.Y, this.inputProp.getValue(), GRMng.frameWidthEW2, GRMng.frameHeightEW2);
                 enemiesInfo.Add(e);
             }
             else if (isClickEB1 && rectangleFrameLevel.Contains((int)positionEB1Transition.X + GRMng.frameWidthEB1 / 2, (int)positionEB1Transition.Y + GRMng.frameHeightEB1 / 2))
             {
-                InfoEnemy e = new InfoEnemy("EnemyBeamA", (int)positionEB1Transition.X + GRMng.frameWidthEB1 / 2 - (int)displacementLevel.X, (int)positionEB1Transition.Y + GRMng.frameHeightEB1 / 2 - (int)displacementLevel.Y, 1, GRMng.frameWidthEB1, GRMng.frameHeightEB1);
+                InfoEnemy e = new InfoEnemy("EnemyBeamA", (int)positionEB1Transition.X + GRMng.frameWidthEB1 / 2 - (int)displacementLevel.X, (int)positionEB1Transition.Y + GRMng.frameHeightEB1 / 2 - (int)displacementLevel.Y, this.inputProp.getValue(), GRMng.frameWidthEB1, GRMng.frameHeightEB1);
                 enemiesInfo.Add(e);
             }
             else if (isClickES && rectangleFrameLevel.Contains((int)positionESTransition.X + GRMng.frameWidthES / 2, (int)positionESTransition.Y + GRMng.frameHeightES / 2))
             {
-                InfoEnemy e = new InfoEnemy("EnemyScaredA", (int)positionESTransition.X + GRMng.frameWidthES / 2 - (int)displacementLevel.X, (int)positionESTransition.Y + GRMng.frameHeightES / 2 - (int)displacementLevel.Y, 1, GRMng.frameWidthES, GRMng.frameHeightES);
+                InfoEnemy e = new InfoEnemy("EnemyScaredA", (int)positionESTransition.X + GRMng.frameWidthES / 2 - (int)displacementLevel.X, (int)positionESTransition.Y + GRMng.frameHeightES / 2 - (int)displacementLevel.Y, this.inputProp.getValue(), GRMng.frameWidthES, GRMng.frameHeightES);
                 enemiesInfo.Add(e);
             }
             else if (isClickEMS && rectangleFrameLevel.Contains((int)positionEMSTransition.X + GRMng.frameWidthEMS / 2, (int)positionEMSTransition.Y + GRMng.frameHeightEMS/2))
             {
-                InfoEnemy e = new InfoEnemy("EnemyMineShotA", (int)positionEMSTransition.X + GRMng.frameWidthEMS / 2 - (int)displacementLevel.X, (int)positionEMSTransition.Y + GRMng.frameHeightEMS / 2 - (int)displacementLevel.Y, 1, GRMng.frameWidthEMS, GRMng.frameHeightEMS);
+                InfoEnemy e = new InfoEnemy("EnemyMineShotA", (int)positionEMSTransition.X + GRMng.frameWidthEMS / 2 - (int)displacementLevel.X, (int)positionEMSTransition.Y + GRMng.frameHeightEMS / 2 - (int)displacementLevel.Y, this.inputProp.getValue(), GRMng.frameWidthEMS, GRMng.frameHeightEMS);
                 enemiesInfo.Add(e);
             }
             else if (isClickEL && rectangleFrameLevel.Contains((int)positionELTransition.X + GRMng.frameWidthEL / 2, (int)positionELTransition.Y + GRMng.frameHeightEL / 2))
             {
-                InfoEnemy e = new InfoEnemy("EnemyLaserA", (int)positionELTransition.X + GRMng.frameWidthEL / 2 - (int)displacementLevel.X, (int)positionELTransition.Y + GRMng.frameHeightEL / 2 - (int)displacementLevel.Y, 1, GRMng.frameWidthEL, GRMng.frameHeightEL);
+                InfoEnemy e = new InfoEnemy("EnemyLaserA", (int)positionELTransition.X + GRMng.frameWidthEL / 2 - (int)displacementLevel.X, (int)positionELTransition.Y + GRMng.frameHeightEL / 2 - (int)displacementLevel.Y, this.inputProp.getValue(), GRMng.frameWidthEL, GRMng.frameHeightEL);
                 enemiesInfo.Add(e);
             }
         
@@ -770,8 +817,8 @@ namespace IS_XNA_Shooter.MapEditor
                 {
                     enemieList.Add(new XElement("enemy",
                                         new XAttribute("type", enemiesInfo[i].type),
-                                        new XAttribute("positionX", enemiesInfo[i].positionX),
-                                        new XAttribute("positionY", enemiesInfo[i].positionY),
+                                        new XAttribute("positionX", enemiesInfo[i].positionX - origXScreen),
+                                        new XAttribute("positionY", enemiesInfo[i].positionY - origYScreen),
                                         new XAttribute("time", enemiesInfo[i].time)));
                 }
 
@@ -818,8 +865,8 @@ namespace IS_XNA_Shooter.MapEditor
                         XmlAttributeCollection enemyN = nodo.Attributes;
                         //XmlAttribute a = enemyN[1];
                         enemyType = Convert.ToString(enemyN[0].Value);
-                        positionX = (float)Convert.ToDouble(enemyN[1].Value);
-                        positionY = (float)Convert.ToDouble(enemyN[2].Value);
+                        positionX = (float)Convert.ToDouble(enemyN[1].Value) + origXScreen;
+                        positionY = (float)Convert.ToDouble(enemyN[2].Value) + origYScreen;
                         time = (float)Convert.ToDouble(enemyN[3].Value);
                         //timeLeftEnemy.Add(time);
 
@@ -847,5 +894,18 @@ namespace IS_XNA_Shooter.MapEditor
                 }
             }
         }   //  end LeerArchivoXML()
+
+        private void unselectEnemy() {
+
+            isClickedEnemyShip = false;
+            if (enemySelected != null)
+            enemySelected.time = inputProp.getValue();
+            enemySelected = null;
+
+            
+        
+        }//unselecEnemy
+
+
     }//Class MainMapEditor
 }

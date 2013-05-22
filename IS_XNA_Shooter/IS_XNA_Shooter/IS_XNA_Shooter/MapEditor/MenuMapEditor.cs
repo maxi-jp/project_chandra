@@ -15,7 +15,7 @@ namespace IS_XNA_Shooter
     public class MenuMapEditor
     {
         // States of the map editor.
-        private enum State
+        public enum State
         {
             SelectTypeGame,
             SelectSizeGame,
@@ -27,7 +27,7 @@ namespace IS_XNA_Shooter
 
 
         // The current state of the menu of map editor.
-        private State currentState;
+        public State currentState;
         // The SuperGame to return to the SuperGame.
         private SuperGame mainGame;
         // The menu to return there.
@@ -178,8 +178,8 @@ namespace IS_XNA_Shooter
                     if (itemArcadeScroll.Unclick(X, Y))
                     {
                         Audio.PlayEffect("digitalAcent01");
-                        currentState = State.SelectSizeGame;
-                        buildScreenSize();
+                        //currentState = State.SelectSizeGame;
+                        //buildScreenSize();
                     }
                     else if (itemArcadeKiller.Unclick(X, Y))
                     {
@@ -196,8 +196,8 @@ namespace IS_XNA_Shooter
                     else if (itemArcadeDefense.Unclick(X, Y))
                     {
                         Audio.PlayEffect("digitalAcent01");
-                        currentState = State.SelectSizeGame;
-                        buildScreenSize();
+                        //currentState = State.SelectSizeGame;
+                        //buildScreenSize();
                     }
                     break;
 
@@ -206,7 +206,7 @@ namespace IS_XNA_Shooter
                     if (itemContinue.Unclick(X, Y) && itemWidth.isInRange() && itemHeight.isInRange())
                     {
                         Audio.PlayEffect("digitalAcent01");
-                        mainMapEditor = new MainMapEditor("Arcade", itemWidth.getValue(), itemHeight.getValue(), mainGame);
+                        mainMapEditor = new MainMapEditor("Arcade", itemWidth.getValue(), itemHeight.getValue(), mainGame, this);
                         currentState = State.MainMapEditor;
                     }
                     break;

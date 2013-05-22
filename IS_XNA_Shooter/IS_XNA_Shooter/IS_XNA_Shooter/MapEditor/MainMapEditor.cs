@@ -17,8 +17,10 @@ namespace IS_XNA_Shooter.MapEditor
         private enum stateMouse
         {
             normal,
-            click,
-            unclick
+            leftClick,
+            leftUnclick,
+            rigthClick,
+            rigthUnlick
         }
 
         //******************************
@@ -37,6 +39,8 @@ namespace IS_XNA_Shooter.MapEditor
         private bool isMovingShip;
         private List<InfoEnemy> enemiesInfo;
         private InfoEnemy enemySelected;
+        private MenuItem itemMainQuit;
+        private MenuMapEditor menuMapEditor;
 
     
         #region Frame Level
@@ -139,7 +143,8 @@ namespace IS_XNA_Shooter.MapEditor
         //***************************
         //*****     BUILDER     *****
         //***************************        
-        public MainMapEditor(String levelType, int width, int height, SuperGame mainGame) {
+        public MainMapEditor(String levelType, int width, int height, SuperGame mainGame, MenuMapEditor menuMapEditor)
+        {
 	    currentStateMouse = stateMouse.normal;
 	    //variables frameLevel
             widthFrameLevel = 1000;
@@ -166,6 +171,7 @@ namespace IS_XNA_Shooter.MapEditor
             this.width = width;
 
             this.mainGame = mainGame;
+            this.menuMapEditor = menuMapEditor;
 
             //Malla de Texturas
             whitePixel = GRMng.whitepixel;
@@ -195,6 +201,10 @@ namespace IS_XNA_Shooter.MapEditor
 
             //buttons save, load and preview
             initButtonsSaveLoadPreview();
+
+            //button quit
+            itemMainQuit = new MenuItem(false, new Vector2(SuperGame.screenWidth - 45, 5), GRMng.menuMain,
+                new Rectangle(0, 360, 40, 40), new Rectangle(40, 360, 40, 40), new Rectangle(80, 360, 40, 40));
         }
 
 
@@ -214,8 +224,8 @@ namespace IS_XNA_Shooter.MapEditor
                 isSelectedFrameLevel = isSelectedFrameShips = isMovingShip = false;
             }
 
-            //unclick mouse
-            if (currentStateMouse == stateMouse.unclick)
+            //unclick mouse button left
+            if (currentStateMouse == stateMouse.leftUnclick)
             {
                 //Save the ships in the frame of maps level if the enemy ships is uncliked over the frame level
                 if (isSelectedFrameShips)
@@ -223,12 +233,18 @@ namespace IS_XNA_Shooter.MapEditor
                     saveShip();
                     isSelectedFrameLevel = false;
                 }
+                //return to main menu
+                if (itemMainQuit.Unclick(Mouse.GetState().X, Mouse.GetState().Y))
+                {
+                    Audio.PlayEffect("digitalAcent01");
+                    menuMapEditor.currentState = MenuMapEditor.State.SelectTypeGame;
+                }
 
                 isMovingShip = false;
             }
 
-            //click
-            if (currentStateMouse == stateMouse.click)
+            //click mouse button left
+            if (currentStateMouse == stateMouse.leftClick)
             {
                 //frame level
                 if (!isSelectedFrameLevel && !isSelectedFrameShips && rectangleFrameLevel.Contains(Mouse.GetState().X, Mouse.GetState().Y))
@@ -271,22 +287,51 @@ namespace IS_XNA_Shooter.MapEditor
                 {
                     enemySelected.positionX = Mouse.GetState().X - (int)displacementLevel.X;
                     enemySelected.positionY = Mouse.GetState().Y - (int)displacementLevel.Y;
-
+                    //limit the position
                     if (enemySelected.positionX < 10 + origXScreen + enemySelected.frameWidth / 2) enemySelected.positionX = 10 + origXScreen + enemySelected.frameWidth / 2;
                     if (enemySelected.positionX > 10 + origXScreen + width - enemySelected.frameWidth / 2) enemySelected.positionX = 10 + origXScreen + width - enemySelected.frameWidth / 2;
                     if (enemySelected.positionY < 10 + origYScreen + enemySelected.frameHeight / 2) enemySelected.positionY = 10 + origYScreen + enemySelected.frameHeight / 2;
                     if (enemySelected.positionY > 10 + origYScreen + height - enemySelected.frameHeight / 2) enemySelected.positionY = 10 + origYScreen + height - enemySelected.frameHeight / 2;
                 }
+
+                //button quit cliked
+                itemMainQuit.Click(Mouse.GetState().X, Mouse.GetState().Y);
+            }
+
+            //unclick button rigth
+            if (currentStateMouse == stateMouse.rigthUnlick)
+            {
+                int i = 0;
+                bool contains = false;
+                while (i < enemiesInfo.Count && !contains)
+                {
+                    Rectangle rectEnemyShip = new Rectangle(enemiesInfo[i].positionX - enemiesInfo[i].frameWidth / 2,
+                     enemiesInfo[i].positionY - enemiesInfo[i].frameHeight / 2,
+                     enemiesInfo[i].frameWidth, enemiesInfo[i].frameHeight);
+
+                    if (rectEnemyShip.Contains(Mouse.GetState().X - (int)displacementLevel.X, Mouse.GetState().Y - (int)displacementLevel.Y))
+                    {
+                        contains = true;
+                        isMovingShip = true;
+                    }
+                    i++;
+                }
+
+                if (contains)
+                {
+                    i--;
+                    enemiesInfo.Remove(enemiesInfo[i]);
+                }
             }
 
             //update the frame of level
             updateFrameLevel();
-
             //frame right to select enemies
             updateFrameEnemiesTransition();
-
             //buttons for save, load and preview a level
             updateButtonsSaveLoadPreview();
+            //menu quit
+            itemMainQuit.Update(Mouse.GetState().X, Mouse.GetState().Y);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -303,6 +348,8 @@ namespace IS_XNA_Shooter.MapEditor
             drawPropertiesEnemies(spriteBatch);
             //buttons for save, load and preview a level
             drawButtonsSaveLoadPreview(spriteBatch);
+            //menu quit
+            itemMainQuit.Draw(spriteBatch);
 
             //debug
             spriteBatch.DrawString(spriteDebug, "(" + displacementLevel.X + ", " + displacementLevel.Y + ")", Vector2.Zero, Color.White);
@@ -342,17 +389,26 @@ namespace IS_XNA_Shooter.MapEditor
             if (currentStateMouse == stateMouse.normal)
             {
                 if (Mouse.GetState().LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed)
-                    currentStateMouse = stateMouse.click;
+                    currentStateMouse = stateMouse.leftClick;
+                else if (Mouse.GetState().RightButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed)
+                    currentStateMouse = stateMouse.rigthClick;
             }
-            else if (currentStateMouse == stateMouse.click)
+            else if (currentStateMouse == stateMouse.leftClick)
             {
                 if (Mouse.GetState().LeftButton != Microsoft.Xna.Framework.Input.ButtonState.Pressed)
-                    currentStateMouse = stateMouse.unclick;
+                    currentStateMouse = stateMouse.leftUnclick;
+            }
+            else if (currentStateMouse == stateMouse.rigthClick)
+            {
+                if (Mouse.GetState().RightButton != Microsoft.Xna.Framework.Input.ButtonState.Pressed)
+                    currentStateMouse = stateMouse.rigthUnlick;
             }
             else
             {
                 if (Mouse.GetState().LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed)
-                    currentStateMouse = stateMouse.click;
+                    currentStateMouse = stateMouse.leftClick;
+                else if (Mouse.GetState().RightButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed)
+                    currentStateMouse = stateMouse.rigthClick;
                 else
                     currentStateMouse = stateMouse.normal;
             }
@@ -723,41 +779,50 @@ namespace IS_XNA_Shooter.MapEditor
 
         private void updateButtonsSaveLoadPreview() 
         {
-            if (rectSave.Contains(Mouse.GetState().X, Mouse.GetState().Y))
-                if (currentStateMouse == stateMouse.click)
-                    rectAnimSave = new Rectangle(0, 2 * (int)GRMng.heightButtonsSaveLoadPreview, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
-                else if (currentStateMouse == stateMouse.normal)
-                    rectAnimSave = new Rectangle(0, (int)GRMng.heightButtonsSaveLoadPreview, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
-                else
+            if (!isMovingShip && !isSelectedFrameLevel && !isSelectedFrameShips)
+            {
+                if (rectSave.Contains(Mouse.GetState().X, Mouse.GetState().Y))
                 {
-                    save();
+                    if (currentStateMouse == stateMouse.leftClick)
+                        rectAnimSave = new Rectangle(0, 2 * (int)GRMng.heightButtonsSaveLoadPreview, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
+                    else if (currentStateMouse == stateMouse.normal)
+                        rectAnimSave = new Rectangle(0, (int)GRMng.heightButtonsSaveLoadPreview, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
+                    else if (currentStateMouse == stateMouse.leftUnclick)
+                    {
+                        save();
+                    }
                 }
-            else
-                rectAnimSave = new Rectangle(0, 0, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
+                else
+                    rectAnimSave = new Rectangle(0, 0, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
 
-            if (rectLoad.Contains(Mouse.GetState().X, Mouse.GetState().Y))
-                if (currentStateMouse == stateMouse.click)
-                    rectAnimLoad = new Rectangle(0, (int)GRMng.heightButtonsSaveLoadPreview * GRMng.numAnimsButtonsSaveLoadPreview + 2 * (int)GRMng.heightButtonsSaveLoadPreview, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
-                else if (currentStateMouse == stateMouse.normal)
-                    rectAnimLoad = new Rectangle(0, (int)GRMng.heightButtonsSaveLoadPreview * GRMng.numAnimsButtonsSaveLoadPreview + (int)GRMng.heightButtonsSaveLoadPreview, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
-                else
+                if (rectLoad.Contains(Mouse.GetState().X, Mouse.GetState().Y))
                 {
-                    load();
+                    if (currentStateMouse == stateMouse.leftClick)
+                        rectAnimLoad = new Rectangle(0, (int)GRMng.heightButtonsSaveLoadPreview * GRMng.numAnimsButtonsSaveLoadPreview + 2 * (int)GRMng.heightButtonsSaveLoadPreview, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
+                    else if (currentStateMouse == stateMouse.normal)
+                        rectAnimLoad = new Rectangle(0, (int)GRMng.heightButtonsSaveLoadPreview * GRMng.numAnimsButtonsSaveLoadPreview + (int)GRMng.heightButtonsSaveLoadPreview, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
+                    else if (currentStateMouse == stateMouse.leftUnclick)
+                    {
+                        load();
+                    }
                 }
-            else
-                rectAnimLoad = new Rectangle(0, (int)GRMng.heightButtonsSaveLoadPreview * GRMng.numAnimsButtonsSaveLoadPreview, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
+                else
+                    rectAnimLoad = new Rectangle(0, (int)GRMng.heightButtonsSaveLoadPreview * GRMng.numAnimsButtonsSaveLoadPreview, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
 
-            if (rectPreview.Contains(Mouse.GetState().X, Mouse.GetState().Y))
-                if (currentStateMouse == stateMouse.click)
-                    rectAnimPreview = new Rectangle(0, (int)GRMng.heightButtonsSaveLoadPreview * GRMng.numAnimsButtonsSaveLoadPreview * 2 + 2 * (int)GRMng.heightButtonsSaveLoadPreview, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
-                else if (currentStateMouse == stateMouse.normal)
-                    rectAnimPreview = new Rectangle(0, (int)GRMng.heightButtonsSaveLoadPreview * GRMng.numAnimsButtonsSaveLoadPreview * 2 + (int)GRMng.heightButtonsSaveLoadPreview, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
-                else
+                if (rectPreview.Contains(Mouse.GetState().X, Mouse.GetState().Y))
                 {
-                    //TODO: when you unclick the button
+                    if (currentStateMouse == stateMouse.leftClick)
+                        rectAnimPreview = new Rectangle(0, (int)GRMng.heightButtonsSaveLoadPreview * GRMng.numAnimsButtonsSaveLoadPreview * 2 + 2 * (int)GRMng.heightButtonsSaveLoadPreview, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
+                    else if (currentStateMouse == stateMouse.normal)
+                        rectAnimPreview = new Rectangle(0, (int)GRMng.heightButtonsSaveLoadPreview * GRMng.numAnimsButtonsSaveLoadPreview * 2 + (int)GRMng.heightButtonsSaveLoadPreview, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
+                    else if (currentStateMouse == stateMouse.leftUnclick)
+                    {
+                        //TODO: when you unclick the button
+                    }
                 }
-            else
-                rectAnimPreview = new Rectangle(0, (int)GRMng.heightButtonsSaveLoadPreview * GRMng.numAnimsButtonsSaveLoadPreview * 2, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
+                else
+                    rectAnimPreview = new Rectangle(0, (int)GRMng.heightButtonsSaveLoadPreview * GRMng.numAnimsButtonsSaveLoadPreview * 2, (int)GRMng.widthButtonsSaveLoadPreview, (int)GRMng.heightButtonsSaveLoadPreview);
+            }
             
         }
 

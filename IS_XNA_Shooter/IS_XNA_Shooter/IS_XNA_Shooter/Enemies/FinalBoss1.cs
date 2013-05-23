@@ -91,7 +91,7 @@ namespace IS_XNA_Shooter
         public FinalBoss1(Camera camera, Level level,Vector2 position, List <Enemy> enemies)
             : base (camera, level, position, (float)Math.PI, GRMng.frameWidthFinalBoss1, GRMng.frameHeightFinalBoss1, 
                 GRMng.numAnimsFinalBoss1, GRMng.frameCountFinalBoss1, GRMng.loopingFinalBoss1, SuperGame.frameTime12,
-                GRMng.textureFinalBoss1, 0, 40, 40000, 1, null)
+                GRMng.textureFinalBoss1, 1, 40, 40000, 1, null)
         {
             //collider points
             colliderPoints();

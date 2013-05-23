@@ -122,6 +122,7 @@
     <Compile Include="Explosions\Asteroid.cs" />
     <Compile Include="Games\GameADefense.cs" />
     <Compile Include="Games\GameC.cs" />
+    <Compile Include="Input\KeyboardHandler.cs" />
     <Compile Include="Levels\LevelC.cs" />
     <Compile Include="Managers\ControlMng.cs" />
     <Compile Include="Enemies\EnemyFactory.cs" />

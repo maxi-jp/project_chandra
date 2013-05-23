@@ -19,7 +19,7 @@ namespace IS_XNA_Shooter
         /// <summary>
         /// String that indicates the current version of the project
         /// </summary>
-        public String currentVersion = "0.6";
+        public String currentVersion = "0.75";
 
         /// <summary>
         /// XNA's atribute for graphics
@@ -205,6 +205,11 @@ namespace IS_XNA_Shooter
         /// </summary>
         private MenuScores menuScores;
 
+        private String currentGameName;
+        // TODO! esto es una ñapa, se hace ahora así para que funcione
+        // el menu de scores para meter una nueva puntuación en nivel
+        // que se ha jugado último
+
         /// <summary>
         /// Game
         /// </summary>
@@ -273,7 +278,7 @@ namespace IS_XNA_Shooter
             updateFramesCounter = updateFramesCounterAux = 0;
             timeCounterSecond = timeCounterSecondAux = 1;
 
-            currentState = gameState.scoresMenu;//starting // puts game's state to starting
+            currentState = gameState.starting; // puts game's state to starting
             pointer = new Vector2();
 
             base.Initialize();
@@ -565,6 +570,7 @@ namespace IS_XNA_Shooter
         /// </summary>
         private void NewGameATest()
         {
+            currentGameName = "TestEnemies";
             grManager.LoadHud();
             grManager.LoadContent("LevelA1"); // Load the gameA's level 1 resources
             audio.LoadContent(1);
@@ -576,6 +582,7 @@ namespace IS_XNA_Shooter
 
         private void NewGameAForTestingParticles()
         {
+            currentGameName = "TestParticles";
             grManager.LoadHud();
             grManager.LoadContent("LevelA1"); // Load the gameA's level 1 resources
             audio.LoadContent(1);
@@ -590,6 +597,8 @@ namespace IS_XNA_Shooter
         /// </summary>
         public void NewStory()
         {
+            currentGameName = "Story";
+
             grManager.LoadHud();
             grManager.LoadVideo(1);
             // introduction video
@@ -612,6 +621,8 @@ namespace IS_XNA_Shooter
         /// <param name="cad">The number of the level</param>
         public void NewSurvival(String cad)
         {
+            currentGameName = cad;
+
             grManager.LoadHud();
             grManager.LoadContent(cad);  // Load the gameA's level 1 resources
             audio.LoadContent(1);
@@ -631,6 +642,8 @@ namespace IS_XNA_Shooter
         /// <param name="cad">The number of the level</param>
         public void NewKiller(String cad)
         {
+            currentGameName = cad;
+
             grManager.LoadHud();
             grManager.LoadContent(cad); // Load the gameB's level 1 resources
             audio.LoadContent(1);
@@ -650,6 +663,8 @@ namespace IS_XNA_Shooter
         /// <param name="cad">The number of the level</param>
         public void NewDefense(String cad)
         {
+            currentGameName = cad;
+
             grManager.LoadHud();
             grManager.LoadContent(cad); // Load the gameA's level 1 resources
             audio.LoadContent(1);
@@ -673,6 +688,8 @@ namespace IS_XNA_Shooter
         /// <param name="cad">The number of the level</param>
         public void NewScroll(String cad)
         {
+            currentGameName = cad;
+
             grManager.LoadHud();
             grManager.LoadContent(cad); // Load the gameB's level 1 resources
             audio.LoadContent(1);
@@ -723,9 +740,19 @@ namespace IS_XNA_Shooter
         /// </summary>
         public void GameOver()
         {
-            //New score added
-            //menuScore.addNewScore(currentNameLevel, player.GetTotalScore()); 
-            currentState = gameState.gameOver;
+            if (currentGameName == "Story")
+            {
+                currentState = gameState.gameOver;
+            }
+            else // Arcade level played:
+            {
+                //Add new score
+                menuScores.AddNewScore(currentGameName, player.GetTotalScore());
+                currentState = gameState.scoresMenu;
+            }
+
+            // reset the player lives
+            player.EarnLife(playerLifes);
         }
 
         /// <summary>

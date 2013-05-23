@@ -28,9 +28,9 @@ namespace IS_XNA_Shooter
 
         public override void Update(int X, int Y)
         {
-            /*if (!selected)
+            if (!selected)
             {
-                if (rectangle.Contains(X, Y))
+                /*if (rectangle.Contains(X, Y))
                     rectActual = rectSelected;
                 else
                     rectActual = rectIddle;
@@ -39,10 +39,10 @@ namespace IS_XNA_Shooter
                 {
                     rectActual = rectIddle;
                     preshed = selected = false;
-                }
+                }*/
+                // TODO! arreglar esto: poner a selected (no preshed) los botones
+                // cuando pasamos por encima y no están seleccionados
             }
-            */
-
         }
 
         public override bool Click(int X, int Y)

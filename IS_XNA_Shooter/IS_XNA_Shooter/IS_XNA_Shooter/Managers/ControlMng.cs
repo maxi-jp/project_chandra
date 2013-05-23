@@ -18,7 +18,7 @@ namespace IS_XNA_Shooter
 
         private KeyboardState prevKeyboardState, actKeyboardState;
 
-        public static bool fPreshed, kPreshed, lPreshed, gPreshed;
+        public static bool fPreshed, kPreshed, lPreshed, gPreshed, enterPreshed;
         public static bool f1Preshed, f2Preshed, f3Preshed, f4Preshed, f5Preshed;
         public static bool f6Preshed, f7Preshed, f8Preshed, f9Preshed, f10Preshed;
         public static bool f11Preshed, f12Preshed;
@@ -33,7 +33,7 @@ namespace IS_XNA_Shooter
         {
             controllerActive = GamePad.GetState(PlayerIndex.One).IsConnected;
 
-            fPreshed = kPreshed = gPreshed = false;
+            fPreshed = kPreshed = gPreshed = enterPreshed = false;
             f1Preshed = f2Preshed = f3Preshed = f4Preshed = f5Preshed = false;
             f6Preshed = f7Preshed = f8Preshed = f9Preshed = f10Preshed = false;
             f11Preshed = f12Preshed = false;
@@ -52,6 +52,7 @@ namespace IS_XNA_Shooter
             fPreshed = (actKeyboardState.IsKeyDown(Keys.F) && prevKeyboardState.IsKeyUp(Keys.F));
             lPreshed = (actKeyboardState.IsKeyDown(Keys.L) && prevKeyboardState.IsKeyUp(Keys.L));
             gPreshed = (actKeyboardState.IsKeyDown(Keys.G) && prevKeyboardState.IsKeyUp(Keys.G));
+            enterPreshed = (actKeyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter));
 
             f1Preshed = (actKeyboardState.IsKeyDown(Keys.F1) && prevKeyboardState.IsKeyUp(Keys.F1));
             f2Preshed = (actKeyboardState.IsKeyDown(Keys.F2) && prevKeyboardState.IsKeyUp(Keys.F2));

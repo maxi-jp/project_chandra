@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace IS_XNA_Shooter
 {
@@ -61,6 +62,12 @@ namespace IS_XNA_Shooter
 
         private XmlDocument xmlScores;
 
+        // atributos necesarios cuando se va a intruducir una nueva puntuación
+        //private String playerName;
+        private int playerScore, scorePosition;
+        private KeyboardHandler keyboardHandler;
+        private Rectangle blackRect;
+
         public MenuScores(SuperGame mainGame)
         {
             this.mainGame = mainGame;
@@ -91,7 +98,7 @@ namespace IS_XNA_Shooter
             itemLevel1 = new MenuItemSelectionButton(true, new Vector2((SuperGame.screenWidth / 2) - 420, (SuperGame.screenHeight / 2) - 160), MathHelper.ToRadians(-90),
                 GRMng.menuScores, new Rectangle(0, 252, 170, 40), new Rectangle(170, 252, 170, 40), new Rectangle(0, 252, 170, 40));
             itemLevel2 = new MenuItemSelectionButton(true, new Vector2((SuperGame.screenWidth / 2) - 420, SuperGame.screenHeight / 2), MathHelper.ToRadians(-90),
-                GRMng.menuScores, new Rectangle(0, 292, 170, 40), new Rectangle(170, 292, 170, 40), new Rectangle(0, 292, 170, 40));
+                GRMng.menuScores, new Rectangle(170, 292, 170, 40), new Rectangle(0, 292, 170, 40), new Rectangle(170, 292, 170, 40));
             itemLevel3 = new MenuItemSelectionButton(true, new Vector2((SuperGame.screenWidth / 2) - 420, (SuperGame.screenHeight / 2) + 160), MathHelper.ToRadians(-90),
                 GRMng.menuScores, new Rectangle(340, 292, 170, 40), new Rectangle(340, 252, 170, 40), new Rectangle(340, 292, 170, 40));
 
@@ -127,6 +134,22 @@ namespace IS_XNA_Shooter
                     itemKiller.Update(X, Y);
                     itemBack.Update(X, Y);
                     break;
+
+                case MenuScoresState.Inserting:
+                    keyboardHandler.Update();
+                    if (ControlMng.enterPreshed)
+                    {
+                        // introducimos el score en la lista y se actualiza el xml
+                        Row nueva = new Row();
+                        nueva.playerName = keyboardHandler.getText();
+                        nueva.score = playerScore;
+                        listSelected[scorePosition] = nueva;
+                        SaveXml();
+
+                        currentState = MenuScoresState.Showing;
+                    }
+                    break;
+
             } // switch
 
         } // Update
@@ -166,6 +189,46 @@ namespace IS_XNA_Shooter
                             Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
                     }
                     break;
+
+                case MenuScoresState.Inserting:
+
+                    itemScroll.Draw(spriteBatch);
+                    itemSurvival.Draw(spriteBatch);
+                    itemDefense.Draw(spriteBatch);
+                    itemKiller.Draw(spriteBatch);
+
+                    itemLevel1.Draw(spriteBatch);
+                    itemLevel2.Draw(spriteBatch);
+                    itemLevel3.Draw(spriteBatch);
+
+                    spriteBatch.DrawString(SuperGame.fontMotorwerk, "Name:", textNamePosition, Color.White, 0,
+                        Vector2.Zero, 1, SpriteEffects.None, 0);
+                    spriteBatch.DrawString(SuperGame.fontMotorwerk, "Score:", textScorePosition, Color.White, 0,
+                        Vector2.Zero, 1, SpriteEffects.None, 0);
+                    for (int i = 0; i < listSelected.Count; i++)
+                    {
+                        spriteBatch.DrawString(SuperGame.fontMotorwerk, listSelected[i].playerName,
+                            new Vector2(textNamePosition.X, textNamePosition.Y + (25 * (i + 2))),
+                            Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                        spriteBatch.DrawString(SuperGame.fontMotorwerk, listSelected[i].score.ToString(),
+                            new Vector2(textScorePosition.X, textNamePosition.Y + (25 * (i + 2))),
+                            Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                    }
+
+                    spriteBatch.Draw(blackpixel, blackRect, Color.White);
+                    spriteBatch.DrawString(SuperGame.fontMotorwerk, "NEW RECORD!",
+                        new Vector2((SuperGame.screenWidth / 2) - SuperGame.fontMotorwerk.MeasureString("NEW RECORD!").X / 2,
+                            (SuperGame.screenHeight / 2) - 90), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                    spriteBatch.DrawString(SuperGame.fontMotorwerk, "ENTER YOUR NAME: " + keyboardHandler.getText(),
+                        new Vector2((SuperGame.screenWidth / 2) - 170,
+                            (SuperGame.screenHeight / 2) - SuperGame.fontMotorwerk.MeasureString("A").Y / 2),
+                        Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                    spriteBatch.DrawString(SuperGame.fontMotorwerk, "YOUR SCORE: " + playerScore + " POINTS",
+                        new Vector2((SuperGame.screenWidth / 2) - SuperGame.fontMotorwerk.MeasureString("YOUR SCORE: " + playerScore + " POINTS").X / 2,
+                            (SuperGame.screenHeight / 2) + 50), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                    
+                    break;
+
             } // switch
 
             itemBack.Draw(spriteBatch);
@@ -200,6 +263,7 @@ namespace IS_XNA_Shooter
                         itemKiller.SetSelected(false);
 
                         currentTypeSelected = GameTypes.Scroll;
+                        listSelected = LevelB1List;
                     }
                     if (itemSurvival.Unclick(X, Y))
                     {
@@ -208,6 +272,7 @@ namespace IS_XNA_Shooter
                         itemKiller.SetSelected(false);
 
                         currentTypeSelected = GameTypes.Survival;
+                        listSelected = LevelC1List;
                     }
                     if (itemDefense.Unclick(X, Y))
                     {
@@ -216,6 +281,7 @@ namespace IS_XNA_Shooter
                         itemKiller.SetSelected(false);
 
                         currentTypeSelected = GameTypes.Defense;
+                        listSelected = LevelADefense1List;
                     }
                     if (itemKiller.Unclick(X, Y))
                     {
@@ -224,6 +290,7 @@ namespace IS_XNA_Shooter
                         itemDefense.SetSelected(false);
 
                         currentTypeSelected = GameTypes.Killer;
+                        listSelected = LevelA1List;
                     }
                     if (itemBack.Unclick(X, Y))
                     {
@@ -234,6 +301,68 @@ namespace IS_XNA_Shooter
             } // switch
             
         } // Unclick
+
+        public void AddNewScore(String levelName, int newScore)
+        {
+            switch (levelName)
+            {
+                case "LevelA1":
+                    itemScroll.SetSelected(false);
+                    itemSurvival.SetSelected(false);
+                    itemDefense.SetSelected(false);
+                    itemKiller.SetSelected();
+                    currentTypeSelected = GameTypes.Killer;
+                    listSelected = LevelA1List;
+                    break;
+                case "LevelADefense1":
+                    itemScroll.SetSelected(false);
+                    itemSurvival.SetSelected(false);
+                    itemDefense.SetSelected();
+                    itemKiller.SetSelected(false);
+                    currentTypeSelected = GameTypes.Defense;
+                    listSelected = LevelADefense1List;
+                    break;
+                case "LevelB1":
+                    itemScroll.SetSelected();
+                    itemSurvival.SetSelected(false);
+                    itemDefense.SetSelected(false);
+                    itemKiller.SetSelected(false);
+                    currentTypeSelected = GameTypes.Scroll;
+                    listSelected = LevelB1List;
+                    break;
+                case "LevelC1":
+                    itemScroll.SetSelected(false);
+                    itemSurvival.SetSelected();
+                    itemDefense.SetSelected(false);
+                    itemKiller.SetSelected(false);
+                    currentTypeSelected = GameTypes.Survival;
+                    listSelected = LevelC1List;
+                    break;
+            }
+            playerScore = newScore;
+
+            // se mira si la nueva puntuación es un record (supera a alguna de las 10 primeras)
+            int scorePos = 10;
+            bool escape = false;
+            while((scorePos > 0) && (!escape))
+            {
+                if (listSelected[scorePos - 1].score < playerScore)
+                    scorePos--;
+                else
+                    escape = true;
+            }
+
+            if (scorePos < 10)
+            {
+                scorePosition = scorePos;
+                keyboardHandler = new KeyboardHandler(12);
+                blackRect = new Rectangle((SuperGame.screenWidth / 2) - 200,
+                    (SuperGame.screenHeight / 2) - 100, 400, 200); 
+                currentState = MenuScoresState.Inserting;
+            }
+            else
+                currentState = MenuScoresState.Showing;
+        }
 
         private void LoadXml()
         {
@@ -281,6 +410,59 @@ namespace IS_XNA_Shooter
             }
 
         } // LoadXml
+
+        private void SaveXml()
+        {
+            String fileName = "../../../../IS_XNA_ShooterContent/scores.xml";
+
+            XDocument miXML = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), new XComment("Level Edited"));
+            XElement scores = new XElement("scores");
+            
+            XElement level = new XElement("level");
+            level.Add(new XAttribute("name", "LevelA1"));
+            for (int i = 0; i < LevelA1List.Count; i++)
+            {
+                level.Add(new XElement("entry",
+                    new XAttribute("player", LevelA1List[i].playerName),
+                    new XAttribute("score", LevelA1List[i].score)));
+            }
+            scores.Add(level);
+
+            level = new XElement("level");
+            level.Add(new XAttribute("name", "LevelB1"));
+            for (int i = 0; i < LevelB1List.Count; i++)
+            {
+                level.Add(new XElement("entry",
+                    new XAttribute("player", LevelB1List[i].playerName),
+                    new XAttribute("score", LevelB1List[i].score)));
+            }
+            scores.Add(level);
+
+            level = new XElement("level");
+            level.Add(new XAttribute("name", "LevelC1"));
+            for (int i = 0; i < LevelC1List.Count; i++)
+            {
+                level.Add(new XElement("entry",
+                    new XAttribute("player", LevelC1List[i].playerName),
+                    new XAttribute("score", LevelC1List[i].score)));
+            }
+            scores.Add(level);
+
+            level = new XElement("level");
+            level.Add(new XAttribute("name", "LevelADefense1"));
+            for (int i = 0; i < LevelADefense1List.Count; i++)
+            {
+                level.Add(new XElement("entry",
+                    new XAttribute("player", LevelADefense1List[i].playerName),
+                    new XAttribute("score", LevelADefense1List[i].score)));
+            }
+            scores.Add(level);
+
+            miXML.Add(scores);
+
+            miXML.Save(fileName);
+
+        } // SaveXml
 
     } // class MenuScores
 }

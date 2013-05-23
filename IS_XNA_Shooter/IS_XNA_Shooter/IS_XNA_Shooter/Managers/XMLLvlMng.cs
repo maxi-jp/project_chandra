@@ -68,6 +68,44 @@ namespace IS_XNA_Shooter
 
         } // LoadContent
 
+        /// <summary>
+        /// Load the content of the game indicated by the param i
+        /// </summary>
+        /// <param name="cad">indicator for the content loaded</param>
+        public void LoadContent(String cad, String xmlPath)
+        {
+            switch (cad)
+            {
+                case "LevelA1": // GameA Level 1
+                    xmlEnemies = new XmlDocument();
+                    xmlEnemies.Load(xmlPath);
+                    break;
+
+                case "LevelB1": // GameB Level 1
+                    xmlRectangles = new XmlDocument();
+                    xmlRectangles.Load("../../../../IS_XNA_ShooterContent/Levels/levelRectangle1.xml");
+                    xmlEnemies = new XmlDocument();
+                    xmlEnemies.Load(xmlPath);
+                    break;
+
+                case "Dialogs": // dialogs
+                    xmlDialogs = new XmlDocument();
+                    xmlDialogs.Load(xmlPath);
+                    break;
+
+                case "LevelB2": // GameB Level 2 DORITO
+                    xmlRectangles = new XmlDocument();
+                    xmlRectangles.Load(xmlPath);
+                    break;
+
+                case "LevelADefense1": // GameA Defense 1
+                    xmlEnemies = new XmlDocument();
+                    xmlEnemies.Load(xmlPath);
+                    break;
+            }
+
+        } // LoadContent
+
        /// <summary>
        /// Unload the content of the XML level manager
        /// </summary>

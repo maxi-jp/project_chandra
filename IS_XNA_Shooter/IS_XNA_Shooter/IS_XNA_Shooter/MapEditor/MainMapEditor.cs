@@ -42,6 +42,7 @@ namespace IS_XNA_Shooter.MapEditor
         private InfoEnemy enemySelected;
         private MenuItem itemMainQuit;
         private MenuMapEditor menuMapEditor;
+        private String xmlPath;
 
     
         #region Frame Level
@@ -819,6 +820,7 @@ namespace IS_XNA_Shooter.MapEditor
                     else if (currentStateMouse == stateMouse.leftUnclick)
                     {
                         //TODO: when you unclick the button
+                        if (xmlPath != null && xmlPath != "") mainGame.NewKillerMapEditor(xmlPath);
                     }
                 }
                 else
@@ -907,6 +909,7 @@ namespace IS_XNA_Shooter.MapEditor
 
 
                 miXML.Save(saveFileDialog1.FileName);
+                xmlPath = saveFileDialog1.FileName;
             }
         }
 
@@ -923,6 +926,8 @@ namespace IS_XNA_Shooter.MapEditor
                     //  Leer los datos del archivo
                     XmlDocument lvl = new XmlDocument();
                     lvl.Load(openFileDialog1.FileName);
+
+                    xmlPath = openFileDialog1.FileName;
 
                     XmlNodeList lista = null;
 

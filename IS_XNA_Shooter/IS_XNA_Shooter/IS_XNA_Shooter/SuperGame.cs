@@ -435,7 +435,9 @@ namespace IS_XNA_Shooter
 
                     game.Update(gameTime);
                     if (game.IsFinished())
-                        currentState = gameState.mainMenu;
+                    {
+                        LevelComplete();
+                    }
 
                     if (Keyboard.GetState().IsKeyDown(Keys.P) ||
                         GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed)
@@ -716,6 +718,24 @@ namespace IS_XNA_Shooter
             grManager.UnloadContent("MenuMain"); /// Unload the main menu's resources
         }
 
+
+        public void NewKillerMapEditor(String xmlPath)
+        {
+            currentGameName = "LevelA1";
+
+            grManager.LoadHud();
+            grManager.LoadContent("LevelA1"); // Load the gameB's level 1 resources
+            audio.LoadContent(1);
+            LvlMng.LoadContent("LevelA1", xmlPath); // Load XML
+
+            game = new GameA(this, player, "LevelA1", GRMng.textureAim, GRMng.textureCell, screenEvolution);
+
+            currentState = gameState.playing; // Change game's state to game mode
+
+            LvlMng.UnloadContent("LevelA1");
+            grManager.UnloadContent("MenuMain"); /// Unload the main menu's resources
+        }
+
         /// <summary>
         /// Puts gameState = playing
         /// </summary>
@@ -733,17 +753,27 @@ namespace IS_XNA_Shooter
             currentState = gameState.mainMenu;
             menu.menuState = Menu.MenuState.main;
         }
-
+        
         /// <summary>
         /// Load the main menu content
         /// </summary>
         public void ExitToMenu()
         {
             grManager.LoadContent("MenuMain");
-            currentState = gameState.mainMenu;
+            //currentState = gameState.mainMenu;
+            currentState = gameState.starting;
             menu.menuState = Menu.MenuState.main;
             grManager.UnloadContentGame();
             audio.UnloadContent(1);
+
+            grManager.LoadContent("MenuStart"); // se cargan los recursos del menu start
+            grManager.LoadContent("MenuMain"); // se cargan los recursos del menu
+            grManager.LoadContent("MenuScores"); // se cargan los recursos del menu de scores
+            grManager.LoadContent("MenuIngame"); // se cargan los recursos del menu ingame
+            grManager.LoadContent("MenuGameOver");// se cargan los recursos del menu gameover
+            grManager.LoadContent("Other"); // all type of "little" resources
+            grManager.LoadContent("MapEditor"); //all contents to map editor
+            audio.LoadContent(0);
 
             player = new Player(playerLifes);
         }
@@ -768,12 +798,36 @@ namespace IS_XNA_Shooter
             player.EarnLife(playerLifes);
         }
 
+        private void LevelComplete()
+        {
+            if (currentGameName == "Story")
+            {
+                currentState = gameState.mainMenu;
+            } // Arcade level played:
+            else
+            {
+                //Add new score
+                menuScores.AddNewScore(currentGameName, player.GetTotalScore());
+                currentState = gameState.scoresMenu;
+            }
+        }
+
         /// <summary>
         /// This method is called from the MenuScores
         /// </summary>
         public void ReturnFromScores()
         {
-            currentState = gameState.mainMenu;
+            //currentState = gameState.mainMenu;
+            currentState = gameState.starting;
+
+            grManager.LoadContent("MenuStart"); // se cargan los recursos del menu start
+            grManager.LoadContent("MenuMain"); // se cargan los recursos del menu
+            grManager.LoadContent("MenuScores"); // se cargan los recursos del menu de scores
+            grManager.LoadContent("MenuIngame"); // se cargan los recursos del menu ingame
+            grManager.LoadContent("MenuGameOver");// se cargan los recursos del menu gameover
+            grManager.LoadContent("Other"); // all type of "little" resources
+            grManager.LoadContent("MapEditor"); //all contents to map editor
+            audio.LoadContent(0);
         }
 
         /// <summary>

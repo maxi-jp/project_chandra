@@ -79,6 +79,8 @@ namespace IS_XNA_Shooter
             {
                 Audio.PlayEffect("digitalAcent01");
                 // TODO! CUESTA & TROYAN BRO! aquí se llama al menu editor
+                mainGame.currentState = SuperGame.gameState.mapMenuEditor;
+                mainGame.menuMapEditor = new MenuMapEditor(mainGame);
             }
             else if (itemQuit.Unclick(X, Y))
             {

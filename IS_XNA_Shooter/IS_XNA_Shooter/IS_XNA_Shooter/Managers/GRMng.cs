@@ -296,6 +296,29 @@ namespace IS_XNA_Shooter
         public static Video videoIntroStory;
         #endregion
 
+        #region MAP EDITOR
+        /* ------------- TEXTURES -------------*/
+        public static Texture2D menuMapEditor1;
+        public static Texture2D menuMapEditor2;
+        public static Texture2D screenSizesMapEditor2;
+        public static Texture2D boxSizesMapEditor2;
+        /* ------------- SPRITES_FONT -------------*/
+        public static SpriteFont fontText;
+        /* ------------- VALUES -------------*/
+        public static float relationHeightScreenSizesMapEditor2 = 0.625f;
+        public static float relationWidthSizesMapEditor2 = 0.52f;
+        public static float relationHeightWidthMapEditor2 = 0.553f;
+        public static float relationHeightHeightMapEditor2 = 0.64f;
+
+        #region screen 3 buttons
+        public static Texture2D buttonsSaveLoadPreview;
+        public static float widthButtonsSaveLoadPreview = 200;
+        public static float heightButtonsSaveLoadPreview = 39;
+        public static int numAnimsButtonsSaveLoadPreview = 3;
+        #endregion
+
+        #endregion
+
         public GRMng(ContentManager content)
         {
             this.content = content;
@@ -484,6 +507,31 @@ namespace IS_XNA_Shooter
                     texturePilot = content.Load<Texture2D>("Graphics/Portraits/Pilot");
                     texturePilotCyborg = content.Load<Texture2D>("Graphics/Portraits/PilotCyborg");
                     portrait_allyourbase = content.Load<Texture2D>("Graphics/Portraits/allyourbase");
+                    break;
+
+                case "MapEditor":
+                    menuMapEditor1 = content.Load<Texture2D>("Graphics/MapEditor/Screen1/backgroundMapEditor_2Screen1");
+                    menuMapEditor2 = content.Load<Texture2D>("Graphics/MapEditor/Screen2/Background/backgroundMapEditor_2");
+                    screenSizesMapEditor2 = content.Load<Texture2D>("Graphics/MapEditor/Screen2/Objects/widthHeightMapEditor_2");
+                    boxSizesMapEditor2 = content.Load<Texture2D>("Graphics/MapEditor/Screen2/Objects/boxSizesMapEditor_2");
+                    fontText = content.Load<SpriteFont>("Motorwerk");
+                    textureBg00 = content.Load<Texture2D>("Graphics/Backgrounds/bg00");
+                    textureCell = content.Load<Texture2D>("Graphics/celdasuelo");
+
+                    //Enemies
+                    textureEW1 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy01_80x80");
+                    textureEW2 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy02_80x80");
+                    textureEB1 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy03_80x80");
+                    textureES = content.Load<Texture2D>("Graphics/Ships/EnemyScared");
+                    textureEMS = content.Load<Texture2D>("Graphics/Ships/mineAnimation");
+                    textureEL = content.Load<Texture2D>("Graphics/Ships/enemyLaser");
+
+                    //Player
+                    texturePA1 = content.Load<Texture2D>("Graphics/Ships/sprites80x80");
+
+                    //Screen 3 buttons
+                    buttonsSaveLoadPreview = content.Load<Texture2D>("Graphics/MapEditor/Screen3/buttonsSaveLoadPreview");
+
                     break;
 
                 case "Other":
@@ -684,6 +732,31 @@ namespace IS_XNA_Shooter
                     texturePilot = null;
                     texturePilotCyborg = null;
                     portrait_allyourbase = null;
+                    break;
+
+                case "MapEditor":
+                    menuMapEditor1 = content.Load<Texture2D>("Graphics/MapEditor/Screen1/backgroundMapEditor_2Screen1");
+                    menuMapEditor2 = content.Load<Texture2D>("Graphics/MapEditor/Screen2/Background/backgroundMapEditor_2");
+                    screenSizesMapEditor2 = content.Load<Texture2D>("Graphics/MapEditor/Screen2/Objects/widthHeightMapEditor_2");
+                    boxSizesMapEditor2 = content.Load<Texture2D>("Graphics/MapEditor/Screen2/Objects/boxSizesMapEditor_2");
+                    fontText = content.Load<SpriteFont>("Motorwerk");
+                    textureBg00 = content.Load<Texture2D>("Graphics/Backgrounds/bg00");
+                    textureCell = content.Load<Texture2D>("Graphics/celdasuelo");
+
+                    //Enemies
+                    textureEW1 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy01_80x80");
+                    textureEW2 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy02_80x80");
+                    textureEB1 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy03_80x80");
+                    textureES = content.Load<Texture2D>("Graphics/Ships/EnemyScared");
+                    textureEMS = content.Load<Texture2D>("Graphics/Ships/mineAnimation");
+                    textureEL = content.Load<Texture2D>("Graphics/Ships/enemyLaser");
+
+                    //Player
+                    texturePA1 = content.Load<Texture2D>("Graphics/Ships/sprites80x80");
+
+                    //Screen 3 buttons
+                    buttonsSaveLoadPreview = content.Load<Texture2D>("Graphics/MapEditor/Screen3/buttonsSaveLoadPreview");
+
                     break;
 
                 case "Other":

@@ -621,11 +621,58 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
-    <ItemGroup>
+  <ItemGroup>
     <Compile Include="Audio\FXEffects\PowerUpOrange.wav">
       <Name>PowerUpOrange</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Graphics\MapEditor\Screen1\backgroundMapEditor_1Screen1.jpg">
+      <Name>backgroundMapEditor_1Screen1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Graphics\MapEditor\Screen1\backgroundMapEditor_2Screen1.jpg">
+      <Name>backgroundMapEditor_2Screen1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Graphics\MapEditor\Screen2\backgroundMapEditor_1 - copia.jpg">
+      <Name>backgroundMapEditor_1 - copia</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Graphics\MapEditor\Screen2\Background\backgroundMapEditor_1.jpg">
+      <Name>backgroundMapEditor_1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Graphics\MapEditor\Screen2\Background\backgroundMapEditor_2.jpg">
+      <Name>backgroundMapEditor_2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Graphics\MapEditor\Screen2\Objects\boxSizesMapEditor_2.png">
+      <Name>boxSizesMapEditor_2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Graphics\MapEditor\Screen2\Objects\widthHeightMapEditor_1.png">
+      <Name>widthHeightMapEditor_1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Graphics\MapEditor\Screen2\Objects\widthHeightMapEditor_2.png">
+      <Name>widthHeightMapEditor_2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Graphics\MapEditor\Screen3\buttonsSaveLoadPreview.png">
+      <Name>buttonsSaveLoadPreview</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

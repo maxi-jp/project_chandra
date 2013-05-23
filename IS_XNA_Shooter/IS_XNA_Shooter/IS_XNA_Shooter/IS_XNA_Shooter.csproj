@@ -94,6 +94,7 @@
     <Reference Include="System">
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml">
       <Private>False</Private>
     </Reference>
@@ -139,6 +140,10 @@
     <Compile Include="Evolutions\ShipPreview.cs" />
     <Compile Include="Evolutions\ShotPreview.cs" />
     <Compile Include="Games\GameAForTestingParticles.cs" />
+    <Compile Include="MapEditor\InfoEnemy.cs" />
+    <Compile Include="MapEditor\ItemInput.cs" />
+    <Compile Include="MapEditor\MainMapEditor.cs" />
+    <Compile Include="MapEditor\MenuMapEditor.cs" />
     <Compile Include="Menus\MenuItemSelectionButton.cs" />
     <Compile Include="Menus\MenuScores.cs" />
     <Compile Include="Menus\MenuStart.cs" />

@@ -45,7 +45,8 @@ namespace IS_XNA_Shooter
             pause,
             gameOver,
             playingVideo,
-            evolution
+            evolution,
+            mapMenuEditor
         };
 
         public enum levelName
@@ -220,6 +221,9 @@ namespace IS_XNA_Shooter
         /// </summary>
         public Player       player;
 
+        //map menu editor
+        public MenuMapEditor menuMapEditor;
+
         private Evolution screenEvolution;
        
         /// <summary>
@@ -305,6 +309,7 @@ namespace IS_XNA_Shooter
             grManager.LoadContent("MenuIngame"); // se cargan los recursos del menu ingame
             grManager.LoadContent("MenuGameOver");// se cargan los recursos del menu gameover
             grManager.LoadContent("Other"); // all type of "little" resources
+            grManager.LoadContent("MapEditor"); //all contents to map editor
             audio.LoadContent(0);
 
             fontDebug = Content.Load<SpriteFont>("FontDebug");
@@ -471,6 +476,10 @@ namespace IS_XNA_Shooter
                 case gameState.evolution:
                     screenEvolution.Update(deltaTime, Mouse.GetState());
                     break;
+
+                case gameState.mapMenuEditor:
+                    menuMapEditor.Update(Mouse.GetState().X, Mouse.GetState().Y);
+                    break;
             }
 
             base.Update(gameTime);
@@ -527,6 +536,10 @@ namespace IS_XNA_Shooter
 
                 case gameState.evolution:
                     screenEvolution.Draw(spriteBatch);
+                    break;
+
+                case gameState.mapMenuEditor:
+                    menuMapEditor.Draw(spriteBatch);
                     break;
             }
 

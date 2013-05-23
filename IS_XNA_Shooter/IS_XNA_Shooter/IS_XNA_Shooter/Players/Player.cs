@@ -58,5 +58,11 @@ namespace IS_XNA_Shooter
             lifes += i;
         }
 
+        public void ResetScore()
+        {
+            totalScore += actualScore;
+            actualScore = 0;
+        }
+
     } // class Player
 } // namespace IS_XNA_Shooter

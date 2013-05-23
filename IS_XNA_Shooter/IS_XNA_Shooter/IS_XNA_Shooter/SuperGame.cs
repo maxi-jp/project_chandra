@@ -766,6 +766,9 @@ namespace IS_XNA_Shooter
 
             // reset the player lives
             player.EarnLife(playerLifes);
+            // reset the player score
+            player.ResetScore();
+
         }
 
         /// <summary>

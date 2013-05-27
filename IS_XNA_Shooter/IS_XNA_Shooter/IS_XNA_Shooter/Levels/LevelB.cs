@@ -250,7 +250,8 @@ namespace IS_XNA_Shooter
                 List<Texture2D> texturesC = new List<Texture2D>();
                 for (int i = 0; i < backgroundList[0].numPng; i++)
                     texturesC.Add(GRMng.GetTextureById(backgroundList[0].pngList[i]));
-                bgLayerC = new BackgroundLayerB(rectangleMap, texturesC, 0, false, 1, true);
+                float scale = (float)SuperGame.screenHeight / (float)texturesC[0].Height;
+                bgLayerC = new BackgroundLayerB(rectangleMap, texturesC, 0, false, scale, true);
 
                 return bgLayerC;
             }
@@ -269,7 +270,8 @@ namespace IS_XNA_Shooter
                 List<Texture2D> textures0 = new List<Texture2D>();
                 for (int k = 0; k < backgroundList[i].numPng; k++)
                     textures0.Add(GRMng.GetTextureById(backgroundList[i].pngList[k]));
-                bgLayer = new BackgroundLayerB(textureIndex, textures0, backgroundList[i].velocity, true, 1.4f, false);
+                float scale = (float)SuperGame.screenHeight / (float)textures0[0].Height;
+                bgLayer = new BackgroundLayerB(textureIndex, textures0, backgroundList[i].velocity, true, scale, false);
                 bgLayerList.Add(bgLayer);
             }
 

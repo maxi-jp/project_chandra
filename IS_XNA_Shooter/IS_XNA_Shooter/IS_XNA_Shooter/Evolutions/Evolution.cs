@@ -239,7 +239,8 @@ namespace IS_XNA_Shooter
             previewRectangle = new Rectangle((int)position.X, (int)position.Y, (int)WIDTH_BUTTON_PREVIEW, (int)HEIGHT_BUTTON_PREVIEW);
 
             //position of rectangle of continue button
-            position = background1.position + new Vector2(-LENGTH_BUTTON_CONTINUE - SPACE_BUTTON_CONTINUE_RIGHT + background1.texture.Width / 2, background1.texture.Height / 2 - LENGTH_BUTTON_CONTINUE - SPACE_BUTTON_CONTINUE_BOTTOM);
+            //position = background1.position + new Vector2(-LENGTH_BUTTON_CONTINUE - SPACE_BUTTON_CONTINUE_RIGHT + background1.texture.Width / 2, background1.texture.Height / 2 - LENGTH_BUTTON_CONTINUE - SPACE_BUTTON_CONTINUE_BOTTOM);
+            position = new Vector2(SuperGame.screenWidth - (int)LENGTH_BUTTON_CONTINUE, SuperGame.screenHeight - (int)LENGTH_BUTTON_CONTINUE);
             continueRectangle = new Rectangle((int)position.X, (int)position.Y, (int)LENGTH_BUTTON_CONTINUE, (int)LENGTH_BUTTON_CONTINUE);
 
             // position of the frame (preview)

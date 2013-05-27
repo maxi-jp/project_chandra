@@ -92,7 +92,7 @@ namespace IS_XNA_Shooter
                 {
                     spriteBatch.Draw(textures[rectangleMap[i]], new Vector2(-scrollPosition + cont, 0), null,
                         Color.White, 0, Vector2.Zero, scale, SpriteEffects.None, 1);
-                    cont += textures[rectangleMap[i]].Width;
+                    cont += (int)(textures[rectangleMap[i]].Width * scale);
                 }
             }
             // TODO: hay que comprobar si la posicion de la textura esta en pantalla para ahorrar draw calls
@@ -134,6 +134,11 @@ namespace IS_XNA_Shooter
                        null, Color.White, rotation, base.drawPoint, (float)(Program.scale * scale), SpriteEffects.None, 0);
         */
         } // Draw
+
+        public float GetScale()
+        {
+            return scale;
+        }
 
     } // class BackgroundLayerB
 }

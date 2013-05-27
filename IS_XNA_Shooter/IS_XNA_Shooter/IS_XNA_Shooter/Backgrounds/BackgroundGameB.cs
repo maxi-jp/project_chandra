@@ -9,7 +9,7 @@ namespace IS_XNA_Shooter
 {
     class BackgroundGameB
     { 
-        private BackgroundLayerB bgLayer0, bgLayer1, bgLayer2, bgLayer3, bgLayerC;
+        private BackgroundLayerB bgLayerC;
         private List<BackgroundLayerB> bgLayerList;
         private int[] rectangleMap;
 
@@ -21,6 +21,8 @@ namespace IS_XNA_Shooter
 
             bgLayerC = level.InitializeBGLayerC();
             bgLayerList = level.InitializeBGLayers();
+
+
             //level.InitializedBGLayers(bgLayerList, bgLayerC);
 
             // last layer
@@ -56,6 +58,11 @@ namespace IS_XNA_Shooter
                 bgLayer.Draw(spriteBatch, scrollPosition);
             if (bgLayerC != null)
                 bgLayerC.Draw(spriteBatch, scrollPosition);
+        }
+
+        public float GetRectanglesScale()
+        {
+            return bgLayerC.GetScale();
         }
 
     } // class BackgroundGameB

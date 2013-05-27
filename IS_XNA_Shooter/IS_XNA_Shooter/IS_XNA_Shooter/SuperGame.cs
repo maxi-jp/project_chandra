@@ -31,6 +31,11 @@ namespace IS_XNA_Shooter
         /// </summary>
         SpriteBatch spriteBatch;
 
+        /// <summary>
+        /// indicates de resolution mode
+        /// 1: 1920x1080; 2: 1280x720; 3: 1024x768
+        /// </summary>
+        public static int resolutionMode;
  
 
         /// <summary>
@@ -80,7 +85,7 @@ namespace IS_XNA_Shooter
         /// <summary>
         /// Indicates if the god mode is active
         /// </summary>
-        public static bool godMode = false;
+        public static bool godMode = true;
 
         /// <summary>
         /// Screen's width
@@ -259,8 +264,22 @@ namespace IS_XNA_Shooter
             audio = new Audio(Content);
 
             int resX = 1280, resY = 720;
-            //int resX = 1366, resY = 768;
-            //int resX = 1024, resY = 768;
+            resolutionMode = 3;
+            switch (resolutionMode)
+            {
+                case 1:
+                    resX = 1920;
+                    resY = 1080;
+                    break;
+                case 2:
+                    resX = 1280;
+                    resY = 720;
+                    break;
+                case 3:
+                    resX = 1024;
+                    resY = 768;
+                    break;
+            }
             graphics.PreferredBackBufferWidth = resX;
             graphics.PreferredBackBufferHeight = resY;
             graphics.IsFullScreen = false;

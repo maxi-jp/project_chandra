@@ -42,5 +42,22 @@ namespace IS_XNA_Shooter
                     Color.White);*/
         } // Draw
 
+        public void UpdateRectanglesScale(float scale)
+        {
+            width = (int)(width * scale);
+            height = (int)(height * scale);
+
+            Rectangle rec;
+            for (int i=0; i<rectangleList.Count(); i++)
+            {
+                rec = rectangleList[i];
+                rec.X = (int)(rectangleList[i].X * scale);
+                rec.Y = (int)(rectangleList[i].Y * scale);
+                rec.Width = (int)(rectangleList[i].Width * scale);
+                rec.Height = (int)(rectangleList[i].Height * scale);
+                rectangleList[i] = rec;
+            }
+        } // UpdateRectanglesScale
+
     } // class RectangleMap
 }

@@ -802,7 +802,12 @@ namespace IS_XNA_Shooter
 
         private void LoadStart()
         {
-            startSplash = content.Load<Texture2D>("Graphics/Splash/splash_start_2");
+            switch (SuperGame.resolutionMode)
+            {
+                case 1: startSplash = content.Load<Texture2D>("Graphics/Splash/splash_start_1"); break;
+                case 2: startSplash = content.Load<Texture2D>("Graphics/Splash/splash_start_2"); break;
+                case 3: startSplash = content.Load<Texture2D>("Graphics/Splash/splash_start_3"); break;
+            }
         }
 
         private void UnloadStart()
@@ -816,8 +821,18 @@ namespace IS_XNA_Shooter
             menuStory = content.Load<Texture2D>("Graphics/Menu/story");
             menuArcade = content.Load<Texture2D>("Graphics/Menu/arcade");
             menuConfig = content.Load<Texture2D>("Graphics/Menu/configuration");
-            menuSplash01 = content.Load<Texture2D>("Graphics/Splash/splash_mainmenu_asset01_2");
-            menuSplash02 = content.Load<Texture2D>("Graphics/Splash/splash_mainmenu_asset02_2");
+            switch (SuperGame.resolutionMode)
+            {
+                case 1: menuSplash01 = content.Load<Texture2D>("Graphics/Splash/splash_mainmenu_asset01_1"); break;
+                case 2: menuSplash01 = content.Load<Texture2D>("Graphics/Splash/splash_mainmenu_asset01_2"); break;
+                case 3: menuSplash01 = content.Load<Texture2D>("Graphics/Splash/splash_mainmenu_asset01_3"); break;
+            }
+            switch (SuperGame.resolutionMode)
+            {
+                case 1: menuSplash02 = content.Load<Texture2D>("Graphics/Splash/splash_mainmenu_asset02_1"); break;
+                case 2: menuSplash02 = content.Load<Texture2D>("Graphics/Splash/splash_mainmenu_asset02_2"); break;
+                case 3: menuSplash02 = content.Load<Texture2D>("Graphics/Splash/splash_mainmenu_asset02_2"); break;
+            }
             menuSplash03 = content.Load<Texture2D>("Graphics/Splash/splash_mainmenu_asset03");
             textureSmoke01 = content.Load<Texture2D>("Graphics/Smoke/smoke01");
         }

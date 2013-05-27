@@ -15,6 +15,7 @@ namespace IS_XNA_Shooter
         //-------------------------
         private List<RectangleMap> listRecMap;
         private int[] rectangleMap;
+        private float rectanglesScale;
 
         private BackgroundGameB backGround; //Fondo con los parallax
 
@@ -72,6 +73,8 @@ namespace IS_XNA_Shooter
             level = new LevelB(camera, levelName, enemies, listRecMap);
             rectangleMap = ((LevelB)level).GetLevelMap();
             backGround = new BackgroundGameB((LevelB)level);
+            rectanglesScale = backGround.GetRectanglesScale();
+            UpdateRectanglesScale();
 
             camera.setLevel(level);
 
@@ -168,7 +171,13 @@ namespace IS_XNA_Shooter
                     new Vector2(5, 27), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             }
 
-         } // Draw
+        } // Draw
+
+        private void UpdateRectanglesScale()
+        {
+            foreach (RectangleMap rm in listRecMap)
+                rm.UpdateRectanglesScale(rectanglesScale);
+        }
 
     }//GameB
 }

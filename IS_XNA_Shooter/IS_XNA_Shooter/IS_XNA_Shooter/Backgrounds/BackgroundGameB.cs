@@ -62,7 +62,10 @@ namespace IS_XNA_Shooter
 
         public float GetRectanglesScale()
         {
-            return bgLayerC.GetScale();
+            if (bgLayerC != null)
+                return bgLayerC.GetScale();
+            else
+                return 1.0f;
         }
 
     } // class BackgroundGameB

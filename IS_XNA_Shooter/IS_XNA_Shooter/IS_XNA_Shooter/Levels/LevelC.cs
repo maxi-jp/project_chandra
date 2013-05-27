@@ -136,12 +136,16 @@ namespace IS_XNA_Shooter
                 width, 1), null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
 
             //Pintamos el tiempo transcurrido del juego
-
-            spriteBatch.DrawString(SuperGame.fontMotorwerk, "Time with live: ",
-                new Vector2(800, 15), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-
-            spriteBatch.DrawString(SuperGame.fontMotorwerk, Math.Truncate(10 *globalTime) / 10 + " seconds",
-                new Vector2(980, 35), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            if (SuperGame.resolutionMode == 3)
+                spriteBatch.DrawString(SuperGame.fontMotorwerk, "Time with live: ", new Vector2(SuperGame.screenWidth - 360, 15),
+                    Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            else
+                spriteBatch.DrawString(SuperGame.fontMotorwerk, "Time with live: ", new Vector2(SuperGame.screenWidth - 480, 15),
+                    Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            spriteBatch.DrawString(SuperGame.fontMotorwerk, (Math.Truncate(10 * globalTime) / 10) + "",
+                new Vector2(SuperGame.screenWidth - 300, 35), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            spriteBatch.DrawString(SuperGame.fontMotorwerk, "seconds",
+                new Vector2(SuperGame.screenWidth - 250, 35), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
         }
 
         public override void setShip(Ship ship)

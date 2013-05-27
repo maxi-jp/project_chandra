@@ -56,6 +56,23 @@ namespace IS_XNA_Shooter
 
                     ReadRectangles();     // load the rectangle map
                     LeerArchivoXML(1, 0); // load the enemies
+
+                    // update the enemies position
+                    float widthScale = 1.0f, heightScale = 1.0f;
+                    if (SuperGame.resolutionMode == 3)
+                    {
+                        for (int i = 0; i < enemies.Count(); i++)
+                        {
+                            if (enemies[i] is EnemyLaserB)
+                                widthScale = 1.25f;
+                            else
+                                widthScale = 1.1f; // debería de ser: 1.25f;
+                            heightScale = 0.9375f;
+
+                            enemies[i].position.X = enemies[i].position.X / widthScale;
+                            enemies[i].position.Y = enemies[i].position.Y / heightScale;
+                        }
+                    }
                     break;
 
                 case "LevelB2": // LevelB 2 DORITO
@@ -75,6 +92,7 @@ namespace IS_XNA_Shooter
                     enemies.Add(finalBoss);
                     break;
             }
+
         }
 
         /*public LevelB(Camera camera, String levelName, List<Enemy> enemies)

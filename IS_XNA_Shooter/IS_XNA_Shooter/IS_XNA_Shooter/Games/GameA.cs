@@ -102,7 +102,10 @@ namespace IS_XNA_Shooter
             backGround.Draw(spriteBatch);
 
             base.Draw(spriteBatch); // Ship, enemies, shots
-            
+
+            spriteBatch.DrawString(SuperGame.fontMotorwerk, "Enemies left: " + enemies.Count(),
+                new Vector2(25, 18), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+
             aimPointSprite.Draw(spriteBatch); // aim point
 
             if (SuperGame.debug)

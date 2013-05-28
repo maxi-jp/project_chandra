@@ -110,6 +110,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Animations\Animation.cs" />
+    <Compile Include="Animations\AnimRect.cs" />
+    <Compile Include="Animations\ComplexAnimation.cs" />
     <Compile Include="Enemies\SuperFinalBoss.cs" />
     <Compile Include="Managers\Audio.cs" />
     <Compile Include="Backgrounds\BackgroundGameA.cs" />

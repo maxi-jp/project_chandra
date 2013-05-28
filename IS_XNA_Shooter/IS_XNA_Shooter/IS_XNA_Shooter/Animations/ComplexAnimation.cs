@@ -48,8 +48,8 @@ namespace IS_XNA_Shooter
         // atributos del juego
         private Camera camera;
         private Level level;
-        private Vector2 position;
-        private float rotation;
+        public Vector2 position;
+        public float rotation;
 
         /* ------------------- CONSTRUCTORES ------------------- */
         public ComplexAnimation(Camera camera, Level level, bool middlePosition, Vector2 position, float rotation,

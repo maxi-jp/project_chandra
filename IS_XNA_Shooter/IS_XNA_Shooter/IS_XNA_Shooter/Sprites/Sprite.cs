@@ -98,5 +98,10 @@ namespace IS_XNA_Shooter
             return position;
         }
 
+        public void SetDrawPoint(Vector2 drawPoint)
+        {
+            this.drawPoint = drawPoint;
+        }
+
     } // class Sprite
 }

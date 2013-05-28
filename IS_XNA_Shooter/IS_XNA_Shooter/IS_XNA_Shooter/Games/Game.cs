@@ -142,21 +142,24 @@ namespace IS_XNA_Shooter
 
             for (int i = 0; i < powerUpList.Count; i++) // powerUps for the ship
             {
-                if (powerUpList[i].IsActive())
+                if (!ship.isDying())
                 {
-                    if (ship.collider.Collision(powerUpList[i].collider)
-                        /*|| powerUpList[i].collider.Collision(ship.collider)*/)
+                    if (powerUpList[i].IsActive())
                     {
-                        ship.CatchPowerUp(powerUpList[i].GetType());
-                        if (powerUpList[i].GetType() == 2) //green power
+                        if (ship.collider.Collision(powerUpList[i].collider)
+                            /*|| powerUpList[i].collider.Collision(ship.collider)*/)
                         {
-                            for (int j = 0; j < enemies.Count(); j++)
-                                if (enemies[j].IsActive() && !(enemies[j].GetType() == typeof(FinalBoss1) || enemies[j].GetType() == typeof(EnemyFinalHeroe2) ||
-                                     enemies[j].GetType() == typeof(BotFinalBoss) || enemies[j].GetType() == typeof(FinalBossHeroe1) ||
-                                     enemies[j].GetType() == typeof(FinalBoss1Turret2) || enemies[j].GetType() == typeof(FinalBoss1Turret1)))
-                                    enemies[j].Damage(200);
+                            ship.CatchPowerUp(powerUpList[i].GetType());
+                            if (powerUpList[i].GetType() == 2) //green power
+                            {
+                                for (int j = 0; j < enemies.Count(); j++)
+                                    if (enemies[j].IsActive() && !(enemies[j].GetType() == typeof(FinalBoss1) || enemies[j].GetType() == typeof(EnemyFinalHeroe2) ||
+                                         enemies[j].GetType() == typeof(BotFinalBoss) || enemies[j].GetType() == typeof(FinalBossHeroe1) ||
+                                         enemies[j].GetType() == typeof(FinalBoss1Turret2) || enemies[j].GetType() == typeof(FinalBoss1Turret1)))
+                                        enemies[j].Damage(200);
+                            }
+                            powerUpList[i].ShowBanner();
                         }
-                        powerUpList[i].ShowBanner();
                     }
                 }
             }

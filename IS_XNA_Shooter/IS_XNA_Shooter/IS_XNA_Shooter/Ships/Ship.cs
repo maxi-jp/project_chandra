@@ -468,5 +468,10 @@ namespace IS_XNA_Shooter
             }
         }
 
+
+        public Boolean isDying()
+        {
+            return (timeDyingAux<2f);
+        }
     } // class Ship
 }

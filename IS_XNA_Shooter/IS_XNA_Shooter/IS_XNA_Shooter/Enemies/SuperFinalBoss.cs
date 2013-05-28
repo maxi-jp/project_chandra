@@ -11,22 +11,14 @@ namespace IS_XNA_Shooter
     {
         // graphic resources
         private Texture2D textureAnim1, textureAnim2, textureAnim3, textureAnim4;
-        private class AnimRect
-        {
-            public Rectangle rect;
-            public Texture2D texture;
 
-            public AnimRect(int X, int Y, int W, int H, Texture2D texture)
-            {
-                this.rect = new Rectangle(X, Y, W, H);
-                this.texture = texture;
-            }
-        } // class AnimRect
-        private AnimRect animIddle1, animIddle2, animIddle3;
-        private List<AnimRect> animIddle4; // abriendo la boca
-        private List<AnimRect> animOpenChest;
-        private List<AnimRect> animFiringLaser;
-        private AnimRect turretTexture;
+        private SpriteCamera animIddle1, animIddle2, animIddle3;
+        private ComplexAnimation animIddle4; // abriendo la boca
+        private short animIddle4FramesCount = 4;
+        private ComplexAnimation animOpenChest;
+        private short animOpenChestFramesCount = 14;
+        private ComplexAnimation animFiringLaser;
+        private SpriteCamera turretTexture;
 
         private enum State
         {
@@ -55,60 +47,49 @@ namespace IS_XNA_Shooter
 
             // initialize animations:
             // iddle1
-            animIddle1 = new AnimRect(0, 0, 306, 432, textureAnim1);
+            animIddle1 = new SpriteCamera(camera, level, true, position, rotation, textureAnim1, new Rectangle(0, 0, 306, 432));
             // iddle2 fede face
-            animIddle2 = new AnimRect(306, 0, 306, 432, textureAnim1);
+            animIddle2 = new SpriteCamera(camera, level, true, position, rotation, textureAnim1, new Rectangle(306, 0, 306, 432));
             // iddle3 fede face 2
-            animIddle3 = new AnimRect(612, 0, 306, 432, textureAnim1);
+            animIddle3 = new SpriteCamera(camera, level, true, position, rotation, textureAnim1, new Rectangle(612, 0, 306, 432));
 
             // iddle2 fede face 3 bostezando
-            animIddle4 = new List<AnimRect>();
-            AnimRect rect1 = new AnimRect(612, 0, 306, 432, textureAnim1);
-            animIddle4.Add(rect1);
-            AnimRect rect2 = new AnimRect(0, 432, 306, 432, textureAnim1);
-            animIddle4.Add(rect2);
-            AnimRect rect3 = new AnimRect(306, 432, 306, 432, textureAnim1);
-            animIddle4.Add(rect3);
+            AnimRect[] animArray1 = new AnimRect[animIddle4FramesCount];
+            animArray1[0] = new AnimRect(612, 0, 306, 432, textureAnim1);
+            animArray1[1] = new AnimRect(0, 432, 306, 432, textureAnim1);
+            animArray1[2] = new AnimRect(306, 432, 306, 432, textureAnim1);
+            animArray1[3] = new AnimRect(612, 0, 306, 432, textureAnim1);
+            animIddle4 = new ComplexAnimation(camera, level, true, position, rotation, animArray1,
+                animIddle4FramesCount, false, SuperGame.frameTime12);
 
             // opening chest
-            animOpenChest = new List<AnimRect>();
-            AnimRect rect5 = new AnimRect(0, 0, 306, 432, textureAnim2);
-            animOpenChest.Add(rect5);
-            AnimRect rect6 = new AnimRect(306, 0, 306, 432, textureAnim2);
-            animOpenChest.Add(rect6);
-            AnimRect rect7 = new AnimRect(612, 0, 306, 432, textureAnim2);
-            animOpenChest.Add(rect7);
-            AnimRect rect8 = new AnimRect(0, 432, 306, 432, textureAnim2);
-            animOpenChest.Add(rect8);
-            AnimRect rect9 = new AnimRect(306, 432, 306, 432, textureAnim2);
-            animOpenChest.Add(rect9);
-            AnimRect rect10 = new AnimRect(612, 432, 306, 432, textureAnim2);
-            animOpenChest.Add(rect10);
-            AnimRect rect11 = new AnimRect(0, 0, 306, 432, textureAnim3);
-            animOpenChest.Add(rect11);
-            AnimRect rect12 = new AnimRect(306, 0, 306, 432, textureAnim3);
-            animOpenChest.Add(rect12);
-            AnimRect rect13 = new AnimRect(612, 0, 306, 432, textureAnim3);
-            animOpenChest.Add(rect13);
-            AnimRect rect14 = new AnimRect(0, 432, 306, 432, textureAnim3);
-            animOpenChest.Add(rect14);
-            AnimRect rect15 = new AnimRect(306, 432, 306, 432, textureAnim3);
-            animOpenChest.Add(rect15);
-            AnimRect rect16 = new AnimRect(612, 432, 306, 432, textureAnim3);
-            animOpenChest.Add(rect16);
-            AnimRect rect17 = new AnimRect(0, 0, 306, 432, textureAnim4);
-            animOpenChest.Add(rect17);
-            AnimRect rect18 = new AnimRect(306, 0, 306, 432, textureAnim4);
-            animOpenChest.Add(rect18);
+            AnimRect[] animArray2 = new AnimRect[animOpenChestFramesCount];
+            animArray2[0] = new AnimRect(0, 0, 306, 432, textureAnim2);
+            animArray2[1] = new AnimRect(306, 0, 306, 432, textureAnim2);
+            animArray2[2] = new AnimRect(612, 0, 306, 432, textureAnim2);
+            animArray2[3] = new AnimRect(0, 432, 306, 432, textureAnim2);
+            animArray2[4] = new AnimRect(306, 432, 306, 432, textureAnim2);
+            animArray2[5] = new AnimRect(612, 432, 306, 432, textureAnim2);
+            animArray2[6] = new AnimRect(0, 0, 306, 432, textureAnim3);
+            animArray2[7] = new AnimRect(306, 0, 306, 432, textureAnim3);
+            animArray2[8] = new AnimRect(612, 0, 306, 432, textureAnim3);
+            animArray2[9] = new AnimRect(0, 432, 306, 432, textureAnim3);
+            animArray2[10] = new AnimRect(306, 432, 306, 432, textureAnim3);
+            animArray2[11] = new AnimRect(612, 432, 306, 432, textureAnim3);
+            animArray2[12] = new AnimRect(0, 0, 306, 432, textureAnim4);
+            animArray2[13] = new AnimRect(306, 0, 306, 432, textureAnim4);
+            animOpenChest = new ComplexAnimation(camera, level, true, position, rotation, animArray2,
+                animOpenChestFramesCount, true, SuperGame.frameTime8);
+
 
             // firing laser
-            animFiringLaser = new List<AnimRect>();
+            /*animFiringLaser = new List<AnimRect>();
             AnimRect rect19 = new AnimRect(306, 0, 306, 432, textureAnim2);
             animOpenChest.Add(rect19);
             AnimRect rect20 = new AnimRect(612, 0, 306, 432, textureAnim2);
             animOpenChest.Add(rect20);
             AnimRect rect21 = new AnimRect(0, 432, 306, 432, textureAnim2);
-            animOpenChest.Add(rect21);
+            animOpenChest.Add(rect21);*/
 
         } // SuperFinalBoss
 
@@ -118,7 +99,7 @@ namespace IS_XNA_Shooter
             switch (currentState)
             {
                 case State.ONE:
-
+                    animOpenChest.Update(deltaTime);
                     break;
                 case State.TWO:
 
@@ -144,8 +125,10 @@ namespace IS_XNA_Shooter
             switch (currentState)
             {
                 case State.ONE:
-                    spriteBatch.Draw(animIddle1.texture, position, animIddle1.rect, Color.White,
-                        rotation, drawPoint, Program.scale, SpriteEffects.None, 0);
+                    /*spriteBatch.Draw(animIddle1.texture, position, animIddle1.rect, Color.White,
+                        rotation, drawPoint, Program.scale, SpriteEffects.None, 0);*/
+                    //animIddle1.DrawRectangle(spriteBatch);
+                    animOpenChest.Draw(spriteBatch);
                     break;
                 case State.TWO:
 

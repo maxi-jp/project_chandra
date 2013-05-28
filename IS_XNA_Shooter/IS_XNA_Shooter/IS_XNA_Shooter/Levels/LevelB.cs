@@ -57,22 +57,7 @@ namespace IS_XNA_Shooter
                     ReadRectangles();     // load the rectangle map
                     LeerArchivoXML(1, 0); // load the enemies
 
-                    // update the enemies position
-                    float widthScale = 1.0f, heightScale = 1.0f;
-                    if (SuperGame.resolutionMode == 3)
-                    {
-                        for (int i = 0; i < enemies.Count(); i++)
-                        {
-                            if (enemies[i] is EnemyLaserB)
-                                widthScale = 1.25f;
-                            else
-                                widthScale = 1.1f; // debería de ser: 1.25f;
-                            heightScale = 0.9375f;
-
-                            enemies[i].position.X = enemies[i].position.X / widthScale;
-                            enemies[i].position.Y = enemies[i].position.Y / heightScale;
-                        }
-                    }
+                    UpdateEnemiesPositions();
                     break;
 
                 case "LevelB2": // LevelB 2 DORITO
@@ -90,6 +75,19 @@ namespace IS_XNA_Shooter
                     finalBoss.SetActive();
 
                     enemies.Add(finalBoss);
+                    break;
+
+                case "LevelBFinalBoss":
+                    width = SuperGame.screenWidth * 2;
+                    height = SuperGame.screenHeight;
+                    ShipInitPosition = new Vector2(100, SuperGame.screenHeight / 2);
+
+                    ReadRectangles();
+
+                    Enemy superFinalBoss = new SuperFinalBoss(camera, this);
+                    superFinalBoss.SetActive();
+                    enemies.Add(superFinalBoss);
+
                     break;
             }
 
@@ -312,6 +310,41 @@ namespace IS_XNA_Shooter
         {
             return enemies;
         }
+
+        private void UpdateEnemiesPositions()
+        {
+            // update the enemies position
+            float widthScale = 1.0f, heightScale = 1.0f;
+            switch (SuperGame.resolutionMode)
+            {
+                case 1:
+                    widthScale = 1280.0f / 1920.0f;
+                    heightScale = 720.0f / 1080.0f;
+                    for (int i = 0; i < enemies.Count(); i++)
+                    {
+                        enemies[i].position.X = enemies[i].position.X / widthScale;
+                        enemies[i].position.Y = enemies[i].position.Y / heightScale;
+                    }
+                    break;
+                case 3:
+                    for (int i = 0; i < enemies.Count(); i++)
+                    {
+                        if (enemies[i] is EnemyLaserB)
+                            widthScale = 1.25f;
+                        else
+                            widthScale = 1.1f; // debería de ser: 1.25f;
+                        heightScale = 0.9375f;
+
+                        enemies[i].position.X = enemies[i].position.X / widthScale;
+                        enemies[i].position.Y = enemies[i].position.Y / heightScale;
+                    }
+                    break;
+                default:
+                    // lo deja igual
+                    break;
+            } // switch
+
+        } // UpdateEnemiesPositions
 
     } // class LevelB
 }

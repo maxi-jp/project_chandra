@@ -30,6 +30,9 @@ namespace IS_XNA_Shooter
 
         // canciones:
         public static Song music01;
+        public static Song music_menu;
+        public static Song music_evolution;
+        public static Song music_street;
 
         public Audio(ContentManager content)
         {
@@ -47,6 +50,7 @@ namespace IS_XNA_Shooter
             switch (i)
             {
                 case 0: // menu:
+                    music_menu = content.Load<Song>("Audio/Music/music_menu_28-Metempsychosis");
                     digitalAcent01 = content.Load<SoundEffect>("Audio/FXEffects/digital_acent_01");
                     break;
 
@@ -56,7 +60,8 @@ namespace IS_XNA_Shooter
                     brokenBone02 = content.Load<SoundEffect>("Audio/FXEffects/broken_bone_02");
                     tackled1 = content.Load<SoundEffect>("Audio/FXEffects/tackled_1");
                     LoadSoundPowerUps();
-                    music01 = content.Load<Song>("Audio/Music/music_01");
+                    music_evolution = content.Load<Song>("Audio/Music/music_evolution_02-TakeOff");
+                    music_street = content.Load<Song>("Audio/Music/music_04-Street");
                     break;
             }
         } // LoadContent
@@ -70,6 +75,7 @@ namespace IS_XNA_Shooter
             switch (i)
             {
                 case 0: // menu:
+                    music_menu = null;
                     digitalAcent01 = null;
                     break;
 
@@ -83,7 +89,8 @@ namespace IS_XNA_Shooter
                     SoundPowerUpGreen = null;
                     SoundPowerUpBlue = null;
                     SoundPowerUpOrange = null;
-
+                    music_evolution = null;
+                    music_street = null;
                     break;
             }
         } // UnloadContent
@@ -114,8 +121,24 @@ namespace IS_XNA_Shooter
         {
             switch (i)
             {
-                case 1:
+                case 1: // music01
+                    MediaPlayer.Stop();
                     MediaPlayer.Play(music01);
+                    MediaPlayer.IsRepeating = true;
+                    break;
+                case 2: // menu song
+                    MediaPlayer.Stop();
+                    MediaPlayer.Play(music_menu);
+                    MediaPlayer.IsRepeating = true;
+                    break;
+                case 3: // evolution screen song
+                    MediaPlayer.Stop();
+                    MediaPlayer.Play(music_evolution);
+                    MediaPlayer.IsRepeating = true;
+                    break;
+                case 4: // street music
+                    MediaPlayer.Stop();
+                    MediaPlayer.Play(music_street);
                     MediaPlayer.IsRepeating = true;
                     break;
             }
@@ -127,6 +150,20 @@ namespace IS_XNA_Shooter
             MediaPlayer.Volume = musicVolume;
         }
 
+        public static void StopMusic()
+        {
+            MediaPlayer.Stop();
+        }
+
+        public static void PauseMusic()
+        {
+            MediaPlayer.Pause();
+        }
+
+        public static void ResumeMusic()
+        {
+            MediaPlayer.Resume();
+        }
 
         private void LoadSoundPowerUps()
         {

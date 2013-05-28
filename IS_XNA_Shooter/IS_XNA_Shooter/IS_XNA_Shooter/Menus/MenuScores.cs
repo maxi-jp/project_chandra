@@ -59,6 +59,7 @@ namespace IS_XNA_Shooter
         private List<Row> LevelC1List;
         private List<Row> LevelADefense1List;
         private List<Row> listSelected;
+        private short maxRowsCount = 10;
 
         private XmlDocument xmlScores;
 
@@ -143,7 +144,9 @@ namespace IS_XNA_Shooter
                         Row nueva = new Row();
                         nueva.playerName = keyboardHandler.getText();
                         nueva.score = playerScore;
-                        listSelected[scorePosition] = nueva;
+                        listSelected.Insert(scorePosition, nueva);
+                        listSelected.RemoveAt(maxRowsCount);
+                        
                         SaveXml();
 
                         currentState = MenuScoresState.Showing;
@@ -342,7 +345,7 @@ namespace IS_XNA_Shooter
             playerScore = newScore;
 
             // se mira si la nueva puntuación es un record (supera a alguna de las 10 primeras)
-            int scorePos = 10;
+            int scorePos = maxRowsCount;
             bool escape = false;
             while((scorePos > 0) && (!escape))
             {
@@ -352,7 +355,7 @@ namespace IS_XNA_Shooter
                     escape = true;
             }
 
-            if (scorePos < 10)
+            if (scorePos < maxRowsCount)
             {
                 scorePosition = scorePos;
                 keyboardHandler = new KeyboardHandler(12);

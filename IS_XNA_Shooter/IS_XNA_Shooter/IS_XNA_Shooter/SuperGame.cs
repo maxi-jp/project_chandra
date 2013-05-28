@@ -19,7 +19,7 @@ namespace IS_XNA_Shooter
         /// <summary>
         /// String that indicates the current version of the project
         /// </summary>
-        public String currentVersion = "0.75";
+        public String currentVersion = "0.8";
 
         /// <summary>
         /// XNA's atribute for graphics
@@ -264,7 +264,7 @@ namespace IS_XNA_Shooter
             audio = new Audio(Content);
 
             int resX = 1280, resY = 720;
-            resolutionMode = 3;
+            resolutionMode = 2;
             switch (resolutionMode)
             {
                 case 1:
@@ -423,6 +423,8 @@ namespace IS_XNA_Shooter
                         NewGameATest();
                     if (debug && Keyboard.GetState().IsKeyDown(Keys.Y))
                         NewGameAForTestingParticles();
+                    if (debug && Keyboard.GetState().IsKeyDown(Keys.Q))
+                        NewGameSuperFinalBoss();
 
                     menu.Update(Mouse.GetState().X, Mouse.GetState().Y, deltaTime);
 
@@ -460,7 +462,7 @@ namespace IS_XNA_Shooter
 
                     if (Keyboard.GetState().IsKeyDown(Keys.P) ||
                         GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed)
-                        currentState = gameState.pause;
+                        EnterPause();
 
                     break;
 
@@ -593,7 +595,7 @@ namespace IS_XNA_Shooter
 
             // when the focus is lost the game is paused
             if (currentState == gameState.playing)
-                currentState = gameState.pause;
+                EnterPause();
         }
 
 
@@ -622,6 +624,18 @@ namespace IS_XNA_Shooter
             audio.LoadContent(1);
             game = new GameAForTestingParticles(this, player, GRMng.textureAim, GRMng.textureCell,
                 screenEvolution);
+            currentState = gameState.playing; // Change game's state to game mode
+            grManager.UnloadContent("MenuMain"); // Unload the menu's resources
+        }
+
+        private void NewGameSuperFinalBoss()
+        {
+            currentGameName = "LevelBFinalBoss";
+            grManager.LoadHud();
+            grManager.LoadContent("LevelBFinalBoss");
+            audio.LoadContent(1);
+            LvlMng.LoadContent("LevelBFinalBoss"); // Load the level map 2
+            game = new GameB(this, player, "LevelBFinalBoss", GRMng.textureAim, screenEvolution);
             currentState = gameState.playing; // Change game's state to game mode
             grManager.UnloadContent("MenuMain"); // Unload the menu's resources
         }
@@ -756,11 +770,21 @@ namespace IS_XNA_Shooter
         }
 
         /// <summary>
-        /// Puts gameState = playing
+        /// Puts gameState = pause and pause the music
+        /// </summary>
+        public void EnterPause()
+        {
+            Audio.PauseMusic();
+            currentState = gameState.pause;
+        }
+
+        /// <summary>
+        /// Puts gameState = playing and re-start music
         /// </summary>
         public void Resume()
         {
             currentState = gameState.playing;
+            Audio.ResumeMusic();
         }
 
         /// <summary>
@@ -768,6 +792,7 @@ namespace IS_XNA_Shooter
         /// </summary>
         public void EnterToMenu()
         {
+            Audio.PlayMusic(2);
             grManager.UnloadContent("MenuStart"); // unload the gamestartmenu
             currentState = gameState.mainMenu;
             menu.menuState = Menu.MenuState.main;
@@ -784,6 +809,8 @@ namespace IS_XNA_Shooter
             menu.menuState = Menu.MenuState.main;
             grManager.UnloadContentGame();
             audio.UnloadContent(1);
+            audio.LoadContent(0);
+            Audio.PlayMusic(2);
 
             grManager.LoadContent("MenuStart"); // se cargan los recursos del menu start
             grManager.LoadContent("MenuMain"); // se cargan los recursos del menu
@@ -802,6 +829,8 @@ namespace IS_XNA_Shooter
         /// </summary>
         public void GameOver()
         {
+            Audio.StopMusic();
+
             if (currentGameName == "Story")
             {
                 currentState = gameState.gameOver;
@@ -818,10 +847,12 @@ namespace IS_XNA_Shooter
             // reset the player score
             player.ResetScore();
 
-        }
+        } // GameOver
 
         private void LevelComplete()
         {
+            Audio.StopMusic();
+
             if (currentGameName == "Story")
             {
                 currentState = gameState.mainMenu;
@@ -832,7 +863,7 @@ namespace IS_XNA_Shooter
                 menuScores.AddNewScore(currentGameName, player.GetTotalScore());
                 currentState = gameState.scoresMenu;
             }
-        }
+        } // LevelComplete
 
         /// <summary>
         /// This method is called from the MenuScores

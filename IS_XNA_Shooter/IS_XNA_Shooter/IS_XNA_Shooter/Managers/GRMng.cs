@@ -194,6 +194,12 @@ namespace IS_XNA_Shooter
         public static Vector2[] colliderShotFinalBossHeroe = {new Vector2(3, 3), new Vector2(10, 0), new Vector2(16, 3), new Vector2(19, 10), new Vector2(16, 16), 
                                                                  new Vector2(10, 19), new Vector2(3, 16), new Vector2(0, 10) };
 
+        /* ------------------- SUPER_FINAL_BOSS -------------------- */
+        public static Texture2D textureSuperFinalBoss1;
+        public static Texture2D textureSuperFinalBoss2;
+        public static Texture2D textureSuperFinalBoss3;
+        public static Texture2D textureSuperFinalBoss4;
+
         #endregion
 
         #region PLAYER
@@ -502,6 +508,15 @@ namespace IS_XNA_Shooter
                     textureBgB00 = content.Load<Texture2D>("Graphics/Backgrounds/bgB00");
                     break;
 
+                case "LevelBFinalBoss":
+                    LoadShipA();
+                    textureSuperFinalBoss1 = content.Load<Texture2D>("Graphics/Ships/SuperFinalBoss/anim01");
+                    textureSuperFinalBoss2 = content.Load<Texture2D>("Graphics/Ships/SuperFinalBoss/anim02");
+                    textureSuperFinalBoss3 = content.Load<Texture2D>("Graphics/Ships/SuperFinalBoss/anim03");
+                    textureSuperFinalBoss4 = content.Load<Texture2D>("Graphics/Ships/SuperFinalBoss/anim04");
+                    textureBgB00 = content.Load<Texture2D>("Graphics/Backgrounds/bgB00");
+                    break;
+
                 case "Portraits":
                     textureCaptain = content.Load<Texture2D>("Graphics/Portraits/Captain");
                     texturePilot = content.Load<Texture2D>("Graphics/Portraits/Pilot");
@@ -727,6 +742,15 @@ namespace IS_XNA_Shooter
                     textureBgB00 = null;
                     break;
 
+                case "LevelBFinalBoss":
+                    UnloadShipA();
+                    textureSuperFinalBoss1 = null;
+                    textureSuperFinalBoss2 = null;
+                    textureSuperFinalBoss3 = null;
+                    textureSuperFinalBoss4 = null;
+                    textureBgB00 = null;
+                    break;
+
                 case "Portraits":
                     textureCaptain = null;
                     texturePilot = null;
@@ -863,9 +887,22 @@ namespace IS_XNA_Shooter
 
         private void LoadShipA()
         {
+            switch (SuperGame.resolutionMode)
+            {
+                case 1:
+                    frameWidthPA1 = 120;
+                    frameHeightPA1 = 120;
+                    texturePA1 = content.Load<Texture2D>("Graphics/Ships/sprites120x120");
+                    texturePA1_shield = content.Load<Texture2D>("Graphics/Ships/sprites_shield120x120");
+                    break;
+                default:
+                    frameWidthPA1 = 80;
+                    frameHeightPA1 = 80;
+                    texturePA1 = content.Load<Texture2D>("Graphics/Ships/sprites80x80");
+                    texturePA1_shield = content.Load<Texture2D>("Graphics/Ships/sprites_shield80x80");
+                    break;
+            }
             textureSmoke01 = content.Load<Texture2D>("Graphics/Smoke/smoke01");
-            texturePA1 = content.Load<Texture2D>("Graphics/Ships/sprites80x80");
-            texturePA1_shield = content.Load<Texture2D>("Graphics/Ships/sprites_shield80x80");
             textureL1 = content.Load<Texture2D>("Graphics/laserShotAnim");
         }
 

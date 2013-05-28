@@ -64,6 +64,11 @@ namespace IS_XNA_Shooter
                     xmlEnemies = new XmlDocument();
                     xmlEnemies.Load("../../../../IS_XNA_ShooterContent/Levels/level1ADefense.xml");
                     break;
+
+                case "LevelBFinalBoss": // SUPER FINAL BOSS
+                    xmlRectangles = new XmlDocument();
+                    xmlRectangles.Load("../../../../IS_XNA_ShooterContent/Levels/levelRectangle2.xml");
+                    break;
             }
 
         } // LoadContent

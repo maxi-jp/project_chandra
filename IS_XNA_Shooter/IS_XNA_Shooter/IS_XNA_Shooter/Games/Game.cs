@@ -68,7 +68,8 @@ namespace IS_XNA_Shooter
             shots = new List<Shot>();
             explosions = new List<Explosion>();
             powerUpList = new List<PowerUp>();
-            //Audio.PlayMusic(1);
+
+            Audio.PlayMusic(4);
         }
 
         /* ------------------------------------------------------------- */

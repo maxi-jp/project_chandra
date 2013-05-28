@@ -2,6 +2,8 @@
 <!--Level Edited-->
 <scores>
   <level name="LevelA1">
+    <entry player="MONCIO" score="2820" />
+    <entry player="ORTEGO" score="2100" />
     <entry player="CB1" score="200" />
     <entry player="MAXIXIIII" score="190" />
     <entry player="FER" score="100" />
@@ -10,14 +12,12 @@
     <entry player="XXX" score="0" />
     <entry player="XXX" score="0" />
     <entry player="XXX" score="0" />
-    <entry player="XXX" score="0" />
-    <entry player="XXX" score="0" />
   </level>
   <level name="LevelB1">
     <entry player="DWASDF" score="4400" />
+    <entry player="SKYWALKER" score="4210" />
     <entry player="JAVIGAY" score="4080" />
-    <entry player="AAA" score="0" />
-    <entry player="AAA" score="0" />
+    <entry player="SAMEER" score="3840" />
     <entry player="AAA" score="0" />
     <entry player="AAA" score="0" />
     <entry player="AAA" score="0" />
@@ -26,9 +26,9 @@
     <entry player="AAA" score="0" />
   </level>
   <level name="LevelC1">
+    <entry player="MAXI" score="7840" />
+    <entry player="MONCIOO" score="4200" />
     <entry player="LOL" score="700" />
-    <entry player="AAA" score="0" />
-    <entry player="AAA" score="0" />
     <entry player="AAA" score="0" />
     <entry player="AAA" score="0" />
     <entry player="AAA" score="0" />

@@ -385,7 +385,92 @@ namespace IS_XNA_Shooter
             }
 
             return enemy;
-        }
+        } // GetEnemyByName
+
+
+        public static Ship GetShipByName(String shipName, Game game, Camera camera,
+            Level level, Evolution evolution, List<Shot> shots)
+        {
+            Ship ship = null;
+            Vector2[] points = new Vector2[8];
+
+            switch (SuperGame.resolutionMode)
+            {
+                case 1: //1920x1080
+                    points[0] = new Vector2(23, 53);
+                    points[1] = new Vector2(39, 50);
+                    points[2] = new Vector2(51, 23);
+                    points[3] = new Vector2(98, 45);
+                    points[4] = new Vector2(98, 75);
+                    points[5] = new Vector2(51, 99);
+                    points[6] = new Vector2(39, 71);
+                    points[7] = new Vector2(23, 68);
+                    break;
+
+                default:
+                    points[0] = new Vector2(15, 35);
+                    points[1] = new Vector2(26, 33);
+                    points[2] = new Vector2(34, 15);
+                    points[3] = new Vector2(65, 30);
+                    points[4] = new Vector2(65, 50);
+                    points[5] = new Vector2(34, 66);
+                    points[6] = new Vector2(26, 47);
+                    points[7] = new Vector2(15, 45);
+                    break;
+            }
+
+            switch (shipName)
+            {
+                case "ShipA":
+                    ship = new ShipA
+                    (
+                        game,
+                        camera,
+                        level,
+                        Vector2.Zero,   /* position */
+                        0,              /* rotation */
+                        points,
+                        GRMng.frameWidthPA1,
+                        GRMng.frameHeightPA1,
+                        GRMng.numAnimsPA1,
+                        GRMng.frameCountPA1,
+                        GRMng.loopingPA1,
+                        SuperGame.frameTime24,
+                        GRMng.texturePA1,
+                        GRMng.texturePA1_shield,
+                        evolution,
+                        shots
+                    );
+                    break;
+
+                case "ShipB":
+                    ship = new ShipB
+                    (
+                        game,
+                        camera,
+                        level,
+                        Vector2.Zero,   /* position */
+                        0,              /* rotation */
+                        points,
+                        GRMng.frameWidthPA1,
+                        GRMng.frameHeightPA1,
+                        GRMng.numAnimsPA1,
+                        GRMng.frameCountPA1,
+                        GRMng.loopingPA1,
+                        SuperGame.frameTime24,
+                        GRMng.texturePA1,
+                        GRMng.texturePA1_shield,
+                        evolution,
+                        shots
+                    );
+                    break;
+
+                default:
+                    throw new NotSupportedException("Ship not found in the Factory");
+            }
+
+            return ship;
+        } // GetShipByName
 
     } // class EnemyFactory
 }

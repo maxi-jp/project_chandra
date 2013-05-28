@@ -181,7 +181,7 @@ namespace IS_XNA_Shooter
             continueState = 0;
 
             // base parameters
-            life = 600;
+            life = 200;
             powerAttack = 400;
             speedShip = 300;
             speedShot = 350;

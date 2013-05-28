@@ -15,7 +15,6 @@ namespace IS_XNA_Shooter
 
         private int screenWidth;
         private int screenHeight;
-        private float scale;
 
         private int tileX, tileY;
 
@@ -25,7 +24,6 @@ namespace IS_XNA_Shooter
         {
             this.speed = speed;
             this.tileable = tileable;
-            this.scale = scale;
 
             screenWidth = SuperGame.screenWidth;
             screenHeight = SuperGame.screenHeight;

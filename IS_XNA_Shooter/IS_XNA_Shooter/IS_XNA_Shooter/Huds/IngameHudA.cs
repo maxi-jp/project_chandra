@@ -60,10 +60,11 @@ namespace IS_XNA_Shooter
         {
             base.PlayerLosesLive();
 
-            for (int i = lifesActual; i < center.Count(); i++)
-            {
-                center[i].SetRectangle(sorceRecCenter2);
-            }
+            if (lifesActual > 0) 
+                for (int i = lifesActual; i < center.Count(); i++)
+                {
+                    center[i].SetRectangle(sorceRecCenter2);
+                }
         }
 
         public override void PlayerEarnsLife()

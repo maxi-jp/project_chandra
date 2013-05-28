@@ -10,7 +10,6 @@ namespace IS_XNA_Shooter
         private int totalScore;     // points earned in the actual game
         private int actualScore;    // points earned in the actual level
         private int lifes;
-		private int nada;
 
         public Player(int lifes)
         {

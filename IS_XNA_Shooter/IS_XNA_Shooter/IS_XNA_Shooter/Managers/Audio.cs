@@ -162,7 +162,7 @@ namespace IS_XNA_Shooter
                 case 6: // factory music
                     isPlayingMusic = true;
                     MediaPlayer.Stop();
-                    MediaPlayer.Play(music_badlands);
+                    MediaPlayer.Play(music_factory);
                     MediaPlayer.IsRepeating = true;
                     break;
             }

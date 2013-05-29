@@ -886,7 +886,7 @@ namespace IS_XNA_Shooter
 
         private void LevelComplete()
         {
-            Audio.StopMusic();
+            //Audio.StopMusic();
 
             if (currentGameName == "Story")
             {
@@ -896,6 +896,7 @@ namespace IS_XNA_Shooter
             else
             {
                 //Add new score
+                Audio.StopMusic();
                 menuScores.AddNewScore(currentGameName, player.GetTotalScore());
                 currentState = gameState.scoresMenu;
             }

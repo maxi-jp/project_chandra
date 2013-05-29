@@ -202,25 +202,26 @@ namespace IS_XNA_Shooter
 
                     currentGame.Draw(spriteBatch);
 
-                    spriteBatch.Draw(GRMng.blackpixeltrans, new Rectangle(100, 500, 1100, 200), Color.White);
+                    spriteBatch.Draw(GRMng.blackpixeltrans, new Rectangle(SuperGame.screenWidth / 30, SuperGame.screenHeight - 240,
+                        SuperGame.screenWidth - 2 * (SuperGame.screenWidth / 30), 220), Color.White);
                     switch (gameDialog[currentConver][currentParagraph].whoTalk)
                     {
                         case 0:
-                            spriteBatch.Draw(GRMng.texturePilot, new Rectangle(110, 510, 280, 180), Color.White);
+                            spriteBatch.Draw(GRMng.texturePilot, new Rectangle(SuperGame.screenWidth / 15, SuperGame.screenHeight - 220, 280, 180), Color.White);
                             break;
                         case 1:
-                            spriteBatch.Draw(GRMng.textureCaptain, new Rectangle(110, 510, 280, 180), Color.White);
+                            spriteBatch.Draw(GRMng.textureCaptain, new Rectangle(SuperGame.screenWidth / 15, SuperGame.screenHeight - 220, 280, 180), Color.White);
                             break;
                         case 2:
-                            spriteBatch.Draw(GRMng.texturePilotCyborg, new Rectangle(110, 510, 280, 180), Color.White);
+                            spriteBatch.Draw(GRMng.texturePilotCyborg, new Rectangle(SuperGame.screenWidth / 15, SuperGame.screenHeight - 220, 280, 180), Color.White);
                             break;
                         case 3:
-                            spriteBatch.Draw(GRMng.portrait_allyourbase, new Rectangle(110, 510, 280, 180), Color.White);
+                            spriteBatch.Draw(GRMng.portrait_allyourbase, new Rectangle(SuperGame.screenWidth / 15, SuperGame.screenHeight - 220, 280, 180), Color.White);
                             break;
                     }
 
                     spriteBatch.DrawString(SuperGame.fontDebug, gameDialog[currentConver][currentParagraph].whatSaid,
-                        new Vector2(400, 510), Color.White, 0, new Vector2(0, 0), 2, SpriteEffects.None, 0);
+                        new Vector2(SuperGame.screenWidth / 15 + 300, SuperGame.screenHeight - 220), Color.White, 0, new Vector2(0, 0), 2, SpriteEffects.None, 0);
 
                     break;
 

@@ -298,6 +298,13 @@ namespace IS_XNA_Shooter
         public static Texture2D gameOverSplash;
         #endregion
 
+        #region SPLASH_FINAL_DEMO
+        public static Texture2D splash_demofin_1;
+        public static Texture2D splash_demofin_2;
+        public static Texture2D splash_demofin_3;
+        public static Texture2D splash_demofin_4;
+        #endregion
+
         #region VIDEO
         public static Video videoIntroStory;
         #endregion
@@ -549,6 +556,10 @@ namespace IS_XNA_Shooter
 
                     break;
 
+                case "SplashFinalDemo":
+                    LoadSplashFinalDemo();
+                    break;
+
                 case "Other":
                     whitepixel = content.Load<Texture2D>("Graphics/whitepixel");
                     redpixel = content.Load<Texture2D>("Graphics/redpixel");
@@ -783,6 +794,10 @@ namespace IS_XNA_Shooter
 
                     break;
 
+                case "SplashFinalDemo":
+                    UnLoadSplashFinalDemo();
+                    break;
+
                 case "Other":
                     whitepixel = null;
                     redpixel = null;
@@ -883,6 +898,22 @@ namespace IS_XNA_Shooter
         {
             menuIngame = null;
             getready321 = null;
+        }
+
+        private void LoadSplashFinalDemo()
+        {
+            splash_demofin_1 = content.Load<Texture2D>("Graphics/Splash/splash_demofin_1");
+            splash_demofin_2 = content.Load<Texture2D>("Graphics/Splash/splash_demofin_2");
+            splash_demofin_3 = content.Load<Texture2D>("Graphics/Splash/splash_demofin_3");
+            splash_demofin_4 = content.Load<Texture2D>("Graphics/Splash/splash_demofin_4");
+        }
+
+        private void UnLoadSplashFinalDemo()
+        {
+            splash_demofin_1 = null;
+            splash_demofin_2 = null;
+            splash_demofin_3 = null;
+            splash_demofin_4 = null;
         }
 
         private void LoadShipA()

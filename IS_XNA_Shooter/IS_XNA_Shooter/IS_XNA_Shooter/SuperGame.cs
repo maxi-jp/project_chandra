@@ -51,7 +51,8 @@ namespace IS_XNA_Shooter
             gameOver,
             playingVideo,
             evolution,
-            mapMenuEditor
+            mapMenuEditor,
+            splashFinalDemo
         };
 
         public enum levelName
@@ -211,6 +212,8 @@ namespace IS_XNA_Shooter
         /// </summary>
         private MenuScores menuScores;
 
+        private SplashFinalDemo menuFinalDemo;
+
         private String currentGameName;
         // TODO! esto es una ñapa, se hace ahora así para que funcione
         // el menu de scores para meter una nueva puntuación en nivel
@@ -264,7 +267,7 @@ namespace IS_XNA_Shooter
             audio = new Audio(Content);
 
             int resX = 1280, resY = 720;
-            resolutionMode = 2;
+            resolutionMode = 3;
             switch (resolutionMode)
             {
                 case 1:
@@ -341,6 +344,12 @@ namespace IS_XNA_Shooter
             menuGameOver =  new MenuGameOver(this);
             menuScores =    new MenuScores(this);
             menuScores.Load();
+            menuFinalDemo = new SplashFinalDemo();
+            // this is for testing the splashfinaldemo
+            /*grManager.LoadContent("SplashFinalDemo");
+            menuFinalDemo.Initialize();
+            currentState = gameState.splashFinalDemo;*/
+
 
             // Create the player and the screenEvolution
             player = new Player(playerLifes);
@@ -503,6 +512,10 @@ namespace IS_XNA_Shooter
                 case gameState.mapMenuEditor:
                     menuMapEditor.Update(Mouse.GetState().X, Mouse.GetState().Y);
                     break;
+
+                case gameState.splashFinalDemo:
+                    menuFinalDemo.Update(deltaTime);
+                    break;
             }
 
             base.Update(gameTime);
@@ -564,6 +577,10 @@ namespace IS_XNA_Shooter
                 case gameState.mapMenuEditor:
                     menuMapEditor.Draw(spriteBatch);
                     break;
+
+                case gameState.splashFinalDemo:
+                    menuFinalDemo.Draw(spriteBatch);
+                    break;
             }
 
             if (debug)
@@ -606,6 +623,7 @@ namespace IS_XNA_Shooter
         /// </summary>
         private void NewGameATest()
         {
+            Audio.StopMusic();
             currentGameName = "TestEnemies";
             grManager.LoadHud();
             grManager.LoadContent("LevelA1"); // Load the gameA's level 1 resources
@@ -618,6 +636,7 @@ namespace IS_XNA_Shooter
 
         private void NewGameAForTestingParticles()
         {
+            Audio.StopMusic();
             currentGameName = "TestParticles";
             grManager.LoadHud();
             grManager.LoadContent("LevelA1"); // Load the gameA's level 1 resources
@@ -630,6 +649,7 @@ namespace IS_XNA_Shooter
 
         private void NewGameSuperFinalBoss()
         {
+            Audio.StopMusic();
             currentGameName = "LevelBFinalBoss";
             grManager.LoadHud();
             grManager.LoadContent("LevelBFinalBoss");
@@ -645,10 +665,15 @@ namespace IS_XNA_Shooter
         /// </summary>
         public void NewStory()
         {
+            Audio.StopMusic();
+
             currentGameName = "Story";
 
             grManager.LoadHud();
             grManager.LoadVideo(1);
+            grManager.LoadContent("SplashFinalDemo");
+
+            menuFinalDemo.Initialize();
             // introduction video
             videoPlayer = new VideoPlayer();
             videoPlayer.Play(GRMng.videoIntroStory);
@@ -669,6 +694,8 @@ namespace IS_XNA_Shooter
         /// <param name="cad">The number of the level</param>
         public void NewSurvival(String cad)
         {
+            Audio.StopMusic();
+
             currentGameName = cad;
 
             grManager.LoadHud();
@@ -690,6 +717,8 @@ namespace IS_XNA_Shooter
         /// <param name="cad">The number of the level</param>
         public void NewKiller(String cad)
         {
+            Audio.StopMusic();
+
             currentGameName = cad;
 
             grManager.LoadHud();
@@ -711,6 +740,8 @@ namespace IS_XNA_Shooter
         /// <param name="cad">The number of the level</param>
         public void NewDefense(String cad)
         {
+            Audio.StopMusic();
+
             currentGameName = cad;
 
             grManager.LoadHud();
@@ -736,6 +767,8 @@ namespace IS_XNA_Shooter
         /// <param name="cad">The number of the level</param>
         public void NewScroll(String cad)
         {
+            Audio.StopMusic();
+
             currentGameName = cad;
 
             grManager.LoadHud();
@@ -754,6 +787,8 @@ namespace IS_XNA_Shooter
 
         public void NewKillerMapEditor(String xmlPath)
         {
+            Audio.StopMusic();
+
             currentGameName = "LevelA1";
 
             grManager.LoadHud();
@@ -813,7 +848,6 @@ namespace IS_XNA_Shooter
             Audio.PlayMusic(2);
 
             grManager.LoadContent("MenuStart"); // se cargan los recursos del menu start
-            grManager.LoadContent("MenuMain"); // se cargan los recursos del menu
             grManager.LoadContent("MenuScores"); // se cargan los recursos del menu de scores
             grManager.LoadContent("MenuIngame"); // se cargan los recursos del menu ingame
             grManager.LoadContent("MenuGameOver");// se cargan los recursos del menu gameover
@@ -855,7 +889,8 @@ namespace IS_XNA_Shooter
 
             if (currentGameName == "Story")
             {
-                currentState = gameState.mainMenu;
+                //currentState = gameState.mainMenu;
+                currentState = gameState.splashFinalDemo;
             } // Arcade level played:
             else
             {

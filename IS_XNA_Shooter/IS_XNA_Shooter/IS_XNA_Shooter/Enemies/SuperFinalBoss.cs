@@ -33,7 +33,10 @@ namespace IS_XNA_Shooter
         private float armRotation;
 
         // texturas texto
-        private SpriteCamera text1, text2, text3;
+        private SpriteCamera text1; // my name is github montoya
+        private SpriteCamera text2; // you erased my repository
+        private SpriteCamera text3; // prepare to die!
+        private SpriteCamera text4; // this isn't even my final form
 
         private enum State
         {
@@ -52,13 +55,35 @@ namespace IS_XNA_Shooter
         private Vector2 initialPosition = new Vector2(SuperGame.screenWidth + 300, SuperGame.screenHeight / 2);
         private float enteringVelocity = 40;
 
+        // contadores
+        private float timeSpeaking1 = 0;
+        private float timeSpeaking1End = 10.0f;
+        private float timeLine1Start = 0.0f; // my name is github montoya
+        private float timeLine1End = 2.5f;
+        private float timeLine2Start = 3.5f; // you erased my repository
+        private float timeLine2End = 2.5f;
+        private float timeLine3Start = 6.0f; // prepare to die!
+        private float timeLine3End = 3.0f;
+        private float timeLine4Start; // this isn't even my final form
+        private float timeLine4End = 2.0f;
+
+        // animaciones acrarar
+        private byte transpLine1 = 0;
+        private bool line1IsFading = false;
+        private byte transpLine2 = 0;
+        private bool line2IsFading = false;
+        private byte transpLine3 = 0;
+        private bool line3IsFading = false;
+        private byte transpLine4 = 0;
+        private bool line4IsFading = false;
+
         private Collider collider;
 
         public SuperFinalBoss(Camera camera, Level level)
             : base(camera, level, Vector2.Zero, 0, 0, 0, 0, null, null, SuperGame.frameTime12,
             GRMng.textureSuperFinalBoss1, 0, 0, 100000, 99999, null)
         {
-            currentState = State.SPEAKING1;
+            currentState = State.ENTERING;
 
             position = initialPosition;
             drawPoint = new Vector2(306 / 2, 432 / 2);
@@ -132,10 +157,16 @@ namespace IS_XNA_Shooter
 
             text1 = new SpriteCamera(camera, level, true, new Vector2(basePosition.X - 400, basePosition.Y - 210),
                 0, textureAnim1, new Rectangle(0, 864, 550, 16));
+            text1.SetTransparency(transpLine1);
             text2 = new SpriteCamera(camera, level, true, new Vector2(basePosition.X - 400, basePosition.Y - 180),
                 0, textureAnim1, new Rectangle(0, 880, 550, 16));
+            text2.SetTransparency(transpLine2);
             text3 = new SpriteCamera(camera, level, true, new Vector2(basePosition.X - 400, basePosition.Y - 150),
                 0, textureAnim1, new Rectangle(0, 896, 550, 16));
+            text3.SetTransparency(transpLine3);
+            text4 = new SpriteCamera(camera, level, true, new Vector2(basePosition.X - 400, basePosition.Y - 180),
+                0, textureAnim1, new Rectangle(0, 912, 550, 74));
+            text4.SetTransparency(transpLine4);
 
             // Collider
             Vector2[] points = new Vector2[19];
@@ -201,7 +232,75 @@ namespace IS_XNA_Shooter
                     break;
                 case State.SPEAKING1:
                     //position.Y += (float)Math.Sin(position.Y * 5);
-                    
+                    timeSpeaking1 += deltaTime;
+
+                    // lineas de texto
+                    if (line1IsFading)
+                    {   // esconder texto
+                        if (transpLine1 > 1)
+                            transpLine1 -= 2;
+                        else
+                        {
+                            transpLine1 = 0;
+                            line1IsFading = false;
+                        }
+                        text1.SetTransparency(transpLine1);
+                    }
+                    else if ((timeSpeaking1 >= timeLine1Start) && (timeSpeaking1 < timeLine1End + timeLine1Start))
+                    {   // presentar texto
+                        if (transpLine1 < 252)
+                            transpLine1 += 4;
+                        else
+                            transpLine1 = 255;
+                        text1.SetTransparency(transpLine1);
+                    }
+                    else if (timeSpeaking1 >= timeLine1Start + timeLine1End)
+                        line1IsFading = true;
+
+                    if (line2IsFading)
+                    {   // esconder texto
+                        if (transpLine2 > 1)
+                            transpLine2 -= 2;
+                        else
+                        {
+                            transpLine2 = 0;
+                            line2IsFading = false;
+                        }
+                        text2.SetTransparency(transpLine2);
+                    }
+                    else if ((timeSpeaking1 >= timeLine2Start) && (timeSpeaking1 < timeLine2End + timeLine2Start))
+                    {   // presentar texto
+                        if (transpLine2 < 252)
+                            transpLine2 += 4;
+                        else
+                            transpLine2 = 255;
+                        text2.SetTransparency(transpLine2);
+                    }
+                    else if (timeSpeaking1 >= timeLine2Start + timeLine2End)
+                        line2IsFading = true;
+
+                    if (line3IsFading)
+                    {   // esconder texto
+                        if (transpLine3 > 1)
+                            transpLine3 -= 2;
+                        else
+                        {
+                            transpLine3 = 0;
+                            line3IsFading = false;
+                        }
+                        text3.SetTransparency(transpLine3);
+                    }
+                    else if ((timeSpeaking1 >= timeLine3Start) && (timeSpeaking1 < timeLine3End + timeLine3Start))
+                    {   // presentar texto
+                        if (transpLine3 < 252)
+                            transpLine3 += 4;
+                        else
+                            transpLine3 = 255;
+                        text3.SetTransparency(transpLine3);
+                    }
+                    else if (timeSpeaking1 >= timeLine3Start + timeLine3End)
+                        line3IsFading = true;
+
                     animIddle5.position = position;
                     animIddle5.rotation = rotation;
 
@@ -211,6 +310,9 @@ namespace IS_XNA_Shooter
                     //turretTexture.rotation += deltaTime * 10;
 
                     animIddle5.Update(deltaTime);
+
+                    if (timeSpeaking1 >= timeSpeaking1End)
+                        ChangeState(State.SPEAKING1, State.ONE);
                     break;
                 case State.ONE:
                     animIddle1.position = position;
@@ -257,7 +359,9 @@ namespace IS_XNA_Shooter
                     text3.DrawRectangle(spriteBatch);
                     break;
                 case State.ONE:
+                    armTexture.DrawRectangle(spriteBatch);
                     animIddle1.DrawRectangle(spriteBatch);
+                    turretTexture.DrawRectangle(spriteBatch);
                     break;
                 case State.TWO:
                     animIddle2.DrawRectangle(spriteBatch);
@@ -276,7 +380,8 @@ namespace IS_XNA_Shooter
                     break;
             } // switch
 
-            collider.Draw(spriteBatch);
+            /*if (SuperGame.debug)
+                collider.Draw(spriteBatch);*/
 
         } // Draw
 
@@ -285,7 +390,12 @@ namespace IS_XNA_Shooter
             if (prevState == State.ENTERING && nextState == State.SPEAKING1)
             {
                 animIddle5.position = position;
+                timeSpeaking1 = 0;
                 currentState = State.SPEAKING1;
+            }
+            else if (prevState == State.SPEAKING1 && nextState == State.ONE)
+            {
+                currentState = State.ONE;
             }
         } // ChangeState
 
@@ -293,6 +403,20 @@ namespace IS_XNA_Shooter
         {
             if (nextState == State.ENTERING)
                 position = initialPosition;
+            else if (nextState == State.SPEAKING1)
+            {
+                timeSpeaking1 = 0;
+                transpLine1 = 0;
+                text1.SetTransparency(transpLine1);
+                transpLine2 = 0;
+                text2.SetTransparency(transpLine2);
+                transpLine3 = 0;
+                text3.SetTransparency(transpLine3);
+                line1IsFading = false;
+                line2IsFading = false;
+                line3IsFading = false;
+                position = basePosition;
+            }
             else
                 position = basePosition;
             currentState = nextState;

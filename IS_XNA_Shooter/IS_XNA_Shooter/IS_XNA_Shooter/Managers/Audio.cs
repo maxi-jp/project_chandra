@@ -14,6 +14,7 @@ namespace IS_XNA_Shooter
 
         private static float effectsVolume;
         private static float musicVolume;
+        private static bool isPlayingMusic;
 
         // efectos del menu:
         public static SoundEffect digitalAcent01;
@@ -39,6 +40,7 @@ namespace IS_XNA_Shooter
             this.content = content;
             effectsVolume = musicVolume = 1;
             MediaPlayer.Volume = musicVolume;
+            isPlayingMusic = false;        
         }
 
         public void LoadContent(int i)
@@ -122,21 +124,25 @@ namespace IS_XNA_Shooter
             switch (i)
             {
                 case 1: // music01
+                    isPlayingMusic = true;
                     MediaPlayer.Stop();
                     MediaPlayer.Play(music01);
                     MediaPlayer.IsRepeating = true;
                     break;
                 case 2: // menu song
+                    isPlayingMusic = true;
                     MediaPlayer.Stop();
                     MediaPlayer.Play(music_menu);
                     MediaPlayer.IsRepeating = true;
                     break;
                 case 3: // evolution screen song
+                    isPlayingMusic = true;
                     MediaPlayer.Stop();
                     MediaPlayer.Play(music_evolution);
                     MediaPlayer.IsRepeating = true;
                     break;
                 case 4: // street music
+                    isPlayingMusic = true;
                     MediaPlayer.Stop();
                     MediaPlayer.Play(music_street);
                     MediaPlayer.IsRepeating = true;
@@ -152,6 +158,7 @@ namespace IS_XNA_Shooter
 
         public static void StopMusic()
         {
+            isPlayingMusic = false;
             MediaPlayer.Stop();
         }
 
@@ -162,7 +169,8 @@ namespace IS_XNA_Shooter
 
         public static void ResumeMusic()
         {
-            MediaPlayer.Resume();
+            if (isPlayingMusic == true)
+                MediaPlayer.Resume();
         }
 
         private void LoadSoundPowerUps()

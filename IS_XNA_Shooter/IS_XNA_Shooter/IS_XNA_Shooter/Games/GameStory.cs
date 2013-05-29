@@ -55,6 +55,8 @@ namespace IS_XNA_Shooter
         private String[] levelList;
         private int currentLevel;
 
+        private bool finished = false;
+
         /*public GameStory(SuperGame mainGame, GRMng grManager, Audio audio, XMLLvlMng LvlMng,
             Player player, float shipVelocity, int shipLife)
             : base(mainGame, player, shipVelocity, shipLife)
@@ -174,7 +176,10 @@ namespace IS_XNA_Shooter
                             timeToResumeAux = 5f;
                         }
                         else
-                            mainGame.ExitToMenu();
+                        {
+                            finished = true;
+                            //mainGame.ExitToMenu();
+                        }
                     }
                     else if (timeToResumeAux >= 5f * 2 / 3)
                         spriteNum.SetRectangle(new Rectangle(341, 80, 170, 150));
@@ -336,7 +341,7 @@ namespace IS_XNA_Shooter
         public override bool IsFinished()
         {
             // TODO: ñapa de cojones
-            return false;
+            return finished;
         }
 
     } // class GameB

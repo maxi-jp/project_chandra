@@ -16,7 +16,7 @@ namespace IS_XNA_Shooter
         private List<RectangleMap> listRecMap;
         private int[] rectangleMap;
         private float rectanglesScale;
-        private bool rectangleColisionActive = false;
+        private bool rectangleColisionActive = true;
 
         private BackgroundGameB backGround; //Fondo con los parallax
 
@@ -72,7 +72,7 @@ namespace IS_XNA_Shooter
             backGround.Update(deltaTime);
 
             // player-walls(rectangles) collision:
-            if (rectangleColisionActive)
+            if (rectangleColisionActive && !SuperGame.godMode)
             {
                 int cont = 0;
                 Rectangle recAux;

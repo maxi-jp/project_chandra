@@ -69,7 +69,7 @@ namespace IS_XNA_Shooter
             explosions = new List<Explosion>();
             powerUpList = new List<PowerUp>();
 
-            Audio.PlayMusic(4);
+            //Audio.PlayMusic(4);
         }
 
         /* ------------------------------------------------------------- */
@@ -139,10 +139,11 @@ namespace IS_XNA_Shooter
                     }
                 }
             }
-            if (!ship.isDying()) // powerUps for the ship
+
+            for (int i = 0; i < powerUpList.Count; i++) // powerUps for the ship
             {
-                for (int i = 0; i < powerUpList.Count; i++) 
-                {   
+                if (!ship.isDying())
+                {
                     if (powerUpList[i].IsActive())
                     {
                         if (ship.collider.Collision(powerUpList[i].collider)
@@ -153,8 +154,8 @@ namespace IS_XNA_Shooter
                             {
                                 for (int j = 0; j < enemies.Count(); j++)
                                     if (enemies[j].IsActive() && !(enemies[j].GetType() == typeof(FinalBoss1) || enemies[j].GetType() == typeof(EnemyFinalHeroe2) ||
-                                            enemies[j].GetType() == typeof(BotFinalBoss) || enemies[j].GetType() == typeof(FinalBossHeroe1) ||
-                                            enemies[j].GetType() == typeof(FinalBoss1Turret2) || enemies[j].GetType() == typeof(FinalBoss1Turret1)))
+                                         enemies[j].GetType() == typeof(BotFinalBoss) || enemies[j].GetType() == typeof(FinalBossHeroe1) ||
+                                         enemies[j].GetType() == typeof(FinalBoss1Turret2) || enemies[j].GetType() == typeof(FinalBoss1Turret1)))
                                         enemies[j].Damage(200);
                             }
                             powerUpList[i].ShowBanner();

@@ -139,10 +139,9 @@ namespace IS_XNA_Shooter
                     }
                 }
             }
-
-            for (int i = 0; i < powerUpList.Count; i++) // powerUps for the ship
+            if (!ship.isDying())
             {
-                if (!ship.isDying())
+                for (int i = 0; i < powerUpList.Count; i++) // powerUps for the ship
                 {
                     if (powerUpList[i].IsActive())
                     {

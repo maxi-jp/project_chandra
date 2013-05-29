@@ -75,6 +75,7 @@ Content\Graphics\Splash\splash_mainmenu_asset02_2.xnb
 Content\Graphics\Splash\splash_mainmenu_asset03.xnb
 Content\Graphics\Ships\sprites_shield80x80.xnb
 Content\Graphics\PowerUps\banPowerUp320x320.xnb
+<<<<<<< HEAD
 Content\Graphics\Menu\scores_2.xnb
 Content\Graphics\MapEditor\Screen1\backgroundMapEditor_1Screen1.xnb
 Content\Graphics\MapEditor\Screen1\backgroundMapEditor_2Screen1.xnb
@@ -93,10 +94,8 @@ Content\Graphics\Ships\SuperFinalBoss\anim01.xnb
 Content\Graphics\Ships\SuperFinalBoss\anim02.xnb
 Content\Graphics\Ships\SuperFinalBoss\anim03.xnb
 Content\Graphics\Ships\SuperFinalBoss\anim04.xnb
-Content\Graphics\Splash\splash_demofin_1.xnb
-Content\Graphics\Splash\splash_demofin_2.xnb
-Content\Graphics\Splash\splash_demofin_3.xnb
-Content\Graphics\Splash\splash_demofin_4.xnb
+=======
+>>>>>>> f875ef212063e72df7e106b689119d20f37263f7
 Content\FontDebug.xnb
 Content\Motorwerk.xnb
 Content\Audio\FXEffects\laser_shot_01.xnb
@@ -108,18 +107,39 @@ Content\Audio\FXEffects\laser_shot_red.xnb
 Content\Audio\FXEffects\PowerUpBlue.xnb
 Content\Audio\FXEffects\PowerUpGreen.xnb
 Content\Audio\FXEffects\PowerUpRed.xnb
-Content\Audio\FXEffects\PowerUpOrange.xnb
 Content\Audio\Music\music_01.xnb
+<<<<<<< HEAD
 Content\Audio\Music\music_04-Street.xnb
 Content\Audio\Music\music_evolution_02-TakeOff.xnb
 Content\Audio\Music\music_menu_28-Metempsychosis.xnb
 Content\Video\VideoIntroProjectChandra.xnb
-Content\Audio\Music\music_08-Badlands.xnb
-Content\Audio\Music\music_12-Factory.xnb
+=======
+Content\Video\VideoIntroProjectChandra.xnb
+Content\Audio\FXEffects\PowerUpOrange.xnb
+Content\Graphics\Menu\scores_2.xnb
+Content\Graphics\MapEditor\Screen1\backgroundMapEditor_1Screen1.xnb
+Content\Graphics\MapEditor\Screen1\backgroundMapEditor_2Screen1.xnb
+Content\Graphics\MapEditor\Screen2\backgroundMapEditor_1 - copia.xnb
+Content\Graphics\MapEditor\Screen2\Background\backgroundMapEditor_1.xnb
+Content\Graphics\MapEditor\Screen2\Background\backgroundMapEditor_2.xnb
+Content\Graphics\MapEditor\Screen2\Objects\boxSizesMapEditor_2.xnb
+Content\Graphics\MapEditor\Screen2\Objects\widthHeightMapEditor_1.xnb
+Content\Graphics\MapEditor\Screen2\Objects\widthHeightMapEditor_2.xnb
+Content\Graphics\MapEditor\Screen3\buttonsSaveLoadPreview.xnb
+Content\Graphics\Splash\splash_mainmenu_asset01_3.xnb
+Content\Graphics\Splash\splash_start_3.xnb
+Content\Graphics\Ships\sprites120x120.xnb
+Content\Graphics\Ships\sprites_shield120x120.xnb
+Content\Graphics\Ships\SuperFinalBoss\anim01.xnb
+Content\Graphics\Ships\SuperFinalBoss\anim02.xnb
+Content\Graphics\Ships\SuperFinalBoss\anim03.xnb
+Content\Graphics\Ships\SuperFinalBoss\anim04.xnb
+Content\Audio\Music\music_04-Street.xnb
+Content\Audio\Music\music_evolution_02-TakeOff.xnb
+Content\Audio\Music\music_menu_28-Metempsychosis.xnb
+>>>>>>> f875ef212063e72df7e106b689119d20f37263f7
 Content\Audio\Music\music_01.wma
 Content\Audio\Music\music_04-Street.wma
 Content\Audio\Music\music_evolution_02-TakeOff.wma
 Content\Audio\Music\music_menu_28-Metempsychosis.wma
 Content\Video\VideoIntroProjectChandra.wmv
-Content\Audio\Music\music_08-Badlands.wma
-Content\Audio\Music\music_12-Factory.wma

@@ -34,6 +34,8 @@ namespace IS_XNA_Shooter
         public static Song music_menu;
         public static Song music_evolution;
         public static Song music_street;
+        public static Song music_badlands;
+        public static Song music_factory;
 
         public Audio(ContentManager content)
         {
@@ -64,6 +66,8 @@ namespace IS_XNA_Shooter
                     LoadSoundPowerUps();
                     music_evolution = content.Load<Song>("Audio/Music/music_evolution_02-TakeOff");
                     music_street = content.Load<Song>("Audio/Music/music_04-Street");
+                    music_badlands = content.Load<Song>("Audio/Music/music_08-Badlands");
+                    music_factory = content.Load<Song>("Audio/Music/music_12-Factory");
                     break;
             }
         } // LoadContent
@@ -93,6 +97,8 @@ namespace IS_XNA_Shooter
                     SoundPowerUpOrange = null;
                     music_evolution = null;
                     music_street = null;
+                    music_badlands = null;
+                    music_factory = null;
                     break;
             }
         } // UnloadContent
@@ -145,6 +151,18 @@ namespace IS_XNA_Shooter
                     isPlayingMusic = true;
                     MediaPlayer.Stop();
                     MediaPlayer.Play(music_street);
+                    MediaPlayer.IsRepeating = true;
+                    break;
+                case 5: // badlands music
+                    isPlayingMusic = true;
+                    MediaPlayer.Stop();
+                    MediaPlayer.Play(music_badlands);
+                    MediaPlayer.IsRepeating = true;
+                    break;
+                case 6: // factory music
+                    isPlayingMusic = true;
+                    MediaPlayer.Stop();
+                    MediaPlayer.Play(music_badlands);
                     MediaPlayer.IsRepeating = true;
                     break;
             }

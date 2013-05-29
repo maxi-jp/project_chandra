@@ -113,6 +113,7 @@
     <Compile Include="Animations\AnimRect.cs" />
     <Compile Include="Animations\ComplexAnimation.cs" />
     <Compile Include="Enemies\SuperFinalBoss.cs" />
+    <Compile Include="Games\GameStoryFinalDemo.cs" />
     <Compile Include="Managers\Audio.cs" />
     <Compile Include="Backgrounds\BackgroundGameA.cs" />
     <Compile Include="Backgrounds\BackgroundGameB.cs" />

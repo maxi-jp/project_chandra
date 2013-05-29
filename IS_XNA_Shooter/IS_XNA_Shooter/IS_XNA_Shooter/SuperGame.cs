@@ -681,7 +681,8 @@ namespace IS_XNA_Shooter
 
             duration = 0;
 
-            game = new GameStory(this, grManager, audio, LvlMng, player, screenEvolution);
+            //game = new GameStory(this, grManager, audio, LvlMng, player, screenEvolution);
+            game = new GameStoryFinalDemo(this, grManager, audio, LvlMng, player, screenEvolution);
 
             //currentState = gameState.playing; // Change game's state to game mode
             //grManager.UnloadContent(2); 

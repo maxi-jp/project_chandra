@@ -21,6 +21,7 @@ namespace IS_XNA_Shooter
         public static XmlDocument xmlEnemies;
         public static XmlDocument xmlRectangles;
         public static XmlDocument xmlDialogs;
+        public static XmlDocument xmlDialogs2;
 
         /// <summary>
         /// Constructor for XMLLvl manager
@@ -53,6 +54,11 @@ namespace IS_XNA_Shooter
                 case "Dialogs": // dialogs
                     xmlDialogs = new XmlDocument();
                     xmlDialogs.Load("../../../../IS_XNA_ShooterContent/Levels/dialog1.xml");
+                    break;
+
+                case "Dialogs2":
+                    xmlDialogs2 = new XmlDocument();
+                    xmlDialogs2.Load("../../../../IS_XNA_ShooterContent/Levels/dialog2.xml");
                     break;
 
                 case "LevelB2": // GameB Level 2 DORITO
@@ -98,6 +104,11 @@ namespace IS_XNA_Shooter
                     xmlDialogs.Load(xmlPath);
                     break;
 
+                case "Dialogs2": // dialogs
+                    xmlDialogs2 = new XmlDocument();
+                    xmlDialogs2.Load(xmlPath);
+                    break;
+
                 case "LevelB2": // GameB Level 2 DORITO
                     xmlRectangles = new XmlDocument();
                     xmlRectangles.Load(xmlPath);
@@ -130,6 +141,10 @@ namespace IS_XNA_Shooter
 
                 case "Dialogs": // dialogs
                     xmlDialogs = null;
+                    break;
+
+                case "Dialogs2": // dialogs
+                    xmlDialogs2 = null;
                     break;
 
                 case "LevelB2": // GameB Level 2 DORITO

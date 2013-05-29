@@ -231,44 +231,18 @@
 
 
       <!-- OLEADA SerpienteShot -->
-      <enemy type="EnemyWeakShotB" positionX="1400" positionY="100" time="100"></enemy>
-      <enemy type="EnemyWeakShotB" positionX="1560" positionY="200" time="100"></enemy>
-      <enemy type="EnemyWeakShotB" positionX="1400" positionY="300" time="101"></enemy>
-      <enemy type="EnemyWeakShotB" positionX="1560" positionY="400" time="101"></enemy>
-      <enemy type="EnemyWeakShotB" positionX="1400" positionY="500" time="102"></enemy>
-      <enemy type="EnemyWeakShotB" positionX="1560" positionY="600" time="102"></enemy>
-      <enemy type="EnemyWeakShotB" positionX="1400" positionY="600" time="103"></enemy>
-      <enemy type="EnemyWeakShotB" positionX="1560" positionY="500" time="103"></enemy>
-      <enemy type="EnemyWeakShotB" positionX="1400" positionY="400" time="104"></enemy>
-      <enemy type="EnemyWeakShotB" positionX="1560" positionY="300" time="104"></enemy>
-      <enemy type="EnemyWeakShotB" positionX="1400" positionY="200" time="105"></enemy>
-      <enemy type="EnemyWeakShotB" positionX="1560" positionY="100" time="105"></enemy>
-
-
-      <!-- OLEADA Serpiente -->
-      <enemy type="EnemyWeakB" positionX="1400" positionY="100" time="106"></enemy>
-      <enemy type="EnemyWeakShotB" positionX="1480" positionY="150" time="106"></enemy>
-      <enemy type="EnemyWeakB" positionX="1560" positionY="200" time="106"></enemy>
-      <enemy type="EnemyWeakShotB" positionX="1640" positionY="250" time="106"></enemy>
-      <enemy type="EnemyWeakB" positionX="1400" positionY="300" time="107"></enemy>
-      <enemy type="EnemyWeakShotB" positionX="1480" positionY="350" time="107"></enemy>
-      <enemy type="EnemyWeakB" positionX="1560" positionY="400" time="107"></enemy>
-      <enemy type="EnemyWeakShotB" positionX="1640" positionY="450" time="107"></enemy>
-      <enemy type="EnemyWeakB" positionX="1400" positionY="500" time="108"></enemy>
-      <enemy type="EnemyWeakShotB" positionX="1480" positionY="550" time="108"></enemy>
-      <enemy type="EnemyWeakB" positionX="1560" positionY="600" time="108"></enemy>
-      <enemy type="EnemyWeakShotB" positionX="1640" positionY="650" time="108"></enemy>
-      <enemy type="EnemyWeakB" positionX="1400" positionY="600" time="109"></enemy>
-      <enemy type="EnemyWeakShotB" positionX="1480" positionY="550" time="109"></enemy>
-      <enemy type="EnemyWeakB" positionX="1560" positionY="500" time="109"></enemy>
-      <enemy type="EnemyWeakShotB" positionX="1640" positionY="450" time="109"></enemy>
-      <enemy type="EnemyWeakB" positionX="1400" positionY="400" time="110"></enemy>
-      <enemy type="EnemyWeakShotB" positionX="1480" positionY="350" time="110"></enemy>
-      <enemy type="EnemyWeakB" positionX="1560" positionY="300" time="110"></enemy>
-      <enemy type="EnemyWeakShotB" positionX="1640" positionY="250" time="110"></enemy>
-      <enemy type="EnemyWeakB" positionX="1400" positionY="200" time="111"></enemy>
-      <enemy type="EnemyWeakShotB" positionX="1480" positionY="150" time="111"></enemy>
-      <enemy type="EnemyWeakB" positionX="1560" positionY="100" time="111"></enemy>
+      <enemy type="EnemyWeakShotB" positionX="1400" positionY="100" time="92"></enemy>
+      <enemy type="EnemyWeakShotB" positionX="1560" positionY="200" time="92"></enemy>
+      <enemy type="EnemyWeakShotB" positionX="1400" positionY="300" time="93"></enemy>
+      <enemy type="EnemyWeakShotB" positionX="1560" positionY="400" time="93"></enemy>
+      <enemy type="EnemyWeakShotB" positionX="1400" positionY="500" time="94"></enemy>
+      <enemy type="EnemyWeakShotB" positionX="1560" positionY="600" time="94"></enemy>
+      <enemy type="EnemyWeakShotB" positionX="1400" positionY="600" time="95"></enemy>
+      <enemy type="EnemyWeakShotB" positionX="1560" positionY="500" time="95"></enemy>
+      <enemy type="EnemyWeakShotB" positionX="1400" positionY="400" time="96"></enemy>
+      <enemy type="EnemyWeakShotB" positionX="1560" positionY="300" time="96"></enemy>
+      <enemy type="EnemyWeakShotB" positionX="1400" positionY="200" time="97"></enemy>
+      <enemy type="EnemyWeakShotB" positionX="1560" positionY="100" time="97"></enemy>
 
     </enemiesList>
 </level>

@@ -36,6 +36,7 @@ namespace IS_XNA_Shooter
         public static Song music_street;
         public static Song music_badlands;
         public static Song music_factory;
+        public static Song music_credits;
 
         public Audio(ContentManager content)
         {
@@ -69,6 +70,10 @@ namespace IS_XNA_Shooter
                     music_badlands = content.Load<Song>("Audio/Music/music_08-Badlands");
                     music_factory = content.Load<Song>("Audio/Music/music_12-Factory");
                     break;
+
+                case 2: // credits
+                    music_credits = content.Load<Song>("Audio/Music/music_credits-Blackheart,TSFH");
+                    break;
             }
         } // LoadContent
 
@@ -99,6 +104,11 @@ namespace IS_XNA_Shooter
                     music_street = null;
                     music_badlands = null;
                     music_factory = null;
+                    music_credits = null;
+                    break;
+
+                case 2: // credits
+                    music_credits = null;
                     break;
             }
         } // UnloadContent
@@ -163,6 +173,12 @@ namespace IS_XNA_Shooter
                     isPlayingMusic = true;
                     MediaPlayer.Stop();
                     MediaPlayer.Play(music_factory);
+                    MediaPlayer.IsRepeating = true;
+                    break;
+                case 7: // credits music
+                    isPlayingMusic = true;
+                    MediaPlayer.Stop();
+                    MediaPlayer.Play(music_credits);
                     MediaPlayer.IsRepeating = true;
                     break;
             }

@@ -305,6 +305,10 @@ namespace IS_XNA_Shooter
         public static Texture2D splash_demofin_4;
         #endregion
 
+        #region SPLASH_CREDITS
+        public static Texture2D splash_credits_1;
+        #endregion
+
         #region VIDEO
         public static Video videoIntroStory;
         #endregion
@@ -560,6 +564,10 @@ namespace IS_XNA_Shooter
                     LoadSplashFinalDemo();
                     break;
 
+                case "SplashCredits":
+                    splash_credits_1 = content.Load<Texture2D>("Graphics/Splash/splash_credits");
+                    break;
+
                 case "Other":
                     whitepixel = content.Load<Texture2D>("Graphics/whitepixel");
                     redpixel = content.Load<Texture2D>("Graphics/redpixel");
@@ -770,32 +778,36 @@ namespace IS_XNA_Shooter
                     break;
 
                 case "MapEditor":
-                    menuMapEditor1 = content.Load<Texture2D>("Graphics/MapEditor/Screen1/backgroundMapEditor_2Screen1");
-                    menuMapEditor2 = content.Load<Texture2D>("Graphics/MapEditor/Screen2/Background/backgroundMapEditor_2");
-                    screenSizesMapEditor2 = content.Load<Texture2D>("Graphics/MapEditor/Screen2/Objects/widthHeightMapEditor_2");
-                    boxSizesMapEditor2 = content.Load<Texture2D>("Graphics/MapEditor/Screen2/Objects/boxSizesMapEditor_2");
-                    fontText = content.Load<SpriteFont>("Motorwerk");
-                    textureBg00 = content.Load<Texture2D>("Graphics/Backgrounds/bg00");
-                    textureCell = content.Load<Texture2D>("Graphics/celdasuelo");
+                    menuMapEditor1 = null;
+                    menuMapEditor2 = null;
+                    screenSizesMapEditor2 = null;
+                    boxSizesMapEditor2 = null;
+                    fontText = null;
+                    textureBg00 = null;
+                    textureCell = null;
 
                     //Enemies
-                    textureEW1 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy01_80x80");
-                    textureEW2 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy02_80x80");
-                    textureEB1 = content.Load<Texture2D>("Graphics/Ships/sprites_enemy03_80x80");
-                    textureES = content.Load<Texture2D>("Graphics/Ships/EnemyScared");
-                    textureEMS = content.Load<Texture2D>("Graphics/Ships/mineAnimation");
-                    textureEL = content.Load<Texture2D>("Graphics/Ships/enemyLaser");
+                    textureEW1 = null;
+                    textureEW2 = null;
+                    textureEB1 = null;
+                    textureES = null;
+                    textureEMS = null;
+                    textureEL = null;
 
                     //Player
-                    texturePA1 = content.Load<Texture2D>("Graphics/Ships/sprites80x80");
+                    texturePA1 = null;
 
                     //Screen 3 buttons
-                    buttonsSaveLoadPreview = content.Load<Texture2D>("Graphics/MapEditor/Screen3/buttonsSaveLoadPreview");
+                    buttonsSaveLoadPreview = null;
 
                     break;
 
                 case "SplashFinalDemo":
                     UnLoadSplashFinalDemo();
+                    break;
+
+                case "SplashCredits":
+                    splash_credits_1 = null;
                     break;
 
                 case "Other":

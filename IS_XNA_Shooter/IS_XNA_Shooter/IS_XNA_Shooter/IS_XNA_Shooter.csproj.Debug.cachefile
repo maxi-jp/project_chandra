@@ -116,6 +116,8 @@ Content\Graphics\Splash\splash_demofin_3.xnb
 Content\Graphics\Splash\splash_demofin_4.xnb
 Content\Audio\Music\music_08-Badlands.xnb
 Content\Audio\Music\music_12-Factory.xnb
+Content\Graphics\Splash\splash_credits.xnb
+Content\Audio\Music\music_credits-Blackheart,TSFH.xnb
 Content\Audio\Music\music_01.wma
 Content\Video\VideoIntroProjectChandra.wmv
 Content\Audio\Music\music_04-Street.wma
@@ -123,3 +125,4 @@ Content\Audio\Music\music_evolution_02-TakeOff.wma
 Content\Audio\Music\music_menu_28-Metempsychosis.wma
 Content\Audio\Music\music_08-Badlands.wma
 Content\Audio\Music\music_12-Factory.wma
+Content\Audio\Music\music_credits-Blackheart,TSFH.wma

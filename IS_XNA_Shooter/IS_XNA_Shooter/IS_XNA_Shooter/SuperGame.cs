@@ -52,7 +52,8 @@ namespace IS_XNA_Shooter
             playingVideo,
             evolution,
             mapMenuEditor,
-            splashFinalDemo
+            splashFinalDemo,
+            splashCredits
         };
 
         public enum levelName
@@ -214,6 +215,8 @@ namespace IS_XNA_Shooter
 
         private SplashFinalDemo menuFinalDemo;
 
+        private SplashCredits splashCredits;
+
         private String currentGameName;
         // TODO! esto es una ñapa, se hace ahora así para que funcione
         // el menu de scores para meter una nueva puntuación en nivel
@@ -285,7 +288,7 @@ namespace IS_XNA_Shooter
             }
             graphics.PreferredBackBufferWidth = resX;
             graphics.PreferredBackBufferHeight = resY;
-            graphics.IsFullScreen = false;
+            graphics.IsFullScreen = true;
 
             Content.RootDirectory = "Content";
         }
@@ -349,7 +352,12 @@ namespace IS_XNA_Shooter
             /*grManager.LoadContent("SplashFinalDemo");
             menuFinalDemo.Initialize();
             currentState = gameState.splashFinalDemo;*/
-
+            splashCredits = new SplashCredits(this);
+            // this is for testing the credits splash
+            /*grManager.LoadContent("SplashCredits");
+            audio.LoadContent(2); // load the song for the credits
+            splashCredits.Initialize();
+            currentState = gameState.splashCredits;*/
 
             // Create the player and the screenEvolution
             player = new Player(playerLifes);
@@ -516,6 +524,10 @@ namespace IS_XNA_Shooter
                 case gameState.splashFinalDemo:
                     menuFinalDemo.Update(deltaTime);
                     break;
+
+                case gameState.splashCredits:
+                    splashCredits.Update(deltaTime);
+                    break;
             }
 
             base.Update(gameTime);
@@ -580,6 +592,10 @@ namespace IS_XNA_Shooter
 
                 case gameState.splashFinalDemo:
                     menuFinalDemo.Draw(spriteBatch);
+                    break;
+
+                case gameState.splashCredits:
+                    splashCredits.Draw(spriteBatch);
                     break;
             }
 
@@ -891,7 +907,12 @@ namespace IS_XNA_Shooter
             if (currentGameName == "Story")
             {
                 //currentState = gameState.mainMenu;
-                currentState = gameState.splashFinalDemo;
+                //currentState = gameState.splashFinalDemo;
+                grManager.LoadContent("SplashCredits");
+                audio.LoadContent(2); // load the song for the credits
+                splashCredits.Initialize();
+                currentState = gameState.splashCredits;
+                currentState = gameState.splashCredits;
             } // Arcade level played:
             else
             {
@@ -926,6 +947,14 @@ namespace IS_XNA_Shooter
         public void ShowScores()
         {
             currentState = gameState.scoresMenu;
+        }
+
+        /// <summary>
+        /// this method is called from the credits splash
+        /// </summary>
+        public void ReturnFromCredits()
+        {
+            currentState = gameState.splashFinalDemo;
         }
 
     } // class SuperGame

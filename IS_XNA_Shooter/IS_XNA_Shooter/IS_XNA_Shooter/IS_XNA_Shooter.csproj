@@ -164,6 +164,7 @@
     <Compile Include="Enemies\FinalBoss1.cs" />
     <Compile Include="Enemies\FinalBoss1Turret1.cs" />
     <Compile Include="Enemies\FinalBoss1Turret2.cs" />
+    <Compile Include="Menus\SplashCredits.cs" />
     <Compile Include="Menus\SplashFinalDemo.cs" />
     <Compile Include="Particles\ParticleSystemCamera.cs" />
     <Compile Include="PowerUp.cs" />

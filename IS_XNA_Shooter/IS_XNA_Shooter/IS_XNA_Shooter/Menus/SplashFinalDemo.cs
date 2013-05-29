@@ -77,7 +77,7 @@ namespace IS_XNA_Shooter
                         }
                         if (logoScale < 1)
                         {
-                            logoScale += 0.1f;
+                            logoScale += 0.005f;
                             splashLogo.scale = logoScale;
                         }
                     }

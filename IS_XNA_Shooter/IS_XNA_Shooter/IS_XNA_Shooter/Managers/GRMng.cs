@@ -573,6 +573,7 @@ namespace IS_XNA_Shooter
                     break;
 
                 case "SplashCredits":
+                    menuSplash01 = content.Load<Texture2D>("Graphics/Splash/splash_mainmenu_asset01_3");
                     splash_credits_1 = content.Load<Texture2D>("Graphics/Splash/splash_credits");
                     break;
 

@@ -147,10 +147,15 @@ namespace IS_XNA_Shooter.MapEditor
         //***************************        
         public MainMapEditor(String levelType, int width, int height, SuperGame mainGame, MenuMapEditor menuMapEditor)
         {
-	    currentStateMouse = stateMouse.normal;
-	    //variables frameLevel
+	        currentStateMouse = stateMouse.normal;
+	        //variables frameLevel
             widthFrameLevel = 1000;
             heightFrameLevel = 500;
+
+            if (SuperGame.resolutionMode == 3)
+            {
+                widthFrameLevel = 800;
+            }
 
             enemiesInfo = new List<InfoEnemy>();
 
@@ -420,8 +425,8 @@ namespace IS_XNA_Shooter.MapEditor
         {
             int origXScreen = SuperGame.screenWidth / 20;
             int origYScreen = SuperGame.screenHeight / 15;
-            int widthFrameLevel = 1000;
-            int heightFrameLevel = 500;
+            /*int widthFrameLevel = 1000;
+            int heightFrameLevel = 500;*/
 
             if (isSelectedFrameLevel && !isSelectedEnemyShip)
             {
@@ -430,10 +435,10 @@ namespace IS_XNA_Shooter.MapEditor
                 displacementLevel.Y += Mouse.GetState().Y - lastPositionMouse.Y;
                 //limit the position "x" of the displacement level.
                 if (displacementLevel.X > 0) displacementLevel.X = 0;
-                if (displacementLevel.X < 1000 - width - 20) displacementLevel.X = widthFrameLevel - width - 20;
+                if (displacementLevel.X < widthFrameLevel - width - 20) displacementLevel.X = widthFrameLevel - width - 20;
                 //limit the position "y" of the displacement level.
                 if (displacementLevel.Y > 0) displacementLevel.Y = 0;
-                if (displacementLevel.Y < 500 - height - 20) displacementLevel.Y = heightFrameLevel - height - 20;
+                if (displacementLevel.Y < heightFrameLevel - height - 20) displacementLevel.Y = heightFrameLevel - height - 20;
             }
             lastPositionMouse.X = Mouse.GetState().X;
             lastPositionMouse.Y = Mouse.GetState().Y;

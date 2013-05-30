@@ -288,7 +288,7 @@ namespace IS_XNA_Shooter
             }
             graphics.PreferredBackBufferWidth = resX;
             graphics.PreferredBackBufferHeight = resY;
-            graphics.IsFullScreen = true;
+            graphics.IsFullScreen = false;
 
             Content.RootDirectory = "Content";
         }
@@ -386,6 +386,10 @@ namespace IS_XNA_Shooter
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
+
+            //Put or quit full screen
+            if (Keyboard.GetState().IsKeyDown(Keys.M))
+                this.graphics.ToggleFullScreen();
 
             // Time since the last method's execution
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;

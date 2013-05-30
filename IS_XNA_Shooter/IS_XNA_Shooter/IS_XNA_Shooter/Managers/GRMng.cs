@@ -315,8 +315,12 @@ namespace IS_XNA_Shooter
 
         #region MAP EDITOR
         /* ------------- TEXTURES -------------*/
-        public static Texture2D menuMapEditor1;
-        public static Texture2D menuMapEditor2;
+        public static Texture2D menuMapEditor1_1;
+        public static Texture2D menuMapEditor1_2;
+        public static Texture2D menuMapEditor1_3;
+        public static Texture2D menuMapEditor2_1;
+        public static Texture2D menuMapEditor2_2;
+        public static Texture2D menuMapEditor2_3;
         public static Texture2D screenSizesMapEditor2;
         public static Texture2D boxSizesMapEditor2;
         /* ------------- SPRITES_FONT -------------*/
@@ -536,8 +540,12 @@ namespace IS_XNA_Shooter
                     break;
 
                 case "MapEditor":
-                    menuMapEditor1 = content.Load<Texture2D>("Graphics/MapEditor/Screen1/backgroundMapEditor_2Screen1");
-                    menuMapEditor2 = content.Load<Texture2D>("Graphics/MapEditor/Screen2/Background/backgroundMapEditor_2");
+                    menuMapEditor1_1 = content.Load<Texture2D>("Graphics/MapEditor/Screen1/backgroundMapEditor_1Screen1");
+                    menuMapEditor1_2 = content.Load<Texture2D>("Graphics/MapEditor/Screen1/backgroundMapEditor_2Screen1");
+                    menuMapEditor1_3 = content.Load<Texture2D>("Graphics/MapEditor/Screen1/backgroundMapEditor_3Screen1");
+                    menuMapEditor2_1 = content.Load<Texture2D>("Graphics/MapEditor/Screen2/Background/backgroundMapEditor_1");
+                    menuMapEditor2_2 = content.Load<Texture2D>("Graphics/MapEditor/Screen2/Background/backgroundMapEditor_2");
+                    menuMapEditor2_3 = content.Load<Texture2D>("Graphics/MapEditor/Screen2/Background/backgroundMapEditor_3");
                     screenSizesMapEditor2 = content.Load<Texture2D>("Graphics/MapEditor/Screen2/Objects/widthHeightMapEditor_2");
                     boxSizesMapEditor2 = content.Load<Texture2D>("Graphics/MapEditor/Screen2/Objects/boxSizesMapEditor_2");
                     fontText = content.Load<SpriteFont>("Motorwerk");
@@ -778,8 +786,12 @@ namespace IS_XNA_Shooter
                     break;
 
                 case "MapEditor":
-                    menuMapEditor1 = null;
-                    menuMapEditor2 = null;
+                    menuMapEditor1_1 = null;
+                    menuMapEditor1_2 = null;
+                    menuMapEditor1_3 = null;
+                    menuMapEditor2_1 = null;
+                    menuMapEditor2_2 = null;
+                    menuMapEditor2_3 = null;
                     screenSizesMapEditor2 = null;
                     boxSizesMapEditor2 = null;
                     fontText = null;

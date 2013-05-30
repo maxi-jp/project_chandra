@@ -97,7 +97,10 @@ namespace IS_XNA_Shooter
 
             horizontalSep = 46;
 
-            backgroundMapEditor = GRMng.menuMapEditor1;
+            //select backgrond
+            if (SuperGame.resolutionMode == 1) backgroundMapEditor = GRMng.menuMapEditor1_1;
+            else if (SuperGame.resolutionMode == 2) backgroundMapEditor = GRMng.menuMapEditor1_2;
+            else backgroundMapEditor = GRMng.menuMapEditor1_3;
             //Button "Back"
             itemBack = new MenuItem(false, new Vector2(5, SuperGame.screenHeight - 45), GRMng.menuMain, 
                 new Rectangle(120, 360, 120, 40), new Rectangle(240, 360, 120, 40), new Rectangle(360, 360, 120, 40));
@@ -129,7 +132,9 @@ namespace IS_XNA_Shooter
         private void buildScreenSize()
         {
             //background
-            spriteBackground = new Sprite(false, Vector2.Zero, 0f, GRMng.menuMapEditor2);
+            if (SuperGame.resolutionMode == 1) spriteBackground = new Sprite(false, Vector2.Zero, 0f, GRMng.menuMapEditor2_1);
+            else if (SuperGame.resolutionMode == 2) spriteBackground = new Sprite(false, Vector2.Zero, 0f, GRMng.menuMapEditor2_2);
+            else spriteBackground = new Sprite(false, Vector2.Zero, 0f, GRMng.menuMapEditor2_3);
             //screen of width-height
             spriteWidthHeight = new Sprite(true, 
                 new Vector2(SuperGame.screenWidth / 2, SuperGame.screenHeight * GRMng.relationHeightScreenSizesMapEditor2), 0f, 
@@ -141,7 +146,8 @@ namespace IS_XNA_Shooter
             itemHeight = new ItemInput(new Vector2(SuperGame.screenWidth * GRMng.relationWidthSizesMapEditor2, 
                 SuperGame.screenHeight * GRMng.relationHeightHeightMapEditor2), ItemInput.State.sizeScreen);
             informationText = "Dimensions between 1000x1000 and 10000x10000";
-            informationPosition = new Vector2(3*SuperGame.screenWidth/10, 2*SuperGame.screenHeight/5);
+            informationPosition = new Vector2(spriteWidthHeight.position.X - spriteWidthHeight.texture.Width / 2 + 10, 
+                spriteWidthHeight.position.Y - spriteWidthHeight.texture.Height / 2);
         }
 
 

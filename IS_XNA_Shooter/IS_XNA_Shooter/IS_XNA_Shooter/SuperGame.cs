@@ -388,7 +388,7 @@ namespace IS_XNA_Shooter
                 this.Exit();
 
             //Put or quit full screen
-            if (Keyboard.GetState().IsKeyDown(Keys.M))
+            if (Keyboard.GetState().IsKeyDown(Keys.OemComma))
                 this.graphics.ToggleFullScreen();
 
             // Time since the last method's execution

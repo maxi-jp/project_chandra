@@ -85,18 +85,7 @@ Content\Graphics\MapEditor\Screen2\Objects\boxSizesMapEditor_2.xnb
 Content\Graphics\MapEditor\Screen2\Objects\widthHeightMapEditor_1.xnb
 Content\Graphics\MapEditor\Screen2\Objects\widthHeightMapEditor_2.xnb
 Content\Graphics\MapEditor\Screen3\buttonsSaveLoadPreview.xnb
-Content\Graphics\Splash\splash_mainmenu_asset01_3.xnb
-Content\Graphics\Splash\splash_start_3.xnb
-Content\Graphics\Ships\sprites120x120.xnb
-Content\Graphics\Ships\sprites_shield120x120.xnb
-Content\Graphics\Ships\SuperFinalBoss\anim01.xnb
-Content\Graphics\Ships\SuperFinalBoss\anim02.xnb
-Content\Graphics\Ships\SuperFinalBoss\anim03.xnb
-Content\Graphics\Ships\SuperFinalBoss\anim04.xnb
-Content\Graphics\Splash\splash_demofin_1.xnb
-Content\Graphics\Splash\splash_demofin_2.xnb
-Content\Graphics\Splash\splash_demofin_3.xnb
-Content\Graphics\Splash\splash_demofin_4.xnb
+Content\Audio\FXEffects\PowerUpOrange.xnb
 Content\Graphics\Splash\splash_credits.xnb
 Content\FontDebug.xnb
 Content\Motorwerk.xnb
@@ -114,8 +103,6 @@ Content\Audio\Music\music_01.xnb
 Content\Audio\Music\music_04-Street.xnb
 Content\Audio\Music\music_evolution_02-TakeOff.xnb
 Content\Audio\Music\music_menu_28-Metempsychosis.xnb
-Content\Audio\Music\music_08-Badlands.xnb
-Content\Audio\Music\music_12-Factory.xnb
 Content\Video\VideoIntroProjectChandra.xnb
 Content\Audio\Music\music_credits-Blackheart,TSFH.xnb
 Content\Graphics\MapEditor\Screen1\backgroundMapEditor_3Screen1.xnb
@@ -130,5 +117,4 @@ Content\Audio\Music\music_menu_28-Metempsychosis.wma
 Content\Audio\Music\music_08-Badlands.wma
 Content\Audio\Music\music_12-Factory.wma
 Content\Video\VideoIntroProjectChandra.wmv
-Content\Audio\Music\music_credits-Blackheart,TSFH.wma
 Content\Audio\Music\music_01.RulesOfNature.wma

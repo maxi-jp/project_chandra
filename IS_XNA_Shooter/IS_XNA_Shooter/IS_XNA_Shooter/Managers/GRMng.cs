@@ -23,6 +23,7 @@ namespace IS_XNA_Shooter
         public static Texture2D bluepixeltrans; // textura pixel azul transparente
         public static Texture2D greenpixeltrans;// textura pixel verde transparente
         public static Texture2D yellowpixeltrans;  // textura pixel amarillo transparente
+        public static Texture2D mousePointer01; // textura del puntero del ratón
 
         #region BACKGROUNDS
         /* ------------------- FONDOS ------------------- */
@@ -249,6 +250,14 @@ namespace IS_XNA_Shooter
         public static short numAnimsL2 = 1;
         public static short[] frameCountL2 = { 3 };
         public static bool[] loopingL2 = { true };
+
+        /* ------------------- LASER 3 ------------------- */
+        public static Texture2D textureL3;
+        public static short frameWidthL3 = 14;
+        public static short frameHeightL3 = 5;
+        public static short numAnimsL3 = 1;
+        public static short[] frameCountL3 = { 3 };
+        public static bool[] loopingL3 = { true };
         #endregion
 
         #region OTHERS
@@ -585,6 +594,7 @@ namespace IS_XNA_Shooter
                     bluepixeltrans = content.Load<Texture2D>("Graphics/bluepixeltransparent");
                     greenpixeltrans = content.Load<Texture2D>("Graphics/greenpixeltransparent");
                     yellowpixeltrans = content.Load<Texture2D>("Graphics/yellowpixeltransparent");
+                    mousePointer01 = content.Load<Texture2D>("Graphics/mouse_pointer");
                     break;
             }
 
@@ -831,6 +841,7 @@ namespace IS_XNA_Shooter
                     bluepixeltrans = null;
                     greenpixeltrans = null;
                     yellowpixeltrans = null;
+                    mousePointer01 = null;
                     break;
             }
 
@@ -960,6 +971,7 @@ namespace IS_XNA_Shooter
             }
             textureSmoke01 = content.Load<Texture2D>("Graphics/Smoke/smoke01");
             textureL1 = content.Load<Texture2D>("Graphics/laserShotAnim");
+            textureL3 = content.Load<Texture2D>("Graphics/laserShotAnim3");
         }
 
         private void UnloadShipA()
@@ -968,6 +980,7 @@ namespace IS_XNA_Shooter
             texturePA1 = null;
             texturePA1_shield = null;
             textureL1 = null;
+            textureL3 = null;
         }
 
         /// <summary>

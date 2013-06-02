@@ -368,9 +368,9 @@ namespace IS_XNA_Shooter
             if (timePowerUpOrange > 0)
             {
                 Audio.PlayEffect("laserShot01");
-                nuevo = new Shot(camera, level, position, rotation, GRMng.frameWidthL1, GRMng.frameHeightL1,
-                    GRMng.numAnimsL1, GRMng.frameCountL1, GRMng.loopingL1, SuperGame.frameTime8,
-                    GRMng.textureL1, SuperGame.shootType.normal, shotVelocity, shotPower);
+                nuevo = new Shot(camera, level, position, rotation, GRMng.frameWidthL3, GRMng.frameHeightL3,
+                    GRMng.numAnimsL3, GRMng.frameCountL3, GRMng.loopingL3, SuperGame.frameTime12,
+                    GRMng.textureL3, SuperGame.shootType.normal, shotVelocity, shotPower);
 
                 nuevo1 = new Shot(camera, level, position, rotation + 0.3f, GRMng.frameWidthL1, GRMng.frameHeightL1,
                     GRMng.numAnimsL1, GRMng.frameCountL1, GRMng.loopingL1, SuperGame.frameTime8,
@@ -385,9 +385,9 @@ namespace IS_XNA_Shooter
             else
             {
                 Audio.PlayEffect("laserShot01");
-                nuevo = new Shot(camera, level, position, rotation, GRMng.frameWidthL1, GRMng.frameHeightL1,
-                    GRMng.numAnimsL1, GRMng.frameCountL1, GRMng.loopingL1, SuperGame.frameTime8,
-                    GRMng.textureL1, SuperGame.shootType.normal, shotVelocity, shotPower);
+                nuevo = new Shot(camera, level, position, rotation, GRMng.frameWidthL3, GRMng.frameHeightL3,
+                    GRMng.numAnimsL3, GRMng.frameCountL3, GRMng.loopingL3, SuperGame.frameTime12,
+                    GRMng.textureL3, SuperGame.shootType.normal, shotVelocity, shotPower);
             }
             shots.Add(nuevo);
             timeToShotAux = timeToShot;

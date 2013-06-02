@@ -30,7 +30,8 @@ namespace IS_XNA_Shooter
         // brazo
         private SpriteCamera armTexture;
         private Vector2 armPosition = new Vector2(-153, -95);
-        private float armRotation;
+        private float armRotationVelocity = 0.5f;
+        private float maxArmRotation = 0.8f * (float)Math.PI;
 
         // texturas texto
         private SpriteCamera text1; // my name is github montoya
@@ -51,6 +52,14 @@ namespace IS_XNA_Shooter
         };
         private State currentState;
 
+        private enum ArmState
+        {
+            MOVING_UP,
+            MOVING_DOWN,
+            STOP
+        };
+        private ArmState currentArmState;
+
         private Vector2 basePosition = new Vector2(SuperGame.screenWidth - 200, SuperGame.screenHeight / 2);
         private Vector2 initialPosition = new Vector2(SuperGame.screenWidth + 300, SuperGame.screenHeight / 2);
         private float enteringVelocity = 40;
@@ -67,7 +76,7 @@ namespace IS_XNA_Shooter
         private float timeLine4Start; // this isn't even my final form
         private float timeLine4End = 2.0f;
 
-        // animaciones acrarar
+        // animaciones aclarar
         private byte transpLine1 = 0;
         private bool line1IsFading = false;
         private byte transpLine2 = 0;
@@ -84,6 +93,7 @@ namespace IS_XNA_Shooter
             GRMng.textureSuperFinalBoss1, 0, 0, 100000, 99999, null)
         {
             currentState = State.ENTERING;
+            currentArmState = ArmState.STOP;
 
             position = initialPosition;
             drawPoint = new Vector2(306 / 2, 432 / 2);
@@ -150,7 +160,7 @@ namespace IS_XNA_Shooter
                 new Rectangle(918, 0, 64, 64));
             //turretTexture.SetDrawPoint(new Vector2());
 
-            armTexture = new SpriteCamera(camera, level, true, position, armRotation, textureAnim1,
+            armTexture = new SpriteCamera(camera, level, true, position, 0, textureAnim1,
                 new Rectangle(612, 432, 77, 596));
             //armTexture.SetDrawPoint(new Vector2(661, 465));
             armTexture.SetDrawPoint(new Vector2(49, 33));
@@ -214,6 +224,20 @@ namespace IS_XNA_Shooter
                 ChangeState(State.FIVE);
             else if (ControlMng.f8Preshed)
                 ChangeState(State.SIX);
+
+            switch (currentArmState)
+            {
+                case ArmState.MOVING_UP:
+                    armTexture.rotation += armRotationVelocity * deltaTime;
+                    if (armTexture.rotation >= maxArmRotation)
+                        currentArmState = ArmState.MOVING_DOWN;
+                    break;
+                case ArmState.MOVING_DOWN:
+                    armTexture.rotation -= armRotationVelocity * deltaTime;
+                    if (armTexture.rotation <= 0)
+                        currentArmState = ArmState.MOVING_UP;
+                    break;
+            } // switch (currentArmState)
 
             switch (currentState)
             {
@@ -305,7 +329,7 @@ namespace IS_XNA_Shooter
                     animIddle5.rotation = rotation;
 
                     armTexture.position = position + armPosition;
-                    armTexture.rotation += (float)Math.Sin(deltaTime / 10);
+                    //armTexture.rotation += (float)Math.Sin(deltaTime / 10);
                     turretTexture.position = position + turretPosition;
                     //turretTexture.rotation += deltaTime * 10;
 
@@ -315,6 +339,8 @@ namespace IS_XNA_Shooter
                         ChangeState(State.SPEAKING1, State.ONE);
                     break;
                 case State.ONE:
+
+                    armTexture.position = position + armPosition;
                     animIddle1.position = position;
                     animIddle1.rotation = rotation;
                     break;
@@ -392,6 +418,7 @@ namespace IS_XNA_Shooter
                 animIddle5.position = position;
                 timeSpeaking1 = 0;
                 currentState = State.SPEAKING1;
+                currentArmState = ArmState.MOVING_UP;
             }
             else if (prevState == State.SPEAKING1 && nextState == State.ONE)
             {
@@ -402,7 +429,10 @@ namespace IS_XNA_Shooter
         private void ChangeState(State nextState)
         {
             if (nextState == State.ENTERING)
+            {
                 position = initialPosition;
+                currentArmState = ArmState.STOP;
+            }
             else if (nextState == State.SPEAKING1)
             {
                 timeSpeaking1 = 0;
@@ -416,6 +446,8 @@ namespace IS_XNA_Shooter
                 line2IsFading = false;
                 line3IsFading = false;
                 position = basePosition;
+                armTexture.rotation = 0;
+                currentArmState = ArmState.MOVING_UP;
             }
             else
                 position = basePosition;

@@ -37,6 +37,7 @@ namespace IS_XNA_Shooter
         public static Song music_badlands;
         public static Song music_factory;
         public static Song music_credits;
+        public static Song music_rulesofnature;
 
         public Audio(ContentManager content)
         {
@@ -69,6 +70,7 @@ namespace IS_XNA_Shooter
                     music_street = content.Load<Song>("Audio/Music/music_04-Street");
                     music_badlands = content.Load<Song>("Audio/Music/music_08-Badlands");
                     music_factory = content.Load<Song>("Audio/Music/music_12-Factory");
+                    music_rulesofnature = content.Load<Song>("Audio/Music/music_01.RulesOfNature");
                     break;
 
                 case 2: // credits
@@ -105,6 +107,7 @@ namespace IS_XNA_Shooter
                     music_badlands = null;
                     music_factory = null;
                     music_credits = null;
+                    music_rulesofnature = null;
                     break;
 
                 case 2: // credits
@@ -179,6 +182,12 @@ namespace IS_XNA_Shooter
                     isPlayingMusic = true;
                     MediaPlayer.Stop();
                     MediaPlayer.Play(music_credits);
+                    MediaPlayer.IsRepeating = true;
+                    break;
+                case 8: // music_rulesofnature
+                    isPlayingMusic = true;
+                    MediaPlayer.Stop();
+                    MediaPlayer.Play(music_rulesofnature);
                     MediaPlayer.IsRepeating = true;
                     break;
             }

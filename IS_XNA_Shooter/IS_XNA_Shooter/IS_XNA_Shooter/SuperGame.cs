@@ -251,6 +251,8 @@ namespace IS_XNA_Shooter
             red
         };
 
+        private Sprite mousePointerSprite;
+
         // fuentes:
         /// <summary>
         /// courier new 12 regular
@@ -301,7 +303,7 @@ namespace IS_XNA_Shooter
         /// </summary>
         protected override void Initialize()
         {
-            IsMouseVisible = true;
+            IsMouseVisible = false;
 
             drawFramesCounter = drawFramesCounterAux = 0;
             updateFramesCounter = updateFramesCounterAux = 0;
@@ -363,6 +365,8 @@ namespace IS_XNA_Shooter
             player = new Player(playerLifes);
             screenEvolution = new Evolution(Content, this);
             menu.setEvolution(screenEvolution);
+
+            mousePointerSprite = new Sprite(false, pointer, 0, GRMng.mousePointer01);
         }
 
         /// <summary>
@@ -424,6 +428,7 @@ namespace IS_XNA_Shooter
             // actual position of the mouse:
             pointer.X = Mouse.GetState().X;
             pointer.Y = Mouse.GetState().Y;
+            mousePointerSprite.position = pointer;
 
             // Game's update:
             switch (currentState)
@@ -555,6 +560,7 @@ namespace IS_XNA_Shooter
             {
                 case gameState.starting:
                     menuStart.Draw(spriteBatch);
+                    mousePointerSprite.Draw(spriteBatch);
                     spriteBatch.DrawString(fontDebug, "build version: " + currentVersion,
                         new Vector2((screenWidth / 2) - fontDebug.MeasureString("build version: " + currentVersion).X/2, 6),
                         Color.White, 0, Vector2.Zero, 1,
@@ -563,10 +569,12 @@ namespace IS_XNA_Shooter
 
                 case gameState.mainMenu:
                     menu.Draw(spriteBatch);
+                    mousePointerSprite.Draw(spriteBatch);
                     break;
 
                 case gameState.scoresMenu:
                     menuScores.Draw(spriteBatch);
+                    mousePointerSprite.Draw(spriteBatch);
                     break;
 
                 case gameState.playing:
@@ -576,10 +584,12 @@ namespace IS_XNA_Shooter
                 case gameState.pause:
                     game.Draw(spriteBatch);
                     menuIngame.Draw(spriteBatch);
+                    mousePointerSprite.Draw(spriteBatch);
                     break;
 
                 case gameState.gameOver:
                     menuGameOver.Draw(spriteBatch);
+                    mousePointerSprite.Draw(spriteBatch);
                     break;
 
                 case gameState.playingVideo:
@@ -588,10 +598,12 @@ namespace IS_XNA_Shooter
 
                 case gameState.evolution:
                     screenEvolution.Draw(spriteBatch);
+                    mousePointerSprite.Draw(spriteBatch);
                     break;
 
                 case gameState.mapMenuEditor:
                     menuMapEditor.Draw(spriteBatch);
+                    mousePointerSprite.Draw(spriteBatch);
                     break;
 
                 case gameState.splashFinalDemo:

@@ -106,10 +106,10 @@ namespace IS_XNA_Shooter
             TWO,    // segunda fase de ataque (con laser)
             THREE,  // se marcha
             FOUR,   // vuelve convertido en fede1
-            FIVE,   // tercera fase de ataque
-            SIX,
-            SEVEN,
-            EIGHT,
+            FIVE,   // tercera fase de ataque (ataque como TWO pero un poco más rapido)
+            SIX,    // le explota la cara
+            SEVEN,  // dice "this is even my final form"
+            EIGHT,  // animación de cara de samer saliendo
             NINE
         };
         private State currentState;
@@ -122,6 +122,8 @@ namespace IS_XNA_Shooter
         };
         private ArmState currentArmState;
 
+        private bool armNextStateStop = false;
+
         private enum TurretState
         {
             MOVING_UP,
@@ -131,8 +133,9 @@ namespace IS_XNA_Shooter
         private TurretState currentTurretState;
 
         private int life1 = 20000;
-        private int life2 = 40000;
-        private int life3 = 50000;
+        private int life2 = 30000;
+        private int life3 = 35000;
+        private int life4 = 30000;
 
         private Vector2 basePosition = new Vector2(SuperGame.screenWidth - 200, SuperGame.screenHeight / 2);
         private Vector2 initialPosition = new Vector2(SuperGame.screenWidth + 300, SuperGame.screenHeight / 2);
@@ -141,6 +144,8 @@ namespace IS_XNA_Shooter
         // contadores
         private float timeSpeaking1 = 0;
         private float timeSpeaking1End = 10.0f;
+        private float timeSpeaking2 = 0;
+        private float timeSpeaking2End = 4.0f;
         private float timeLine1Start = 0.0f; // my name is github montoya
         private float timeLine1End = 2.5f;
         private float timeLine2Start = 3.5f; // you erased my repository
@@ -148,7 +153,9 @@ namespace IS_XNA_Shooter
         private float timeLine3Start = 6.0f; // prepare to die!
         private float timeLine3End = 3.0f;
         private float timeLine4Start; // this isn't even my final form
-        private float timeLine4End = 2.0f;
+        private float timeLine4End = 3.0f;
+        private float timeFaceExploiting = 3.0f;
+        private float timeSamerSaliendo = 3.0f;
 
         // animaciones aclarar
         private byte transpLine1 = 0;
@@ -159,6 +166,12 @@ namespace IS_XNA_Shooter
         private bool line3IsFading = false;
         private byte transpLine4 = 0;
         private bool line4IsFading = false;
+
+        // explosion de la cara:
+        private Animation explosionFaceAnimation;
+        private ParticleSystemCamera particles;
+        private int particlesCount = 22;
+        private Vector2 facePosition = new Vector2(-85, -135);
 
         //private Collider collider;
 
@@ -212,7 +225,7 @@ namespace IS_XNA_Shooter
             animArray2[12] = new AnimRect(0, 0, 306, 432, textureAnim4);
             animArray2[13] = new AnimRect(306, 0, 306, 432, textureAnim4);
             animOpenChest = new ComplexAnimation(camera, level, true, basePosition, rotation, animArray2,
-                animOpenChestFramesCount, true, SuperGame.frameTime8);
+                animOpenChestFramesCount, false, 1.0f / 4.0f);
 
             // firing laser
             AnimRect[] animArray3 = new AnimRect[animFiringLaserFramesCount];
@@ -279,6 +292,17 @@ namespace IS_XNA_Shooter
             float radius = (float)Math.Sqrt(306 / 2 * 306 / 2 + 612 / 2 * 612 / 2);
             collider = new Collider(camera, true, basePosition, rotation, points, radius, 306, 432);
 
+            explosionFaceAnimation = new Animation(camera, level, true, position, 0, GRMng.textureSuperFinalBossExplosion,
+                GRMng.frameWidthSuperFinalBossExplosion, GRMng.frameHeightSuperFinalBossExplosion,
+                GRMng.numAnimsSuperFinalBossExplosion, GRMng.frameCountSuperFinalBossExplosion,
+                GRMng.loopingSuperFinalBossExplosion, SuperGame.frameTime12);
+            Rectangle[] rectangles = new Rectangle[4];
+            rectangles[0] = new Rectangle(0, 0, 64, 64);
+            rectangles[1] = new Rectangle(64, 0, 64, 64);
+            rectangles[2] = new Rectangle(0, 64, 64, 64);
+            rectangles[3] = new Rectangle(64, 64, 64, 64);
+            particles = new ParticleSystemCamera(camera, level, GRMng.textureSmoke01, rectangles, particlesCount, position);
+
             //For the Laser
             Rectangle rect = new Rectangle(0, 0, 2000, 2);
             p1 = new Vector2();
@@ -331,8 +355,10 @@ namespace IS_XNA_Shooter
                     break;
                 case ArmState.MOVING_DOWN:
                     armTexture.rotation -= armRotationVelocity * deltaTime;
-                    if (armTexture.rotation <= 0)
+                    if ((armTexture.rotation <= 0) && (!armNextStateStop))
                         currentArmState = ArmState.MOVING_UP;
+                    else if ((armTexture.rotation <= 0) && (armNextStateStop))
+                        currentArmState = ArmState.STOP;
                     break;
             } // switch (currentArmState)
 
@@ -498,9 +524,9 @@ namespace IS_XNA_Shooter
                     }
                     /*else if (timeToShotLaserAux > 1)//Spin
                         rotation += 0.45f * deltaTime;*/
-                    else if (timeToShotLaserAux < 0.5f)//Prepare to shoot
+                    else if (timeToShotLaserAux < 0.6f)//Prepare to shoot
                     {   // falta medio segundo para que dispare
-                        armTexture.SetColor(255, 96, 96, 255);
+                        armTexture.SetColor(255, 255, 96, 255);
                         /*if (currentAnim != 1)
                             setAnim(1);*/
                         //rotation += 0.2f * deltaTime;//Rotates slowly
@@ -535,7 +561,7 @@ namespace IS_XNA_Shooter
                     if (position.X >= initialPosition.X)
                         ChangeState(State.THREE, State.FOUR);
                     break;
-                case State.FOUR: // ENTRA FEDE
+                case State.FOUR: // vuelve convertido en fede1
                     position.X -= deltaTime * enteringVelocity * 2.0f;
                     position.Y += (float)Math.Sin(position.Y * 10);
 
@@ -548,7 +574,7 @@ namespace IS_XNA_Shooter
                     if (position.X <= basePosition.X)
                         ChangeState(State.FOUR, State.FIVE);
                     break;
-                case State.FIVE: // FEDE ATACA
+                case State.FIVE: // tercera fase de ataque (ataque como TWO pero un poco más rapido)
                     turretTexture.position = position + turretPosition;
                     armTexture.position = position + armPosition;
                     animIddle3.position = position;
@@ -580,7 +606,7 @@ namespace IS_XNA_Shooter
                         rotation += 0.45f * deltaTime;*/
                     else if (timeToShotLaserAux < 0.5f)//Prepare to shoot
                     {   // falta medio segundo para que dispare
-                        armTexture.SetColor(255, 96, 96, 255);
+                        armTexture.SetColor(255, 255, 96, 255);
                         /*if (currentAnim != 1)
                             setAnim(1);*/
                         //rotation += 0.2f * deltaTime;//Rotates slowly
@@ -603,13 +629,66 @@ namespace IS_XNA_Shooter
                             armTexture.SetColor(255, 255, 255, 255);
                     }
                     break;
-                case State.SIX:
-                    animIddle4.Update(deltaTime);
+                case State.SIX: // le explota la cara
+                    timeFaceExploiting -= deltaTime;
+                    if (timeFaceExploiting <= 0)
+                    {
+                        ChangeState(State.SIX, State.SEVEN);
+                    }
+                    turretTexture.position = position + turretPosition;
+                    armTexture.position = position + armPosition;
+                    particles.Update(deltaTime, facePosition+position, /*rotation*/(float)Math.PI);
+                    explosionFaceAnimation.position = facePosition + position;
+                    explosionFaceAnimation.Update(deltaTime);
+
+                    position.Y += (float)Math.Sin(position.Y * 10);
+
+                    animIddle3.position = position;
+                    animIddle3.rotation = rotation;
+
+                    armTexture.position = position + armPosition;
+                    turretTexture.position = position + turretPosition;
                     break;
-                case State.SEVEN:
+                case State.SEVEN: // dice "this is even my final form"
+                    timeSpeaking2 += deltaTime;
+
+                    // lineas de texto
+                    if (line4IsFading)
+                    {   // esconder texto
+                        if (transpLine4 > 1)
+                            transpLine4 -= 2;
+                        else
+                        {
+                            transpLine4 = 0;
+                            line4IsFading = false;
+                        }
+                        text4.SetTransparency(transpLine4);
+                    }
+                    else if ((timeSpeaking2 >= timeLine4Start) && (timeSpeaking2 < timeLine4End + timeLine4Start))
+                    {   // presentar texto
+                        if (transpLine4 < 252)
+                            transpLine4 += 4;
+                        else
+                            transpLine4 = 255;
+                        text4.SetTransparency(transpLine4);
+                    }
+                    else if (timeSpeaking2 >= timeLine4Start + timeLine4End)
+                        line4IsFading = true;
+
+                    animIddle4.Update(deltaTime);
+
+                    if (timeSpeaking2 >= timeSpeaking2End)
+                        ChangeState(State.SEVEN, State.EIGHT);
+                    break;
+                case State.EIGHT: // animación de cara de samer saliendo
+                    timeSamerSaliendo -= deltaTime;
+
+                    if (timeSamerSaliendo <= 0)
+                        ChangeState(State.EIGHT, State.NINE);
+
                     animOpenChest.Update(deltaTime);
                     break;
-                case State.EIGHT:
+                case State.NINE:
                     animFiringLaser.Update(deltaTime);
                     break;
             } // switch
@@ -667,6 +746,9 @@ namespace IS_XNA_Shooter
             foreach (Shot s in turretShots)
                 s.Draw(spriteBatch);
 
+            if (shootingLaser)
+                laser.Draw(spriteBatch);
+
             switch (currentState)
             {
                 case State.ENTERING:
@@ -682,44 +764,53 @@ namespace IS_XNA_Shooter
                     text2.DrawRectangle(spriteBatch);
                     text3.DrawRectangle(spriteBatch);
                     break;
-                case State.ONE:
+                case State.ONE: // primera fase de ataque
                     armTexture.DrawRectangle(spriteBatch);
                     animIddle1.DrawRectangle(spriteBatch);
                     turretTexture.DrawRectangle(spriteBatch);
                     break;
-                case State.TWO:
-                    armTexture.DrawRectangle(spriteBatch);
-                    animIddle1.DrawRectangle(spriteBatch);
-                    turretTexture.DrawRectangle(spriteBatch);
-                    if (shootingLaser)
-                        laser.Draw(spriteBatch);
-                    break;
-                case State.THREE:
+                case State.TWO: // segunda fase de ataque (con laser)
                     armTexture.DrawRectangle(spriteBatch);
                     animIddle1.DrawRectangle(spriteBatch);
                     turretTexture.DrawRectangle(spriteBatch);
                     break;
-                case State.FOUR:
+                case State.THREE: // se marcha
+                    armTexture.DrawRectangle(spriteBatch);
+                    animIddle1.DrawRectangle(spriteBatch);
+                    turretTexture.DrawRectangle(spriteBatch);
+                    break;
+                case State.FOUR: // vuelve convertido en fede1
                     armTexture.DrawRectangle(spriteBatch);
                     animIddle2.DrawRectangle(spriteBatch);
                     turretTexture.DrawRectangle(spriteBatch);
                     break;
-                case State.FIVE:
+                case State.FIVE: // tercera fase de ataque (ataque como TWO pero un poco más rapido)
                     armTexture.DrawRectangle(spriteBatch);
                     animIddle2.DrawRectangle(spriteBatch);
                     turretTexture.DrawRectangle(spriteBatch);
                     break;
-                case State.SIX:
+                case State.SIX: // le explota la cara
+                    armTexture.DrawRectangle(spriteBatch);
                     animIddle3.DrawRectangle(spriteBatch);
+                    turretTexture.DrawRectangle(spriteBatch);
+                    particles.Draw(spriteBatch);
+                    explosionFaceAnimation.Draw(spriteBatch);
                     break;
-                case State.SEVEN:
+                case State.SEVEN: // dice "this is even my final form"
+                    armTexture.DrawRectangle(spriteBatch);
                     animIddle4.Draw(spriteBatch);
+                    turretTexture.DrawRectangle(spriteBatch);
+                    text4.DrawRectangle(spriteBatch);
                     break;
-                case State.EIGHT:
+                case State.EIGHT: // animación de cara de samer saliendo
+                    armTexture.DrawRectangle(spriteBatch);
                     animOpenChest.Draw(spriteBatch);
+                    turretTexture.DrawRectangle(spriteBatch);
                     break;
                 case State.NINE:
+                    armTexture.DrawRectangle(spriteBatch);
                     animFiringLaser.Draw(spriteBatch);
+                    turretTexture.DrawRectangle(spriteBatch);
                     break;
             } // switch
 
@@ -771,6 +862,7 @@ namespace IS_XNA_Shooter
                 animIddle2.rotation = rotation;
                 armTexture.rotation = 0;
                 turretTexture.rotation = 0;
+                armTexture.SetColor(255, 255, 255, 255);
                 currentState = State.FOUR;
             }
             else if (prevState == State.FOUR && nextState == State.FIVE)
@@ -780,6 +872,32 @@ namespace IS_XNA_Shooter
                 currentArmState = ArmState.MOVING_UP;
                 currentState = State.FIVE;
             }
+            else if (prevState == State.FIVE && nextState == State.SIX)
+            {
+                colisionable = false;
+                armTexture.SetColor(255, 255, 255, 255);
+                currentArmState = ArmState.MOVING_DOWN;
+                armTexture.SetColor(255, 255, 255, 255);
+                armNextStateStop = true;
+                currentTurretState = TurretState.STOP;
+                currentState = State.SIX;
+            }
+            else if (prevState == State.SIX && nextState == State.SEVEN)
+            {
+                currentState = State.SEVEN;
+            }
+            else if (prevState == State.SEVEN && nextState == State.EIGHT)
+            {
+                currentState = State.EIGHT;
+            }
+            else if (prevState == State.EIGHT && nextState == State.NINE)
+            {
+                colisionable = true;
+                currentState = State.NINE;
+                currentArmState = ArmState.MOVING_DOWN;
+                armNextStateStop = false;
+                currentTurretState = TurretState.MOVING_UP;
+            }
         } // ChangeState
 
         private void ChangeState(State nextState)
@@ -787,6 +905,7 @@ namespace IS_XNA_Shooter
             if (nextState == State.ENTERING)
             {
                 colisionable = false;
+                armTexture.SetColor(255, 255, 255, 255);
                 position = initialPosition;
                 currentArmState = ArmState.STOP;
                 currentTurretState = TurretState.STOP;
@@ -794,6 +913,7 @@ namespace IS_XNA_Shooter
             else if (nextState == State.SPEAKING1)
             {
                 colisionable = false;
+                armTexture.SetColor(255, 255, 255, 255);
                 timeSpeaking1 = 0;
                 transpLine1 = 0;
                 text1.SetTransparency(transpLine1);
@@ -812,6 +932,7 @@ namespace IS_XNA_Shooter
             else if (nextState == State.ONE)
             {
                 colisionable = true;
+                armTexture.SetColor(255, 255, 255, 255);
                 currentArmState = ArmState.MOVING_UP;
                 currentTurretState = TurretState.MOVING_UP;
                 armTexture.rotation = 0;
@@ -821,6 +942,7 @@ namespace IS_XNA_Shooter
             else if (nextState == State.TWO)
             {
                 colisionable = true;
+                armTexture.SetColor(255, 255, 255, 255);
                 currentArmState = ArmState.MOVING_UP;
                 currentTurretState = TurretState.MOVING_UP;
                 armTexture.rotation = 0;
@@ -830,12 +952,15 @@ namespace IS_XNA_Shooter
             else if (nextState == State.THREE)
             {
                 colisionable = false;
+                armTexture.SetColor(255, 255, 255, 255);
                 currentTurretState = TurretState.STOP;
                 currentArmState = ArmState.STOP;
             }
             else if (nextState == State.FOUR)
             {
+                position = initialPosition;
                 colisionable = false;
+                armTexture.SetColor(255, 255, 255, 255);
                 currentTurretState = TurretState.STOP;
                 currentArmState = ArmState.STOP;
             }
@@ -844,11 +969,46 @@ namespace IS_XNA_Shooter
                 colisionable = true;
                 currentArmState = ArmState.MOVING_UP;
                 currentTurretState = TurretState.MOVING_UP;
+                armTexture.SetColor(255, 255, 255, 255);
                 armTexture.rotation = 0;
                 turretTexture.rotation = 0;
+                animIddle2.position = basePosition;
                 position = basePosition;
             }
-            else
+            else if (nextState == State.SIX)
+            {
+                explosionFaceAnimation.setAnim(0, -1);
+                timeFaceExploiting = 2.0f;
+                colisionable = false;
+                currentArmState = ArmState.MOVING_DOWN;
+                armTexture.SetColor(255, 255, 255, 255);
+                armNextStateStop = true;
+                currentTurretState = TurretState.STOP;
+            }
+            else if (nextState == State.SEVEN)
+            {
+                colisionable = false;
+                currentArmState = ArmState.MOVING_DOWN;
+                armNextStateStop = true;
+                currentTurretState = TurretState.STOP;
+                armTexture.SetColor(255, 255, 255, 255);
+            }
+            else if (nextState == State.EIGHT)
+            {
+                timeSamerSaliendo = 3.0f;
+                colisionable = false;
+                currentArmState = ArmState.MOVING_DOWN;
+                armNextStateStop = true;
+                currentTurretState = TurretState.STOP;
+                armTexture.SetColor(255, 255, 255, 255);
+            }
+            else if (nextState == State.NINE)
+            {
+                colisionable = true;
+                currentArmState = ArmState.MOVING_DOWN;
+                armNextStateStop = false;
+                currentTurretState = TurretState.MOVING_UP;
+            }
                 position = basePosition;
             currentState = nextState;
         }
@@ -910,6 +1070,11 @@ namespace IS_XNA_Shooter
                         life3 -= i;
                         if (life3 <= 0)
                             ChangeState(State.FIVE, State.SIX);
+                        break;
+                    case State.SEVEN:
+                        life4 -= i;
+                        if (life4 <= 0)
+                            ChangeState(State.SEVEN, State.EIGHT);
                         break;
                 }
                 life -= i;

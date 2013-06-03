@@ -47,6 +47,57 @@ namespace IS_XNA_Shooter
         private SpriteCamera text3; // prepare to die!
         private SpriteCamera text4; // this isn't even my final form
 
+        //For the Laser
+        /// <summary>
+        /// Laser's rectanlge
+        /// </summary>
+        private Rectangle rect;
+
+        /// <summary>
+        /// Laser's actual points 
+        /// </summary>
+        private Vector2 p1, p2, p3;
+
+        /// <summary>
+        /// Laser's original points
+        /// </summary>
+        private Vector2 p1Orig, p2Orig, p3Orig;
+
+        /// <summary>
+        /// Time between shots
+        /// </summary>
+        private float timeToShot = 1.0f;
+
+        /// <summary>
+        /// Shot power
+        /// </summary>
+        private int shotPower = 1000;
+
+        /// <summary>
+        /// Enemy's shot, in this case a laser
+        /// </summary>
+        private Shot laser;
+
+        /// <summary>
+        /// Time to set the shot
+        /// </summary>
+        private float shootingCont = 0.1f;
+
+        /// <summary>
+        /// To set shootingCont only once
+        /// </summary>
+        private Boolean shootingContSet = false;
+
+        /// <summary>
+        /// Says if it has to shoot or not
+        /// </summary>
+        private Boolean shootingLaser = false;
+
+        /// <summary>
+        /// Rotatio Matrix for the laser's points
+        /// </summary>
+        private Matrix rotationMatrix;
+
         private enum State
         {
             ENTERING,
@@ -223,6 +274,20 @@ namespace IS_XNA_Shooter
             points[18] = new Vector2(155, 421);
             float radius = (float)Math.Sqrt(306 / 2 * 306 / 2 + 612 / 2 * 612 / 2);
             collider = new Collider(camera, true, basePosition, rotation, points, radius, 306, 432);
+
+            //For the Laser
+            Rectangle rect = new Rectangle(0, 0, 2000, 2);
+            p1 = new Vector2();
+            p2 = new Vector2();
+            p3 = new Vector2();
+
+            p1Orig = new Vector2(175, 0);
+            p2Orig = new Vector2(495, 0);
+            p3Orig = new Vector2(775, 0);
+
+            laser = new Shot(camera, level, p1, armTexture.rotation , GRMng.frameWidthELBulletA, GRMng.frameHeightELBullet,
+                GRMng.numAnimsELBullet, GRMng.frameCountELBullet, GRMng.loopingELBullet, SuperGame.frameTime8,
+                GRMng.textureELBullet, SuperGame.shootType.normal, 100, shotPower);
 
         } // SuperFinalBoss
 
@@ -415,6 +480,61 @@ namespace IS_XNA_Shooter
                         Audio.PlayEffect("laserShot02");
                         timeToTurretShotAux = timeToTurretShot;
                     }
+                    
+                    timeToShot -= deltaTime;
+
+                	if (shootingLaser)//It shoots if it has to
+                	{
+                    LaserShot();
+                    laser.Update(deltaTime);
+
+                    rotation += 0.2f * deltaTime;//Rotates slowly
+
+                }
+                else if (timeToShot > 1)//Spin
+                    rotation += 0.45f * deltaTime;
+                else if (timeToShot > 0)//Prepare to shoot
+                {
+                    if (currentAnim != 1) setAnim(1);
+
+                    rotation += 0.2f * deltaTime;//Rotates slowly
+                }
+                if (timeToShot <= 0)
+                {
+                    setAnim(0);
+                    timeToShot = 1.0f;
+                    shootingLaser = !shootingLaser;
+                    if (shootingLaser)
+                    {
+                        if (!shootingContSet)
+                        {
+                            shootingContSet = true;
+                            shootingCont = 0.1f;
+                        }
+                        LaserShot();
+                    }
+                }
+            if (shootingLaser)// shots
+            {
+                laser.Update(deltaTime);
+                //shot-player colisions
+                if (shootingCont >= 0)
+                    shootingCont -= deltaTime;
+                else
+                    if (ship.collider.CollisionTwoPoints(p1, p3))
+                    {
+                        // the player is hitted:
+                        ship.Damage(laser.GetPower());
+
+                        // the shot must be erased only if it hasn't provoked the
+                        // player ship death, otherwise the shot will had be removed
+                        // before from the game in: Game.PlayerDead() -> Enemy.Kill()
+                        /*if (ship.GetLife() > 0)
+                            shots.RemoveAt(i);*/
+                    }
+            }
+
+            
                     break;
                 case State.THREE: // se marcha
                     position.X += deltaTime * enteringVelocity * 1.8f;
@@ -440,7 +560,13 @@ namespace IS_XNA_Shooter
 
                     if (position.X <= basePosition.X)
                         ChangeState(State.FOUR, State.FIVE);
-                    break;
+                    armTexture.position = position + armPosition;
+                    turretTexture.position = position + turretPosition;
+
+                    if (position.X <= basePosition.X)
+                        ChangeState(State.FOUR, State.FIVE);
+
+                }
                 case State.FIVE: // FEDE ATACA
                     turretTexture.position = position + turretPosition;
                     armTexture.position = position + armPosition;
@@ -469,6 +595,45 @@ namespace IS_XNA_Shooter
                     animFiringLaser.Update(deltaTime);
                     break;
             } // switch
+
+            if (shootingLaser)// shots
+            {
+                laser.Update(deltaTime);
+                //shot-player colisions
+                if (shootingCont >= 0)
+                    shootingCont -= deltaTime;
+                else
+                    if (ship.collider.CollisionTwoPoints(p1, p3))
+                    {
+                        // the player is hitted:
+                        ship.Damage(laser.GetPower());
+
+                        // the shot must be erased only if it hasn't provoked the
+                        // player ship death, otherwise the shot will had be removed
+                        // before from the game in: Game.PlayerDead() -> Enemy.Kill()
+                        /*if (ship.GetLife() > 0)
+                            shots.RemoveAt(i);*/
+                    }
+            }
+                 
+                case State.FIVE: // FEDE ATACA
+                    turretTexture.position = position + turretPosition;
+                    armTexture.position = position + armPosition;
+
+                    timeToTurretShotAux -= deltaTime;
+                    if (timeToTurretShotAux <= 0)
+                    {
+                        Shot shot = new Shot(camera, level, turretTexture.position, turretTexture.rotation + (float)Math.PI,
+                            GRMng.frameWidthL1, GRMng.frameHeightL1, GRMng.numAnimsL1, GRMng.frameCountL1,
+                            GRMng.loopingL1, SuperGame.frameTime10, GRMng.textureL1, SuperGame.shootType.normal,
+                            turretShotVelocity, turretShotPower);
+                        turretShots.Add(shot);
+                        Audio.PlayEffect("laserShot02");
+                        timeToTurretShotAux = timeToTurretShot2;
+                    }
+                case State.SIX:
+                case State.SEVEN:
+                case State.EIGHT:
 
             // shots:
             for (int i = 0; i < turretShots.Count(); i++)
@@ -676,5 +841,30 @@ namespace IS_XNA_Shooter
             turretShots.Clear();
         }
 
+        /// <summary>
+        /// Calculates the enemy's laser points and rectangle
+        /// </summary>
+        private void LaserShot()
+        {
+            //The calculation of the rectangle
+            rotationMatrix = Matrix.CreateRotationZ(armTexture.rotation - (float)Math.PI * 3 / 2);
+            int width = level.width + 200;
+
+            p1 = Vector2.Transform(p1Orig, rotationMatrix);
+            p1 += armTexture.position;
+
+            p2 = Vector2.Transform(p2Orig, rotationMatrix);
+            p2 += armTexture.position;
+
+            p3 = Vector2.Transform(p3Orig, rotationMatrix);
+            p3 += armTexture.position;
+
+            rect.X = (int)position.X;
+            rect.Y = (int)position.Y;
+
+            laser.position = p2;
+            laser.rotation = armTexture.rotation - (float)Math.PI * 3 / 2;
+
+        }
     } // class SuperFinalBoss
 }

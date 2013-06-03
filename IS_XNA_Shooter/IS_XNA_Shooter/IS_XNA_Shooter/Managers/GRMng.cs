@@ -538,6 +538,8 @@ namespace IS_XNA_Shooter
                     textureSuperFinalBoss2 = content.Load<Texture2D>("Graphics/Ships/SuperFinalBoss/anim02");
                     textureSuperFinalBoss3 = content.Load<Texture2D>("Graphics/Ships/SuperFinalBoss/anim03");
                     textureSuperFinalBoss4 = content.Load<Texture2D>("Graphics/Ships/SuperFinalBoss/anim04");
+                    textureEL = content.Load<Texture2D>("Graphics/Ships/enemyLaser");
+                    textureELBullet = content.Load<Texture2D>("Graphics/yellowpixel");
                     textureBgB00 = content.Load<Texture2D>("Graphics/Backgrounds/bgB00");
                     break;
 

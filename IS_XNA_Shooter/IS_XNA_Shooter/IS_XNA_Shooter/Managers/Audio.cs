@@ -20,7 +20,7 @@ namespace IS_XNA_Shooter
         public static SoundEffect digitalAcent01;
 
         // efectos del juego:
-        public static SoundEffect laserShot01;
+        public static SoundEffect laserShot01, laserShot02;
         public static SoundEffect brokenBone01, brokenBone02;
         public static SoundEffect tackled1;
         public static SoundEffect laserShotRed;
@@ -62,6 +62,7 @@ namespace IS_XNA_Shooter
 
                 case 1: // juego:
                     laserShot01 = content.Load<SoundEffect>("Audio/FXEffects/laser_shot_01");
+                    laserShot02 = content.Load<SoundEffect>("Audio/FXEffects/laser_shot_02");
                     brokenBone01 = content.Load<SoundEffect>("Audio/FXEffects/broken_bone_01");
                     brokenBone02 = content.Load<SoundEffect>("Audio/FXEffects/broken_bone_02");
                     tackled1 = content.Load<SoundEffect>("Audio/FXEffects/tackled_1");
@@ -94,6 +95,7 @@ namespace IS_XNA_Shooter
 
                 case 1: // juego:
                     laserShot01 = null;
+                    laserShot02 = null;
                     brokenBone01 = null;
                     brokenBone02 = null;
                     tackled1 = null;
@@ -127,10 +129,11 @@ namespace IS_XNA_Shooter
             {
                 case "digitalAcent01":  digitalAcent01.Play(effectsVolume,pitch,pan);   break;
                 case "laserShot01":     laserShot01.Play(effectsVolume, pitch, pan);    break;
+                case "laserShot02":     laserShot02.Play(effectsVolume, pitch, pan);    break;
                 case "brokenBone01":    brokenBone01.Play(effectsVolume, pitch, pan);   break;
                 case "brokenBone02":    brokenBone02.Play(effectsVolume, pitch, pan);   break;
                 case "tackled1":        tackled1.Play(effectsVolume, pitch, pan);       break;
-                case "laser_shot_red":  laserShotRed.Play(effectsVolume, pitch, pan); break;
+                case "laser_shot_red":  laserShotRed.Play(effectsVolume, pitch, pan);   break;
                 case "PowerUpRed":      SoundPowerUpRed.Play(effectsVolume, pitch, pan); break;
                 case "PowerUpBlue":     SoundPowerUpBlue.Play(effectsVolume, pitch, pan); break;
                 case "PowerUpGreen":    SoundPowerUpGreen.Play(effectsVolume, pitch, pan); break;

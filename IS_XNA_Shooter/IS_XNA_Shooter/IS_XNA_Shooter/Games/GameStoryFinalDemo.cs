@@ -331,7 +331,7 @@ namespace IS_XNA_Shooter
                 case "LevelB1":         Audio.PlayMusic(6); break;
                 case "LevelA1":         Audio.PlayMusic(5); break;
                 case "LevelBFinalBoss": Audio.PlayMusic(8); break;
-                case "LevelB2":         Audio.PlayMusic(4); break;
+                case "LevelB2":         Audio.PlayMusic(8/*4*/); break;
             }
         }
 

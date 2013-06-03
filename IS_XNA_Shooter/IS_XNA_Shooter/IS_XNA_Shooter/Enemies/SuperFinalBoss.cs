@@ -64,9 +64,9 @@ namespace IS_XNA_Shooter
         private Vector2 p1Orig, p2Orig, p3Orig;
 
         /// <summary>
-        /// Time between shots
+        /// Time between laser shots
         /// </summary>
-        private float timeToShot = 1.0f;
+        private float timeToShotLaser = 1.8f, timeToShotLaserAux = 1.8f;
 
         /// <summary>
         /// Shot power
@@ -130,6 +130,10 @@ namespace IS_XNA_Shooter
         };
         private TurretState currentTurretState;
 
+        private int life1 = 20000;
+        private int life2 = 40000;
+        private int life3 = 50000;
+
         private Vector2 basePosition = new Vector2(SuperGame.screenWidth - 200, SuperGame.screenHeight / 2);
         private Vector2 initialPosition = new Vector2(SuperGame.screenWidth + 300, SuperGame.screenHeight / 2);
         private float enteringVelocity = 40;
@@ -156,11 +160,11 @@ namespace IS_XNA_Shooter
         private byte transpLine4 = 0;
         private bool line4IsFading = false;
 
-        private Collider collider;
+        //private Collider collider;
 
         public SuperFinalBoss(Camera camera, Level level)
             : base(camera, level, Vector2.Zero, 0, 0, 0, 0, null, null, SuperGame.frameTime12,
-            GRMng.textureSuperFinalBoss1, 0, 0, 100000, 99999, null)
+                GRMng.textureSuperFinalBoss1, 0, 0, 100000/*life*/, 99999/*value*/, null/*ship*/)
         {
             currentState = State.ENTERING;
             currentArmState = ArmState.STOP;
@@ -451,6 +455,7 @@ namespace IS_XNA_Shooter
                     animIddle1.position = position;
                     animIddle1.rotation = rotation;
 
+                    // disparos de la torreta
                     timeToTurretShotAux -= deltaTime;
                     if (timeToTurretShotAux <= 0)
                     {
@@ -469,6 +474,7 @@ namespace IS_XNA_Shooter
                     animIddle1.position = position;
                     animIddle1.rotation = rotation;
 
+                    // disparos de la torreta
                     timeToTurretShotAux -= deltaTime;
                     if (timeToTurretShotAux <= 0)
                     {
@@ -480,61 +486,42 @@ namespace IS_XNA_Shooter
                         Audio.PlayEffect("laserShot02");
                         timeToTurretShotAux = timeToTurretShot;
                     }
-                    
-                    timeToShot -= deltaTime;
 
-                	if (shootingLaser)//It shoots if it has to
-                	{
-                    LaserShot();
-                    laser.Update(deltaTime);
-
-                    rotation += 0.2f * deltaTime;//Rotates slowly
-
-                }
-                else if (timeToShot > 1)//Spin
-                    rotation += 0.45f * deltaTime;
-                else if (timeToShot > 0)//Prepare to shoot
-                {
-                    if (currentAnim != 1) setAnim(1);
-
-                    rotation += 0.2f * deltaTime;//Rotates slowly
-                }
-                if (timeToShot <= 0)
-                {
-                    setAnim(0);
-                    timeToShot = 1.0f;
-                    shootingLaser = !shootingLaser;
-                    if (shootingLaser)
+                    // disparo laser
+                    timeToShotLaserAux -= deltaTime;
+                    if (shootingLaser)//It shoots if it has to
                     {
-                        if (!shootingContSet)
-                        {
-                            shootingContSet = true;
-                            shootingCont = 0.1f;
-                        }
                         LaserShot();
+                        laser.Update(deltaTime);
+
+                        //rotation += 0.2f * deltaTime;//Rotates slowly
                     }
-                }
-            if (shootingLaser)// shots
-            {
-                laser.Update(deltaTime);
-                //shot-player colisions
-                if (shootingCont >= 0)
-                    shootingCont -= deltaTime;
-                else
-                    if (ship.collider.CollisionTwoPoints(p1, p3))
+                    /*else if (timeToShotLaserAux > 1)//Spin
+                        rotation += 0.45f * deltaTime;*/
+                    else if (timeToShotLaserAux < 0.5f)//Prepare to shoot
+                    {   // falta medio segundo para que dispare
+                        armTexture.SetColor(255, 96, 96, 255);
+                        /*if (currentAnim != 1)
+                            setAnim(1);*/
+                        //rotation += 0.2f * deltaTime;//Rotates slowly
+                    }
+                    if (timeToShotLaserAux <= 0)
                     {
-                        // the player is hitted:
-                        ship.Damage(laser.GetPower());
-
-                        // the shot must be erased only if it hasn't provoked the
-                        // player ship death, otherwise the shot will had be removed
-                        // before from the game in: Game.PlayerDead() -> Enemy.Kill()
-                        /*if (ship.GetLife() > 0)
-                            shots.RemoveAt(i);*/
+                        //setAnim(0);
+                        timeToShotLaserAux = timeToShotLaser;
+                        shootingLaser = !shootingLaser;
+                        if (shootingLaser)
+                        {
+                            if (!shootingContSet)
+                            {
+                                shootingContSet = true;
+                                shootingCont = 0.1f;
+                            }
+                            LaserShot();
+                        }
+                        else
+                            armTexture.SetColor(255, 255, 255, 255);
                     }
-            }
-
-            
                     break;
                 case State.THREE: // se marcha
                     position.X += deltaTime * enteringVelocity * 1.8f;
@@ -560,19 +547,14 @@ namespace IS_XNA_Shooter
 
                     if (position.X <= basePosition.X)
                         ChangeState(State.FOUR, State.FIVE);
-                    armTexture.position = position + armPosition;
-                    turretTexture.position = position + turretPosition;
-
-                    if (position.X <= basePosition.X)
-                        ChangeState(State.FOUR, State.FIVE);
-
-                }
+                    break;
                 case State.FIVE: // FEDE ATACA
                     turretTexture.position = position + turretPosition;
                     armTexture.position = position + armPosition;
                     animIddle3.position = position;
                     animIddle3.rotation = rotation;
 
+                    // disparos torreta
                     timeToTurretShotAux -= deltaTime;
                     if (timeToTurretShotAux <= 0)
                     {
@@ -583,6 +565,42 @@ namespace IS_XNA_Shooter
                         turretShots.Add(shot);
                         Audio.PlayEffect("laserShot02");
                         timeToTurretShotAux = timeToTurretShot2;
+                    }
+
+                    // disparo laser
+                    timeToShotLaserAux -= deltaTime;
+                    if (shootingLaser)//It shoots if it has to
+                    {
+                        LaserShot();
+                        laser.Update(deltaTime);
+
+                        //rotation += 0.2f * deltaTime;//Rotates slowly
+                    }
+                    /*else if (timeToShotLaserAux > 1)//Spin
+                        rotation += 0.45f * deltaTime;*/
+                    else if (timeToShotLaserAux < 0.5f)//Prepare to shoot
+                    {   // falta medio segundo para que dispare
+                        armTexture.SetColor(255, 96, 96, 255);
+                        /*if (currentAnim != 1)
+                            setAnim(1);*/
+                        //rotation += 0.2f * deltaTime;//Rotates slowly
+                    }
+                    if (timeToShotLaserAux <= 0)
+                    {
+                        //setAnim(0);
+                        timeToShotLaserAux = timeToShotLaser;
+                        shootingLaser = !shootingLaser;
+                        if (shootingLaser)
+                        {
+                            if (!shootingContSet)
+                            {
+                                shootingContSet = true;
+                                shootingCont = 0.1f;
+                            }
+                            LaserShot();
+                        }
+                        else
+                            armTexture.SetColor(255, 255, 255, 255);
                     }
                     break;
                 case State.SIX:
@@ -595,45 +613,6 @@ namespace IS_XNA_Shooter
                     animFiringLaser.Update(deltaTime);
                     break;
             } // switch
-
-            if (shootingLaser)// shots
-            {
-                laser.Update(deltaTime);
-                //shot-player colisions
-                if (shootingCont >= 0)
-                    shootingCont -= deltaTime;
-                else
-                    if (ship.collider.CollisionTwoPoints(p1, p3))
-                    {
-                        // the player is hitted:
-                        ship.Damage(laser.GetPower());
-
-                        // the shot must be erased only if it hasn't provoked the
-                        // player ship death, otherwise the shot will had be removed
-                        // before from the game in: Game.PlayerDead() -> Enemy.Kill()
-                        /*if (ship.GetLife() > 0)
-                            shots.RemoveAt(i);*/
-                    }
-            }
-                 
-                case State.FIVE: // FEDE ATACA
-                    turretTexture.position = position + turretPosition;
-                    armTexture.position = position + armPosition;
-
-                    timeToTurretShotAux -= deltaTime;
-                    if (timeToTurretShotAux <= 0)
-                    {
-                        Shot shot = new Shot(camera, level, turretTexture.position, turretTexture.rotation + (float)Math.PI,
-                            GRMng.frameWidthL1, GRMng.frameHeightL1, GRMng.numAnimsL1, GRMng.frameCountL1,
-                            GRMng.loopingL1, SuperGame.frameTime10, GRMng.textureL1, SuperGame.shootType.normal,
-                            turretShotVelocity, turretShotPower);
-                        turretShots.Add(shot);
-                        Audio.PlayEffect("laserShot02");
-                        timeToTurretShotAux = timeToTurretShot2;
-                    }
-                case State.SIX:
-                case State.SEVEN:
-                case State.EIGHT:
 
             // shots:
             for (int i = 0; i < turretShots.Count(); i++)
@@ -654,7 +633,27 @@ namespace IS_XNA_Shooter
                         if (ship.GetLife() > 0)
                             turretShots.RemoveAt(i);
                     }
+                }
+            }
 
+            // laser shot
+            if (shootingLaser)
+            {
+                laser.Update(deltaTime);
+                //shot-player colisions
+                if (shootingCont >= 0)
+                shootingCont -= deltaTime;
+                else
+                if (ship.collider.CollisionTwoPoints(p1, p3))
+                {
+                    // the player is hitted:
+                    ship.Damage(laser.GetPower());
+
+                    // the shot must be erased only if it hasn't provoked the
+                    // player ship death, otherwise the shot will had be removed
+                    // before from the game in: Game.PlayerDead() -> Enemy.Kill()
+                    /*if (ship.GetLife() > 0)
+                    shots.RemoveAt(i);*/
                 }
             }
 
@@ -692,6 +691,8 @@ namespace IS_XNA_Shooter
                     armTexture.DrawRectangle(spriteBatch);
                     animIddle1.DrawRectangle(spriteBatch);
                     turretTexture.DrawRectangle(spriteBatch);
+                    if (shootingLaser)
+                        laser.Draw(spriteBatch);
                     break;
                 case State.THREE:
                     armTexture.DrawRectangle(spriteBatch);
@@ -723,7 +724,18 @@ namespace IS_XNA_Shooter
             } // switch
 
             if (SuperGame.debug)
+            {
                 collider.Draw(spriteBatch);
+                // Frame counters
+                spriteBatch.DrawString(SuperGame.fontDebug, "EnemyState = " + currentState.ToString() + ".",
+                    new Vector2(5, 39), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                spriteBatch.DrawString(SuperGame.fontDebug, "EnemyLife1 = " + life1 + ".",
+                    new Vector2(5, 51), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                spriteBatch.DrawString(SuperGame.fontDebug, "EnemyLife2 = " + life2 + ".",
+                    new Vector2(5, 63), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                spriteBatch.DrawString(SuperGame.fontDebug, "EnemyLife3 = " + life3 + ".",
+                    new Vector2(5, 75), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            }
 
         } // Draw
 
@@ -738,6 +750,7 @@ namespace IS_XNA_Shooter
             }
             else if (prevState == State.SPEAKING1 && nextState == State.ONE)
             {
+                colisionable = true;
                 currentState = State.ONE;
                 currentTurretState = TurretState.MOVING_UP;
             }
@@ -747,6 +760,7 @@ namespace IS_XNA_Shooter
             }
             else if (prevState == State.TWO && nextState == State.THREE)
             {
+                colisionable = false;
                 currentTurretState = TurretState.STOP;
                 currentArmState = ArmState.STOP;
                 currentState = State.THREE;
@@ -761,6 +775,7 @@ namespace IS_XNA_Shooter
             }
             else if (prevState == State.FOUR && nextState == State.FIVE)
             {
+                colisionable = true;
                 currentTurretState = TurretState.MOVING_UP;
                 currentArmState = ArmState.MOVING_UP;
                 currentState = State.FIVE;
@@ -771,12 +786,14 @@ namespace IS_XNA_Shooter
         {
             if (nextState == State.ENTERING)
             {
+                colisionable = false;
                 position = initialPosition;
                 currentArmState = ArmState.STOP;
                 currentTurretState = TurretState.STOP;
             }
             else if (nextState == State.SPEAKING1)
             {
+                colisionable = false;
                 timeSpeaking1 = 0;
                 transpLine1 = 0;
                 text1.SetTransparency(transpLine1);
@@ -794,6 +811,7 @@ namespace IS_XNA_Shooter
             }
             else if (nextState == State.ONE)
             {
+                colisionable = true;
                 currentArmState = ArmState.MOVING_UP;
                 currentTurretState = TurretState.MOVING_UP;
                 armTexture.rotation = 0;
@@ -802,6 +820,7 @@ namespace IS_XNA_Shooter
             }
             else if (nextState == State.TWO)
             {
+                colisionable = true;
                 currentArmState = ArmState.MOVING_UP;
                 currentTurretState = TurretState.MOVING_UP;
                 armTexture.rotation = 0;
@@ -810,16 +829,19 @@ namespace IS_XNA_Shooter
             }
             else if (nextState == State.THREE)
             {
+                colisionable = false;
                 currentTurretState = TurretState.STOP;
                 currentArmState = ArmState.STOP;
             }
             else if (nextState == State.FOUR)
             {
+                colisionable = false;
                 currentTurretState = TurretState.STOP;
                 currentArmState = ArmState.STOP;
             }
             else if (nextState == State.FIVE)
             {
+                colisionable = true;
                 currentArmState = ArmState.MOVING_UP;
                 currentTurretState = TurretState.MOVING_UP;
                 armTexture.rotation = 0;
@@ -864,7 +886,34 @@ namespace IS_XNA_Shooter
 
             laser.position = p2;
             laser.rotation = armTexture.rotation - (float)Math.PI * 3 / 2;
+        }
 
+        public override void Damage(int i)
+        {
+            if (i == -1)
+                life = life1 = life2 = life3 = 0;
+            else
+            {
+                switch (currentState)
+                {
+                    case State.ONE:
+                        life1 -= i;
+                        if (life1 <= 0)
+                            ChangeState(State.ONE, State.TWO);
+                        break;
+                    case State.TWO:
+                        life2 -= i;
+                        if (life2 <= 0)
+                            ChangeState(State.TWO, State.THREE);
+                        break;
+                    case State.FIVE:
+                        life3 -= i;
+                        if (life3 <= 0)
+                            ChangeState(State.FIVE, State.SIX);
+                        break;
+                }
+                life -= i;
+            }
         }
     } // class SuperFinalBoss
 }

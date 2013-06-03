@@ -137,7 +137,7 @@ namespace IS_XNA_Shooter
         private int life3 = 35000;
         private int life4 = 30000;
 
-        private Vector2 basePosition = new Vector2(SuperGame.screenWidth - 200, SuperGame.screenHeight / 2);
+        private Vector2 basePosition = new Vector2(SuperGame.screenWidth - 160, SuperGame.screenHeight / 2);
         private Vector2 initialPosition = new Vector2(SuperGame.screenWidth + 300, SuperGame.screenHeight / 2);
         private float enteringVelocity = 40;
 
@@ -145,7 +145,7 @@ namespace IS_XNA_Shooter
         private float timeSpeaking1 = 0;
         private float timeSpeaking1End = 10.0f;
         private float timeSpeaking2 = 0;
-        private float timeSpeaking2End = 4.0f;
+        private float timeSpeaking2End = 5.0f;
         private float timeLine1Start = 0.0f; // my name is github montoya
         private float timeLine1End = 2.5f;
         private float timeLine2Start = 3.5f; // you erased my repository
@@ -265,7 +265,7 @@ namespace IS_XNA_Shooter
                 0, textureAnim1, new Rectangle(0, 896, 550, 16));
             text3.SetTransparency(transpLine3);
             text4 = new SpriteCamera(camera, level, true, new Vector2(basePosition.X - 400, basePosition.Y - 180),
-                0, textureAnim1, new Rectangle(0, 912, 550, 74));
+                0, textureAnim1, new Rectangle(0, 912, 612, 74));
             text4.SetTransparency(transpLine4);
 
             // Collider
@@ -550,7 +550,7 @@ namespace IS_XNA_Shooter
                     }
                     break;
                 case State.THREE: // se marcha
-                    position.X += deltaTime * enteringVelocity * 1.8f;
+                    position.X += deltaTime * enteringVelocity * 2.4f;
                     position.Y += (float)Math.Sin(position.Y * 10);
 
                     animIddle1.position = position;
@@ -826,6 +826,8 @@ namespace IS_XNA_Shooter
                     new Vector2(5, 63), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
                 spriteBatch.DrawString(SuperGame.fontDebug, "EnemyLife3 = " + life3 + ".",
                     new Vector2(5, 75), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                spriteBatch.DrawString(SuperGame.fontDebug, "EnemyLife4 = " + life4 + ".",
+                    new Vector2(5, 87), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             }
 
         } // Draw
@@ -851,6 +853,7 @@ namespace IS_XNA_Shooter
             }
             else if (prevState == State.TWO && nextState == State.THREE)
             {
+                armTexture.SetColor(255, 255, 255, 255);
                 colisionable = false;
                 currentTurretState = TurretState.STOP;
                 currentArmState = ArmState.STOP;

@@ -200,7 +200,12 @@ namespace IS_XNA_Shooter
         public static Texture2D textureSuperFinalBoss2;
         public static Texture2D textureSuperFinalBoss3;
         public static Texture2D textureSuperFinalBoss4;
-
+        public static Texture2D textureSuperFinalBossExplosion;
+        public static short frameWidthSuperFinalBossExplosion = 128;
+        public static short frameHeightSuperFinalBossExplosion = 128;
+        public static short numAnimsSuperFinalBossExplosion = 1;
+        public static short[] frameCountSuperFinalBossExplosion = { 8 };
+        public static bool[] loopingSuperFinalBossExplosion = { false };
         #endregion
 
         #region PLAYER
@@ -538,6 +543,7 @@ namespace IS_XNA_Shooter
                     textureSuperFinalBoss2 = content.Load<Texture2D>("Graphics/Ships/SuperFinalBoss/anim02");
                     textureSuperFinalBoss3 = content.Load<Texture2D>("Graphics/Ships/SuperFinalBoss/anim03");
                     textureSuperFinalBoss4 = content.Load<Texture2D>("Graphics/Ships/SuperFinalBoss/anim04");
+                    textureSuperFinalBossExplosion = content.Load<Texture2D>("Graphics/Explosions/explosion02");
                     textureEL = content.Load<Texture2D>("Graphics/Ships/enemyLaser");
                     textureELBullet = content.Load<Texture2D>("Graphics/yellowpixel");
                     textureBgB00 = content.Load<Texture2D>("Graphics/Backgrounds/bgB00");
@@ -788,6 +794,7 @@ namespace IS_XNA_Shooter
                     textureSuperFinalBoss2 = null;
                     textureSuperFinalBoss3 = null;
                     textureSuperFinalBoss4 = null;
+                    textureSuperFinalBossExplosion = null;
                     textureBgB00 = null;
                     break;
 

@@ -12,7 +12,7 @@ namespace IS_XNA_Shooter
         // graphic resources
         private Texture2D textureAnim1, textureAnim2, textureAnim3, textureAnim4;
 
-        private SpriteCamera animIddle1, animIddle2, animIddle3;
+        private SpriteCamera animIddle1, animIddle2, animIddle3, animIddle6;
         private ComplexAnimation animIddle4; // abriendo la boca
         private short animIddle4FramesCount = 4;
         private ComplexAnimation animIddle5; // hablando
@@ -110,7 +110,8 @@ namespace IS_XNA_Shooter
             SIX,    // le explota la cara
             SEVEN,  // dice "this is even my final form"
             EIGHT,  // animación de cara de samer saliendo
-            NINE
+            NINE,   // cuarta fase de ataque (fede + samer)
+            TEN
         };
         private State currentState;
 
@@ -198,6 +199,8 @@ namespace IS_XNA_Shooter
             animIddle2 = new SpriteCamera(camera, level, true, basePosition, rotation, textureAnim1, new Rectangle(306, 0, 306, 432));
             // iddle3 fede face 2
             animIddle3 = new SpriteCamera(camera, level, true, basePosition, rotation, textureAnim1, new Rectangle(612, 0, 306, 432));
+            // iddle fede con samer
+            animIddle6 = new SpriteCamera(camera, level, true, basePosition, rotation, textureAnim4, new Rectangle(306, 0, 306, 432));
 
             // iddle2 fede face 3 bostezando
             AnimRect[] animArray1 = new AnimRect[animIddle4FramesCount];
@@ -345,6 +348,8 @@ namespace IS_XNA_Shooter
                 ChangeState(State.EIGHT);
             else if (ControlMng.f11Preshed)
                 ChangeState(State.NINE);
+            else if (ControlMng.f12Preshed)
+                ChangeState(State.TEN);
 
             switch (currentArmState)
             {
@@ -688,7 +693,62 @@ namespace IS_XNA_Shooter
 
                     animOpenChest.Update(deltaTime);
                     break;
-                case State.NINE:
+                case State.NINE: // cuarta fase de ataque (fede + samer)
+                    turretTexture.position = position + turretPosition;
+                    armTexture.position = position + armPosition;
+                    animIddle6.position = position;
+                    animIddle6.rotation = rotation;
+
+                    // disparos torreta
+                    timeToTurretShotAux -= deltaTime;
+                    if (timeToTurretShotAux <= 0)
+                    {
+                        Shot shot = new Shot(camera, level, turretTexture.position, turretTexture.rotation + (float)Math.PI,
+                            GRMng.frameWidthL1, GRMng.frameHeightL1, GRMng.numAnimsL1, GRMng.frameCountL1,
+                            GRMng.loopingL1, SuperGame.frameTime10, GRMng.textureL1, SuperGame.shootType.normal,
+                            turretShotVelocity, turretShotPower);
+                        turretShots.Add(shot);
+                        Audio.PlayEffect("laserShot02");
+                        timeToTurretShotAux = timeToTurretShot2;
+                    }
+
+                    // disparo laser
+                    timeToShotLaserAux -= deltaTime;
+                    if (shootingLaser)//It shoots if it has to
+                    {
+                        LaserShot();
+                        laser.Update(deltaTime);
+
+                        //rotation += 0.2f * deltaTime;//Rotates slowly
+                    }
+                    /*else if (timeToShotLaserAux > 1)//Spin
+                        rotation += 0.45f * deltaTime;*/
+                    else if (timeToShotLaserAux < 0.5f)//Prepare to shoot
+                    {   // falta medio segundo para que dispare
+                        armTexture.SetColor(255, 255, 96, 255);
+                        /*if (currentAnim != 1)
+                            setAnim(1);*/
+                        //rotation += 0.2f * deltaTime;//Rotates slowly
+                    }
+                    if (timeToShotLaserAux <= 0)
+                    {
+                        //setAnim(0);
+                        timeToShotLaserAux = timeToShotLaser;
+                        shootingLaser = !shootingLaser;
+                        if (shootingLaser)
+                        {
+                            if (!shootingContSet)
+                            {
+                                shootingContSet = true;
+                                shootingCont = 0.1f;
+                            }
+                            LaserShot();
+                        }
+                        else
+                            armTexture.SetColor(255, 255, 255, 255);
+                    }
+                    break;
+                case State.TEN:
                     animFiringLaser.Update(deltaTime);
                     break;
             } // switch
@@ -808,6 +868,11 @@ namespace IS_XNA_Shooter
                     turretTexture.DrawRectangle(spriteBatch);
                     break;
                 case State.NINE:
+                    armTexture.DrawRectangle(spriteBatch);
+                    animIddle6.DrawRectangle(spriteBatch);
+                    turretTexture.DrawRectangle(spriteBatch);
+                    break;
+                case State.TEN:
                     armTexture.DrawRectangle(spriteBatch);
                     animFiringLaser.Draw(spriteBatch);
                     turretTexture.DrawRectangle(spriteBatch);

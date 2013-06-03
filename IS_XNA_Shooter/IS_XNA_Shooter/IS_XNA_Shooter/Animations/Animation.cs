@@ -137,7 +137,7 @@ namespace IS_XNA_Shooter
                     middlePoint, SpriteEffects.None, 1);
         }
 
-        protected void setAnim(short i)
+        public void setAnim(short i)
         {
             if (currentAnim != i)
                 prevAnim = currentAnim;
@@ -147,7 +147,7 @@ namespace IS_XNA_Shooter
             elapsedTime = 0;
         }
 
-        protected void setAnim(short i, short j)
+        public void setAnim(short i, short j)
         {
             nextAnim = j;
             setAnim(i);

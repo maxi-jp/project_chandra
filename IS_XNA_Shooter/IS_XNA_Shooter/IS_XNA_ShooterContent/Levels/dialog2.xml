@@ -18,8 +18,8 @@ get out of there now!"> </paragraph>
 this will be interesting. Stupid Kreatorians."> </paragraph>
 	</conversation2>
 	<conversation3>
-		<paragraph who = "0" text = "Chandra: Captain! My sensors detects a very strange
-presence..."> </paragraph>
+		<paragraph who = "0" text = "Chandra: Captain! My sensors detect ..." ></paragraph>
+		<paragraph who = "0" text = "... a very strange presence..."> </paragraph>
 		<paragraph who = "3" text = "CATS: ALL YOUR BASE ARE BELONG TO US."> </paragraph>
 		<paragraph who = "0" text = "Chandra: What the hell..."> </paragraph>
 		<paragraph who = "3" text = "CATS: I AM GOING TO SUSPEND YOU ALL."> </paragraph>

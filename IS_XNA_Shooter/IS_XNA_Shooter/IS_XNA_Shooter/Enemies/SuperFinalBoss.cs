@@ -944,9 +944,6 @@ namespace IS_XNA_Shooter
         {
             //base.Draw(spriteBatch);
 
-            foreach (Shot s in turretShots)
-                s.Draw(spriteBatch);
-
             if (shootingLaser)
                 laser.Draw(spriteBatch);
 
@@ -1015,7 +1012,6 @@ namespace IS_XNA_Shooter
                     break;
                 case State.TEN:
                     armTexture.DrawRectangle(spriteBatch);
-                    animIddle6.DrawRectangle(spriteBatch);
                     animFiringLaser.Draw(spriteBatch);
                     turretTexture.DrawRectangle(spriteBatch);
                     break;
@@ -1029,6 +1025,9 @@ namespace IS_XNA_Shooter
                     fuckingBigExplosion.Draw(spriteBatch);
                     break;
             } // switch
+
+            foreach (Shot s in turretShots)
+                s.Draw(spriteBatch);
 
             if (SuperGame.debug)
             {

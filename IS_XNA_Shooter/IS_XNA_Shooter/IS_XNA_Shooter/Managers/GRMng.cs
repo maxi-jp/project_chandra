@@ -201,8 +201,12 @@ namespace IS_XNA_Shooter
         public static Texture2D textureSuperFinalBoss3;
         public static Texture2D textureSuperFinalBoss4;
         public static Texture2D textureSuperFinalBossExplosion;
+        public static Texture2D texturePinguinShot;
         public static short frameWidthSuperFinalBossExplosion = 128;
         public static short frameHeightSuperFinalBossExplosion = 128;
+        public static short numAnimPinguinShot = 1;
+        public static short[] frameCountPinguinShot = { 8 };
+        public static bool[] loopingPinguinShot = {true};
         public static short numAnimsSuperFinalBossExplosion = 1;
         public static short[] frameCountSuperFinalBossExplosion = { 8 };
         public static bool[] loopingSuperFinalBossExplosion = { false };
@@ -539,6 +543,7 @@ namespace IS_XNA_Shooter
 
                 case "LevelBFinalBoss":
                     LoadShipA();
+                    texturePinguinShot = content.Load<Texture2D>("Graphics/Ships/SuperFinalBoss/pinguinoBullet");
                     textureSuperFinalBoss1 = content.Load<Texture2D>("Graphics/Ships/SuperFinalBoss/anim01");
                     textureSuperFinalBoss2 = content.Load<Texture2D>("Graphics/Ships/SuperFinalBoss/anim02");
                     textureSuperFinalBoss3 = content.Load<Texture2D>("Graphics/Ships/SuperFinalBoss/anim03");
@@ -790,6 +795,7 @@ namespace IS_XNA_Shooter
 
                 case "LevelBFinalBoss":
                     UnloadShipA();
+                    texturePinguinShot = null;
                     textureSuperFinalBoss1 = null;
                     textureSuperFinalBoss2 = null;
                     textureSuperFinalBoss3 = null;

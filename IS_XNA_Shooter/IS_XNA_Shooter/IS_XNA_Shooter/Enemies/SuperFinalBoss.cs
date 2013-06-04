@@ -789,11 +789,11 @@ namespace IS_XNA_Shooter
                             gyre = (float)Math.PI + gyre;
                         }
                         Shot shot = new Shot(camera, level, this.animFiringLaser.position + new Vector2(-100,35), gyre,
-                                GRMng.frameWidthL1, GRMng.frameHeightL1, GRMng.numAnimsL1, GRMng.frameCountL1,
-                                GRMng.loopingL1, SuperGame.frameTime10, GRMng.textureL1, SuperGame.shootType.normal,
+                                64, 64, GRMng.numAnimPinguinShot, GRMng.frameCountPinguinShot,
+                                GRMng.loopingPinguinShot, SuperGame.frameTime10, GRMng.texturePinguinShot, SuperGame.shootType.normal,
                                 turretShotVelocity, turretShotPower);
                         turretShots.Add(shot);
-                        Audio.PlayEffect("laserShot02");
+                        Audio.PlayEffect("laser_shot_red");
                     }
 
                     // disparos torreta

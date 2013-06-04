@@ -45,6 +45,8 @@ namespace IS_XNA_Shooter
 
         public void Update(float deltaTime)
         {
+            controllerActive = GamePad.GetState(PlayerIndex.One).IsConnected;
+
             // keyboard:
             actKeyboardState = Keyboard.GetState();
 

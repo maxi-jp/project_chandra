@@ -10,7 +10,7 @@ namespace IS_XNA_Shooter
     class SuperFinalBoss : Enemy
     {
         // graphic resources
-        private Texture2D textureAnim1, textureAnim2, textureAnim3, textureAnim4;
+        private Texture2D textureAnim1, textureAnim2, textureAnim3, textureAnim4, textureAnim5;
 
         private SpriteCamera animIddle1, animIddle2, animIddle3, animIddle6;
         private ComplexAnimation animIddle4; // abriendo la boca
@@ -21,6 +21,9 @@ namespace IS_XNA_Shooter
         private short animOpenChestFramesCount = 14;
         private ComplexAnimation animFiringLaser;
         private short animFiringLaserFramesCount = 4;
+        private ComplexAnimation fuckingBigExplosion; // final explosion
+        private short fuckingBigExplosionFramesCount = 15;
+        private float fuckingBigExplosionScale = 6.0f;
 
         // torreta
         private SpriteCamera turretTexture;
@@ -111,7 +114,8 @@ namespace IS_XNA_Shooter
             SEVEN,  // dice "this is even my final form"
             EIGHT,  // animación de cara de samer saliendo
             NINE,   // cuarta fase de ataque (fede + samer)
-            TEN
+            TEN,
+            ELEVEN  // EXPLOSION FINAL
         };
         private State currentState;
 
@@ -133,10 +137,11 @@ namespace IS_XNA_Shooter
         };
         private TurretState currentTurretState;
 
-        private int life1 = 20000;
-        private int life2 = 30000;
-        private int life3 = 35000;
-        private int life4 = 30000;
+        private int life1 = 15000;
+        private int life2 = 25000;
+        private int life3 = 30000;
+        private int life4 = 20000;
+        private int life5 = 20000;
 
         private Vector2 basePosition = new Vector2(SuperGame.screenWidth - 160, SuperGame.screenHeight / 2);
         private Vector2 initialPosition = new Vector2(SuperGame.screenWidth + 300, SuperGame.screenHeight / 2);
@@ -157,6 +162,9 @@ namespace IS_XNA_Shooter
         private float timeLine4End = 3.0f;
         private float timeFaceExploiting = 3.0f;
         private float timeSamerSaliendo = 3.0f;
+        private float timeExplosion = 4.0f, timeExplosionAux = 4.0f;
+
+        private bool hide = false;
 
         // animaciones aclarar
         private byte transpLine1 = 0;
@@ -180,6 +188,7 @@ namespace IS_XNA_Shooter
             : base(camera, level, Vector2.Zero, 0, 0, 0, 0, null, null, SuperGame.frameTime12,
                 GRMng.textureSuperFinalBoss1, 0, 0, 100000/*life*/, 99999/*value*/, null/*ship*/)
         {
+            life = life1 + life2 + life3 + life4 + life5;
             currentState = State.ENTERING;
             currentArmState = ArmState.STOP;
             currentTurretState = TurretState.STOP;
@@ -191,6 +200,7 @@ namespace IS_XNA_Shooter
             textureAnim2 = GRMng.textureSuperFinalBoss2;
             textureAnim3 = GRMng.textureSuperFinalBoss3;
             textureAnim4 = GRMng.textureSuperFinalBoss4;
+            textureAnim5 = GRMng.textureSuperFinalBossFuckingBigExplosion;
 
             // initialize animations:
             // iddle1
@@ -246,6 +256,26 @@ namespace IS_XNA_Shooter
             animArray5[2] = new AnimRect(612, 432, 306, 432, textureAnim4);
             animIddle5 = new ComplexAnimation(camera, level, true, basePosition, rotation, animArray5,
                 animIddle5FramesCount, true, SuperGame.frameTime12);
+
+            // final explosion
+            AnimRect[] animArray6 = new AnimRect[fuckingBigExplosionFramesCount];
+            animArray6[0] = new AnimRect(0, 0, 96, 96, textureAnim5);
+            animArray6[1] = new AnimRect(96, 0, 96, 96, textureAnim5);
+            animArray6[2] = new AnimRect(192, 0, 96, 96, textureAnim5);
+            animArray6[3] = new AnimRect(288, 0, 96, 96, textureAnim5);
+            animArray6[4] = new AnimRect(384, 0, 96, 96, textureAnim5);
+            animArray6[5] = new AnimRect(0, 96, 96, 96, textureAnim5);
+            animArray6[6] = new AnimRect(96, 96, 96, 96, textureAnim5);
+            animArray6[7] = new AnimRect(192, 96, 96, 96, textureAnim5);
+            animArray6[8] = new AnimRect(288, 96, 96, 96, textureAnim5);
+            animArray6[9] = new AnimRect(384, 96, 96, 96, textureAnim5);
+            animArray6[10] = new AnimRect(0, 192, 96, 96, textureAnim5);
+            animArray6[11] = new AnimRect(96, 192, 96, 96, textureAnim5);
+            animArray6[12] = new AnimRect(192, 192, 192, 96, textureAnim5);
+            animArray6[13] = new AnimRect(288, 192, 96, 96, textureAnim5);
+            animArray6[14] = new AnimRect(384, 192, 96, 96, textureAnim5);
+            fuckingBigExplosion = new ComplexAnimation(camera, level, true, basePosition, rotation,
+                fuckingBigExplosionScale, animArray6, fuckingBigExplosionFramesCount, false, 1.0f / 4.0f);
 
             turretTexture = new SpriteCamera(camera, level, true, position, 0, textureAnim1,
                 new Rectangle(918, 0, 64, 64));
@@ -543,6 +573,7 @@ namespace IS_XNA_Shooter
                         shootingLaser = !shootingLaser;
                         if (shootingLaser)
                         {
+                            Audio.PlayEffect("laserLong01", -1, 0.6f);
                             if (!shootingContSet)
                             {
                                 shootingContSet = true;
@@ -623,6 +654,7 @@ namespace IS_XNA_Shooter
                         shootingLaser = !shootingLaser;
                         if (shootingLaser)
                         {
+                            Audio.PlayEffect("laserLong01", -1, 0.6f);
                             if (!shootingContSet)
                             {
                                 shootingContSet = true;
@@ -737,6 +769,7 @@ namespace IS_XNA_Shooter
                         shootingLaser = !shootingLaser;
                         if (shootingLaser)
                         {
+                            Audio.PlayEffect("laserLong01", -1, 0.6f);
                             if (!shootingContSet)
                             {
                                 shootingContSet = true;
@@ -750,6 +783,20 @@ namespace IS_XNA_Shooter
                     break;
                 case State.TEN:
                     animFiringLaser.Update(deltaTime);
+                    break;
+                case State.ELEVEN: // explosión final
+                    timeExplosionAux -= deltaTime;
+                    if (timeExplosionAux <= timeExplosion / 2)
+                    {
+                        // esconder al final boss
+                        hide = true;
+                    }
+                    if (timeExplosionAux <= 0)
+                    {
+                        // terminar nivel
+                        erasable = true;
+                    }
+                    fuckingBigExplosion.Update(deltaTime);
                     break;
             } // switch
 
@@ -877,6 +924,15 @@ namespace IS_XNA_Shooter
                     animFiringLaser.Draw(spriteBatch);
                     turretTexture.DrawRectangle(spriteBatch);
                     break;
+                case State.ELEVEN:
+                    if (!hide)
+                    {
+                        armTexture.DrawRectangle(spriteBatch);
+                        animIddle6.DrawRectangle(spriteBatch);
+                        turretTexture.DrawRectangle(spriteBatch);
+                    }
+                    fuckingBigExplosion.Draw(spriteBatch);
+                    break;
             } // switch
 
             if (SuperGame.debug)
@@ -893,6 +949,8 @@ namespace IS_XNA_Shooter
                     new Vector2(5, 75), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
                 spriteBatch.DrawString(SuperGame.fontDebug, "EnemyLife4 = " + life4 + ".",
                     new Vector2(5, 87), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+                spriteBatch.DrawString(SuperGame.fontDebug, "EnemyLife5 = " + life5 + ".",
+                    new Vector2(5, 99), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
             }
 
         } // Draw
@@ -943,9 +1001,9 @@ namespace IS_XNA_Shooter
             else if (prevState == State.FIVE && nextState == State.SIX)
             {
                 colisionable = false;
+                explosionFaceAnimation.setAnim(0, -1);
                 armTexture.SetColor(255, 255, 255, 255);
                 currentArmState = ArmState.MOVING_DOWN;
-                armTexture.SetColor(255, 255, 255, 255);
                 armNextStateStop = true;
                 currentTurretState = TurretState.STOP;
                 currentState = State.SIX;
@@ -965,6 +1023,14 @@ namespace IS_XNA_Shooter
                 currentArmState = ArmState.MOVING_DOWN;
                 armNextStateStop = false;
                 currentTurretState = TurretState.MOVING_UP;
+            }
+            else if (prevState == State.NINE && nextState == State.ELEVEN)
+            {
+                colisionable = false;
+                currentState = State.ELEVEN;
+                currentArmState = ArmState.MOVING_DOWN;
+                armNextStateStop = false;
+                Audio.PlayEffect("explosion01");
             }
         } // ChangeState
 
@@ -1010,6 +1076,7 @@ namespace IS_XNA_Shooter
             else if (nextState == State.TWO)
             {
                 colisionable = true;
+                armNextStateStop = false;
                 armTexture.SetColor(255, 255, 255, 255);
                 currentArmState = ArmState.MOVING_UP;
                 currentTurretState = TurretState.MOVING_UP;
@@ -1035,6 +1102,7 @@ namespace IS_XNA_Shooter
             else if (nextState == State.FIVE)
             {
                 colisionable = true;
+                armNextStateStop = false;
                 currentArmState = ArmState.MOVING_UP;
                 currentTurretState = TurretState.MOVING_UP;
                 armTexture.SetColor(255, 255, 255, 255);
@@ -1052,6 +1120,7 @@ namespace IS_XNA_Shooter
                 armTexture.SetColor(255, 255, 255, 255);
                 armNextStateStop = true;
                 currentTurretState = TurretState.STOP;
+                position = basePosition;
             }
             else if (nextState == State.SEVEN)
             {
@@ -1060,6 +1129,7 @@ namespace IS_XNA_Shooter
                 armNextStateStop = true;
                 currentTurretState = TurretState.STOP;
                 armTexture.SetColor(255, 255, 255, 255);
+                position = basePosition;
             }
             else if (nextState == State.EIGHT)
             {
@@ -1069,6 +1139,7 @@ namespace IS_XNA_Shooter
                 armNextStateStop = true;
                 currentTurretState = TurretState.STOP;
                 armTexture.SetColor(255, 255, 255, 255);
+                position = basePosition;
             }
             else if (nextState == State.NINE)
             {
@@ -1076,8 +1147,14 @@ namespace IS_XNA_Shooter
                 currentArmState = ArmState.MOVING_DOWN;
                 armNextStateStop = false;
                 currentTurretState = TurretState.MOVING_UP;
-            }
                 position = basePosition;
+            }
+            else if (nextState == State.ELEVEN)
+            {
+                Audio.PlayEffect("explosion01");
+                colisionable = false;
+            }
+                
             currentState = nextState;
         }
 
@@ -1139,13 +1216,24 @@ namespace IS_XNA_Shooter
                         if (life3 <= 0)
                             ChangeState(State.FIVE, State.SIX);
                         break;
-                    case State.SEVEN:
+                    case State.NINE:
                         life4 -= i;
                         if (life4 <= 0)
-                            ChangeState(State.SEVEN, State.EIGHT);
+                        {
+                            ChangeState(State.NINE, State.ELEVEN);
+                            //erasable = true;
+                        }
+                        break;
+                    case State.TEN:
+                        life4 -= i;
+                        if (life4 <= 0)
+                        {
+                            ChangeState(State.NINE, State.ELEVEN);
+                            //erasable = true;
+                        }
                         break;
                 }
-                life -= i;
+                //life -= i;
             }
         }
     } // class SuperFinalBoss

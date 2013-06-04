@@ -81,7 +81,7 @@ namespace IS_XNA_Shooter
             setTimeToResume();
 
             currentLevel = 0;
-            levelList = new String[] { "LevelB1", "LevelA1", "LevelB2" /*"LevelBFinalBoss"*/ };
+            levelList = new String[] { "LevelB1", "LevelA1", /*"LevelB2"*/ "LevelBFinalBoss" };
             InitGame(levelList[currentLevel]);
             currentState = StoryState.levelDialog;
         }

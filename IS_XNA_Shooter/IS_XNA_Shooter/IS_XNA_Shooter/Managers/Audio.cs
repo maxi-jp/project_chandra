@@ -20,7 +20,7 @@ namespace IS_XNA_Shooter
         public static SoundEffect digitalAcent01;
 
         // efectos del juego:
-        public static SoundEffect laserShot01, laserShot02;
+        public static SoundEffect laserShot01, laserShot02, laserLong01;
         public static SoundEffect brokenBone01, brokenBone02;
         public static SoundEffect tackled1;
         public static SoundEffect laserShotRed;
@@ -28,6 +28,7 @@ namespace IS_XNA_Shooter
         public static SoundEffect SoundPowerUpGreen;
         public static SoundEffect SoundPowerUpBlue;
         public static SoundEffect SoundPowerUpOrange;
+        public static SoundEffect explosion01;
 
         // canciones:
         public static Song music01;
@@ -61,11 +62,13 @@ namespace IS_XNA_Shooter
                     break;
 
                 case 1: // juego:
+                    laserLong01 = content.Load<SoundEffect>("Audio/FXEffects/laser_long_01");
                     laserShot01 = content.Load<SoundEffect>("Audio/FXEffects/laser_shot_01");
                     laserShot02 = content.Load<SoundEffect>("Audio/FXEffects/laser_shot_02");
                     brokenBone01 = content.Load<SoundEffect>("Audio/FXEffects/broken_bone_01");
                     brokenBone02 = content.Load<SoundEffect>("Audio/FXEffects/broken_bone_02");
                     tackled1 = content.Load<SoundEffect>("Audio/FXEffects/tackled_1");
+                    explosion01 = content.Load<SoundEffect>("Audio/FXEffects/explosion01");
                     LoadSoundPowerUps();
                     music_evolution = content.Load<Song>("Audio/Music/music_evolution_02-TakeOff");
                     music_street = content.Load<Song>("Audio/Music/music_04-Street");
@@ -94,11 +97,13 @@ namespace IS_XNA_Shooter
                     break;
 
                 case 1: // juego:
+                    laserLong01 = null;
                     laserShot01 = null;
                     laserShot02 = null;
                     brokenBone01 = null;
                     brokenBone02 = null;
                     tackled1 = null;
+                    explosion01 = null;
                     laserShotRed = null;
                     SoundPowerUpRed = null;
                     SoundPowerUpGreen = null;
@@ -120,19 +125,21 @@ namespace IS_XNA_Shooter
 
         public static void PlayEffect(String cad)
         {
-            PlayEffect(cad, 1, 0);
+            PlayEffect(cad, 0, 0);
         }
 
         public static void PlayEffect(String cad, float pitch, float pan)
         {
             switch (cad)
             {
+                case "laserLong01":     laserLong01.Play(effectsVolume, pitch, pan);    break;
                 case "digitalAcent01":  digitalAcent01.Play(effectsVolume,pitch,pan);   break;
                 case "laserShot01":     laserShot01.Play(effectsVolume, pitch, pan);    break;
                 case "laserShot02":     laserShot02.Play(effectsVolume, pitch, pan);    break;
                 case "brokenBone01":    brokenBone01.Play(effectsVolume, pitch, pan);   break;
                 case "brokenBone02":    brokenBone02.Play(effectsVolume, pitch, pan);   break;
                 case "tackled1":        tackled1.Play(effectsVolume, pitch, pan);       break;
+                case "explosion01":     explosion01.Play(effectsVolume, pitch, pan);    break;
                 case "laser_shot_red":  laserShotRed.Play(effectsVolume, pitch, pan);   break;
                 case "PowerUpRed":      SoundPowerUpRed.Play(effectsVolume, pitch, pan); break;
                 case "PowerUpBlue":     SoundPowerUpBlue.Play(effectsVolume, pitch, pan); break;
@@ -190,6 +197,7 @@ namespace IS_XNA_Shooter
                 case 8: // music_rulesofnature
                     isPlayingMusic = true;
                     MediaPlayer.Stop();
+                    MediaPlayer.Volume = 0.8f;
                     MediaPlayer.Play(music_rulesofnature);
                     MediaPlayer.IsRepeating = true;
                     break;

@@ -11,6 +11,8 @@ namespace IS_XNA_Shooter
     {
          /* ------------------- ATRIBUTOS ------------------- */
 
+        private float scale;
+
         // número de frames de la animación
         private short frameCount;
 
@@ -55,6 +57,39 @@ namespace IS_XNA_Shooter
         public ComplexAnimation(Camera camera, Level level, bool middlePosition, Vector2 position, float rotation,
             AnimRect[/*frameCount*/] animArray, short frameCount, bool looping, float frametime)
         {
+            scale = 1;
+            this.camera = camera;
+            this.level = level;
+            this.position = position;
+            this.rotation = rotation;
+
+            color = Color.White;
+
+            this.animArray = animArray;
+
+            frameWidth = animArray[0].rect.Width;
+            frameHeight = animArray[0].rect.Height;
+            middlePoint = new Vector2(frameWidth / 2, frameHeight / 2);
+            this.frameCount = frameCount;
+            this.looping = looping;
+            this.frameTime = frametime;
+
+            // Set the time to zero
+            elapsedTime = 0;
+            currentFrame = 0;
+
+            // Set the Animation to active by default
+            animActive = true;
+            animFinished = false;
+        }
+
+        public ComplexAnimation(Camera camera, Level level, bool middlePosition, Vector2 position, float rotation,
+            float scale, AnimRect[/*frameCount*/] animArray, short frameCount, bool looping, float frametime)
+            : this (camera, level, middlePosition, position, rotation, animArray, frameCount, looping,
+                frametime)
+        {
+            this.scale = scale;
+
             this.camera = camera;
             this.level = level;
             this.position = position;
@@ -129,8 +164,10 @@ namespace IS_XNA_Shooter
         {
             // Only draw the animation when we are active
             if (animActive)
-                spriteBatch.Draw(animArray[currentFrame].texture, destinationRect, animArray[currentFrame].rect, color, rotation,
-                    middlePoint, SpriteEffects.None, 1);
+                /*spriteBatch.Draw(animArray[currentFrame].texture, destinationRect, animArray[currentFrame].rect, color, rotation,
+                    middlePoint, SpriteEffects.None, 1);*/
+            spriteBatch.Draw(animArray[currentFrame].texture, position + camera.displacement,
+                animArray[currentFrame].rect, color, rotation, middlePoint, scale, SpriteEffects.None, 1);
         }
 
         /*protected void setAnim(short i)

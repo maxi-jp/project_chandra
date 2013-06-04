@@ -1070,6 +1070,7 @@ namespace IS_XNA_Shooter
             }
             else if (prevState == State.TWO && nextState == State.THREE)
             {
+                shootingLaser = false;
                 armTexture.SetColor(255, 255, 255, 255);
                 colisionable = false;
                 currentTurretState = TurretState.STOP;
@@ -1094,6 +1095,7 @@ namespace IS_XNA_Shooter
             }
             else if (prevState == State.FIVE && nextState == State.SIX)
             {
+                shootingLaser = false;
                 colisionable = false;
                 explosionFaceAnimation.setAnim(0, -1);
                 armTexture.SetColor(255, 255, 255, 255);
@@ -1128,6 +1130,7 @@ namespace IS_XNA_Shooter
             }
             else if (prevState == State.NINE && nextState == State.ELEVEN)
             {
+                shootingLaser = false;
                 colisionable = false;
                 currentState = State.ELEVEN;
                 currentArmState = ArmState.MOVING_DOWN;

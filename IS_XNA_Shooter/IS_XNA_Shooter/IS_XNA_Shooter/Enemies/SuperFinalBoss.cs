@@ -36,6 +36,7 @@ namespace IS_XNA_Shooter
         private List<Shot> turretShots;
         private float turretShotVelocity = 300;
         private float timeToTurretShot = 0.6f, timeToTurretShot2 = 0.4f, timeToTurretShotAux = 0.4f;
+        private float timeToShotLaserAuxSam = 0.4f, timeToShotSamer= 0.2f;
         private int turretShotPower = 100;
 
         // brazo
@@ -620,6 +621,7 @@ namespace IS_XNA_Shooter
                     timeToTurretShotAux -= deltaTime;
                     if (timeToTurretShotAux <= 0)
                     {
+
                         Shot shot = new Shot(camera, level, turretTexture.position, turretTexture.rotation + (float)Math.PI,
                             GRMng.frameWidthL1, GRMng.frameHeightL1, GRMng.numAnimsL1, GRMng.frameCountL1,
                             GRMng.loopingL1, SuperGame.frameTime10, GRMng.textureL1, SuperGame.shootType.normal,
@@ -780,9 +782,101 @@ namespace IS_XNA_Shooter
                         else
                             armTexture.SetColor(255, 255, 255, 255);
                     }
+
+                    // disparo cabeza samer
+                    timeToShotLaserAuxSam -= deltaTime;
+                    if (timeToShotLaserAuxSam <= 0)
+                    {
+                        timeToShotLaserAuxSam = 2f;
+                        ChangeState(State.NINE, State.TEN);
+                    }
+
                     break;
                 case State.TEN:
                     animFiringLaser.Update(deltaTime);
+                    turretTexture.position = position + turretPosition;
+                    armTexture.position = position + armPosition;
+                    animIddle5.position = position;
+                    animIddle5.rotation = rotation;
+
+                    //cambio samer
+                    timeToShotLaserAuxSam -= deltaTime;
+                    if (timeToShotLaserAuxSam <= 0)
+                    {
+                        timeToShotLaserAuxSam = 0.8f;
+                        ChangeState(State.TEN, State.NINE);
+                    }
+
+                    //disparo samer
+                    timeToShotSamer -= deltaTime;
+                    if (timeToShotSamer <= 0)
+                    {
+                        timeToShotSamer = 0.4f;
+                        float dY = -ship.position.Y + this.animFiringLaser.position.Y;
+                        float dX = -ship.position.X + this.animFiringLaser.position.X;
+
+                        float gyre = (float)Math.Atan(dY / dX);
+
+                        if (dX >= 0)
+                        {
+                            gyre = (float)Math.PI + gyre;
+                        }
+                        Shot shot = new Shot(camera, level, this.animFiringLaser.position + new Vector2(-100,35), gyre,
+                                64, 64, GRMng.numAnimPinguinShot, GRMng.frameCountPinguinShot,
+                                GRMng.loopingPinguinShot, SuperGame.frameTime10, GRMng.texturePinguinShot, SuperGame.shootType.normal,
+                                turretShotVelocity, turretShotPower);
+                        turretShots.Add(shot);
+                        Audio.PlayEffect("laser_shot_red");
+                    }
+
+                    // disparos torreta
+                    timeToTurretShotAux -= deltaTime;
+                    if (timeToTurretShotAux <= 0)
+                    {
+                        Shot shot = new Shot(camera, level, turretTexture.position, turretTexture.rotation + (float)Math.PI,
+                            GRMng.frameWidthL1, GRMng.frameHeightL1, GRMng.numAnimsL1, GRMng.frameCountL1,
+                            GRMng.loopingL1, SuperGame.frameTime10, GRMng.textureL1, SuperGame.shootType.normal,
+                            turretShotVelocity, turretShotPower);
+                        turretShots.Add(shot);
+                        Audio.PlayEffect("laserShot02");
+                        timeToTurretShotAux = timeToTurretShot2;
+                    }
+
+                    // disparo laser
+                    timeToShotLaserAux -= deltaTime;
+                    if (shootingLaser)//It shoots if it has to
+                    {
+                        LaserShot();
+                        laser.Update(deltaTime);
+
+                        //rotation += 0.2f * deltaTime;//Rotates slowly
+                    }
+                    /*else if (timeToShotLaserAux > 1)//Spin
+                        rotation += 0.45f * deltaTime;*/
+                    else if (timeToShotLaserAux < 0.5f)//Prepare to shoot
+                    {   // falta medio segundo para que dispare
+                        armTexture.SetColor(255, 255, 96, 255);
+                        /*if (currentAnim != 1)
+                            setAnim(1);*/
+                        //rotation += 0.2f * deltaTime;//Rotates slowly
+                    }
+                    if (timeToShotLaserAux <= 0)
+                    {
+                        //setAnim(0);
+                        timeToShotLaserAux = timeToShotLaser;
+                        shootingLaser = !shootingLaser;
+                        if (shootingLaser)
+                        {
+                            if (!shootingContSet)
+                            {
+                                shootingContSet = true;
+                                shootingCont = 0.1f;
+                            }
+                            LaserShot();
+                        }
+                        else
+                            armTexture.SetColor(255, 255, 255, 255);
+                    }
                     break;
                 case State.ELEVEN: // explosión final
                     timeExplosionAux -= deltaTime;
@@ -921,6 +1015,7 @@ namespace IS_XNA_Shooter
                     break;
                 case State.TEN:
                     armTexture.DrawRectangle(spriteBatch);
+                    animIddle6.DrawRectangle(spriteBatch);
                     animFiringLaser.Draw(spriteBatch);
                     turretTexture.DrawRectangle(spriteBatch);
                     break;
@@ -1023,6 +1118,14 @@ namespace IS_XNA_Shooter
                 currentArmState = ArmState.MOVING_DOWN;
                 armNextStateStop = false;
                 currentTurretState = TurretState.MOVING_UP;
+            }
+            else if (prevState == State.NINE && nextState == State.TEN)
+            {
+                currentState = State.TEN;
+            }
+            else if (prevState == State.TEN && nextState == State.NINE)
+            {
+                currentState = State.NINE;
             }
             else if (prevState == State.NINE && nextState == State.ELEVEN)
             {

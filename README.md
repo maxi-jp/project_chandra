@@ -14,7 +14,7 @@ First of all i am going to explain the game controls:
 		
 	-To shoot: Left click mouse.
 	
-	-In main menu you can go to the test mode with "T" key, particles sistem test with "Y" key and play against the super final boss pressing "Q" key. 
+	-In main menu you can go to the test mode with "T" key, particles system test with "Y" key and play against the super final boss pressing "Q" key. 
 	
 	-In test mode you can see all the enemies with all the function keys: F1,F2,F3,F4,F5,F6,F7,F8,F9. And you can see the power ups with de F10 key.
 	
@@ -23,7 +23,7 @@ First of all i am going to explain the game controls:
 		
 	-In debug mode you can get lives with the "L" key and loose lives with the "K" key.
 	
-	-In the particles sistem test you have these controls:
+	-In the particles system test you have these controls:
 		Press FX to increase value, press FX+mouse.rightclick for decrease value 
         F1: Number of Particles = " + ship.particles.GetParticleCount() + "\n" +
 		F2: PARTICLE_CREATION_INTERVAL = " + ship.particles.PARTICLE_CREATION_INTERVAL

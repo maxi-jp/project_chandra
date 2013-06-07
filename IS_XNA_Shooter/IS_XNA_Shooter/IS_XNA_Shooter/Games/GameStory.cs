@@ -145,6 +145,7 @@ namespace IS_XNA_Shooter
                     if (timeToResumeAux <= 0)
                     {
                         currentState = StoryState.playing;
+                        PlaySong(levelList[currentLevel]);
                         timeToResumeAux = timeToResume;
                     }
                     else if (timeToResumeAux >= timeToResume * 2 / 3)
@@ -343,6 +344,17 @@ namespace IS_XNA_Shooter
         {
             // TODO: ñapa de cojones
             return finished;
+        }
+
+        private void PlaySong(String cad)
+        {
+            switch (cad)
+            {
+                case "LevelB1": Audio.PlayMusic(6); break;
+                case "LevelA1": Audio.PlayMusic(5); break;
+                case "LevelBFinalBoss": Audio.PlayMusic(8); break;
+                case "LevelB2": Audio.PlayMusic(8/*4*/); break;
+            }
         }
 
     } // class GameB

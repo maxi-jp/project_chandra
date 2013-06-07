@@ -81,7 +81,7 @@ namespace IS_XNA_Shooter
             setTimeToResume();
 
             currentLevel = 0;
-            levelList = new String[] { "LevelB1", "LevelA1", /*"LevelB2"*/ "LevelBFinalBoss" };
+            levelList = new String[] { "LevelB1_finalDemo", "LevelA1_finalDemo", "LevelBFinalBoss" };
             InitGame(levelList[currentLevel]);
             currentState = StoryState.levelDialog;
         }
@@ -225,26 +225,24 @@ namespace IS_XNA_Shooter
             // Load the content for the new level & unload the content of the previous one
             if (currentLevel > 0)
                 grManager.UnloadContent(levelList[currentLevel-1]);
-            grManager.LoadContent(cad);
+            //grManager.LoadContent(cad);
 
             switch (cad)
             {
-                case "LevelB1":
+                case "LevelB1_finalDemo":
+                    grManager.LoadContent("LevelB1");
                     LvlMng.LoadContent(cad); // Load the rectangles
-                    currentGame = new GameB(mainGame, player, cad, GRMng.textureAim, evolution);
+                    currentGame = new GameB(mainGame, player, "LevelB1", GRMng.textureAim, evolution);
                     break;
 
-                case "LevelA1":
+                case "LevelA1_finalDemo":
+                    grManager.LoadContent("LevelA1");
                     LvlMng.LoadContent(cad); // Load the levelA's enemies
-                    currentGame = new GameA(mainGame, player, cad, GRMng.textureAim, GRMng.textureCell, evolution);
-                    break;
-
-                case "LevelB2": // final boss: DORITO FUCKER
-                    LvlMng.LoadContent(cad); // Load the level map 2
-                    currentGame = new GameB(mainGame, player, cad, GRMng.textureAim, evolution);
+                    currentGame = new GameA(mainGame, player, "LevelA1", GRMng.textureAim, GRMng.textureCell, evolution);
                     break;
 
                 case "LevelBFinalBoss": // final boss
+                    grManager.LoadContent("LevelBFinalBoss");
                     LvlMng.LoadContent(cad); // Load the level map 2
                     currentGame = new GameB(mainGame, player, cad, GRMng.textureAim, evolution);
                     break;
@@ -328,8 +326,8 @@ namespace IS_XNA_Shooter
         {
             switch (cad)
             {
-                case "LevelB1":         Audio.PlayMusic(6); break;
-                case "LevelA1":         Audio.PlayMusic(5); break;
+                case "LevelB1_finalDemo": Audio.PlayMusic(6); break;
+                case "LevelA1_finalDemo": Audio.PlayMusic(5); break;
                 case "LevelBFinalBoss": Audio.PlayMusic(8); break;
                 case "LevelB2":         Audio.PlayMusic(8/*4*/); break;
             }

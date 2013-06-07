@@ -597,7 +597,12 @@ namespace IS_XNA_Shooter
                     break;
 
                 case "SplashCredits":
-                    menuSplash01 = content.Load<Texture2D>("Graphics/Splash/splash_mainmenu_asset01_3");
+                    switch (SuperGame.resolutionMode)
+                    {
+                        case 1: menuSplash01 = content.Load<Texture2D>("Graphics/Splash/splash_mainmenu_asset01_1"); break;
+                        case 2: menuSplash01 = content.Load<Texture2D>("Graphics/Splash/splash_mainmenu_asset01_2"); break;
+                        case 3: menuSplash01 = content.Load<Texture2D>("Graphics/Splash/splash_mainmenu_asset01_3"); break;
+                    }
                     splash_credits_1 = content.Load<Texture2D>("Graphics/Splash/splash_credits");
                     break;
 

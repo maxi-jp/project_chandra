@@ -449,8 +449,10 @@ namespace IS_XNA_Shooter
                         NewGameATest();
                     if (debug && Keyboard.GetState().IsKeyDown(Keys.Y))
                         NewGameAForTestingParticles();
-                    if (debug && Keyboard.GetState().IsKeyDown(Keys.Q))
+                    if (debug && Keyboard.GetState().IsKeyDown(Keys.U))
                         NewGameSuperFinalBoss();
+                    if (debug && Keyboard.GetState().IsKeyDown(Keys.Q))
+                        NewStoryFinalDemo();
 
                     menu.Update(Mouse.GetState().X, Mouse.GetState().Y, deltaTime);
 
@@ -713,11 +715,33 @@ namespace IS_XNA_Shooter
 
             duration = 0;
 
-            //game = new GameStory(this, grManager, audio, LvlMng, player, screenEvolution);
-            game = new GameStoryFinalDemo(this, grManager, audio, LvlMng, player, screenEvolution);
+            game = new GameStory(this, grManager, audio, LvlMng, player, screenEvolution);
 
             //currentState = gameState.playing; // Change game's state to game mode
             //grManager.UnloadContent(2); 
+            grManager.UnloadContent("MenuMain"); /// Unload the main menu's resources
+        }
+
+        private void NewStoryFinalDemo()
+        {
+            Audio.StopMusic();
+
+            currentGameName = "Story";
+
+            grManager.LoadHud();
+            grManager.LoadVideo(1);
+            grManager.LoadContent("SplashFinalDemo");
+
+            menuFinalDemo.Initialize();
+            // introduction video
+            videoPlayer = new VideoPlayer();
+            videoPlayer.Play(GRMng.videoIntroStory);
+            currentState = gameState.playingVideo;
+
+            duration = 0;
+
+            game = new GameStoryFinalDemo(this, grManager, audio, LvlMng, player, screenEvolution);
+
             grManager.UnloadContent("MenuMain"); /// Unload the main menu's resources
         }
 
@@ -922,12 +946,11 @@ namespace IS_XNA_Shooter
 
             if (currentGameName == "Story")
             {
+                //Audio.StopMusic();
                 //currentState = gameState.mainMenu;
-                //currentState = gameState.splashFinalDemo;
                 grManager.LoadContent("SplashCredits");
                 audio.LoadContent(2); // load the song for the credits
                 splashCredits.Initialize();
-                currentState = gameState.splashCredits;
                 currentState = gameState.splashCredits;
             } // Arcade level played:
             else
@@ -970,7 +993,8 @@ namespace IS_XNA_Shooter
         /// </summary>
         public void ReturnFromCredits()
         {
-            currentState = gameState.splashFinalDemo;
+            //currentState = gameState.splashFinalDemo;
+            ExitToMenu();
         }
 
     } // class SuperGame

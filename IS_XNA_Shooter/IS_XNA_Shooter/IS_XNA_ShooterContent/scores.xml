@@ -2,6 +2,7 @@
 <!--Level Edited-->
 <scores>
   <level name="LevelA1">
+    <entry player="JAVENCIO" score="4200" />
     <entry player="MONCIO" score="2820" />
     <entry player="ORTEGO" score="2100" />
     <entry player="CB1" score="200" />
@@ -11,14 +12,13 @@
     <entry player="GUILLE" score="70" />
     <entry player="YAM" score="2" />
     <entry player="XXX" score="0" />
-    <entry player="XXX" score="0" />
   </level>
   <level name="LevelB1">
+    <entry player="SAMERCIO" score="5390" />
     <entry player="DWASDF" score="4400" />
     <entry player="SKYWALKER" score="4210" />
     <entry player="JAVIGAY" score="4080" />
     <entry player="SAMEER" score="3840" />
-    <entry player="AAA" score="0" />
     <entry player="AAA" score="0" />
     <entry player="AAA" score="0" />
     <entry player="AAA" score="0" />
@@ -38,12 +38,12 @@
     <entry player="AAA" score="0" />
   </level>
   <level name="LevelADefense1">
+    <entry player="PEINADO" score="1190" />
     <entry player="G--" score="5" />
     <entry player="A--" score="4" />
     <entry player="L--" score="3" />
     <entry player="L--" score="2" />
     <entry player="U--" score="1" />
-    <entry player="AAA" score="0" />
     <entry player="AAA" score="0" />
     <entry player="AAA" score="0" />
     <entry player="AAA" score="0" />

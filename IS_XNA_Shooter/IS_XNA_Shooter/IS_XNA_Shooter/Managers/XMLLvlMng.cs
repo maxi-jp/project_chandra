@@ -51,6 +51,18 @@ namespace IS_XNA_Shooter
                     xmlEnemies.Load("../../../../IS_XNA_ShooterContent/Levels/level1B.xml");
                     break;
 
+                case "LevelA1_finalDemo": // GameA Level 1
+                    xmlEnemies = new XmlDocument();
+                    xmlEnemies.Load("../../../../IS_XNA_ShooterContent/Levels/level1A_finalDemo.xml");
+                    break;
+
+                case "LevelB1_finalDemo": // GameB Level 1
+                    xmlRectangles = new XmlDocument();
+                    xmlRectangles.Load("../../../../IS_XNA_ShooterContent/Levels/levelRectangle1.xml");
+                    xmlEnemies = new XmlDocument();
+                    xmlEnemies.Load("../../../../IS_XNA_ShooterContent/Levels/level1B_finalDemo.xml");
+                    break;
+
                 case "Dialogs": // dialogs
                     xmlDialogs = new XmlDocument();
                     xmlDialogs.Load("../../../../IS_XNA_ShooterContent/Levels/dialog1.xml");

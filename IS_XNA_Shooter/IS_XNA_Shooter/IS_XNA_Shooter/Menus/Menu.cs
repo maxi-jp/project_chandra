@@ -123,8 +123,8 @@ namespace IS_XNA_Shooter
                     itemMainStory.Update(X, Y);
                     itemMainArcade.Update(X, Y);
                     itemMainScores.Update(X, Y);
-                    itemMainChangeProfile.Update(X, Y);
-                    itemMainConfig.Update(X, Y);
+                    //itemMainChangeProfile.Update(X, Y);
+                    //itemMainConfig.Update(X, Y);
                     itemMainQuit.Update(X, Y);
                     break;
 
@@ -166,8 +166,8 @@ namespace IS_XNA_Shooter
                     itemMainStory.Draw(spriteBatch);
                     itemMainArcade.Draw(spriteBatch);
                     itemMainScores.Draw(spriteBatch);
-                    itemMainChangeProfile.Draw(spriteBatch);
-                    itemMainConfig.Draw(spriteBatch);
+                    //itemMainChangeProfile.Draw(spriteBatch);
+                    //itemMainConfig.Draw(spriteBatch);
                     itemMainQuit.Draw(spriteBatch);
                     break;
 

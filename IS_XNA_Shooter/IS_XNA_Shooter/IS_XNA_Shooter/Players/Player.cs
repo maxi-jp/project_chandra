@@ -39,7 +39,11 @@ namespace IS_XNA_Shooter
 
         public void LoseLife()
         {
-            lifes--;
+            int actualLife = this.GetLife();
+            if (actualLife > 0)
+            {
+                lifes--;
+            }
         }
 
         public void LoseLife(int i)
